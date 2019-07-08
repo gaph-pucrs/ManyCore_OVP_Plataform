@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <peripheral constructor="constructor"
+    destructor="destructor"
+    httpvis="F"
+    imagefile="pse.pse"
+    library="peripheral"
+    name="net"
+    releasestatus="0"
+    saveRestore="F"
+    vendor="example"
+    version="1.0"
+    visibility="0">
+    <docsection name="doc"
+        text="Description">
+        <doctext name="txt"
+            text="Example use of virtual packet network"/>
+    </docsection>
+    <busslaveport addresswidth="32"
+        mustbeconnected="T"
+        name="bport1"
+        size="0x1">
+        <addressblock name="regs"
+            size="0x1"
+            width="8">
+            <memorymappedregister access="rw"
+                isvolatile="T"
+                name="tx"
+                offset="0x0"
+                readfunction="txRead"
+                width="1"
+                writefunction="txWrite"/>
+        </addressblock>
+    </busslaveport>
+    <packetnetport maxbytes="8"
+        mustbeconnected="F"
+        name="pktPort"
+        updatefunction="pktTrigger"
+        updatefunctionargument="33"/>
+    <fileversion major="1"
+        minor="0"
+        name="_version_0"/>
+ </peripheral>
