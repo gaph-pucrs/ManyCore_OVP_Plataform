@@ -15,6 +15,8 @@
 #ifndef BPORT1
     #error BPORT1 is undefined.It needs to be set to the port base address
 #endif
+#define BPORT1_REGS_MY_ADDRESS    (BPORT1 + 0x10)
+
 #define BPORT1_REGS_TX_REG1    (BPORT1 + 0x0)
 
 #define BPORT1_REGS_TX_REG2    (BPORT1 + 0x4)

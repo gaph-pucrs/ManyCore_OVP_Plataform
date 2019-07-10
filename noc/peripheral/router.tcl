@@ -13,7 +13,7 @@ iadddocumentation -name Description \
 # A slave port on the processor bus
 #
 imodeladdbusslaveport -name bport1 \
-                      -size 0x10 \
+                      -size 0x14 \
                       -mustbeconnected
 
 #
@@ -24,7 +24,15 @@ imodeladdaddressblock -name regs   \
                       -port bport1 \
                       -offset 0x0  \
                       -width 32    \
-                      -size 0x10
+                      -size 0x14
+
+
+
+
+imodeladdmmregister  -name my_address \
+                     -readfunction   addressRead \
+                     -writefunction  addressWrite \
+                     -offset 16 
 #
 # The transmit register
 # 
