@@ -38,6 +38,9 @@ extern Uns32 diagnosticLevel;
 typedef struct bport1_regs_dataS { 
     union { 
         Uns32 value;
+    } my_address;
+    union { 
+        Uns32 value;
     } tx_reg1;
     union { 
         Uns32 value;
@@ -70,6 +73,8 @@ extern handlesT handles;
 
 ////////////////////////////// Callback prototypes /////////////////////////////
 
+PPM_REG_READ_CB(addressRead);
+PPM_REG_WRITE_CB(addressWrite);
 PPM_REG_READ_CB(rxRead1);
 PPM_REG_READ_CB(rxRead2);
 PPM_REG_WRITE_CB(rxWrite1);

@@ -27,9 +27,10 @@ int main(int argc, char **argv)
 {
     volatile unsigned int *tx_reg1 = ROUTER_BASE + 0x0;
     volatile unsigned int *tx_reg2 = ROUTER_BASE + 0x1;
+    volatile unsigned int *my_address = ROUTER_BASE + 0x4;
 
     LOG("ROUTER1 TEST Application start\n\n");
-
+        printf("aaaaaaaasa");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -43,8 +44,9 @@ int main(int argc, char **argv)
     // read rx_av register until its value indicates that a valid data is 
     // available at rx_reg, then prints rx_reg value on screen
     int i;
+    *my_address = 0x00;
 
-    *tx_reg1 = 0x10; // Endereço destino
+    *tx_reg1 = 0x11; // Endereço destino
     *tx_reg2 = 0;    // Valor
 
     for (i = 0; i < 100; i++){
@@ -52,7 +54,7 @@ int main(int argc, char **argv)
         interrupt = 0;
         printf("Processor 1 received a message for address: %d\n", rx_value1);
         printf("Processor 1 received %d\n\n", rx_value2);
-        *tx_reg1 = 0x10;
+        *tx_reg1 = 0x11;
         *tx_reg2 = rx_value2 + 1;
     }
 

@@ -12,7 +12,6 @@
 
 unsigned int dataCount[5] = {0,0,0,0,0};
 unsigned int delivery[5] = {0,0,0,0,0};
-unsigned int myAddress = 0xFF;
 
 unsigned int positionY(unsigned int address){
     unsigned int mask =  3;
@@ -28,7 +27,7 @@ unsigned int positionX(unsigned int address){
     return thebit;
 }
 
-unsigned int XYrouting(unsigned int current, unsigned int destination){
+/*unsigned int XYrouting(unsigned int current, unsigned int destination){
     if(positionX(current) == positionX(destination) && positionY(current) == positionY(destination)){
         return 4; // local
     }
@@ -48,9 +47,9 @@ unsigned int XYrouting(unsigned int current, unsigned int destination){
         bhmMessage("I", "XYRouting", "Something is not quite right! ERROR!!!\n");
         return 0xF; // ERROR
     }
-}
+}*/
 
-void deliveryPkt(unsigned int destPort, unsigned int my_data, unsigned int localPort, struct handlesS handles){
+/*void deliveryPkt(unsigned int destPort, unsigned int my_data, unsigned int localPort, struct handlesS handles){
     if(destPort == 4){// LOCAL
         bhmMessage("I", "RX", "rx_reg2=%x UD=%d\n", my_data, localPort);
         bport1_regs_data.rx_reg2.value = my_data;
@@ -75,25 +74,15 @@ void deliveryPkt(unsigned int destPort, unsigned int my_data, unsigned int local
         bhmMessage("I", "TX", "An ilusion? What are you hiding? ERROR!%x\n", my_data);
     }
     return; 
-}
-
-PPM_REG_READ_CB(addressRead) {
-    // YOUR CODE HERE (addressRead)
-    return *(Uns32*)user;
-}
-
-PPM_REG_WRITE_CB(addressWrite) {
-    myAddress = (unsigned int)bport1_regs_data.my_address.value;
-    *(Uns32*)user = data;
-}
+}*/
 
 PPM_REG_READ_CB(rxRead1) {
-    // YOUR CODE HERE (rxRead1)
+    //ppmWriteNet(handles.INTTC, 0);
     return *(Uns32*)user;
 }
 
 PPM_REG_READ_CB(rxRead2) {
-    // YOUR CODE HERE (rxRead2)
+    ppmWriteNet(handles.INTTC, 0);
     return *(Uns32*)user;
 }
 
@@ -108,12 +97,12 @@ PPM_REG_WRITE_CB(rxWrite2) {
 }
 
 PPM_PACKETNET_CB(triggerEast) {
-     if (dataCount[0] == 0){
+    if (dataCount[0] == 0){
         unsigned int rx_data1 = *(unsigned int *)data;
 
-        delivery[0] = XYrouting(myAddress, rx_data1);
+       // delivery[0] = XYrouting((Uns32)userData, rx_data1);
         
-        deliveryPkt(delivery[0], rx_data1, myAddress, handles);
+       // deliveryPkt(delivery[0], rx_data1, (Uns32)userData, handles);
 
         dataCount[0]=1;
     }
@@ -121,59 +110,19 @@ PPM_PACKETNET_CB(triggerEast) {
         unsigned int rx_data2 = *(unsigned int *)data;
         dataCount[0]=0;
 
-        deliveryPkt(delivery[0], rx_data2, myAddress, handles);
+        //deliveryPkt(delivery[0], rx_data2, (Uns32)userData, handles);
 
         ppmWriteNet(handles.INTTC, 1);
     }
 }
-
-PPM_PACKETNET_CB(triggerNorth) {
- if (dataCount[2] == 0){
-        unsigned int rx_data1 = *(unsigned int *)data;
-
-        delivery[2] = XYrouting(myAddress, rx_data1);
-        
-        deliveryPkt(delivery[2], rx_data1, myAddress, handles);
-
-        dataCount[2]=1;
-    }
-    else{
-        unsigned int rx_data2 = *(unsigned int *)data;
-        dataCount[2]=0;
-
-        deliveryPkt(delivery[2], rx_data2, myAddress, handles);
-
-        ppmWriteNet(handles.INTTC, 1);
-    }
-}
-
-PPM_PACKETNET_CB(triggerSouth) {
-if (dataCount[3] == 0){
-        unsigned int rx_data1 = *(unsigned int *)data;
-
-        delivery[3] = XYrouting(myAddress, rx_data1);
-        
-        deliveryPkt(delivery[3], rx_data1, myAddress, handles);
-
-        dataCount[3]=1;
-    }
-    else{
-        unsigned int rx_data2 = *(unsigned int *)data;
-        dataCount[3]=0;
-
-        deliveryPkt(delivery[3], rx_data2, myAddress, handles);
-
-        ppmWriteNet(handles.INTTC, 1);
-    }}
 
 PPM_PACKETNET_CB(triggerWest) {
-
-     if (dataCount[1] == 1){
+    if (dataCount[1] == 1){
         unsigned int rx_data1 = *(unsigned int *)data;
 
-        delivery[1] = XYrouting(myAddress, rx_data1);
+       // delivery[1] = XYrouting((Uns32)userData, rx_data1);
         
-        deliveryPkt(delivery[1], rx_data1, myAddress, handles);
+       // deliveryPkt(delivery[1], rx_data1, (Uns32)userData, handles);
 
         dataCount[1]=1;
     }
@@ -181,7 +130,47 @@ PPM_PACKETNET_CB(triggerWest) {
         unsigned int rx_data2 = *(unsigned int *)data;
         dataCount[1]=0;
 
-        deliveryPkt(delivery[1], rx_data2, myAddress, handles);
+       // deliveryPkt(delivery[1], rx_data2, (Uns32)userData, handles);
+
+        ppmWriteNet(handles.INTTC, 1);
+    }
+}
+
+PPM_PACKETNET_CB(triggerNorth) {
+    if (dataCount[2] == 0){
+        unsigned int rx_data1 = *(unsigned int *)data;
+
+       // delivery[2] = XYrouting((Uns32)userData, rx_data1);
+        
+       // deliveryPkt(delivery[2], rx_data1, (Uns32)userData, handles);
+
+        dataCount[2]=1;
+    }
+    else{
+        unsigned int rx_data2 = *(unsigned int *)data;
+        dataCount[2]=0;
+
+       // deliveryPkt(delivery[2], rx_data2, (Uns32)userData, handles);
+
+        ppmWriteNet(handles.INTTC, 1);
+    }
+}
+
+PPM_PACKETNET_CB(triggerSouth) {
+    if (dataCount[3] == 0){
+        unsigned int rx_data1 = *(unsigned int *)data;
+
+       // delivery[3] = XYrouting((Uns32)userData, rx_data1);
+        
+      //  deliveryPkt(delivery[3], rx_data1, (Uns32)userData, handles);
+
+        dataCount[3]=1;
+    }
+    else{
+        unsigned int rx_data2 = *(unsigned int *)data;
+        dataCount[3]=0;
+
+      //  deliveryPkt(delivery[3], rx_data2, (Uns32)userData, handles);
 
         ppmWriteNet(handles.INTTC, 1);
     }
@@ -197,15 +186,34 @@ PPM_REG_READ_CB(txRead2) {
     return *(Uns32*)user;
 }
 
+
+/*if (dataCount[0] == 0){
+        unsigned int rx_data1 = *(unsigned int *)data;
+
+        delivery[0] = XYrouting((Uns32)userData, rx_data1);
+        
+        deliveryPkt(delivery[0], rx_data1);
+
+        dataCount[0]=1;
+    }
+    else{
+        unsigned int rx_data2 = *(unsigned int *)data;
+        dataCount[0]=0;
+
+        deliveryPkt(delivery[0], rx_data2);
+
+        ppmWriteNet(handles.INTTC, 1);
+    }
+    */
+
 PPM_REG_WRITE_CB(txWrite1) {
-  if(dataCount[4] == 0){
-        unsigned int tx_data1 = data >> 24;
+    if(dataCount[4] == 0){
+        unsigned int tx_data1 = data;
         dataCount[4]=1;
 
-        delivery[4] = XYrouting(myAddress, tx_data1);
-        bhmMessage("I", "TX1", "Recebemos o tx_data1 = %d - sera enviado para %d - meu endereco: %d",tx_data1, delivery[4], myAddress);
-        deliveryPkt(delivery[4], tx_data1, myAddress, handles);
-        bhmMessage("I", "TX1", "Enviando!");
+       // delivery[4] = XYrouting(0x00, tx_data1);
+
+     //   deliveryPkt(delivery[4], tx_data1, 0x00, handles);
     }
     else{
         bhmMessage("I", "TX1", "Enviando o tx_data1 - ERRO!");
@@ -218,7 +226,7 @@ PPM_REG_WRITE_CB(txWrite2) {
         unsigned int tx_data2 = data;
         dataCount[4]=0;
 
-        deliveryPkt(delivery[4], tx_data2, myAddress, handles);
+      //  deliveryPkt(delivery[4], tx_data2, 0x00, handles);
     }
     else{
         bhmMessage("I", "TX1", "Enviando o tx_data2 - ERRO!");
