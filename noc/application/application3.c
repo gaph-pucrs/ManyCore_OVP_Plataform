@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     volatile unsigned int *my_address = ROUTER_BASE + 0x4;
 
 
-    LOG("ROUTER2 TEST Application start\n\n");
+    LOG("ROUTER3 TEST Application start\n\n");
 
     // Attach the external interrupt handler for 'intr0'
     int_init();
@@ -44,9 +44,9 @@ int main(int argc, char **argv)
     spr |= 0x4;
     MTSPR(17, spr);
 
-    *my_address = 0x01;
+    *my_address = 0x10;
 
-    LOG("ROUTER2 TEST Application DONE\n\n");
+    LOG("ROUTER3 TEST Application DONE\n\n");
     
     return 1;
 }
