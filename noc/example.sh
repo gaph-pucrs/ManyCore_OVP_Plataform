@@ -1,5 +1,9 @@
 #!/bin/sh
+cd peripheral
 
+rm -rf pse.pse
+
+cd ..
 # Check Installation supports this example
 checkinstall.exe -p install.pkg --nobanner || exit
 
