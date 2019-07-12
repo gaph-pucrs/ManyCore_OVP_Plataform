@@ -19,9 +19,9 @@ void interruptHandler(void) {
     volatile unsigned int *rx_reg1 = ROUTER_BASE + 0x2;
     volatile unsigned int *rx_reg2 = ROUTER_BASE + 0x3;
 
-
     rx_value1 = *rx_reg1;
     rx_value2 = *rx_reg2;
+
     interrupt = 1;
 }
 
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     *my_address = 0x11;
 
     for (i = 0; i < 100; i++){
-        while(interrupt == 0) {sleep(50);}
+        while(interrupt == 0) {}
         interrupt = 0;
         printf("Processor 1 received a message for address: %d\n", rx_value1);
         printf("Processor 2 received %d\n\n", rx_value2);

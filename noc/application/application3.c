@@ -48,5 +48,10 @@ int main(int argc, char **argv)
 
     LOG("ROUTER3 TEST Application DONE\n\n");
     
+    //while(interrupt==0){}
+
+    LOG("Unreachable LOG3\n\n");
+
+
     return 1;
 }
