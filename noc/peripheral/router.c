@@ -29,9 +29,11 @@ unsigned int positionY(unsigned int address){
     return thebit;
 }
 
-unsigned int XYrouting(unsigned int current, unsigned int destination){
+unsigned int XYrouting(unsigned int current, unsigned int dest){ //ination){
     //bhmMessage("I", "XYRouting", "Local %d -- Dest %d\n",current, destination);
     //bhmMessage("I", "XYRouting", "LocalX %d -- LocalY %d  ---- DestX %d -- DestY %d\n",positionX(current), positionY(current), positionX(destination), positionY(destination));
+    //unsigned int current = cur >> 24;
+    unsigned int destination = dest >> 24;
     if(positionX(current) == positionX(destination) && positionY(current) == positionY(destination)){
         return 4; // local
     }
@@ -64,7 +66,6 @@ void deliveryPkt(unsigned int destPort, unsigned int my_data, unsigned int local
             dataCount[4] = 0;
             bport1_regs_data.rx_reg2.value = my_data;
             bhmMessage("I", "RXlocal2", "rx_reg2=%x UD=%d\n", bport1_regs_data.rx_reg2.value, localPort);
-            ppmWriteNet(handles.INTTC, 1);
         }
     }
     else if(destPort == 0){ // EAST
@@ -89,6 +90,7 @@ void deliveryPkt(unsigned int destPort, unsigned int my_data, unsigned int local
     return; 
 }
 
+
 PPM_REG_READ_CB(addressRead) {
     // YOUR CODE HERE (addressRead)
     return *(Uns32*)user;
@@ -101,12 +103,12 @@ PPM_REG_WRITE_CB(addressWrite) {
 }
 
 PPM_REG_READ_CB(rxRead1) {
-    // YOUR CODE HERE (rxRead1)
+    ppmWriteNet(handles.INTTC, 0);
     return *(Uns32*)user;
 }
 
 PPM_REG_READ_CB(rxRead2) {
-    // YOUR CODE HERE (rxRead2)
+    ppmWriteNet(handles.INTTC, 0);
     return *(Uns32*)user;
 }
 
@@ -124,7 +126,7 @@ PPM_PACKETNET_CB(triggerEast) {
     if (dataCount[0] == 0){
         rx_data1 = *(unsigned int *)data;
 
-        bhmMessage("I", "PortEast", "Recebido dado: %d",rx_data1);
+        //bhmMessage("I", "PortEast", "Recebido dado: %d",rx_data1);
 
         delivery[0] = XYrouting(myAddress, rx_data1);
 
@@ -149,7 +151,7 @@ PPM_PACKETNET_CB(triggerNorth) {
     if (dataCount[2] == 0){
         rx_data1 = *(unsigned int *)data;
 
-        bhmMessage("I", "PortNorth", "Recebido dado: %d",rx_data1);
+        //bhmMessage("I", "PortNorth", "Recebido dado: %d",rx_data1);
 
         delivery[2] = XYrouting(myAddress, rx_data1);
 
@@ -174,7 +176,7 @@ PPM_PACKETNET_CB(triggerSouth) {
     if (dataCount[3] == 0){
         rx_data1 = *(unsigned int *)data;
 
-        bhmMessage("I", "PortSouth", "Recebido dado: %d",rx_data1);
+        //bhmMessage("I", "PortSouth", "Recebido dado: %d",rx_data1);
 
         delivery[3] = XYrouting(myAddress, rx_data1);
 
@@ -199,7 +201,7 @@ PPM_PACKETNET_CB(triggerWest) {
     if (dataCount[1] == 0){
         rx_data1 = *(unsigned int *)data;
 
-        bhmMessage("I", "PortWest", "Recebido dado: %d",rx_data1);
+        //bhmMessage("I", "PortWest", "Recebido dado: %d",rx_data1);
 
         delivery[1] = XYrouting(myAddress, rx_data1);
 
@@ -232,7 +234,7 @@ PPM_REG_READ_CB(txRead2) {
 
 PPM_REG_WRITE_CB(txWrite1) {
   if(dataCount[4] == 0){
-        tx_data1 = data >> 24;
+        tx_data1 = data;
         dataCount[4]=1;
 
         delivery[4] = XYrouting(myAddress, tx_data1);
@@ -248,7 +250,7 @@ PPM_REG_WRITE_CB(txWrite1) {
 
 PPM_REG_WRITE_CB(txWrite2) {
     if(dataCount[4] > 0){
-        tx_data2 = data >> 24;
+        tx_data2 = data;
         dataCount[4]=0;
 
         deliveryPkt(delivery[4], tx_data1, myAddress, handles);
@@ -264,7 +266,7 @@ PPM_CONSTRUCTOR_CB(constructor) {
     unsigned int i;
     for(i=0;i<5;i++){
         dataCount[i] = 0;
-        delivery[i] = 0;
+        delivery[i] = 0xF;
     }
     // YOUR CODE HERE (pre constructor)
     periphConstructor();

@@ -46,7 +46,13 @@ int main(int argc, char **argv)
 
     *my_address = 0x01;
 
+    
     LOG("ROUTER2 TEST Application DONE\n\n");
     
+    //while(interrupt==0){}
+
+    LOG("Unreachable LOG2\n\n");
+
+
     return 1;
 }
