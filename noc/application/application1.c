@@ -30,7 +30,6 @@ int main(int argc, char **argv)
     volatile unsigned int *my_address = ROUTER_BASE + 0x4;
 
     LOG("ROUTER1 TEST Application start\n\n");
-        printf("aaaaaaaasa");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
