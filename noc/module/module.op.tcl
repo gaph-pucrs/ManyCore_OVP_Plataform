@@ -108,10 +108,10 @@ ihwaddperipheral -instancename router4 -modelfile peripheral/pse.pse
 # The peripheral models each have a single memory mapped register.
 # Writing to this register causes a transmission on the packetnet
 #
-ihwconnect -instancename router1 -busslaveport bport1 -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x80000013
-ihwconnect -instancename router2 -busslaveport bport1 -bus cpu2Bus -loaddress 0x80000000 -hiaddress 0x80000013
-ihwconnect -instancename router3 -busslaveport bport1 -bus cpu3Bus -loaddress 0x80000000 -hiaddress 0x80000013
-ihwconnect -instancename router4 -busslaveport bport1 -bus cpu4Bus -loaddress 0x80000000 -hiaddress 0x80000013
+ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x8000000B
+ihwconnect -instancename router2 -busslaveport localPort -bus cpu2Bus -loaddress 0x80000000 -hiaddress 0x8000000B
+ihwconnect -instancename router3 -busslaveport localPort -bus cpu3Bus -loaddress 0x80000000 -hiaddress 0x8000000B
+ihwconnect -instancename router4 -busslaveport localPort -bus cpu4Bus -loaddress 0x80000000 -hiaddress 0x8000000B
 
 #
 # The packetnet interconnect
