@@ -11,28 +11,45 @@ typedef unsigned char Uns8;
 
 #define LOG(_FMT, ...)  printf( "Info " _FMT,  ## __VA_ARGS__)
 
-volatile static Uns32 rx_value1 = 0;
-volatile static Uns32 rx_value2 = 0;
 volatile static Uns32 interrupt = 0;
+volatile static Uns32 rxPacket[256];
+volatile static Uns32 rxPointer = 0;
+volatile static Uns32 txPointer = 0;
+volatile static Uns32 txPacket[256];
 
 void interruptHandler(void) {
-    volatile unsigned int *rx_reg1 = ROUTER_BASE + 0x2;
-    volatile unsigned int *rx_reg2 = ROUTER_BASE + 0x3;
+    volatile unsigned int *rxLocal = ROUTER_BASE + 0x2;
+    printf("Oiaaaaaaaaaaaaaaaaaaaaaaaaa");
+    if (rxPointer == 0){
+        rxPacket[rxPointer] = *rxLocal;
+        rxPointer++;
+    }
+    else if (rxPointer == 1){
+        rxPacket[rxPointer] = *rxLocal;
+        rxPointer++;
+    }
+    else{
+        rxPacket[rxPointer] = *rxLocal;
+        rxPointer++;
+        if(rxPointer > (rxPacket[1] + 2)){
+            interrupt = 1;
+        }
+    }
+}
 
-    rx_value1 = *rx_reg1;
-    rx_value2 = *rx_reg2;
-
-    interrupt = 1;
+void sendPckt(){
+    volatile unsigned int *txLocal = ROUTER_BASE + 0x1;
+    while(txPointer < (txPacket[1] + 2)){
+        *txLocal = txPacket[txPointer];
+        txPointer++;
+    }
 }
 
 int main(int argc, char **argv)
 {
-    volatile unsigned int *tx_reg1 = ROUTER_BASE + 0x0;
-    volatile unsigned int *tx_reg2 = ROUTER_BASE + 0x1;
-    volatile unsigned int *my_address = ROUTER_BASE + 0x4;
+    volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 
-    LOG("ROUTER4 TEST Application start\n\n");
-
+    LOG("ROUTER1 TEST Application start\n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -46,16 +63,18 @@ int main(int argc, char **argv)
     // read rx_av register until its value indicates that a valid data is 
     // available at rx_reg, then prints rx_reg value on screen
     int i;
+    *myAddress = 0x11;
 
-    *my_address = 0x11;
+    txPacket[0] = 0x00;
+    txPacket[1] = 1;
 
     for (i = 0; i < 100; i++){
-        while(interrupt == 0) {}
+        rxPointer = 0;
+        while(interrupt == 0) { }
         interrupt = 0;
-        printf("Processor 1 received a message for address: %d\n", rx_value1);
-        printf("Processor 2 received %d\n\n", rx_value2);
-        *tx_reg1 = 0x00;
-        *tx_reg2 = rx_value2 + 1;
+        printf("Processor 4 received a message for address: %d\n - size: %d - content: %d", rxPacket[0], rxPacket[1], rxPacket[2]);
+        txPacket[2] = rxPacket[2] + 1;
+        sendPckt();
     }
 
     LOG("ROUTER4 TEST Application DONE\n\n");
