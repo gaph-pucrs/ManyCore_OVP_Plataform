@@ -7,13 +7,13 @@ imodelnewperipheral -name router \
                     -version 1.0 
 
 iadddocumentation -name Description \
-                  -text "A router peripheral"
+                  -text "Simple router peripheral"
 
 #
 # A slave port on the processor bus
 #
-imodeladdbusslaveport -name localPort \
-                      -size 0x18 \
+imodeladdbusslaveport -name bport1 \
+                      -size 0x14 \
                       -mustbeconnected
 
 #
@@ -21,41 +21,56 @@ imodeladdbusslaveport -name localPort \
 # is taken up by three registers
 #                    
 imodeladdaddressblock -name regs   \
-                      -port localPort \
+                      -port bport1 \
                       -offset 0x0  \
                       -width 32    \
-                      -size 0x18
+                      -size 0x14
 
 
-imodeladdmmregister  -name myAddress \
+
+
+imodeladdmmregister  -name my_address \
                      -readfunction   addressRead \
                      -writefunction  addressWrite \
-                     -offset 0 
-
-imodeladdmmregister  -name txLocal \
-                     -readfunction   txRead \
-                     -writefunction  txWrite \
-                     -offset 4
-
-imodeladdmmregister  -name rxEast \
-                     -readfunction   rxEread \
-                     -writefunction  rxEwrite \
-                     -offset 8
-
-imodeladdmmregister  -name rxWest \
-                     -readfunction   rxWread \
-                     -writefunction  rxWwrite \
-                     -offset 12
-
-imodeladdmmregister  -name rxNorth \
-                     -readfunction   rxNread \
-                     -writefunction  rxNwrite \
                      -offset 16 
+#
+# The transmit register
+# 
+# HEADER reg
+imodeladdmmregister  -name tx_reg1 \
+                     -readfunction   txRead1 \
+                     -writefunction  txWrite1 \
+                     -offset 0 
+# -width 4
 
-imodeladdmmregister  -name rxSouth \
-                     -readfunction   rxSread \
-                     -writefunction  rxSwrite \
-                     -offset 20
+#
+# The receive register
+#
+# Payload
+imodeladdmmregister  -name tx_reg2 \
+                     -readfunction   txRead2 \
+                     -writefunction  txWrite2 \
+                     -offset 4
+#-width 4
+
+#
+# The data available register
+#
+imodeladdmmregister  -name rx_reg1 \
+                     -readfunction   rxRead1 \
+                     -writefunction  rxWrite1 \
+                     -offset 8 
+#-width 4
+
+#
+# The data available register
+#
+imodeladdmmregister  -name rx_reg2 \
+                     -readfunction   rxRead2 \
+                     -writefunction  rxWrite2 \
+                     -offset 12 
+#-width 4
+
 
 #
 # Interface to the packetnet network. The maxbytes parameter sets the maximum
