@@ -13,7 +13,7 @@ iadddocumentation -name Description \
 # A slave port on the processor bus
 #
 imodeladdbusslaveport -name localPort \
-                      -size 12 \
+                      -size 16 \
                       -mustbeconnected
 
 #
@@ -24,7 +24,7 @@ imodeladdaddressblock -name regs   \
                       -port localPort \
                       -offset 0x0  \
                       -width 32    \
-                      -size 12
+                      -size 16
 
 
 imodeladdmmregister  -name myAddress \
@@ -41,6 +41,11 @@ imodeladdmmregister  -name rxLocal \
                      -readfunction   rxRead \
                      -writefunction  rxWrite \
                      -offset 8
+
+imodeladdmmregister  -name readDone \
+                     -readfunction   rdRead \
+                     -writefunction  rdWrite \
+                     -offset 12 
 
 #
 # Interface to the packetnet network. The maxbytes parameter sets the maximum

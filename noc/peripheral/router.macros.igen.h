@@ -21,6 +21,8 @@
 
 #define LOCALPORT_REGS_RXLOCAL    (LOCALPORT + 0x8)
 
+#define LOCALPORT_REGS_READDONE    (LOCALPORT + 0xc)
+
 
 
 #endif
