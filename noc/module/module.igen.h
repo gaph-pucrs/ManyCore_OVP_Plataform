@@ -389,7 +389,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router1",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu1Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000bULL)
+                OP_BUS_CONNECT(cpu1Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int1_n, "INTTC")
@@ -411,7 +411,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router2",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu2Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000bULL)
+                OP_BUS_CONNECT(cpu2Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int2_n, "INTTC")
@@ -433,7 +433,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router3",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu3Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000bULL)
+                OP_BUS_CONNECT(cpu3Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int3_n, "INTTC")
@@ -455,7 +455,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router4",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu4Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000bULL)
+                OP_BUS_CONNECT(cpu4Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int4_n, "INTTC")
