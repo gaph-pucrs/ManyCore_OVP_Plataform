@@ -19,26 +19,33 @@ volatile static Uns32 txPacket[256];
 
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x2;
-    printf("Oiaaaaaaaaaaaaaaaaaaaaaaaaa");
+    volatile unsigned int *readDone = ROUTER_BASE + 0x3;
+    //LOG("INTERRUPTION!\n\n");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *readDone = *readDone + 1;
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *readDone = *readDone + 1;
     }
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        if(rxPointer > (rxPacket[1] + 2)){
+        if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
+        }else{
+            *readDone = *readDone + 1;
         }
     }
+
 }
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x1;
+    txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         *txLocal = txPacket[txPointer];
         txPointer++;
@@ -48,8 +55,7 @@ void sendPckt(){
 int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
-
-    LOG("ROUTER1 TEST Application start\n\n");
+    LOG("ROUTER4 TEST Application start\n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -60,8 +66,6 @@ int main(int argc, char **argv)
     spr |= 0x4;
     MTSPR(17, spr);
 
-    // read rx_av register until its value indicates that a valid data is 
-    // available at rx_reg, then prints rx_reg value on screen
     int i;
     *myAddress = 0x11;
 
@@ -72,7 +76,7 @@ int main(int argc, char **argv)
         rxPointer = 0;
         while(interrupt == 0) { }
         interrupt = 0;
-        printf("Processor 4 received a message for address: %d\n - size: %d - content: %d", rxPacket[0], rxPacket[1], rxPacket[2]);
+        printf("Processor 4 received a message for address: %d -  size: %d - content: %d\n", rxPacket[0], rxPacket[1], rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
         sendPckt();
     }

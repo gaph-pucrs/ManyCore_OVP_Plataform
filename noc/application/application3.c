@@ -19,25 +19,31 @@ volatile static Uns32 txPacket[256];
 
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x2;
+    volatile unsigned int *readDone = ROUTER_BASE + 0x3;
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *readDone = *readDone + 1;
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *readDone = *readDone + 1;
     }
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        if(rxPointer > (rxPacket[1] + 2)){
+        if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
+        }else{
+            *readDone = *readDone + 1;
         }
     }
 }
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x1;
+    txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         *txLocal = txPacket[txPointer];
         txPointer++;
