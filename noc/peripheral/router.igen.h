@@ -10,6 +10,14 @@
 #ifndef ROUTER_IGEN_H
 #define ROUTER_IGEN_H
 
+#define EAST        0
+#define WEST        1
+#define NORTH       2
+#define SOUTH       3
+#define LOCAL       4
+#define N_PORTS     5
+#define BUFFER_SIZE 256
+
 #ifdef _PSE_
 #    include "peripheral/impTypes.h"
 #    include "peripheral/bhm.h"
@@ -45,6 +53,9 @@ typedef struct localPort_regs_dataS {
     union { 
         Uns32 value;
     } rxLocal;
+    union { 
+        Uns32 value;
+    } readDone;
 } localPort_regs_dataT, *localPort_regs_dataTP;
 
 /////////////////////////////// Port Declarations //////////////////////////////
@@ -69,6 +80,8 @@ extern handlesT handles;
 
 PPM_REG_READ_CB(addressRead);
 PPM_REG_WRITE_CB(addressWrite);
+PPM_REG_READ_CB(rdRead);
+PPM_REG_WRITE_CB(rdWrite);
 PPM_REG_READ_CB(rxRead);
 PPM_REG_WRITE_CB(rxWrite);
 PPM_PACKETNET_CB(triggerEast);

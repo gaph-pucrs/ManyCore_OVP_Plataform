@@ -23,7 +23,7 @@ static ppmBusPort busPorts[] = {
     {
         .name            = "localPort",
         .type            = PPM_SLAVE_PORT,
-        .addrHi          = 0xbLL,
+        .addrHi          = 0xfLL,
         .mustBeConnected = 1,
         .remappable      = 0,
         .description     = 0,

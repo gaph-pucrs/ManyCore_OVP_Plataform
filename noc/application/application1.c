@@ -19,19 +19,25 @@ volatile static Uns32 txPacket[256];
 
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x2;
+    volatile unsigned int *readDone = ROUTER_BASE + 0x3;
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *readDone = *readDone + 1;
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *readDone = *readDone + 1;
     }
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        if(rxPointer > (rxPacket[1] + 2)){
+        if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
+        }
+        else{
+            *readDone = *readDone + 1;
         }
     }
 }
@@ -74,7 +80,7 @@ int main(int argc, char **argv)
         rxPointer = 0;
         while(interrupt == 0) { }
         interrupt = 0;
-        printf("Processor 1 received a message for address: %d\n - size: %d - content: %d", rxPacket[0], rxPacket[1], rxPacket[2]);
+        printf("Processor 1 received a message for address: %d - size: %d - content: %d\n", rxPacket[0], rxPacket[1], rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
         sendPckt();
     }
