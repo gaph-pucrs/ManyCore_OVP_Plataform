@@ -2,16 +2,32 @@
 X=$1
 Y=$2
 
+cd application
+./applicationGenerator.sh $X $Y
+
+cd ..
+cd module
+./moduleGenerator.sh $X $Y
+
+cd ..
+
 N=$(($X*$Y))
 N=$(($N-1))
 
 rm -rf ovp_compiler.sh
-echo "#!/bin/sh\ncd peripheral\nrm -rf pse.pse \ncd .. \ncheckinstall.exe -p install.pkg --nobanner || exit \nCROSS=OR1K \n" >> ovp_compiler.sh
-echo "make -C application CROSS=\${CROSS}\nmake -C module\nmake -C peripheral NOVLNV=1\n" >> ovp_compiler.sh
+echo "#!/bin/sh" >> ovp_compiler.sh
+echo "cd peripheral" >> ovp_compiler.sh
+echo "rm -rf pse.pse" >> ovp_compiler.sh
+echo "cd .." >> ovp_compiler.sh
+echo "# Check Installation supports this example" >> ovp_compiler.sh
+echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
+echo "CROSS=OR1K" >> ovp_compiler.sh
+echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
+echo "make -C module" >> ovp_compiler.sh
+echo "make -C peripheral NOVLNV=1" >> ovp_compiler.sh
 
 echo "harness.exe \\" >> ovp_compiler.sh
-echo "\n    --modulefile module/model.\${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
-
+echo "    --modulefile module/model.\${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
 
 for i in $(seq 0 $N);
 do
@@ -24,3 +40,5 @@ do
 done
 
 chmod +x ovp_compiler.sh
+
+./ovp_compiler.sh
