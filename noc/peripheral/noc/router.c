@@ -6,7 +6,7 @@
 //                             Version 20170201.0
 //
 ////////////////////////////////////////////////////////////////////////////////
-
+#include "noc.h"
 #include "router.igen.h"
 //////////////////////////////// Callback stubs ////////////////////////////////
 //Endereço local
@@ -34,16 +34,16 @@ unsigned int delivering_from = 0;
 //////////////////////////////// ///////////// ////////////////////////////////
 
 
-//Extrai a posicao X de um endereço
-unsigned int positionX(unsigned int address){
+//Extrai a posicao Y de um endereço
+unsigned int positionY(unsigned int address){
     unsigned int mask =  0xF;
     unsigned int masked_n = address & mask;
     unsigned int thebit = masked_n;
     return thebit;
 }
 
-//Extrai a posicao Y de um endereço
-unsigned int positionY(unsigned int address){
+//Extrai a posicao X de um endereço
+unsigned int positionX(unsigned int address){
     unsigned int mask =  0xF0;
     unsigned int masked_n = address & mask;
     unsigned int thebit = masked_n >> 4;
@@ -152,7 +152,9 @@ PPM_REG_READ_CB(addressRead) {
 PPM_REG_WRITE_CB(addressWrite) {
     //Guarda o endereço local
     myAddress = (unsigned int)data >> 24;
-    bhmMessage("INFO", "MYADRESS", "My Address: %d", myAddress);
+    int x = positionX(myAddress);
+    int y = positionY(myAddress);
+    bhmMessage("INFO", "MYADRESS", "My Address: %d %d", x, y);
     *(Uns32*)user = data;
 }
 

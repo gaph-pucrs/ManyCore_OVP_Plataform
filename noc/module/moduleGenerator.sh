@@ -70,7 +70,7 @@ done
 for i in $(seq 0 $N);
 do
 
-	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/pse.pse" >> module.op.tcl
+	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/noc/pse.pse" >> module.op.tcl
 done
 
 echo "" >> module.op.tcl
