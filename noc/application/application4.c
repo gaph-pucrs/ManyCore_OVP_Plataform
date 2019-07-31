@@ -70,7 +70,7 @@ int main(int argc, char **argv)
     // read rx_av register until its value indicates that a valid data is 
     // available at rx_reg, then prints rx_reg value on screen
     int i;
-    *myAddress = 0x11;
+    *myAddress = 0x01;
 
     //========================
     // YOUR CODE HERE
