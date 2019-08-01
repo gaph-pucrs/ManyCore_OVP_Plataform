@@ -257,19 +257,19 @@ ihwaddbridge -instancename bridge8
 
 ihwconnect -bus cpu0Bus -busslaveport ps -instancename bridge0 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge0 -loaddress 0x8 -hiaddress 0xF
-ihwconnect -bus cpu1Bus -busslaveport ps -instancename bridge1 -loaddress 0x80000018 -hiaddress 0x8000001F
+ihwconnect -bus cpu1Bus -busslaveport ps -instancename bridge1 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge1 -loaddress 0x10 -hiaddress 0x17
-ihwconnect -bus cpu2Bus -busslaveport ps -instancename bridge2 -loaddress 0x80000020 -hiaddress 0x80000027
+ihwconnect -bus cpu2Bus -busslaveport ps -instancename bridge2 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge2 -loaddress 0x18 -hiaddress 0x1F
-ihwconnect -bus cpu3Bus -busslaveport ps -instancename bridge3 -loaddress 0x80000028 -hiaddress 0x8000002F
+ihwconnect -bus cpu3Bus -busslaveport ps -instancename bridge3 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge3 -loaddress 0x20 -hiaddress 0x27
-ihwconnect -bus cpu4Bus -busslaveport ps -instancename bridge4 -loaddress 0x80000030 -hiaddress 0x80000037
+ihwconnect -bus cpu4Bus -busslaveport ps -instancename bridge4 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge4 -loaddress 0x28 -hiaddress 0x2F
-ihwconnect -bus cpu5Bus -busslaveport ps -instancename bridge5 -loaddress 0x80000038 -hiaddress 0x8000003F
+ihwconnect -bus cpu5Bus -busslaveport ps -instancename bridge5 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge5 -loaddress 0x30 -hiaddress 0x37
-ihwconnect -bus cpu6Bus -busslaveport ps -instancename bridge6 -loaddress 0x80000040 -hiaddress 0x80000047
+ihwconnect -bus cpu6Bus -busslaveport ps -instancename bridge6 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge6 -loaddress 0x38 -hiaddress 0x3F
-ihwconnect -bus cpu7Bus -busslaveport ps -instancename bridge7 -loaddress 0x80000048 -hiaddress 0x8000004F
+ihwconnect -bus cpu7Bus -busslaveport ps -instancename bridge7 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge7 -loaddress 0x40 -hiaddress 0x47
-ihwconnect -bus cpu8Bus -busslaveport ps -instancename bridge8 -loaddress 0x80000050 -hiaddress 0x80000057
+ihwconnect -bus cpu8Bus -busslaveport ps -instancename bridge8 -loaddress 0x80000010 -hiaddress 0x80000017
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge8 -loaddress 0x48 -hiaddress 0x4F
