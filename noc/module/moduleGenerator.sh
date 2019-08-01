@@ -19,6 +19,7 @@ do
 done
 
 
+
 echo "" >> module.op.tcl
 
 for i in $(seq 0 $N);
@@ -79,7 +80,10 @@ for i in $(seq 0 $N);
 do
 
 	echo "ihwconnect -instancename router"$i" -busslaveport localPort -bus cpu"$i"Bus -loaddress 0x80000000 -hiaddress 0x8000000F" >> module.op.tcl
+
 done
+
+
 
 echo "" >> module.op.tcl
 
@@ -201,13 +205,64 @@ do
 	echo "ihwconnect -instancename router"$i" -netport       INTTC  -net int"$i >> module.op.tcl
 done
 
+echo "" >> module.op.tcl
 
 
+echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
+
+echo "" >> module.op.tcl
+
+echo "ihwaddbus -instancename syncBus -addresswidth 32" >> module.op.tcl
+echo "ihwconnect -instancename sync -busslaveport syncPort -bus syncBus -loaddress 0x0 -hiaddress 0x7" >> module.op.tcl
+
+echo "" >> module.op.tcl
+
+for i in $(seq 0 $N);
+do
+	echo "ihwaddbridge -instancename bridge"$i >> module.op.tcl
+done
+
+echo "" >> module.op.tcl
+
+loCpuBus=0x80000010 
+hiCpuBus=0x80000017 
+
+loSyncBus=0x8 
+hiSyncBus=0xF
+
+for i in $(seq 0 $N);
+do
+	echo "ihwconnect -bus cpu"$i"Bus -busslaveport ps -instancename bridge"$i" -loaddress "$loCpuBus" -hiaddress "$hiCpuBus"" >> module.op.tcl
+	echo "ihwconnect -bus syncBus -busmasterport pm -instancename bridge"$i" -loaddress "$loSyncBus" -hiaddress "$hiSyncBus"" >> module.op.tcl
+ #sync -bus syncBus -loaddress "$loSyncBus" -hiaddress "$hiSyncBus" -bus cpu"$i"Bus -loaddress "$loCpuBus" -hiaddress "$hiCpuBus" ">> module.op.tcl
+	
+	auxLoSyncBus=$(($loSyncBus + 0x00000008))
+
+	loSyncBus=$(echo 16o${auxLoSyncBus}p | dc)
+	
+	loSyncBus=0x$loSyncBus
+
+	auxHiSyncBus=$(($hiSyncBus + 0x00000008))
+
+	hiSyncBus=$(echo 16o${auxHiSyncBus}p | dc)
+	
+	hiSyncBus=0x$hiSyncBus
 
 
+	auxLoCpuBus=$(($loCpuBus + 0x00000008))
 
+	loCpuBus=$(echo 16o${auxLoCpuBus}p | dc)
+	
+	loCpuBus=0x$loCpuBus
 
+	
+	auxHiCpuBus=$(($hiCpuBus + 0x00000008))
 
+	hiCpuBus=$(echo 16o${auxHiCpuBus}p | dc)
+	
+	hiCpuBus=0x$hiCpuBus
+
+done
 
 
 

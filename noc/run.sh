@@ -25,7 +25,9 @@ echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
 echo "CROSS=OR1K" >> ovp_compiler.sh
 echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
-echo "make -C peripheral NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/noc NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
+
 
 echo "harness.exe \\" >> ovp_compiler.sh
 echo "    --modulefile module/model.\${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
