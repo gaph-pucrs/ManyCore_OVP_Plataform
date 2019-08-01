@@ -5,10 +5,9 @@
 
 CROSS=OR1K
 
-make -C application CROSS=${CROSS}
 
 make -C module
-
+make -C application CROSS=${CROSS}
 #make -C peripheral NOVLNV=1
 
 # run the platform

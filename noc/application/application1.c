@@ -20,6 +20,7 @@ volatile static Uns32 txPacket[256];
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x2;
     volatile unsigned int *readDone = ROUTER_BASE + 0x3;
+
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
@@ -55,7 +56,7 @@ int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 
-    LOG("ROUTER1 TEST Application start\n\n");
+    LOG("Starting ROUTER1 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -71,20 +72,10 @@ int main(int argc, char **argv)
     int i;
     *myAddress = 0x10;
 
-    txPacket[0] = 0x11;
-    txPacket[1] = 1;
-    txPacket[2] = 0;
-    sendPckt();
+    //========================
+    // YOUR CODE HERE
+    //========================
 
-    for (i = 0; i < 100; i++){
-        rxPointer = 0;
-        while(interrupt == 0) { }
-        interrupt = 0;
-        printf("Processor 1 received a message for address: %d - size: %d - content: %d\n", rxPacket[0], rxPacket[1], rxPacket[2]);
-        txPacket[2] = rxPacket[2] + 1;
-        sendPckt();
-    }
-
-    LOG("ROUTER1 TEST Application DONE\n\n");
+    LOG("Application ROUTER1 done!\n\n");
     return 1;
 }
