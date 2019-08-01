@@ -859,7 +859,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x10ULL, .addrHi=0x17ULL),
-                OP_BUS_CONNECT(cpu1Bus_b, "ps", .slave=1, .addrLo=0x80000018ULL, .addrHi=0x8000001fULL)
+                OP_BUS_CONNECT(cpu1Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0
@@ -873,7 +873,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x18ULL, .addrHi=0x1fULL),
-                OP_BUS_CONNECT(cpu2Bus_b, "ps", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
+                OP_BUS_CONNECT(cpu2Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0
@@ -887,7 +887,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x20ULL, .addrHi=0x27ULL),
-                OP_BUS_CONNECT(cpu3Bus_b, "ps", .slave=1, .addrLo=0x80000028ULL, .addrHi=0x8000002fULL)
+                OP_BUS_CONNECT(cpu3Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0
@@ -901,7 +901,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x28ULL, .addrHi=0x2fULL),
-                OP_BUS_CONNECT(cpu4Bus_b, "ps", .slave=1, .addrLo=0x80000030ULL, .addrHi=0x80000037ULL)
+                OP_BUS_CONNECT(cpu4Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0
@@ -915,7 +915,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x30ULL, .addrHi=0x37ULL),
-                OP_BUS_CONNECT(cpu5Bus_b, "ps", .slave=1, .addrLo=0x80000038ULL, .addrHi=0x8000003fULL)
+                OP_BUS_CONNECT(cpu5Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0
@@ -929,7 +929,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x38ULL, .addrHi=0x3fULL),
-                OP_BUS_CONNECT(cpu6Bus_b, "ps", .slave=1, .addrLo=0x80000040ULL, .addrHi=0x80000047ULL)
+                OP_BUS_CONNECT(cpu6Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0
@@ -943,7 +943,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x40ULL, .addrHi=0x47ULL),
-                OP_BUS_CONNECT(cpu7Bus_b, "ps", .slave=1, .addrLo=0x80000048ULL, .addrHi=0x8000004fULL)
+                OP_BUS_CONNECT(cpu7Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0
@@ -957,7 +957,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x48ULL, .addrHi=0x4fULL),
-                OP_BUS_CONNECT(cpu8Bus_b, "ps", .slave=1, .addrLo=0x80000050ULL, .addrHi=0x80000057ULL)
+                OP_BUS_CONNECT(cpu8Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
         0

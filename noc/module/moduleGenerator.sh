@@ -249,19 +249,6 @@ do
 	hiSyncBus=0x$hiSyncBus
 
 
-	auxLoCpuBus=$(($loCpuBus + 0x00000008))
-
-	loCpuBus=$(echo 16o${auxLoCpuBus}p | dc)
-	
-	loCpuBus=0x$loCpuBus
-
-	
-	auxHiCpuBus=$(($hiCpuBus + 0x00000008))
-
-	hiCpuBus=$(echo 16o${auxHiCpuBus}p | dc)
-	
-	hiCpuBus=0x$hiCpuBus
-
 done
 
 
