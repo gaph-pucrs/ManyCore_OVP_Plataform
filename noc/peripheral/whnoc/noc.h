@@ -16,3 +16,5 @@
 
 // Misc
 #define EMPTY   0
+#define HEADER  0xFFFFFFFF
+#define SIZE    0xFFFFFFFE
