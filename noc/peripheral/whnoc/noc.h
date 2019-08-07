@@ -13,6 +13,7 @@
 // Control flags
 #define STALL   1
 #define GO      2
+#define DONE    3
 
 // Misc
 #define EMPTY   0
