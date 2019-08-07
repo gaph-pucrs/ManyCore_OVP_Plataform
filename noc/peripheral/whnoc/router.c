@@ -202,35 +202,60 @@ void sendFlits(){
         }
 
         // If the port is transmitting something then send a flit ahead
-        else if(routingTable[port] < ND && !isEmpty(port)) {
+        if(routingTable[port] < ND && !isEmpty(port)) {
 
             // Transmission to the local IP
             if(routingTable[port] == LOCAL){
-                localPort_regs_data.dataTxLocal.value = bufferPop();
+                localPort_regs_data.dataTxLocal.value = bufferPop(port);
                 ppmWriteNet(handles.INTTC, 1);
             }
 
             // Transmit it to the EAST router
             else if(routingTable[port] == EAST){
-                while(control[routingTable[port]]==GO){
-                    data = bufferPop();
+                // While the receiver router has space AND 
+                // there is flits to send AND 
+                // still connected to the output port
+                while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
+                    data = bufferPop(port);
+                    // Send a flit!
                     ppmPacketnetWrite(handles.portDataEast, &data, sizeof(data));
                 }
             }
 
             // Transmit it to the WEST router
-            else if(routingTable[port] == EAST){
-
+            else if(routingTable[port] == WEST){
+                // While the receiver router has space AND 
+                // there is flits to send AND 
+                // still connected to the output port
+                while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
+                    data = bufferPop(port);
+                    // Send a flit!
+                    ppmPacketnetWrite(handles.portDataWest, &data, sizeof(data));
+                }
             }
 
             // Transmit it to the NORTH router
-            else if(routingTable[port] == EAST){
-
+            else if(routingTable[port] == NORTH){
+                // While the receiver router has space AND 
+                // there is flits to send AND 
+                // still connected to the output port
+                while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
+                    data = bufferPop(port);
+                    // Send a flit!
+                    ppmPacketnetWrite(handles.portDataNorth, &data, sizeof(data));
+                }
             }
 
             // Transmit it to the SOUTH router
-            else if(routingTable[port] == EAST){
-
+            else if(routingTable[port] == SOUTH){
+                // While the receiver router has space AND 
+                // there is flits to send AND 
+                // still connected to the output port
+                while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
+                    data = bufferPop(port);
+                    // Send a flit!
+                    ppmPacketnetWrite(handles.portDataSouth, &data, sizeof(data));
+                }
             }
 
         }
