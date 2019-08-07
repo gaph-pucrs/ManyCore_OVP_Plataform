@@ -93,6 +93,7 @@ void bufferStatusUpdate(unsigned int port){
         status = GO;
     }
 
+    // Transmitt the new buffer status to the neighbor
     if (port == LOCAL){
         localPort_regs_data.controlLocal.value = status;
     }
@@ -111,9 +112,9 @@ void bufferStatusUpdate(unsigned int port){
 
 }
 
-void bufferPush(unsigned int data, unsigned int port){
+void bufferPush(unsigned int port, unsigned int flit){
     // Write a new flit in the buffer
-    buffer[port][last[port]] = data;
+    buffer[port][last[port]] = flit;
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;
     }
@@ -205,7 +206,7 @@ void sendFlits(){
         if(routingTable[port] < ND && !isEmpty(port)) {
 
             // Transmission to the local IP
-            if(routingTable[port] == LOCAL){
+            if(routingTable[port] == LOCAL && control[LOCAL] == DONE){
                 localPort_regs_data.dataTxLocal.value = bufferPop(port);
                 ppmWriteNet(handles.INTTC, 1);
             }
@@ -260,7 +261,11 @@ void sendFlits(){
 
         }
     }
+}
 
+void controlUpdate(unsigned int port, unsigned int ctrlData){
+    // Stores the new neighbor status
+    control[port] = ctrlData;
 }
 
 ////////////////////////////////////////////////////////////
@@ -281,64 +286,110 @@ PPM_REG_WRITE_CB(addressWrite) {
 }
 
 PPM_PACKETNET_CB(controlEast) {
-    // YOUR CODE HERE (controlEast)
+    // Updates the neighbor port status
+    controlUpdate(EAST, (unsigned int *)data);
+ 
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_PACKETNET_CB(controlNorth) {
-    // YOUR CODE HERE (controlNorth)
+    // Updates the neighbor port status
+    controlUpdate(NORTH, (unsigned int *)data);
+ 
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_PACKETNET_CB(controlSouth) {
-    // YOUR CODE HERE (controlSouth)
+    // Updates the neighbor port status
+    controlUpdate(SOUTH, (unsigned int *)data);
+ 
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_PACKETNET_CB(controlWest) {
-    // YOUR CODE HERE (controlWest)
+    // Updates the neighbor port status
+    controlUpdate(WEST, (unsigned int *)data);
+ 
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_PACKETNET_CB(dataEast) {
-    // YOUR CODE HERE (dataEast)
+    // Stores the new incoming flit
+    bufferPush(EAST, (unsigned int *)data);
+
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_PACKETNET_CB(dataNorth) {
-    // YOUR CODE HERE (dataNorth)
+    // Stores the new incoming flit
+    bufferPush(NORTH, (unsigned int *)data);
+
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_PACKETNET_CB(dataSouth) {
-    // YOUR CODE HERE (dataSouth)
+    // Stores the new incoming flit
+    bufferPush(SOUTH, (unsigned int *)data);
+
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_PACKETNET_CB(dataWest) {
-    // YOUR CODE HERE (dataWest)
+    // Stores the new incoming flit
+    bufferPush(WEST, (unsigned int *)data);
+
+    // Runs the transmittion function
+    sendFlits();
 }
 
 PPM_REG_READ_CB(ctrlRead) {
-    // YOUR CODE HERE (ctrlRead)
+    // Runs the transmittion function
+    sendFlits();
+
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(ctrlWrite) {
-    // YOUR CODE HERE (ctrlWrite)
+    // Updates the local port status
+    controlUpdate(LOCAL, (unsigned int *)data);
+
+    // Runs the transmittion function
+    sendFlits();
+
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(rxRead) {
-    // YOUR CODE HERE (rxRead)
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
-    
+    // Stores the new incoming flit
+    bufferPush(LOCAL, data);
+
+    // Runs the transmittion function
+    sendFlits();
+
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(txRead) {
-    // YOUR CODE HERE (txRead)
+    // Once that the IP reads the flit, turn down the interruption 
+    ppmWriteNet(handles.INTTC, 0); 
+
+    // Runs the transmittion function
+    sendFlits();
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(txWrite) {
-    // YOUR CODE HERE (txWrite)
     *(Uns32*)user = data;
 }
 
