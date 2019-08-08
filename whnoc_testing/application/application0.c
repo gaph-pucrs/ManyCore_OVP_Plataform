@@ -81,6 +81,22 @@ int main(int argc, char **argv)
     // YOUR CODE HERE
     //========================
 
+    // Creating the tx packet
+    txPacket[0] = 0x11;
+    txPacket[1] = 1;
+    txPacket[2] = 1;
+
+    // Sends the first packet
+    sendPckt();
+
+    for(i=0; i<99; i++){
+        interrupt = 0;
+        while(interrupt != 1){}
+        LOG("00 --- Valor recebido: %d", rxPacket[2]);
+        txPacket[2] = rxPacket[2] + 1;
+        sendPckt();
+    }
+
     LOG("Application ROUTER0 done!\n\n");
     return 1;
 }
