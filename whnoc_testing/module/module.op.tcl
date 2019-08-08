@@ -74,15 +74,15 @@ ihwaddmemory -instancename ram7 -type ram
 ihwconnect -bus cpu3Bus -instancename ram7 -busslaveport sp3 -loaddress 0xf0000000 -hiaddress 0xffffffff
 
 
-ihwaddperipheral -instancename router0 -modelfile peripheral/noc/pse.pse
-ihwaddperipheral -instancename router1 -modelfile peripheral/noc/pse.pse
-ihwaddperipheral -instancename router2 -modelfile peripheral/noc/pse.pse
-ihwaddperipheral -instancename router3 -modelfile peripheral/noc/pse.pse
+ihwaddperipheral -instancename router0 -modelfile peripheral/whnoc/pse.pse
+ihwaddperipheral -instancename router1 -modelfile peripheral/whnoc/pse.pse
+ihwaddperipheral -instancename router2 -modelfile peripheral/whnoc/pse.pse
+ihwaddperipheral -instancename router3 -modelfile peripheral/whnoc/pse.pse
 
-ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x8000000F
-ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x8000000F
-ihwconnect -instancename router2 -busslaveport localPort -bus cpu2Bus -loaddress 0x80000000 -hiaddress 0x8000000F
-ihwconnect -instancename router3 -busslaveport localPort -bus cpu3Bus -loaddress 0x80000000 -hiaddress 0x8000000F
+ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x80000013
+ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x80000013
+ihwconnect -instancename router2 -busslaveport localPort -bus cpu2Bus -loaddress 0x80000000 -hiaddress 0x80000013
+ihwconnect -instancename router3 -busslaveport localPort -bus cpu3Bus -loaddress 0x80000000 -hiaddress 0x80000013
 
 ihwaddpacketnet -instancename p_0_0_E
 ihwaddpacketnet -instancename p_0_0_W
@@ -93,35 +93,25 @@ ihwaddpacketnet -instancename p_1_1_W
 ihwaddpacketnet -instancename p_1_1_N
 ihwaddpacketnet -instancename p_1_1_S
 
-ihwconnect -instancename router0 -packetnetport portEast -packetnet p_0_0_E
-ihwconnect -instancename router1 -packetnetport portWest -packetnet p_0_0_E
-ihwconnect -instancename router0 -packetnetport portNorth -packetnet p_0_0_N
-ihwconnect -instancename router2 -packetnetport portSouth -packetnet p_0_0_N
-ihwconnect -instancename router3 -packetnetport portWest -packetnet p_1_1_W
-ihwconnect -instancename router2 -packetnetport portEast -packetnet p_1_1_W
-ihwconnect -instancename router3 -packetnetport portSouth -packetnet p_1_1_S
-ihwconnect -instancename router1 -packetnetport portNorth -packetnet p_1_1_S
+ihwconnect -instancename router0 -packetnetport portDataEast -packetnet p_0_0_E
+ihwconnect -instancename router1 -packetnetport portDataWest -packetnet p_0_0_E
+ihwconnect -instancename router0 -packetnetport portDataNorth -packetnet p_0_0_N
+ihwconnect -instancename router2 -packetnetport portDataSouth -packetnet p_0_0_N
+ihwconnect -instancename router3 -packetnetport portDataWest -packetnet p_1_1_W
+ihwconnect -instancename router2 -packetnetport portDataEast -packetnet p_1_1_W
+ihwconnect -instancename router3 -packetnetport portDataSouth -packetnet p_1_1_S
+ihwconnect -instancename router1 -packetnetport portDataNorth -packetnet p_1_1_S
+
+ihwconnect -instancename router0 -packetnetport portControlEast -packetnet p_0_0_E
+ihwconnect -instancename router1 -packetnetport portControlWest -packetnet p_0_0_E
+ihwconnect -instancename router0 -packetnetport portControlNorth -packetnet p_0_0_N
+ihwconnect -instancename router2 -packetnetport portControlSouth -packetnet p_0_0_N
+ihwconnect -instancename router3 -packetnetport portControlWest -packetnet p_1_1_W
+ihwconnect -instancename router2 -packetnetport portControlEast -packetnet p_1_1_W
+ihwconnect -instancename router3 -packetnetport portControlSouth -packetnet p_1_1_S
+ihwconnect -instancename router1 -packetnetport portControlNorth -packetnet p_1_1_S
 
 ihwconnect -instancename router0 -netport       INTTC  -net int0
 ihwconnect -instancename router1 -netport       INTTC  -net int1
 ihwconnect -instancename router2 -netport       INTTC  -net int2
 ihwconnect -instancename router3 -netport       INTTC  -net int3
-
-ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse
-
-ihwaddbus -instancename syncBus -addresswidth 32
-ihwconnect -instancename sync -busslaveport syncPort -bus syncBus -loaddress 0x0 -hiaddress 0x7
-
-ihwaddbridge -instancename bridge0
-ihwaddbridge -instancename bridge1
-ihwaddbridge -instancename bridge2
-ihwaddbridge -instancename bridge3
-
-ihwconnect -bus cpu0Bus -busslaveport ps -instancename bridge0 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge0 -loaddress 0x8 -hiaddress 0xF
-ihwconnect -bus cpu1Bus -busslaveport ps -instancename bridge1 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge1 -loaddress 0x10 -hiaddress 0x17
-ihwconnect -bus cpu2Bus -busslaveport ps -instancename bridge2 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge2 -loaddress 0x18 -hiaddress 0x1F
-ihwconnect -bus cpu3Bus -busslaveport ps -instancename bridge3 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge3 -loaddress 0x20 -hiaddress 0x27

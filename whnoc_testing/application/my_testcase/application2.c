@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 
-    LOG("Starting ROUTER3 application! \n\n");
+    LOG("ROUTER2 TEST Application start\n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -70,12 +70,12 @@ int main(int argc, char **argv)
     // read rx_av register until its value indicates that a valid data is 
     // available at rx_reg, then prints rx_reg value on screen
     int i;
-    *myAddress = 0x11;
+    *myAddress = 0x01;
 
     //========================
     // YOUR CODE HERE
     //========================
 
-    LOG("Application ROUTER3 done!\n\n");
+    LOG("ROUTER2 TEST Application DONE\n\n");
     return 1;
 }
