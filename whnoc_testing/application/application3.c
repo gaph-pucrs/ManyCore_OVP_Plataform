@@ -80,6 +80,18 @@ int main(int argc, char **argv)
     //========================
     // YOUR CODE HERE
     //========================
+    
+    // Creating the tx packet
+    txPacket[0] = 0x00;
+    txPacket[1] = 1;
+
+    for(i=0; i<99; i++){
+        interrupt = 0;
+        while(interrupt != 1){}
+        LOG("11 --- Valor recebido: %d", rxPacket[2]);
+        txPacket[2] = rxPacket[2] + 1;
+        sendPckt();
+    }
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;
