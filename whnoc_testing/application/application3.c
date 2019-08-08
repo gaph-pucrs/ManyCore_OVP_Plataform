@@ -21,7 +21,7 @@ volatile static Uns32 txPacket[256];
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
     volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
-
+    LOG("Interrupcao!!!!");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;

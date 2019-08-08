@@ -50,6 +50,7 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*control != GO){
+            LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
