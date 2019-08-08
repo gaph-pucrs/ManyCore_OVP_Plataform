@@ -3,6 +3,7 @@
 
 #include "interrupt.h"
 #include "spr_defs.h"
+#include "../peripheral/whnoc/noc.h"
 
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
 
@@ -18,18 +19,18 @@ volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
 void interruptHandler(void) {
-    volatile unsigned int *rxLocal = ROUTER_BASE + 0x2;
-    volatile unsigned int *readDone = ROUTER_BASE + 0x3;
+    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
+    volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *readDone = *readDone + 1;
+        *control = ACK;
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *readDone = *readDone + 1;
+        *control = ACK;
     }
     else{
         rxPacket[rxPointer] = *rxLocal;
@@ -38,15 +39,19 @@ void interruptHandler(void) {
             interrupt = 1;
         }
         else{
-            *readDone = *readDone + 1;
+            *control = ACK;
         }
     }
 }
 
 void sendPckt(){
-    volatile unsigned int *txLocal = ROUTER_BASE + 0x1;
+    volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
+    volatile unsigned int *control = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
+        while(*control != GO){
+            // Waiting for space in the router buffer
+        }
         *txLocal = txPacket[txPointer];
         txPointer++;
     }

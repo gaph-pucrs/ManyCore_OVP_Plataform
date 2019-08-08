@@ -52,11 +52,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optBusP cpu3Bus_b = opBusNew(mi, "cpu3Bus", 32, 0, 0);
 
 
-    // Bus syncBus
-
-    optBusP syncBus_b = opBusNew(mi, "syncBus", 32, 0, 0);
-
-
 ////////////////////////////////////////////////////////////////////////////////
 //                                    NETS
 ////////////////////////////////////////////////////////////////////////////////
@@ -393,79 +388,25 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
-    // Bridge bridge0
-
-    opBridgeNew(
-        mi,
-        "bridge0",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x8ULL, .addrHi=0xfULL),
-                OP_BUS_CONNECT(cpu0Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge1
-
-    opBridgeNew(
-        mi,
-        "bridge1",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x10ULL, .addrHi=0x17ULL),
-                OP_BUS_CONNECT(cpu1Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge2
-
-    opBridgeNew(
-        mi,
-        "bridge2",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x18ULL, .addrHi=0x1fULL),
-                OP_BUS_CONNECT(cpu2Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge3
-
-    opBridgeNew(
-        mi,
-        "bridge3",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x20ULL, .addrHi=0x27ULL),
-                OP_BUS_CONNECT(cpu3Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
-            )
-        ),
-        0
-    );
-
     // PSE router0
 
-    const char *router0_path = "peripheral/noc/pse.pse";
+    const char *router0_path = "peripheral/whnoc/pse.pse";
     opPeripheralNew(
         mi,
         router0_path,
         "router0",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu0Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
+                OP_BUS_CONNECT(cpu0Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int0_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portEast"),
-                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portNorth")
+                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portControlNorth")
             )
         ),
         0
@@ -473,21 +414,23 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 
     // PSE router1
 
-    const char *router1_path = "peripheral/noc/pse.pse";
+    const char *router1_path = "peripheral/whnoc/pse.pse";
     opPeripheralNew(
         mi,
         router1_path,
         "router1",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu1Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
+                OP_BUS_CONNECT(cpu1Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int1_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portWest"),
-                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portNorth")
+                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portControlNorth")
             )
         ),
         0
@@ -495,21 +438,23 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 
     // PSE router2
 
-    const char *router2_path = "peripheral/noc/pse.pse";
+    const char *router2_path = "peripheral/whnoc/pse.pse";
     opPeripheralNew(
         mi,
         router2_path,
         "router2",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu2Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
+                OP_BUS_CONNECT(cpu2Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int2_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portSouth"),
-                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portEast")
+                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portControlSouth"),
+                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portControlEast")
             )
         ),
         0
@@ -517,36 +462,23 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 
     // PSE router3
 
-    const char *router3_path = "peripheral/noc/pse.pse";
+    const char *router3_path = "peripheral/whnoc/pse.pse";
     opPeripheralNew(
         mi,
         router3_path,
         "router3",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu3Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x8000000fULL)
+                OP_BUS_CONNECT(cpu3Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(int3_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portWest"),
-                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portSouth")
-            )
-        ),
-        0
-    );
-
-    // PSE sync
-
-    const char *sync_path = "peripheral/synchronizer/pse.pse";
-    opPeripheralNew(
-        mi,
-        sync_path,
-        "sync",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "syncPort", .slave=1, .addrLo=0x0ULL, .addrHi=0x7ULL)
+                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portControlSouth")
             )
         ),
         0
