@@ -12,9 +12,10 @@
 
 // Control flags
 #define STALL   1
-#define GO      2
+#define GO      0
+
 #define REQ     3
-#define ACK     4
+#define ACK     0
 
 // Misc
 #define EMPTY   0

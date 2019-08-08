@@ -178,14 +178,23 @@ void sendFlits(){
     int to = ND;
     int allowed = 1;
     unsigned int flit, header;
+
+    //bhmMessage("INFO", "SENDFLITS", "INSIDE ROUTER: %d %d", positionX(myAddress), positionY(myAddress));
+
     // For each port do:
     for(port = EAST; port <= LOCAL; port++){
+
+        //bhmMessage("INFO", "SENDFLITS", "Selected Port: %d",port);
 
         // If this port is not transmitting anything
         if(routingTable[port] == ND){
 
+            //bhmMessage("INFO", "SENDFLITS", "Is free");
+
             // And has something to transmit
             if (!isEmpty(port)){
+
+                //bhmMessage("INFO", "SENDFLITS", "Routing request");
 
                 // Discover to wich port the packet must go
                 header = buffers[port][first[port]];
@@ -195,10 +204,12 @@ void sendFlits(){
                 for(checkport = 0; checkport <= LOCAL; checkport++){
                     if (routingTable[checkport] == to){
                         allowed = 0;
-                        break;
                     }
                 }
                 if(allowed == 1){
+
+                    //bhmMessage("INFO", "SENDFLITS", "Routing ack - the packet will be transmitted");
+
                     routingTable[port] = to;
                 }
             }
@@ -207,8 +218,13 @@ void sendFlits(){
         // If the port is transmitting something then send a flit ahead
         if(routingTable[port] < ND && !isEmpty(port)) {
 
+            //bhmMessage("INFO", "SENDFLITS", "Transmitting...");
+
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
+
+                //bhmMessage("INFO", "SENDFLITS", "to the local port");
+
                 localPort_regs_data.dataTxLocal.value = bufferPop(port);
                 txCtrl = REQ;
                 ppmWriteNet(handles.INTTC, 1);
@@ -216,6 +232,9 @@ void sendFlits(){
 
             // Transmit it to the EAST router
             else if(routingTable[port] == EAST){
+
+                //bhmMessage("INFO", "SENDFLITS", "to the east port");
+
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
@@ -228,6 +247,9 @@ void sendFlits(){
 
             // Transmit it to the WEST router
             else if(routingTable[port] == WEST){
+
+                //bhmMessage("INFO", "SENDFLITS", "to the west port");
+
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
@@ -240,6 +262,9 @@ void sendFlits(){
 
             // Transmit it to the NORTH router
             else if(routingTable[port] == NORTH){
+
+                //bhmMessage("INFO", "SENDFLITS", "to the north port");
+
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
@@ -252,6 +277,9 @@ void sendFlits(){
 
             // Transmit it to the SOUTH router
             else if(routingTable[port] == SOUTH){
+                
+                //bhmMessage("INFO", "SENDFLITS", "to the south port");   
+
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
@@ -382,7 +410,9 @@ PPM_REG_WRITE_CB(rxCtrlWrite) {
 }
 
 PPM_REG_WRITE_CB(txCtrlWrite) {
-    txCtrl = *(unsigned int *)data;
+    txCtrl = *(unsigned int *)data >> 24;
+
+    bhmMessage("INFO", "txCtrlW", "controle recebido: %d\n", txCtrl);
 
     // Runs the transmittion function
     sendFlits();
@@ -410,6 +440,7 @@ PPM_REG_READ_CB(txRead) {
 
     // Runs the transmittion function
     sendFlits();
+
     return *(Uns32*)user;
 }
 
@@ -418,8 +449,7 @@ PPM_REG_WRITE_CB(txWrite) {
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {
-    // YOUR CODE HERE (pre constructor)
-    periphConstructor();
+    periphConstructor(); 
     // YOUR CODE HERE (post constructor)
 }
 

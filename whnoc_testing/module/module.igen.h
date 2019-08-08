@@ -77,6 +77,22 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 
     optPacketnetP p_1_1_S_pkn = opPacketnetNew(mi, "p_1_1_S", 0, 0);
 
+    optPacketnetP q_0_0_E_pkn = opPacketnetNew(mi, "q_0_0_E", 0, 0);
+
+    opPacketnetNew(mi, "q_0_0_W", 0, 0);
+
+    optPacketnetP q_0_0_N_pkn = opPacketnetNew(mi, "q_0_0_N", 0, 0);
+
+    opPacketnetNew(mi, "q_0_0_S", 0, 0);
+
+    opPacketnetNew(mi, "q_1_1_E", 0, 0);
+
+    optPacketnetP q_1_1_W_pkn = opPacketnetNew(mi, "q_1_1_W", 0, 0);
+
+    opPacketnetNew(mi, "q_1_1_N", 0, 0);
+
+    optPacketnetP q_1_1_S_pkn = opPacketnetNew(mi, "q_1_1_S", 0, 0);
+
     // Processor cpu0
 
     const char *cpu0_path = opVLNVString(
@@ -405,8 +421,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portDataEast"),
                 OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portControlEast"),
-                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portControlNorth")
+                OP_PACKETNET_CONNECT(q_0_0_E_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(q_0_0_N_pkn, "portControlNorth")
             )
         ),
         0
@@ -429,8 +445,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portDataWest"),
                 OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portControlNorth")
+                OP_PACKETNET_CONNECT(q_0_0_E_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(q_1_1_S_pkn, "portControlNorth")
             )
         ),
         0
@@ -453,8 +469,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portControlEast")
+                OP_PACKETNET_CONNECT(q_0_0_N_pkn, "portControlSouth"),
+                OP_PACKETNET_CONNECT(q_1_1_W_pkn, "portControlEast")
             )
         ),
         0
@@ -477,8 +493,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portDataWest"),
                 OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portControlSouth")
+                OP_PACKETNET_CONNECT(q_1_1_W_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(q_1_1_S_pkn, "portControlSouth")
             )
         ),
         0

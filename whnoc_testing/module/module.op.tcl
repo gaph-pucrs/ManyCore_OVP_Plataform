@@ -102,14 +102,23 @@ ihwconnect -instancename router2 -packetnetport portDataEast -packetnet p_1_1_W
 ihwconnect -instancename router3 -packetnetport portDataSouth -packetnet p_1_1_S
 ihwconnect -instancename router1 -packetnetport portDataNorth -packetnet p_1_1_S
 
-ihwconnect -instancename router0 -packetnetport portControlEast -packetnet p_0_0_E
-ihwconnect -instancename router1 -packetnetport portControlWest -packetnet p_0_0_E
-ihwconnect -instancename router0 -packetnetport portControlNorth -packetnet p_0_0_N
-ihwconnect -instancename router2 -packetnetport portControlSouth -packetnet p_0_0_N
-ihwconnect -instancename router3 -packetnetport portControlWest -packetnet p_1_1_W
-ihwconnect -instancename router2 -packetnetport portControlEast -packetnet p_1_1_W
-ihwconnect -instancename router3 -packetnetport portControlSouth -packetnet p_1_1_S
-ihwconnect -instancename router1 -packetnetport portControlNorth -packetnet p_1_1_S
+ihwaddpacketnet -instancename q_0_0_E
+ihwaddpacketnet -instancename q_0_0_W
+ihwaddpacketnet -instancename q_0_0_N
+ihwaddpacketnet -instancename q_0_0_S
+ihwaddpacketnet -instancename q_1_1_E
+ihwaddpacketnet -instancename q_1_1_W
+ihwaddpacketnet -instancename q_1_1_N
+ihwaddpacketnet -instancename q_1_1_S
+
+ihwconnect -instancename router0 -packetnetport portControlEast -packetnet q_0_0_E
+ihwconnect -instancename router1 -packetnetport portControlWest -packetnet q_0_0_E
+ihwconnect -instancename router0 -packetnetport portControlNorth -packetnet q_0_0_N
+ihwconnect -instancename router2 -packetnetport portControlSouth -packetnet q_0_0_N
+ihwconnect -instancename router3 -packetnetport portControlWest -packetnet q_1_1_W
+ihwconnect -instancename router2 -packetnetport portControlEast -packetnet q_1_1_W
+ihwconnect -instancename router3 -packetnetport portControlSouth -packetnet q_1_1_S
+ihwconnect -instancename router1 -packetnetport portControlNorth -packetnet q_1_1_S
 
 ihwconnect -instancename router0 -netport       INTTC  -net int0
 ihwconnect -instancename router1 -netport       INTTC  -net int1
