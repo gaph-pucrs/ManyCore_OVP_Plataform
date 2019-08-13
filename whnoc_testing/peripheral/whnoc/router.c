@@ -114,6 +114,9 @@ void bufferStatusUpdate(unsigned int port){
 }
 
 void bufferPush(unsigned int port, unsigned int flit){
+    
+    //bhmMessage("INFO", "PUSHFuncion", ">>>>~~~~~~~~~~>>>>>> Porta %d recebeu flit %d", port, (flit >> 24));
+    
     // Write a new flit in the buffer
     buffers[port][last[port]] = flit;
     if(last[port] < BUFFER_SIZE-1){
@@ -142,6 +145,8 @@ unsigned int bufferPop(unsigned int port){
     
     // Decreses the flitCount
     flitCount[port] = flitCount[port] - 1;
+    
+    //bhmMessage("INFO", "POP", "port: %d - flit count: %d",port, flitCount[port]);
 
     // If the flitCount goes to EMPTY then the transmission is done!
     if (flitCount[port] == EMPTY){
@@ -151,12 +156,14 @@ unsigned int bufferPop(unsigned int port){
 
         // Inform that the next flit will be a header
         flitCount[port] = HEADER;
+
+        //bhmMessage("INFO", "POPFuncion", ">>>>>>>>>>>>>>>>>>>. Porta %d esta liberada!", port);
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCount[port] == SIZE){
-        flitCount[port] = value;
+        flitCount[port] = value >> 24;
     }
-
+    
     // Update the buffer status
     bufferStatusUpdate(port);
     
@@ -172,7 +179,7 @@ unsigned int isEmpty(unsigned int port){
     }
 }
 
-void sendFlits(){
+void sendFlits(struct handlesS handles){
     int port = 0;
     int checkport = 0;
     int to = ND;
@@ -208,9 +215,9 @@ void sendFlits(){
                 }
                 if(allowed == 1){
 
-                    //bhmMessage("INFO", "SENDFLITS", "Routing ack - the packet will be transmitted");
-
                     routingTable[port] = to;
+
+                    //bhmMessage("INFO", "SENDFLITS", "Port %d routed to %d", port, routingTable[port]);
                 }
             }
         }
@@ -218,28 +225,27 @@ void sendFlits(){
         // If the port is transmitting something then send a flit ahead
         if(routingTable[port] < ND && !isEmpty(port)) {
 
-            //bhmMessage("INFO", "SENDFLITS", "Transmitting...");
-
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
+                flit = bufferPop(port);
 
-                //bhmMessage("INFO", "SENDFLITS", "to the local port");
-
-                localPort_regs_data.dataTxLocal.value = bufferPop(port);
+                //bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));
+                
                 txCtrl = REQ;
+                localPort_regs_data.dataTxLocal.value = flit;
                 ppmWriteNet(handles.INTTC, 1);
             }
 
             // Transmit it to the EAST router
             else if(routingTable[port] == EAST){
-
-                //bhmMessage("INFO", "SENDFLITS", "to the east port");
-
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                     flit = bufferPop(port);
+
+                    //bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d",(flit >> 24));
+
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
                 }
@@ -247,14 +253,14 @@ void sendFlits(){
 
             // Transmit it to the WEST router
             else if(routingTable[port] == WEST){
-
-                //bhmMessage("INFO", "SENDFLITS", "to the west port");
-
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                     flit = bufferPop(port);
+
+                    //bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d", (flit >> 24));
+
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
                 }
@@ -262,14 +268,14 @@ void sendFlits(){
 
             // Transmit it to the NORTH router
             else if(routingTable[port] == NORTH){
-
-                //bhmMessage("INFO", "SENDFLITS", "to the north port");
-
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                     flit = bufferPop(port);
+
+                    //bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d", (flit >> 24));
+
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
                 }
@@ -277,14 +283,14 @@ void sendFlits(){
 
             // Transmit it to the SOUTH router
             else if(routingTable[port] == SOUTH){
-                
-                //bhmMessage("INFO", "SENDFLITS", "to the south port");   
-
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                     flit = bufferPop(port);
+
+                    //bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
+
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
                 }
@@ -322,7 +328,7 @@ PPM_PACKETNET_CB(controlEast) {
     controlUpdate(EAST, ctrl);
  
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_PACKETNET_CB(controlNorth) {
@@ -331,7 +337,7 @@ PPM_PACKETNET_CB(controlNorth) {
     controlUpdate(NORTH, ctrl);
  
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_PACKETNET_CB(controlSouth) {
@@ -340,7 +346,7 @@ PPM_PACKETNET_CB(controlSouth) {
     controlUpdate(SOUTH, ctrl);
  
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_PACKETNET_CB(controlWest) {
@@ -349,7 +355,7 @@ PPM_PACKETNET_CB(controlWest) {
     controlUpdate(WEST, ctrl);
  
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_PACKETNET_CB(dataEast) {
@@ -358,7 +364,7 @@ PPM_PACKETNET_CB(dataEast) {
     bufferPush(EAST, flit);
 
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_PACKETNET_CB(dataNorth) {
@@ -367,7 +373,7 @@ PPM_PACKETNET_CB(dataNorth) {
     bufferPush(NORTH, flit);
 
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_PACKETNET_CB(dataSouth) {
@@ -376,7 +382,7 @@ PPM_PACKETNET_CB(dataSouth) {
     bufferPush(SOUTH, flit);
 
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_PACKETNET_CB(dataWest) {
@@ -385,37 +391,39 @@ PPM_PACKETNET_CB(dataWest) {
     bufferPush(WEST, flit);
 
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 }
 
 PPM_REG_READ_CB(rxCtrlRead) {
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 
     return *(Uns32*)user;
 }
 
 PPM_REG_READ_CB(txCtrlRead) {
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(rxCtrlWrite) {
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 
     *(Uns32*)user = data;
 }
 
 PPM_REG_WRITE_CB(txCtrlWrite) {
-    txCtrl = *(unsigned int *)data >> 24;
+    //bhmMessage("INFO", "txCtrlW", "controle recebido!");
+    txCtrl = data;
+    txCtrl = txCtrl >> 24;
 
-    bhmMessage("INFO", "txCtrlW", "controle recebido: %d\n", txCtrl);
+    //bhmMessage("INFO", "txCtrlW", "controle recebido: %d\n", txCtrl);
 
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 
     *(Uns32*)user = data;
 }
@@ -429,17 +437,20 @@ PPM_REG_WRITE_CB(rxWrite) {
     bufferPush(LOCAL, data);
 
     // Runs the transmittion function
-    sendFlits();
+    sendFlits(handles);
 
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(txRead) {
+    
     // Once that the IP reads the flit, turn down the interruption 
     ppmWriteNet(handles.INTTC, 0); 
 
+    //bhmMessage("INFO", "txRead", "dado lido - interrupcao removida");
+
     // Runs the transmittion function
-    sendFlits();
+    //sendFlits(handles);
 
     return *(Uns32*)user;
 }

@@ -35,11 +35,9 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *control = ACK;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-        }
-        else{
-            *control = ACK;
         }
     }
 }
@@ -62,7 +60,7 @@ int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 
-    LOG("Starting ROUTER0 application! \n\n");
+    LOG("----------\nStarting ROUTER0 application! \n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -92,8 +90,9 @@ int main(int argc, char **argv)
 
     for(i=0; i<99; i++){
         interrupt = 0;
+        rxPointer = 0;
         while(interrupt != 1){}
-        LOG("00 --- Valor recebido: %d", rxPacket[2]);
+        LOG("00 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
         sendPckt();
     }
