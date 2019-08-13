@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 
-    LOG("Starting ROUTER1 application! \n\n");
+    LOG("----------\nStarting ROUTER1 application! \n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
