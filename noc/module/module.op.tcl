@@ -110,7 +110,7 @@ ihwconnect -instancename router3 -netport       INTTC  -net int3
 ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse
 
 ihwaddbus -instancename syncBus -addresswidth 32
-ihwconnect -instancename sync -busslaveport syncPort -bus syncBus -loaddress 0x0 -hiaddress 0x7
+ihwconnect -instancename sync -busslaveport syncPort -bus syncBus -loaddress 0x00000000 -hiaddress 0x00000007
 
 ihwaddbridge -instancename bridge0
 ihwaddbridge -instancename bridge1
@@ -118,10 +118,10 @@ ihwaddbridge -instancename bridge2
 ihwaddbridge -instancename bridge3
 
 ihwconnect -bus cpu0Bus -busslaveport ps -instancename bridge0 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge0 -loaddress 0x8 -hiaddress 0xF
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge0 -loaddress 0x00000000 -hiaddress 0x00000007
 ihwconnect -bus cpu1Bus -busslaveport ps -instancename bridge1 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge1 -loaddress 0x10 -hiaddress 0x17
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge1 -loaddress 0x00000000 -hiaddress 0x00000007
 ihwconnect -bus cpu2Bus -busslaveport ps -instancename bridge2 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge2 -loaddress 0x18 -hiaddress 0x1F
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge2 -loaddress 0x00000000 -hiaddress 0x00000007
 ihwconnect -bus cpu3Bus -busslaveport ps -instancename bridge3 -loaddress 0x80000010 -hiaddress 0x80000017
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge3 -loaddress 0x20 -hiaddress 0x27
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge3 -loaddress 0x00000000 -hiaddress 0x00000007
