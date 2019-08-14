@@ -400,7 +400,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "bridge0",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x8ULL, .addrHi=0xfULL),
+                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
                 OP_BUS_CONNECT(cpu0Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
@@ -414,7 +414,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "bridge1",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x10ULL, .addrHi=0x17ULL),
+                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
                 OP_BUS_CONNECT(cpu1Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
@@ -428,7 +428,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "bridge2",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x18ULL, .addrHi=0x1fULL),
+                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
                 OP_BUS_CONNECT(cpu2Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
@@ -442,7 +442,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "bridge3",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x20ULL, .addrHi=0x27ULL),
+                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
                 OP_BUS_CONNECT(cpu3Bus_b, "ps", .slave=1, .addrLo=0x80000010ULL, .addrHi=0x80000017ULL)
             )
         ),
