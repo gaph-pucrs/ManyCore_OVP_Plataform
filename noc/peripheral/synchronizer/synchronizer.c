@@ -8,8 +8,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "synchronizer.igen.h"
+#include "../noc/noc.h"
 //////////////////////////////// Callback stubs ////////////////////////////////
-
+int startedPEs = 0;
 PPM_REG_READ_CB(goRead) {
     // YOUR CODE HERE (goRead)
 
@@ -22,13 +23,23 @@ PPM_REG_WRITE_CB(goWrite) {
     *(Uns32*)user = data;
 }
 
+/*recebendo flit do cpu*/
 PPM_REG_WRITE_CB(readyWrite) {
-    // YOUR CODE HERE (re                           adyWrite)
+    startedPEs++;
+    bhmMessage("I", "readyWrite", "incrementando numero de roteadores %d\n",startedPEs);
+    if(startedPEs == N_PES){
+
+        bhmMessage("I", "readyWrite", " numero TOTAL de roteadores %d\n",startedPEs);
+	syncPort_regs_data.syncToPE.value = 1;
+
+    }
+    // YOUR CODE HERE (re adyWrite)
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(readyRead) {
-    // YOUR CODE HERE (readyRead)
+
+// YOUR CODE HERE (readyRead)
     return *(Uns32*)user;
 }
 
