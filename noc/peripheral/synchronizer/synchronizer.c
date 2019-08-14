@@ -23,7 +23,7 @@ PPM_REG_WRITE_CB(goWrite) {
 }
 
 PPM_REG_WRITE_CB(readyWrite) {
-    // YOUR CODE HERE (radyWrite)
+    // YOUR CODE HERE (re                           adyWrite)
     *(Uns32*)user = data;
 }
 
