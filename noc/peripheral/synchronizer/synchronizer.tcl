@@ -28,14 +28,45 @@ imodeladdaddressblock -name regs   \
                       -size 8
 
 
-imodeladdmmregister  -name syncToPE \
+imodeladdmmregister  -name syncToPE0 \
                      -readfunction   goRead \
                      -writefunction  goWrite \
                      -offset 0 
 
-imodeladdmmregister  -name PEtoSync \
+imodeladdmmregister  -name PEtoSync0 \
                      -readfunction   readyRead \
                      -writefunction  readyWrite \
-                     -offset 4
+                     -offset 1
 
+imodeladdmmregister  -name syncToPE1 \
+                     -readfunction   goRead \
+                     -writefunction  goWrite \
+                     -offset 2
+
+imodeladdmmregister  -name PEtoSync1 \
+                     -readfunction   readyRead \
+                     -writefunction  readyWrite \
+                     -offset 3
+
+
+imodeladdmmregister  -name syncToPE2 \
+                     -readfunction   goRead \
+                     -writefunction  goWrite \
+                     -offset 4 
+
+imodeladdmmregister  -name PEtoSync2 \
+                     -readfunction   readyRead \
+                     -writefunction  readyWrite \
+                     -offset 5
+
+
+imodeladdmmregister  -name syncToPE3 \
+                     -readfunction   goRead \
+                     -writefunction  goWrite \
+                     -offset 6 
+
+imodeladdmmregister  -name PEtoSync3 \
+                     -readfunction   readyRead \
+                     -writefunction  readyWrite \
+                     -offset 7
 
