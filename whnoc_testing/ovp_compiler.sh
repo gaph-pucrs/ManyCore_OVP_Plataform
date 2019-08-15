@@ -7,7 +7,8 @@ checkinstall.exe -p install.pkg --nobanner || exit
 CROSS=OR1K
 make -C application CROSS=${CROSS}
 make -C module
-make -C peripheral/whnoc NOVLNV=1
+make -C peripheral/noc NOVLNV=1
+make -C peripheral/synchronizer NOVLNV=1
 harness.exe \
     --modulefile module/model.${IMPERAS_SHRSUF} \
      --program cpu0=application/application0.${CROSS}.elf $* \

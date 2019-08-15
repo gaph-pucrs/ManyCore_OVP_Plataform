@@ -6,6 +6,7 @@
 #include "../peripheral/whnoc/noc.h"
 
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
+#define SYNC_BASE ((unsigned int *) 0x80000014)
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
@@ -60,6 +61,9 @@ void sendPckt(){
 int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
+    volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
+    volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
+
 
     LOG("Starting Application\n\n");
     // Attach the external interrupt handler for 'intr0'
@@ -74,8 +78,17 @@ int main(int argc, char **argv)
 
     // read rx_av register until its value indicates that a valid data is 
     // available at rx_reg, then prints rx_reg value on screen
-    int i;
+    int i, start = 0;
     *myAddress = 0x01;
+
+    
+    *PEToSync = 0x01;
+
+    while(start != 1){
+	start = *SyncToPE >> 24;
+     }
+
+
 
     //========================
     // YOUR CODE HERE

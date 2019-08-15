@@ -28,8 +28,9 @@ do
     for j in $(seq 0 $(($X-1)));
     do
         sed -i 's/\*myAddress = 0x.*/\*myAddress = 0x'$j$i'\;/' application$cont.c 
-
+        sed -i 's/\*PEToSync = 0x.*/\*PEToSync = 0x'$j$i'\;/' application$cont.c 
         cont=$((cont+1))
     done
 done
+
 
