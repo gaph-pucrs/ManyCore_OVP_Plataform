@@ -61,37 +61,37 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optNetP int2_n = opNetNew(mi, "int2", 0, 0);
     optNetP int3_n = opNetNew(mi, "int3", 0, 0);
 
-    optPacketnetP p_0_0_E_pkn = opPacketnetNew(mi, "p_0_0_E", 0, 0);
+    optPacketnetP data_0_0_E_pkn = opPacketnetNew(mi, "data_0_0_E", 0, 0);
 
-    opPacketnetNew(mi, "p_0_0_W", 0, 0);
+    opPacketnetNew(mi, "data_0_0_W", 0, 0);
 
-    optPacketnetP p_0_0_N_pkn = opPacketnetNew(mi, "p_0_0_N", 0, 0);
+    optPacketnetP data_0_0_N_pkn = opPacketnetNew(mi, "data_0_0_N", 0, 0);
 
-    opPacketnetNew(mi, "p_0_0_S", 0, 0);
+    opPacketnetNew(mi, "data_0_0_S", 0, 0);
 
-    opPacketnetNew(mi, "p_1_1_E", 0, 0);
+    optPacketnetP ctrl_0_0_E_pkn = opPacketnetNew(mi, "ctrl_0_0_E", 0, 0);
 
-    optPacketnetP p_1_1_W_pkn = opPacketnetNew(mi, "p_1_1_W", 0, 0);
+    opPacketnetNew(mi, "ctrl_0_0_W", 0, 0);
 
-    opPacketnetNew(mi, "p_1_1_N", 0, 0);
+    optPacketnetP ctrl_0_0_N_pkn = opPacketnetNew(mi, "ctrl_0_0_N", 0, 0);
 
-    optPacketnetP p_1_1_S_pkn = opPacketnetNew(mi, "p_1_1_S", 0, 0);
+    opPacketnetNew(mi, "ctrl_0_0_S", 0, 0);
 
-    optPacketnetP q_0_0_E_pkn = opPacketnetNew(mi, "q_0_0_E", 0, 0);
+    opPacketnetNew(mi, "data_1_1_E", 0, 0);
 
-    opPacketnetNew(mi, "q_0_0_W", 0, 0);
+    optPacketnetP data_1_1_W_pkn = opPacketnetNew(mi, "data_1_1_W", 0, 0);
 
-    optPacketnetP q_0_0_N_pkn = opPacketnetNew(mi, "q_0_0_N", 0, 0);
+    opPacketnetNew(mi, "data_1_1_N", 0, 0);
 
-    opPacketnetNew(mi, "q_0_0_S", 0, 0);
+    optPacketnetP data_1_1_S_pkn = opPacketnetNew(mi, "data_1_1_S", 0, 0);
 
-    opPacketnetNew(mi, "q_1_1_E", 0, 0);
+    opPacketnetNew(mi, "ctrl_1_1_E", 0, 0);
 
-    optPacketnetP q_1_1_W_pkn = opPacketnetNew(mi, "q_1_1_W", 0, 0);
+    optPacketnetP ctrl_1_1_W_pkn = opPacketnetNew(mi, "ctrl_1_1_W", 0, 0);
 
-    opPacketnetNew(mi, "q_1_1_N", 0, 0);
+    opPacketnetNew(mi, "ctrl_1_1_N", 0, 0);
 
-    optPacketnetP q_1_1_S_pkn = opPacketnetNew(mi, "q_1_1_S", 0, 0);
+    optPacketnetP ctrl_1_1_S_pkn = opPacketnetNew(mi, "ctrl_1_1_S", 0, 0);
 
     // Processor cpu0
 
@@ -419,10 +419,10 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_NET_CONNECT(int0_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(q_0_0_E_pkn, "portControlEast"),
-                OP_PACKETNET_CONNECT(q_0_0_N_pkn, "portControlNorth")
+                OP_PACKETNET_CONNECT(data_0_0_E_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_E_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(data_0_0_N_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_N_pkn, "portControlNorth")
             )
         ),
         0
@@ -443,10 +443,10 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_NET_CONNECT(int1_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_0_0_E_pkn, "portDataWest"),
-                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(q_0_0_E_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(q_1_1_S_pkn, "portControlNorth")
+                OP_PACKETNET_CONNECT(data_0_0_E_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_E_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_1_1_S_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_S_pkn, "portControlNorth")
             )
         ),
         0
@@ -467,10 +467,10 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_NET_CONNECT(int2_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_0_0_N_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(q_0_0_N_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(q_1_1_W_pkn, "portControlEast")
+                OP_PACKETNET_CONNECT(data_0_0_N_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_N_pkn, "portControlSouth"),
+                OP_PACKETNET_CONNECT(data_1_1_W_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_W_pkn, "portControlEast")
             )
         ),
         0
@@ -491,10 +491,10 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_NET_CONNECT(int3_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(p_1_1_W_pkn, "portDataWest"),
-                OP_PACKETNET_CONNECT(p_1_1_S_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(q_1_1_W_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(q_1_1_S_pkn, "portControlSouth")
+                OP_PACKETNET_CONNECT(data_1_1_W_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_W_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_1_1_S_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_S_pkn, "portControlSouth")
             )
         ),
         0
@@ -513,7 +513,7 @@ optModuleAttr modelAttrs = {
     .vlnv          = {
         .vendor  = "defaultVendor",
         .library = "work",
-        .name    = "simpleCpuRouter",
+        .name    = "ManyCores_WormHoleNoC",
         .version = "1.0"
     },
     .constructCB          = moduleConstructor,
