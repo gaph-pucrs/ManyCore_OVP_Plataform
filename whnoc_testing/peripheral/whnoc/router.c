@@ -13,9 +13,6 @@
 // Local Address
 unsigned int myAddress = 0xFFFFFFFF;
 
-// Stores the requested output port for a given packet
-unsigned int delivery[N_PORTS] = {ND,ND,ND,ND,ND};
-
 // Countdown value, informing how many flits are left to be transmitted 
 unsigned int flitCount[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
 
@@ -143,7 +140,7 @@ unsigned int bufferPop(unsigned int port){
         first[port] = 0;
     }
     
-    // Decreses the flitCount
+    // Decreases the flitCount
     flitCount[port] = flitCount[port] - 1;
     
     //bhmMessage("INFO", "POP", "port: %d - flit count: %d",port, flitCount[port]);
