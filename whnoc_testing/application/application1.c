@@ -35,11 +35,9 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *control = ACK;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-        }
-        else{
-            *control = ACK;
         }
     }
 }
@@ -50,6 +48,7 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*control != GO){
+            LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
@@ -61,7 +60,7 @@ int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 
-    LOG("----------\nStarting ROUTER1 application! \n");
+    LOG("----------\nStarting ROUTER0 application! \n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -81,6 +80,23 @@ int main(int argc, char **argv)
     // YOUR CODE HERE
     //========================
 
-    LOG("Application ROUTER1 done!\n\n");
+    /*// Creating the tx packet
+    txPacket[0] = 0x01;
+    txPacket[1] = 1;
+    txPacket[2] = 1;
+
+    // Sends the first packet
+    sendPckt();
+
+    for(i=0; i<99; i++){
+        interrupt = 0;
+        rxPointer = 0;
+        while(interrupt != 1){}
+        LOG("10 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
+        txPacket[2] = rxPacket[2] + 1;
+        sendPckt();
+    }*/
+
+    LOG("Application ROUTER0 done!\n\n");
     return 1;
 }
