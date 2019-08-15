@@ -5,3 +5,4 @@
 #define LOCAL 		4
 #define N_PORTS 	5
 #define BUFFER_SIZE 	256
+#define N_PES           4
