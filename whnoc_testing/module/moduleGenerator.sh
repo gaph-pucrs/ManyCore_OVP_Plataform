@@ -227,6 +227,36 @@ do
 	echo "ihwconnect -instancename router"$i" -netport       INTTC  -net int"$i >> module.op.tcl
 done
 
+echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
+
+echo "" >> module.op.tcl
+
+echo "ihwaddbus -instancename syncBus -addresswidth 32" >> module.op.tcl
+echo "ihwconnect -instancename sync -busslaveport syncPort -bus syncBus -loaddress 0x00000000 -hiaddress 0x00000007" >> module.op.tcl
+
+echo "" >> module.op.tcl
+
+for i in $(seq 0 $N);
+do
+	echo "ihwaddbridge -instancename bridge"$i >> module.op.tcl
+done
+
+echo "" >> module.op.tcl
+
+loCpuBus=0x80000014 
+hiCpuBus=0x8000001B 
+
+loSyncBus=0x00000000 
+hiSyncBus=0x00000007
+
+for i in $(seq 0 $N);
+do
+	echo "ihwconnect -bus cpu"$i"Bus -busslaveport ps -instancename bridge"$i" -loaddress "$loCpuBus" -hiaddress "$hiCpuBus"" >> module.op.tcl
+	echo "ihwconnect -bus syncBus -busmasterport pm -instancename bridge"$i" -loaddress "$loSyncBus" -hiaddress "$hiSyncBus"" >> module.op.tcl
+
+done
+
+
 
 
 
