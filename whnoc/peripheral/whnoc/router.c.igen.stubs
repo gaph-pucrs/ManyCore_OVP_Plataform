@@ -1,0 +1,113 @@
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//                W R I T T E N   B Y   I M P E R A S   I G E N
+//
+//                             Version 20170201.0
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#include "router.igen.h"
+//////////////////////////////// Callback stubs ////////////////////////////////
+
+PPM_REG_READ_CB(addressRead) {
+    // YOUR CODE HERE (addressRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(addressWrite) {
+    // YOUR CODE HERE (addressWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_PACKETNET_CB(controlEast) {
+    // YOUR CODE HERE (controlEast)
+}
+
+PPM_PACKETNET_CB(controlNorth) {
+    // YOUR CODE HERE (controlNorth)
+}
+
+PPM_PACKETNET_CB(controlSouth) {
+    // YOUR CODE HERE (controlSouth)
+}
+
+PPM_PACKETNET_CB(controlWest) {
+    // YOUR CODE HERE (controlWest)
+}
+
+PPM_PACKETNET_CB(dataEast) {
+    // YOUR CODE HERE (dataEast)
+}
+
+PPM_PACKETNET_CB(dataNorth) {
+    // YOUR CODE HERE (dataNorth)
+}
+
+PPM_PACKETNET_CB(dataSouth) {
+    // YOUR CODE HERE (dataSouth)
+}
+
+PPM_PACKETNET_CB(dataWest) {
+    // YOUR CODE HERE (dataWest)
+}
+
+PPM_REG_READ_CB(rxCtrlRead) {
+    // YOUR CODE HERE (rxCtrlRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(rxCtrlWrite) {
+    // YOUR CODE HERE (rxCtrlWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_REG_READ_CB(rxRead) {
+    // YOUR CODE HERE (rxRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(rxWrite) {
+    // YOUR CODE HERE (rxWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_REG_READ_CB(txCtrlRead) {
+    // YOUR CODE HERE (txCtrlRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(txCtrlWrite) {
+    // YOUR CODE HERE (txCtrlWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_REG_READ_CB(txRead) {
+    // YOUR CODE HERE (txRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(txWrite) {
+    // YOUR CODE HERE (txWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_CONSTRUCTOR_CB(constructor) {
+    // YOUR CODE HERE (pre constructor)
+    periphConstructor();
+    // YOUR CODE HERE (post constructor)
+}
+
+PPM_DESTRUCTOR_CB(destructor) {
+    // YOUR CODE HERE (destructor)
+}
+
+
+PPM_SAVE_STATE_FN(peripheralSaveState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
+PPM_RESTORE_STATE_FN(peripheralRestoreState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
