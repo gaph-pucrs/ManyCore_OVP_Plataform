@@ -36,10 +36,10 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *control = ACK;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
         }
+        *control = STALL;
     }
 }
 
@@ -75,15 +75,26 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x01;
+    *myAddress = 0x20;
 
-    *PEToSync = 0x01;
+    *PEToSync = 0x20;
     while(start != 1){
 	start = *SyncToPE >> 24;
      }
 
     //========================
-    // YOUR CODE HERE
+
+    txPacket[0] = 0x24;
+    txPacket[1] = 128;
+
+    int i,j;
+    for(i=0;i<10;i++){
+        for(j=0;j<128;j++){
+            txPacket[j+2] = 2;
+        }
+        //sendPckt();
+    }
+
     //========================
 
     LOG("Application ROUTER2 done!\n\n");
