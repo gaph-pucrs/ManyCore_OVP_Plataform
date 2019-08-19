@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 	start = *SyncToPE >> 24;
      }
 
-LOG("SAIU DO WHILE");
+
 
     //========================
     // YOUR CODE HERE

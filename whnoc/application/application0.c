@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
-    LOG("----------\nStarting ROUTER0 application! \n");
+    LOG("Starting ROUTER0 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -74,9 +74,7 @@ int main(int argc, char **argv)
     spr |= 0x4;
     MTSPR(17, spr);
 
-    // read rx_av register until its value indicates that a valid data is 
-    // available at rx_reg, then prints rx_reg value on screen
-    int i, start = 0;
+    int start = 0;
     *myAddress = 0x00;
 
     *PEToSync = 0x00;
@@ -87,26 +85,6 @@ int main(int argc, char **argv)
     //========================
     // YOUR CODE HERE
     //========================
-
-    // Creating the tx packet
-    txPacket[0] = 0x11;
-    txPacket[1] = 1;
-    txPacket[2] = 1;
-
-
-    // Sends the first packet
-    sendPckt();
-
-    for(i=0; i<99; i++){
-        interrupt = 0;
-        rxPointer = 0;
-        while(interrupt != 1){}
-        LOG("00 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
-        txPacket[2] = rxPacket[2] + 1;
-        sendPckt();
-    }
-
-	
 
     LOG("Application ROUTER0 done!\n\n");
     return 1;

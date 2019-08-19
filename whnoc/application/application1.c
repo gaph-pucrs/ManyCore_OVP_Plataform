@@ -36,11 +36,9 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
+        *control = ACK;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-        }
-        else{
-            *control = ACK;
         }
     }
 }
@@ -51,6 +49,7 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*control != GO){
+            LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
@@ -64,7 +63,6 @@ int main(int argc, char **argv)
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
-
     LOG("Starting ROUTER1 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
@@ -76,19 +74,13 @@ int main(int argc, char **argv)
     spr |= 0x4;
     MTSPR(17, spr);
 
-    // read rx_av register until its value indicates that a valid data is 
-    // available at rx_reg, then prints rx_reg value on screen
-    int i, start = 0;
+    int start = 0;
     *myAddress = 0x10;
 
-    
     *PEToSync = 0x10;
-
     while(start != 1){
 	start = *SyncToPE >> 24;
      }
-
-LOG("SAIU DO WHILE");
 
     //========================
     // YOUR CODE HERE
