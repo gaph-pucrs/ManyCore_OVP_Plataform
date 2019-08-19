@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
-    LOG("----------\nStarting ROUTER0 application! \n");
+    LOG("Starting ROUTER0 application! \n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
