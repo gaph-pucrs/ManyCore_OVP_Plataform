@@ -75,15 +75,26 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x11;
+    *myAddress = 0x30;
 
-    *PEToSync = 0x11;
+    *PEToSync = 0x30;
     while(start != 1){
 	start = *SyncToPE >> 24;
      }
 
     //========================
-    // YOUR CODE HERE
+
+    txPacket[0] = 0x24;
+    txPacket[1] = 128;
+
+    int i,j;
+    for(i=0;i<10;i++){
+        for(j=0;j<128;j++){
+            txPacket[j+2] = 3;
+        }
+        //sendPckt();
+    }
+
     //========================
 
     LOG("Application ROUTER3 done!\n\n");

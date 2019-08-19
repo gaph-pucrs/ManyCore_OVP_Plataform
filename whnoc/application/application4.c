@@ -36,10 +36,10 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-                if(rxPointer >= (rxPacket[1] + 2)){
+        *control = ACK;
+        if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
         }
-        *control = STALL;
     }
 }
 
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
-    LOG("Starting ROUTER0 application! \n");
+    LOG("Starting ROUTER4 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -75,17 +75,27 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x00;
+    *myAddress = 0x40;
 
-    *PEToSync = 0x00;
+    *PEToSync = 0x40;
     while(start != 1){
 	start = *SyncToPE >> 24;
      }
 
     //========================
-    // YOUR CODE HERE
+
+    txPacket[0] = 0x24;
+    txPacket[1] = 128;
+
+    int i,j;
+    for(i=0;i<10;i++){
+        for(j=0;j<128;j++){
+            txPacket[j+2] = 4;
+        }
+        //sendPckt();
+    }
     //========================
 
-    LOG("Application ROUTER0 done!\n\n");
+    LOG("Application ROUTER4 done!\n\n");
     return 1;
 }
