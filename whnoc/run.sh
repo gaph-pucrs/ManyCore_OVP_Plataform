@@ -25,7 +25,7 @@ echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
 echo "CROSS=OR1K" >> ovp_compiler.sh
 echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
-echo "make -C peripheral/noc NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/whnoc NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
 
 
@@ -38,9 +38,11 @@ do
     then
         echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
     else
-        echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$*" >> ovp_compiler.sh
+        echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
     fi
 done
+
+       echo "--verbose " >> ovp_compiler.sh
 
 chmod +x ovp_compiler.sh
 
