@@ -49,7 +49,7 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*control != GO){
-            LOG("\n %d \n", *control);
+            //LOG("\n %d \n", *control>>24);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
@@ -79,11 +79,22 @@ int main(int argc, char **argv)
 
     *PEToSync = 0x00;
     while(start != 1){
-	start = *SyncToPE >> 24;
-     }
+	    start = *SyncToPE >> 24;
+    }
 
     //========================
-    // YOUR CODE HERE
+
+    txPacket[0] = 0x24;
+    txPacket[1] = 5;
+
+    int i,j;
+    for(i=0;i<10;i++){
+        for(j=0;j<5;j++){
+            txPacket[j+2] = 0x00;
+        }
+        sendPckt();
+    }
+
     //========================
 
     LOG("Application ROUTER0 done!\n\n");
