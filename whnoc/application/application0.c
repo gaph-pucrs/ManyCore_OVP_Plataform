@@ -49,9 +49,10 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*control != GO){
-            //LOG("\n %d \n", *control>>24);
+            LOG("CONTROLE EM STALL\n");
             // Waiting for space in the router buffer
         }
+        LOG("ENVIANDO FLIT %d\n", txPacket[txPointer]);
         *txLocal = txPacket[txPointer];
         txPointer++;
     }
@@ -88,10 +89,11 @@ int main(int argc, char **argv)
     txPacket[1] = 5;
 
     int i,j;
+    for(j=0;j<5;j++){
+        txPacket[j+2] = 0x00;
+    }
+
     for(i=0;i<10;i++){
-        for(j=0;j<5;j++){
-            txPacket[j+2] = 0x00;
-        }
         sendPckt();
     }
 

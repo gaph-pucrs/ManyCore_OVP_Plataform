@@ -25,7 +25,7 @@ volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
     //volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
-
+    LOG("==========================================RECEBENDO UM PACOTE!");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
@@ -86,7 +86,8 @@ int main(int argc, char **argv)
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
     MTSPR(17, spr);
-
+    
+    LOG("aaaaaaaaaaaaaa PACOTE <<<<<<====================================================");
     int start = 0;
     *myAddress = 0x24;
 
@@ -98,6 +99,7 @@ int main(int argc, char **argv)
     //========================
     int i;
     for(i=0;i<50;i++){
+        LOG("AGUARDANDO PACOTE <<<<<<====================================================");
         // Aguarda um pacote
         receivePckt();
 
