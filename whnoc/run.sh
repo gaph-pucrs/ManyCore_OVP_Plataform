@@ -13,6 +13,17 @@ cd module
 cd ..
 
 N=$(($X*$Y))
+
+
+cd peripheral
+cd whnoc
+
+sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
+
+
+cd ..
+cd ..
+
 N=$(($N-1))
 
 rm -rf ovp_compiler.sh
