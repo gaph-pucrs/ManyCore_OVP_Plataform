@@ -83,7 +83,18 @@ int main(int argc, char **argv)
      }
 
     //========================
-    // YOUR CODE HERE
+
+    txPacket[0] = 0x24;
+    txPacket[1] = 128;
+
+    int i,j;
+    for(i=0;i<10;i++){
+        for(j=0;j<128;j++){
+            txPacket[j+2] = 3;
+        }
+        //sendPckt();
+    }
+
     //========================
 
     LOG("Application ROUTER3 done!\n\n");
