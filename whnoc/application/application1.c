@@ -74,11 +74,12 @@ int main(int argc, char **argv)
     spr |= 0x4;
     MTSPR(17, spr);
 
+    
     int start = 0;
     *myAddress = 0x10;
 
     *PEToSync = 0x10;
-    while(start != 1){
+    while(start != 1){ 
 	start = *SyncToPE >> 24;
      }
 
