@@ -76,8 +76,8 @@ int main(int argc, char **argv)
 
     int start = 0;
     *myAddress = 0x22;
-
     *PEToSync = 0x22;
+
     while(start != 1){
 	start = *SyncToPE >> 24;
      }
