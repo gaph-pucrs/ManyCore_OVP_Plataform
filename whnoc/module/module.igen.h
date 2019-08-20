@@ -52,31 +52,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optBusP cpu3Bus_b = opBusNew(mi, "cpu3Bus", 32, 0, 0);
 
 
-    // Bus cpu4Bus
-
-    optBusP cpu4Bus_b = opBusNew(mi, "cpu4Bus", 32, 0, 0);
-
-
-    // Bus cpu5Bus
-
-    optBusP cpu5Bus_b = opBusNew(mi, "cpu5Bus", 32, 0, 0);
-
-
-    // Bus cpu6Bus
-
-    optBusP cpu6Bus_b = opBusNew(mi, "cpu6Bus", 32, 0, 0);
-
-
-    // Bus cpu7Bus
-
-    optBusP cpu7Bus_b = opBusNew(mi, "cpu7Bus", 32, 0, 0);
-
-
-    // Bus cpu8Bus
-
-    optBusP cpu8Bus_b = opBusNew(mi, "cpu8Bus", 32, 0, 0);
-
-
     // Bus syncBus
 
     optBusP syncBus_b = opBusNew(mi, "syncBus", 32, 0, 0);
@@ -90,11 +65,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optNetP int1_n = opNetNew(mi, "int1", 0, 0);
     optNetP int2_n = opNetNew(mi, "int2", 0, 0);
     optNetP int3_n = opNetNew(mi, "int3", 0, 0);
-    optNetP int4_n = opNetNew(mi, "int4", 0, 0);
-    optNetP int5_n = opNetNew(mi, "int5", 0, 0);
-    optNetP int6_n = opNetNew(mi, "int6", 0, 0);
-    optNetP int7_n = opNetNew(mi, "int7", 0, 0);
-    optNetP int8_n = opNetNew(mi, "int8", 0, 0);
 
     optPacketnetP data_0_0_E_pkn = opPacketnetNew(mi, "data_0_0_E", 0, 0);
 
@@ -112,69 +82,21 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 
     opPacketnetNew(mi, "ctrl_0_0_S", 0, 0);
 
-    opPacketnetNew(mi, "data_0_2_E", 0, 0);
-
-    optPacketnetP data_0_2_W_pkn = opPacketnetNew(mi, "data_0_2_W", 0, 0);
-
-    optPacketnetP data_0_2_N_pkn = opPacketnetNew(mi, "data_0_2_N", 0, 0);
-
-    opPacketnetNew(mi, "data_0_2_S", 0, 0);
-
-    opPacketnetNew(mi, "ctrl_0_2_E", 0, 0);
-
-    optPacketnetP ctrl_0_2_W_pkn = opPacketnetNew(mi, "ctrl_0_2_W", 0, 0);
-
-    optPacketnetP ctrl_0_2_N_pkn = opPacketnetNew(mi, "ctrl_0_2_N", 0, 0);
-
-    opPacketnetNew(mi, "ctrl_0_2_S", 0, 0);
-
-    optPacketnetP data_1_1_E_pkn = opPacketnetNew(mi, "data_1_1_E", 0, 0);
+    opPacketnetNew(mi, "data_1_1_E", 0, 0);
 
     optPacketnetP data_1_1_W_pkn = opPacketnetNew(mi, "data_1_1_W", 0, 0);
 
-    optPacketnetP data_1_1_N_pkn = opPacketnetNew(mi, "data_1_1_N", 0, 0);
+    opPacketnetNew(mi, "data_1_1_N", 0, 0);
 
     optPacketnetP data_1_1_S_pkn = opPacketnetNew(mi, "data_1_1_S", 0, 0);
 
-    optPacketnetP ctrl_1_1_E_pkn = opPacketnetNew(mi, "ctrl_1_1_E", 0, 0);
+    opPacketnetNew(mi, "ctrl_1_1_E", 0, 0);
 
     optPacketnetP ctrl_1_1_W_pkn = opPacketnetNew(mi, "ctrl_1_1_W", 0, 0);
 
-    optPacketnetP ctrl_1_1_N_pkn = opPacketnetNew(mi, "ctrl_1_1_N", 0, 0);
+    opPacketnetNew(mi, "ctrl_1_1_N", 0, 0);
 
     optPacketnetP ctrl_1_1_S_pkn = opPacketnetNew(mi, "ctrl_1_1_S", 0, 0);
-
-    optPacketnetP data_2_0_E_pkn = opPacketnetNew(mi, "data_2_0_E", 0, 0);
-
-    opPacketnetNew(mi, "data_2_0_W", 0, 0);
-
-    opPacketnetNew(mi, "data_2_0_N", 0, 0);
-
-    optPacketnetP data_2_0_S_pkn = opPacketnetNew(mi, "data_2_0_S", 0, 0);
-
-    optPacketnetP ctrl_2_0_E_pkn = opPacketnetNew(mi, "ctrl_2_0_E", 0, 0);
-
-    opPacketnetNew(mi, "ctrl_2_0_W", 0, 0);
-
-    opPacketnetNew(mi, "ctrl_2_0_N", 0, 0);
-
-    optPacketnetP ctrl_2_0_S_pkn = opPacketnetNew(mi, "ctrl_2_0_S", 0, 0);
-
-    opPacketnetNew(mi, "data_2_2_E", 0, 0);
-
-    optPacketnetP data_2_2_W_pkn = opPacketnetNew(mi, "data_2_2_W", 0, 0);
-
-    opPacketnetNew(mi, "data_2_2_N", 0, 0);
-
-    optPacketnetP data_2_2_S_pkn = opPacketnetNew(mi, "data_2_2_S", 0, 0);
-
-    opPacketnetNew(mi, "ctrl_2_2_E", 0, 0);
-
-    optPacketnetP ctrl_2_2_W_pkn = opPacketnetNew(mi, "ctrl_2_2_W", 0, 0);
-
-    opPacketnetNew(mi, "ctrl_2_2_N", 0, 0);
-
-    optPacketnetP ctrl_2_2_S_pkn = opPacketnetNew(mi, "ctrl_2_2_S", 0, 0);
 
     // Processor cpu0
 
@@ -367,246 +289,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
-    // Processor cpu4
-
-    const char *cpu4_path = opVLNVString(
-        0, // use the default VLNV path
-        "ovpworld.org",
-        "processor",
-        "or1k",
-        "1.0",
-        OP_PROCESSOR,
-        1   // report errors
-    );
-
-    optProcessorP cpu4_c = opProcessorNew(
-        mi,
-        cpu4_path,
-        "cpu4",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu4Bus_b, "INSTRUCTION"),
-                OP_BUS_CONNECT(cpu4Bus_b, "DATA")
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int4_n, "intr0")
-            )
-        ),
-        OP_PARAMS(
-             OP_PARAM_UNS32_SET("cpuid", 4)
-            ,OP_PARAM_STRING_SET("variant", "generic")
-        )
-    );
-
-    const char *or1kNewlib_4_expath = opVLNVString(
-        0, // use the default VLNV path
-        0,
-        0,
-        "or1kNewlib",
-        0,
-        OP_EXTENSION,
-        1   // report errors
-    );
-
-    opProcessorExtensionNew(
-        cpu4_c,
-        or1kNewlib_4_expath,
-        "or1kNewlib_4",
-        0
-    );
-
-    // Processor cpu5
-
-    const char *cpu5_path = opVLNVString(
-        0, // use the default VLNV path
-        "ovpworld.org",
-        "processor",
-        "or1k",
-        "1.0",
-        OP_PROCESSOR,
-        1   // report errors
-    );
-
-    optProcessorP cpu5_c = opProcessorNew(
-        mi,
-        cpu5_path,
-        "cpu5",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu5Bus_b, "INSTRUCTION"),
-                OP_BUS_CONNECT(cpu5Bus_b, "DATA")
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int5_n, "intr0")
-            )
-        ),
-        OP_PARAMS(
-             OP_PARAM_UNS32_SET("cpuid", 5)
-            ,OP_PARAM_STRING_SET("variant", "generic")
-        )
-    );
-
-    const char *or1kNewlib_5_expath = opVLNVString(
-        0, // use the default VLNV path
-        0,
-        0,
-        "or1kNewlib",
-        0,
-        OP_EXTENSION,
-        1   // report errors
-    );
-
-    opProcessorExtensionNew(
-        cpu5_c,
-        or1kNewlib_5_expath,
-        "or1kNewlib_5",
-        0
-    );
-
-    // Processor cpu6
-
-    const char *cpu6_path = opVLNVString(
-        0, // use the default VLNV path
-        "ovpworld.org",
-        "processor",
-        "or1k",
-        "1.0",
-        OP_PROCESSOR,
-        1   // report errors
-    );
-
-    optProcessorP cpu6_c = opProcessorNew(
-        mi,
-        cpu6_path,
-        "cpu6",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu6Bus_b, "INSTRUCTION"),
-                OP_BUS_CONNECT(cpu6Bus_b, "DATA")
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int6_n, "intr0")
-            )
-        ),
-        OP_PARAMS(
-             OP_PARAM_UNS32_SET("cpuid", 6)
-            ,OP_PARAM_STRING_SET("variant", "generic")
-        )
-    );
-
-    const char *or1kNewlib_6_expath = opVLNVString(
-        0, // use the default VLNV path
-        0,
-        0,
-        "or1kNewlib",
-        0,
-        OP_EXTENSION,
-        1   // report errors
-    );
-
-    opProcessorExtensionNew(
-        cpu6_c,
-        or1kNewlib_6_expath,
-        "or1kNewlib_6",
-        0
-    );
-
-    // Processor cpu7
-
-    const char *cpu7_path = opVLNVString(
-        0, // use the default VLNV path
-        "ovpworld.org",
-        "processor",
-        "or1k",
-        "1.0",
-        OP_PROCESSOR,
-        1   // report errors
-    );
-
-    optProcessorP cpu7_c = opProcessorNew(
-        mi,
-        cpu7_path,
-        "cpu7",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu7Bus_b, "INSTRUCTION"),
-                OP_BUS_CONNECT(cpu7Bus_b, "DATA")
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int7_n, "intr0")
-            )
-        ),
-        OP_PARAMS(
-             OP_PARAM_UNS32_SET("cpuid", 7)
-            ,OP_PARAM_STRING_SET("variant", "generic")
-        )
-    );
-
-    const char *or1kNewlib_7_expath = opVLNVString(
-        0, // use the default VLNV path
-        0,
-        0,
-        "or1kNewlib",
-        0,
-        OP_EXTENSION,
-        1   // report errors
-    );
-
-    opProcessorExtensionNew(
-        cpu7_c,
-        or1kNewlib_7_expath,
-        "or1kNewlib_7",
-        0
-    );
-
-    // Processor cpu8
-
-    const char *cpu8_path = opVLNVString(
-        0, // use the default VLNV path
-        "ovpworld.org",
-        "processor",
-        "or1k",
-        "1.0",
-        OP_PROCESSOR,
-        1   // report errors
-    );
-
-    optProcessorP cpu8_c = opProcessorNew(
-        mi,
-        cpu8_path,
-        "cpu8",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu8Bus_b, "INSTRUCTION"),
-                OP_BUS_CONNECT(cpu8Bus_b, "DATA")
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int8_n, "intr0")
-            )
-        ),
-        OP_PARAMS(
-             OP_PARAM_UNS32_SET("cpuid", 8)
-            ,OP_PARAM_STRING_SET("variant", "generic")
-        )
-    );
-
-    const char *or1kNewlib_8_expath = opVLNVString(
-        0, // use the default VLNV path
-        0,
-        0,
-        "or1kNewlib",
-        0,
-        OP_EXTENSION,
-        1   // report errors
-    );
-
-    opProcessorExtensionNew(
-        cpu8_c,
-        or1kNewlib_8_expath,
-        "or1kNewlib_8",
-        0
-    );
-
     // Memory ram0
 
     opMemoryNew(
@@ -727,156 +409,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
-    // Memory ram8
-
-    opMemoryNew(
-        mi,
-        "ram8",
-        OP_PRIV_RWX,
-        (0xfffffffULL) - (0x0ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu4Bus_b, "sp4", .slave=1, .addrLo=0x0ULL, .addrHi=0xfffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram9
-
-    opMemoryNew(
-        mi,
-        "ram9",
-        OP_PRIV_RWX,
-        (0xffffffffULL) - (0xf0000000ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu4Bus_b, "sp4", .slave=1, .addrLo=0xf0000000ULL, .addrHi=0xffffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram10
-
-    opMemoryNew(
-        mi,
-        "ram10",
-        OP_PRIV_RWX,
-        (0xfffffffULL) - (0x0ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu5Bus_b, "sp5", .slave=1, .addrLo=0x0ULL, .addrHi=0xfffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram11
-
-    opMemoryNew(
-        mi,
-        "ram11",
-        OP_PRIV_RWX,
-        (0xffffffffULL) - (0xf0000000ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu5Bus_b, "sp5", .slave=1, .addrLo=0xf0000000ULL, .addrHi=0xffffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram12
-
-    opMemoryNew(
-        mi,
-        "ram12",
-        OP_PRIV_RWX,
-        (0xfffffffULL) - (0x0ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu6Bus_b, "sp6", .slave=1, .addrLo=0x0ULL, .addrHi=0xfffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram13
-
-    opMemoryNew(
-        mi,
-        "ram13",
-        OP_PRIV_RWX,
-        (0xffffffffULL) - (0xf0000000ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu6Bus_b, "sp6", .slave=1, .addrLo=0xf0000000ULL, .addrHi=0xffffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram14
-
-    opMemoryNew(
-        mi,
-        "ram14",
-        OP_PRIV_RWX,
-        (0xfffffffULL) - (0x0ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu7Bus_b, "sp7", .slave=1, .addrLo=0x0ULL, .addrHi=0xfffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram15
-
-    opMemoryNew(
-        mi,
-        "ram15",
-        OP_PRIV_RWX,
-        (0xffffffffULL) - (0xf0000000ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu7Bus_b, "sp7", .slave=1, .addrLo=0xf0000000ULL, .addrHi=0xffffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram16
-
-    opMemoryNew(
-        mi,
-        "ram16",
-        OP_PRIV_RWX,
-        (0xfffffffULL) - (0x0ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu8Bus_b, "sp8", .slave=1, .addrLo=0x0ULL, .addrHi=0xfffffffULL)
-            )
-        ),
-        0
-    );
-
-    // Memory ram17
-
-    opMemoryNew(
-        mi,
-        "ram17",
-        OP_PRIV_RWX,
-        (0xffffffffULL) - (0xf0000000ULL),
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu8Bus_b, "sp8", .slave=1, .addrLo=0xf0000000ULL, .addrHi=0xffffffffULL)
-            )
-        ),
-        0
-    );
-
     // Bridge bridge0
 
     opBridgeNew(
@@ -933,76 +465,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
-    // Bridge bridge4
-
-    opBridgeNew(
-        mi,
-        "bridge4",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu4Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge5
-
-    opBridgeNew(
-        mi,
-        "bridge5",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu5Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge6
-
-    opBridgeNew(
-        mi,
-        "bridge6",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu6Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge7
-
-    opBridgeNew(
-        mi,
-        "bridge7",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu7Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge8
-
-    opBridgeNew(
-        mi,
-        "bridge8",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu8Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
     // PSE router0
 
     const char *router0_path = "peripheral/whnoc/pse.pse";
@@ -1044,8 +506,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_0_0_E_pkn, "portDataWest"),
                 OP_PACKETNET_CONNECT(ctrl_0_0_E_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(data_0_2_W_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(ctrl_0_2_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_1_1_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_S_pkn, "portControlNorth")
             )
@@ -1068,10 +528,10 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_NET_CONNECT(int2_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(data_0_2_W_pkn, "portDataWest"),
-                OP_PACKETNET_CONNECT(ctrl_0_2_W_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(data_0_2_N_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(ctrl_0_2_N_pkn, "portControlNorth")
+                OP_PACKETNET_CONNECT(data_0_0_N_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_N_pkn, "portControlSouth"),
+                OP_PACKETNET_CONNECT(data_1_1_W_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_W_pkn, "portControlEast")
             )
         ),
         0
@@ -1092,140 +552,10 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_NET_CONNECT(int3_n, "INTTC")
             ),
             OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(data_0_0_N_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(ctrl_0_0_N_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(data_1_1_W_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(ctrl_1_1_W_pkn, "portControlEast"),
-                OP_PACKETNET_CONNECT(data_2_0_S_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(ctrl_2_0_S_pkn, "portControlNorth")
-            )
-        ),
-        0
-    );
-
-    // PSE router4
-
-    const char *router4_path = "peripheral/whnoc/pse.pse";
-    opPeripheralNew(
-        mi,
-        router4_path,
-        "router4",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu4Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int4_n, "INTTC")
-            ),
-            OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(data_1_1_E_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(ctrl_1_1_E_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_1_1_W_pkn, "portDataWest"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_W_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(data_1_1_N_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(ctrl_1_1_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_1_1_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_S_pkn, "portControlSouth")
-            )
-        ),
-        0
-    );
-
-    // PSE router5
-
-    const char *router5_path = "peripheral/whnoc/pse.pse";
-    opPeripheralNew(
-        mi,
-        router5_path,
-        "router5",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu5Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int5_n, "INTTC")
-            ),
-            OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(data_0_2_N_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(ctrl_0_2_N_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(data_1_1_E_pkn, "portDataWest"),
-                OP_PACKETNET_CONNECT(ctrl_1_1_E_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(data_2_2_S_pkn, "portDataNorth"),
-                OP_PACKETNET_CONNECT(ctrl_2_2_S_pkn, "portControlNorth")
-            )
-        ),
-        0
-    );
-
-    // PSE router6
-
-    const char *router6_path = "peripheral/whnoc/pse.pse";
-    opPeripheralNew(
-        mi,
-        router6_path,
-        "router6",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu6Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int6_n, "INTTC")
-            ),
-            OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(data_2_0_E_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(ctrl_2_0_E_pkn, "portControlEast"),
-                OP_PACKETNET_CONNECT(data_2_0_S_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(ctrl_2_0_S_pkn, "portControlSouth")
-            )
-        ),
-        0
-    );
-
-    // PSE router7
-
-    const char *router7_path = "peripheral/whnoc/pse.pse";
-    opPeripheralNew(
-        mi,
-        router7_path,
-        "router7",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu7Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int7_n, "INTTC")
-            ),
-            OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(data_1_1_N_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(ctrl_1_1_N_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(data_2_0_E_pkn, "portDataWest"),
-                OP_PACKETNET_CONNECT(ctrl_2_0_E_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(data_2_2_W_pkn, "portDataEast"),
-                OP_PACKETNET_CONNECT(ctrl_2_2_W_pkn, "portControlEast")
-            )
-        ),
-        0
-    );
-
-    // PSE router8
-
-    const char *router8_path = "peripheral/whnoc/pse.pse";
-    opPeripheralNew(
-        mi,
-        router8_path,
-        "router8",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu8Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000013ULL)
-            ),
-            OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int8_n, "INTTC")
-            ),
-            OP_PACKETNET_CONNECTIONS(
-                OP_PACKETNET_CONNECT(data_2_2_W_pkn, "portDataWest"),
-                OP_PACKETNET_CONNECT(ctrl_2_2_W_pkn, "portControlWest"),
-                OP_PACKETNET_CONNECT(data_2_2_S_pkn, "portDataSouth"),
-                OP_PACKETNET_CONNECT(ctrl_2_2_S_pkn, "portControlSouth")
             )
         ),
         0
