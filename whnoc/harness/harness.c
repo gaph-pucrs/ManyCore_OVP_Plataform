@@ -25,12 +25,13 @@
 #define MODULE_INSTANCE "u1"
 #define CPU_INSTANCE    "cpu1"
 #define PREFIX          "BUS_MON"
+#define HARNESS_NAME    "harness"
 
 // Give the monitoring a threshold
 
 #define MONITOR_THRESHOLD 100
 static unsigned int count;
-
+int dataCheck;
 //
 // triggered when registered access happens and prints information of access
 //
@@ -50,7 +51,27 @@ static OP_MONITOR_FN(monitorCallback) {
             VA,
             (count == MONITOR_THRESHOLD) ? "(threshold reached)" : ""
         );
+
+	dataCheck=0;
+		 opProcessorRead(
+                    processor,
+                    addr,
+                    &dataCheck,
+                    4,
+                    1,
+                    True,
+                    OP_HOSTENDIAN_TARGET
+                );
+
+	
+                opMessage("I", HARNESS_NAME "PROCESSOR_READ",
+                                            "==========================================dataCheck: %d",
+      					     dataCheck);
+
     }
+
+
+
 }
 
 //
@@ -68,6 +89,10 @@ static void monitorProcessor(optModuleP mi) {
     optProcessorP processor = 0;
     while ((processor = opProcessorNext(mod, processor))) {
 
+	opMessage ("I", PREFIX "_NFW", "===============================================================PROCESSOR %s",processor ? opObjectName(processor) : "artifact");
+
+
+
         Addr max = 0;
         optBusPortConnP bpc = opObjectByName(processor, "DATA", OP_BUSPORTCONN_EN).BusPortConn;
         if(bpc) {
@@ -79,12 +104,13 @@ static void monitorProcessor(optModuleP mi) {
         opMessage("I", PREFIX "_BM", "Add monitor for '%s' (0x" FMT_A0Nx " to 0x" FMT_A0Nx ")\n",
                                       opObjectHierName(processor), (Addr)0, max);
         opProcessorFetchMonitorAdd(processor, min, max, monitorCallback, "processor-fetch");
-        opProcessorReadMonitorAdd (processor, min, max, monitorCallback, "processor-read");
-        opProcessorWriteMonitorAdd(processor, min, max, monitorCallback, "processor-write");
+      //  opProcessorReadMonitorAdd (processor, min, max, monitorCallback, "processor-read");
+        //opProcessorWriteMonitorAdd(processor, min, max, monitorCallback, "processor-write");
 
 
 
     }
+    
 }
 
 
@@ -107,10 +133,10 @@ int main(int argc, const char *argv[]) {
     // processor instance parameters
     //	opParamBoolOverride(mi,     MODULE_INSTANCE "/" CPU_INSTANCE "/" OP_FP_TRACE, 1);
     //	opParamBoolOverride(mi,     MODULE_INSTANCE  "/" CPU_INSTANCE "/" OP_FP_TRACESHOWICOUNT, 1);
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu3" "/" OP_FP_MIPS, 50);
     opParamDoubleOverride(mi,   MODULE_INSTANCE "/" CPU_INSTANCE "/" OP_FP_MIPS, 50);
     opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu2" "/" OP_FP_MIPS, 50);
 
-    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu3" "/" OP_FP_MIPS, 50);
     opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu0" "/" OP_FP_MIPS, 50);
     opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 

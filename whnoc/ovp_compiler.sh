@@ -16,4 +16,4 @@ harness/harness.$IMPERAS_ARCH.exe \
      --program cpu1=application/application1.${CROSS}.elf $* \
      --program cpu2=application/application2.${CROSS}.elf $* \
      --program cpu3=application/application3.${CROSS}.elf $* \
---verbose 
+--verbose --trace 
