@@ -25,17 +25,38 @@
 #define MODULE_INSTANCE "u1"
 #define CPU_INSTANCE    "cpu1"
 #define PREFIX          "BUS_MON"
-#define HARNESS_NAME    "harness"
+
+
+#define INSTRUCTIONS_PER_SECOND       1000000
+#define QUANTUM_TIME_SLICE            0.00001
+#define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
+
 
 // Give the monitoring a threshold
 
 #define MONITOR_THRESHOLD 100
-static unsigned int count;
-int dataCheck;
+//static unsigned int count;
+
+typedef unsigned int BYTE;      // 8-bit byte
+BYTE dataCheck;
+BYTE teste;
+
+struct optionsS {
+    Bool         custom;
+} options = {
+    .custom = False,
+};
+
+
 //
 // triggered when registered access happens and prints information of access
+
+
 //
-static OP_MONITOR_FN(monitorCallback) {
+/*static OP_MONITOR_FN(monitorCallback) {
+
+
+	//BYTE opcode = 0;
     if(++count <= MONITOR_THRESHOLD) {
         opMessage ("I", PREFIX "_MT",
             "Monitor triggered (%03d): "
@@ -63,21 +84,30 @@ static OP_MONITOR_FN(monitorCallback) {
                     OP_HOSTENDIAN_TARGET
                 );
 
-	
-                opMessage("I", HARNESS_NAME "PROCESSOR_READ",
-                                            "==========================================dataCheck: %d",
+
+		//opcode = getOpcode(dataCheck);
+
+		//processorModel(opcode)
+
+
+		//dataCheck = dataCheck & 0X000000FF;
+
+                //opMessage("I", HARNESS_NAME "PROCESSOR_READ",
+                                            "==========================================dataCheck: 0x%08x",
       					     dataCheck);
+
+			
 
     }
 
 
 
-}
+}*/
 
 //
 // iterate across the processors found in the module and register callbacks for read, write and fetch
 //
-static void monitorProcessor(optModuleP mi) {
+/*static void monitorProcessor(optModuleP mi) {
 
     optModuleP mod;
 
@@ -114,10 +144,91 @@ static void monitorProcessor(optModuleP mi) {
 }
 
 
-
+*/
 int main(int argc, const char *argv[]) {
     opSessionInit(OP_VERSION);
     opCmdParseStd (argv[0], OP_AC_ALL, argc, argv);
+
+    // create the root module with reduced Quantum (in line with Custom Scheduler)
+    optParamP   params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
+    optModuleP  mi     = opRootModuleNew(0, 0, params);
+
+	opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu3" "/" OP_FP_MIPS, 200);
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" CPU_INSTANCE "/" OP_FP_MIPS, 200);
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu2" "/" OP_FP_MIPS, 200);
+
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu0" "/" OP_FP_MIPS, 200);
+    
+    opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
+
+    optModuleP mod;
+
+    if (!(mod = opObjectByName (mi, MODULE_INSTANCE, OP_MODULE_EN).Module)) {
+        opMessage ("F", PREFIX "_NFW", "Can not find module(%s)", MODULE_INSTANCE);
+    }
+
+    optProcessorP proc;// = opProcessorNext(ui, NULL);
+
+    
+    // must advance to next phase for the API calls that follow
+    opRootModulePreSimulate(mi);
+    
+        // run simulation with custom scheduling
+        optTime       myTime     = QUANTUM_TIME_SLICE;
+        optStopReason stopReason = OP_SR_SCHED;
+        do {
+
+            // move time forward by time slice on root module
+            // NOTE: This matches the standard scheduler which moves time forward in
+            //       the system and then executes instructions on all processors
+            opRootModuleTimeAdvance(mi, myTime);
+            
+	   opMessage(
+                "I", "HARNESS",
+                "Advance Time to %g seconds",
+                (double)myTime
+            );
+
+
+
+	  optModuleP mod;
+
+          if (!(mod = opObjectByName (mi, MODULE_INSTANCE, OP_MODULE_EN).Module)) {
+              opMessage ("F", PREFIX "_NFW", "Can not find module(%s)", MODULE_INSTANCE);
+          }
+
+
+            // run processor for number of instructions calculated for time slice
+	    while ((proc = opProcessorNext(mod, proc))) {
+
+	    
+            	stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+	    }
+
+
+            if ((stopReason!=OP_SR_SCHED) && (stopReason!=OP_SR_HALT)) {
+
+                opMessage(
+                    "I", "HARNESS",
+                    "Simulation Complete (%s)",
+                    opStopReasonString(stopReason)
+                );
+
+                break;  // finish simulation loop
+
+            }
+
+            myTime += QUANTUM_TIME_SLICE;
+
+        } while (1);
+    
+	opMessage(
+        "I", "HARNESS",
+        "Time at Completion %g seconds",
+        (double)opModuleCurrentTime(mi)
+    );
+
+
 
 
     // root module / simulation wide parameters
@@ -125,7 +236,7 @@ int main(int argc, const char *argv[]) {
     //	opParamBoolOverride(0, OP_FP_SHOWBUSES, 1);
     //	opParamBoolOverride(0, OP_FP_SHOWTDOMAINS, 1);
     //	opParamBoolOverride(0, OP_FP_SUPPRESSBANNER, 1);
-    opParamBoolOverride(0, OP_FP_STOPONCONTROLC, 1);
+   /* opParamBoolOverride(0, OP_FP_STOPONCONTROLC, 1);
     opParamBoolOverride(0, OP_FP_ENABLEIMPERASINTERCEPTS, 1);
     opParamBoolOverride(0, OP_FP_VERBOSE, 1);
     optModuleP mi = opRootModuleNew(0, 0, 0);
@@ -133,11 +244,11 @@ int main(int argc, const char *argv[]) {
     // processor instance parameters
     //	opParamBoolOverride(mi,     MODULE_INSTANCE "/" CPU_INSTANCE "/" OP_FP_TRACE, 1);
     //	opParamBoolOverride(mi,     MODULE_INSTANCE  "/" CPU_INSTANCE "/" OP_FP_TRACESHOWICOUNT, 1);
-    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu3" "/" OP_FP_MIPS, 50);
-    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" CPU_INSTANCE "/" OP_FP_MIPS, 50);
-    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu2" "/" OP_FP_MIPS, 50);
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu3" "/" OP_FP_MIPS, 100);
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" CPU_INSTANCE "/" OP_FP_MIPS, 100);
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu2" "/" OP_FP_MIPS, 100);
 
-    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu0" "/" OP_FP_MIPS, 50);
+    opParamDoubleOverride(mi,   MODULE_INSTANCE "/" "cpu0" "/" OP_FP_MIPS, 100);
     opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 
         monitorProcessor(mi);
@@ -145,7 +256,12 @@ int main(int argc, const char *argv[]) {
 
 
 
-    opRootModuleSimulate(mi);
+    opRootModuleSimulate(mi);*/
+
+	
+
+
+
     opSessionTerminate();
     return 0;
 }

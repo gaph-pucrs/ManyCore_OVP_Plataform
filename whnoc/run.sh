@@ -55,7 +55,7 @@ do
     fi
 done
 
-       echo "--verbose --trace " >> ovp_compiler.sh
+       echo "--verbose" >> ovp_compiler.sh  #--trace " >> ovp_compiler.sh
 
 chmod +x ovp_compiler.sh
 
