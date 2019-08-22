@@ -85,9 +85,11 @@ void bufferStatusUpdate(unsigned int port){
     // -- No available space in this buffer!
     if ((first[port] == 0 && last[port] == (BUFFER_SIZE-1)) || (first[port] == (last[port]+1))){
         status = STALL;
+        //bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está STALL", port);
     }
     // -- There is space in this buffer!
     else{
+        //bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está GO", port);
         status = GO;
     }
 
@@ -162,7 +164,7 @@ unsigned int bufferPop(unsigned int port){
     }
     
     // Update the buffer status
-    bufferStatusUpdate(port);
+    //bufferStatusUpdate(port);
     
     return value;
 }
@@ -198,7 +200,7 @@ void sendFlits(struct handlesS handles){
             // And has something to transmit
             if (!isEmpty(port)){
 
-                //bhmMessage("INFO", "SENDFLITS", "Routing request");
+                bhmMessage("INFO", "SENDFLITS", "Routing request port: %d", port);
 
                 // Discover to wich port the packet must go
                 header = buffers[port][first[port]];
@@ -214,7 +216,7 @@ void sendFlits(struct handlesS handles){
 
                     routingTable[port] = to;
 
-                    //bhmMessage("INFO", "SENDFLITS", "Port %d routed to %d", port, routingTable[port]);
+                    bhmMessage("INFO", "SENDFLITS", "Port %d routed to %d", port, routingTable[port]);
                 }
             }
         }
@@ -231,6 +233,8 @@ void sendFlits(struct handlesS handles){
                 txCtrl = REQ;
                 localPort_regs_data.dataTxLocal.value = flit;
                 ppmWriteNet(handles.INTTC, 1);
+                // Update the buffer status
+                bufferStatusUpdate(port);
             }
 
             // Transmit it to the EAST router
@@ -238,6 +242,7 @@ void sendFlits(struct handlesS handles){
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
+                //if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                     flit = bufferPop(port);
 
@@ -245,6 +250,8 @@ void sendFlits(struct handlesS handles){
 
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
+                    // Update the buffer status
+                    bufferStatusUpdate(port);
                 }
             }
 
@@ -253,6 +260,7 @@ void sendFlits(struct handlesS handles){
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
+                //if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                     flit = bufferPop(port);
 
@@ -260,6 +268,8 @@ void sendFlits(struct handlesS handles){
 
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
+                    // Update the buffer status
+                    bufferStatusUpdate(port);    
                 }
             }
 
@@ -268,6 +278,7 @@ void sendFlits(struct handlesS handles){
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
+                //if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                     flit = bufferPop(port);
 
@@ -275,6 +286,8 @@ void sendFlits(struct handlesS handles){
 
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
+                    // Update the buffer status
+                    bufferStatusUpdate(port);
                 }
             }
 
@@ -283,6 +296,7 @@ void sendFlits(struct handlesS handles){
                 // While the receiver router has space AND 
                 // there is flits to send AND 
                 // still connected to the output port
+                //if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                 while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                     flit = bufferPop(port);
 
@@ -290,6 +304,8 @@ void sendFlits(struct handlesS handles){
 
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
+                    // Update the buffer status
+                    bufferStatusUpdate(port);
                 }
             }
 
