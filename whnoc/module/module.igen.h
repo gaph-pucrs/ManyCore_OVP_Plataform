@@ -52,11 +52,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optBusP cpu3Bus_b = opBusNew(mi, "cpu3Bus", 32, 0, 0);
 
 
-    // Bus syncBus
-
-    optBusP syncBus_b = opBusNew(mi, "syncBus", 32, 0, 0);
-
-
 ////////////////////////////////////////////////////////////////////////////////
 //                                    NETS
 ////////////////////////////////////////////////////////////////////////////////
@@ -409,62 +404,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
-    // Bridge bridge0
-
-    opBridgeNew(
-        mi,
-        "bridge0",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu0Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge1
-
-    opBridgeNew(
-        mi,
-        "bridge1",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu1Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge2
-
-    opBridgeNew(
-        mi,
-        "bridge2",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu2Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
-    // Bridge bridge3
-
-    opBridgeNew(
-        mi,
-        "bridge3",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "pm", .addrLo=0x0ULL, .addrHi=0x7ULL),
-                OP_BUS_CONNECT(cpu3Bus_b, "ps", .slave=1, .addrLo=0x80000014ULL, .addrHi=0x8000001bULL)
-            )
-        ),
-        0
-    );
-
     // PSE router0
 
     const char *router0_path = "peripheral/whnoc/pse.pse";
@@ -556,21 +495,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_1_1_W_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_1_1_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_S_pkn, "portControlSouth")
-            )
-        ),
-        0
-    );
-
-    // PSE sync
-
-    const char *sync_path = "peripheral/synchronizer/pse.pse";
-    opPeripheralNew(
-        mi,
-        sync_path,
-        "sync",
-        OP_CONNECTIONS(
-            OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(syncBus_b, "syncPort", .slave=1, .addrLo=0x0ULL, .addrHi=0x7ULL)
             )
         ),
         0

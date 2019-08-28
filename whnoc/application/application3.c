@@ -6,7 +6,7 @@
 #include "../peripheral/whnoc/noc.h"
 
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
-#define SYNC_BASE ((unsigned int *) 0x80000014)
+//#define SYNC_BASE ((unsigned int *) 0x80000014)
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
@@ -60,9 +60,9 @@ void sendPckt(){
 int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
-    volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
+  /*  volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
-
+*/
     LOG("Starting ROUTER3 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
@@ -77,14 +77,29 @@ int main(int argc, char **argv)
     int start = 0;
     *myAddress = 0x11;
 
-    *PEToSync = 0x11;
+  /*  *PEToSync = 0x11;
     while(start != 1){
 	start = *SyncToPE >> 24;
-     }
+     }*/
 
     //========================
     // YOUR CODE HERE
     //========================
+int i;
+txPacket[0] = 0x00;
+    txPacket[1] = 1;
+
+    for(i=0; i<99; i++){
+        while(interrupt != 1){}
+        LOG("11 - %d ---- Valor recebido: %d\n",i, rxPacket[2]);
+        txPacket[2] = rxPacket[2] + 1;
+        sendPckt();
+	rxPointer = 0;
+        interrupt = 0; 
+        
+    }
+
+
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;
