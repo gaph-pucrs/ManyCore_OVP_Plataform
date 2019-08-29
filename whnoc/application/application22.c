@@ -98,12 +98,12 @@ int main(int argc, char **argv)
     //========================
     int i;
     LOG("~~>AGUARDANDO PACOTES\n");
-    for(i=0;i<20;i++){
+    for(i=0;i<11;i++){
         // Aguarda um pacote
         receivePckt();
 
         // Printa quem enviou
-        LOG("Pacote de: %d\n",rxPacket[4]>>24);
+        LOG("Pacote de: %d -----------------------------------------------> i: %d\n",rxPacket[4]>>24,i);
 
         // Reseta as flags para o recebimento do proximo
         packetConsumed();
