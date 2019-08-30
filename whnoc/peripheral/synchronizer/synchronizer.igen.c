@@ -15,6 +15,9 @@ syncPort_regs_dataT syncPort_regs_data;
 
 handlesT handles;
 
+
+bhmThreadHandle th0,th1,th2,th3, th4;
+bhmEventHandle goEvent;
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
 // Test this variable to determine what diagnostics to output.
@@ -71,6 +74,40 @@ static void installRegisters(void) {
 
 }
 
+void myThread0(void *user){
+	int tick0 = 1;
+	bhmWaitEvent(goEvent);
+//	bhmPrintf("----------------------->tick0\n");
+     ppmPacketnetWrite(handles.tickPort_00, &tick0, sizeof(tick0));
+	bhmDeleteThread(th0);
+}
+void myThread1(void *user){
+int tick1 = 1;
+	bhmWaitEvent(goEvent);
+//bhmPrintf("--------------------------->tick1\n");
+     ppmPacketnetWrite(handles.tickPort_01, &tick1, sizeof(tick1));
+	bhmDeleteThread(th1);
+}	
+void myThread2(void *user){
+int tick2 = 1;
+	bhmWaitEvent(goEvent);
+//bhmPrintf("--------------------------->tick2\n");
+     ppmPacketnetWrite(handles.tickPort_10, &tick2, sizeof(tick2));
+	bhmDeleteThread(th2);
+}
+void myThread3(void *user){
+	
+int tick3 = 1;
+	bhmWaitEvent(goEvent);
+//bhmPrintf("--------------------------->tick3\n");
+     ppmPacketnetWrite(handles.tickPort_11, &tick3, sizeof(tick3));
+	bhmDeleteThread(th3);
+}
+
+void goThread(void *user){
+	bhmWaitDelay(100);
+	bhmTriggerEvent(goEvent);
+}
 ////////////////////////////////// Constructor /////////////////////////////////
 
 PPM_CONSTRUCTOR_CB(periphConstructor) {
@@ -92,17 +129,17 @@ int main(int argc, char *argv[]) {
     bhmInstallDiagCB(setDiagLevel);
     constructor();
 	int i = 0;
-    unsigned int tick = 0;
+    goEvent = bhmCreateNamedEvent("start","go tick");
     while(1){
-        bhmWaitDelay(500);
-	bhmPrintf("TICK = %d\n",tick);
 
-        ppmPacketnetWrite(handles.tickPort_00, &tick, sizeof(tick));
-        ppmPacketnetWrite(handles.tickPort_01, &tick, sizeof(tick));
-        ppmPacketnetWrite(handles.tickPort_10, &tick, sizeof(tick));
-        ppmPacketnetWrite(handles.tickPort_11, &tick, sizeof(tick));
-        tick++;
-	i++;
+	bhmPrintf("TICK = %d\n",i);
+        bhmWaitDelay(500);
+	th0 = bhmCreateThread(myThread0,0,"myThread0",0);
+	th1 = bhmCreateThread(myThread1,0,"myThread1",0);
+	th2 = bhmCreateThread(myThread2,0,"myThread2",0);
+	th3 = bhmCreateThread(myThread3,0,"myThread3",0);
+	bhmCreateThread(goThread,0,"goThread",0);
+       	i++;
 
     }
 

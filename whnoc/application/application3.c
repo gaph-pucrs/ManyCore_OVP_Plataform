@@ -15,31 +15,36 @@ typedef unsigned char Uns8;
 
 volatile static Uns32 interrupt = 0;
 volatile static Uns32 rxPacket[256];
-volatile static Uns32 rxPointer = 0;
+volatile static Uns32 rxPointer = 0; 
 volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal
-    LOG(">>>>>>>>>>>INTERROMPIDO!");
+   // LOG(">>>>>>>>>>>INTERROMPIDO!\n");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
         *control = ACK;
+//LOG(">>>>>>>>>>>INTERROMPIDO0!\n");
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
         *control = ACK;
+//LOG(">>>>>>>>>>>INTERROMPIDO1!\n");
     }
     else{
+//LOG(">>>>>>>>>>>INTERROMPIDO2!\n");
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
 	     *control = STALL;
+//LOG(">>>>>>>>>>>INTERROMPIDO3!\n");
         }else{
+//LOG(">>>>>>>>>>>INTERROMPIDO4!\n");
         	*control = ACK;
 	}
     }
@@ -58,6 +63,16 @@ void sendPckt(){
         *txLocal = txPacket[txPointer];
         txPointer++;
     }
+}
+
+void receivePckt(){
+    while(interrupt!=1){}
+}
+
+void packetConsumed(){
+    rxPointer = 0;
+    interrupt = 0;
+    *control = ACK;
 }
 
 int main(int argc, char **argv)
@@ -93,15 +108,13 @@ int main(int argc, char **argv)
     txPacket[1] = 1;
     int i;
     for(i=0; i<99; i++){
-        while(interrupt != 1){}
+        receivePckt();
         LOG("11 - %d ---- Valor recebido: %d\n",i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
         sendPckt();
-	    rxPointer = 0;
-        interrupt = 0; 
-        
-    }
 
+        packetConsumed();
+    }
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;

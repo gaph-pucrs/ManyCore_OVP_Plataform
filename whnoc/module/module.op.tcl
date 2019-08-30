@@ -123,7 +123,6 @@ ihwconnect -instancename router1 -netport       INTTC  -net int1
 ihwconnect -instancename router2 -netport       INTTC  -net int2
 ihwconnect -instancename router3 -netport       INTTC  -net int3
 ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse
-ihwaddperipheral -instancename ticker -modelfile peripheral/ticker/pse.pse
 
 ihwaddbus -instancename syncBus -addresswidth 32
 ihwconnect -instancename sync -busslaveport syncPort -bus syncBus -loaddress 0x00000000 -hiaddress 0x00000007
