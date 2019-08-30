@@ -19,12 +19,9 @@ volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
-volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
-
-
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-    //volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
+    volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
@@ -39,7 +36,7 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        if(rxPointer >= (rxPacket[1] + 2)){
+                if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
         }
         *control = STALL;
@@ -58,16 +55,6 @@ void sendPckt(){
         *txLocal = txPacket[txPointer];
         txPointer++;
     }
-}
-
-void receivePckt(){
-    while(interrupt!=1){}
-}
-
-void packetConsumed(){
-    rxPointer = 0;
-    interrupt = 0;
-    *control = ACK;
 }
 
 int main(int argc, char **argv)
@@ -92,22 +79,11 @@ int main(int argc, char **argv)
 
     *PEToSync = 0x24;
     while(start != 1){
-	    start = *SyncToPE >> 24;
-    }
+	start = *SyncToPE >> 24;
+     }
 
     //========================
-    int i;
-    for(i=0;i<50;i++){
-        // Aguarda um pacote
-        receivePckt();
-
-        // Printa quem enviou
-        LOG("a--- %d",rxPacket[4]>>24);
-
-        // Reseta as flags para o recebimento do proximoHUASUAHSshuaush
-        packetConsumed();
-    }
-
+    // YOUR CODE HERE
     //========================
 
     LOG("Application ROUTER22 done!\n\n");

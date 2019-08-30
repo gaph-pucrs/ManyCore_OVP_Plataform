@@ -106,6 +106,12 @@ imodeladdpacketnetport \
     -updatefunction controlSouth \
     -updatefunctionargument 0x00
 
+imodeladdpacketnetport \
+    -name tickPort \
+    -maxbytes 4 \
+    -updatefunction tick \
+    -updatefunctionargument 0x00
+
 #########################################
 ## Processor interrupt line
 #########################################
