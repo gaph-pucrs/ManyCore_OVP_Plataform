@@ -252,7 +252,7 @@ void arbitration(unsigned int port){
 }
 
 void transmitt(){
-    unsigned int port;
+    unsigned int port, flit;
     // For each port...
     for(port = 0; port <= LOCAL; port++){
         // If this port is connected to something AND has something to transmitt... 
