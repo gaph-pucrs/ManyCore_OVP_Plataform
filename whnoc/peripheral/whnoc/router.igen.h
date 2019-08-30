@@ -1,22 +1,3 @@
-/*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied.
- *
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -90,6 +71,7 @@ typedef struct handlesS {
     ppmPacketnetHandle    portControlWest;
     ppmPacketnetHandle    portControlNorth;
     ppmPacketnetHandle    portControlSouth;
+    ppmPacketnetHandle    tickPort;
 } handlesT, *handlesTP;
 
 extern handlesT handles;
@@ -110,6 +92,7 @@ PPM_REG_READ_CB(rxCtrlRead);
 PPM_REG_WRITE_CB(rxCtrlWrite);
 PPM_REG_READ_CB(rxRead);
 PPM_REG_WRITE_CB(rxWrite);
+PPM_PACKETNET_CB(tick);
 PPM_REG_READ_CB(txCtrlRead);
 PPM_REG_WRITE_CB(txCtrlWrite);
 PPM_REG_READ_CB(txRead);

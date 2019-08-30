@@ -9,12 +9,11 @@
 
 #include "synchronizer.igen.h"
 #include "../whnoc/noc.h"
+
 //////////////////////////////// Callback stubs ////////////////////////////////
-int startedPEs = 0;
+unsigned int startedPEs;
 PPM_REG_READ_CB(goRead) {
     // YOUR CODE HERE (goRead)
-
-
     return *(Uns32*)user;
 }
 
@@ -23,9 +22,13 @@ PPM_REG_WRITE_CB(goWrite) {
     *(Uns32*)user = data;
 }
 
-/*recebendo flit do cpu*/
+PPM_REG_READ_CB(readyRead) {
+    // YOUR CODE HERE (readyRead)
+    return *(Uns32*)user;
+}
+
 PPM_REG_WRITE_CB(readyWrite) {
-    startedPEs++;
+        startedPEs++;
     bhmMessage("I", "readyWrite", "incrementando numero de roteadores %d\n",startedPEs);
     if(startedPEs == N_PES){
 
@@ -37,10 +40,20 @@ PPM_REG_WRITE_CB(readyWrite) {
     *(Uns32*)user = data;
 }
 
-PPM_REG_READ_CB(readyRead) {
+PPM_PACKETNET_CB(tick00) {
+    // YOUR CODE HERE (tick00)
+}
 
-// YOUR CODE HERE (readyRead)
-    return *(Uns32*)user;
+PPM_PACKETNET_CB(tick01) {
+    // YOUR CODE HERE (tick01)
+}
+
+PPM_PACKETNET_CB(tick10) {
+    // YOUR CODE HERE (tick10)
+}
+
+PPM_PACKETNET_CB(tick11) {
+    // YOUR CODE HERE (tick11)
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {

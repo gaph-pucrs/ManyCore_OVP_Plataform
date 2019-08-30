@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <peripheral constructor="userInit"
+    destructor="userFinish"
+    extensionfile="model"
+    httpvis="F"
+    imagefile="pse.pse"
+    library="peripheral"
+    name="simplePeripheralSemihost"
+    releasestatus="0"
+    saveRestore="F"
+    vendor="imperas.com"
+    version="1.0"
+    visibility="0">
+    <docsection name="doc"
+        text="Description">
+        <doctext name="txt"
+            text="Basic Test Peripheral."/>
+    </docsection>
+    <docsection name="doc_1"
+        text="Limitations">
+        <doctext name="txt"
+            text="This is a preliminary test model showing basic interaction and use with semihosting on a peripheral."/>
+    </docsection>
+    <docsection name="doc_2"
+        text="Licensing">
+        <doctext name="txt"
+            text="Open Source Apache 2.0"/>
+    </docsection>
+    <formalattribute defaultValue="1"
+        name="pollPeriod"
+        type="uns32">
+        <docsection name="doc"
+            text="Description">
+            <doctext name="txt"
+                text="Specify the polling period"/>
+        </docsection>
+    </formalattribute>
+    <busslaveport addresswidth="32"
+        mustbeconnected="T"
+        name="config"
+        size="0xc">
+        <addressblock name="A"
+            size="0x8"
+            width="8">
+            <memorymappedregister access="rw"
+                isvolatile="T"
+                name="data"
+                readfunction="read_data"
+                width="8"
+                writefunction="write_data">
+                <reset mask="255"
+                    name="resetNet"/>
+            </memorymappedregister>
+            <memorymappedregister access="w"
+                isvolatile="T"
+                name="command"
+                offset="0x4"
+                width="8"
+                writefunction="write_command">
+                <reset mask="255"
+                    name="resetNet"/>
+            </memorymappedregister>
+            <memorymappedregister access="r"
+                isvolatile="T"
+                name="status"
+                offset="0x4"
+                readfunction="read_status"
+                width="8"/>
+        </addressblock>
+    </busslaveport>
+    <busslaveport addresswidth="32"
+        name="trigger"
+        size="0x1">
+        <addressblock name="A"
+            size="0x1"
+            width="8">
+            <memorymappedregister access="w"
+                isvolatile="T"
+                name="trigger"
+                offset="0x0"
+                width="8"
+                writefunction="triggerCallback"/>
+        </addressblock>
+    </busslaveport>
+    <netport name="irq"
+        type="output"
+        updatefunctionargument="0"/>
+    <fileversion major="1"
+        minor="0"
+        name="_version_0"/>
+ </peripheral>
