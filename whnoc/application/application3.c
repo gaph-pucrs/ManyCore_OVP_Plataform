@@ -15,14 +15,14 @@ typedef unsigned char Uns8;
 
 volatile static Uns32 interrupt = 0;
 volatile static Uns32 rxPacket[256];
-volatile static Uns32 rxPointer = 0;
+volatile static Uns32 rxPointer = 0; 
 volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal
-    LOG(">>>>>>>>>>>INTERROMPIDO!");
+    //LOG(">>>>>>>>>>>INTERROMPIDO!\n");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
@@ -60,6 +60,16 @@ void sendPckt(){
     }
 }
 
+void receivePckt(){
+    while(interrupt!=1){}
+}
+
+void packetConsumed(){
+    rxPointer = 0;
+    interrupt = 0;
+    *control = ACK;
+}
+
 int main(int argc, char **argv)
 {
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
@@ -93,15 +103,13 @@ int main(int argc, char **argv)
     txPacket[1] = 1;
     int i;
     for(i=0; i<99; i++){
-        while(interrupt != 1){}
+        receivePckt();
         LOG("11 - %d ---- Valor recebido: %d\n",i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
         sendPckt();
-	    rxPointer = 0;
-        interrupt = 0; 
-        
-    }
 
+        packetConsumed();
+    }
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;
