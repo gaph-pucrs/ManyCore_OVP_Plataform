@@ -594,17 +594,6 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
-    // PSE ticker
-
-    const char *ticker_path = "peripheral/ticker/pse.pse";
-    opPeripheralNew(
-        mi,
-        ticker_path,
-        "ticker",
-        0,
-        0
-    );
-
 }
 
 optModuleAttr modelAttrs = {
@@ -627,4 +616,3 @@ optModuleAttr modelAttrs = {
     .postSimulateCB       = modulePostSimulate,
     .destructCB           = moduleDestruct,
 };
-

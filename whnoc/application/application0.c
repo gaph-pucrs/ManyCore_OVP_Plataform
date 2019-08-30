@@ -13,14 +13,13 @@ typedef unsigned char Uns8;
 
 #define LOG(_FMT, ...)  printf( "Info " _FMT,  ## __VA_ARGS__)
 
-volatile static Uns32 interrupt = 0;
+volatile static Uns32 interrupt = 0; 
 volatile static Uns32 rxPacket[256];
 volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
-    volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
-
+volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
    if (rxPointer == 0){
@@ -39,12 +38,12 @@ void interruptHandler(void) {
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
 	     *control = STALL;
-        }else{
+        }
+        else{
         	*control = ACK;
-	}
+	    }
     }
 }
-
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
@@ -58,6 +57,16 @@ void sendPckt(){
         *txLocal = txPacket[txPointer];
         txPointer++;
     }
+}
+
+void receivePckt(){
+    while(interrupt!=1){}
+}
+
+void packetConsumed(){
+    rxPointer = 0;
+    interrupt = 0;
+    *control = ACK;
 }
 
 int main(int argc, char **argv)
@@ -98,15 +107,16 @@ int main(int argc, char **argv)
     sendPckt();
 	int i;
     for(i=0; i<99; i++){
-        interrupt = 0;
-        rxPointer = 0;
-        while(interrupt != 1){}
-        LOG("00 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
+        receivePckt();
+        LOG("00 - %d ---- Valor recebido: %d\n",i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
         sendPckt();
+
+        packetConsumed();
     }
 
 
     LOG("Application ROUTER0 done!\n\n");
+    
     return 1;
 }
