@@ -1,22 +1,3 @@
-/*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied.
- *
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -72,6 +53,10 @@ extern syncPort_regs_dataT syncPort_regs_data;
 
 typedef struct handlesS {
     void                 *syncPort;
+    ppmPacketnetHandle    tickPort_00;
+    ppmPacketnetHandle    tickPort_01;
+    ppmPacketnetHandle    tickPort_10;
+    ppmPacketnetHandle    tickPort_11;
 } handlesT, *handlesTP;
 
 extern handlesT handles;
@@ -82,6 +67,10 @@ PPM_REG_READ_CB(goRead);
 PPM_REG_WRITE_CB(goWrite);
 PPM_REG_READ_CB(readyRead);
 PPM_REG_WRITE_CB(readyWrite);
+PPM_PACKETNET_CB(tick00);
+PPM_PACKETNET_CB(tick01);
+PPM_PACKETNET_CB(tick10);
+PPM_PACKETNET_CB(tick11);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
 PPM_CONSTRUCTOR_CB(constructor);

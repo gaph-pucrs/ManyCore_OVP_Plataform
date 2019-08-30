@@ -229,6 +229,8 @@ done
 
 echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
 
+echo "ihwaddperipheral -instancename ticker -modelfile peripheral/ticker/pse.pse" >> module.op.tcl
+
 echo "" >> module.op.tcl
 
 echo "ihwaddbus -instancename syncBus -addresswidth 32" >> module.op.tcl
