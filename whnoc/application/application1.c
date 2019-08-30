@@ -19,11 +19,11 @@ volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
-void interruptHandler(void) {
-    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
     volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 
-    if (rxPointer == 0){
+void interruptHandler(void) {
+    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
+   if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
         *control = ACK;
@@ -36,12 +36,15 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *control = ACK;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-        }
+	     *control = STALL;
+        }else{
+        	*control = ACK;
+	}
     }
 }
+
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
@@ -83,18 +86,7 @@ int main(int argc, char **argv)
      }
 
     //========================
-    
-    txPacket[0] = 0x24;
-    txPacket[1] = 128;
-
-    int i,j;
-    for(i=0;i<10;i++){
-        for(j=0;j<128;j++){
-            txPacket[j+2] = 1;
-        }
-        //sendPckt();
-    }
-    
+    // YOUR CODE HERE
     //========================
 
     LOG("Application ROUTER1 done!\n\n");

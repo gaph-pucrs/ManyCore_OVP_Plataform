@@ -5,6 +5,7 @@
 #define SOUTH 	3
 #define LOCAL 	4
 #define ND      5 // Not Defined
+#define DMNI    6
 
 // NoC Structure configuration
 #define N_PORTS 	    5
@@ -22,5 +23,8 @@
 #define HEADER  0xFFFFFFFF
 #define SIZE    0xFFFFFFFD
 
-#define N_PES 9
+#define DMNI_SIZE 25600
+
+#define N_PES 4
+
 

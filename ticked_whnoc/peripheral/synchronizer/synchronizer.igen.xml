@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <peripheral constructor="constructor"
+    destructor="destructor"
+    httpvis="F"
+    imagefile="pse.pse"
+    library="peripheral"
+    name="sync"
+    releasestatus="0"
+    saveRestore="F"
+    vendor="gaph"
+    version="1.0"
+    visibility="0">
+    <docsection name="doc"
+        text="Description">
+        <doctext name="txt"
+            text="A synchronizer peripheral"/>
+    </docsection>
+    <busslaveport addresswidth="32"
+        mustbeconnected="T"
+        name="syncPort"
+        size="0x8">
+        <addressblock name="regs"
+            size="0x8"
+            width="32">
+            <memorymappedregister access="rw"
+                isvolatile="T"
+                name="syncToPE"
+                readfunction="goRead"
+                width="32"
+                writefunction="goWrite"/>
+            <memorymappedregister access="rw"
+                isvolatile="T"
+                name="PEtoSync"
+                offset="0x4"
+                readfunction="readyRead"
+                width="32"
+                writefunction="readyWrite"/>
+        </addressblock>
+    </busslaveport>
+    <fileversion major="1"
+        minor="0"
+        name="_version_0"/>
+ </peripheral>
