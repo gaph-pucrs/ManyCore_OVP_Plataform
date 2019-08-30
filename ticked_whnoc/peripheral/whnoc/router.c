@@ -430,6 +430,7 @@ PPM_REG_READ_CB(rxRead) {
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
+	bhmMessage("I","rxWrite","Stores the new incoming flit\n");
     // Stores the new incoming flit
     bufferPush(LOCAL, data);
 

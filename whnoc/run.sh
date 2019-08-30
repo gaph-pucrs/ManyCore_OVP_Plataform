@@ -27,6 +27,7 @@ echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/ticker NOVLNV=1" >> ovp_compiler.sh
 
 
 echo "harness.exe \\" >> ovp_compiler.sh

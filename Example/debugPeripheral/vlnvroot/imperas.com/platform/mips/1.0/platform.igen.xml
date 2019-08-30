@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <hw clp="T"
+    clpAllArgs="T"
+    clpExtArgs="T"
+    clpMessage="Arguments"
+    clpStdArgs="T"
+    httpvis="F"
+    library="platform"
+    name="mips"
+    purpose="0"
+    releasestatus="0"
+    saverestore="F"
+    stoponctrlc="F"
+    vendor="mips.ovpworld.org"
+    verbose="F"
+    version="1.0"
+    visibility="0">
+    <nets name="nets"/>
+    <docsection name="doc"
+        text="Description">
+        <doctext name="txt"
+            text="A simple platform instancing a single processor and a peripheral."/>
+    </docsection>
+    <docsection name="doc_1"
+        text="Licensing">
+        <doctext name="txt"
+            text="Open Source Apache 2.0"/>
+    </docsection>
+    <bus addresswidth="32"
+        name="bus1"/>
+    <processorinstance endian="big"
+        name="cpu0">
+        <vlnvreference library="processor"
+            name="mips32"
+            vendor="mips.ovpworld.org"/>
+        <extlibrary directLoad="T"
+            name="mips32SDE_0">
+            <vlnvreference name="mips32SDE"
+                vendor="mips.ovpworld.org"/>
+        </extlibrary>
+        <busmasterportconnection connection="bus1"
+            name="INSTRUCTION"/>
+        <busmasterportconnection connection="bus1"
+            name="DATA"/>
+    </processorinstance>
+    <memoryinstance name="memoryMain">
+        <vlnvreference name="ram"/>
+        <busslaveportconnection connection="bus1"
+            hiaddress="0x07ffffff"
+            loaddress="0x00000000"
+            name="sp1"/>
+    </memoryinstance>
+    <memoryinstance name="memoryStack">
+        <vlnvreference name="ram"/>
+        <busslaveportconnection connection="bus1"
+            hiaddress="0xffffffff"
+            loaddress="0x20000000"
+            name="sp1"/>
+    </memoryinstance>
+    <peripheralinstance name="simplePeripheral">
+        <vlnvreference name="simplePeripheralSemiHost"/>
+        <busslaveportconnection connection="bus1"
+            hiaddress="0x1000000b"
+            loaddress="0x10000000"
+            name="config"/>
+        <busslaveportconnection connection="bus1"
+            hiaddress="0x10000100"
+            loaddress="0x10000100"
+            name="trigger"/>
+        <attribute content="200"
+            name="pollPeriod"/>
+    </peripheralinstance>
+    <fileversion major="1"
+        minor="0"
+        name="_version_0"/>
+ </hw>

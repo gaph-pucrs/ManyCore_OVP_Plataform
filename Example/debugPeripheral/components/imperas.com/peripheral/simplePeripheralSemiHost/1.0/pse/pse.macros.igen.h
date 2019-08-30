@@ -26,45 +26,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "synchronizer.igen.h"
-//////////////////////////////// Callback stubs ////////////////////////////////
+#ifndef PSE_MACROS_IGEN_H
+#define PSE_MACROS_IGEN_H
+// Before including this file in the application, define the indicated macros
+// to fix the base address of each slave port.
+// Set the macro 'CONFIG' to the base of port 'config'
+#ifndef CONFIG
+    #error CONFIG is undefined.It needs to be set to the port base address
+#endif
+#define CONFIG_A_DATA    (CONFIG + 0x0)
 
-PPM_REG_READ_CB(goRead) {
-    // YOUR CODE HERE (goRead)
-    return *(Uns32*)user;
-}
+#define CONFIG_A_COMMAND    (CONFIG + 0x4)
 
-PPM_REG_WRITE_CB(goWrite) {
-    // YOUR CODE HERE (goWrite)
-    *(Uns32*)user = data;
-}
-
-PPM_REG_READ_CB(readyRead) {
-    // YOUR CODE HERE (readyRead)
-    return *(Uns32*)user;
-}
-
-PPM_REG_WRITE_CB(readyWrite) {
-    // YOUR CODE HERE (readyWrite)
-    *(Uns32*)user = data;
-}
-
-PPM_CONSTRUCTOR_CB(constructor) {
-    // YOUR CODE HERE (pre constructor)
-    periphConstructor();
-    // YOUR CODE HERE (post constructor)
-}
-
-PPM_DESTRUCTOR_CB(destructor) {
-    // YOUR CODE HERE (destructor)
-}
+#define CONFIG_A_STATUS    (CONFIG + 0x4)
 
 
-PPM_SAVE_STATE_FN(peripheralSaveState) {
-    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
-}
+// Set the macro 'TRIGGER' to the base of port 'trigger'
+#ifndef TRIGGER
+    #error TRIGGER is undefined.It needs to be set to the port base address
+#endif
+#define TRIGGER_A_TRIGGER    (TRIGGER + 0x0)
 
-PPM_RESTORE_STATE_FN(peripheralRestoreState) {
-    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
-}
 
+
+#endif
