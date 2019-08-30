@@ -91,19 +91,15 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-	int i = 0;
     unsigned int tick = 0;
     while(1){
         bhmWaitDelay(500);
-	bhmPrintf("TICK = %d\n",tick);
-
+	    //bhmPrintf("TICK = %d\n",tick);
         ppmPacketnetWrite(handles.tickPort_00, &tick, sizeof(tick));
         ppmPacketnetWrite(handles.tickPort_01, &tick, sizeof(tick));
         ppmPacketnetWrite(handles.tickPort_10, &tick, sizeof(tick));
         ppmPacketnetWrite(handles.tickPort_11, &tick, sizeof(tick));
         tick++;
-	i++;
-
     }
 
 

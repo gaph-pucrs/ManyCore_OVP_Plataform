@@ -99,6 +99,11 @@
         name="portControlSouth"
         updatefunction="controlSouth"
         updatefunctionargument="0"/>
+    <packetnetport maxbytes="4"
+        mustbeconnected="F"
+        name="tickPort"
+        updatefunction="tick"
+        updatefunctionargument="0"/>
     <netport name="INTTC"
         type="output"
         updatefunctionargument="0">
