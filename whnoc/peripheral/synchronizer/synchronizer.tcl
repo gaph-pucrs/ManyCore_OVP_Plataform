@@ -38,4 +38,29 @@ imodeladdmmregister  -name PEtoSync \
                      -writefunction  readyWrite \
                      -offset 4
 
+## TICKER
+
+imodeladdpacketnetport \
+    -name tickPort_00 \
+    -maxbytes 4 \
+    -updatefunction tick00 \
+    -updatefunctionargument 0x00
+
+imodeladdpacketnetport \
+    -name tickPort_01 \
+    -maxbytes 4 \
+    -updatefunction tick01 \
+    -updatefunctionargument 0x00
+
+imodeladdpacketnetport \
+    -name tickPort_10 \
+    -maxbytes 4 \
+    -updatefunction tick10 \
+    -updatefunctionargument 0x00
+
+imodeladdpacketnetport \
+    -name tickPort_11 \
+    -maxbytes 4 \
+    -updatefunction tick11 \
+    -updatefunctionargument 0x00
 

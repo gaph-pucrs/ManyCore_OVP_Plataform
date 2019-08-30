@@ -19,10 +19,10 @@ volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
-
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
-    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
+    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal
+    LOG(">>>>>>>>>>>INTERROMPIDO!");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
@@ -38,13 +38,13 @@ void interruptHandler(void) {
         rxPointer++;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-            *control = STALL;
-        }
-        else{
-            *control = ACK;
-        }
+	     *control = STALL;
+        }else{
+        	*control = ACK;
+	}
     }
 }
+
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
@@ -52,10 +52,9 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*control != GO){
-            //LOG("CONTROLE EM STALL\n");
+            LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
-        //LOG("ENVIANDO FLIT %d\n", txPacket[txPointer]);
         *txLocal = txPacket[txPointer];
         txPointer++;
     }
@@ -79,30 +78,30 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x30;
+    *myAddress = 0x11;
 
-    *PEToSync = 0x30;
+    *PEToSync = 0x11;
     while(start != 1){
 	start = *SyncToPE >> 24;
      }
 
     //========================
-
-    txPacket[0] = 0x24;
-    txPacket[1] = 20;
-
-    int i, j, x;
-    x=0;
-    for(j=0;j<20;j++){
-        x=x+1;
-        txPacket[j+2] = *myAddress;
-    }
-
-    for(i=0;i<10;i++){
-        //sendPckt();
-    }
-
+    // YOUR CODE HERE
     //========================
+    // Creating the tx packet
+    txPacket[0] = 0x00;
+    txPacket[1] = 1;
+    int i;
+    for(i=0; i<99; i++){
+        while(interrupt != 1){}
+        LOG("11 - %d ---- Valor recebido: %d\n",i, rxPacket[2]);
+        txPacket[2] = rxPacket[2] + 1;
+        sendPckt();
+	    rxPointer = 0;
+        interrupt = 0; 
+        
+    }
+
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;

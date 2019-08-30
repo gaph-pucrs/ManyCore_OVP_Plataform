@@ -19,10 +19,10 @@ volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
-
-volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
+    volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
+
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
@@ -36,13 +36,10 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        if(rxPointer >= (rxPacket[1] + 2)){
+                if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-            *control = STALL;
         }
-        else{
-            *control = ACK;
-        }
+        *control = STALL;
     }
 }
 
@@ -52,10 +49,9 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*control != GO){
-            //LOG("CONTROLE EM STALL\n");
+            LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
-        //LOG("ENVIANDO FLIT %d\n", txPacket[txPointer]);
         *txLocal = txPacket[txPointer];
         txPointer++;
     }
@@ -87,21 +83,7 @@ int main(int argc, char **argv)
      }
 
     //========================
-
-    txPacket[0] = 0x24;
-    txPacket[1] = 20;
-
-    int i, j, x;
-    x=0;
-    for(j=0;j<20;j++){
-        x=x+1;
-        txPacket[j+2] = 0x40;
-    }
-
-    //for(i=0;i<10;i++){
-        sendPckt();
-    //}
-
+    // YOUR CODE HERE
     //========================
 
     LOG("Application ROUTER4 done!\n\n");

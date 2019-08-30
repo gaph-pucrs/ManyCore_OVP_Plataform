@@ -1,22 +1,3 @@
-/*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied.
- *
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -59,12 +40,74 @@ static PPM_BUS_PORT_FN(nextBusPort) {
     return busPort->name ? busPort : 0;
 }
 
+
+//                     Shared data for packetnet interface
+
+Uns8 tickPort_00_pnsd[4];
+Uns8 tickPort_01_pnsd[4];
+Uns8 tickPort_10_pnsd[4];
+Uns8 tickPort_11_pnsd[4];
+
+static ppmPacketnetPort packetnetPorts[] = {
+    {
+        .name            = "tickPort_00",
+        .mustBeConnected = 0,
+        .description     = 0,
+        .sharedData      = tickPort_00_pnsd,
+        .sharedDataBytes = 4,
+        .handlePtr       = &handles.tickPort_00,
+        .packetnetCB     = tick00,
+        .userData        = (void*)0
+    },
+    {
+        .name            = "tickPort_01",
+        .mustBeConnected = 0,
+        .description     = 0,
+        .sharedData      = tickPort_01_pnsd,
+        .sharedDataBytes = 4,
+        .handlePtr       = &handles.tickPort_01,
+        .packetnetCB     = tick01,
+        .userData        = (void*)0
+    },
+    {
+        .name            = "tickPort_10",
+        .mustBeConnected = 0,
+        .description     = 0,
+        .sharedData      = tickPort_10_pnsd,
+        .sharedDataBytes = 4,
+        .handlePtr       = &handles.tickPort_10,
+        .packetnetCB     = tick10,
+        .userData        = (void*)0
+    },
+    {
+        .name            = "tickPort_11",
+        .mustBeConnected = 0,
+        .description     = 0,
+        .sharedData      = tickPort_11_pnsd,
+        .sharedDataBytes = 4,
+        .handlePtr       = &handles.tickPort_11,
+        .packetnetCB     = tick11,
+        .userData        = (void*)0
+    },
+    { 0 }
+};
+
+static PPM_PACKETNET_PORT_FN(nextPacketnetPort) {
+    if(!port) {
+         port = packetnetPorts;
+    } else {
+        port++;
+    }
+    return port->name ? port : 0;
+}
+
 ppmModelAttr modelAttrs = {
 
     .versionString    = PPM_VERSION_STRING,
     .type             = PPM_MT_PERIPHERAL,
 
     .busPortsCB       = nextBusPort,  
+    .packetnetPortsCB = nextPacketnetPort,
 
     .saveCB        = peripheralSaveState,
     .restoreCB     = peripheralRestoreState,

@@ -36,10 +36,10 @@ void interruptHandler(void) {
     else{
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *control = ACK;
-        if(rxPointer >= (rxPacket[1] + 2)){
+                if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
         }
+        *control = STALL;
     }
 }
 

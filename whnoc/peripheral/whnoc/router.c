@@ -178,7 +178,7 @@ unsigned int bufferPop(unsigned int port){
 
 
         for(portas=EAST;portas<=LOCAL;portas++){
-            bhmMessage("INFO", "ROUTINGTABLE", ">>> Porta %d esta vinculada a: %d", portas, routingTable[portas]);
+            //bhmMessage("INFO", "ROUTINGTABLE", ">>> Porta %d esta vinculada a: %d", portas, routingTable[portas]);
         }
     
     }
@@ -251,7 +251,7 @@ void arbitration(unsigned int port){
     }
 }
 
-void transmitt(){
+void transmitt(struct handlesS handles){
     unsigned int port, flit;
     // For each port...
     for(port = 0; port <= LOCAL; port++){
@@ -261,7 +261,7 @@ void transmitt(){
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
                 flit = bufferPop(port);
-                //bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));               
+                bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));               
                 txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                 localPort_regs_data.dataTxLocal.value = flit;
                 ppmWriteNet(handles.INTTC, 1);
@@ -327,20 +327,6 @@ void transmitt(){
     }
 }
 
-void runTick(){
-    unsigned int port;
-    //Send a flit from the DMNI to the local Buffer!
-    DMNI_pop();
-
-    // Defines which port will be attended by the arbiter
-    port = priorityCheck();
-
-    // Runs the arbitration for the selected port
-    arbitration(port);
-
-    // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-    transmitt();
-}
 
 // DEPLETED! Does not use this function!
 void sendFlits(struct handlesS handles){
@@ -400,7 +386,7 @@ void sendFlits(struct handlesS handles){
             if(routingTable[port] == LOCAL && txCtrl == ACK){
                 flit = bufferPop(port);
 
-                //bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));
+                bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));
                 
                 txCtrl = REQ;
                 localPort_regs_data.dataTxLocal.value = flit;
@@ -503,7 +489,7 @@ void DMNI_statusUpdate(){
 }
 
 void DMNI_push(unsigned int newFlit){
-    DMNI_packets[DMNI_last] = flit;
+    DMNI_packets[DMNI_last] = newFlit;
     if(DMNI_last < DMNI_SIZE-1){
         DMNI_last++;
     }
@@ -527,6 +513,21 @@ void DMNI_pop(){
         DMNI_statusUpdate();
     }
 }
+void runTick(struct handlesS handles){
+    unsigned int port;
+    //Send a flit from the DMNI to the local Buffer!
+    DMNI_pop();
+
+    // Defines which port will be attended by the arbiter
+    port = priorityCheck();
+
+    // Runs the arbitration for the selected port
+    arbitration(port);
+
+    // Runs the transmittion of one flit to each direction (if there is a connection stablished)
+    transmitt(handles);
+}
+
 
 ////////////////////////////////////////////////////////////
 //////////////////// Callback stubs ////////////////////////
@@ -538,7 +539,7 @@ PPM_REG_READ_CB(addressRead) {
 
 PPM_REG_WRITE_CB(addressWrite) {
     // Stores the local address - it is sent by the local IP during the initialization
-    if(myAddress = 0xFFFFFFFF){
+    if(myAddress == 0xFFFFFFFF){
         myAddress = (unsigned int)data >> 24;
         int x = positionX(myAddress);
         int y = positionY(myAddress);
@@ -554,6 +555,7 @@ PPM_PACKETNET_CB(controlEast) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(EAST, ctrl);
+
 }
 
 PPM_PACKETNET_CB(controlNorth) {
@@ -578,24 +580,28 @@ PPM_PACKETNET_CB(dataEast) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(EAST, flit);
+    bhmMessage("INFO", "PORTAEAST", "Chegou um flit! %d", flit>>24);
 }
 
 PPM_PACKETNET_CB(dataNorth) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(NORTH, flit);
+    bhmMessage("INFO", "PORTANORTH", "Chegou um flit! %d", flit>>24);
 }
 
 PPM_PACKETNET_CB(dataSouth) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(SOUTH, flit);
+    bhmMessage("INFO", "PORTASOUTH", "Chegou um flit! %d", flit>>24);
 }
 
 PPM_PACKETNET_CB(dataWest) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(WEST, flit);
+    bhmMessage("INFO", "PORTAWEST", "Chegou um flit! %d", flit>>24);
 }
 
 PPM_REG_READ_CB(rxCtrlRead) {
@@ -624,10 +630,15 @@ PPM_REG_READ_CB(rxRead) {
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
+	//bhmMessage("I","rxWrite","armazenando o flit da dmni");
     // Stores the flit in the DMNI, that will send the flit to the local buffer once a tick comes
     DMNI_push(data);
-
     *(Uns32*)user = data;
+}
+
+PPM_PACKETNET_CB(tick) {
+  //  bhmMessage("INFO","TICK","------->TICK");
+    runTick(handles);
 }
 
 PPM_REG_READ_CB(txRead) {
