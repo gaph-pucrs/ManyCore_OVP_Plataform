@@ -627,3 +627,4 @@ optModuleAttr modelAttrs = {
     .postSimulateCB       = modulePostSimulate,
     .destructCB           = moduleDestruct,
 };
+
