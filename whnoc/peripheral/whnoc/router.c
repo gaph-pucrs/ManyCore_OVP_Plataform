@@ -206,8 +206,7 @@ unsigned int isEmpty(unsigned int port){
 }
 
 unsigned int dmniIsEmpty(){
-	if(DMNI_first != DMNI_last){
-
+	if(DMNI_first != (DMNI_last)){
 		return 0;
 	}else{
 		return 1;
@@ -273,7 +272,7 @@ void transmitt(struct handlesS handles){
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
                 flit = bufferPop(port);
-              //  bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));               
+                bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));               
                 txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                 localPort_regs_data.dataTxLocal.value = flit;
                 ppmWriteNet(handles.INTTC, 1);
@@ -287,7 +286,7 @@ void transmitt(struct handlesS handles){
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                 //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                     flit = bufferPop(port);
-                   // bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d",(flit >> 24));
+                    bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d",(flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
                 }
@@ -301,7 +300,7 @@ void transmitt(struct handlesS handles){
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                 //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                     flit = bufferPop(port);
-                 //   bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d", (flit >> 24));
+                    bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d", (flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
                 }
@@ -315,7 +314,7 @@ void transmitt(struct handlesS handles){
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                 //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                     flit = bufferPop(port);
-                  //  bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d", (flit >> 24));
+                    bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d", (flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
                 }
@@ -329,7 +328,7 @@ void transmitt(struct handlesS handles){
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                 //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                     flit = bufferPop(port);
-                  //  bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
+                    bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
 
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
@@ -545,6 +544,7 @@ void runTick(struct handlesS handles){
 
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
     transmitt(handles);
+
 }
 
 
@@ -649,7 +649,10 @@ PPM_REG_WRITE_CB(txCtrlWrite) {
 }
 
 PPM_REG_READ_CB(rxRead) {
-    return *(Uns32*)user;
+   
+
+ return *(Uns32*)user;
+   
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
@@ -664,19 +667,28 @@ PPM_PACKETNET_CB(tick) {
     int i;
 
     if((flitWaiting) || (flitDMNI)){
-	  //  bhmMessage("INFO","TICK","---------- run");
+    //bhmMessage("INFO","TICK","Transmitindo");
     	    runTick(handles);
     } else {
     for(i = EAST; i <= LOCAL; i++){
          if(!isEmpty(i)){
-		//bhmMessage("INFO","NOTEMPTY","NOTEMPTY");
+	//	bhmMessage("INFO","NOTEMPTY","NOTEMPTY");
 		flitWaiting=1;
 		break;
 	 }
 	//bhmMessage("INFO","EMPTY","EMPTY");
 	flitWaiting=0;
     }
-    flitDMNI = dmniIsEmpty();
+     if(dmniIsEmpty()==1){
+	flitDMNI=0;
+     }else{
+	flitDMNI=1;
+     }
+	
+
+
+    
+	//bhmMessage("INFO","FLITDMNI","FLITDMNI = %d\n",flitDMNI);
     
    }
 }
