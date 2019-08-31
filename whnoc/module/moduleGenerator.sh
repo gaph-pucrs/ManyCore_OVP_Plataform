@@ -258,6 +258,20 @@ do
 
 done
 
+echo "" >> module.op.tcl
+
+
+for i in $(seq 0 $N);
+do
+	echo "ihwaddpacketnet -instancename tick"$i >> module.op.tcl
+done
+
+
+echo "" >> module.op.tcl
+
+
+
+
 
 
 
