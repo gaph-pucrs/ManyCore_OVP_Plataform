@@ -9,15 +9,13 @@
 
 
 #include "synchronizer.igen.h"
+#include "syncThreads.h"
 /////////////////////////////// Port Declarations //////////////////////////////
 
 syncPort_regs_dataT syncPort_regs_data;
 
 handlesT handles;
 
-
-bhmThreadHandle th0,th1,th2,th3, th4;
-bhmEventHandle goEvent;
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
 // Test this variable to determine what diagnostics to output.
@@ -134,11 +132,7 @@ int main(int argc, char *argv[]) {
 
 	bhmPrintf("TICK = %d\n",i);
         bhmWaitDelay(500);
-	th0 = bhmCreateThread(myThread0,0,"myThread0",0);
-	th1 = bhmCreateThread(myThread1,0,"myThread1",0);
-	th2 = bhmCreateThread(myThread2,0,"myThread2",0);
-	th3 = bhmCreateThread(myThread3,0,"myThread3",0);
-	bhmCreateThread(goThread,0,"goThread",0);
+	runThreads();
        	i++;
 
     }
