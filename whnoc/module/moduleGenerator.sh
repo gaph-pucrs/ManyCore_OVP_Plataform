@@ -266,8 +266,14 @@ do
 	echo "ihwaddpacketnet -instancename tick"$i >> module.op.tcl
 done
 
-
 echo "" >> module.op.tcl
+
+
+for i in $(seq 0 $N);
+do
+	echo "ihwconnect -instancename router"$i" -packetnetport tickPort -packetnet tick"$i >> module.op.tcl
+	echo "ihwconnect -instancename sync -packetnetport tickPort_"$i" -packetnet tick"$i >> module.op.tcl
+done
 
 
 

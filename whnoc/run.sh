@@ -12,10 +12,15 @@ cd module
 
 cd ..
 
+cd peripheral/synchronizer
+./syncGenerator.sh $X $Y
+#igen.exe --batch synchronizer.tcl --writec router
+./threadsGenerator.sh $X $Y
+cd ..
 N=$(($X*$Y))
 
 
-cd peripheral
+#cd peripheral
 cd whnoc
 
 sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
@@ -39,7 +44,7 @@ echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
 
-echo "make -C peripheral/ticker NOVLNV=1" >> ovp_compiler.sh
+#echo "make -C peripheral/ticker NOVLNV=1" >> ovp_compiler.sh
  #harness/harness.$IMPERAS_ARCH.exe --program application/application.OR1K.elf 
 echo "harness.exe --modulefile module/model.\${IMPERAS_SHRSUF}" >> ovp_compiler.sh
 
