@@ -9,7 +9,6 @@
 
 #include "synchronizer.igen.h"
 #include "../whnoc/noc.h"
-
 //////////////////////////////// Callback stubs ////////////////////////////////
 unsigned int startedPEs;
 PPM_REG_READ_CB(goRead) {
@@ -28,7 +27,7 @@ PPM_REG_READ_CB(readyRead) {
 }
 
 PPM_REG_WRITE_CB(readyWrite) {
-        startedPEs++;
+  startedPEs++;
     bhmMessage("I", "readyWrite", "incrementando numero de roteadores %d\n",startedPEs);
     if(startedPEs == N_PES){
 
@@ -40,12 +39,12 @@ PPM_REG_WRITE_CB(readyWrite) {
     *(Uns32*)user = data;
 }
 
-PPM_PACKETNET_CB(tick00) {
-    // YOUR CODE HERE (tick00)
+PPM_PACKETNET_CB(tick0) {
+    // YOUR CODE HERE (tick0)
 }
 
-PPM_PACKETNET_CB(tick01) {
-    // YOUR CODE HERE (tick01)
+PPM_PACKETNET_CB(tick1) {
+    // YOUR CODE HERE (tick1)
 }
 
 PPM_PACKETNET_CB(tick10) {
@@ -54,6 +53,54 @@ PPM_PACKETNET_CB(tick10) {
 
 PPM_PACKETNET_CB(tick11) {
     // YOUR CODE HERE (tick11)
+}
+
+PPM_PACKETNET_CB(tick12) {
+    // YOUR CODE HERE (tick12)
+}
+
+PPM_PACKETNET_CB(tick13) {
+    // YOUR CODE HERE (tick13)
+}
+
+PPM_PACKETNET_CB(tick14) {
+    // YOUR CODE HERE (tick14)
+}
+
+PPM_PACKETNET_CB(tick15) {
+    // YOUR CODE HERE (tick15)
+}
+
+PPM_PACKETNET_CB(tick2) {
+    // YOUR CODE HERE (tick2)
+}
+
+PPM_PACKETNET_CB(tick3) {
+    // YOUR CODE HERE (tick3)
+}
+
+PPM_PACKETNET_CB(tick4) {
+    // YOUR CODE HERE (tick4)
+}
+
+PPM_PACKETNET_CB(tick5) {
+    // YOUR CODE HERE (tick5)
+}
+
+PPM_PACKETNET_CB(tick6) {
+    // YOUR CODE HERE (tick6)
+}
+
+PPM_PACKETNET_CB(tick7) {
+    // YOUR CODE HERE (tick7)
+}
+
+PPM_PACKETNET_CB(tick8) {
+    // YOUR CODE HERE (tick8)
+}
+
+PPM_PACKETNET_CB(tick9) {
+    // YOUR CODE HERE (tick9)
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {

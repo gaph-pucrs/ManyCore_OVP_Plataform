@@ -229,7 +229,6 @@ done
 
 echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
 
-echo "ihwaddperipheral -instancename ticker -modelfile peripheral/ticker/pse.pse" >> module.op.tcl
 
 echo "" >> module.op.tcl
 
@@ -269,6 +268,12 @@ done
 
 echo "" >> module.op.tcl
 
+
+for i in $(seq 0 $N);
+do
+	echo "ihwconnect -instancename router"$i" -packetnetport tickPort -packetnet tick"$i >> module.op.tcl
+	echo "ihwconnect -instancename sync -packetnetport tickPort_"$i" -packetnet tick"$i >> module.op.tcl
+done
 
 
 

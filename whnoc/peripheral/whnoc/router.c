@@ -244,6 +244,7 @@ void arbitration(unsigned int port){
         // Discover to wich port the packet must go
         header = buffers[port][first[port]];
         to = XYrouting(myAddress, header);
+	bhmMessage("INFO","ARBITRATION", "ARBITRADO PARA : %d\n",to);
         // Verify if any other port is using the selected one
         allowed = 1;
         for(checkport = 0; checkport <= LOCAL; checkport++){

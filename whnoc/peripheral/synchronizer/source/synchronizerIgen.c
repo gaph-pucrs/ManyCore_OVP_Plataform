@@ -1,13 +1,3 @@
-
-////////////////////////////////////////////////////////////////////////////////
-//
-//                W R I T T E N   B Y   I M P E R A S   I G E N
-//
-//                             Version 20170201.0
-//
-////////////////////////////////////////////////////////////////////////////////
-
-
 #include "synchronizer.igen.h"
 #include "syncThreads.h"
 /////////////////////////////// Port Declarations //////////////////////////////
@@ -92,7 +82,7 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-int i = 0;
+	int i = 0;
     goEvent = bhmCreateNamedEvent("start","go tick");
     while(1){
 
@@ -102,6 +92,8 @@ int i = 0;
        	i++;
 
     }
+
+
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();

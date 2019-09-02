@@ -100,13 +100,16 @@ int main(int argc, char **argv)
     // Creating the tx packet
     txPacket[0] = 0x11;
     txPacket[1] = 1;
-    txPacket[2] = 1;
+    txPacket[2] = 2;
 
 
     // Sends the first packet
     sendPckt();
+        LOG("pacote enviado\n");
 	int i;
     for(i=0; i<99; i++){
+
+        LOG("pacote enviado\n");
         receivePckt();
         LOG("00 - %d ---- Valor recebido: %d\n",i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;

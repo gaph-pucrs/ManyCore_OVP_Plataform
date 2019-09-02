@@ -25,6 +25,6 @@
 
 #define DMNI_SIZE 25600
 
-#define N_PES 4
+#define N_PES 16
 
 

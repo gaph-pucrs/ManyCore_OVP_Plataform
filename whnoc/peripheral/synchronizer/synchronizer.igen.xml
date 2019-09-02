@@ -38,6 +38,26 @@
                 writefunction="readyWrite"/>
         </addressblock>
     </busslaveport>
+    <packetnetport maxbytes="4"
+        mustbeconnected="F"
+        name="tickPort_0"
+        updatefunction="tick0"
+        updatefunctionargument="0"/>
+    <packetnetport maxbytes="4"
+        mustbeconnected="F"
+        name="tickPort_1"
+        updatefunction="tick1"
+        updatefunctionargument="0"/>
+    <packetnetport maxbytes="4"
+        mustbeconnected="F"
+        name="tickPort_2"
+        updatefunction="tick2"
+        updatefunctionargument="0"/>
+    <packetnetport maxbytes="4"
+        mustbeconnected="F"
+        name="tickPort_3"
+        updatefunction="tick3"
+        updatefunctionargument="0"/>
     <fileversion major="1"
         minor="0"
         name="_version_0"/>
