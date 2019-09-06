@@ -37,7 +37,7 @@ void interruptHandler(void) {
         rxPointer++;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-	     *control = STALL;
+	        *control = STALL;
         }
         else{
         	*control = ACK;
@@ -54,6 +54,7 @@ void sendPckt(){
             LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
+        //LOG("Enviando o flit: %d\n",txPacket[txPointer]);
         *txLocal = txPacket[txPointer];
         txPointer++;
     }
@@ -91,35 +92,30 @@ int main(int argc, char **argv)
 
     *PEToSync = 0x00;
     while(start != 1){
-	start = *SyncToPE >> 24;
-     }
+	    start = *SyncToPE >> 24;
+    }
 
     //========================
     // YOUR CODE HERE
     //========================
+
     // Creating the tx packet
     txPacket[0] = 0x11;
     txPacket[1] = 1;
-    txPacket[2] = 2;
+    txPacket[2] = 1;
 
 
     // Sends the first packet
     sendPckt();
-        LOG("pacote enviado\n");
-	int i;
+    int i;
     for(i=0; i<99; i++){
-
-        LOG("pacote enviado\n");
         receivePckt();
-        LOG("00 - %d ---- Valor recebido: %d\n",i, rxPacket[2]);
+        LOG("00 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
-        sendPckt();
-
         packetConsumed();
+        sendPckt();
     }
 
-
     LOG("Application ROUTER0 done!\n\n");
-    
     return 1;
 }
