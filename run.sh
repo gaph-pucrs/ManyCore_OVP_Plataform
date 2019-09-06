@@ -5,9 +5,9 @@ Y=$2
 N=$(($X*$Y))
 
 #source /soft64/source_gaph
-#module load ovp/20170201
-#source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
-#setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
+module load ovp/20170201
+source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
+setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
 
 cd application
 ./applicationGenerator.sh $X $Y

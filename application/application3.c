@@ -22,8 +22,7 @@ volatile static Uns32 txPacket[256];
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-    LOG("----------------------------->Interrompido!\n");
-    if (rxPointer == 0){
+   if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
         *control = ACK;
@@ -92,13 +91,10 @@ int main(int argc, char **argv)
 
     *PEToSync = 0x11;
     while(start != 1){
-	    start = *SyncToPE >> 24;
-    }
+	start = *SyncToPE >> 24;
+     }
 
     //========================
-    // YOUR CODE HERE
-    //========================
-
     // Creating the tx packet
     txPacket[0] = 0x00;
     txPacket[1] = 1;
@@ -110,7 +106,9 @@ int main(int argc, char **argv)
         packetConsumed();
         sendPckt();
     }
+    //========================
 
+    
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;
