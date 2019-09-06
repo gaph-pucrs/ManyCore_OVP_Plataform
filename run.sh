@@ -36,8 +36,13 @@ echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
+echo "make -C harness" >> ovp_compiler.sh
+ #harness/harness.$IMPERAS_ARCH.exe --program application/application.OR1K.elf 
+echo "harness.exe --modulefile module/model.\${IMPERAS_SHRSUF}" >> ovp_compiler.sh
+
+echo "harness/harness.\$IMPERAS_ARCH.exe \\" >> ovp_compiler.sh
 #harness/harness.$IMPERAS_ARCH.exe --program application/application.OR1K.elf 
-echo "harness.exe --modulefile module/model.\${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
+#echo "harness.exe --modulefile module/model.\${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
 
 #echo " --modulefile module/model.\${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
 
