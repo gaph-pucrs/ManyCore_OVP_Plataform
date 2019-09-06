@@ -323,8 +323,8 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
     control[port] = ctrlData;
 }
 
-void runTick(struct handlesS handles, unsigned int port){
-    //unsigned int port;
+void runTick(){//struct handlesS handles){
+    unsigned int port;
    // int teste;
     //Send a flit from the DMNI to the local Buffer!
 
@@ -332,7 +332,7 @@ void runTick(struct handlesS handles, unsigned int port){
    // bhmMessage("INFO","runTick", "teste --------> %d\n",teste);
 
     // Defines which port will be attended by the arbiter
-    //port = priorityCheck();
+    port = priorityCheck();
 
     // Runs the arbitration for the selected port
     arbitration(port);
@@ -368,25 +368,28 @@ PPM_PACKETNET_CB(controlEast) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(EAST, ctrl);
-
+    runTick();
 }
 
 PPM_PACKETNET_CB(controlNorth) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(NORTH, ctrl);
+    runTick();
 }
 
 PPM_PACKETNET_CB(controlSouth) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(SOUTH, ctrl);
+    runTick();
 }
 
 PPM_PACKETNET_CB(controlWest) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(WEST, ctrl);
+    runTick();
 }
 
 
@@ -395,32 +398,32 @@ PPM_PACKETNET_CB(dataEast) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(EAST, flit);
-     bhmMessage("INFO", "PORTAEAST", "Chegou um flit! %d", flit>>24);
-    runTick(handles, EAST);
+    //bhmMessage("INFO", "PORTAEAST", "Chegou um flit! %d", flit>>24);
+    runTick();
 }
 
 PPM_PACKETNET_CB(dataNorth) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(NORTH, flit);
-    bhmMessage("INFO", "PORTANORTH", "Chegou um flit! %d", flit>>24);
-    runTick(handles, NORTH);
+    //bhmMessage("INFO", "PORTANORTH", "Chegou um flit! %d", flit>>24);
+    runTick();
 }
 
 PPM_PACKETNET_CB(dataSouth) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(SOUTH, flit);
-    bhmMessage("INFO", "PORTASOUTH", "Chegou um flit! %d", flit>>24);
-    runTick(handles, SOUTH);
+    //bhmMessage("INFO", "PORTASOUTH", "Chegou um flit! %d", flit>>24);
+    runTick();
 }
 
 PPM_PACKETNET_CB(dataWest) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(WEST, flit);
-     bhmMessage("INFO", "PORTAWEST", "Chegou um flit! %d", flit>>24);
-    runTick(handles, WEST);
+    //bhmMessage("INFO", "PORTAWEST", "Chegou um flit! %d", flit>>24);
+    runTick();
 }
 
 
@@ -445,7 +448,7 @@ PPM_REG_WRITE_CB(rxWrite) {
     // Stores the new incoming flit
     bufferPush(LOCAL, data);
     *(Uns32*)user = data;
-    runTick(handles, LOCAL);
+    runTick();
 }
 
 PPM_REG_READ_CB(txCtrlRead) {
@@ -457,7 +460,7 @@ PPM_REG_WRITE_CB(txCtrlWrite) {
     //bhmMessage("INFO", "txCtrlW", "controle recebido!");
     txCtrl = data;
     txCtrl = txCtrl >> 24;
-
+    runTick();
     //bhmMessage("INFO", "txCtrlW", "controle recebido: %d\n", txCtrl);
     *(Uns32*)user = data;
 }
@@ -467,7 +470,7 @@ PPM_REG_READ_CB(txRead) {
     ppmWriteNet(handles.INTTC, 0); 
 
     //bhmMessage("INFO", "txRead", "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<dado lido - interrupcao removida");
-
+    runTick();
     return *(Uns32*)user;
 }
 
