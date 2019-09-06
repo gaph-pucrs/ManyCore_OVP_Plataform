@@ -51,7 +51,7 @@ do
     fi
 done
 
-        echo "     --verbose " >> ovp_compiler.sh
+        #echo "     --verbose " >> ovp_compiler.sh
 
 chmod +x ovp_compiler.sh
 

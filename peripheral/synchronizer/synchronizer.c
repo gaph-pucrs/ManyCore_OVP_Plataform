@@ -10,6 +10,7 @@
 #include "synchronizer.igen.h"
 #include "../whnoc/noc.h"
 //////////////////////////////// Callback stubs ////////////////////////////////
+unsigned int startedPEs = 0;
 
 PPM_REG_READ_CB(goRead) {
     // YOUR CODE HERE (goRead)
