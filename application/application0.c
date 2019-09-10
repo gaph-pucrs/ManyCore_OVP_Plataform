@@ -91,26 +91,19 @@ int main(int argc, char **argv)
 
     *PEToSync = 0x00;
     while(start != 1){
-	start = *SyncToPE >> 24;
-     }
+	    start = *SyncToPE >> 24;
+    }
 
     //========================
     // Creating the tx packet
-    txPacket[0] = 0x11;
-    txPacket[1] = 1;
-    txPacket[2] = 1;
-
-
-    // Sends the first packet
-    sendPckt();
+    txPacket[0] = 0x24;
+    txPacket[1] = 20;
     int i;
-    for(i=0; i<99; i++){
-        receivePckt();
-        LOG("00 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
-        txPacket[2] = rxPacket[2] + 1;
-        packetConsumed();
-        sendPckt();
+    for(i=2; i<110; i++){
+        txPacket[i] = 0;
     }
+
+    sendPckt();
     //========================
 
     LOG("Application ROUTER0 done!\n\n");

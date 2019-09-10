@@ -94,7 +94,7 @@ void bufferStatusUpdate(unsigned int port){
     // -- No available space in this buffer!
     if ((first[port] == 0 && last[port] == (BUFFER_SIZE-1)) || (first[port] == (last[port]+1))){
         status = STALL;
-        bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está STALL", port);
+        //bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está STALL", port);
     }
     // -- There is space in this buffer!
     else{
@@ -223,7 +223,7 @@ void arbitration(unsigned int port){
         // Discover to wich port the packet must go
         header = buffers[port][first[port]];
         to = XYrouting(myAddress, header);
-	bhmMessage("INFO","ARBITRATION", "ARBITRADO PARA : %d\n",to);
+	    //bhmMessage("INFO","ARBITRATION", "ARBITRADO PARA : %d\n",to);
         // Verify if any other port is using the selected one
         allowed = 1;
         for(checkport = 0; checkport <= LOCAL; checkport++){
@@ -368,28 +368,36 @@ PPM_PACKETNET_CB(controlEast) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(EAST, ctrl);
-    runTick();
+    if(ctrl != STALL){
+        runTick();
+    }
 }
 
 PPM_PACKETNET_CB(controlNorth) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(NORTH, ctrl);
-    runTick();
+    if(ctrl != STALL){
+        runTick();
+    }    
 }
 
 PPM_PACKETNET_CB(controlSouth) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(SOUTH, ctrl);
-    runTick();
+    if(ctrl != STALL){
+        runTick();
+    }
 }
 
 PPM_PACKETNET_CB(controlWest) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
     controlUpdate(WEST, ctrl);
-    runTick();
+    if(ctrl != STALL){
+        runTick();
+    }
 }
 
 
@@ -399,7 +407,9 @@ PPM_PACKETNET_CB(dataEast) {
     // Stores the new incoming flit
     bufferPush(EAST, flit);
     //bhmMessage("INFO", "PORTAEAST", "Chegou um flit! %d", flit>>24);
-    runTick();
+    if(routingTable[EAST]!=LOCAL){
+        runTick();
+    }
 }
 
 PPM_PACKETNET_CB(dataNorth) {
@@ -407,7 +417,9 @@ PPM_PACKETNET_CB(dataNorth) {
     // Stores the new incoming flit
     bufferPush(NORTH, flit);
     //bhmMessage("INFO", "PORTANORTH", "Chegou um flit! %d", flit>>24);
-    runTick();
+    if(routingTable[NORTH]!=LOCAL){
+        runTick();
+    }
 }
 
 PPM_PACKETNET_CB(dataSouth) {
@@ -415,7 +427,9 @@ PPM_PACKETNET_CB(dataSouth) {
     // Stores the new incoming flit
     bufferPush(SOUTH, flit);
     //bhmMessage("INFO", "PORTASOUTH", "Chegou um flit! %d", flit>>24);
-    runTick();
+    if(routingTable[SOUTH]!=LOCAL){
+        runTick();
+    }
 }
 
 PPM_PACKETNET_CB(dataWest) {
@@ -423,17 +437,21 @@ PPM_PACKETNET_CB(dataWest) {
     // Stores the new incoming flit
     bufferPush(WEST, flit);
     //bhmMessage("INFO", "PORTAWEST", "Chegou um flit! %d", flit>>24);
-    runTick();
+    if(routingTable[WEST]!=LOCAL){
+        runTick();
+    }
 }
 
 
 PPM_REG_READ_CB(rxCtrlRead) {
     // YOUR CODE HERE (rxCtrlRead)
+    runTick();
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(rxCtrlWrite) {
     // YOUR CODE HERE (rxCtrlWrite)
+    runTick();
     *(Uns32*)user = data;
 }
 
@@ -453,6 +471,7 @@ PPM_REG_WRITE_CB(rxWrite) {
 
 PPM_REG_READ_CB(txCtrlRead) {
     // YOUR CODE HERE (txCtrlRead)
+    runTick();
     return *(Uns32*)user;
 }
 
