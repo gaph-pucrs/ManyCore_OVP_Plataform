@@ -91,8 +91,8 @@ int main(int argc, char **argv)
 
     *PEToSync = 0x10;
     while(start != 1){
-	start = *SyncToPE >> 24;
-     }
+	    start = *SyncToPE >> 24;
+    }
 
     //========================
     // YOUR CODE HERE

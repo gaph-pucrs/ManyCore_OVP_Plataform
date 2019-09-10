@@ -75,7 +75,7 @@ int main(int argc, char **argv)
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
-    LOG("Starting ROUTER0 application! \n");
+    LOG("Starting ROUTER0 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -95,7 +95,15 @@ int main(int argc, char **argv)
     }
 
     //========================
-    // YOUR CODE HERE
+    // Creating the tx packet
+    txPacket[0] = 0x24;
+    txPacket[1] = 100;
+    int i;
+    for(i=0; i<110; i++){
+        txPacket[i] = 0;
+    }
+
+    sendPckt();
     //========================
 
     LOG("Application ROUTER0 done!\n\n");
