@@ -41,13 +41,25 @@ unsigned int packetStatus[N_PORTS] = {ND,ND,ND,ND,ND}; //TODO
 // Priority list
 unsigned int priority[N_PORTS] = {0,0,0,0,0};
 
+typedef struct {
+   unsigned int dataInterr;
+   unsigned int dataPort;
+}interruption;
+
+unsigned int interruptionActive = 0;
+unsigned int fifo_last = 0;
+unsigned int fifo_tail = 0;
+
+struct interruption fifoInterruption[256];
+
+
+
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
 ////////////////////////////////////////////////////////////
 
 // Extract the Y position for a given address
-unsigned int positionY(unsigned int address){
     unsigned int mask =  0xF;
     unsigned int masked_n = address & mask;
     unsigned int thebit = masked_n;
@@ -255,6 +267,8 @@ void transmitt(struct handlesS handles){
                 bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d",(flit >> 24));               
                 txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                 localPort_regs_data.dataTxLocal.value = flit;
+		bhmMessage("INFO", "SENDFLITS", "------------------------------------------>Ativando interrupcao");   
+		interruptionActive = 1;            
                 ppmWriteNet(handles.INTTC, 1);
             }
 
@@ -323,8 +337,8 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
     control[port] = ctrlData;
 }
 
-void runTick(){//struct handlesS handles){
-    unsigned int port;
+void runTick(unsigned int port){//struct handlesS handles){
+    //unsigned int port;
    // int teste;
     //Send a flit from the DMNI to the local Buffer!
 
@@ -332,7 +346,7 @@ void runTick(){//struct handlesS handles){
    // bhmMessage("INFO","runTick", "teste --------> %d\n",teste);
 
     // Defines which port will be attended by the arbiter
-    port = priorityCheck();
+    //port = priorityCheck();
 
     // Runs the arbitration for the selected port
     arbitration(port);
@@ -342,6 +356,29 @@ void runTick(){//struct handlesS handles){
 
 }
 
+
+void interruptionPush(struct interruption thisInterruption){
+
+    if(fifo_last<256){    
+
+	fifoInterruption[fifo_last] = thisInterruption;
+    }
+
+    fifo_last++;
+
+
+}
+struct interruption interruptionPull(){
+
+  struct interruption lastInterruption;
+  if(fifo_tail<fifo_last){
+    
+	lastInterruption = fifoInterruption[fifo_tail];
+	fifo_tail++;
+   }
+   return fifoInterruption[fifo_tail];
+}
+
 //////////////////////////////// Callback stubs ////////////////////////////////
 
 
@@ -349,6 +386,8 @@ PPM_REG_READ_CB(addressRead) {
     // YOUR CODE HERE (addressRead)
     return *(Uns32*)user;
 }
+
+
 
 PPM_REG_WRITE_CB(addressWrite) {
  if(myAddress == 0xFFFFFFFF){
@@ -367,63 +406,113 @@ PPM_REG_WRITE_CB(addressWrite) {
 PPM_PACKETNET_CB(controlEast) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
-    controlUpdate(EAST, ctrl);
-    runTick();
+    struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = EAST;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          controlUpdate(EAST, ctrl);
+          runTick();
+    }
 }
 
 PPM_PACKETNET_CB(controlNorth) {
     unsigned int ctrl = *(unsigned int *)data;
-    // Updates the neighbor port status
-    controlUpdate(NORTH, ctrl);
-    runTick();
+    struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = NORTH;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          controlUpdate(NORTH, ctrl);
+          runTick(NORTH);
+    }
 }
 
 PPM_PACKETNET_CB(controlSouth) {
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
-    controlUpdate(SOUTH, ctrl);
-    runTick();
-}
+    struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = SOUTH;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          controlUpdate(SOUTH, ctrl);
+          runTick(SOUTH);
+    }}
 
 PPM_PACKETNET_CB(controlWest) {
     unsigned int ctrl = *(unsigned int *)data;
-    // Updates the neighbor port status
-    controlUpdate(WEST, ctrl);
-    runTick();
+    struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = WEST;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          controlUpdate(WEST, ctrl);
+          runTick(WEST);
+    }
 }
 
 
 
 PPM_PACKETNET_CB(dataEast) {
     unsigned int flit = *(unsigned int *)data;
-    // Stores the new incoming flit
-    bufferPush(EAST, flit);
+	// Stores the new incoming flit
+    bufferPush(EAST, flit);]
+    struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = EAST;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          runTick(EAST);
+    }
     //bhmMessage("INFO", "PORTAEAST", "Chegou um flit! %d", flit>>24);
-    runTick();
-}
+    
 
 PPM_PACKETNET_CB(dataNorth) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(NORTH, flit);
-    //bhmMessage("INFO", "PORTANORTH", "Chegou um flit! %d", flit>>24);
-    runTick();
+     if(interruptionActive){
+    	my_interruption.dataPort = NORTH;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          runTick(NORTH);
+    }
 }
 
 PPM_PACKETNET_CB(dataSouth) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(SOUTH, flit);
-    //bhmMessage("INFO", "PORTASOUTH", "Chegou um flit! %d", flit>>24);
-    runTick();
+    struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = SOUTH;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          runTick(SOUTH);
+    }
 }
 
 PPM_PACKETNET_CB(dataWest) {
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(WEST, flit);
-    //bhmMessage("INFO", "PORTAWEST", "Chegou um flit! %d", flit>>24);
-    runTick();
+    struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = WEST;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          runTick(WEST);
+    } 
+
 }
 
 
@@ -448,7 +537,14 @@ PPM_REG_WRITE_CB(rxWrite) {
     // Stores the new incoming flit
     bufferPush(LOCAL, data);
     *(Uns32*)user = data;
-    runTick();
+ struct interruption my_interruption;
+    if(interruptionActive){
+    	my_interruption.dataPort = WEST;
+	my_interruption.dataInterr =*(unsigned int *)data;
+	interruptionPush(my_interruption);		
+    }else{
+          runTick(WEST);
+    } 
 }
 
 PPM_REG_READ_CB(txCtrlRead) {
@@ -460,7 +556,7 @@ PPM_REG_WRITE_CB(txCtrlWrite) {
     //bhmMessage("INFO", "txCtrlW", "controle recebido!");
     txCtrl = data;
     txCtrl = txCtrl >> 24;
-    runTick();
+    //runTick();
     //bhmMessage("INFO", "txCtrlW", "controle recebido: %d\n", txCtrl);
     *(Uns32*)user = data;
 }
@@ -468,9 +564,20 @@ PPM_REG_WRITE_CB(txCtrlWrite) {
 PPM_REG_READ_CB(txRead) {
     // Once that the IP reads the flit, turn down the interruption 
     ppmWriteNet(handles.INTTC, 0); 
+    int i,qtdInterruptions;
+    struct interruption nextInterruption;
+    bhmMessage("INFO", "txRead", "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<dado lido - interrupcao removida");
 
-    //bhmMessage("INFO", "txRead", "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<dado lido - interrupcao removida");
-    runTick();
+    interruptionActive = 0;
+    qtdInterruptions = fifo_last;
+    for(i=0;i<qtdInterruptions;i++){
+	nextInterruption = interruptionPull();
+	runTick(nextInterruption.dataPort);
+   }
+
+   fifo_last = 0;
+   fifo_tail = 0;
+
     return *(Uns32*)user;
 }
 

@@ -5,8 +5,7 @@
 
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u1"
-#define CPU_INSTANCE    "cpu1"
-#define PREFIX          "BUS_MON"
+#define PREFIX          "HARNESS"
 
 
 #define INSTRUCTIONS_PER_SECOND       100000
@@ -15,6 +14,8 @@
 
 
 int main(int argc, const char *argv[]) {
+
+	
     opSessionInit(OP_VERSION);
     opCmdParseStd (argv[0], OP_AC_ALL, argc, argv);
 
@@ -30,7 +31,7 @@ int main(int argc, const char *argv[]) {
 
     int contQuantum = 0;
     if (!(mod = opObjectByName (mi, MODULE_INSTANCE, OP_MODULE_EN).Module)) {
-        opMessage ("F", PREFIX "_NFW", "Can not find module(%s)", MODULE_INSTANCE);
+        opMessage ("F", PREFIX, "Can not find module(%s)", MODULE_INSTANCE);
     }
 
     optProcessorP proc;// = opProcessorNext(ui, NULL);
@@ -60,7 +61,7 @@ int main(int argc, const char *argv[]) {
 	  optModuleP mod;
 
           if (!(mod = opObjectByName (mi, MODULE_INSTANCE, OP_MODULE_EN).Module)) {
-              opMessage ("F", PREFIX "_NFW", "Can not find module(%s)", MODULE_INSTANCE);
+              opMessage ("F", PREFIX, "Can not find module(%s)", MODULE_INSTANCE);
           }
 
 
@@ -69,6 +70,8 @@ int main(int argc, const char *argv[]) {
 
 	    
             	stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+
+		
 	    }
 
 
@@ -85,6 +88,9 @@ int main(int argc, const char *argv[]) {
             }
 
             myTime += QUANTUM_TIME_SLICE;
+
+
+		
 
         } while (1);
     

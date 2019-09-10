@@ -75,7 +75,7 @@ int main(int argc, char **argv)
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
-    LOG("Starting ROUTER3 application! \n\n");
+    LOG("Starting ROUTER4 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -87,9 +87,9 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x30;
+    *myAddress = 0x40;
 
-    *PEToSync = 0x30;
+    *PEToSync = 0x40;
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
@@ -99,18 +99,22 @@ int main(int argc, char **argv)
     //========================
 
     // Creating the tx packet
-    txPacket[0] = 0x00;
+    txPacket[0] = 0x11;
     txPacket[1] = 1;
+    txPacket[2] = 1;
+
+
+    // Sends the first packet
+    sendPckt();
     int i;
     for(i=0; i<99; i++){
         receivePckt();
-        LOG("11 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
+        LOG("00 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;
         packetConsumed();
         sendPckt();
     }
 
-
-    LOG("Application ROUTER3 done!\n\n");
+    LOG("Application ROUTER4 done!\n\n");
     return 1;
 }
