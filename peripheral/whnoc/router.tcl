@@ -80,6 +80,16 @@ imodeladdpacketnetport \
     -updatefunctionargument 0x00
 
 #########################################
+## To Tick
+#########################################
+
+imodeladdpacketnetport \
+    -name tickPort \
+    -maxbytes 4 \
+    -updatefunction tick \
+    -updatefunctionargument 0x00
+
+#########################################
 ## Control ports between routers
 #########################################
 imodeladdpacketnetport \
