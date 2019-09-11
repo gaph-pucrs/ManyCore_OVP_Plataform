@@ -47,11 +47,11 @@ void interruptHandler(void) {
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
-    volatile unsigned int *control = ROUTER_BASE + 0x3; // controlRxLocal
+    volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
-        while(*control != GO){
-            LOG("\n %d \n", *control);
+        while(*controlTx != GO){
+            //LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
@@ -97,10 +97,10 @@ int main(int argc, char **argv)
     //========================
     // Creating the tx packet
     txPacket[0] = 0x24;
-    txPacket[1] = 20;
+    txPacket[1] = 100;
     int i;
     for(i=2; i<110; i++){
-        txPacket[i] = 0;
+        txPacket[i] = i;
     }
 
     sendPckt();

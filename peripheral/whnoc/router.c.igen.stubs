@@ -91,10 +91,6 @@ PPM_REG_WRITE_CB(rxWrite) {
     *(Uns32*)user = data;
 }
 
-PPM_PACKETNET_CB(tick) {
-    // YOUR CODE HERE (tick)
-}
-
 PPM_REG_READ_CB(txCtrlRead) {
     // YOUR CODE HERE (txCtrlRead)
     return *(Uns32*)user;
