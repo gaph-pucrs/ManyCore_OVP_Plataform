@@ -16,7 +16,7 @@ typedef unsigned char Uns8;
 volatile static Uns32 interrupt = 0; 
 volatile static Uns32 rxPacket[256];
 volatile static Uns32 rxPointer = 0;
-volatile static Uns32 txPointer = 0;
+volatile static Uns32 txPointer = 0; 
 volatile static Uns32 txPacket[256];
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal

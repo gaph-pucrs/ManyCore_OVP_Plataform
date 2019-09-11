@@ -22,7 +22,7 @@ volatile static Uns32 txPacket[256];
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-   if (rxPointer == 0){
+    if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
         *control = ACK;
@@ -37,7 +37,7 @@ void interruptHandler(void) {
         rxPointer++;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-	     *control = STALL;
+	        *control = STALL;
         }
         else{
         	*control = ACK;
@@ -47,10 +47,10 @@ void interruptHandler(void) {
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
-    volatile unsigned int *control = ROUTER_BASE + 0x3; // controlRxLocal
+    volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
-        while(*control != GO){
+        while(*controlTx != GO){
             LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }

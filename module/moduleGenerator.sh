@@ -256,3 +256,26 @@ do
 	echo "ihwconnect -bus syncBus -busmasterport pm -instancename bridge"$i" -loaddress "$loSyncBus" -hiaddress "$hiSyncBus"" >> module.op.tcl
 
 done
+
+
+
+
+
+
+
+
+
+
+echo "" >> module.op.tcl
+for i in $(seq 0 $N);
+	do
+	for j in $(seq $(($i+1)) $N);
+	do
+		echo "ihwaddpacketnet -instancename tick_"$i"_"$j"" >> module.op.tcl
+		echo "ihwconnect -instancename router"$i" -packetnetport tickPort -packetnet tick_"$i"_"$j"" >> module.op.tcl
+		echo "ihwconnect -instancename router"$j" -packetnetport tickPort -packetnet tick_"$i"_"$j"" >> module.op.tcl
+	done
+done 
+echo "" >> module.op.tcl
+
+

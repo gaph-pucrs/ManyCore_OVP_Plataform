@@ -25,7 +25,7 @@ void interruptHandler(void) {
    if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *control = ACK;
+        *control = ACK; 
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
     txPacket[1] = 100;
     int i;
     for(i=2; i<110; i++){
-        txPacket[i] = i+100;
+        txPacket[i] = i+200;
     }
 
     sendPckt();
