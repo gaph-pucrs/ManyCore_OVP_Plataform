@@ -20,6 +20,9 @@ cd ..
 cd peripheral
 cd whnoc
 sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
+cd ..
+cd ticker
+# Ticker scripts
 cd ../..
 
 N=$(($N-1))
@@ -36,6 +39,7 @@ echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/ticker NOVLNV=1" >> ovp_compiler.sh
 # --------- Sem HARNESS modificado
 echo "harness.exe \\" >> ovp_compiler.sh
 echo "    --modulefile module/model.${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
