@@ -60,6 +60,7 @@ void sendPckt(){
 }
 
 void receivePckt(){
+    while(*control!=STALL){}
     while(interrupt!=1){}
 }
 

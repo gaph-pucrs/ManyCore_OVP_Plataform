@@ -9,6 +9,7 @@ make -C application CROSS=${CROSS}
 make -C module
 make -C peripheral/whnoc NOVLNV=1
 make -C peripheral/synchronizer NOVLNV=1
+make -C peripheral/ticker NOVLNV=1
 harness.exe \
     --modulefile module/model.so \
      --program cpu0=application/application0.${CROSS}.elf $* \
