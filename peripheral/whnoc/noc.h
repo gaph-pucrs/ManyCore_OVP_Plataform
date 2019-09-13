@@ -22,6 +22,6 @@
 #define HEADER  0xFFFFFFFF
 #define SIZE    0xFFFFFFFD
 
-#define N_PES 25
+#define N_PES 4
 
 

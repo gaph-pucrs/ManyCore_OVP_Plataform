@@ -87,9 +87,9 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x30;
+    *myAddress = 0x11;
 
-    *PEToSync = 0x30;
+    *PEToSync = 0x11;
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
     txPacket[0] = 0x00;
     txPacket[1] = 1;
     int i;
-    for(i=0; i<99; i++){
+    for(i=0; i<1; i++){
         receivePckt();
         LOG("11 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;

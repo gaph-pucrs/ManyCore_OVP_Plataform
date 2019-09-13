@@ -107,7 +107,7 @@ int main(int argc, char **argv)
     // Sends the first packet
     sendPckt();
     int i;
-    for(i=0; i<99; i++){
+    for(i=0; i<1; i++){
         receivePckt();
         LOG("00 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
         txPacket[2] = rxPacket[2] + 1;

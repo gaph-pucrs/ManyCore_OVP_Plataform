@@ -50,16 +50,14 @@ unsigned int interruptionActive = 0;
 unsigned int fifo_last = 0;
 unsigned int fifo_tail = 0;
 
-struct interruption fifoInterruption[256];
-
-
-
+interruption fifoInterruption[256];
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
 ////////////////////////////////////////////////////////////
 
 // Extract the Y position for a given address
+unsigned int positionY(unsigned int address){
     unsigned int mask =  0xF;
     unsigned int masked_n = address & mask;
     unsigned int thebit = masked_n;
@@ -110,7 +108,7 @@ void bufferStatusUpdate(unsigned int port){
     }
     // -- There is space in this buffer!
     else{
-        //bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está GO", port);
+        bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está GO", port);
         status = GO;
     }
 
@@ -132,13 +130,16 @@ void bufferStatusUpdate(unsigned int port){
     }
 
 }
-
 void bufferPush(unsigned int port, unsigned int flit){
     //bhmMessage("INFO", "PUSHFuncion", ">>>>~~~~~~~~~~>>>>>> Porta %d recebeu flit %d", port, (flit >> 24));
     // Write a new flit in the buffer
     buffers[port][last[port]] = flit;
+
+    flitCount[port]++;
+    bhmMessage("INFO","bufferPush","buffers[posicao] = %d %d and flit = %d", port, last[port], flit >> 24);
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;
+        bhmMessage("INFO","bufferPush","last[port] = %d",last[port]);
     }
     else if(last[port] == BUFFER_SIZE-1){
         last[port] = 0;
@@ -151,16 +152,15 @@ void bufferPush(unsigned int port, unsigned int flit){
 unsigned int bufferPop(unsigned int port){
     unsigned int value;
 
-    int portas;
-
+//    int portas;
+    bhmMessage("INFO","bufferPop","bufferPop da porta %d ",port);
     // Read the first flit from the buffer
     value = buffers[port][first[port]];
      
     // Increments the "first" pointer
     if(first[port] < BUFFER_SIZE-1){
         first[port]++;
-    }
-    else if(first[port] == BUFFER_SIZE-1){
+    } else if(first[port] == BUFFER_SIZE-1){
         first[port] = 0;
     }
     
@@ -170,22 +170,23 @@ unsigned int bufferPop(unsigned int port){
     //bhmMessage("INFO", "POP", "port: %d - flit count: %d",port, flitCount[port]);
 
     // If the flitCount goes to EMPTY then the transmission is done!
+    bhmMessage("INFO","bufferPop","------------------------------------------------------------>FLITCOUNT = %d",flitCount[port]);
     if (flitCount[port] == EMPTY){
         
         // Updates the routing table, releasing the output port
+	bhmMessage("INFO", "----------------->POP", "port: %d  ", port);
+
         routingTable[port] = ND;
 
         // Inform that the next flit will be a header
         flitCount[port] = HEADER;
 
 
-        for(portas=EAST;portas<=LOCAL;portas++){
+        /*for(portas=EAST;portas<=LOCAL;portas++){
             //bhmMessage("INFO", "ROUTINGTABLE", ">>> Porta %d esta vinculada a: %d", portas, routingTable[portas]);
-        }
+        }*/
     
-    }
-    // If it is the packet size flit then we store the value for the countdown
-    else if (flitCount[port] == SIZE){
+    } else if (flitCount[port] == SIZE){
         flitCount[port] = value >> 24;
        // bhmMessage("INFO", "GETSIZE", "Porta %d esta transmitindo pacote de: %d flits", port, flitCount[port]);
     }
@@ -197,6 +198,8 @@ unsigned int bufferPop(unsigned int port){
 }
 
 unsigned int isEmpty(unsigned int port){
+	bhmMessage("INFO","isEmpty","last[port] = %d and first[port] = %d",last[port],first[port]);
+	bhmMessage("INFO","isEmpty","port = %d",port);
     if(last[port] != first[port]){
         return 0; // no, it is not empty
     }
@@ -231,11 +234,17 @@ void arbitration(unsigned int port){
     unsigned int header, to, checkport, allowed;
     // In the first place, verify if the port is not connected to any thing and has something to transmitt 
     // (THIS IS REDUNDANT!)
+    bhmMessage("INFO","ARBITRATION","ROUTING TABLE PORT = %d AND isEmpty = %d", routingTable[port],isEmpty(port));
+    bhmMessage("INFO","ARBITRATION","PORT = %d", port);
     if(routingTable[port] == ND && !isEmpty(port)){
+    	bhmMessage("INFO","ARBITRATION","ENTROU NO IF");
         // Discover to wich port the packet must go
+
         header = buffers[port][first[port]];
+        bhmMessage("INFO","ARBITRATION","buffers[posicao] = %d %d and flit = %d", port, first[port], header >> 24);
         to = XYrouting(myAddress, header);
-	bhmMessage("INFO","ARBITRATION", "ARBITRADO PARA : %d\n",to);
+        bhmMessage("INFO","ARBITRATION","------------> MYADDRESS = %d and --------->HEADER = %d",myAddress,header);
+		bhmMessage("INFO","ARBITRATION", "ARBITRADO PARA : %d\n",to);
         // Verify if any other port is using the selected one
         allowed = 1;
         for(checkport = 0; checkport <= LOCAL; checkport++){
@@ -245,6 +254,7 @@ void arbitration(unsigned int port){
             }
         }
         if(allowed == 1){
+        	bhmMessage("INFO","-------->ROUTINGTABLE","--------------------------------------->ATUALIZANDO ROUTINGTABLE DA PORTA %d para a porta %d",port, to);
             routingTable[port] = to;
             /* bhmMessage("INFO", "SENDFLITS", "Port %d routed to %d", port, routingTable[port]);
             for(portas=EAST;portas<=LOCAL;portas++){
@@ -268,8 +278,9 @@ void transmitt(struct handlesS handles){
                 txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                 localPort_regs_data.dataTxLocal.value = flit;
 		bhmMessage("INFO", "SENDFLITS", "------------------------------------------>Ativando interrupcao");   
-		interruptionActive = 1;            
                 ppmWriteNet(handles.INTTC, 1);
+           		interruptionActive = 1;            
+
             }
 
             // Transmit it to the EAST router
@@ -349,6 +360,8 @@ void runTick(unsigned int port){//struct handlesS handles){
     //port = priorityCheck();
 
     // Runs the arbitration for the selected port
+
+ bhmMessage("INFO","runTick", "port = %d",port);    
     arbitration(port);
 
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
@@ -357,7 +370,9 @@ void runTick(unsigned int port){//struct handlesS handles){
 }
 
 
-void interruptionPush(struct interruption thisInterruption){
+void interruptionPush(interruption thisInterruption){
+	bhmMessage("INFO","interruptionPush","-------------------------------------------->INTERRUPTION PUSH");
+	bhmMessage("INFO","interruptionPush","fifoInterruption posicao %d ", fifo_last);
 
     if(fifo_last<256){    
 
@@ -368,15 +383,18 @@ void interruptionPush(struct interruption thisInterruption){
 
 
 }
-struct interruption interruptionPull(){
+interruption interruptionPull(){
 
-  struct interruption lastInterruption;
+  interruption lastInterruption;
+  lastInterruption.dataPort=0;
+  lastInterruption.dataInterr=0;
+  bhmMessage("INFO","interruptionPull","fifoInterruption posicao %d ", fifo_tail);
   if(fifo_tail<fifo_last){
     
 	lastInterruption = fifoInterruption[fifo_tail];
 	fifo_tail++;
    }
-   return fifoInterruption[fifo_tail];
+   return lastInterruption;
 }
 
 //////////////////////////////// Callback stubs ////////////////////////////////
@@ -405,21 +423,22 @@ PPM_REG_WRITE_CB(addressWrite) {
 
 PPM_PACKETNET_CB(controlEast) {
     unsigned int ctrl = *(unsigned int *)data;
-    // Updates the neighbor port status
-    struct interruption my_interruption;
+    bhmMessage("INFO","CALLBACK","controlEast");
+    interruption my_interruption;
     if(interruptionActive){
     	my_interruption.dataPort = EAST;
 	my_interruption.dataInterr =*(unsigned int *)data;
 	interruptionPush(my_interruption);		
     }else{
           controlUpdate(EAST, ctrl);
-          runTick();
+          runTick(EAST);
     }
 }
 
 PPM_PACKETNET_CB(controlNorth) {
+	bhmMessage("INFO","CALLBACK","controlNorth");
     unsigned int ctrl = *(unsigned int *)data;
-    struct interruption my_interruption;
+    interruption my_interruption;
     if(interruptionActive){
     	my_interruption.dataPort = NORTH;
 	my_interruption.dataInterr =*(unsigned int *)data;
@@ -431,9 +450,10 @@ PPM_PACKETNET_CB(controlNorth) {
 }
 
 PPM_PACKETNET_CB(controlSouth) {
+	bhmMessage("INFO","CALLBACK","controlSouth");
     unsigned int ctrl = *(unsigned int *)data;
     // Updates the neighbor port status
-    struct interruption my_interruption;
+    interruption my_interruption;
     if(interruptionActive){
     	my_interruption.dataPort = SOUTH;
 	my_interruption.dataInterr =*(unsigned int *)data;
@@ -444,8 +464,9 @@ PPM_PACKETNET_CB(controlSouth) {
     }}
 
 PPM_PACKETNET_CB(controlWest) {
+	bhmMessage("INFO","CALLBACK","controlWest");
     unsigned int ctrl = *(unsigned int *)data;
-    struct interruption my_interruption;
+    interruption my_interruption;
     if(interruptionActive){
     	my_interruption.dataPort = WEST;
 	my_interruption.dataInterr =*(unsigned int *)data;
@@ -459,10 +480,11 @@ PPM_PACKETNET_CB(controlWest) {
 
 
 PPM_PACKETNET_CB(dataEast) {
+	bhmMessage("INFO","CALLBACK","dataEast");
     unsigned int flit = *(unsigned int *)data;
 	// Stores the new incoming flit
-    bufferPush(EAST, flit);]
-    struct interruption my_interruption;
+    bufferPush(EAST, flit);
+    interruption my_interruption;
     if(interruptionActive){
     	my_interruption.dataPort = EAST;
 	my_interruption.dataInterr =*(unsigned int *)data;
@@ -470,15 +492,18 @@ PPM_PACKETNET_CB(dataEast) {
     }else{
           runTick(EAST);
     }
+}
     //bhmMessage("INFO", "PORTAEAST", "Chegou um flit! %d", flit>>24);
     
 
 PPM_PACKETNET_CB(dataNorth) {
+	bhmMessage("INFO","CALLBACK","dataNorth");
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(NORTH, flit);
+    interruption my_interruption;
      if(interruptionActive){
-    	my_interruption.dataPort = NORTH;
+    my_interruption.dataPort = NORTH;
 	my_interruption.dataInterr =*(unsigned int *)data;
 	interruptionPush(my_interruption);		
     }else{
@@ -487,13 +512,15 @@ PPM_PACKETNET_CB(dataNorth) {
 }
 
 PPM_PACKETNET_CB(dataSouth) {
+	bhmMessage("INFO","CALLBACK","dataSouth");
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(SOUTH, flit);
-    struct interruption my_interruption;
+    interruption my_interruption;
     if(interruptionActive){
     	my_interruption.dataPort = SOUTH;
 	my_interruption.dataInterr =*(unsigned int *)data;
+	bhmMessage("INFO","dataSouth","ARMAZENANDO INTERRUPCAO da porta %d e dado %d",my_interruption.dataPort,my_interruption.dataInterr >> 24);
 	interruptionPush(my_interruption);		
     }else{
           runTick(SOUTH);
@@ -501,10 +528,11 @@ PPM_PACKETNET_CB(dataSouth) {
 }
 
 PPM_PACKETNET_CB(dataWest) {
+	bhmMessage("INFO","CALLBACK","dataWest");
     unsigned int flit = *(unsigned int *)data;
     // Stores the new incoming flit
     bufferPush(WEST, flit);
-    struct interruption my_interruption;
+    interruption my_interruption;
     if(interruptionActive){
     	my_interruption.dataPort = WEST;
 	my_interruption.dataInterr =*(unsigned int *)data;
@@ -533,17 +561,18 @@ PPM_REG_READ_CB(rxRead) {
 
 PPM_REG_WRITE_CB(rxWrite) {
     //unsigned int flit = *(unsigned int *)data;
-    //bhmMessage("INFO", "WRITE", "Porta Local recebeu o flit: %d\n",data>>24);
+    bhmMessage("INFO", "WRITE", "Porta Local recebeu o flit: %d\n",data>>24);
     // Stores the new incoming flit
+    bhmMessage("INFO","CALLBACK","LOCAL");
     bufferPush(LOCAL, data);
     *(Uns32*)user = data;
- struct interruption my_interruption;
+    interruption my_interruption;
     if(interruptionActive){
-    	my_interruption.dataPort = WEST;
+    	my_interruption.dataPort = LOCAL;
 	my_interruption.dataInterr =*(unsigned int *)data;
 	interruptionPush(my_interruption);		
     }else{
-          runTick(WEST);
+          runTick(LOCAL);
     } 
 }
 
@@ -565,14 +594,16 @@ PPM_REG_READ_CB(txRead) {
     // Once that the IP reads the flit, turn down the interruption 
     ppmWriteNet(handles.INTTC, 0); 
     int i,qtdInterruptions;
-    struct interruption nextInterruption;
+    interruption nextInterruption;
     bhmMessage("INFO", "txRead", "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<dado lido - interrupcao removida");
 
     interruptionActive = 0;
     qtdInterruptions = fifo_last;
+    bhmMessage("INFO","txRead","QUANTIDADE DE INTERRUPCOES = %d",qtdInterruptions);
     for(i=0;i<qtdInterruptions;i++){
-	nextInterruption = interruptionPull();
-	runTick(nextInterruption.dataPort);
+		nextInterruption = interruptionPull();
+		bhmMessage("INFO","txRead","DEZARMAZENANDO INTERRUPCAO DA PORTA %d e dado %d", nextInterruption.dataPort, nextInterruption.dataInterr >> 24);
+		runTick(nextInterruption.dataPort);
    }
 
    fifo_last = 0;
