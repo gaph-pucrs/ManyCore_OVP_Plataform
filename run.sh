@@ -22,7 +22,7 @@ cd whnoc
 sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
 cd ..
 cd ticker
-# Ticker scripts
+./tickerGenerator.sh $X $Y
 cd ../..
 
 N=$(($N-1))
