@@ -24,4 +24,7 @@
 
 #define N_PES 25
 
-
+//Ticks
+#define TICK 0
+#define TICK_OFF 1
+#define TICK_ON 5

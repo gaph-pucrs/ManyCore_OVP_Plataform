@@ -45,8 +45,18 @@ unsigned int priority[N_PORTS] = {0,0,0,0,0};
 /////////////////////// FUNCTIONS //////////////////////////
 ////////////////////////////////////////////////////////////
 
+void turn_TickOn(){
+    unsigned int inftick = TICK_ON;
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
+}
+
+void turn_tickOff(){
+    unsigned int inftick = TICK_OFF;
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
+}
+
 void informTick(){
-    unsigned int inftick = 0;
+    unsigned int inftick = TICK;
     ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
 }
 
@@ -131,6 +141,9 @@ void bufferPush(unsigned int port, unsigned int flit){
         last[port] = 0;
     }
 
+    // Inform the ticker that this router has something to send
+    turn_TickOn();
+
     // Update the buffer status
     bufferStatusUpdate(port);
 }
@@ -160,6 +173,11 @@ unsigned int bufferPop(unsigned int port){
 
         // Inform that the next flit will be a header
         flitCount[port] = HEADER;
+
+        // If every buffer is empty this router does not need to be ticked
+        if(flitCount[EAST]==HEADER && flitCount[WEST]==HEADER && flitCount[NORTH]==HEADER && flitCount[SOUTH]==HEADER && flitCount[LOCAL]==HEADER){
+            turn_tickOff();
+        }
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCount[port] == SIZE){
