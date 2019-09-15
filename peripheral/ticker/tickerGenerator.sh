@@ -47,10 +47,10 @@ echo "" >> ticker.c
 echo "unsigned int tickMap[N_PES];" >> ticker.c
 echo "" >> ticker.c
 echo "void runTicks(){" >> ticker.c
-echo "    unsigned int tick = 0;" ticker.c
-for i in $(seq 0 $N);
+echo "    unsigned int tick = 0;" >> ticker.c
+for i in $(seq 0 $N)
 do
-    echo"    if(tickMap["$i"] == TICK_ON) ppmPacketnetWrite(handles.tickPort"$i", &tick, sizeof(tick));" >> ticker.c
+    echo "    if(tickMap["$i"] == TICK_ON) ppmPacketnetWrite(handles.tickPort"$i", &tick, sizeof(tick));" >> ticker.c
 done
 echo "}" >> ticker.c
 echo "" >> ticker.c
@@ -63,7 +63,7 @@ echo "        tickMap[router] = status;" >> ticker.c
 echo "    }" >> ticker.c
 echo "}" >> ticker.c
 echo "" >> ticker.c
-for i in $(seq 0 $N);
+for i in $(seq 0 $N)
 do
     echo "PPM_PACKETNET_CB(tick"$i") {" >> ticker.c
     echo "    unsigned int status = *(unsigned int *)data;" >> ticker.c

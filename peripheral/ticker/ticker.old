@@ -1,7 +1,17 @@
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//                W R I T T E N   B Y   I M P E R A S   I G E N
+//
+//                             Version 20170201.0
+//
+////////////////////////////////////////////////////////////////////////////////
+
 #include "ticker.igen.h"
 #include "../whnoc/noc.h"
+//////////////////////////////// Callback stubs ////////////////////////////////
 
-unsigned int tickMap[N_PES];
+unsigned int tickMap[N_PES] = {TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF};
 
 void runTicks(){
     unsigned int tick = 0;
@@ -51,14 +61,89 @@ PPM_PACKETNET_CB(tick1) {
     statusUpdate(1, status);
 }
 
+PPM_PACKETNET_CB(tick10) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(10, status);
+}
+
+PPM_PACKETNET_CB(tick11) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(11, status);   
+}
+
+PPM_PACKETNET_CB(tick12) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(12, status); 
+}
+
+PPM_PACKETNET_CB(tick13) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(13, status);
+}
+
+PPM_PACKETNET_CB(tick14) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(14, status); 
+}
+
+PPM_PACKETNET_CB(tick15) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(15, status); 
+}
+
+PPM_PACKETNET_CB(tick16) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(16, status); 
+}
+
+PPM_PACKETNET_CB(tick17) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(17, status);    
+}
+
+PPM_PACKETNET_CB(tick18) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(18, status); 
+}
+
+PPM_PACKETNET_CB(tick19) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(19, status); 
+}
+
 PPM_PACKETNET_CB(tick2) {
     unsigned int status = *(unsigned int *)data;
-    statusUpdate(2, status);
+    statusUpdate(2, status);  
+}
+
+PPM_PACKETNET_CB(tick20) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(20, status);  
+}
+
+PPM_PACKETNET_CB(tick21) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(21, status);  
+}
+
+PPM_PACKETNET_CB(tick22) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(22, status);     
+}
+
+PPM_PACKETNET_CB(tick23) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(23, status);    
+}
+
+PPM_PACKETNET_CB(tick24) {
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(24, status);     
 }
 
 PPM_PACKETNET_CB(tick3) {
     unsigned int status = *(unsigned int *)data;
-    statusUpdate(3, status);
+    statusUpdate(3, status);     
 }
 
 PPM_PACKETNET_CB(tick4) {
@@ -68,7 +153,7 @@ PPM_PACKETNET_CB(tick4) {
 
 PPM_PACKETNET_CB(tick5) {
     unsigned int status = *(unsigned int *)data;
-    statusUpdate(5, status);
+    statusUpdate(5, status);  
 }
 
 PPM_PACKETNET_CB(tick6) {
@@ -91,87 +176,16 @@ PPM_PACKETNET_CB(tick9) {
     statusUpdate(9, status);
 }
 
-PPM_PACKETNET_CB(tick10) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(10, status);
-}
-
-PPM_PACKETNET_CB(tick11) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(11, status);
-}
-
-PPM_PACKETNET_CB(tick12) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(12, status);
-}
-
-PPM_PACKETNET_CB(tick13) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(13, status);
-}
-
-PPM_PACKETNET_CB(tick14) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(14, status);
-}
-
-PPM_PACKETNET_CB(tick15) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(15, status);
-}
-
-PPM_PACKETNET_CB(tick16) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(16, status);
-}
-
-PPM_PACKETNET_CB(tick17) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(17, status);
-}
-
-PPM_PACKETNET_CB(tick18) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(18, status);
-}
-
-PPM_PACKETNET_CB(tick19) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(19, status);
-}
-
-PPM_PACKETNET_CB(tick20) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(20, status);
-}
-
-PPM_PACKETNET_CB(tick21) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(21, status);
-}
-
-PPM_PACKETNET_CB(tick22) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(22, status);
-}
-
-PPM_PACKETNET_CB(tick23) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(23, status);
-}
-
-PPM_PACKETNET_CB(tick24) {
-    unsigned int status = *(unsigned int *)data;
-    statusUpdate(24, status);
-}
-
 PPM_CONSTRUCTOR_CB(constructor) {
+    // YOUR CODE HERE (pre constructor)
     periphConstructor();
+    // YOUR CODE HERE (post constructor)
 }
 
 PPM_DESTRUCTOR_CB(destructor) {
+    // YOUR CODE HERE (destructor)
 }
+
 
 PPM_SAVE_STATE_FN(peripheralSaveState) {
     bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
@@ -180,3 +194,4 @@ PPM_SAVE_STATE_FN(peripheralSaveState) {
 PPM_RESTORE_STATE_FN(peripheralRestoreState) {
     bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
 }
+
