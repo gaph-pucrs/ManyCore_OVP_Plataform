@@ -10,133 +10,169 @@
 #include "ticker.igen.h"
 //////////////////////////////// Callback stubs ////////////////////////////////
 
+unsigned int tickMap[N_PES] = {TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF};
+
 void runTicks(){
     unsigned int tick = 0;
-    ppmPacketnetWrite(handles.tickPort0, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort1, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort2, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort3, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort4, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort5, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort6, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort7, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort8, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort9, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort10, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort11, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort12, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort13, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort14, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort15, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort16, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort17, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort18, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort19, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort20, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort21, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort22, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort23, &tick, sizeof(tick));
-    ppmPacketnetWrite(handles.tickPort24, &tick, sizeof(tick));
+    if(tickMap[0] == TICK_ON) ppmPacketnetWrite(handles.tickPort0, &tick, sizeof(tick));
+    if(tickMap[1] == TICK_ON) ppmPacketnetWrite(handles.tickPort1, &tick, sizeof(tick));
+    if(tickMap[2] == TICK_ON) ppmPacketnetWrite(handles.tickPort2, &tick, sizeof(tick));
+    if(tickMap[3] == TICK_ON) ppmPacketnetWrite(handles.tickPort3, &tick, sizeof(tick));
+    if(tickMap[4] == TICK_ON) ppmPacketnetWrite(handles.tickPort4, &tick, sizeof(tick));
+    if(tickMap[5] == TICK_ON) ppmPacketnetWrite(handles.tickPort5, &tick, sizeof(tick));
+    if(tickMap[6] == TICK_ON) ppmPacketnetWrite(handles.tickPort6, &tick, sizeof(tick));
+    if(tickMap[7] == TICK_ON) ppmPacketnetWrite(handles.tickPort7, &tick, sizeof(tick));
+    if(tickMap[8] == TICK_ON) ppmPacketnetWrite(handles.tickPort8, &tick, sizeof(tick));
+    if(tickMap[9] == TICK_ON) ppmPacketnetWrite(handles.tickPort9, &tick, sizeof(tick));
+    if(tickMap[10] == TICK_ON) ppmPacketnetWrite(handles.tickPort10, &tick, sizeof(tick));
+    if(tickMap[11] == TICK_ON) ppmPacketnetWrite(handles.tickPort11, &tick, sizeof(tick));
+    if(tickMap[12] == TICK_ON) ppmPacketnetWrite(handles.tickPort12, &tick, sizeof(tick));
+    if(tickMap[13] == TICK_ON) ppmPacketnetWrite(handles.tickPort13, &tick, sizeof(tick));
+    if(tickMap[14] == TICK_ON) ppmPacketnetWrite(handles.tickPort14, &tick, sizeof(tick));
+    if(tickMap[15] == TICK_ON) ppmPacketnetWrite(handles.tickPort15, &tick, sizeof(tick));
+    if(tickMap[16] == TICK_ON) ppmPacketnetWrite(handles.tickPort16, &tick, sizeof(tick));
+    if(tickMap[17] == TICK_ON) ppmPacketnetWrite(handles.tickPort17, &tick, sizeof(tick));
+    if(tickMap[18] == TICK_ON) ppmPacketnetWrite(handles.tickPort18, &tick, sizeof(tick));
+    if(tickMap[19] == TICK_ON) ppmPacketnetWrite(handles.tickPort19, &tick, sizeof(tick));
+    if(tickMap[20] == TICK_ON) ppmPacketnetWrite(handles.tickPort20, &tick, sizeof(tick));
+    if(tickMap[21] == TICK_ON) ppmPacketnetWrite(handles.tickPort21, &tick, sizeof(tick));
+    if(tickMap[22] == TICK_ON) ppmPacketnetWrite(handles.tickPort22, &tick, sizeof(tick));
+    if(tickMap[23] == TICK_ON) ppmPacketnetWrite(handles.tickPort23, &tick, sizeof(tick));
+    if(tickMap[24] == TICK_ON) ppmPacketnetWrite(handles.tickPort24, &tick, sizeof(tick));
+}
+
+void statusUpdate(unsigned int router, unsigned int status){
+    if(status == TICK){
+        runTicks();
+    }
+    else{
+        tickMap[router] = status;
+    }
 }
 
 PPM_PACKETNET_CB(tick0) {
-    runTicks();
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(0, status);
 }
 
 PPM_PACKETNET_CB(tick1) {
-    runTicks();   
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(1, status);
 }
 
 PPM_PACKETNET_CB(tick10) {
-    runTicks();    
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(10, status);
 }
 
 PPM_PACKETNET_CB(tick11) {
-    runTicks();    
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(11, status);   
 }
 
 PPM_PACKETNET_CB(tick12) {
-    runTicks();   
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(12, status); 
 }
 
 PPM_PACKETNET_CB(tick13) {
-    runTicks();   
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(13, status);
 }
 
 PPM_PACKETNET_CB(tick14) {
-    runTicks();   
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(14, status); 
 }
 
 PPM_PACKETNET_CB(tick15) {
-    runTicks();  
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(15, status); 
 }
 
 PPM_PACKETNET_CB(tick16) {
-    runTicks();  
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(16, status); 
 }
 
 PPM_PACKETNET_CB(tick17) {
-    runTicks();    
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(17, status);    
 }
 
 PPM_PACKETNET_CB(tick18) {
-    runTicks();  
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(18, status); 
 }
 
 PPM_PACKETNET_CB(tick19) {
-    runTicks();   
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(19, status); 
 }
 
 PPM_PACKETNET_CB(tick2) {
-    runTicks();    
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(2, status);  
 }
 
 PPM_PACKETNET_CB(tick20) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(20, status);  
 }
 
 PPM_PACKETNET_CB(tick21) {
-    runTicks();   
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(21, status);  
 }
 
 PPM_PACKETNET_CB(tick22) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(22, status);     
 }
 
 PPM_PACKETNET_CB(tick23) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(23, status);    
 }
 
 PPM_PACKETNET_CB(tick24) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(24, status);     
 }
 
 PPM_PACKETNET_CB(tick3) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(3, status);     
 }
 
 PPM_PACKETNET_CB(tick4) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(4, status);
 }
 
 PPM_PACKETNET_CB(tick5) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(5, status);  
 }
 
 PPM_PACKETNET_CB(tick6) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(6, status);
 }
 
 PPM_PACKETNET_CB(tick7) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(7, status);
 }
 
 PPM_PACKETNET_CB(tick8) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(8, status);
 }
 
 PPM_PACKETNET_CB(tick9) {
-    runTicks();     
+    unsigned int status = *(unsigned int *)data;
+    statusUpdate(9, status);
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {
