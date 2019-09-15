@@ -11,7 +11,7 @@
 #include "../whnoc/noc.h"
 //////////////////////////////// Callback stubs ////////////////////////////////
 
-unsigned int tickMap[N_PES];
+unsigned int tickMap[N_PES] = {TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF,TICK_OFF};
 
 void runTicks(){
     unsigned int tick = 0;
