@@ -101,10 +101,11 @@ int main(int argc, char **argv)
     for(i=2; i<110; i++){
         txPacket[i] = i+200;
     }
+    txPacket[22] = 4;
 
-    sendPckt();
-    
-
+    for(i=0;i<10;i++){
+        sendPckt();
+    }
     //========================
     // YOUR CODE HERE
     //========================

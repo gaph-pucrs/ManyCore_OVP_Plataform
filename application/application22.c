@@ -99,13 +99,12 @@ int main(int argc, char **argv)
     //========================
     // YOUR CODE HERE
     //========================
-
-    receivePckt();
-    LOG(">>>>>>>>> %d\n", rxPacket[15]);
-    packetConsumed();
-    receivePckt();
-    LOG(">>>>>>>>> %d\n", rxPacket[20]);
-    packetConsumed();
+    int i;
+    for(i=0;i<50;i++){
+        receivePckt();
+        LOG("-- %d\n", rxPacket[22]);
+        packetConsumed();
+    }
 
     LOG("Application ROUTER22 done!\n\n");
     return 1;

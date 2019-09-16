@@ -25,6 +25,9 @@
 #define N_PES 25
 
 //Ticks
-#define TICK 0
-#define TICK_OFF 1
-#define TICK_ON 5
+#define TICK        0
+#define TICK_OFF    0x0FF
+#define TICK_ON     0x011
+
+// PreBuffer
+#define PREBUFFER_SIZE  25000

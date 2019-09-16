@@ -51,7 +51,7 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*controlTx != GO){
-            LOG("\n %d \n", *control);
+            //LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
@@ -96,8 +96,19 @@ int main(int argc, char **argv)
     }
 
     //========================
-    // YOUR CODE HERE
-    //========================
+// Creating the tx packet
+    txPacket[0] = 0x24;
+    txPacket[1] = 100;
+    int i;
+    for(i=2; i<110; i++){
+        txPacket[i] = i;
+    }
+    txPacket[22] = 3;
+
+
+    for(i=0;i<10;i++){
+        sendPckt();
+    }    //========================
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;
