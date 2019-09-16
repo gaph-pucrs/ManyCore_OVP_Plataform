@@ -103,8 +103,12 @@ int main(int argc, char **argv)
     for(i=2; i<110; i++){
         txPacket[i] = i;
     }
+    txPacket[22] = 0;
 
-    sendPckt();
+
+    for(i=0;i<10;i++){
+        sendPckt();
+    }
     //========================
 
     LOG("Application ROUTER0 done!\n\n");

@@ -41,17 +41,22 @@ unsigned int packetStatus[N_PORTS] = {ND,ND,ND,ND,ND}; //TODO
 // Priority list
 unsigned int priority[N_PORTS] = {0,0,0,0,0};
 
+// Tick Status
+unsigned int myTickStatus = TICK_OFF;
+
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
 ////////////////////////////////////////////////////////////
 
 void turn_TickOn(){
     unsigned int inftick = TICK_ON;
+    myTickStatus = TICK_ON;
     ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
 }
 
-void turn_tickOff(){
+void turn_TickOff(){
     unsigned int inftick = TICK_OFF;
+    myTickStatus = TICK_OFF;
     ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
 }
 
@@ -142,10 +147,19 @@ void bufferPush(unsigned int port, unsigned int flit){
     }
 
     // Inform the ticker that this router has something to send
-    turn_TickOn();
+    if(myTickStatus == TICK_OFF) turn_TickOn();
 
     // Update the buffer status
     bufferStatusUpdate(port);
+}
+
+unsigned int isEmpty(unsigned int port){
+    if(last[port] != first[port]){
+        return 0; // no, it is not empty
+    }
+    else{
+        return 1; // yes, it is empty
+    }
 }
 
 unsigned int bufferPop(unsigned int port){
@@ -175,9 +189,12 @@ unsigned int bufferPop(unsigned int port){
         flitCount[port] = HEADER;
 
         // If every buffer is empty this router does not need to be ticked
-        if(flitCount[EAST]==HEADER && flitCount[WEST]==HEADER && flitCount[NORTH]==HEADER && flitCount[SOUTH]==HEADER && flitCount[LOCAL]==HEADER){
-            turn_tickOff();
+        if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){
+            turn_TickOff();
         }
+
+        // Reset it's priority
+        priority[port] = 0;
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCount[port] == SIZE){
@@ -188,15 +205,6 @@ unsigned int bufferPop(unsigned int port){
     bufferStatusUpdate(port);
     
     return value;
-}
-
-unsigned int isEmpty(unsigned int port){
-    if(last[port] != first[port]){
-        return 0; // no, it is not empty
-    }
-    else{
-        return 1; // yes, it is empty
-    }
 }
 
 unsigned int priorityCheck(){
@@ -216,7 +224,7 @@ unsigned int priorityCheck(){
         }
     }
     // Once one port is selected, then it's priority goes to zero.
-    priority[selected] = 0;
+    priority[selected] = 1;
 
     return selected;
 }
@@ -329,6 +337,7 @@ void runTick(){
 
 void controlUpdate(unsigned int port, unsigned int ctrlData){
     control[port] = ctrlData;
+    
 }
 
 
