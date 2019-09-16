@@ -15,12 +15,14 @@ localPort_regs_dataT localPort_regs_data;
 
 handlesT handles;
 
+
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
 // Test this variable to determine what diagnostics to output.
 // eg. if (diagnosticLevel >= 1) bhmMessage("I", "router", "Example");
 //     Predefined macros PSE_DIAG_LOW, PSE_DIAG_MEDIUM and PSE_DIAG_HIGH may be used
 Uns32 diagnosticLevel;
+
 
 /////////////////////////// Diagnostic level callback //////////////////////////
 
@@ -124,6 +126,7 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
 ///////////////////////////////////// Main /////////////////////////////////////
 
 int main(int argc, char *argv[]) {
+ //  int t = 1;
 
     ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
     {
@@ -131,11 +134,18 @@ int main(int argc, char *argv[]) {
         ppmDocAddText(doc2_node, "A OVP Wormhole Router");
     }
 
+
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
+    
+    //goTh = bhmCreateNamedEvent("start","go Threads");
+    //bhmPrintf("--------------------------------------------------------------->Evento criado!!!");
+    //handleInt = bhmCreateThread(intThread,0,"intThread",0);
+    //waitEnd = bhmCreateThread(endThread,0,"endThread",0);
+    //handleTh = bhmCreateThread(handleThread,0,"handleThread",0);
 
-    bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
+    //bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
     return 0;
 }
