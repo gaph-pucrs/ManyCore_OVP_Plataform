@@ -3,37 +3,39 @@
 
 unsigned int tickMap[N_PES];
 
+static unsigned int tickN = 0;
+
 void runTicks(){
-    unsigned int tick = 0;
-    if(tickMap[0] == TICK_ON) ppmPacketnetWrite(handles.tickPort0, &tick, sizeof(tick));
-    if(tickMap[1] == TICK_ON) ppmPacketnetWrite(handles.tickPort1, &tick, sizeof(tick));
-    if(tickMap[2] == TICK_ON) ppmPacketnetWrite(handles.tickPort2, &tick, sizeof(tick));
-    if(tickMap[3] == TICK_ON) ppmPacketnetWrite(handles.tickPort3, &tick, sizeof(tick));
-    if(tickMap[4] == TICK_ON) ppmPacketnetWrite(handles.tickPort4, &tick, sizeof(tick));
-    if(tickMap[5] == TICK_ON) ppmPacketnetWrite(handles.tickPort5, &tick, sizeof(tick));
-    if(tickMap[6] == TICK_ON) ppmPacketnetWrite(handles.tickPort6, &tick, sizeof(tick));
-    if(tickMap[7] == TICK_ON) ppmPacketnetWrite(handles.tickPort7, &tick, sizeof(tick));
-    if(tickMap[8] == TICK_ON) ppmPacketnetWrite(handles.tickPort8, &tick, sizeof(tick));
-    if(tickMap[9] == TICK_ON) ppmPacketnetWrite(handles.tickPort9, &tick, sizeof(tick));
-    if(tickMap[10] == TICK_ON) ppmPacketnetWrite(handles.tickPort10, &tick, sizeof(tick));
-    if(tickMap[11] == TICK_ON) ppmPacketnetWrite(handles.tickPort11, &tick, sizeof(tick));
-    if(tickMap[12] == TICK_ON) ppmPacketnetWrite(handles.tickPort12, &tick, sizeof(tick));
-    if(tickMap[13] == TICK_ON) ppmPacketnetWrite(handles.tickPort13, &tick, sizeof(tick));
-    if(tickMap[14] == TICK_ON) ppmPacketnetWrite(handles.tickPort14, &tick, sizeof(tick));
-    if(tickMap[15] == TICK_ON) ppmPacketnetWrite(handles.tickPort15, &tick, sizeof(tick));
-    if(tickMap[16] == TICK_ON) ppmPacketnetWrite(handles.tickPort16, &tick, sizeof(tick));
-    if(tickMap[17] == TICK_ON) ppmPacketnetWrite(handles.tickPort17, &tick, sizeof(tick));
-    if(tickMap[18] == TICK_ON) ppmPacketnetWrite(handles.tickPort18, &tick, sizeof(tick));
-    if(tickMap[19] == TICK_ON) ppmPacketnetWrite(handles.tickPort19, &tick, sizeof(tick));
-    if(tickMap[20] == TICK_ON) ppmPacketnetWrite(handles.tickPort20, &tick, sizeof(tick));
-    if(tickMap[21] == TICK_ON) ppmPacketnetWrite(handles.tickPort21, &tick, sizeof(tick));
-    if(tickMap[22] == TICK_ON) ppmPacketnetWrite(handles.tickPort22, &tick, sizeof(tick));
-    if(tickMap[23] == TICK_ON) ppmPacketnetWrite(handles.tickPort23, &tick, sizeof(tick));
-    if(tickMap[24] == TICK_ON) ppmPacketnetWrite(handles.tickPort24, &tick, sizeof(tick));
+    if(tickMap[0] == TICK_ON) ppmPacketnetWrite(handles.tickPort0, &tickN, sizeof(tickN));
+    if(tickMap[1] == TICK_ON) ppmPacketnetWrite(handles.tickPort1, &tickN, sizeof(tickN));
+    if(tickMap[2] == TICK_ON) ppmPacketnetWrite(handles.tickPort2, &tickN, sizeof(tickN));
+    if(tickMap[3] == TICK_ON) ppmPacketnetWrite(handles.tickPort3, &tickN, sizeof(tickN));
+    if(tickMap[4] == TICK_ON) ppmPacketnetWrite(handles.tickPort4, &tickN, sizeof(tickN));
+    if(tickMap[5] == TICK_ON) ppmPacketnetWrite(handles.tickPort5, &tickN, sizeof(tickN));
+    if(tickMap[6] == TICK_ON) ppmPacketnetWrite(handles.tickPort6, &tickN, sizeof(tickN));
+    if(tickMap[7] == TICK_ON) ppmPacketnetWrite(handles.tickPort7, &tickN, sizeof(tickN));
+    if(tickMap[8] == TICK_ON) ppmPacketnetWrite(handles.tickPort8, &tickN, sizeof(tickN));
+    if(tickMap[9] == TICK_ON) ppmPacketnetWrite(handles.tickPort9, &tickN, sizeof(tickN));
+    if(tickMap[10] == TICK_ON) ppmPacketnetWrite(handles.tickPort10, &tickN, sizeof(tickN));
+    if(tickMap[11] == TICK_ON) ppmPacketnetWrite(handles.tickPort11, &tickN, sizeof(tickN));
+    if(tickMap[12] == TICK_ON) ppmPacketnetWrite(handles.tickPort12, &tickN, sizeof(tickN));
+    if(tickMap[13] == TICK_ON) ppmPacketnetWrite(handles.tickPort13, &tickN, sizeof(tickN));
+    if(tickMap[14] == TICK_ON) ppmPacketnetWrite(handles.tickPort14, &tickN, sizeof(tickN));
+    if(tickMap[15] == TICK_ON) ppmPacketnetWrite(handles.tickPort15, &tickN, sizeof(tickN));
+    if(tickMap[16] == TICK_ON) ppmPacketnetWrite(handles.tickPort16, &tickN, sizeof(tickN));
+    if(tickMap[17] == TICK_ON) ppmPacketnetWrite(handles.tickPort17, &tickN, sizeof(tickN));
+    if(tickMap[18] == TICK_ON) ppmPacketnetWrite(handles.tickPort18, &tickN, sizeof(tickN));
+    if(tickMap[19] == TICK_ON) ppmPacketnetWrite(handles.tickPort19, &tickN, sizeof(tickN));
+    if(tickMap[20] == TICK_ON) ppmPacketnetWrite(handles.tickPort20, &tickN, sizeof(tickN));
+    if(tickMap[21] == TICK_ON) ppmPacketnetWrite(handles.tickPort21, &tickN, sizeof(tickN));
+    if(tickMap[22] == TICK_ON) ppmPacketnetWrite(handles.tickPort22, &tickN, sizeof(tickN));
+    if(tickMap[23] == TICK_ON) ppmPacketnetWrite(handles.tickPort23, &tickN, sizeof(tickN));
+    if(tickMap[24] == TICK_ON) ppmPacketnetWrite(handles.tickPort24, &tickN, sizeof(tickN));
 }
 
 void statusUpdate(unsigned int router, unsigned int status){
     if(status == TICK){
+        tickN = tickN + 1;
         runTicks();
     }
     else{

@@ -99,8 +99,9 @@ int main(int argc, char **argv)
 // Creating the tx packet
     txPacket[0] = 0x24;
     txPacket[1] = 100;
+    txPacket[2] = 0;
     int i;
-    for(i=2; i<110; i++){
+    for(i=3; i<110; i++){
         txPacket[i] = i;
     }
     txPacket[22] = 3;

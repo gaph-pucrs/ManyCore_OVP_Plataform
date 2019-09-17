@@ -102,7 +102,7 @@ int main(int argc, char **argv)
     int i;
     for(i=0;i<50;i++){
         receivePckt();
-        LOG("-- %d\n", rxPacket[22]);
+        LOG("-- %d -- total ticks: %d\n", rxPacket[22], rxPacket[2]);
         packetConsumed();
     }
 

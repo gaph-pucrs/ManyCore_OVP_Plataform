@@ -44,6 +44,8 @@ unsigned int priority[N_PORTS] = {0,0,0,0,0};
 // Tick Status
 unsigned int myTickStatus = TICK_OFF;
 unsigned int tickN = 0;
+unsigned int storeTick_enable = 0;
+unsigned int storeTick_port = ND;
 
 // PREBUFFER
 unsigned int PREBUFFER_packets[PREBUFFER_SIZE];
@@ -216,6 +218,9 @@ unsigned int bufferPop(unsigned int port){
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCount[port] == SIZE){
         flitCount[port] = value >> 24;
+        // Inform that in the next cicle it needs to store the ticke value
+        storeTick_enable = 1;
+        storeTick_port = port;
     }
     
     // Update the buffer status
@@ -277,6 +282,12 @@ void transmitt(struct handlesS handles){
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
                 flit = bufferPop(port);
+                // Stotes the total ticks inside the NoC in this flit
+                if(storeTick_port == port && storeTick_enable == 1){
+                    flit = tickN - flit;
+                    storeTick_enable = 0;
+                    storeTick_port = ND;
+                }
                 //bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d",(flit >> 24), port);               
                 txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                 localPort_regs_data.dataTxLocal.value = flit;
@@ -290,6 +301,12 @@ void transmitt(struct handlesS handles){
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                     flit = bufferPop(port);
+                    // Stotes the start tick time inside the packet
+                    if(storeTick_port == LOCAL && storeTick_enable == 1){
+                        flit = tickN;
+                        storeTick_enable = 0;
+                        storeTick_port = ND;
+                    }
                     //bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d",(flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
@@ -303,6 +320,12 @@ void transmitt(struct handlesS handles){
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                     flit = bufferPop(port);
+                    // Stotes the start tick time inside the packet
+                    if(storeTick_port == LOCAL && storeTick_enable == 1){
+                        flit = tickN;
+                        storeTick_enable = 0;
+                        storeTick_port = ND;
+                    }
                     //bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d", (flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
@@ -316,6 +339,12 @@ void transmitt(struct handlesS handles){
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                     flit = bufferPop(port);
+                    // Stotes the start tick time inside the packet
+                    if(storeTick_port == LOCAL && storeTick_enable == 1){
+                        flit = tickN;
+                        storeTick_enable = 0;
+                        storeTick_port = ND;
+                    }
                     //bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d", (flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
@@ -329,6 +358,12 @@ void transmitt(struct handlesS handles){
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                     flit = bufferPop(port);
+                    // Stotes the start tick time inside the packet
+                    if(storeTick_port == LOCAL && storeTick_enable == 1){
+                        flit = tickN;
+                        storeTick_enable = 0;
+                        storeTick_port = ND;
+                    }
                     //bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
@@ -387,7 +422,7 @@ void PREBUFFER_pop(){
 void runTick(){
     unsigned int port;
     //bhmMessage("INFO", "TICK", "Tick: %d", tickN);
-    tickN++;
+    //tickN++;
     // Send a flit from the PREBUFFER to the local buffer
     PREBUFFER_pop();
 
@@ -506,6 +541,7 @@ PPM_REG_WRITE_CB(txWrite) {
 
 PPM_PACKETNET_CB(tick) {
     //bhmMessage("INFO", "Ticker", "Tiked!");
+    tickN = *(unsigned int *)data;
     runTick();
 }
 
