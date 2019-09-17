@@ -35,7 +35,6 @@ echo "cd .." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
 echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
 echo "CROSS=OR1K" >> ovp_compiler.sh
-aaaaaaaaaaa
 echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc NOVLNV=1" >> ovp_compiler.sh

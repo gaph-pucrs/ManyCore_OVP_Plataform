@@ -87,14 +87,17 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x30;
+    *myAddress = 0x11;
 
-    *PEToSync = 0x30;
+    *PEToSync = 0x11;
     while(start != 1){
-	start = *SyncToPE >> 24;
-     }
+	    start = *SyncToPE >> 24;
+    }
 
     //========================
+    // YOUR CODE HERE
+    //========================
+
     // Creating the tx packet
     txPacket[0] = 0x00;
     txPacket[1] = 1;
@@ -106,9 +109,7 @@ int main(int argc, char **argv)
         packetConsumed();
         sendPckt();
     }
-    //========================
 
-    
 
     LOG("Application ROUTER3 done!\n\n");
     return 1;

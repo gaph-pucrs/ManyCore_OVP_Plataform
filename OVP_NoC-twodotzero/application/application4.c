@@ -25,7 +25,7 @@ void interruptHandler(void) {
    if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *control = ACK;
+        *control = ACK; 
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
@@ -47,11 +47,11 @@ void interruptHandler(void) {
 
 void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
-    volatile unsigned int *control = ROUTER_BASE + 0x3; // controlRxLocal
+    volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
-        while(*control != GO){
-            LOG("\n %d \n", *control);
+        while(*controlTx != GO){
+            //LOG("\n %d \n", *controlTx);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
@@ -60,6 +60,7 @@ void sendPckt(){
 }
 
 void receivePckt(){
+    while(*control!=STALL){}
     while(interrupt!=1){}
 }
 
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
-    LOG("Starting ROUTER3 application! \n\n");
+    LOG("Starting ROUTER4 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -87,29 +88,28 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x30;
+    *myAddress = 0x40;
 
-    *PEToSync = 0x30;
+    *PEToSync = 0x40;
     while(start != 1){
-	start = *SyncToPE >> 24;
-     }
+	    start = *SyncToPE >> 24;
+    }
 
-    //========================
-    // Creating the tx packet
-    txPacket[0] = 0x00;
-    txPacket[1] = 1;
+    txPacket[0] = 0x24;
+    txPacket[1] = 100;
     int i;
-    for(i=0; i<99; i++){
-        receivePckt();
-        LOG("11 - %d ---- Valor recebido: %d\n", i, rxPacket[2]);
-        txPacket[2] = rxPacket[2] + 1;
-        packetConsumed();
+    for(i=2; i<110; i++){
+        txPacket[i] = i+200;
+    }
+    txPacket[22] = 4;
+
+    for(i=0;i<10;i++){
         sendPckt();
     }
     //========================
+    // YOUR CODE HERE
+    //========================
 
-    
-
-    LOG("Application ROUTER3 done!\n\n");
+    LOG("Application ROUTER4 done!\n\n");
     return 1;
 }

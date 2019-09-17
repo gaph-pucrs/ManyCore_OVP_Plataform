@@ -876,3 +876,82 @@ ihwconnect -bus cpu23Bus -busslaveport ps -instancename bridge23 -loaddress 0x80
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge23 -loaddress 0x00000000 -hiaddress 0x00000007
 ihwconnect -bus cpu24Bus -busslaveport ps -instancename bridge24 -loaddress 0x80000014 -hiaddress 0x8000001B
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge24 -loaddress 0x00000000 -hiaddress 0x00000007
+
+ihwaddperipheral -instancename ticker -modelfile peripheral/ticker/pse.pse
+
+ihwaddpacketnet -instancename tick_0
+ihwconnect -instancename router0 -packetnetport tickPort -packetnet tick_0
+ihwconnect -instancename ticker -packetnetport tickPort0 -packetnet tick_0
+ihwaddpacketnet -instancename tick_1
+ihwconnect -instancename router1 -packetnetport tickPort -packetnet tick_1
+ihwconnect -instancename ticker -packetnetport tickPort1 -packetnet tick_1
+ihwaddpacketnet -instancename tick_2
+ihwconnect -instancename router2 -packetnetport tickPort -packetnet tick_2
+ihwconnect -instancename ticker -packetnetport tickPort2 -packetnet tick_2
+ihwaddpacketnet -instancename tick_3
+ihwconnect -instancename router3 -packetnetport tickPort -packetnet tick_3
+ihwconnect -instancename ticker -packetnetport tickPort3 -packetnet tick_3
+ihwaddpacketnet -instancename tick_4
+ihwconnect -instancename router4 -packetnetport tickPort -packetnet tick_4
+ihwconnect -instancename ticker -packetnetport tickPort4 -packetnet tick_4
+ihwaddpacketnet -instancename tick_5
+ihwconnect -instancename router5 -packetnetport tickPort -packetnet tick_5
+ihwconnect -instancename ticker -packetnetport tickPort5 -packetnet tick_5
+ihwaddpacketnet -instancename tick_6
+ihwconnect -instancename router6 -packetnetport tickPort -packetnet tick_6
+ihwconnect -instancename ticker -packetnetport tickPort6 -packetnet tick_6
+ihwaddpacketnet -instancename tick_7
+ihwconnect -instancename router7 -packetnetport tickPort -packetnet tick_7
+ihwconnect -instancename ticker -packetnetport tickPort7 -packetnet tick_7
+ihwaddpacketnet -instancename tick_8
+ihwconnect -instancename router8 -packetnetport tickPort -packetnet tick_8
+ihwconnect -instancename ticker -packetnetport tickPort8 -packetnet tick_8
+ihwaddpacketnet -instancename tick_9
+ihwconnect -instancename router9 -packetnetport tickPort -packetnet tick_9
+ihwconnect -instancename ticker -packetnetport tickPort9 -packetnet tick_9
+ihwaddpacketnet -instancename tick_10
+ihwconnect -instancename router10 -packetnetport tickPort -packetnet tick_10
+ihwconnect -instancename ticker -packetnetport tickPort10 -packetnet tick_10
+ihwaddpacketnet -instancename tick_11
+ihwconnect -instancename router11 -packetnetport tickPort -packetnet tick_11
+ihwconnect -instancename ticker -packetnetport tickPort11 -packetnet tick_11
+ihwaddpacketnet -instancename tick_12
+ihwconnect -instancename router12 -packetnetport tickPort -packetnet tick_12
+ihwconnect -instancename ticker -packetnetport tickPort12 -packetnet tick_12
+ihwaddpacketnet -instancename tick_13
+ihwconnect -instancename router13 -packetnetport tickPort -packetnet tick_13
+ihwconnect -instancename ticker -packetnetport tickPort13 -packetnet tick_13
+ihwaddpacketnet -instancename tick_14
+ihwconnect -instancename router14 -packetnetport tickPort -packetnet tick_14
+ihwconnect -instancename ticker -packetnetport tickPort14 -packetnet tick_14
+ihwaddpacketnet -instancename tick_15
+ihwconnect -instancename router15 -packetnetport tickPort -packetnet tick_15
+ihwconnect -instancename ticker -packetnetport tickPort15 -packetnet tick_15
+ihwaddpacketnet -instancename tick_16
+ihwconnect -instancename router16 -packetnetport tickPort -packetnet tick_16
+ihwconnect -instancename ticker -packetnetport tickPort16 -packetnet tick_16
+ihwaddpacketnet -instancename tick_17
+ihwconnect -instancename router17 -packetnetport tickPort -packetnet tick_17
+ihwconnect -instancename ticker -packetnetport tickPort17 -packetnet tick_17
+ihwaddpacketnet -instancename tick_18
+ihwconnect -instancename router18 -packetnetport tickPort -packetnet tick_18
+ihwconnect -instancename ticker -packetnetport tickPort18 -packetnet tick_18
+ihwaddpacketnet -instancename tick_19
+ihwconnect -instancename router19 -packetnetport tickPort -packetnet tick_19
+ihwconnect -instancename ticker -packetnetport tickPort19 -packetnet tick_19
+ihwaddpacketnet -instancename tick_20
+ihwconnect -instancename router20 -packetnetport tickPort -packetnet tick_20
+ihwconnect -instancename ticker -packetnetport tickPort20 -packetnet tick_20
+ihwaddpacketnet -instancename tick_21
+ihwconnect -instancename router21 -packetnetport tickPort -packetnet tick_21
+ihwconnect -instancename ticker -packetnetport tickPort21 -packetnet tick_21
+ihwaddpacketnet -instancename tick_22
+ihwconnect -instancename router22 -packetnetport tickPort -packetnet tick_22
+ihwconnect -instancename ticker -packetnetport tickPort22 -packetnet tick_22
+ihwaddpacketnet -instancename tick_23
+ihwconnect -instancename router23 -packetnetport tickPort -packetnet tick_23
+ihwconnect -instancename ticker -packetnetport tickPort23 -packetnet tick_23
+ihwaddpacketnet -instancename tick_24
+ihwconnect -instancename router24 -packetnetport tickPort -packetnet tick_24
+ihwconnect -instancename ticker -packetnetport tickPort24 -packetnet tick_24
+
