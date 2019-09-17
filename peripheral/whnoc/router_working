@@ -43,26 +43,10 @@ unsigned int priority[N_PORTS] = {0,0,0,0,0};
 
 // Tick Status
 unsigned int myTickStatus = TICK_OFF;
-unsigned int tickN = 0;
-
-// PREBUFFER
-unsigned int PREBUFFER_packets[PREBUFFER_SIZE];
-static unsigned int PREBUFFER_last = 0;
-static unsigned int PREBUFFER_first = 0;
-
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
 ////////////////////////////////////////////////////////////
-
-unsigned int PREBUFFER_isEmpty(){
-	if(PREBUFFER_first != (PREBUFFER_last)){
-		return 0;
-	}
-    else{
-		return 1;
-	}
-}
 
 void turn_TickOn(){
     unsigned int inftick = TICK_ON;
@@ -135,8 +119,7 @@ void bufferStatusUpdate(unsigned int port){
 
     // Transmitt the new buffer status to the neighbor
     if (port == LOCAL){
-        localStatus = status;
-        //localPort_regs_data.controlRxLocal.value = status;
+        localPort_regs_data.controlRxLocal.value = status;
     }
     else if (port == EAST){
         ppmPacketnetWrite(handles.portControlEast, &status, sizeof(status));
@@ -206,7 +189,7 @@ unsigned int bufferPop(unsigned int port){
         flitCount[port] = HEADER;
 
         // If every buffer is empty this router does not need to be ticked
-        if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && PREBUFFER_isEmpty()){
+        if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){
             turn_TickOff();
         }
 
@@ -240,6 +223,9 @@ unsigned int priorityCheck(){
             }
         }
     }
+    // Once one port is selected, then it's priority goes to zero.
+    priority[selected] = 1;
+
     return selected;
 }
 
@@ -247,7 +233,7 @@ void arbitration(unsigned int port){
     unsigned int header, to, checkport, allowed;
     // In the first place, verify if the port is not connected to any thing and has something to transmitt 
     // (THIS IS REDUNDANT!)
-    if(port != ND && routingTable[port] == ND && !isEmpty(port)){
+    if(routingTable[port] == ND && !isEmpty(port)){
         // Discover to wich port the packet must go
         header = buffers[port][first[port]];
         to = XYrouting(myAddress, header);
@@ -260,9 +246,6 @@ void arbitration(unsigned int port){
         }
         if(allowed == 1){
             routingTable[port] = to;
-            // Once one port is attended, then reset it's priority.
-            priority[port] = 1;
-            //bhmMessage("INFo","ARBRITATION","port %d routed to: %d",port, to);
         }
     }
 }
@@ -338,68 +321,26 @@ void transmitt(struct handlesS handles){
     }
 }
 
-void controlUpdate(unsigned int port, unsigned int ctrlData){
-    control[port] = ctrlData;
-}
-
-
-void PREBUFFER_statusUpdate(){
-    unsigned int status;
-    if((PREBUFFER_first == 0 && PREBUFFER_last == PREBUFFER_SIZE-1) || (PREBUFFER_first == (PREBUFFER_last+1))){
-        status = STALL;
-    }
-    else{
-        status = GO;
-    }
-    localPort_regs_data.controlRxLocal.value = status;
-}
-
-void PREBUFFER_push(unsigned int newFlit){
-    PREBUFFER_packets[PREBUFFER_last] = newFlit;
-    //bhmMessage("INFO","PUSH", "Pushing %d to DMIN",PREBUFFER_packets[PREBUFFER_last]>>24);
-    if(PREBUFFER_last < PREBUFFER_SIZE-1){
-        PREBUFFER_last++;
-    }
-    else if(PREBUFFER_last == PREBUFFER_SIZE-1){
-        PREBUFFER_last = 0;
-    }
-    if(myTickStatus==TICK_OFF) turn_TickOn();
-    PREBUFFER_statusUpdate();
-}
-
-void PREBUFFER_pop(){
-    if(PREBUFFER_last != PREBUFFER_first && localStatus == GO){
-        bufferPush(LOCAL, PREBUFFER_packets[PREBUFFER_first]);
-        //bhmMessage("INFO","POP", "Popping %d to local",PREBUFFER_packets[PREBUFFER_first]>>24);
-        // first++
-        if(PREBUFFER_first < PREBUFFER_SIZE-1){
-            PREBUFFER_first++;
-        }
-        else if(PREBUFFER_first == PREBUFFER_SIZE-1){
-            PREBUFFER_first = 0;
-        }
-        PREBUFFER_statusUpdate();
-    }
-}
-
-
 
 void runTick(){
     unsigned int port;
-    //bhmMessage("INFO", "TICK", "Tick: %d", tickN);
-    tickN++;
-    // Send a flit from the PREBUFFER to the local buffer
-    PREBUFFER_pop();
 
     // Defines which port will be attended by the arbiter
     port = priorityCheck();
-    
+
     // Runs the arbitration for the selected port
     arbitration(port);
 
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
     transmitt(handles);
 }
+
+void controlUpdate(unsigned int port, unsigned int ctrlData){
+    control[port] = ctrlData;
+    
+}
+
+
 //////////////////////////////// Callback stubs ////////////////////////////////
 
 
@@ -476,8 +417,7 @@ PPM_REG_READ_CB(rxRead) {
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
-    PREBUFFER_push(data);
-    //bufferPush(LOCAL, data);
+    bufferPush(LOCAL, data);
     *(Uns32*)user = data;
 }
 
