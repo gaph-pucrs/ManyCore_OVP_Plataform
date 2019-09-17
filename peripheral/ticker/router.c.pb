@@ -41,11 +41,43 @@ unsigned int packetStatus[N_PORTS] = {ND,ND,ND,ND,ND}; //TODO
 // Priority list
 unsigned int priority[N_PORTS] = {0,0,0,0,0};
 
-unsigned int runTickAgain = 0;
+// Tick Status
+unsigned int myTickStatus = TICK_OFF;
+
+// PreBuffer
+unsigned int preBuffer[PREBUFFER_SIZE];
+unsigned int pb_last = 0;
+unsigned int pb_first = 0;
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
 ////////////////////////////////////////////////////////////
+
+unsigned int pb_IsEmpty(){
+	if(pb_first != pb_last){
+		return 0; // no, it is not empty
+    }
+    else{
+        return 1; // yes, it is empty
+	}
+}
+
+void turn_TickOn(){
+    unsigned int inftick = TICK_ON;
+    myTickStatus = TICK_ON;
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
+}
+
+void turn_TickOff(){
+    unsigned int inftick = TICK_OFF;
+    myTickStatus = TICK_OFF;
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
+}
+
+void informTick(){
+    unsigned int inftick = TICK;
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
+}
 
 // Extract the Y position for a given address
 unsigned int positionY(unsigned int address){
@@ -66,8 +98,6 @@ unsigned int positionX(unsigned int address){
 // Calculates the output port for a given local address and a destination address
 // using a XY routing algorithm
 unsigned int XYrouting(unsigned int current, unsigned int dest){
-    //bhmMessage("I", "XYRouting", "Local %d -- Dest %d\n",current, destination);
-    //bhmMessage("I", "XYRouting", "LocalX %d -- LocalY %d  ---- DestX %d -- DestY %d\n",positionX(current), positionY(current), positionX(destination), positionY(destination));
     unsigned int destination = dest >> 24;
     if(positionX(current) == positionX(destination) && positionY(current) == positionY(destination)){
         return LOCAL;
@@ -95,17 +125,16 @@ void bufferStatusUpdate(unsigned int port){
     // -- No available space in this buffer!
     if ((first[port] == 0 && last[port] == (BUFFER_SIZE-1)) || (first[port] == (last[port]+1))){
         status = STALL;
-        //bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está STALL", port);
     }
     // -- There is space in this buffer!
     else{
-        //bhmMessage("INFO", "StatusUpdate", ">>> Porta %d está GO", port);
         status = GO;
     }
 
     // Transmitt the new buffer status to the neighbor
     if (port == LOCAL){
-        localPort_regs_data.controlRxLocal.value = status;
+        localStatus = status;
+        //localPort_regs_data.controlRxLocal.value = status;
     }
     else if (port == EAST){
         ppmPacketnetWrite(handles.portControlEast, &status, sizeof(status));
@@ -118,13 +147,11 @@ void bufferStatusUpdate(unsigned int port){
     }
     else if (port == SOUTH){
         ppmPacketnetWrite(handles.portControlSouth, &status, sizeof(status));
-        //bhmMessage("INFO", "BufferStatusUpdate", "Status porta sul: %d", status);
     }
 
 }
 
 void bufferPush(unsigned int port, unsigned int flit){
-    //bhmMessage("INFO", "PUSHFuncion", ">>>>~~~~~~~~~~>>>>>> Porta %d recebeu flit %d", port, (flit >> 24));
     // Write a new flit in the buffer
     buffers[port][last[port]] = flit;
     if(last[port] < BUFFER_SIZE-1){
@@ -134,14 +161,24 @@ void bufferPush(unsigned int port, unsigned int flit){
         last[port] = 0;
     }
 
+    // Inform the ticker that this router has something to send
+    if(myTickStatus == TICK_OFF) turn_TickOn();
+
     // Update the buffer status
     bufferStatusUpdate(port);
 }
 
+unsigned int isEmpty(unsigned int port){
+    if(last[port] != first[port]){
+        return 0; // no, it is not empty
+    }
+    else{
+        return 1; // yes, it is empty
+    }
+}
+
 unsigned int bufferPop(unsigned int port){
     unsigned int value;
-
-    //int portas;
 
     // Read the first flit from the buffer
     value = buffers[port][first[port]];
@@ -157,8 +194,6 @@ unsigned int bufferPop(unsigned int port){
     // Decreases the flitCount
     flitCount[port] = flitCount[port] - 1;
     
-    //bhmMessage("INFO", "POP", "port: %d - flit count: %d",port, flitCount[port]);
-
     // If the flitCount goes to EMPTY then the transmission is done!
     if (flitCount[port] == EMPTY){
         
@@ -168,32 +203,23 @@ unsigned int bufferPop(unsigned int port){
         // Inform that the next flit will be a header
         flitCount[port] = HEADER;
 
-        runTickAgain = 1;
-        bhmMessage("INFO", "RotingTable", ">>>>>>>>>>>>>>>>>>>>>>>>>PORTA %d FREE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",port);
-        /*for(portas=EAST;portas<=LOCAL;portas++){
-            //bhmMessage("INFO", "ROUTINGTABLE", ">>> Porta %d esta vinculada a: %d", portas, routingTable[portas]);
-        }*/
-    
+        // If every buffer is empty this router does not need to be ticked
+        if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && pb_IsEmpty()){
+            turn_TickOff();
+        }
+
+        // Reset it's priority
+        priority[port] = 0;
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCount[port] == SIZE){
         flitCount[port] = value >> 24;
-       // bhmMessage("INFO", "GETSIZE", "Porta %d esta transmitindo pacote de: %d flits", port, flitCount[port]);
     }
     
     // Update the buffer status
-    //bufferStatusUpdate(port);
+    bufferStatusUpdate(port);
     
     return value;
-}
-
-unsigned int isEmpty(unsigned int port){
-    if(last[port] != first[port]){
-        return 0; // no, it is not empty
-    }
-    else{
-        return 1; // yes, it is empty
-    }
 }
 
 unsigned int priorityCheck(){
@@ -212,8 +238,8 @@ unsigned int priorityCheck(){
             }
         }
     }
-    // Once one port is selected, then it's priority goes to zero.
-    priority[selected] = 0;
+    // Once one port is selected, then reset it's priority
+    priority[selected] = 1;
 
     return selected;
 }
@@ -226,21 +252,15 @@ void arbitration(unsigned int port){
         // Discover to wich port the packet must go
         header = buffers[port][first[port]];
         to = XYrouting(myAddress, header);
-	    //bhmMessage("INFO","ARBITRATION", "ARBITRADO PARA : %d\n",to);
         // Verify if any other port is using the selected one
         allowed = 1;
         for(checkport = 0; checkport <= LOCAL; checkport++){
             if (routingTable[checkport] == to){
                 allowed = 0;
-                //bhmMessage("INFO", "SENDFLITS", "NOT ALLOWED! porta %d quer porta %d mas esta ocupado por porta %d",port, to, checkport);
             }
         }
         if(allowed == 1){
             routingTable[port] = to;
-            /* bhmMessage("INFO", "SENDFLITS", "Port %d routed to %d", port, routingTable[port]);
-            for(portas=EAST;portas<=LOCAL;portas++){
-                bhmMessage("INFO", "ROUTINGTABLE", ">>> Porta %d esta vinculada a: %d", portas, routingTable[portas]);
-            }*/
         }
     }
 }
@@ -254,9 +274,8 @@ void transmitt(struct handlesS handles){
 
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
-                //flit = bufferPop(port);
-                flit = buffers[port][first[port]]; // bufferpop moved to the read callback
-                bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d",(flit >> 24), port);               
+                flit = bufferPop(port);
+                //bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d",(flit >> 24), port);               
                 txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                 localPort_regs_data.dataTxLocal.value = flit;
                 ppmWriteNet(handles.INTTC, 1);
@@ -268,12 +287,10 @@ void transmitt(struct handlesS handles){
                 // there is flits to send AND 
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
-                //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                     flit = bufferPop(port);
-                    bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d",(flit >> 24));
+                    //bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d",(flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
-                    bufferStatusUpdate(port);
                 }
             }
 
@@ -283,12 +300,10 @@ void transmitt(struct handlesS handles){
                 // there is flits to send AND 
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
-                //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                     flit = bufferPop(port);
-                    bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d", (flit >> 24));
+                    //bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d", (flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
-                    bufferStatusUpdate(port);
                 }
             }
 
@@ -298,12 +313,10 @@ void transmitt(struct handlesS handles){
                 // there is flits to send AND 
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
-                //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                     flit = bufferPop(port);
-                    bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d", (flit >> 24));
+                    //bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d", (flit >> 24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
-                    bufferStatusUpdate(port);
                 }
             }
 
@@ -313,27 +326,84 @@ void transmitt(struct handlesS handles){
                 // there is flits to send AND 
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
-                //while(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                     flit = bufferPop(port);
-                    bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
-
+                    //bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
-                    bufferStatusUpdate(port);
                 }
             }
         }
     }
 }
 
+void controlUpdate(unsigned int port, unsigned int ctrlData){
+    control[port] = ctrlData;
+    
+}
 
-void runTick(){//struct handlesS handles){
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+// PRE-BUFFER
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+
+//unsigned int pb_IsEmpty();
+
+void pb_statusUpdate(){
+    unsigned int status;
+    if ((pb_first == 0 && pb_last == (PREBUFFER_SIZE-1)) || (pb_first == (pb_last+1))){
+        status = STALL;
+    }
+    else{
+        status = GO;
+    }
+    localPort_regs_data.controlRxLocal.value = status;
+}
+
+void pb_push(unsigned int newFlit){
+    preBuffer[pb_last] = newFlit;
+    bhmMessage("INFO", "PUSH", "Adicionando o dado: %d, pb_last: %d, pb_first: %d",newFlit>>24,pb_last,pb_first);
+    if(pb_last < PREBUFFER_SIZE-1){
+        pb_last++;
+    }
+    else if(pb_last == PREBUFFER_SIZE-1){
+        pb_last = 0;
+    }
+    if(myTickStatus == TICK_OFF){
+        turn_TickOn();
+    }
+    pb_statusUpdate();
+}
+
+void pb_pop(){
+    if(!pb_IsEmpty() && localStatus == GO){
+        bufferPush(LOCAL, preBuffer[pb_first]);
+        bhmMessage("INFO", "BPOP", "~~ data: %d, pb_last: %d, pb_first: %d",preBuffer[pb_first]>>24,pb_last,pb_first);
+
+        // first++
+        if(pb_first < PREBUFFER_SIZE-1){
+            pb_first++;
+        }
+        else if(pb_first == PREBUFFER_SIZE-1){
+            pb_first = 0;
+        }
+        pb_statusUpdate();
+    }
+}
+
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+// TICK!
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+
+void runTick(){
     unsigned int port;
-   // int teste;
-    //Send a flit from the DMNI to the local Buffer!
+    
+    bhmMessage("INFO", "TICK!", ">>> tick! topdata: %d, pb_last: %d, pb_first: %d",preBuffer[pb_first]>>24,pb_last,pb_first);
 
-
-   // bhmMessage("INFO","runTick", "teste --------> %d\n",teste);
+    // Send one flit from the prebuffer to the local port
+    pb_pop();
 
     // Defines which port will be attended by the arbiter
     port = priorityCheck();
@@ -343,38 +413,12 @@ void runTick(){//struct handlesS handles){
 
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
     transmitt(handles);
-
-    /*if(runTickAgain){
-        runTickAgain = 0;
-        runTick();
-    }*/
 }
-
-void controlUpdate(unsigned int port, unsigned int ctrlData){
-    // Stores the new neighbor status
-    /*control[port] = ctrlData;
-    bhmMessage("INFO", "control", "port %d Status: %d",port,ctrlData);
-    bhmMessage("INFO", "control", "port>%d runTick\n",port);
-    runTick();*/
-
-    if(control[port] == GO) {
-        control[port] = ctrlData;
-    }
-    else{
-        control[port] = ctrlData;
-        if(control[port] == GO){
-            bhmMessage("INFO", "control", "port>%d runTick\n",port);
-            runTick();
-        }
-    }
-}
-
 
 //////////////////////////////// Callback stubs ////////////////////////////////
 
 
 PPM_REG_READ_CB(addressRead) {
-    // YOUR CODE HERE (addressRead)
     return *(Uns32*)user;
 }
 
@@ -394,149 +438,79 @@ PPM_REG_WRITE_CB(addressWrite) {
 
 PPM_PACKETNET_CB(controlEast) {
     unsigned int ctrl = *(unsigned int *)data;
-    // Updates the neighbor port status
     controlUpdate(EAST, ctrl);
 }
 
 PPM_PACKETNET_CB(controlNorth) {
     unsigned int ctrl = *(unsigned int *)data;
-    // Updates the neighbor port status
     controlUpdate(NORTH, ctrl);
-    /*if(control[NORTH] != STALL){
-        bhmMessage("INFO", "controlNorth", "runTick\n");
-        runTick();
-    }*/    
 }
 
 PPM_PACKETNET_CB(controlSouth) {
     unsigned int ctrl = *(unsigned int *)data;
-    // Updates the neighbor port status
     controlUpdate(SOUTH, ctrl);
-    /*if(control[SOUTH] != STALL){
-        bhmMessage("INFO", "controlSouth", "runTick\n");
-        runTick();
-    }*/
 }
 
 PPM_PACKETNET_CB(controlWest) {
     unsigned int ctrl = *(unsigned int *)data;
-    // Updates the neighbor port status
     controlUpdate(WEST, ctrl);
-    /*if(control[WEST] != STALL){
-        bhmMessage("INFO", "controlWest", "runTick\n");
-        runTick();
-    }*/
 }
 
 
 
 PPM_PACKETNET_CB(dataEast) {
     unsigned int flit = *(unsigned int *)data;
-    // Stores the new incoming flit
     bufferPush(EAST, flit);
-    //bhmMessage("INFO", "PORTAEAST", "Chegou um flit! %d", flit>>24);
-    if(routingTable[EAST]!=LOCAL && control[routingTable[EAST]] == GO){
-        bhmMessage("INFO", "dataEast", "runTick\n");
-        runTick();
-    }
 }
 
 PPM_PACKETNET_CB(dataNorth) {
     unsigned int flit = *(unsigned int *)data;
-    // Stores the new incoming flit
     bufferPush(NORTH, flit);
-    //bhmMessage("INFO", "PORTANORTH", "Chegou um flit! %d", flit>>24);
-    if(routingTable[NORTH]!=LOCAL && control[routingTable[NORTH]] == GO){
-        bhmMessage("INFO", "dataNorth", "runTick\n");
-        runTick();
-    }
 }
 
 PPM_PACKETNET_CB(dataSouth) {
     unsigned int flit = *(unsigned int *)data;
-    // Stores the new incoming flit
     bufferPush(SOUTH, flit);
-    //bhmMessage("INFO", "PORTASOUTH", "Chegou um flit! %d", flit>>24);
-    if(routingTable[SOUTH]!=LOCAL && control[routingTable[SOUTH]] == GO){
-        bhmMessage("INFO", "dataSouth", "runTick\n");
-        runTick();
-    }
 }
 
 PPM_PACKETNET_CB(dataWest) {
     unsigned int flit = *(unsigned int *)data;
-    // Stores the new incoming flit
     bufferPush(WEST, flit);
-    //bhmMessage("INFO", "PORTAWEST", "Chegou um flit! %d", flit>>24);
-    if(routingTable[WEST]!=LOCAL && control[routingTable[WEST]] == GO){
-        bhmMessage("INFO", "dataWest", "runTick\n");
-        runTick();
-    }
 }
 
 PPM_REG_READ_CB(rxCtrlRead) {
-    // YOUR CODE HERE (rxCtrlRead)
-    //if(control[routingTable[LOCAL]] == GO){
-        //bhmMessage("INFO", "rxCtrlRead", "runTick\n");
-        runTick();
-    //}
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(rxCtrlWrite) {
-    // YOUR CODE HERE (rxCtrlWrite)
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(rxRead) {
-    // YOUR CODE HERE (rxRead)
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
-    //unsigned int flit = *(unsigned int *)data;
-    //bhmMessage("INFO", "WRITE", "Porta Local recebeu o flit: %d\n",data>>24);
-    // Stores the new incoming flit
-    bufferPush(LOCAL, data);
+    //bufferPush(LOCAL, data);
+    pb_push(data);
     *(Uns32*)user = data;
-    if(control[routingTable[LOCAL]] == GO){
-        bhmMessage("INFO", "rxWrite", "runTick\n");
-        runTick();
-    }
 }
 
 PPM_REG_READ_CB(txCtrlRead) {
-    // YOUR CODE HERE (txCtrlRead)
-    //bhmMessage("INFO", "txCtrlRead", "runTick\n");
-    //runTick();
+    informTick();
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(txCtrlWrite) {
-    //bhmMessage("INFO", "txCtrlW", "controle recebido!");
     txCtrl = data;
     txCtrl = txCtrl >> 24;
-    bhmMessage("INFO", "txWrite", "runTick\n");
-    runTick();
-    //bhmMessage("INFO", "txCtrlW", "controle recebido: %d\n", txCtrl);
+
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(txRead) {
-    // Once that the IP reads the flit, turn down the interruption 
     ppmWriteNet(handles.INTTC, 0);
-    
-    int interator, findPort = ND;
-    for(interator = 0; interator<N_PORTS; interator++){
-        if(routingTable[interator] == LOCAL){
-            findPort = interator;
-        }
-    }
-    bufferPop(findPort);
-    bufferStatusUpdate(findPort);
-    //bhmMessage("INFO", "txRead", "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<dado lido - interrupcao removida");
-    bhmMessage("INFO", "txRead", "runTick\n");
-    runTick();
+
     return *(Uns32*)user;
 }
 
@@ -546,9 +520,9 @@ PPM_REG_WRITE_CB(txWrite) {
 }
 
 PPM_PACKETNET_CB(tick) {
-    // YOUR CODE HERE (tick)
+    //bhmMessage("INFO", "Ticker", "Tiked!");
+    runTick();
 }
-
 
 PPM_CONSTRUCTOR_CB(constructor) {
     // YOUR CODE HERE (pre constructor)
