@@ -52,12 +52,17 @@ unsigned int priority[N_PORTS] = {0,0,0,0,0};
 
 // Tick Status
 unsigned int myTickStatus = TICK_OFF;
-unsigned int tickN = 0;
+
 
 // PREBUFFER
 unsigned int PREBUFFER_packets[PREBUFFER_SIZE];
 static unsigned int PREBUFFER_last = 0;
 static unsigned int PREBUFFER_first = 0;
+
+unsigned int contFlitsPacket[N_PORTS] = {0,0,0,0,0};
+unsigned int contPackets[N_PORTS] = {0,0,0,0,0};
+unsigned int contFlitsTotal[N_PORTS] = {0,0,0,0,0};
+unsigned int sizePacket = 0xFFFFFFF;
 
 
 ////////////////////////////////////////////////////////////
@@ -175,7 +180,7 @@ void bufferPush(unsigned int port, unsigned int flit){
     // Inform the ticker that this router has something to send
     if(myTickStatus == TICK_OFF){
 		turn_TickOn();
-		//packets[currentPacket].qtdInstructions+=3;
+
     }
 
     // Update the buffer status
@@ -367,8 +372,11 @@ void PREBUFFER_statusUpdate(){
 }
 
 void PREBUFFER_push(unsigned int newFlit){
+     contFlitsPacket[LOCAL]++;
+     contFlitsTotal[LOCAL]++;
     PREBUFFER_packets[PREBUFFER_last] = newFlit;
-    bhmMessage("INFO","PUSH", "Pushing %d to DMIN",PREBUFFER_packets[PREBUFFER_last]>>24);
+
+ //   bhmMessage("INFO","PUSH", "Pushing %d to DMIN",PREBUFFER_packets[PREBUFFER_last]>>24);
     if(PREBUFFER_last < PREBUFFER_SIZE-1){
         PREBUFFER_last++;
     }
@@ -379,6 +387,20 @@ void PREBUFFER_push(unsigned int newFlit){
 	turn_TickOn();
 	//packets[currentPacket]+=3;
      }
+
+     if(contFlitsPacket[LOCAL]==2){
+	sizePacket = newFlit;
+	
+	bhmMessage("INFO","PREBUFFER_push","sizePacket = %d\n", sizePacket >> 24);
+	bhmMessage("INFO","PREBUFFER_push","newFlit = %d\n", newFlit >> 24);
+		
+     }  else if (contFlitsPacket[LOCAL] == (sizePacket>>24)){
+	contPackets[LOCAL]++;
+	bhmMessage("INFO","PREBUFFER_push","packets = %d\n", contPackets[LOCAL]);
+	contFlitsPacket[LOCAL] = 0;
+    }
+
+
     PREBUFFER_statusUpdate();
 }
 
@@ -402,7 +424,7 @@ void PREBUFFER_pop(){
 void runTick(){
     unsigned int port;
     //bhmMessage("INFO", "TICK", "Tick: %d", tickN);
-    tickN++;
+
     // Send a flit from the PREBUFFER to the local buffer
     PREBUFFER_pop();
 
@@ -520,7 +542,10 @@ PPM_REG_WRITE_CB(txWrite) {
 }
 
 PPM_PACKETNET_CB(tick) {
-    //bhmMessage("INFO", "Ticker", "Tiked!");
+	//int nTick = *(unsigned int *) data;
+  //  bhmMessage("INFO", "Ticker", "Tick = %d",nTick);
+   // bhmMessage("INFO","TICK","----------------------->TICK");
+
     runTick();
 }
 

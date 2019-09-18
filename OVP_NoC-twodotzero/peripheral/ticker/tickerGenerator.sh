@@ -46,8 +46,12 @@ echo "#include \"../whnoc/noc.h\"" >> ticker.c
 echo "" >> ticker.c
 echo "unsigned int tickMap[N_PES];" >> ticker.c
 echo "" >> ticker.c
-echo "void runTicks(){" >> ticker.c
+echo "    unsigned int nTick = 0;" >> ticker.c
 echo "    unsigned int tick = 0;" >> ticker.c
+echo "void runTicks(){" >> ticker.c
+echo "         tick = nTick;" >> ticker.c
+
+
 for i in $(seq 0 $N)
 do
     echo "    if(tickMap["$i"] == TICK_ON) ppmPacketnetWrite(handles.tickPort"$i", &tick, sizeof(tick));" >> ticker.c
@@ -57,6 +61,8 @@ echo "" >> ticker.c
 echo "void statusUpdate(unsigned int router, unsigned int status){" >> ticker.c
 echo "    if(status == TICK){" >> ticker.c
 echo "        runTicks();" >> ticker.c
+echo "         nTick++; " >>ticker.c
+echo "         //bhmMessage(\"INFO\", \"ticker\",\"ticker %d\",nTick);" >> ticker.c
 echo "    }" >> ticker.c
 echo "    else{" >> ticker.c
 echo "        tickMap[router] = status;" >> ticker.c

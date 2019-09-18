@@ -13,16 +13,26 @@ typedef unsigned char Uns8;
 
 #define LOG(_FMT, ...)  printf( "Info " _FMT,  ## __VA_ARGS__)
 
+typedef struct {
+   unsigned int size;
+   unsigned int hopes;
+   unsigned int startTime;
+   unsigned int endTime;
+   unsigned int dest;
+   int *message;
+}packet;
+packet myPacket;
+
 volatile static Uns32 interrupt = 0; 
 volatile static Uns32 rxPacket[256];
 volatile static Uns32 rxPointer = 0;
-volatile static Uns32 txPointer = 0; 
+volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-   if (rxPointer == 0){
+    if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
         *control = ACK;
@@ -37,7 +47,7 @@ void interruptHandler(void) {
         rxPointer++;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-	     *control = STALL;
+	        *control = STALL;
         }
         else{
         	*control = ACK;
@@ -49,13 +59,30 @@ void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
     volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
-    while(txPointer < (txPacket[1] + 2)){
+    while(txPointer < (myPacket.size + 2)){
         while(*controlTx != GO){
             //LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
-        *txLocal = txPacket[txPointer];
-        txPointer++;
+
+	if(txPointer == 0){
+
+
+		*txLocal = myPacket.dest;
+		txPointer++;
+	}else if (txPointer == 1){
+
+        	*txLocal = myPacket.size + 5;
+        	txPointer++;
+	}else if((txPointer >=2)&& (txPointer <5)){
+
+		*txLocal = 0;
+		txPointer++;
+	} else {
+
+		*txLocal = myPacket.message[txPointer-5];
+		txPointer++;
+	} 
     }
 }
 
@@ -95,21 +122,23 @@ int main(int argc, char **argv)
 	    start = *SyncToPE >> 24;
     }
 
-    //========================
-    // Creating the tx packet
-    txPacket[0] = 0x24;
-    txPacket[1] = 100;
+
+    myPacket.size = 100;
+
+    myPacket.message = (int *)malloc(myPacket.size * sizeof(int));
+
+    myPacket.dest=0x24;
+    
     int i;
-    for(i=2; i<110; i++){
-        txPacket[i] = i;
+    for(i=0; i<myPacket.size; i++){
+        myPacket.message[i] = i;
     }
-    txPacket[22] = 0;
+    myPacket.message[17] = 0;
 
 
     for(i=0;i<10;i++){
         sendPckt();
-    }
-    //========================
+    }    //========================
 
     LOG("Application ROUTER0 done!\n\n");
     return 1;

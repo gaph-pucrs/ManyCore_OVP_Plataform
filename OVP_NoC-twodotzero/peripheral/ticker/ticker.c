@@ -3,8 +3,10 @@
 
 unsigned int tickMap[N_PES];
 
-void runTicks(){
+    unsigned int nTick = 0;
     unsigned int tick = 0;
+void runTicks(){
+         tick = nTick;
     if(tickMap[0] == TICK_ON) ppmPacketnetWrite(handles.tickPort0, &tick, sizeof(tick));
     if(tickMap[1] == TICK_ON) ppmPacketnetWrite(handles.tickPort1, &tick, sizeof(tick));
     if(tickMap[2] == TICK_ON) ppmPacketnetWrite(handles.tickPort2, &tick, sizeof(tick));
@@ -35,6 +37,8 @@ void runTicks(){
 void statusUpdate(unsigned int router, unsigned int status){
     if(status == TICK){
         runTicks();
+         nTick++; 
+         //bhmMessage("INFO", "ticker","ticker %d",nTick);
     }
     else{
         tickMap[router] = status;
