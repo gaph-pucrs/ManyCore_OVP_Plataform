@@ -39,7 +39,7 @@ unsigned int routingTable[N_PORTS] = {ND,ND,ND,ND,ND};
 unsigned int packetStatus[N_PORTS] = {ND,ND,ND,ND,ND}; //TODO
 
 // Priority list
-unsigned int priority[N_PORTS] = {0,0,0,0,0};
+unsigned int priority[N_PORTS] = {0,1,2,3,4};
 
 // Tick Status
 unsigned int myTickStatus = TICK_OFF;
