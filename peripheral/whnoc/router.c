@@ -209,7 +209,6 @@ unsigned int bufferPop(unsigned int port){
         if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && PREBUFFER_isEmpty()){
             turn_TickOff();
         }
-
         // Reset it's priority
         priority[port] = 0;
     }
@@ -256,6 +255,8 @@ void arbitration(unsigned int port){
         for(checkport = 0; checkport <= LOCAL; checkport++){
             if (routingTable[checkport] == to){
                 allowed = 0;
+                // If the port can't get routed, then turn it's priority down
+                if(priority[port]>5) priority[port] = priority[port] - 5;
             }
         }
         if(allowed == 1){
