@@ -50,13 +50,15 @@ void interruptHandler(void) {
 
     }
     else if (rxPointer ==2){
-//myPacket.startTime = *rxLocal;
+    myPacket.startTime = *rxLocal;
 	rxPacket[rxPointer] = *rxLocal;
 	//printf("tick quando entrou na noc = %d\n",*rxLocal);
 	rxPointer++;
 	*control = ACK;
      
-    } else{
+    
+    }else{
+    
 
 	//printf("---------------> else\n");
         rxPacket[rxPointer] = *rxLocal;
@@ -138,6 +140,7 @@ int main(int argc, char **argv)
         }*/
        // LOG("MY_PACKET START TIME = %d", myPacket.startTime);
         LOG("-- %d\n", rxPacket[22]);
+        LOG("Pacote levou %d ticks para trafegar na NoC", rxPacket[104]-myPacket.startTime);
         packetConsumed();
     }
 

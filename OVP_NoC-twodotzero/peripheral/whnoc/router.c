@@ -228,6 +228,7 @@ unsigned int bufferPop(unsigned int port){
 
         // Reset it's priority
         priority[port] = 0;
+        value = (nTick << 24);
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCount[port] == SIZE){
