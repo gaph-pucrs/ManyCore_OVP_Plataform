@@ -1,3 +1,5 @@
+#include <limits.h>
+
 // Cardinal ports 
 #define EAST 	0
 #define WEST 	1

@@ -59,7 +59,7 @@ void sendPckt(){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
     volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
-    while(txPointer < (myPacket.size + 2)){
+    while(txPointer < (myPacket.size + 5)){
         while(*controlTx != GO){
             //LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
@@ -72,7 +72,7 @@ void sendPckt(){
 		txPointer++;
 	}else if (txPointer == 1){
 
-        	*txLocal = myPacket.size + 5;
+        	*txLocal = myPacket.size + 3;
         	txPointer++;
 	}else if((txPointer >=2)&& (txPointer <5)){
 
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
     myPacket.message[17] = 0;
 
 
-    for(i=0;i<10;i++){
+    for(i=0;i<2;i++){
         sendPckt();
     }    //========================
 

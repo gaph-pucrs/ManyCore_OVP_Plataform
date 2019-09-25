@@ -30,7 +30,7 @@ for i in $(seq 0 $N);
 do
 	echo "imodeladdpacketnetport  \\" >> ticker.tcl
     echo "      -name tickPort"$i" \\" >> ticker.tcl
-    echo "      -maxbytes 4 \\" >> ticker.tcl
+    echo "      -maxbytes 8 \\" >> ticker.tcl
     echo "      -updatefunction tick"$i" \\" >> ticker.tcl
     echo "      -updatefunctionargument 0x00" >> ticker.tcl
     echo "" >> ticker.tcl
@@ -44,25 +44,30 @@ rm ticker.c.igen.stubs
 echo "#include \"ticker.igen.h\"" >> ticker.c
 echo "#include \"../whnoc/noc.h\"" >> ticker.c
 echo "" >> ticker.c
+echo "unsigned int TRANSMISSION = 0;" >> ticker.c
 echo "unsigned int tickMap[N_PES];" >> ticker.c
 echo "" >> ticker.c
-echo "    unsigned int nTick = 0;" >> ticker.c
-echo "    unsigned int tick = 0;" >> ticker.c
+echo "    unsigned long long int nTick = 0;" >> ticker.c
+echo "    unsigned long long int tick = 0;" >> ticker.c
 echo "void runTicks(){" >> ticker.c
 echo "         tick = nTick;" >> ticker.c
 
+echo " bhmMessage(\"INFO\",\"TICKERC\",\"TICK = %llu\", tick);" >> ticker.c
 
 for i in $(seq 0 $N)
 do
-    echo "    if(tickMap["$i"] == TICK_ON) ppmPacketnetWrite(handles.tickPort"$i", &tick, sizeof(tick));" >> ticker.c
+    echo "    if(tickMap["$i"] == TICK_ON) {" >> ticker.c
+    echo "             ppmPacketnetWrite(handles.tickPort"$i", &tick, sizeof(tick));" >> ticker.c
+    echo "}" >> ticker.c
+
 done
+
 echo "}" >> ticker.c
-echo "" >> ticker.c
 echo "void statusUpdate(unsigned int router, unsigned int status){" >> ticker.c
 echo "    if(status == TICK){" >> ticker.c
 echo "        runTicks();" >> ticker.c
 echo "         nTick++; " >>ticker.c
-echo "         //bhmMessage(\"INFO\", \"ticker\",\"ticker %d\",nTick);" >> ticker.c
+echo "         bhmMessage(\"INFO\", \"moduloticker\",\"ticker %llu\",nTick);" >> ticker.c
 echo "    }" >> ticker.c
 echo "    else{" >> ticker.c
 echo "        tickMap[router] = status;" >> ticker.c

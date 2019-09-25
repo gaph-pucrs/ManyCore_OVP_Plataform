@@ -22,25 +22,39 @@ volatile static Uns32 txPacket[256];
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-    //LOG("~~~~~~~~~~~~~~~~~>>>>>>>>>>>>>Interrupcao!\n");
+ //   LOG("~~~~~~~~~~~~~~~~~>>>>>>>>>>>>>Interrupcao!\n");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
+	printf("rxLocal = %d\n", *rxLocal);
         rxPointer++;
         *control = ACK;
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
+	printf("rxLocal = %d\n", *rxLocal);
         rxPointer++;
         *control = ACK;
     }
-    else{
+    else if (rxPointer ==2){
+
+	rxPacket[rxPointer] = *rxLocal;
+	printf("tick quando entrou na noc = %d\n",*rxLocal);
+	rxPointer++;
+	*control = ACK;
+     
+    } else{
+
+	//printf("---------------> else\n");
         rxPacket[rxPointer] = *rxLocal;
+	printf("msg = %d\n", *rxLocal);
         rxPointer++;
-        if(rxPointer >= (rxPacket[1] + 2)){
+        if(rxPointer >= rxPacket[1] + 2){
+	 //   printf("ENTROU NO IF");
             interrupt = 1;
 	        *control = STALL;
         }
         else{
+	//    printf("ENTROU NO SEGUNDO ELSE");
         	*control = ACK;
 	    }
     }
@@ -63,7 +77,8 @@ void sendPckt(){
 void receivePckt(){
     while(*control!=STALL){
     }
-    while(interrupt!=1){}
+    while(interrupt!=1){
+}
 }
 
 void packetConsumed(){
@@ -101,7 +116,7 @@ int main(int argc, char **argv)
     // YOUR CODE HERE
     //========================
     int i;
-    for(i=0;i<50;i++){
+    for(i=0;i<2;i++){
         receivePckt();
         LOG("-- %d\n", rxPacket[22]);
         packetConsumed();

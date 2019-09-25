@@ -22,10 +22,10 @@ volatile static Uns32 txPacket[256];
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-   if (rxPointer == 0){
+    if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
         rxPointer++;
-        *control = ACK; 
+        *control = ACK;
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
@@ -37,7 +37,7 @@ void interruptHandler(void) {
         rxPointer++;
         if(rxPointer >= (rxPacket[1] + 2)){
             interrupt = 1;
-	     *control = STALL;
+	        *control = STALL;
         }
         else{
         	*control = ACK;
@@ -51,7 +51,7 @@ void sendPckt(){
     txPointer = 0;
     while(txPointer < (txPacket[1] + 2)){
         while(*controlTx != GO){
-            //LOG("\n %d \n", *controlTx);
+            LOG("\n %d \n", *control);
             // Waiting for space in the router buffer
         }
         *txLocal = txPacket[txPointer];
@@ -95,17 +95,6 @@ int main(int argc, char **argv)
 	    start = *SyncToPE >> 24;
     }
 
-    txPacket[0] = 0x24;
-    txPacket[1] = 100;
-    int i;
-    for(i=2; i<110; i++){
-        txPacket[i] = i+200;
-    }
-    txPacket[22] = 4;
-
-    for(i=0;i<10;i++){
-        sendPckt();
-    }
     //========================
     // YOUR CODE HERE
     //========================
