@@ -9,16 +9,6 @@
 #include "router.igen.h"
 #include "noc.h"
 
-/*typedef struct {
-   unsigned int size;
-   unsigned int hopes;
-   unsigned int qtdInstructions;
-}packet;
-
-packet packets[100000];
-unsigned int currentPacket=0;
-*/
-
 // Local Address
 unsigned int myAddress = 0xFFFFFFFF;
 
@@ -27,9 +17,6 @@ unsigned int flitCount[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
 
 // Stores the current packet size
 unsigned int packetSize[N_PORTS] = {EMPTY,EMPTY,EMPTY,EMPTY,EMPTY};
-
-// One buffer for each port
-unsigned int buffers[N_PORTS][BUFFER_SIZE];
 
 // Buffer read/write control pointers
 unsigned int last[N_PORTS] = {0,0,0,0,0};
@@ -62,10 +49,11 @@ unsigned int contFlitsPacket[N_PORTS] = {0,0,0,0,0};
 unsigned int contPackets[N_PORTS] = {0,0,0,0,0};
 unsigned int contFlitsTotal[N_PORTS] = {0,0,0,0,0};
 unsigned int contFlitsPort[N_PORTS] = {0,0,0,0,0};
+
 unsigned int sizePacket = 0xFFFFFFF;
+
 unsigned long long int nTick = 0;
-unsigned long int currentTick[N_PORTS] = {0,0,0,0,0};
-unsigned int contWTick=0;
+
 typedef struct{
     unsigned int data;
     unsigned long long int inTime;
@@ -178,7 +166,6 @@ void bufferStatusUpdate(unsigned int port){
 
 void bufferPush(unsigned int port, unsigned int flit){
    // bhmMessage("INFO","BUFFERPUSH","PORT = %d e posicao do buffer = %d e %d",port,port,last[port]);
-    buffers[port][last[port]] = flit;
     flitsBuffer[port][last[port]].data = flit;
 
     if(last[port] < BUFFER_SIZE-1){
@@ -211,7 +198,7 @@ unsigned int bufferPop(unsigned int port){
     unsigned int value;
 
     // Read the first flit from the buffer
-    value = buffers[port][first[port]];
+    value = flitsBuffer[port][first[port]].data;
     //bhmMessage("INFO","buffer pop","VALORA SER ENVIADO = %d\n", value >> 24); 
    // bhmMessage("INFO","FLITCOUNT","FLITCOUNT  = %d\n", flitCount[port]);
     // Increments the "first" pointer
@@ -245,12 +232,12 @@ unsigned int bufferPop(unsigned int port){
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCount[port] == SIZE){
         flitCount[port] = value >> 24;
-	packetS = value >> 24;
+	//packetS = value >> 24;
 	
         //bhmMessage("INFO","BUFFERPOP","packetS = %d\n", packetS);
-    } else if(flitCount[port] == (packetS -2)){
+    //} else if(flitCount[port] == (packetS -2)){
 	//bhmMessage("INFO","BUFFER POP", "Value antigo = %d\n", value);
-	value = (unsigned int)nTick << 24;
+	//value = (unsigned int)nTick << 24;
        // bhmMessage("INFO","BUFFERPOP","nTick %d \n",nTick);
        // bhmMessage("INFO","BUFFERPOP","value %d \n",value);
 	//return (unsigned int)nTick;
@@ -289,7 +276,7 @@ void arbitration(unsigned int port){
     // (THIS IS REDUNDANT!)
     if(port != ND && routingTable[port] == ND && !isEmpty(port)){
         // Discover to wich port the packet must go
-        header = buffers[port][first[port]];
+        header = flitsBuffer[port][first[port]].data;
         to = XYrouting(myAddress, header);
         // Verify if any other port is using the selected one
         allowed = 1;
@@ -317,7 +304,7 @@ void transmitt(struct handlesS handles){
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
                 flit = bufferPop(port);
-                bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d",flit , port);               
+                bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d",flit >> 24 , port);               
                 txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                 localPort_regs_data.dataTxLocal.value = flit;
                 ppmWriteNet(handles.INTTC, 1);
@@ -411,22 +398,19 @@ void PREBUFFER_push(unsigned int newFlit){
 	//bhmMessage("INFO","PREBUFFER_push","newFlit = %d\n", newFlit >> 24);
 
  //   bhmMessage("INFO","PUSH", "Pushing %d to DMIN",PREBUFFER_packets[PREBUFFER_last]>>24);
-   
-   
-
+  // unsigned long long int testando = 184;
      	if(contFlitsPacket[LOCAL]==2){
 		sizePacket = newFlit;
 	
 		//bhmMessage("INFO","PREBUFFER_push","sizePacket = %d\n", sizePacket >> 24);
 		//bhmMessage("INFO","PREBUFFER_push","newFlit = %d\n\n", newFlit >> 24);
 		
-     	} else if(contFlitsPacket[LOCAL]==3){
-
-		newFlit = (unsigned int )nTick;
+   	} else if(contFlitsPacket[LOCAL]==3){
+     //   bhmMessage("INFO","PREBUFFER","----------------------->ALOOOOOO");
+        newFlit = (unsigned int)(nTick << 24);
+       
 	} else if (contFlitsPacket[LOCAL] == (sizePacket>>24) + 2){
 		contPackets[LOCAL]++;
-		//bhmMessage("INFO","PREBUFFER_push","packets = %d\n\n", contPackets[LOCAL]);
-       		 //bhmMessage("INFO","PREBUFFER_push","ultimo flit = %d\n\n", newFlit >> 24);
 		contFlitsPacket[LOCAL] = 0;
 	}
 

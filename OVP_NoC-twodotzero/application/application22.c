@@ -8,6 +8,16 @@
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
 #define SYNC_BASE ((unsigned int *) 0x80000014)
 
+typedef struct {
+   unsigned int size;
+   unsigned int hopes;
+   unsigned int startTime;
+   unsigned int endTime;
+   unsigned int dest;
+   int *message;
+}packet;
+packet myPacket;
+
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
 unsigned int contInstructions = 0;
@@ -25,20 +35,24 @@ void interruptHandler(void) {
  //   LOG("~~~~~~~~~~~~~~~~~>>>>>>>>>>>>>Interrupcao!\n");
     if (rxPointer == 0){
         rxPacket[rxPointer] = *rxLocal;
-	printf("rxLocal = %d\n", *rxLocal);
+//	printf("rxLocal = %d\n", *rxLocal);
         rxPointer++;
         *control = ACK;
+       // myPacket.dest = *rxLocal;
     }
     else if (rxPointer == 1){
         rxPacket[rxPointer] = *rxLocal;
-	printf("rxLocal = %d\n", *rxLocal);
+	//printf("rxLocal = %d\n", *rxLocal);
         rxPointer++;
         *control = ACK;
+    //    myPacket.size = *rxLocal;
+     //   myPacket.message = (int *)malloc(myPacket.size * sizeof(int));
+
     }
     else if (rxPointer ==2){
-
+//myPacket.startTime = *rxLocal;
 	rxPacket[rxPointer] = *rxLocal;
-	printf("tick quando entrou na noc = %d\n",*rxLocal);
+	//printf("tick quando entrou na noc = %d\n",*rxLocal);
 	rxPointer++;
 	*control = ACK;
      
@@ -46,7 +60,8 @@ void interruptHandler(void) {
 
 	//printf("---------------> else\n");
         rxPacket[rxPointer] = *rxLocal;
-	printf("msg = %d\n", *rxLocal);
+      //  myPacket.message[rxPointer] = *rxLocal;
+	//printf("msg = %d\n", *rxLocal);
         rxPointer++;
         if(rxPointer >= rxPacket[1] + 2){
 	 //   printf("ENTROU NO IF");
@@ -118,6 +133,10 @@ int main(int argc, char **argv)
     int i;
     for(i=0;i<2;i++){
         receivePckt();
+        /* for(i=0;i<100;i++){
+            printf("rxPacket = %d\n",myPacket.message[i]);
+        }*/
+       // LOG("MY_PACKET START TIME = %d", myPacket.startTime);
         LOG("-- %d\n", rxPacket[22]);
         packetConsumed();
     }

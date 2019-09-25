@@ -74,11 +74,15 @@ void sendPckt(){
 
         	*txLocal = myPacket.size + 3;
         	txPointer++;
-	}else if((txPointer >=2)&& (txPointer <5)){
+	}else if((txPointer >=2)&& (txPointer <4)){
 
 		*txLocal = 0;
 		txPointer++;
-	} else {
+    }else if ( txPointer == (myPacket.size + 4)){
+        *txLocal = 0;
+        txPointer++;
+
+    } else {
 
 		*txLocal = myPacket.message[txPointer-5];
 		txPointer++;
