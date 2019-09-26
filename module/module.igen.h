@@ -2768,7 +2768,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_0_0_E_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_0_0_N_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_0_0_N_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_0_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_0_pkn, "iterationsPort")
             )
         ),
         0
@@ -2795,7 +2795,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_0_2_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_1_1_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_1_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_1_pkn, "iterationsPort")
             )
         ),
         0
@@ -2822,7 +2822,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_0_2_W_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_0_2_N_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_0_2_N_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_2_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_2_pkn, "iterationsPort")
             )
         ),
         0
@@ -2849,7 +2849,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_0_4_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_1_3_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_1_3_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_3_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_3_pkn, "iterationsPort")
             )
         ),
         0
@@ -2874,7 +2874,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_0_4_W_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_0_4_N_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_0_4_N_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_4_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_4_pkn, "iterationsPort")
             )
         ),
         0
@@ -2901,7 +2901,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_1_1_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_2_0_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_2_0_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_5_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_5_pkn, "iterationsPort")
             )
         ),
         0
@@ -2930,7 +2930,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_1_1_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_1_1_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_6_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_6_pkn, "iterationsPort")
             )
         ),
         0
@@ -2959,7 +2959,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_1_3_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_2_2_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_2_2_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_7_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_7_pkn, "iterationsPort")
             )
         ),
         0
@@ -2988,7 +2988,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_1_3_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_1_3_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_1_3_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_8_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_8_pkn, "iterationsPort")
             )
         ),
         0
@@ -3015,7 +3015,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_1_3_E_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_2_4_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_2_4_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_9_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_9_pkn, "iterationsPort")
             )
         ),
         0
@@ -3042,7 +3042,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_2_0_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_2_0_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_2_0_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_10_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_10_pkn, "iterationsPort")
             )
         ),
         0
@@ -3071,7 +3071,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_2_2_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_3_1_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_3_1_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_11_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_11_pkn, "iterationsPort")
             )
         ),
         0
@@ -3100,7 +3100,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_2_2_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_2_2_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_2_2_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_12_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_12_pkn, "iterationsPort")
             )
         ),
         0
@@ -3129,7 +3129,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_2_4_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_3_3_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_3_3_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_13_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_13_pkn, "iterationsPort")
             )
         ),
         0
@@ -3156,7 +3156,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_2_4_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_2_4_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_2_4_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_14_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_14_pkn, "iterationsPort")
             )
         ),
         0
@@ -3183,7 +3183,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_3_1_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_4_0_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_4_0_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_15_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_15_pkn, "iterationsPort")
             )
         ),
         0
@@ -3212,7 +3212,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_3_1_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_3_1_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_3_1_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_16_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_16_pkn, "iterationsPort")
             )
         ),
         0
@@ -3241,7 +3241,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_3_3_W_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_4_2_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_4_2_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_17_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_17_pkn, "iterationsPort")
             )
         ),
         0
@@ -3270,7 +3270,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_3_3_N_pkn, "portControlNorth"),
                 OP_PACKETNET_CONNECT(data_3_3_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_3_3_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_18_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_18_pkn, "iterationsPort")
             )
         ),
         0
@@ -3297,7 +3297,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_3_3_E_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_4_4_S_pkn, "portDataNorth"),
                 OP_PACKETNET_CONNECT(ctrl_4_4_S_pkn, "portControlNorth"),
-                OP_PACKETNET_CONNECT(tick_19_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_19_pkn, "iterationsPort")
             )
         ),
         0
@@ -3322,7 +3322,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_4_0_E_pkn, "portControlEast"),
                 OP_PACKETNET_CONNECT(data_4_0_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_4_0_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_20_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_20_pkn, "iterationsPort")
             )
         ),
         0
@@ -3349,7 +3349,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_4_0_E_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_4_2_W_pkn, "portDataEast"),
                 OP_PACKETNET_CONNECT(ctrl_4_2_W_pkn, "portControlEast"),
-                OP_PACKETNET_CONNECT(tick_21_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_21_pkn, "iterationsPort")
             )
         ),
         0
@@ -3376,7 +3376,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_4_2_W_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_4_2_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_4_2_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_22_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_22_pkn, "iterationsPort")
             )
         ),
         0
@@ -3403,7 +3403,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_4_2_E_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_4_4_W_pkn, "portDataEast"),
                 OP_PACKETNET_CONNECT(ctrl_4_4_W_pkn, "portControlEast"),
-                OP_PACKETNET_CONNECT(tick_23_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_23_pkn, "iterationsPort")
             )
         ),
         0
@@ -3428,7 +3428,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_PACKETNET_CONNECT(ctrl_4_4_W_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_4_4_S_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_4_4_S_pkn, "portControlSouth"),
-                OP_PACKETNET_CONNECT(tick_24_pkn, "tickPort")
+                OP_PACKETNET_CONNECT(tick_24_pkn, "iterationsPort")
             )
         ),
         0

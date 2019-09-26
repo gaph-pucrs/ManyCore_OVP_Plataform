@@ -78,20 +78,20 @@ unsigned int preBuffe_isEmpty(){
 void turn_TickOn(){
     unsigned int inftick = TICK_ON;
     myTickStatus = TICK_ON;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
 }
 
 // Informs the ticker that this router does not needs ticks
 void turn_TickOff(){
     unsigned int inftick = TICK_OFF;
     myTickStatus = TICK_OFF;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
 }
 
 // Inform the ticker that the PE is waiting a packet - REMOVE THIS AFTER THE PARALELIZATION
 void informTick(){
     unsigned int inftick = TICK;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.tickPort, &inftick, sizeof(inftick));
 }
 
 // Extract the Y position for a given address
@@ -215,24 +215,18 @@ unsigned int bufferPop(unsigned int port){
         // Updates the routing table, releasing the output port
         routingTable[port] = ND;
 
-        if(flitCountOut[port] == OUT_TIME){
-            bhmMessage("INFO", "BufferPOP", "Entregando pacote no tempo: %llu",currentTime);
-            value = currentTime << 24;
-        }
-
         // Inform that the next flit will be a header
         flitCountOut[port] = HEADER;
 
         // If every buffer is empty this router does not need to be ticked
         if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && preBuffe_isEmpty()){
             turn_TickOff();
-            bhmMessage("INFO", "BufferPOP", "Desligando os ticks");
         }
         // Reset it's priority
         priority[port] = 0;
 
         // If it is the tail flit, put the current time in the packet...
-        
+        if(flitCountOut[port] == OUT_TIME) value = currentTime << 24;
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCountOut[port] == SIZE){
@@ -270,7 +264,7 @@ void arbitration(unsigned int port){
     // (THIS IS REDUNDANT!)
     if(port != ND && routingTable[port] == ND && !isEmpty(port)){
         // Discover to wich port the packet must go
-        header = buffers[port][first[port]].data;
+        header = buffers[port][first[port]];
         to = XYrouting(myAddress, header);
         // Verify if any other port is using the selected one
         allowed = 1;
@@ -402,7 +396,7 @@ void preBuffe_pop(){
         ////////////////////////
         if(flitCountIn == HEADER){
             NoCInputTime = currentTime;
-            packetDest = preBufferPackets[preBuffer_first] >> 24;
+            packetDest = preBufferPackets[preBuffer_first];
         }
         // Decrease the flitCount
         flitCountIn = flitCountIn - 1;
@@ -420,7 +414,7 @@ void preBuffe_pop(){
             if(positionY(myAddress)>positionY(packetDest)) difY = positionY(myAddress) - positionY(packetDest);
             else difY = positionY(packetDest) - positionY(myAddress);
             // Adds both difs to determine the amount of hopes
-            preBufferPackets[preBuffer_first] = (difX + difY) << 24;
+            preBufferPackets[preBuffer_first] = difX + difY;
         }
         else if(flitCountIn == IN_TIME){
             preBufferPackets[preBuffer_first] = NoCInputTime << 24;
@@ -588,6 +582,7 @@ PPM_REG_WRITE_CB(txCtrlWrite) {
 
 PPM_REG_READ_CB(txRead) {
     ppmWriteNet(handles.INTTC, 0);
+
     return *(Uns32*)user;
 }
 
@@ -597,7 +592,7 @@ PPM_REG_WRITE_CB(txWrite) {
 }
 
 PPM_PACKETNET_CB(iterationPort) {
-    currentTime = *(unsigned long long int *)data;
+    //bhmMessage("INFO", "Ticker", "Tiked!");
     iterate();
 }
 

@@ -66,11 +66,11 @@ Uns8 portDataEast_pnsd[4];
 Uns8 portDataWest_pnsd[4];
 Uns8 portDataNorth_pnsd[4];
 Uns8 portDataSouth_pnsd[4];
-Uns8 tickPort_pnsd[4];
-Uns8 portControlEast_pnsd[4];
-Uns8 portControlWest_pnsd[4];
-Uns8 portControlNorth_pnsd[4];
-Uns8 portControlSouth_pnsd[4];
+Uns8 iterationsPort_pnsd[8];
+Uns8 portControlEast_pnsd[8];
+Uns8 portControlWest_pnsd[8];
+Uns8 portControlNorth_pnsd[8];
+Uns8 portControlSouth_pnsd[8];
 
 static ppmPacketnetPort packetnetPorts[] = {
     {
@@ -114,13 +114,13 @@ static ppmPacketnetPort packetnetPorts[] = {
         .userData        = (void*)0
     },
     {
-        .name            = "tickPort",
+        .name            = "iterationsPort",
         .mustBeConnected = 0,
         .description     = 0,
-        .sharedData      = tickPort_pnsd,
-        .sharedDataBytes = 4,
-        .handlePtr       = &handles.tickPort,
-        .packetnetCB     = tick,
+        .sharedData      = iterationsPort_pnsd,
+        .sharedDataBytes = 8,
+        .handlePtr       = &handles.iterationsPort,
+        .packetnetCB     = iterationPort,
         .userData        = (void*)0
     },
     {
@@ -128,7 +128,7 @@ static ppmPacketnetPort packetnetPorts[] = {
         .mustBeConnected = 0,
         .description     = 0,
         .sharedData      = portControlEast_pnsd,
-        .sharedDataBytes = 4,
+        .sharedDataBytes = 8,
         .handlePtr       = &handles.portControlEast,
         .packetnetCB     = controlEast,
         .userData        = (void*)0
@@ -138,7 +138,7 @@ static ppmPacketnetPort packetnetPorts[] = {
         .mustBeConnected = 0,
         .description     = 0,
         .sharedData      = portControlWest_pnsd,
-        .sharedDataBytes = 4,
+        .sharedDataBytes = 8,
         .handlePtr       = &handles.portControlWest,
         .packetnetCB     = controlWest,
         .userData        = (void*)0
@@ -148,7 +148,7 @@ static ppmPacketnetPort packetnetPorts[] = {
         .mustBeConnected = 0,
         .description     = 0,
         .sharedData      = portControlNorth_pnsd,
-        .sharedDataBytes = 4,
+        .sharedDataBytes = 8,
         .handlePtr       = &handles.portControlNorth,
         .packetnetCB     = controlNorth,
         .userData        = (void*)0
@@ -158,7 +158,7 @@ static ppmPacketnetPort packetnetPorts[] = {
         .mustBeConnected = 0,
         .description     = 0,
         .sharedData      = portControlSouth_pnsd,
-        .sharedDataBytes = 4,
+        .sharedDataBytes = 8,
         .handlePtr       = &handles.portControlSouth,
         .packetnetCB     = controlSouth,
         .userData        = (void*)0

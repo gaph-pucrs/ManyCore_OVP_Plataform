@@ -18,9 +18,12 @@
 #define ACK     0
 
 // Misc
-#define EMPTY   0
-#define HEADER  0xFFFFFFFF
-#define SIZE    0xFFFFFFFD
+#define EMPTY       0x00000000
+#define HEADER      0xFFFFFFFF
+#define SIZE        0xFFFFFFFD
+#define HOPES       0x00000002
+#define IN_TIME     0x00000001
+#define OUT_TIME    0x00000000
 
 #define N_PES 25
 

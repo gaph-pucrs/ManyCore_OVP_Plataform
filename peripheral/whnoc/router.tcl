@@ -84,9 +84,9 @@ imodeladdpacketnetport \
 #########################################
 
 imodeladdpacketnetport \
-    -name tickPort \
-    -maxbytes 4 \
-    -updatefunction tick \
+    -name iterationsPort \
+    -maxbytes 8 \
+    -updatefunction iterationPort \
     -updatefunctionargument 0x00
 
 #########################################
@@ -94,25 +94,25 @@ imodeladdpacketnetport \
 #########################################
 imodeladdpacketnetport \
     -name portControlEast \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction controlEast \
     -updatefunctionargument 0x00
 
 imodeladdpacketnetport \
     -name portControlWest \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction controlWest \
     -updatefunctionargument 0x00
 
 imodeladdpacketnetport \
     -name portControlNorth \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction controlNorth \
     -updatefunctionargument 0x00
 
 imodeladdpacketnetport \
     -name portControlSouth \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction controlSouth \
     -updatefunctionargument 0x00
 

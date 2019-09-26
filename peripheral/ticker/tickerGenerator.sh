@@ -30,7 +30,7 @@ for i in $(seq 0 $N);
 do
 	echo "imodeladdpacketnetport  \\" >> ticker.tcl
     echo "      -name tickPort"$i" \\" >> ticker.tcl
-    echo "      -maxbytes 4 \\" >> ticker.tcl
+    echo "      -maxbytes 8 \\" >> ticker.tcl
     echo "      -updatefunction tick"$i" \\" >> ticker.tcl
     echo "      -updatefunctionargument 0x00" >> ticker.tcl
     echo "" >> ticker.tcl
@@ -46,7 +46,7 @@ echo "#include \"../whnoc/noc.h\"" >> ticker.c
 echo "" >> ticker.c
 echo "unsigned int tickMap[N_PES];" >> ticker.c
 echo "" >> ticker.c
-echo "static unsigned int tickN = 0;" >> ticker.c
+echo "static unsigned long long int tickN = 0;" >> ticker.c
 echo "" >> ticker.c
 echo "void runTicks(){" >> ticker.c
 for i in $(seq 0 $N)

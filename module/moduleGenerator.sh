@@ -264,7 +264,7 @@ echo "" >> module.op.tcl
 for i in $(seq 0 $N);
 	do
 	echo "ihwaddpacketnet -instancename tick_"$i"" >> module.op.tcl
-	echo "ihwconnect -instancename router"$i" -packetnetport tickPort -packetnet tick_"$i"" >> module.op.tcl
+	echo "ihwconnect -instancename router"$i" -packetnetport iterationsPort -packetnet tick_"$i"" >> module.op.tcl
 	echo "ihwconnect -instancename ticker -packetnetport tickPort"$i" -packetnet tick_"$i"" >> module.op.tcl
 done 
 echo "" >> module.op.tcl
