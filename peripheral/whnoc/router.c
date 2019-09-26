@@ -598,6 +598,7 @@ PPM_REG_WRITE_CB(txWrite) {
 
 PPM_PACKETNET_CB(iterationPort) {
     currentTime = *(unsigned long long int *)data;
+    bhmMessage("INFO", "ITERATION", "iteration: %llu", currentTime);
     iterate();
 }
 
