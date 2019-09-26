@@ -3,7 +3,7 @@
 
 unsigned int tickMap[N_PES];
 
-static unsigned int tickN = 0;
+static unsigned long long int tickN = 0;
 
 void runTicks(){
     if(tickMap[0] == TICK_ON) ppmPacketnetWrite(handles.tickPort0, &tickN, sizeof(tickN));
