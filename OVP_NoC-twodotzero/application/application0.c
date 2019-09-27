@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
@@ -30,6 +29,19 @@ volatile static Uns32 txPointer = 0;
 volatile static Uns32 txPacket[256];
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
+
+/* Swap bytes in 32 bit value.  */
+#define __bswap_constant_32(x) \
+     ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
+      (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
+
+unsigned int
+htonl (unsigned int x)
+{
+    return __bswap_constant_32(x);
+}
+
+
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
     if (rxPointer == 0){
@@ -127,15 +139,15 @@ int main(int argc, char **argv)
     }
 
 
-    myPacket.size = 100;
+    myPacket.size = 200;
 
     myPacket.message = (int *)malloc(myPacket.size * sizeof(int));
 
-    myPacket.dest=0x24;
+    myPacket.dest=htonl(0x24);
     
     int i;
     for(i=0; i<myPacket.size; i++){
-        myPacket.message[i] = i;
+        myPacket.message[i] = 0xFFF;
     }
     myPacket.message[17] = 0;
 

@@ -396,7 +396,7 @@ void PREBUFFER_push(unsigned int newFlit){
      contFlitsTotal[LOCAL]++;
     
 	//bhmMessage("INFO","PREBUFFER_push","contFlitsPacket = %d\n", contFlitsPacket[LOCAL]);
-	//bhmMessage("INFO","PREBUFFER_push","newFlit = %d\n", newFlit >> 24);
+	bhmMessage("INFO","PREBUFFER_push","--------------------------------------------->newFlit = %x\n", newFlit );
 
  //   bhmMessage("INFO","PUSH", "Pushing %d to DMIN",PREBUFFER_packets[PREBUFFER_last]>>24);
   // unsigned long long int testando = 184;
@@ -602,7 +602,8 @@ PPM_REG_READ_CB(rxRead) {
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
-	//bhmMessage("INFO","RXWRITE","dado entrando na noc\n");    
+    //        unsigned int flit = *(unsigned int *)data;
+	//bhmMessage("INFO","RXWRITE","------------------------------------->dado entrando na noc = %d\n", flit);    
 	PREBUFFER_push(data);
     
     //bufferPush(LOCAL, data);
