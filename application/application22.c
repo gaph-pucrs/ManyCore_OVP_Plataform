@@ -34,7 +34,7 @@ volatile unsigned int count = 0;
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-    LOG("INT %d! data: %d\n",count, *rxLocal);
+    //LOG("INT %d! data: %d\n",count, *rxLocal);
 
     count++;
     if (rxPointer == 0){                        // HEADER
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    for(i=0;i<2;i++){
+    for(i=0;i<4;i++){
         receivePckt();
         LOG("Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();

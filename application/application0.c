@@ -136,7 +136,7 @@ int main(int argc, char **argv)
     for(i = 0; i<txPacket.size; i++){
         txPacket.message[i] = i;
     }
-    txPacket.message[15] = 0x00;
+    txPacket.message[15] = 0;
     
     for(i=0;i<2;i++){
         sendPckt();

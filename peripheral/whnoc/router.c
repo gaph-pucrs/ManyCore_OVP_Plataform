@@ -11,6 +11,24 @@
 #include "noc.h"
 
 
+#define __bswap_constant_32(x) \
+     ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
+      (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
+
+unsigned int htonl(unsigned int x){
+    return __bswap_constant_32(x);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+#define __cswap_constant_32(x) \
+     ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
+      (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
+
+unsigned int ntohl(unsigned int x){
+    return __cswap_constant_32(x);
+}
+
 // Local Address
 unsigned int myAddress = 0xFFFFFFFF;
 
@@ -76,22 +94,22 @@ unsigned int preBuffe_isEmpty(){
 
 // Informs the ticker that this router needs ticks
 void turn_TickOn(){
-    unsigned int inftick = TICK_ON;
+    unsigned int inftick0 = TICK_ON;
     myTickStatus = TICK_ON;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.iterationsPort, &inftick0, sizeof(inftick0));
 }
 
 // Informs the ticker that this router does not needs ticks
 void turn_TickOff(){
-    unsigned int inftick = TICK_OFF;
+    unsigned int inftick1 = TICK_OFF;
     myTickStatus = TICK_OFF;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.iterationsPort, &inftick1, sizeof(inftick1));
 }
 
 // Inform the ticker that the PE is waiting a packet - REMOVE THIS AFTER THE PARALELIZATION
 void informTick(){
-    unsigned int inftick = TICK;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    unsigned int inftick2 = TICK;
+    ppmPacketnetWrite(handles.iterationsPort, &inftick2, sizeof(inftick2));
 }
 
 // Extract the Y position for a given address
@@ -113,7 +131,8 @@ unsigned int positionX(unsigned int address){
 // Calculates the output port for a given local address and a destination address
 // using a XY routing algorithm
 unsigned int XYrouting(unsigned int current, unsigned int dest){
-    unsigned int destination = dest >> 24;
+    unsigned int destination = ntohl(dest);
+    //bhmMessage("INFO", "XY", "dest: %d --- %d", dest, destination);
     if(positionX(current) == positionX(destination) && positionY(current) == positionY(destination)){
         return LOCAL;
     }
@@ -193,7 +212,7 @@ unsigned int isEmpty(unsigned int port){
 }
 
 unsigned int bufferPop(unsigned int port){
-    unsigned int value;
+    unsigned long long int value;
 
     // Read the first flit from the buffer
     value = buffers[port][first[port]].data;
@@ -216,8 +235,7 @@ unsigned int bufferPop(unsigned int port){
         routingTable[port] = ND;
 
         if(flitCountOut[port] == OUT_TIME){
-            bhmMessage("INFO", "BufferPOP", "Entregando pacote no tempo: %llu",currentTime);
-            value = currentTime << 24;
+            value = ntohl(currentTime); // << 24;
         }
 
         // Inform that the next flit will be a header
@@ -226,7 +244,7 @@ unsigned int bufferPop(unsigned int port){
         // If every buffer is empty this router does not need to be ticked
         if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && preBuffe_isEmpty()){
             turn_TickOff();
-            bhmMessage("INFO", "BufferPOP", "Desligando os ticks");
+            //bhmMessage("INFO", "BufferPOP", "Desligando os ticks");
         }
         // Reset it's priority
         priority[port] = 0;
@@ -236,7 +254,7 @@ unsigned int bufferPop(unsigned int port){
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCountOut[port] == SIZE){
-        flitCountOut[port] = value >> 24;
+        flitCountOut[port] = htonl(value); // >> 24;
     }
     
     // Update the buffer status
@@ -290,12 +308,12 @@ void arbitration(unsigned int port){
     }
 }
 
-void transmitt(struct handlesS handles){
+void transmitt(){
     unsigned int port, flit;
     // For each port...
     for(port = 0; port <= LOCAL; port++){
         // If this port is connected to something AND has something to transmitt... 
-        if(routingTable[port] < ND && !isEmpty(port)) {
+        if(routingTable[port] < ND && !isEmpty(port) && currentTime > buffers[port][first[port]].inTime) {
 
             // Transmission to the local IP
             if(routingTable[port] == LOCAL && txCtrl == ACK){
@@ -393,7 +411,7 @@ void preBuffe_push(unsigned int newFlit){
     preBuffe_statusUpdate();
 }
 
-void preBuffe_pop(){
+void preBuffer_pop(){
     unsigned int difX, difY;
     // Verify if the preBuffer has something to send and if the local buffer has space to recieve
     if(preBuffer_last != preBuffer_first && localStatus == GO){
@@ -402,14 +420,14 @@ void preBuffe_pop(){
         ////////////////////////
         if(flitCountIn == HEADER){
             NoCInputTime = currentTime;
-            packetDest = preBufferPackets[preBuffer_first] >> 24;
+            packetDest = htonl(preBufferPackets[preBuffer_first]); //>> 24;
         }
         // Decrease the flitCount
         flitCountIn = flitCountIn - 1;
 
         // Register the size of a new packet to insert some control information in the tail
         if (flitCountIn == SIZE){
-            flitCountIn = preBufferPackets[preBuffer_first] >> 24;
+            flitCountIn = htonl(preBufferPackets[preBuffer_first]); //>> 24;
         }
         else if(flitCountIn == HOPES){
                         // Calculate the number of hopes to achiev the destination address
@@ -420,10 +438,13 @@ void preBuffe_pop(){
             if(positionY(myAddress)>positionY(packetDest)) difY = positionY(myAddress) - positionY(packetDest);
             else difY = positionY(packetDest) - positionY(myAddress);
             // Adds both difs to determine the amount of hopes
-            preBufferPackets[preBuffer_first] = (difX + difY) << 24;
+            preBufferPackets[preBuffer_first] = ntohl(difX + difY); //<< 24;
         }
         else if(flitCountIn == IN_TIME){
-            preBufferPackets[preBuffer_first] = NoCInputTime << 24;
+            preBufferPackets[preBuffer_first] = ntohl(NoCInputTime); // << 24;
+        }
+        else if(flitCountIn == OUT_TIME){
+            flitCountIn = HEADER;
         }
 
         incomingFlit.data = preBufferPackets[preBuffer_first];
@@ -448,7 +469,7 @@ void preBuffe_pop(){
 void iterate(){
     unsigned int port;
     // Send a flit from the PREBUFFER to the local buffer
-    preBuffe_pop();
+    preBuffer_pop();
 
     // Defines which port will be attended by the arbiter
     port = priorityCheck();
@@ -457,7 +478,7 @@ void iterate(){
     arbitration(port);
 
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-    transmitt(handles);
+    transmitt();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -470,7 +491,7 @@ PPM_REG_READ_CB(addressRead) {
 
 PPM_REG_WRITE_CB(addressWrite) {
  if(myAddress == 0xFFFFFFFF){
-        myAddress = (unsigned int)data >> 24;
+        myAddress = htonl((unsigned int)data); // >> 24;
         int x = positionX(myAddress);
         int y = positionY(myAddress);
         bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
@@ -570,18 +591,22 @@ PPM_REG_READ_CB(rxRead) {
 PPM_REG_WRITE_CB(rxWrite) {
     // Writes the incoming data inside the PreBuffer
     preBuffe_push(data);
+    if((control[EAST] == GO && routingTable[EAST] != ND) || (control[WEST] == GO && routingTable[WEST] != ND)  \
+    || (control[NORTH] == GO && routingTable[NORTH] != ND) || (control[SOUTH] == GO && routingTable[SOUTH] != ND) \
+    || (control[LOCAL] == GO && routingTable[LOCAL] != ND)){
+        informTick();
+    }
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(txCtrlRead) {
-    // THIS NEED TO BE REMOVED!
     informTick();
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(txCtrlWrite) {
     txCtrl = data;
-    txCtrl = txCtrl >> 24;
+    txCtrl = htonl(txCtrl);// >> 24;
 
     *(Uns32*)user = data;
 }
@@ -598,7 +623,7 @@ PPM_REG_WRITE_CB(txWrite) {
 
 PPM_PACKETNET_CB(iterationPort) {
     currentTime = *(unsigned long long int *)data;
-    bhmMessage("INFO", "ITERATION", "iteration: %llu", currentTime);
+    //bhmMessage("INFO", "ITERACTION", "Tempo: %llu",currentTime);
     iterate();
 }
 
