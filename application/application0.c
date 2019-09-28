@@ -1,6 +1,8 @@
+
 #include <stdio.h>
 #include <string.h>
-
+#include <time.h>
+#include <stdlib.h>
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
@@ -27,6 +29,7 @@ packet rxPacket;
 volatile static Uns32 intr0 = 0; 
 volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
+    time_t tinicio, tsend,tfim,tignore; /* variaveis do "tipo" tempo */
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
@@ -100,6 +103,8 @@ void packetConsumed(){
 
 int main(int argc, char **argv)
 {
+    tinicio = clock(); /* marca o tempo inicial */
+
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
     //////////////////////////////////////////////////////
@@ -122,14 +127,21 @@ int main(int argc, char **argv)
     *myAddress = 0x00;
 
     *PEToSync = 0x00;
+    tinicio = clock();
+
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
-
+    tignore = clock();
+     tinicio = tignore - (tignore - tinicio);
+    //tignore = clock();
+    //tinicio = tignore - tinicio;
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
+
     int i;
+     
     txPacket.destination = 0x24;
     txPacket.size = 100;
     txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
@@ -137,7 +149,8 @@ int main(int argc, char **argv)
         txPacket.message[i] = i;
     }
     txPacket.message[15] = 0;
-    
+  
+    printf("---------->tempo da aplicacao 0 = %d\n",tinicio);
     for(i=0;i<2;i++){
         sendPckt();
     }
@@ -148,3 +161,6 @@ int main(int argc, char **argv)
     LOG("Application ROUTER0 done!\n\n");
     return 1;
 }
+
+
+

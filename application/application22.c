@@ -4,6 +4,7 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
+#include <time.h>
 
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
 #define SYNC_BASE ((unsigned int *) 0x80000014)
@@ -27,8 +28,7 @@ packet rxPacket;
 volatile static Uns32 intr0 = 0; 
 volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
-
-
+time_t tinicio, tsend,tignore,tfim; /* variaveis do "tipo" tempo */
 volatile unsigned int count = 0;
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
@@ -128,15 +128,23 @@ int main(int argc, char **argv)
     *myAddress = 0x24;
 
     *PEToSync = 0x24;
+    tinicio = clock();
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
+     tignore = clock();
+     tinicio = tignore - (tignore - tinicio);
+    //tinicio = tignore - tinicio;
+
 
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    for(i=0;i<4;i++){
+    printf("---------->tempo da aplicacao 22 = %d\n",tinicio);
+    tsend = clock(); /* marca o tempo inicial */
+    tsend = tsend - tinicio;
+    for(i=0;i<2;i++){
         receivePckt();
         LOG("Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();
