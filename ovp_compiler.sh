@@ -10,8 +10,8 @@ make -C module
 make -C peripheral/whnoc NOVLNV=1
 make -C peripheral/synchronizer NOVLNV=1
 make -C peripheral/ticker NOVLNV=1
-harness.exe \
-    --modulefile module/model.so \
+make -C harness
+harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu0=application/application0.${CROSS}.elf $* \
      --program cpu1=application/application1.${CROSS}.elf $* \
      --program cpu2=application/application2.${CROSS}.elf $* \
@@ -37,3 +37,4 @@ harness.exe \
      --program cpu22=application/application22.${CROSS}.elf $* \
      --program cpu23=application/application23.${CROSS}.elf $* \
      --program cpu24=application/application24.${CROSS}.elf $* \
+5 5
