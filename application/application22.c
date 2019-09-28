@@ -129,6 +129,7 @@ int main(int argc, char **argv)
 
     *PEToSync = 0x24;
     tinicio = clock();
+
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
@@ -141,6 +142,7 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
+    LOG("ANTES DE RECEBER! \n\n");
     printf("---------->tempo da aplicacao 22 = %d\n",tinicio);
     tsend = clock(); /* marca o tempo inicial */
     tsend = tsend - tinicio;

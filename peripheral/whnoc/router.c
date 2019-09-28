@@ -589,6 +589,7 @@ PPM_REG_READ_CB(rxRead) {
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
+	bhmMessage("INFO","RXRITE","PREBUFFER");
     // Writes the incoming data inside the PreBuffer
     preBuffe_push(data);
     if((control[EAST] == GO && routingTable[EAST] != ND) || (control[WEST] == GO && routingTable[WEST] != ND)  \

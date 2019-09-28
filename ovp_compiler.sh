@@ -37,4 +37,4 @@ harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu22=application/application22.${CROSS}.elf $* \
      --program cpu23=application/application23.${CROSS}.elf $* \
      --program cpu24=application/application24.${CROSS}.elf $* \
-5 5
+$*
