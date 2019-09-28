@@ -1,141 +1,121 @@
+/*
+ *
+ * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
+ *
+ * The contents of this file are provided under the Software License
+ * Agreement that you accepted before downloading this file.
+ *
+ * This source forms part of the Software and can be used for educational,
+ * training, and demonstration purposes but cannot be used for derivative
+ * works except in cases where the derivative works require OVP technology
+ * to run.
+ *
+ * For open source models released under licenses that you can use for
+ * derivative works, please visit www.OVPworld.org or www.imperas.com
+ * for the location of the open source models.
+ *
+ */
+
 #include <string.h>
 #include <stdlib.h>
 
 #include "op/op.h"
 
+#define MODULE_NAME "top"
 #define MODULE_DIR      "module"
-#define MODULE_INSTANCE "mpsoc"
-#define CPU_INSTANCE    "cpu1"
-#define PREFIX          "BUS_MON"
-
-
-#define INSTRUCTIONS_PER_SECOND       1000000
-#define QUANTUM_TIME_SLICE            0.00001
+#define MODULE_INSTANCE "u2"
+#define INSTRUCTIONS_PER_SECOND       100000
+#define QUANTUM_TIME_SLICE            0.0001
 #define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
+struct optionsS {
+} options = {
+};
 
-
-int main(int argc, const char *argv[]) {
-    opSessionInit(OP_VERSION);
-
-// create the root module with reduced Quantum (in line with Custom Scheduler)
-
-    // create the root module with reduced Quantum (in line with Custom Scheduler)
-    optParamP   params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
-    optModuleP  mi     = opRootModuleNew(0, 0, params);
+/* static OP_CONSTRUCT_FN(moduleConstruct) {
+    const char *u1_path = "module";
     opModuleNew(
-        mi,                 // parent module
-        MODULE_DIR,         // modelfile
-        MODULE_INSTANCE,    // name
+        mi,       // parent module
+        u1_path,       // modelfile
+        "u1",   // name
         0,
         0
     );
-   // optModuleP u1 = opModuleNew(mi, "module", "u1", 0, 0);
+}*/
 
-   
+static void cmdParser(optCmdParserP parser) {
+}
+
+typedef struct optModuleObjectS {
+    // insert module persistent data here
+} optModuleObject;
+
+
+
+static OP_POST_SIMULATE_FN(modulePostSimulate) {
+// insert modulePostSimulate code here
+}
+
+static OP_DESTRUCT_FN(moduleDestruct) {
+// insert moduleDestruct code here
+}
+
+optModuleAttr modelAttrs = {
+    .versionString       = OP_VERSION,
+    .type                = OP_MODULE,
+    .name                = MODULE_NAME,
+    .objectSize          = sizeof(optModuleObject),
+    .releaseStatus       = OP_UNSET,
+    .purpose             = OP_PP_BAREMETAL,
+    .visibility          = OP_VISIBLE,
+   // .constructCB          = moduleConstruct,
+    .postSimulateCB       = modulePostSimulate,
+    .destructCB           = moduleDestruct,
+};
+
+int main(int argc, const char *argv[]) {
+    opSessionInit(OP_VERSION);
+    optParamP   params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
+    optCmdParserP parser = opCmdParserNew(MODULE_NAME, OP_AC_ALL);
+    cmdParser(parser);
+    opCmdParseArgs(parser, argc, argv);
+    optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);
+    optModuleP  modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
+
+  
     
     int contQuantum = 0;
-   
-	
-  
-	
-    // must advance to next phase for the API calls that follow
-    opRootModulePreSimulate(mi);
+     optTime       myTime     = QUANTUM_TIME_SLICE;
+     optStopReason stopReason = OP_SR_SCHED;
+       
+       optProcessorP proc = opProcessorNext(modNew, NULL);
+        opRootModulePreSimulate(mi);
+        
+      //  opRootModuleSimulate(mi);
 
-    	  /* optProcessorP cpu0 = opObjectByName(mi, "cpu0", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu1 = opObjectByName(mi, "cpu1", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu2 = opObjectByName(mi, "cpu2", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu3 = opObjectByName(mi, "cpu3", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu4 = opObjectByName(mi, "cpu4", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu5 = opObjectByName(mi, "cpu5", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu6 = opObjectByName(mi, "cpu6", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu7 = opObjectByName(mi, "cpu7", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu8 = opObjectByName(mi, "cpu8", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu9 = opObjectByName(mi, "cpu9", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu10 = opObjectByName(mi, "cpu10", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu11 = opObjectByName(mi, "cpu11", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu12 = opObjectByName(mi, "cpu12", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu13 = opObjectByName(mi, "cpu13", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu14 = opObjectByName(mi, "cpu14", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu15 = opObjectByName(mi, "cpu15", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu16 = opObjectByName(mi, "cpu16", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu17 = opObjectByName(mi, "cpu17", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu18 = opObjectByName(mi, "cpu18", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu19 = opObjectByName(mi, "cpu19", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu20 = opObjectByName(mi, "cpu20", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu21 = opObjectByName(mi, "cpu21", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu22 = opObjectByName(mi, "cpu22", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu23 = opObjectByName(mi, "cpu23", OP_PROCESSOR_EN).Processor; 
-    	  optProcessorP cpu24 = opObjectByName(mi, "cpu24", OP_PROCESSOR_EN).Processor; */
-        // run simulation with custom scheduling
-        optTime       myTime     = QUANTUM_TIME_SLICE;
-        optStopReason stopReason = OP_SR_SCHED;
-        optProcessorP proc;
+
         do {
 
             // move time forward by time slice on root module
             // NOTE: This matches the standard scheduler which moves time forward in
             //       the system and then executes instructions on all processors
             opRootModuleTimeAdvance(mi, myTime);
-            
-	   /*opMessage(
+            opMessage(
                 "I", "HARNESS",
                 "Advance Time to %g seconds",
                 (double)myTime
-            );*/
-		contQuantum++;
+            );
 
-          optModuleP mod;
-
-          if (!(mod = opObjectByName (mi, MODULE_INSTANCE, OP_MODULE_EN).Module)) {
-              opMessage ("F", PREFIX "_NFW", "Can not find module(%s)", "u1");
-          }
-
-
-            // run processor for number of instructions calculated for time slice
-	    while ((proc = opProcessorNext(mod, proc))) {
-
-	    
-            	stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
-	    }
-
-
-
-            // run processor for number of instructions calculated for time slice
-	      
-          /*  stopReason = opProcessorSimulate(opObjectByName(u1, "cpu0", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu1", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu2", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu3", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu4", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu5", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu6", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu7", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu8", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu9", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu10", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu11", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu12", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu13", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu14", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu15", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu16", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu17", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu18", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu19", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu20", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu21", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu22", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu23", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);
-            stopReason = opProcessorSimulate(opObjectByName(u1, "cpu24", OP_PROCESSOR_EN).Processor, INSTRUCTIONS_PER_TIME_SLICE);*/
-
-
+            while ((proc = opProcessorNext(modNew, proc))) {
+                stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+            }
+            contQuantum++;
 
             if ((stopReason!=OP_SR_SCHED) && (stopReason!=OP_SR_HALT)) {
 
                 opMessage(
                     "I", "HARNESS",
-                    "Simulation Complete (%s) quantums Executados = %d\n com %f instrucoes por timeSlice",
-                    opStopReasonString(stopReason),contQuantum, INSTRUCTIONS_PER_TIME_SLICE 
+                    "Simulation Complete (%s) e %d quantums",
+                    opStopReasonString(stopReason),contQuantum
                 );
 
                 break;  // finish simulation loop
@@ -145,12 +125,7 @@ int main(int argc, const char *argv[]) {
             myTime += QUANTUM_TIME_SLICE;
 
         } while (1);
-    
-	opMessage(
-        "I", "HARNESS",
-        "Time at Completion %g seconds",
-        (double)opModuleCurrentTime(mi)
-    );
+
 
     opSessionTerminate();
     return 0;

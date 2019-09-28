@@ -64,7 +64,7 @@ do
         echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
     fi
 done
-	echo "$*" >> ovp_compiler.sh
+	echo "\$*" >> ovp_compiler.sh
         #echo "     --verbose " >> ovp_compiler.sh
 
 chmod +x ovp_compiler.sh
