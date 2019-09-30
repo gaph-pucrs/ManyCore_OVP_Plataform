@@ -68,7 +68,7 @@ unsigned int routingTable[N_PORTS] = {ND,ND,ND,ND,ND};
 unsigned int priority[N_PORTS] = {0,1,2,3,4};
 
 // Simulation time
-unsigned int myTickStatus = TICK_OFF;
+unsigned short int myTickStatus = TICK_OFF;
 unsigned long long int currentTime; // %llu
 unsigned long long int NoCInputTime;
 unsigned int packetDest;
@@ -78,6 +78,8 @@ unsigned int preBufferPackets[PREBUFFER_SIZE];
 static unsigned int preBuffer_last = 0;
 static unsigned int preBuffer_first = 0;
 
+int contFlitsPacket[N_PORTS] = {0,0,0,0,0};
+int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
@@ -94,21 +96,21 @@ unsigned int preBuffe_isEmpty(){
 
 // Informs the ticker that this router needs ticks
 void turn_TickOn(){
-    unsigned int inftick0 = TICK_ON;
+    unsigned short int inftick0 = TICK_ON;
     myTickStatus = TICK_ON;
     ppmPacketnetWrite(handles.iterationsPort, &inftick0, sizeof(inftick0));
 }
 
 // Informs the ticker that this router does not needs ticks
 void turn_TickOff(){
-    unsigned int inftick1 = TICK_OFF;
+    unsigned short int inftick1 = TICK_OFF;
     myTickStatus = TICK_OFF;
     ppmPacketnetWrite(handles.iterationsPort, &inftick1, sizeof(inftick1));
 }
 
 // Inform the ticker that the PE is waiting a packet - REMOVE THIS AFTER THE PARALELIZATION
 void informTick(){
-    unsigned int inftick2 = TICK;
+    unsigned short int inftick2 = TICK;
     ppmPacketnetWrite(handles.iterationsPort, &inftick2, sizeof(inftick2));
 }
 
@@ -400,6 +402,8 @@ void preBuffe_statusUpdate(){
 }
 
 void preBuffe_push(unsigned int newFlit){
+    contFlitsPacket[LOCAL]++;
+   // bhmMessage("I","PREBUFFERPUSH","PREBUFFERLAST = %d",preBuffer_last);
     preBufferPackets[preBuffer_last] = newFlit;
     if(preBuffer_last < PREBUFFER_SIZE-1){
         preBuffer_last++;
@@ -407,6 +411,21 @@ void preBuffe_push(unsigned int newFlit){
     else if(preBuffer_last == PREBUFFER_SIZE-1){
         preBuffer_last = 0;
     }
+    if(contFlitsPacket[LOCAL] ==2){
+        sizeCurrentPacket[LOCAL] = newFlit;
+        bhmMessage("I","PREBUFFERPUSH","SIZE_CURRENT_PACKET = %d",htonl(newFlit));
+    }else if(contFlitsPacket[LOCAL] == htonl(sizeCurrentPacket[LOCAL])+2){
+        contFlitsPacket[LOCAL] = 0;
+         bhmMessage("I","PREBUFFERPUSH","ACABOU O PACOTE flit = %d",htonl(newFlit));
+
+
+
+    }else if(contFlitsPacket[LOCAL]==3){
+        bhmMessage("I","PREBUFFERPUSH","FLIT = %d",htonl(newFlit));
+        ppmPacketnetWrite(handles.iterationsPort, &newFlit, sizeof(newFlit));
+
+    }
+    
     if(myTickStatus==TICK_OFF) turn_TickOn();
     preBuffe_statusUpdate();
 }
@@ -589,7 +608,8 @@ PPM_REG_READ_CB(rxRead) {
 }
 
 PPM_REG_WRITE_CB(rxWrite) {
-	bhmMessage("INFO","RXRITE","PREBUFFER");
+    
+	//bhmMessage("INFO","RXRITE","PREBUFFER = %lu", sizeof(unsigned short int));
     // Writes the incoming data inside the PreBuffer
     preBuffe_push(data);
     if((control[EAST] == GO && routingTable[EAST] != ND) || (control[WEST] == GO && routingTable[WEST] != ND)  \

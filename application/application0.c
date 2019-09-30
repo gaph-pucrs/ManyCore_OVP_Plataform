@@ -147,11 +147,16 @@ int main(int argc, char **argv)
     txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
     for(i = 0; i<txPacket.size; i++){
         txPacket.message[i] = i;
+	
     }
     txPacket.message[15] = 0;
   
     printf("---------->tempo da aplicacao 0 = %d\n",tinicio);
-    for(i=0;i<2;i++){
+    for(i=0;i<1;i++){
+	tsend = clock();
+	tsend = tsend - tinicio;
+        txPacket.message[0] = tsend;
+        LOG("TSEND = %d\n",tsend);
         sendPckt();
     }
     //////////////////////////////////////////////////////
