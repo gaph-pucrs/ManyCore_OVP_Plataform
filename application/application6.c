@@ -129,11 +129,18 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
+    int i;
+    txPacket.destination = 0x24;
+    txPacket.size = 100;
+    txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
+    for(i = 0; i<txPacket.size; i++){
+        txPacket.message[i] = i;
+    }
+    txPacket.message[15] = 6;
     
-
-    //LOG("Hello World!");
-
-
+    for(i=0;i<10;i++){
+        sendPckt();
+    }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

@@ -591,11 +591,11 @@ PPM_REG_READ_CB(rxRead) {
 PPM_REG_WRITE_CB(rxWrite) {
     // Writes the incoming data inside the PreBuffer
     preBuffe_push(data);
-    if((control[routingTable[EAST]] == GO && routingTable[EAST] != ND) || (control[routingTable[WEST]] == GO && routingTable[WEST] != ND)  \
+    /*if((control[routingTable[EAST]] == GO && routingTable[EAST] != ND) || (control[routingTable[WEST]] == GO && routingTable[WEST] != ND)  \
     || (control[routingTable[NORTH]] == GO && routingTable[NORTH] != ND) || (control[routingTable[SOUTH]] == GO && routingTable[SOUTH] != ND) \
     || (control[routingTable[LOCAL]] == GO && routingTable[LOCAL] != ND)){
         informTick();
-    }
+    }*/
     *(Uns32*)user = data;
 }
 

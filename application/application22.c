@@ -136,9 +136,9 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    for(i=0;i<4;i++){
+    for(i=0;i<80;i++){
         receivePckt();
-        LOG("Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
+        LOG("Pacote recebido de: %d - nHops: %d - inTime: %d - outTime: %d - totalTime = %d\n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime, (rxPacket.outTime-rxPacket.inTime));
         packetConsumed();
     }
 
