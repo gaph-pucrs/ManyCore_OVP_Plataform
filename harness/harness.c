@@ -21,10 +21,11 @@
 
 #include "op/op.h"
 
+
 #define MODULE_NAME "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
-#define INSTRUCTIONS_PER_SECOND       100000
+#define INSTRUCTIONS_PER_SECOND       1000000
 #define QUANTUM_TIME_SLICE            0.0001
 #define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
 struct optionsS {
@@ -85,7 +86,7 @@ int main(int argc, const char *argv[]) {
     
     int contQuantum = 0;
      optTime       myTime     = QUANTUM_TIME_SLICE;
-     optStopReason stopReason = OP_SR_SCHED;
+   //  optStopReason stopReason = OP_SR_SCHED;
        
        optProcessorP proc = opProcessorNext(modNew, NULL);
         opRootModulePreSimulate(mi);
@@ -99,18 +100,23 @@ int main(int argc, const char *argv[]) {
             // NOTE: This matches the standard scheduler which moves time forward in
             //       the system and then executes instructions on all processors
             opRootModuleTimeAdvance(mi, myTime);
-            opMessage(
+           /*/ opMessage(
                 "I", "HARNESS",
                 "Advance Time to %g seconds",
                 (double)myTime
-            );
-
+            );*/
+            int contador = 0;
             while ((proc = opProcessorNext(modNew, proc))) {
-                stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
-            }
+                  /*opMessage(
+                "I", "HARNESS",
+                "printPROC contador = %d",contador);*/
+              /*   stopReason = */opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+                
+                contador ++;
+             }
             contQuantum++;
 
-            if ((stopReason!=OP_SR_SCHED) && (stopReason!=OP_SR_HALT)) {
+            /*/if ((stopReason!=OP_SR_SCHED) && (stopReason!=OP_SR_HALT)) {
 
                 opMessage(
                     "I", "HARNESS",
@@ -120,7 +126,7 @@ int main(int argc, const char *argv[]) {
 
                 break;  // finish simulation loop
 
-            }
+            }*/
 
             myTime += QUANTUM_TIME_SLICE;
 
