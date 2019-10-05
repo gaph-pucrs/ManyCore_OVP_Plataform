@@ -18,7 +18,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 #include "op/op.h"
 
 
@@ -88,7 +88,7 @@ int main(int argc, const char *argv[]) {
      optTime       myTime     = QUANTUM_TIME_SLICE;
    //  optStopReason stopReason = OP_SR_SCHED;
        
-       optProcessorP proc = opProcessorNext(modNew, NULL);
+       optProcessorP proc;// = opProcessorNext(modNew, NULL);
         opRootModulePreSimulate(mi);
         
       //  opRootModuleSimulate(mi);
@@ -100,20 +100,23 @@ int main(int argc, const char *argv[]) {
             // NOTE: This matches the standard scheduler which moves time forward in
             //       the system and then executes instructions on all processors
             opRootModuleTimeAdvance(mi, myTime);
-           /*/ opMessage(
+             /*opMessage(
                 "I", "HARNESS",
-                "Advance Time to %g seconds",
+                "---------------------------------------------------------------------------->Advance Time to %g seconds",
                 (double)myTime
             );*/
+            //fprintf(stderr,"---------------------------------------------------------------------------->Advance Time to %g seconds",
+              //  (double)myTime);
             int contador = 0;
             while ((proc = opProcessorNext(modNew, proc))) {
-                  /*opMessage(
+                /*  opMessage(
                 "I", "HARNESS",
-                "printPROC contador = %d",contador);*/
-              /*   stopReason = */opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+                "printPROC contador = %d",contador);
+                stopReason = */
+              opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
                 
                 contador ++;
-             }
+            }
             contQuantum++;
 
             /*/if ((stopReason!=OP_SR_SCHED) && (stopReason!=OP_SR_HALT)) {

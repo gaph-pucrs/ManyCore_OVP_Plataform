@@ -40,6 +40,72 @@ handlesT handles;
 // eg. if (diagnosticLevel >= 1) bhmMessage("I", "sync", "Example");
 //     Predefined macros PSE_DIAG_LOW, PSE_DIAG_MEDIUM and PSE_DIAG_HIGH may be used
 Uns32 diagnosticLevel;
+////////////////////////////////////////////////////////////////////////////////
+//
+//                W R I T T E N   B Y   I M P E R A S   I G E N
+//
+//                             Version 20170201.0
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#include "synchronizer.igen.h"
+#include "../whnoc/noc.h"
+//////////////////////////////// Callback stubs ////////////////////////////////
+unsigned int startedPEs = 0;
+bhmEventHandle goEvent;
+
+PPM_REG_READ_CB(goRead) {
+    // YOUR CODE HERE (goRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(goWrite) {
+    // YOUR CODE HERE (goWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_REG_READ_CB(readyRead) {
+    // YOUR CODE HERE (readyRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(readyWrite) {
+    startedPEs++;
+    //unsigned int aux = *(unsigned int *)data >> 24;
+    bhmMessage("I", "readyWrite", "incrementando numero de roteadores %d\n",startedPEs);
+    if(startedPEs == N_PES){
+       //  bhmWaitDelay(QUANTUM_DELAY);
+        bhmMessage("I", "readyWrite", " numero TOTAL de roteadores %d\n",startedPEs);
+	    bhmTriggerEvent(goEvent);
+    //	    syncPort_regs_data.syncToPE.value = 1;
+    }
+   /*  }else if(aux == 254){
+        syncPort_regs_data.syncToPE.value = 5;
+    }*/
+    // YOUR CODE HERE (re adyWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_CONSTRUCTOR_CB(constructor) {
+    // YOUR CODE HERE (pre constructor)
+    periphConstructor();
+    // YOUR CODE HERE (post constructor)
+}
+
+PPM_DESTRUCTOR_CB(destructor) {
+    // YOUR CODE HERE (destructor)
+}
+
+
+PPM_SAVE_STATE_FN(peripheralSaveState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
+PPM_RESTORE_STATE_FN(peripheralRestoreState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
+
 
 /////////////////////////// Diagnostic level callback //////////////////////////
 
@@ -110,7 +176,10 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-
+    goEvent = bhmCreateNamedEvent("start","go");
+    bhmWaitEvent(goEvent);
+    bhmWaitDelay(QUANTUM_DELAY);
+    syncPort_regs_data.syncToPE.value = 1;
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
     return 0;

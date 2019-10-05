@@ -29,7 +29,7 @@ packet rxPacket;
 volatile static Uns32 intr0 = 0; 
 volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
-    time_t tinicio, tsend,tfim,tignore; /* variaveis do "tipo" tempo */
+    time_t tinicio, tsend,tfim,tignore,t1,t2,t3,t4, t0; /* variaveis do "tipo" tempo */
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
@@ -63,26 +63,26 @@ void interruptHandler(void) {
     rxPointer++;
 }
 
-void sendPckt(){
+void sendPckt(packet thisPacket){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
     volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
     //                      HEADER   + 2 (header + sizer)
     //                      TAIL         + 3 (hopes + inTime + outTime)
-    while(txPointer < (txPacket.size + 2 + 3)){
+    while(txPointer < (thisPacket.size + 2 + 3)){
         while(*controlTx != GO){ /* Waiting for space in the preBuffer */}
 
         if(txPointer == 0){
-            *txLocal = txPacket.destination;
+            *txLocal = thisPacket.destination;
         }
         else if (txPointer == 1){
-            *txLocal = txPacket.size + 3; // + 3 for the TAIL
+            *txLocal = thisPacket.size + 3; // + 3 for the TAIL
         }
-        else if (txPointer >= (txPacket.size + 2)){
+        else if (txPointer >= (thisPacket.size + 2)){
             *txLocal = 0;
         }
         else{
-            *txLocal = txPacket.message[txPointer-2];
+            *txLocal = thisPacket.message[txPointer-2];
         }
 
         txPointer++;
@@ -103,8 +103,6 @@ void packetConsumed(){
 
 int main(int argc, char **argv)
 {
-    tinicio = clock(); /* marca o tempo inicial */
-
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
     //////////////////////////////////////////////////////
@@ -132,8 +130,13 @@ int main(int argc, char **argv)
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
-    tignore = clock();
-     tinicio = tignore - (tignore - tinicio);
+   tignore = clock();
+   tinicio = tignore - (tignore - tinicio);
+  // fprintf(stderr,"---------->tempo inicial da aplicacao 1 = %d\n",tinicio);
+    /*t0 = clock();
+    t0 = t0-tinicio;
+       fprintf(stderr,"t0 0 = %d\n",t0);
+*/
     //tignore = clock();
     //tinicio = tignore - tinicio;
     //////////////////////////////////////////////////////
@@ -143,21 +146,37 @@ int main(int argc, char **argv)
     int i;
      
     txPacket.destination = 0x24;
-    txPacket.size = 100;
+    txPacket.size = 145;
+  /*  t1 = clock();
+    t1 = t1-tinicio;
+       fprintf(stderr,"t1 0 = %d\n",t1);
+*/
     txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
+  /*  t2 = clock();
+    t2 = t2-tinicio;
+    fprintf(stderr,"t2 0 = %d\n",t2);
+*/
+
     for(i = 0; i<txPacket.size; i++){
         txPacket.message[i] = i;
 	
     }
+  /*   t3 = clock();
+    t3 = t3-tinicio;
+    fprintf(stderr,"t3 0 = %d\n",t3);
+*/
     txPacket.message[15] = 0;
-  
-    printf("---------->tempo da aplicacao 0 = %d\n",tinicio);
-    for(i=0;i<1;i++){
+    /*for(i=0;i<100;i++){
+        
+    }*/
+    for(i=0;i<2;i++){
 	tsend = clock();
 	tsend = tsend - tinicio;
         txPacket.message[0] = tsend;
-        LOG("TSEND = %d\n",tsend);
-        sendPckt();
+        fprintf(stderr,"TSEND 0= %d\n",tsend);
+        sendPckt(txPacket);
+
+       
     }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////

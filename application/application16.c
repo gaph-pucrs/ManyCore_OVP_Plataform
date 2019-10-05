@@ -1,6 +1,8 @@
+
 #include <stdio.h>
 #include <string.h>
-
+#include <time.h>
+#include <stdlib.h>
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
@@ -27,6 +29,7 @@ packet rxPacket;
 volatile static Uns32 intr0 = 0; 
 volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
+    time_t tinicio, tsend,tfim,tignore,t1,t2,t3,t4, t0; /* variaveis do "tipo" tempo */
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
@@ -122,18 +125,59 @@ int main(int argc, char **argv)
     *myAddress = 0x13;
 
     *PEToSync = 0x13;
+    tinicio = clock();
+
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
-
+   tignore = clock();
+   tinicio = tignore - (tignore - tinicio);
+  // fprintf(stderr,"---------->tempo inicial da aplicacao 0 = %d\n",tinicio);
+    /*t0 = clock();
+    t0 = t0-tinicio;
+       fprintf(stderr,"t0 0 = %d\n",t0);
+*/
+    //tignore = clock();
+    //tinicio = tignore - tinicio;
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    
 
-    //LOG("Hello World!");
+    int i;
+     
+    txPacket.destination = 0x24;
+    txPacket.size = 145;
+  /*  t1 = clock();
+    t1 = t1-tinicio;
+       fprintf(stderr,"t1 0 = %d\n",t1);
+*/
+    txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
+  /*  t2 = clock();
+    t2 = t2-tinicio;
+    fprintf(stderr,"t2 0 = %d\n",t2);
+*/
 
+    for(i = 0; i<txPacket.size; i++){
+        txPacket.message[i] = 200;
+	
+    }
+  /*   t3 = clock();
+    t3 = t3-tinicio;
+    fprintf(stderr,"t3 0 = %d\n",t3);
+*/
+    txPacket.message[15] = 16;
+    /*for(i=0;i<100;i++){
+        
+    }*/
+    for(i=0;i<2;i++){
+	tsend = clock();
+	tsend = tsend - tinicio;
+        txPacket.message[0] = tsend;
+        fprintf(stderr,"TSEND 16= %d\n",tsend);
+        sendPckt();
 
+       
+    }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
@@ -141,3 +185,6 @@ int main(int argc, char **argv)
     LOG("Application ROUTER16 done!\n\n");
     return 1;
 }
+
+
+
