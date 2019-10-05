@@ -31,6 +31,8 @@
 #define TICK        0
 #define TICK_OFF    0x0FF
 #define TICK_ON     0x011
+#define TICK_ON_LOCAL 0X022
+#define TICK_OFF_LOCAL 0X033
 
 // PreBuffer
 #define PREBUFFER_SIZE  25000

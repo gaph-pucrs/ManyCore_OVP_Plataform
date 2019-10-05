@@ -142,11 +142,11 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    LOG("ANTES DE RECEBER! \n\n");
-    printf("---------->tempo da aplicacao 22 = %d\n",tinicio);
+    //LOG("ANTES DE RECEBER! \n\n");
+    //printf("---------->tempo  da aplicacao 22 = %d\n",tinicio);
     tsend = clock(); /* marca o tempo inicial */
     tsend = tsend - tinicio;
-    for(i=0;i<2;i++){
+    for(i=0;i<48;i++){
         receivePckt();
         LOG("Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();
