@@ -173,7 +173,7 @@ int main(int argc, char **argv)
 	tsend = clock();
 	tsend = tsend - tinicio;
         txPacket.message[0] = tsend;
-        fprintf(stderr,"TSEND 3= %d\n",tsend);
+       // fprintf(stderr,"TSEND 3= %d\n",tsend);
         sendPckt();
 
        

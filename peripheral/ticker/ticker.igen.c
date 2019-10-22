@@ -53,7 +53,6 @@ typedef struct {
    unsigned int *sameTime; 
 }send;
 
-
 send *sendVector;
 bhmEventHandle tickLocal;
 int contQ = 0;
@@ -857,6 +856,14 @@ int main(int argc, char *argv[]) {
      while(1){
          
         bhmWaitDelay(QUANTUM_DELAY);
+       /* for(i=0;i<N_PES;i++){
+            bhmMessage("I","ITERATOR"," LOCAL %d ; EAST %d ; WEST %d ; NORTH %d, SOUTH %d", contFlits[i][LOCAL],contFlits[i][EAST],contFlits[i][WEST],contFlits[i][NORTH],contFlits[i][SOUTH]);
+            contFlits[i][LOCAL] = 0;
+            contFlits[i][WEST] = 0;
+            contFlits[i][EAST] = 0;
+            contFlits[i][NORTH] = 0;
+            contFlits[i][SOUTH] = 0;
+        }*/
         
         //bhmMessage("I","TICKER","--------------------------------------------------->QUANTUM ESPERADO");
         

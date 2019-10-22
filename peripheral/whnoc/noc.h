@@ -25,6 +25,9 @@
 #define IN_TIME     0x00000001
 #define OUT_TIME    0x00000000
 
+#define DIM_X 5
+#define DIM_Y 5
+
 #define N_PES 25
 
 //Ticks
@@ -36,3 +39,6 @@
 
 // PreBuffer
 #define PREBUFFER_SIZE  25000
+
+extern int contFlits[N_PORTS];
+extern int myID;

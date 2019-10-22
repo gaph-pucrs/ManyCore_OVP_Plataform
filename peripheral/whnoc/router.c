@@ -80,6 +80,8 @@ unsigned int lastTickLocal = 0;
 unsigned int preBufferPackets[PREBUFFER_SIZE];
 static unsigned int preBuffer_last = 0;
 static unsigned int preBuffer_first = 0;
+int myID=0;
+int contFlits[N_PORTS];
 
 int contFlitsPacket[N_PORTS] = {0,0,0,0,0};
 int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
@@ -346,6 +348,7 @@ void transmitt(){
             // Transmission to the local IP
                 if(routingTable[port] == LOCAL && txCtrl == ACK){
                    flit = bufferPop(port);
+                   contFlits[LOCAL]= contFlits[LOCAL]++;
 //bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d , tick = %llu",(flit >> 24), port,currentTime);               
                   txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                   localPort_regs_data.dataTxLocal.value = flit;
@@ -362,6 +365,7 @@ void transmitt(){
                                  //   bhmMessage("I","TRANSMIT","================ IF 3");
 
                          flit = bufferPop(port);
+                         contFlits[EAST]= contFlits[EAST]++;
                          //bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d , tick = %llu",(flit >> 24),currentTime);
                     // Send a flit!
                          ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
@@ -376,6 +380,8 @@ void transmitt(){
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                     flit = bufferPop(port);
+                    contFlits[WEST]= contFlits[WEST]++;
+
 //bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d , tick = %llu", (flit >> 24), currentTime);
                     // Send a flit!
                     ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
@@ -390,6 +396,8 @@ void transmitt(){
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                     flit = bufferPop(port);
+                    contFlits[NORTH]= contFlits[NORTH]++;
+
                    //bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d, tick = %llu", (flit >> 24), currentTime);
                     // Send a flit!
                     ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
@@ -404,6 +412,8 @@ void transmitt(){
                 // still connected to the output port
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                     flit = bufferPop(port);
+                    contFlits[SOUTH]= contFlits[SOUTH]++;
+
                    // bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
                     // Send a flit!
                     ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
@@ -582,6 +592,12 @@ PPM_REG_WRITE_CB(addressWrite) {
         int x = positionX(myAddress);
         int y = positionY(myAddress);
         bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
+        myID = (DIM_X*y)+x;
+        bhmMessage("INFO","MYADRESS","MY ID = %d", myID);
+        int i;
+        for(i=0;i<N_PORTS;i++){
+            contFlits[i] = 0;
+        }
     }
     else{
        // bhmMessage("INFO", "MY_ADRESS", "ERROR: The address can not be changed!");

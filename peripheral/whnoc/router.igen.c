@@ -28,6 +28,8 @@
 
 
 #include "router.igen.h"
+#include "noc.h"
+#include <stdio.h>
 /////////////////////////////// Port Declarations //////////////////////////////
 
 localPort_regs_dataT localPort_regs_data;
@@ -153,7 +155,32 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-
+ //   int contQuantum = 0;
+   // FILE *fp;
+    
+   /* while(1){
+    bhmWaitDelay(QUANTUM_DELAY);
+    int i=0;
+    fp = fopen ("data4.csv","a");
+   
+    fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+    
+    fclose(fp);
+  
+    //fp  = fopen ("data.csv", "w");
+    //fprintf(fp, "%d", contFlits[LOCAL]);
+     //       fclose(fp);
+          //  bhmMessage("I","ROUTER"," LOCAL %d ; EAST %d ; WEST %d ; NORTH %d, SOUTH %d", contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+            contFlits[LOCAL] = 0;
+            contFlits[WEST] = 0;
+            contFlits[EAST] = 0;
+            contFlits[NORTH] = 0;
+            contFlits[SOUTH] = 0;
+    
+   // bhmMessage("I","ROUTER","FLITS LOCAL = %d")
+   // bhmMessage("INFO","ROUTER","AQUIIIII");
+    i++;
+    }*/
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
     return 0;
