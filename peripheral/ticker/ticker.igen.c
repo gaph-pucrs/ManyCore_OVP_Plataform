@@ -74,11 +74,14 @@ void writePort(send *sendV, int id){
   // bhmMessage("I","WRITEPORT","------------------------------------------------------> tickN = %llx, aux = %.16llx, tick = ",tickN,aux);
     for(i=0;i<sendV[id].equals;i++){
     tick = tickN;
-    //bhmMessage("I","TICKER","SENDV POSICAO %d e PE %d",(id +i), sendV[id+i].idPE);
+    //bhmMessage("I","WRITE PORT","SENDV POSICAO %d e PE %d",(id +i), sendV[id+i].idPE);
     if(sendV[id + i].idPE == 0 ){
          ppmPacketnetWrite(handles.tickPort0, &tick, sizeof(tick));
+      //   bhmMessage("I","WRITE PORT", "TICK NO 0");
     }else if(sendV[id + i].idPE == 1){
         ppmPacketnetWrite(handles.tickPort1, &tick, sizeof(tick));
+              //   bhmMessage("I","WRITE PORT", "TICK NO 1");
+
 
     }else if(sendV[id + i].idPE == 2){
         ppmPacketnetWrite(handles.tickPort2, &tick, sizeof(tick));
@@ -134,7 +137,7 @@ void writePort(send *sendV, int id){
 
 
 void runTicks(){  
-  //  bhmMessage("I","TICKER","TICK = %llu",tickN);
+  // bhmMessage("I","TICKER","TICK = %llu",tickN);
     tick = tickN;
     if((tickMap[0] == TICK_ON)||(tickMapLocal[0] == TICK_ON_LOCAL2)) ppmPacketnetWrite(handles.tickPort0, &tick, sizeof(tick));
     tick = tickN;
@@ -878,19 +881,19 @@ int main(int argc, char *argv[]) {
         }
         for(i=0;i<N_PES;i++){
             if(tickMapLocal[i] == TICK_ON_LOCAL){
-               // bhmMessage("I","TICKER","TEM DADO PARA ENVIAR");
+              //  bhmMessage("I","TICKER","TEM DADO PARA ENVIAR");
                 run = 1;
                 break;
             }
         }
         if(run){
-           // bhmMessage("I","TICKER","------------------------------------>RUN");
+         //   bhmMessage("I","TICKER","------------------------------------>RUN");
             for(i=0;i<contQ;i++){
-            //    bhmMessage("I","ORDEM ANTES","%d do PE %d",sendV[i].time,sendV[i].idPE);
+              //  bhmMessage("I","ORDEM ANTES","%d do PE %d",sendV[i].time,sendV[i].idPE);
             }
             insertionSort(contQ, sendV);
             for(i=0;i<contQ;i++){
-           //     bhmMessage("I","ORDEM DEPOIS","%d do PE %d",sendV[i].time,sendV[i].idPE);
+             //   bhmMessage("I","ORDEM DEPOIS","%d do PE %d",sendV[i].time,sendV[i].idPE);
             }
             sendV[0].start = 1;
           //  bhmMessage("I","TICKER","sendVectorStart 0 = %d",sendV[0].start);
@@ -898,7 +901,7 @@ int main(int argc, char *argv[]) {
             for(i=1;i<contQ;i++){
             //tickN++;
                 sendV[i].start = sendV[i-1].start + ((sendV[i].time - sendV[i-1].time)/30);
-               // bhmMessage("I","TICKER","sendVectorStart %d do PE %d = %d",i,sendV[i].idPE,sendV[i].start);
+              //  bhmMessage("I","TICKER","sendVectorStart %d do PE %d = %d",i,sendV[i].idPE,sendV[i].start);
                 sendV[i].equals = 0;
 
                /* if(sendV[i].start == sendV[i-1].start){
@@ -907,7 +910,7 @@ int main(int argc, char *argv[]) {
 
                 }*/
             }
-            int i,j;
+            int i,j, contW = 0;
 
             tickN++;
             int aux = tickN;
@@ -924,8 +927,9 @@ int main(int argc, char *argv[]) {
                 }
             //}
 
-          //  bhmMessage("I","TICKER"," %d iguais", sendV[0].equals);
+           // bhmMessage("I","TICKER"," %d iguais", sendV[0].equals);
             writePort(sendV, 0);
+            contW ++;
            // bhmMessage("I","TICKER","ESCREVEU NO PE %d",sendV[0].idPE);
 
             runTicks();
@@ -934,12 +938,12 @@ int main(int argc, char *argv[]) {
                 tickMapLocal[sendV[i].idPE] = TICK_ON_LOCAL2;
             }
            // contQ = contQ - sendV[0].equals;
-
+         //   bhmMessage("I","TICKER"," sendV[0].equals = %d CONTQ = %d",sendV[0].equals, contQ);
             for(i=sendV[0].equals;i<contQ;i++){
                 nextTick =  aux + sendV[i].start + 1;
               //  bhmMessage("I","TICKER"," esperando evento NEXT TICK = %llu DO PE %d", nextTick,sendV[i].idPE);
                 bhmWaitEvent(tickLocal);
-               // bhmMessage("I","TICKER","TICK LOCAL PE %d", sendV[i].idPE);
+              //  bhmMessage("I","TICKER","TICK LOCAL PE %d", sendV[i].idPE);
                 writePort(sendV, i);
                 runTicks();
                 for(j=0;j<sendV[i].equals;i++){
@@ -966,6 +970,8 @@ int main(int argc, char *argv[]) {
                 //writePort(sendVector[i].idPE);
                 //runTicks();
                 //tickN++;
+            } else {
+             //   bhmMessage("I","TICKER","NOT RUN");
             }
             
 
