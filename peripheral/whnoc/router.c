@@ -85,7 +85,7 @@ int contFlits[N_PORTS];
 
 int contFlitsPacket[N_PORTS] = {0,0,0,0,0};
 int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
-unsigned int contR = 0;
+//unsigned int contR = 0;
 unsigned int *pacote;
 unsigned int lastPacote = 0;
 
@@ -117,14 +117,14 @@ void turn_TickOff(){
 }
 void informTickLocal(){
     unsigned short int inftick = TICK_ON_LOCAL;
-   // myTickStatusLocal = TICK_ON_LOCAL;
+    myTickStatusLocal = TICK_ON_LOCAL;
   //  bhmMessage("I","informTick","TICK_ON_LOCAL = %d",inftick);
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
 
 void informTickLocalOFF(){
     unsigned short int inftick =TICK_OFF_LOCAL;
-   // myTickStatusLocal = TICK_ON_LOCAL;
+    //myTickStatusLocal = TICK_ON_LOCAL;
   //  bhmMessage("I","informTick","TICK_ON_LOCAL = %d",inftick);
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
@@ -349,7 +349,7 @@ void transmitt(){
                 if(routingTable[port] == LOCAL && txCtrl == ACK){
                    flit = bufferPop(port);
                    contFlits[LOCAL]= contFlits[LOCAL]++;
-//bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d , tick = %llu",(flit >> 24), port,currentTime);               
+              //  bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d , tick = %llu",(flit >> 24), port,currentTime);               
                   txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                   localPort_regs_data.dataTxLocal.value = flit;
                  ppmWriteNet(handles.INTTC, 1);
@@ -366,7 +366,7 @@ void transmitt(){
 
                          flit = bufferPop(port);
                          contFlits[EAST]= contFlits[EAST]++;
-                         //bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d , tick = %llu",(flit >> 24),currentTime);
+                       //  bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d , tick = %llu",(flit >> 24),currentTime);
                     // Send a flit!
                          ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
                         ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
@@ -382,7 +382,7 @@ void transmitt(){
                     flit = bufferPop(port);
                     contFlits[WEST]= contFlits[WEST]++;
 
-//bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d , tick = %llu", (flit >> 24), currentTime);
+                  //  bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d , tick = %llu", (flit >> 24), currentTime);
                     // Send a flit!
                     ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
                     ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
@@ -398,7 +398,7 @@ void transmitt(){
                     flit = bufferPop(port);
                     contFlits[NORTH]= contFlits[NORTH]++;
 
-                   //bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d, tick = %llu", (flit >> 24), currentTime);
+                //   bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d, tick = %llu", (flit >> 24), currentTime);
                     // Send a flit!
                     ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
                     ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
@@ -465,12 +465,12 @@ void preBuffe_push(unsigned int newFlit){
 
                 ppmPacketnetWrite(handles.iterationsPort, &newFlit, sizeof(newFlit));
                     //    bhmMessage("I","PREBUFFERPUSH","INFORM TICK LOCAL2");
-        } else {
+      //  } else {
                     //    bhmMessage("I","PREBUFFERPUSH","armazenando pacote para depois");
 
-                pacote = (unsigned int*) realloc (pacote, contR * sizeof (pacote));
-                pacote[contR] = newFlit;
-                contR ++;
+              //  pacote = (unsigned int*) realloc (pacote, (contR+1) * sizeof (pacote));
+                //pacote[contR] = newFlit;
+            //    contR ++;
                 
         }                  
 
@@ -486,8 +486,12 @@ void preBuffe_push(unsigned int newFlit){
 void preBuffer_pop(){
     unsigned int difX, difY;
     // Verify if the preBuffer has something to send and if the local buffer has space to recieve
+    //if(myID ==0)bhmMessage("I","prebufferpop","prebuffer last %d prebuffer_first %d localStaus %d", preBuffer_last, preBuffer_first, localStatus);
+
     if(preBuffer_last != preBuffer_first && localStatus == GO){
-        ////////////////////////
+        if(myID == 0){
+        //bhmMessage("I","prebufferpop","TEM DADO PARA ENVIAR");
+        }////////////////////////
         // Control insertions //
         ////////////////////////
         if(flitCountIn == HEADER){
@@ -519,18 +523,18 @@ void preBuffer_pop(){
             flitCountIn = HEADER;
             myTickStatusLocal = TICK_OFF_LOCAL;
            // informTickLocalOFF();
-            if(contR >0){
+            if(preBuffer_last != (preBuffer_first+1)){
 
-            //    bhmMessage("I","PREBUFFERPUSH","dezarmazenando pacote ");
+               // bhmMessage("I","PREBUFFERPUSH","dezarmazenando pacote ");
 
                 informTickLocal();
 
-                ppmPacketnetWrite(handles.iterationsPort, &pacote[lastPacote], sizeof(pacote[lastPacote]));
-                     //           bhmMessage("I","PREBUFFERPUSH","dezarmazenando pacote 2");
+                ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));
+               if(myID==17) bhmMessage("I","PREBUFFERPOP","dezarmazenando pacote 2");
 
 
-                contR --;
-                lastPacote ++;
+               // contR --;
+                //lastPacote ++;
             }
 
         }
@@ -549,6 +553,7 @@ void preBuffer_pop(){
             preBuffer_first = 0;
         }
         preBuffe_statusUpdate();
+
     }
 }
 
@@ -732,8 +737,9 @@ PPM_REG_WRITE_CB(txWrite) {
 PPM_PACKETNET_CB(iterationPort) {
     
     currentTime = *(unsigned long long int *)data;
-
-    //bhmMessage("I","ROUTER","RECEBEU TICK %llx",currentTime);
+    if (myID == 0){
+      //  bhmMessage("I","ROUTER","RECEBEU TICK %lld",currentTime);
+    }
     if((currentTime >> 31) == 1){
       //  bhmMessage("I","TICKER","ALTERAR PARA TICK_ON_LOCAL");
         myTickStatusLocal = TICK_ON_LOCAL;
