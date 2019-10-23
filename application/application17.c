@@ -35,6 +35,7 @@ volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
     if (rxPointer == 0){                        // HEADER
+     //   printf("chegouuu o flit1\n");
         rxPacket.destination = *rxLocal;
         *control = ACK;
     }
@@ -73,6 +74,7 @@ void sendPckt(){
         while(*controlTx != GO){ /* Waiting for space in the preBuffer */}
 
         if(txPointer == 0){
+            
             *txLocal = txPacket.destination;
         }
         else if (txPointer == 1){

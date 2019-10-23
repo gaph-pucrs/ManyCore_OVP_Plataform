@@ -155,13 +155,15 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
- //   int contQuantum = 0;
-   // FILE *fp;
-    
-   /* while(1){
+//    int contQuantum = 0;
+    FILE *fp;
+    //int i=0;
+    while(1){
     bhmWaitDelay(QUANTUM_DELAY);
-    int i=0;
-    fp = fopen ("data4.csv","a");
+           // if(i<=10){
+    //if(myID==0)bhmMessage("I","ROUTER","QUANTUM %d", i);
+    
+    fp = fopen ("data7.csv","a");
    
     fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
     
@@ -170,7 +172,7 @@ int main(int argc, char *argv[]) {
     //fp  = fopen ("data.csv", "w");
     //fprintf(fp, "%d", contFlits[LOCAL]);
      //       fclose(fp);
-          //  bhmMessage("I","ROUTER"," LOCAL %d ; EAST %d ; WEST %d ; NORTH %d, SOUTH %d", contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+          // bhmMessage("I","ROUTER"," LOCAL %d ; EAST %d ; WEST %d ; NORTH %d, SOUTH %d", contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
             contFlits[LOCAL] = 0;
             contFlits[WEST] = 0;
             contFlits[EAST] = 0;
@@ -179,8 +181,9 @@ int main(int argc, char *argv[]) {
     
    // bhmMessage("I","ROUTER","FLITS LOCAL = %d")
    // bhmMessage("INFO","ROUTER","AQUIIIII");
-    i++;
-    }*/
+   // i++;
+    }
+    
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
     return 0;

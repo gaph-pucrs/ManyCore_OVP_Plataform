@@ -89,10 +89,12 @@ int main(int argc, const char *argv[]) {
    //  optStopReason stopReason = OP_SR_SCHED;
        
        optProcessorP proc;// = opProcessorNext(modNew, NULL);
+       
         opRootModulePreSimulate(mi);
         
       //  opRootModuleSimulate(mi);
-
+    //  optPeripheralP = opPeripheralNew("router0", router0,NULL,NULL,NULL);
+    
 
         do {
 
@@ -118,6 +120,9 @@ int main(int argc, const char *argv[]) {
                 contador ++;
             }
             contQuantum++;
+            opMessage(
+                "I", "HARNESS",
+                "contQuantum = %d",contQuantum);
 
             /*/if ((stopReason!=OP_SR_SCHED) && (stopReason!=OP_SR_HALT)) {
 
