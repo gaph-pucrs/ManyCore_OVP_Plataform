@@ -33,38 +33,52 @@ volatile unsigned int count = 0;
     volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
+volatile int receivingPckt = 0;
 void interruptHandler(void) {
+   while(receivingPckt!=0){
+
+   }
+   receivingPckt = 1;
+    int i = 0;
     //LOG("INT %d! data: %d\n",count, *rxLocal);
 
-    //rxPacket.size = 5;
-    //while(rxPointer < rxPacket.size + 4){
+    rxPacket.size = 5;
+   // while(rxPointer < rxPacket.size + 4){
         while(*control!=STALL){
             if (rxPointer == 0){                        // HEADER
                 rxPacket.destination = *rxLocal;
                 *control = ACK;
+              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == 1){                   // SIZE
                 rxPacket.size = *rxLocal - 3; // -3 to eliminate the control data from the tail
                 rxPacket.message = (int *)malloc(rxPacket.size * sizeof(unsigned int));
                 *control = ACK;
+              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == rxPacket.size + 2){   // HOPES
                 rxPacket.hopes = *rxLocal;
                 *control = ACK;
+              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == rxPacket.size + 3){   // IN TIME
                 rxPacket.inTime = *rxLocal;
                 *control = ACK;
+              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == rxPacket.size + 4){   // OUT TIME
                 rxPacket.outTime = *rxLocal;
                 intr0 = 1;
                 *control = STALL;
+                receivingPckt = 2;
+               // printf("flit %d = %d \n",rxPointer,*rxLocal);
                 return;
             }
             else{                                       // MESSAGE
                 rxPacket.message[rxPointer-2] = *rxLocal;
                 *control = ACK;
+                if(rxPointer == 17) printf("source = %d",*rxLocal);
+               // printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             rxPointer++;
         }
@@ -99,26 +113,35 @@ void sendPckt(){
     }
 }
 int cont = 0;
+
 void receivePckt(){
 
     while(intr0!=1){
-        while(*control!=STALL){
-            
+        if(*control!=STALL){
+
+        }
+       // while(*control!=STALL){            
            // LOG("------------------------------------------------------------------------>AQUI\n");
            //cont ++;
-        }
+    }
+     while(receivingPckt != 2){
+
+     }
+    
+
+
         
 
-    }
 }
+
 
 
 void packetConsumed(){
     rxPointer = 0;
     intr0 = 0;
     free(rxPacket.message);
-
     *control = ACK;
+    receivingPckt = 0;
 }
 
 int main(int argc, char **argv)
@@ -135,6 +158,7 @@ int main(int argc, char **argv)
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
     int_enable(0);
+    
 
     // Enable external interrupts
     Uns32 spr = MFSPR(17);

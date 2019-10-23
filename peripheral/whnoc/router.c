@@ -354,7 +354,7 @@ void transmitt(){
               //  bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d , tick = %llu",(flit >> 24), port,currentTime);               
                   txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                   localPort_regs_data.dataTxLocal.value = flit;
-                 ppmWriteNet(handles.INTTC, 1);
+                    ppmWriteNet(handles.INTTC, 1);
                  }
 
             // Transmit it to the EAST router
@@ -730,18 +730,21 @@ PPM_REG_READ_CB(txCtrlRead) {
 
     //bhmMessage("I","TXCTRLREAD","TX_CTRL_READ");
     informTick();
+    
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(txCtrlWrite) {
     txCtrl = data;
     txCtrl = htonl(txCtrl);// >> 24;
-
+    if(txCtrl==STALL){
+        ppmWriteNet(handles.INTTC,0);
+    }
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(txRead) {
-    ppmWriteNet(handles.INTTC, 0);
+    //ppmWriteNet(handles.INTTC, 0);
     return *(Uns32*)user;
 }
 
