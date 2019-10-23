@@ -30,40 +30,47 @@ volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
 time_t tinicio, tsend,tignore,tfim; /* variaveis do "tipo" tempo */
 volatile unsigned int count = 0;
+    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 void interruptHandler(void) {
-    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
     //LOG("INT %d! data: %d\n",count, *rxLocal);
 
-    count++;
-    if (rxPointer == 0){                        // HEADER
-        rxPacket.destination = *rxLocal;
-        *control = ACK;
-    }
-    else if (rxPointer == 1){                   // SIZE
-        rxPacket.size = *rxLocal - 3; // -3 to eliminate the control data from the tail
-        rxPacket.message = (int *)malloc(rxPacket.size * sizeof(unsigned int));
-        *control = ACK;
-    }
-    else if (rxPointer == rxPacket.size + 2){   // HOPES
-        rxPacket.hopes = *rxLocal;
-        *control = ACK;
-    }
-    else if (rxPointer == rxPacket.size + 3){   // IN TIME
-        rxPacket.inTime = *rxLocal;
-        *control = ACK;
-    }
-    else if (rxPointer == rxPacket.size + 4){   // OUT TIME
-        rxPacket.outTime = *rxLocal;
-        intr0 = 1;
-        *control = STALL;
-    }
-    else{                                       // MESSAGE
-        rxPacket.message[rxPointer-2] = *rxLocal;
-        *control = ACK;
-    }
-    rxPointer++;
+    //rxPacket.size = 5;
+    //while(rxPointer < rxPacket.size + 4){
+        while(*control!=STALL){
+            if (rxPointer == 0){                        // HEADER
+                rxPacket.destination = *rxLocal;
+                *control = ACK;
+            }
+            else if (rxPointer == 1){                   // SIZE
+                rxPacket.size = *rxLocal - 3; // -3 to eliminate the control data from the tail
+                rxPacket.message = (int *)malloc(rxPacket.size * sizeof(unsigned int));
+                *control = ACK;
+            }
+            else if (rxPointer == rxPacket.size + 2){   // HOPES
+                rxPacket.hopes = *rxLocal;
+                *control = ACK;
+            }
+            else if (rxPointer == rxPacket.size + 3){   // IN TIME
+                rxPacket.inTime = *rxLocal;
+                *control = ACK;
+            }
+            else if (rxPointer == rxPacket.size + 4){   // OUT TIME
+                rxPacket.outTime = *rxLocal;
+                intr0 = 1;
+                *control = STALL;
+                return;
+            }
+            else{                                       // MESSAGE
+                rxPacket.message[rxPointer-2] = *rxLocal;
+                *control = ACK;
+            }
+            rxPointer++;
+        }
+  //  }
+    
+    
 }
 
 void sendPckt(){
@@ -91,16 +98,26 @@ void sendPckt(){
         txPointer++;
     }
 }
-
+int cont = 0;
 void receivePckt(){
+
     while(intr0!=1){
-        while(*control!=STALL){}
+        while(*control!=STALL){
+            
+           // LOG("------------------------------------------------------------------------>AQUI\n");
+           //cont ++;
+        }
+        
+
     }
 }
+
 
 void packetConsumed(){
     rxPointer = 0;
     intr0 = 0;
+    free(rxPacket.message);
+
     *control = ACK;
 }
 
@@ -146,9 +163,18 @@ int main(int argc, char **argv)
     //printf("---------->tempo  da aplicacao 22 = %d\n",tinicio);
     tsend = clock(); /* marca o tempo inicial */
     tsend = tsend - tinicio;
+    int a=5;
+    /* printf("comecou\n");
+   /* while(i<10000){
+       a = *rxLocal;
+        i++;
+    }
+    printf("i= %d a = %d\n",i, a);*/
     for(i=0;i<48;i++){
+     //   printf("comecou\n");
+
         receivePckt();
-        LOG("Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
+        LOG(" Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();
     }
 

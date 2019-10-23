@@ -132,7 +132,8 @@ void informTickLocalOFF(){
 // Inform the ticker that the PE is waiting a packet - REMOVE THIS AFTER THE PARALELIZATION
 void informTick(){
     unsigned short int inftick2 = TICK;
-    
+        //myTickStatus = TICK_ON;
+
     ppmPacketnetWrite(handles.iterationsPort, &inftick2, sizeof(inftick2));
 }
 
@@ -349,6 +350,7 @@ void transmitt(){
                 if(routingTable[port] == LOCAL && txCtrl == ACK){
                    flit = bufferPop(port);
                    contFlits[LOCAL]= contFlits[LOCAL]++;
+                  // bhmMessage("I","CONTFLITS","CONTFLITS LOCAL = %d",contFlits[LOCAL]);
               //  bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d , tick = %llu",(flit >> 24), port,currentTime);               
                   txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
                   localPort_regs_data.dataTxLocal.value = flit;
@@ -366,6 +368,8 @@ void transmitt(){
 
                          flit = bufferPop(port);
                          contFlits[EAST]= contFlits[EAST]++;
+                      //  bhmMessage("I","CONTFLITS","CONTFLITS EAST = %d",contFlits[EAST]);
+
                        //  bhmMessage("INFO", "SENDFLITS", "to the east port - flit: %d , tick = %llu",(flit >> 24),currentTime);
                     // Send a flit!
                          ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
@@ -381,6 +385,8 @@ void transmitt(){
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                     flit = bufferPop(port);
                     contFlits[WEST]= contFlits[WEST]++;
+                  //  bhmMessage("I","CONTFLITS","CONTFLITS WEST = %d",contFlits[WEST]);
+
 
                   //  bhmMessage("INFO", "SENDFLITS", "to the west port - flit: %d , tick = %llu", (flit >> 24), currentTime);
                     // Send a flit!
@@ -397,8 +403,9 @@ void transmitt(){
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                     flit = bufferPop(port);
                     contFlits[NORTH]= contFlits[NORTH]++;
+                //   bhmMessage("I","CONTFLITS","CONTFLITS NORTH = %d",contFlits[NORTH]);
 
-                //   bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d, tick = %llu", (flit >> 24), currentTime);
+              //  if(myID==17) bhmMessage("INFO", "SENDFLITS", "to the north port - flit: %d, tick = %llu", (flit >> 24), currentTime);
                     // Send a flit!
                     ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
                     ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
@@ -413,6 +420,8 @@ void transmitt(){
                 if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                     flit = bufferPop(port);
                     contFlits[SOUTH]= contFlits[SOUTH]++;
+                   // bhmMessage("I","CONTFLITS","CONTFLITS SOUTH = %d",contFlits[SOUTH]);
+
 
                    // bhmMessage("INFO", "SENDFLITS", "to the south port - flit: %d", (flit>>24));
                     // Send a flit!
@@ -443,7 +452,7 @@ void preBuffe_statusUpdate(){
 
 void preBuffe_push(unsigned int newFlit){
     contFlitsPacket[LOCAL]++;
-   // bhmMessage("I","PREBUFFERPUSH","PREBUFFERLAST = %d",preBuffer_last);
+  //  if((myID==17) &&(preBuffer_last ==1))bhmMessage("I","PREBUFFERPUSH","PREBUFFERPUSH");
     preBufferPackets[preBuffer_last] = newFlit;
     if(preBuffer_last < PREBUFFER_SIZE-1){
         preBuffer_last++;
@@ -486,7 +495,7 @@ void preBuffe_push(unsigned int newFlit){
 void preBuffer_pop(){
     unsigned int difX, difY;
     // Verify if the preBuffer has something to send and if the local buffer has space to recieve
-    //if(myID ==0)bhmMessage("I","prebufferpop","prebuffer last %d prebuffer_first %d localStaus %d", preBuffer_last, preBuffer_first, localStatus);
+   // if(myID ==17)bhmMessage("I","prebufferpop","prebuffer last %d prebuffer_first %d localStaus %d", preBuffer_last, preBuffer_first, localStatus);
 
     if(preBuffer_last != preBuffer_first && localStatus == GO){
         if(myID == 0){
@@ -530,7 +539,7 @@ void preBuffer_pop(){
                 informTickLocal();
 
                 ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));
-               if(myID==17) bhmMessage("I","PREBUFFERPOP","dezarmazenando pacote 2");
+             //  if(myID==17) bhmMessage("I","PREBUFFERPOP","dezarmazenando pacote 2");
 
 
                // contR --;
@@ -567,7 +576,7 @@ void iterate(){
     unsigned int port;
     // Send a flit from the PREBUFFER to the local buffer
     if(myTickStatusLocal == TICK_ON_LOCAL){
-//("I","ROUTER","IF TICK_ON_LOCAL");
+      //  if(myID==0) bhmMessage("I","ROUTER","PREBUFFER_POP");
 
         preBuffer_pop();
     }
@@ -687,6 +696,7 @@ PPM_PACKETNET_CB(dataWest) {
 
 PPM_REG_READ_CB(rxCtrlRead) {
     return *(Uns32*)user;
+    
 }
 
 PPM_REG_WRITE_CB(rxCtrlWrite) {
@@ -707,12 +717,18 @@ PPM_REG_WRITE_CB(rxWrite) {
     || (control[NORTH] == GO && routingTable[NORTH] != ND) || (control[SOUTH] == GO && routingTable[SOUTH] != ND) \
     || (control[LOCAL] == GO && routingTable[LOCAL] != ND)){
        // bhmMessage("I","rxWrite","=*=*=*=*=*==================================> entrou no iff");
-       // informTickLocal();
+   //     informTickLocal();
     }
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(txCtrlRead) {
+    //int i=0;
+   // if(myID==22)bhmMessage("I","RX CTRL READ", "TICKKKKK");
+  
+    //bhmMessage("I","tx ctrl read","i = %d", i);
+
+    //bhmMessage("I","TXCTRLREAD","TX_CTRL_READ");
     informTick();
     return *(Uns32*)user;
 }

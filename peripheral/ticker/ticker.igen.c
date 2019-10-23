@@ -137,7 +137,7 @@ void writePort(send *sendV, int id){
 
 
 void runTicks(){  
-  // bhmMessage("I","TICKER","TICK = %llu",tickN);
+   //bhmMessage("I","TICKER","TICK = %llu",tickN);
     tick = tickN;
     if((tickMap[0] == TICK_ON)||(tickMapLocal[0] == TICK_ON_LOCAL2)) ppmPacketnetWrite(handles.tickPort0, &tick, sizeof(tick));
     tick = tickN;
