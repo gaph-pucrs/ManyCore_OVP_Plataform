@@ -30,59 +30,50 @@ volatile static Uns32 rxPointer = 0;
 volatile static Uns32 txPointer = 0;
 time_t tinicio, tsend,tignore,tfim; /* variaveis do "tipo" tempo */
 volatile unsigned int count = 0;
-    volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
-
+volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
 volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
-volatile int receivingPckt = 0;
+
 void interruptHandler(void) {
-   while(receivingPckt!=0){
-
-   }
-   receivingPckt = 1;
     int i = 0;
-    //LOG("INT %d! data: %d\n",count, *rxLocal);
-
-    rxPacket.size = 5;
-   // while(rxPointer < rxPacket.size + 4){
-        while(*control!=STALL){
+    while(*control!=STALL){
+        if(*control == REQ){
             if (rxPointer == 0){                        // HEADER
                 rxPacket.destination = *rxLocal;
                 *control = ACK;
-              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == 1){                   // SIZE
                 rxPacket.size = *rxLocal - 3; // -3 to eliminate the control data from the tail
                 rxPacket.message = (int *)malloc(rxPacket.size * sizeof(unsigned int));
                 *control = ACK;
-              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == rxPacket.size + 2){   // HOPES
                 rxPacket.hopes = *rxLocal;
                 *control = ACK;
-              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == rxPacket.size + 3){   // IN TIME
                 rxPacket.inTime = *rxLocal;
                 *control = ACK;
-              //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             else if (rxPointer == rxPacket.size + 4){   // OUT TIME
                 rxPacket.outTime = *rxLocal;
                 intr0 = 1;
                 *control = STALL;
-                receivingPckt = 2;
-               // printf("flit %d = %d \n",rxPointer,*rxLocal);
+                // printf("flit %d = %d \n",rxPointer,*rxLocal);
                 return;
             }
             else{                                       // MESSAGE
                 rxPacket.message[rxPointer-2] = *rxLocal;
                 *control = ACK;
-                if(rxPointer == 17) printf("source = %d",*rxLocal);
-               // printf("flit %d = %d \n",rxPointer,*rxLocal);
+                //if(rxPointer == 17) printf("source = %d",*rxLocal);
+                // printf("flit %d = %d \n",rxPointer,*rxLocal);
             }
             rxPointer++;
         }
-  //  }
+    }
     
     
 }
@@ -112,36 +103,19 @@ void sendPckt(){
         txPointer++;
     }
 }
-int cont = 0;
 
 void receivePckt(){
-
     while(intr0!=1){
         if(*control!=STALL){
-
         }
-       // while(*control!=STALL){            
-           // LOG("------------------------------------------------------------------------>AQUI\n");
-           //cont ++;
     }
-     while(receivingPckt != 2){
-
-     }
-    
-
-
-        
-
 }
-
-
 
 void packetConsumed(){
     rxPointer = 0;
     intr0 = 0;
     free(rxPacket.message);
     *control = ACK;
-    receivingPckt = 0;
 }
 
 int main(int argc, char **argv)
@@ -196,7 +170,6 @@ int main(int argc, char **argv)
     printf("i= %d a = %d\n",i, a);*/
     for(i=0;i<48;i++){
      //   printf("comecou\n");
-
         receivePckt();
         LOG(" Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();

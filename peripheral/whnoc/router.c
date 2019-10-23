@@ -250,6 +250,10 @@ unsigned int bufferPop(unsigned int port){
         first[port] = 0;
     }
     
+    /*if(flitCountOut[port]==HEADER){
+        ppmWriteNet(handles.INTTC, 1);
+    }*/
+
     // Decreases the flitCountOut
     flitCountOut[port] = flitCountOut[port] - 1;
     
@@ -348,12 +352,13 @@ void transmitt(){
                 }
             // Transmission to the local IP
                 if(routingTable[port] == LOCAL && txCtrl == ACK){
-                   flit = bufferPop(port);
-                   contFlits[LOCAL]= contFlits[LOCAL]++;
-                  // bhmMessage("I","CONTFLITS","CONTFLITS LOCAL = %d",contFlits[LOCAL]);
-              //  bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d , tick = %llu",(flit >> 24), port,currentTime);               
-                  txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
-                  localPort_regs_data.dataTxLocal.value = flit;
+                    flit = bufferPop(port);
+                    contFlits[LOCAL]= contFlits[LOCAL]++;
+                    // bhmMessage("I","CONTFLITS","CONTFLITS LOCAL = %d",contFlits[LOCAL]);
+                    //  bhmMessage("INFO", "SENDFLITS", "to the local port - flit: %d - from: %d , tick = %llu",(flit >> 24), port,currentTime);               
+                    txCtrl = REQ; // TODO: try to remove this and let only the interruption signal!
+                    localPort_regs_data.controlTxLocal.value = htonl(REQ);
+                    localPort_regs_data.dataTxLocal.value = flit;
                     ppmWriteNet(handles.INTTC, 1);
                  }
 
