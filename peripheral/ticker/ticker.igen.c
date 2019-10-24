@@ -12,18 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-/////////////////////////////// Port Declarations //////////////////////////////
 
-handlesT handles;
-
-/////////////////////////////// Diagnostic level ///////////////////////////////
-
-// Test this variable to determine what diagnostics to output.
-// eg. if (diagnosticLevel >= 1) bhmMessage("I", "ticker", "Example");
-//     Predefined macros PSE_DIAG_LOW, PSE_DIAG_MEDIUM and PSE_DIAG_HIGH may be used
-Uns32 diagnosticLevel;
-
-#include "ticker.igen.h"
 #include "../whnoc/noc.h"
 
 #define TICK_ON_LOCAL2 0X044
@@ -31,17 +20,15 @@ Uns32 diagnosticLevel;
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 
-unsigned int htonl(unsigned int x){
-    return __bswap_constant_32(x);
-}
 
+handlesT handles;
+Uns32 diagnosticLevel;
 
 unsigned int tickMap[N_PES];
 unsigned int tickMapLocal[N_PES];
 
 unsigned long long int tickN = 0;
 unsigned long long int tick = 0;
-//unsigned int tSend[N_PES] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 int contTotal = 0;
 unsigned long long int nextTick = 1000000;
@@ -55,10 +42,13 @@ typedef struct {
 
 send *sendVector;
 bhmEventHandle tickLocal;
-int contQ = 0;
+int cont = 0;
 
+unsigned int htonl(unsigned int x){
+    return __bswap_constant_32(x);
+}
 
-/*void runTickLocal(int contQ){
+/*void runTickLocal(intcont){
     int i;
     tickN++;
     tick = tickN;
@@ -211,7 +201,7 @@ void statusUpdate(unsigned int router, unsigned int status){
     int i;
      int mapOr = 0;
      for(i=0;i<N_PES;i++){
-         if((tickMap[i]==TICK_ON)||(contQ!=0)){
+         if((tickMap[i]==TICK_ON)||(cont!=0)){
              mapOr = 1;
              break;
          }
@@ -850,136 +840,105 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-     int i,run = 0;
+
+    
+     int i, j, aux = 0;
+
+     /* Run is 1 if has somehing to transmit in any local ports */
+     int run = 0;
+
      send *sendV;
-     
-     //int test = 1;
-      tickLocal = bhmCreateNamedEvent("start","go Local");
+
+     /* Event tickLocal will be triggered when the next packet can be sended in LOCAL!!*/
+    tickLocal = bhmCreateNamedEvent("start","go Local");
 
      while(1){
-         
-        bhmWaitDelay(QUANTUM_DELAY);
-       /* for(i=0;i<N_PES;i++){
-            bhmMessage("I","ITERATOR"," LOCAL %d ; EAST %d ; WEST %d ; NORTH %d, SOUTH %d", contFlits[i][LOCAL],contFlits[i][EAST],contFlits[i][WEST],contFlits[i][NORTH],contFlits[i][SOUTH]);
-            contFlits[i][LOCAL] = 0;
-            contFlits[i][WEST] = 0;
-            contFlits[i][EAST] = 0;
-            contFlits[i][NORTH] = 0;
-            contFlits[i][SOUTH] = 0;
-        }*/
-        
-        //bhmMessage("I","TICKER","--------------------------------------------------->QUANTUM ESPERADO");
-        
-        contQ = contTotal;
-        contTotal = 0;
-        
-        
-        sendV = malloc (contQ * sizeof (send));
 
-        for(i=0;i<contQ;i++){
+        /* Wait the next quantum */ 
+        bhmWaitDelay(QUANTUM_DELAY);
+        
+        /* Passing the values of the previous quantum */
+        cont = contTotal;
+        contTotal = 0;        
+        sendV = malloc (cont * sizeof (send));
+        for(i=0;i<cont;i++){
             sendV[i] = sendVector[i];
         }
+
+        /* For each PE, verify if has something to send in local Port */
         for(i=0;i<N_PES;i++){
             if(tickMapLocal[i] == TICK_ON_LOCAL){
-              //  bhmMessage("I","TICKER","TEM DADO PARA ENVIAR");
                 run = 1;
                 break;
             }
         }
+
+        /* Checks if has something to send in any local port */
         if(run){
-         //   bhmMessage("I","TICKER","------------------------------------>RUN");
-            for(i=0;i<contQ;i++){
-              //  bhmMessage("I","ORDEM ANTES","%d do PE %d",sendV[i].time,sendV[i].idPE);
-            }
-            insertionSort(contQ, sendV);
-            for(i=0;i<contQ;i++){
-             //   bhmMessage("I","ORDEM DEPOIS","%d do PE %d",sendV[i].time,sendV[i].idPE);
-            }
+
+            /* Sort the packets that will be transmitted */
+            insertionSort(cont, sendV);
+
+            /* The first packet will be sent in the next tick*/
             sendV[0].start = 1;
-          //  bhmMessage("I","TICKER","sendVectorStart 0 = %d",sendV[0].start);
             sendV[0].equals = 0;
-            for(i=1;i<contQ;i++){
-            //tickN++;
+
+            /* Calculates the difference between the transmission of the packets (in ticks) */
+            for(i=1;i<cont;i++){
+            
                 sendV[i].start = sendV[i-1].start + ((sendV[i].time - sendV[i-1].time)/30);
-              //  bhmMessage("I","TICKER","sendVectorStart %d do PE %d = %d",i,sendV[i].idPE,sendV[i].start);
                 sendV[i].equals = 0;
-
-               /* if(sendV[i].start == sendV[i-1].start){
-
-                   sendV[i].equals ++;
-
-                }*/
             }
-            int i,j, contW = 0;
 
-            tickN++;
-            int aux = tickN;
-
-
-           // if(contQ > 1){
-                for(i=0;i<contQ;i++){
-                    for(j=i;j<contQ;j++){
-                        if(sendV[i].start == sendV[j].start){
-                            sendV[i].equals ++;
-                          //  bhmMessage("I","ticker","equals ++");
+            /* Checks the packets that will be sent in the same tick */
+            for(i=0;i<cont;i++){
+               for(j=i;j<cont;j++){
+                    if(sendV[i].start == sendV[j].start){
+                         sendV[i].equals ++;
                         }
-                    }
                 }
-            //}
+            }
+          
+            /* Increments the tick */
+            tickN++;
+            aux = tickN;
 
-           // bhmMessage("I","TICKER"," %d iguais", sendV[0].equals);
+            /* Sends the tick for the first(s) packet(s)*/
             writePort(sendV, 0);
-            contW ++;
-           // bhmMessage("I","TICKER","ESCREVEU NO PE %d",sendV[0].idPE);
-
+            /* Sends the tick for routers*/
             runTicks();
-           // bhmMessage("I","TICKER","ENVIA PRIMEIRO TICK ROUTER");
+
+
             for(i=0;i<sendV[0].equals;i++){
                 tickMapLocal[sendV[i].idPE] = TICK_ON_LOCAL2;
             }
-           // contQ = contQ - sendV[0].equals;
-         //   bhmMessage("I","TICKER"," sendV[0].equals = %d CONTQ = %d",sendV[0].equals, contQ);
-            for(i=sendV[0].equals;i<contQ;i++){
+          
+            /* For each packet starting on the last sent... */
+            for(i=sendV[0].equals;i<cont;i++){
+
                 nextTick =  aux + sendV[i].start + 1;
-              //  bhmMessage("I","TICKER"," esperando evento NEXT TICK = %llu DO PE %d", nextTick,sendV[i].idPE);
+                /* Wait for the next tick */
                 bhmWaitEvent(tickLocal);
-              //  bhmMessage("I","TICKER","TICK LOCAL PE %d", sendV[i].idPE);
+                
+                /*send the ticks for this packets and routers */
                 writePort(sendV, i);
                 runTicks();
+
                 for(j=0;j<sendV[i].equals;i++){
                     tickMapLocal[sendV[i].idPE] = TICK_ON_LOCAL2;
                 }
                 i = i + sendV[i].equals - 1;
-               // eventoAtivado=0;
-               // runTicks();
+           
             }
             free(sendVector);
             free(sendV);
 
             sendVector = malloc (1 * sizeof (send));
-            contQ=0;
+             cont=0;
             run = 0;
-           // bhmMessage("I","TICKER","/////////////////////////////////////////////////////////////////////////////////ACABOU EXECUCAO DESTE QUANTUM MAIN");
-
-            //bhmMessage("I","TICKER","-------------------------------------------------------->AQUI");
-            //for(i=0;i<contQ;i++){
-              //  while(tickN < (aux + sendVector[i].start)){
-               //     bhmMessage("I","TICKER","WHILE");
-                //}
-               // bhmMessage("I","TICKER","-------------------------------------------------------------------------------->saiu do while");
-                //writePort(sendVector[i].idPE);
-                //runTicks();
-                //tickN++;
-            } else {
-             //   bhmMessage("I","TICKER","NOT RUN");
-            }
-            
-
-
-
-      //  }
-      //  bhmMessage("INFO","TICKER","QUANTUM ESPERADO");
-
+ 
+            } 
+         
     }
 
    
