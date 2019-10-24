@@ -157,31 +157,31 @@ int main(int argc, char *argv[]) {
     constructor();
 //    int contQuantum = 0;
     FILE *fp;
-    //int i=0;
+    int i=0;
+    
     while(1){
-    bhmWaitDelay(QUANTUM_DELAY);
-           // if(i<=10){
-    //if(myID==0)bhmMessage("I","ROUTER","QUANTUM %d", i);
-    
-    fp = fopen ("data7.csv","a");
+        bhmWaitDelay(QUANTUM_DELAY);
+        if(i<=100){
+            if(myID==0){
+     
+                fp = fopen ("data12.csv","a");
+                fprintf(fp,"Quantum %d\n",i);
+                fprintf(fp,"Routers ; LOCAL ; EAST ; WEST ; NORTH ; SOUTH \n");
+                fclose(fp);       
+            }  
+            fp = fopen ("data12.csv","a");
    
-    fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+            fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
     
-    fclose(fp);
-  
-    //fp  = fopen ("data.csv", "w");
-    //fprintf(fp, "%d", contFlits[LOCAL]);
-     //       fclose(fp);
-          // bhmMessage("I","ROUTER"," LOCAL %d ; EAST %d ; WEST %d ; NORTH %d, SOUTH %d", contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+            fclose(fp);
             contFlits[LOCAL] = 0;
             contFlits[WEST] = 0;
             contFlits[EAST] = 0;
             contFlits[NORTH] = 0;
             contFlits[SOUTH] = 0;
-    
-   // bhmMessage("I","ROUTER","FLITS LOCAL = %d")
-   // bhmMessage("INFO","ROUTER","AQUIIIII");
-   // i++;
+        }
+                i++;
+
     }
     
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
