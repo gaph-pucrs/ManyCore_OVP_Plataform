@@ -8,6 +8,17 @@ bigBlock = size * 3
 DIM_X = 5
 DIM_Y = 5
 MAX_FLITS = 150
+N_PES = 25
+QUANTUMS_PER_IMG = 1
+
+# class quantumFlits():
+#     def __init__(self, pLocal, pEast, pWest, pNorth, pSouth):
+#         self.pLocal = pLocal
+#         self.pEast = pEast
+#         self.pWest = pWest
+#         self.pNorth = pNorth
+#         self.pSouth = pSouth
+    
 
 
 def drawNoC(pLocal,pEast, pWest, pNorth, pSouth, i):
@@ -27,9 +38,9 @@ def drawNoC(pLocal,pEast, pWest, pNorth, pSouth, i):
             min_x_b4 = min_x_b1
             min_x_b5 = min_x_b2
             min_x_b6 = min_x_b3
-           # min_x_b7 = min_x_b1
+            min_x_b7 = min_x_b1
             min_x_b8 = min_x_b2
-            #min_x_b9 = min_x_b3
+            min_x_b9 = min_x_b3
 
             min_y_b1 = min_y + (size * 0)
             min_y_b2 = min_y_b1 
@@ -39,30 +50,44 @@ def drawNoC(pLocal,pEast, pWest, pNorth, pSouth, i):
             min_y_b6 = min_y_b4
             min_y_b7 = min_y + (size *2)
             min_y_b8 = min_y_b7
-#            min_y_b9 = min_y_b7
+            min_y_b9 = min_y_b7
 
             #NOTHING
-            #draw.rectangle([min_x_b1, min_y_b1, min_x_b1 + size, min_y_b1+size], fill='white', outline='white')
-            #  draw.multiline_text((min_x + size/2, min_y + size/2), text=str(pLocal[index]) , fill='blue', align='center')
+            #drawing retangle with color gray
+            draw.rectangle([min_x_b1, min_y_b1, min_x_b1 + size, min_y_b1+size], fill='gray', outline='gray')
+            #drawing transversal line
+            draw.line([min_x_b1, min_y_b1, min_x_b1 + size, min_y_b1+size], fill='black', width=1)
+            #drawing line horizontal line
+            draw.line([min_x_b1, min_y_b1, min_x_b1 + size, min_y_b1], fill='black', width=4)
+            #drawing vertical line
+            draw.line([min_x_b1, min_y_b1, min_x_b1, min_y_b1 + size], fill='black', width=4)
+
+
 
             #NORTH
+            #calculating port color
             portColor= int(255 - pNorth[Routers]/MAX_FLITS * 255)
             draw.rectangle([min_x_b2, min_y_b2, min_x_b2 + size, min_y_b2+size], fill=(255,portColor,portColor), outline='gray')
+            #drawing horizontal line
+            draw.line([min_x_b2, min_y_b2, min_x_b2 + size, min_y_b2], fill='black', width=4)
+            #drawing text
             draw.multiline_text((min_x_b2 + size/2, min_y_b2 + size/2), text=str(pNorth[Routers]) , fill='black', align='center')
 
 
             #LOCAL
             portColor= int(255 - pLocal[Routers]/MAX_FLITS * 255)
-
             draw.rectangle([min_x_b3, min_y_b3, min_x_b3 + size, min_y_b3+size], fill=(255,portColor,portColor), outline='gray')
             draw.multiline_text((min_x_b3 + size/2, min_y_b3 + size/2), text=str(pLocal[Routers]) , fill='black', align='center')
+            draw.line([min_x_b3, min_y_b3, min_x_b3 + size, min_y_b3], fill='black', width=4)
+            draw.line([min_x_b3 + size, min_y_b3, min_x_b3 + size, min_y_b3 + size ], fill='black', width=4)
 
 
             #WEST
             portColor= int(255 - pWest[Routers]/MAX_FLITS * 255)
-
             draw.rectangle([min_x_b4, min_y_b4, min_x_b4 + size, min_y_b4+size], fill=(255,portColor,portColor), outline='gray')
             draw.multiline_text((min_x_b4 + size/2, min_y_b4 + size/2), text=str(pWest[Routers]) , fill='black', align='center')
+            draw.line([min_x_b4, min_y_b4, min_x_b4, min_y_b4 + size], fill='black', width=4)
+
 
             #ROUTER TAG
             draw.rectangle([min_x_b5, min_y_b5, min_x_b5 + size, min_y_b5+size], fill=(173,234,234), outline='black')
@@ -73,19 +98,34 @@ def drawNoC(pLocal,pEast, pWest, pNorth, pSouth, i):
 
             draw.rectangle([min_x_b6, min_y_b6, min_x_b6 + size, min_y_b6+size], fill=(255,portColor,portColor), outline='gray')
             draw.multiline_text((min_x_b6 + size/2, min_y_b6 + size/2), text=str(pEast[Routers]) , fill='black', align='center')
+            draw.line([min_x_b6 + size, min_y_b6, min_x_b6 + size, min_y_b6 + size ], fill='black', width=4)
+
 
 
             #NOTHING
-           # draw.rectangle([min_x_b7, min_y_b7, min_x_b7 + size, min_y_b7+size], fill='white', outline='white')
+            draw.rectangle([min_x_b7, min_y_b7, min_x_b7 + size, min_y_b7+size], fill='gray', outline='gray')
+            draw.line([min_x_b7, min_y_b7, min_x_b7, min_y_b7 + size], fill='black', width=4)
+            draw.line([min_x_b7, min_y_b7, min_x_b7 + size, min_y_b7+size], fill='black', width=1)
+            
+            draw.line([min_x_b7,min_y_b7 + size, min_x_b7 + size, min_y_b7+size ], fill='black', width=1)
+
+
 
             #SOUTH
             portColor= int(255 - pSouth[Routers]/MAX_FLITS * 255)
 
             draw.rectangle([min_x_b8, min_y_b8, min_x_b8 + size, min_y_b8+size], fill=(255,portColor,portColor), outline='black')
             draw.multiline_text((min_x_b8 + size/2, min_y_b8 + size/2), text=str(pSouth[Routers]) , fill='black', align='center')
+            draw.line([min_x_b8,min_y_b8 + size, min_x_b8 + size, min_y_b8 + size ], fill='black', width=4)
 
 
             #NOTHING
+            draw.rectangle([min_x_b9, min_y_b9, min_x_b9 + size, min_y_b9+size], fill='gray', outline='gray')
+            draw.line([min_x_b9, min_y_b9, min_x_b9 + size, min_y_b9+size], fill='black', width=1)
+            draw.line([min_x_b8,min_y_b9 + size, min_x_b9 + size, min_y_b9 + size ], fill='black', width=4)
+            draw.line([min_x_b9 + size, min_y_b9, min_x_b9 + size, min_y_b9 + size ], fill='black', width=4)
+
+
            # draw.rectangle([min_x_b9, min_y_b9, min_x_b9 + size, min_y_b9+size], fill='white', outline='white')
 
 
@@ -103,15 +143,24 @@ if __name__ == '__main__':
     z = 0
     k = 0
     j = 0
+    cont = 0
     router = []
     pLocal = []
     pEast = []
     pWest = []
     pNorth = []
     pSouth = []
+    qFlits = []
+
+    #pLocalImg = [0 for i in range (N_PES)]
+    #pEastImg = [0 for i in range (N_PES)]
+    #pWestImg = [0 for i in range (N_PES)]
+    #pNorthImg = [0 for i in range(N_PES)]
+    #pSouthImg = [0 for i in range (N_PES)]
+    
     #font = ImageFont.truetype("arial", 15)
     #a = np.array([])
-    with open('data11.csv') as csv_file:
+    with open('trafegoMemphis') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')  
         line_count = 0
         for row in csv_reader:
@@ -120,30 +169,52 @@ if __name__ == '__main__':
                 j = 0
                 print("Entrou no if")
             elif "LOCAL" in row[1]:
-                z = z+1
+                z = 0
             else:
                 #router.append(j)
+                                   
                 pLocal.append(int(row[1]))
                 pEast.append(int(row[2]))
                 pWest.append(int(row[3]))
                 pNorth.append(int(row[4]))
                 pSouth.append(int(row[5]))
-
+               
                 j = j+1
+            if (j == N_PES):
                 
-            if j == 25:
+                #print("aquuiii")
+
+               # qFlits.append(quantumFlits(pLocal,pEast,pWest,pNorth,pSouth))
                 
-                print(pLocal)
-                print(pEast)
-                print(pWest)
-                print(pSouth)
-                print(pNorth)
+            #if (j == N_PES*QUANTUMS_PER_IMG):
+                
+             #   pLocal.clear()
+              #  pEast.clear()
+               # pWest.clear()
+                #pNorth.clear()
+                #pSouth.clear()
+                
+                #for idx, qFlit in enumerate(qFlits):
+                #for qFlit in qFlits:
+                 #   for z in range(N_PES):                   
+                  #      print(z)
+                   #     pLocalImg[z] += qFlit.pLocal[z]
+                    #    pEastImg[z] += qFlit.pEast[z]
+                     #   pWestImg[z] += qFlit.pWest[z]
+                      #  pNorthImg[z] += qFlit.pNorth[z]
+                       # pSouthImg[z] += qFlit.pSouth[z]
+
                 drawNoC(pLocal, pEast, pWest, pNorth, pSouth, i)
                 pLocal.clear()
                 pEast.clear()
                 pWest.clear()
                 pNorth.clear()
                 pSouth.clear()
+                # pLocalImg.clear()
+                # pEastImg.clear()
+                # pWestImg.clear()
+                # pNorthImg.clear()
+                # pSouthImg.clear()
 
                 j=0
 
