@@ -9,16 +9,47 @@ DIM_X = 5
 DIM_Y = 5
 MAX_FLITS = 150
 N_PES = 25
-QUANTUMS_PER_IMG = 1
+QUANTUMS_PER_IMG = 2
+QUANTUMS = 98
 
-# class quantumFlits():
-#     def __init__(self, pLocal, pEast, pWest, pNorth, pSouth):
-#         self.pLocal = pLocal
-#         self.pEast = pEast
-#         self.pWest = pWest
-#         self.pNorth = pNorth
-#         self.pSouth = pSouth
-    
+
+class quantumFlits():
+    def __init__(self, pLocal, pEast, pWest, pNorth, pSouth):
+        self.pLocal = pLocal
+        self.pEast = pEast
+        self.pWest = pWest
+        self.pNorth = pNorth
+        self.pSouth = pSouth
+
+def loadQuantum(input_file):      
+    pLocal = []
+    pEast = []
+    pWest = []
+    pNorth = []
+    pSouth = []
+    for row in input_file:
+        if "Quantum" in row[0] :
+            j = 0
+            #  print("Entrou no if")
+        elif "LOCAL" in row[1]:
+            pass
+        else:
+            #router.append(j)
+                                   
+            pLocal.append(int(row[1]))
+            pEast.append(int(row[2]))
+            pWest.append(int(row[3]))
+            pNorth.append(int(row[4]))
+            pSouth.append(int(row[5]))
+               
+            j = j+1
+        if (j == N_PES):
+                
+            #print("aquuiii")
+
+            return quantumFlits(pLocal,pEast,pWest,pNorth,pSouth)
+
+
 
 
 def drawNoC(pLocal,pEast, pWest, pNorth, pSouth, i):
@@ -132,92 +163,43 @@ def drawNoC(pLocal,pEast, pWest, pNorth, pSouth, i):
             Routers += 1
 
     im.save('quantum{}.png'.format(i))
-    img = ImageTk.PhotoImage(image=im)
-    tk.Label(window, image=img).pack()
-    window.mainloop()            
+    #img = ImageTk.PhotoImage(image=im)
+    #tk.Label(window, image=img).pack()
+    #window.mainloop()            
 
 
 if __name__ == '__main__':
   
-    i = 0
-    z = 0
-    k = 0
-    j = 0
-    cont = 0
-    router = []
-    pLocal = []
-    pEast = []
-    pWest = []
-    pNorth = []
-    pSouth = []
     qFlits = []
-
-    #pLocalImg = [0 for i in range (N_PES)]
-    #pEastImg = [0 for i in range (N_PES)]
-    #pWestImg = [0 for i in range (N_PES)]
-    #pNorthImg = [0 for i in range(N_PES)]
-    #pSouthImg = [0 for i in range (N_PES)]
-    
-    #font = ImageFont.truetype("arial", 15)
-    #a = np.array([])
-    with open('trafegoMemphis') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')  
-        line_count = 0
-        for row in csv_reader:
-            if "Quantum" in row[0] :
-                i = i+1
-                j = 0
-                print("Entrou no if")
-            elif "LOCAL" in row[1]:
-                z = 0
-            else:
-                #router.append(j)
-                                   
-                pLocal.append(int(row[1]))
-                pEast.append(int(row[2]))
-                pWest.append(int(row[3]))
-                pNorth.append(int(row[4]))
-                pSouth.append(int(row[5]))
-               
-                j = j+1
-            if (j == N_PES):
-                
-                #print("aquuiii")
-
-               # qFlits.append(quantumFlits(pLocal,pEast,pWest,pNorth,pSouth))
-                
-            #if (j == N_PES*QUANTUMS_PER_IMG):
-                
-             #   pLocal.clear()
-              #  pEast.clear()
-               # pWest.clear()
-                #pNorth.clear()
-                #pSouth.clear()
-                
-                #for idx, qFlit in enumerate(qFlits):
-                #for qFlit in qFlits:
-                 #   for z in range(N_PES):                   
-                  #      print(z)
-                   #     pLocalImg[z] += qFlit.pLocal[z]
-                    #    pEastImg[z] += qFlit.pEast[z]
-                     #   pWestImg[z] += qFlit.pWest[z]
-                      #  pNorthImg[z] += qFlit.pNorth[z]
-                       # pSouthImg[z] += qFlit.pSouth[z]
-
-                drawNoC(pLocal, pEast, pWest, pNorth, pSouth, i)
-                pLocal.clear()
-                pEast.clear()
-                pWest.clear()
-                pNorth.clear()
-                pSouth.clear()
-                # pLocalImg.clear()
-                # pEastImg.clear()
-                # pWestImg.clear()
-                # pNorthImg.clear()
-                # pSouthImg.clear()
-
-                j=0
-
+    i = 0
+    pLocalImg = [0 for i in range (N_PES)]
+    pEastImg = [0 for i in range (N_PES)]
+    pWestImg = [0 for i in range (N_PES)]
+    pNorthImg = [0 for i in range(N_PES)]
+    pSouthImg = [0 for i in range (N_PES)]
+  
+    with open('data11.csv') as csv_file:
+        for _ in range(0,QUANTUMS,QUANTUMS_PER_IMG):
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            for _ in range(QUANTUMS_PER_IMG):
+                qFlits.append(loadQuantum(csv_reader))
+                i += 1     
+            for qFlit in qFlits:
+                for z in range(N_PES):                   
+                    pLocalImg[z] += qFlit.pLocal[z]
+                    pEastImg[z] += qFlit.pEast[z]
+                    pWestImg[z] += qFlit.pWest[z]
+                    pNorthImg[z] += qFlit.pNorth[z]
+                    pSouthImg[z] += qFlit.pSouth[z]
+            # print(cont)
+            #cont = 0
+            drawNoC(pLocalImg, pEastImg, pWestImg, pNorthImg, pSouthImg, i)
+            pLocalImg = [0 for i in range (N_PES)]
+            pEastImg = [0 for i in range (N_PES)]
+            pWestImg = [0 for i in range (N_PES)]
+            pNorthImg = [0 for i in range(N_PES)]
+            pSouthImg = [0 for i in range (N_PES)]
+            qFlits.clear()
 
 
 
