@@ -8,7 +8,7 @@
 
 // NoC Structure configuration
 #define N_PORTS 	    5
-#define BUFFER_SIZE 	8
+#define BUFFER_SIZE 	17
 
 // Control flags
 #define STALL   1

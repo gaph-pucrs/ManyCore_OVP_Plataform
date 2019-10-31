@@ -1,19 +1,8 @@
 /*
- *
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
- *
- * The contents of this file are provided under the Software License
- * Agreement that you accepted before downloading this file.
- *
- * This source forms part of the Software and can be used for educational,
- * training, and demonstration purposes but cannot be used for derivative
- * works except in cases where the derivative works require OVP technology
- * to run.
- *
- * For open source models released under licenses that you can use for
- * derivative works, please visit www.OVPworld.org or www.imperas.com
- * for the location of the open source models.
- *
+
+ This code controls the simulation.
+ The number  of Instructions per Time slice (INSTRUCTIONS_PER_TIME_SLICE) can be altered.
+
  */
 
 #include <string.h>
@@ -25,31 +14,13 @@
 #define MODULE_NAME "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
-#define INSTRUCTIONS_PER_SECOND       1000000000
+#define INSTRUCTIONS_PER_SECOND       100000000
 #define QUANTUM_TIME_SLICE            0.0001
-#define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
+#define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //10000
 struct optionsS {
 } options = {
 };
-
-/* static OP_CONSTRUCT_FN(moduleConstruct) {
-    const char *u1_path = "module";
-    opModuleNew(
-        mi,       // parent module
-        u1_path,       // modelfile
-        "u1",   // name
-        0,
-        0
-    );
-}*/
-
-static void cmdParser(optCmdParserP parser) {
-}
-
-typedef struct optModuleObjectS {
-    // insert module persistent data here
-} optModuleObject;
-
+int N_PES =25;
 
 
 static OP_POST_SIMULATE_FN(modulePostSimulate) {
@@ -60,11 +31,11 @@ static OP_DESTRUCT_FN(moduleDestruct) {
 // insert moduleDestruct code here
 }
 
+/*Attributes Set in Module Construction */
 optModuleAttr modelAttrs = {
     .versionString       = OP_VERSION,
     .type                = OP_MODULE,
     .name                = MODULE_NAME,
-    .objectSize          = sizeof(optModuleObject),
     .releaseStatus       = OP_UNSET,
     .purpose             = OP_PP_BAREMETAL,
     .visibility          = OP_VISIBLE,
@@ -74,28 +45,28 @@ optModuleAttr modelAttrs = {
 };
 
 int main(int argc, const char *argv[]) {
+
+    /*Required to init the simulation */
     opSessionInit(OP_VERSION);
-    optParamP   params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
+
+    /* create the root module with reduced Quantum (in line with Custom Scheduler) */
+    optParamP params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
     optCmdParserP parser = opCmdParserNew(MODULE_NAME, OP_AC_ALL);
-    cmdParser(parser);
     opCmdParseArgs(parser, argc, argv);
     optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);
     optModuleP  modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 
-  
-    
+    /*count the numbers of quantums */
     int contQuantum = 0;
-     optTime       myTime     = QUANTUM_TIME_SLICE;
-   //  optStopReason stopReason = OP_SR_SCHED;
-       
-       optProcessorP proc;// = opProcessorNext(modNew, NULL);
-       
-        opRootModulePreSimulate(mi);
-        
-      //  opRootModuleSimulate(mi);
-    //  optPeripheralP = opPeripheralNew("router0", router0,NULL,NULL,NULL);
-    
 
+
+     optTime       myTime     = QUANTUM_TIME_SLICE;
+     optStopReason stopReason = OP_SR_SCHED;   
+     optProcessorP proc;
+       
+     // must advance to next phase for the API calls that follow
+     opRootModulePreSimulate(mi);
+        
         do {
 
             // move time forward by time slice on root module
@@ -109,22 +80,34 @@ int main(int argc, const char *argv[]) {
             );*/
             //fprintf(stderr,"---------------------------------------------------------------------------->Advance Time to %g seconds",
               //  (double)myTime);
-            int contador = 0;
+           
+            /*cont the number of processors that has exited */
+            int cont = 0;
+        
+            /* loop for all processors */   
             while ((proc = opProcessorNext(modNew, proc))) {
                 /*  opMessage(
                 "I", "HARNESS",
-                "printPROC contador = %d",contador);
-                stopReason = */
-              opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+                "printPROC contador = %d",contador);*/
+
+                /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
+                stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
                 
-                contador ++;
+                /*checks if the processor has exited */
+                if(stopReason == OP_SR_EXIT){
+                    cont++;
+                }
+
+                
             }
+
             contQuantum++;
             opMessage(
                 "I", "HARNESS",
                 "contQuantum = %d",contQuantum);
 
-            /*/if ((stopReason!=OP_SR_SCHED) && (stopReason!=OP_SR_HALT)) {
+            /*checks if all processors has exited */
+            if (cont==N_PES) {
 
                 opMessage(
                     "I", "HARNESS",
@@ -134,14 +117,15 @@ int main(int argc, const char *argv[]) {
 
                 break;  // finish simulation loop
 
-            }*/
+            }
 
             myTime += QUANTUM_TIME_SLICE;
 
         } while (1);
 
-
+    /*Required for the end of simulation*/
     opSessionTerminate();
+
     return 0;
 }
 

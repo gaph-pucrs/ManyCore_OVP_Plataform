@@ -4,6 +4,7 @@ X=$1
 Y=$2
 N=$(($X*$Y))
 
+
 #source /soft64/source_gaph
 module load ovp/20170201
 source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
@@ -24,6 +25,10 @@ cd ..
 cd ticker
 #./tickerGenerator.sh $X $Y
 cd ../..
+
+cd harness
+sed -i 's/int N_PES.*/int N_PES ='$N';/' harness.c
+cd ..
 
 N=$(($N-1))
 
