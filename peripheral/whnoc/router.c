@@ -1,4 +1,3 @@
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
@@ -64,6 +63,11 @@ unsigned int routingTable[N_PORTS] = {ND,ND,ND,ND,ND};
 // Priority list
 unsigned int priority[N_PORTS] = {0,1,2,3,4};
 
+// RR Arbiter
+unsigned int nextPort = ND;
+unsigned int actualPort = LOCAL;
+
+
 // Simulation time
 unsigned short int myTickStatus = TICK_OFF;
 unsigned short int myTickStatusLocal = TICK_OFF_LOCAL;
@@ -88,6 +92,8 @@ int contFlitsPacket[N_PORTS] = {0,0,0,0,0};
 
 // size of currentPacket
 int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
+unsigned int contPriority[N_PORTS] = {0,0,0,0,5};
+
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
@@ -267,7 +273,7 @@ unsigned int bufferPop(unsigned int port){
         }
         // Reset it's priority
         priority[port] = 0;
-        
+        contPriority[port] = 0;
     }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCountOut[port] == SIZE){
@@ -280,14 +286,13 @@ unsigned int bufferPop(unsigned int port){
     return value;
 }
 
-unsigned int priorityCheck(){
-    unsigned int selected = ND; // Starts selecting none;
+//unsigned int priorityCheck(){
+    /*unsigned int selected = ND; // Starts selecting none;
     unsigned int selPrio = 0; 
     int k;
     for(k = 0; k <= LOCAL; k++){
         // Increases the priority every time that this function runs
         priority[k] = priority[k] + 1;
-
         // If the port has a request then...
         if(!isEmpty(k) && routingTable[k]==ND){
             if(priority[k] > selPrio){
@@ -296,7 +301,119 @@ unsigned int priorityCheck(){
             }
         }
     }
-    return selected;
+    return selected;*/
+
+/*checks if the port is available */
+int portIsAvailable(int port){
+
+    int checkport=0;
+    for(checkport = 0; checkport <N_PORTS; checkport++){
+            if (routingTable[checkport] == port){
+                return 0;
+            }
+    }
+    return 1;
+
+}
+
+
+int getMaxPortAvailable(unsigned int *contPriority){
+
+    int max = 0;
+    int canTransmit = 0;
+    int port = 0;
+    int selPort = ND;
+   /*Checks for each port if the port has priority bigger than max and is not routed and the connected port is available*/
+    for(port=0;port<N_PORTS;port++){
+        if((contPriority[port]>max) && (routingTable[port]==ND) && (portIsAvailable(XYrouting(myAddress,buffers[port][first[port]].data)))){
+            
+             max = contPriority[port];
+             selPort = port;
+            canTransmit = 1;
+        }
+    }
+
+    if(selPort!=ND){
+        return selPort;
+    }else{
+        return ND;
+    }
+}
+
+
+
+void priorityCheck(){
+
+    int port = 0;
+    int selectedPort = 0;
+
+    /*Count priority for ports that has something to send */
+    for(port=0;port<N_PORTS;port++){
+        if((!isEmpty(port)) && (routingTable[port] == ND)){
+                contPriority[port] ++; 
+        }
+    }
+    /*Returns the port with the bigger priority */
+    selectedPort = getMaxPortAvailable(contPriority);
+
+    /*if some port was selected */
+    if(selectedPort != 5){
+        /*routingTable is updated and port priority is update to 0 */
+        routingTable[selectedPort] = XYrouting(myAddress,buffers[selectedPort][first[selectedPort]].data);
+        contPriority[selectedPort] = 0;
+    } 
+
+    
+    //return 0;
+}
+
+
+ /*   switch (actualPort){
+        case LOCAL:
+            if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
+            else if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
+            else if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
+            else if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
+            else nextPort = LOCAL;
+        break;
+
+        case EAST:
+            if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
+            else if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
+            else if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
+            else if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
+            else nextPort = EAST;
+        break;
+
+        case WEST:
+            if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
+            else if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
+            else if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
+            else if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
+            else nextPort = WEST;
+        break;
+
+        case NORTH:
+            if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
+            else if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
+            else if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
+            else if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
+            else nextPort = NORTH;
+        break;
+
+        case SOUTH:
+            if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
+            else if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
+            else if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
+            else if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
+            else nextPort = SOUTH;
+        break;
+
+        default:
+            nextPort = LOCAL;
+    }
+    actualPort = nextPort;
+    return;
 }
 
 void arbitration(unsigned int port){
@@ -319,9 +436,12 @@ void arbitration(unsigned int port){
             routingTable[port] = to;
             // Once one port is attended, then reset it's priority.
             priority[port] = 1;
+              if(myID == 17){
+                   bhmMessage("I","ROUTER","--------------------------->Porta %d atendida \n", port);
+               }
         }
     }
-}
+}*/
 
 void transmitt(){
     unsigned int port, flit;
@@ -522,20 +642,17 @@ void preBuffer_pop(){
 
 void iterate(){
 
-    unsigned int port;
     // Send a flit from the PREBUFFER to the local buffer
     if(myTickStatusLocal == TICK_ON_LOCAL){
 
         preBuffer_pop();
     }
     // Defines which port will be attended by the arbiter
-    port = priorityCheck();
-
-    // Runs the arbitration for the selected port
-    arbitration(port);
-
-    // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-    transmitt();
+    //port = priorityCheck();
+    priorityCheck();
+   // Runs the transmittion of one flit to each direction (if there is a connection stablished)
+    transmitt();   
+   
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -717,3 +834,4 @@ PPM_RESTORE_STATE_FN(peripheralRestoreState) {
     bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
 }
 
+   

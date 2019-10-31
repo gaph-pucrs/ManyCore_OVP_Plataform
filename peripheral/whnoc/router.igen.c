@@ -155,32 +155,31 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-//    int contQuantum = 0;
+   // int contQuantum = 0;
     FILE *fp;
     int i=0;
     
     while(1){
         bhmWaitDelay(QUANTUM_DELAY);
-        if(i<=100){
-            if(myID==0){
+        if(myID==0){
      
-                fp = fopen ("data12.csv","a");
+                fp = fopen ("data17.csv","a");
                 fprintf(fp,"Quantum %d\n",i);
                 fprintf(fp,"Routers ; LOCAL ; EAST ; WEST ; NORTH ; SOUTH \n");
                 fclose(fp);       
-            }  
-            fp = fopen ("data12.csv","a");
+        }  
+        fp = fopen ("data17.csv","a");
    
-            fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+        fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+  
+        fclose(fp);
+        contFlits[LOCAL] = 0;
+        contFlits[WEST] = 0;
+        contFlits[EAST] = 0;
+        contFlits[NORTH] = 0;
+        contFlits[SOUTH] = 0;
     
-            fclose(fp);
-            contFlits[LOCAL] = 0;
-            contFlits[WEST] = 0;
-            contFlits[EAST] = 0;
-            contFlits[NORTH] = 0;
-            contFlits[SOUTH] = 0;
-        }
-                i++;
+        i++;
 
     }
     
