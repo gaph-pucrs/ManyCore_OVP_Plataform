@@ -168,7 +168,7 @@ int main(int argc, char **argv)
         i++;
     }
     printf("i= %d a = %d\n",i, a);*/
-    for(i=0;i<4;i++){
+    for(i=0;i<48;i++){
      //   printf("comecou\n");
         receivePckt();
         LOG(" Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
