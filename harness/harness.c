@@ -102,9 +102,9 @@ int main(int argc, const char *argv[]) {
             }
 
             contQuantum++;
-            opMessage(
+            /*opMessage(
                 "I", "HARNESS",
-                "contQuantum = %d",contQuantum);
+                "contQuantum = %d",contQuantum);*/
 
             /*checks if all processors has exited */
             if (cont==N_PES) {

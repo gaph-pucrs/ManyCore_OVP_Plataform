@@ -31,14 +31,26 @@
 #define N_PES 25
 
 //Ticks
-#define TICK        0
-#define TICK_OFF    0x0FF
-#define TICK_ON     0x011
-#define TICK_ON_LOCAL 0X022
-#define TICK_OFF_LOCAL 0X033
+#define TICK            0
+#define TICK_OFF        0x0FF
+#define TICK_ON         0x011
+#define TICK_ON_LOCAL   0x022
+#define TICK_OFF_LOCAL  0x033
 
 // PreBuffer
 #define PREBUFFER_SIZE  25000
 
+///// CODE DEFINES
+// Arbitration
+#define ARBITER_RR      0
+#define ARBITER_HERMES  0
+#define ARBITER_TTL     1
+// Debug logs
+#define LOG_OUTPUTFLITS 1
+
+
+#if LOG_OUTPUTFLITS
 extern int contFlits[N_PORTS];
+#endif
+
 extern int myID;
