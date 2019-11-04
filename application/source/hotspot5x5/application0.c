@@ -132,7 +132,7 @@ int main(int argc, char **argv)
     int i;
     txPacket.destination = 0x24;
     txPacket.size = 100;
-    txPacket.message = (int *)malloc(myPacket.size * sizeof(int));
+    txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
     for(i = 0; i<txPacket.size; i++){
         txPacket.message[i] = i;
     }

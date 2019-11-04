@@ -163,12 +163,12 @@ int main(int argc, char *argv[]) {
         bhmWaitDelay(QUANTUM_DELAY);
         if(myID==0){
      
-                fp = fopen ("data17.csv","a");
+                fp = fopen ("simulation/data17.csv","a");
                 fprintf(fp,"Quantum %d\n",i);
                 fprintf(fp,"Routers ; LOCAL ; EAST ; WEST ; NORTH ; SOUTH \n");
                 fclose(fp);       
         }  
-        fp = fopen ("data17.csv","a");
+        fp = fopen ("simulation/data17.csv","a");
    
         fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
   

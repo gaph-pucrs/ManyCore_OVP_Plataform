@@ -171,10 +171,11 @@ int main(int argc, char **argv)
     for(i=0;i<48;i++){
      //   printf("comecou\n");
         receivePckt();
-        LOG(" Pacote recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
+        LOG(" Pacote recebido de: %d - nHops: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();
     }
 
+    LOG("48 PACOTES RRECEBIDOS!\n");
 
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
