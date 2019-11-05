@@ -1,4 +1,4 @@
-imodelnewperipheral -name ticker \
+imodelnewperipheral -name iterator \
                     -constructor constructor \
                     -destructor  destructor \
                     -vendor gaph \
@@ -6,159 +6,159 @@ imodelnewperipheral -name ticker \
                     -version 1.0
 
 iadddocumentation -name Description \
-                  -text "A router ticker"
+                  -text "The NoC iterator"
 
-#########################################
-## Data ports between routers
-#########################################
+#############################################
+## Data ports between iterator and routers ##
+#############################################
 
 imodeladdpacketnetport  \
-      -name tickPort0 \
+      -name iterationPort0 \
       -maxbytes 8 \
-      -updatefunction tick0 \
+      -updatefunction iteration0 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort1 \
+      -name iterationPort1 \
       -maxbytes 8 \
-      -updatefunction tick1 \
+      -updatefunction iteration1 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort2 \
+      -name iterationPort2 \
       -maxbytes 8 \
-      -updatefunction tick2 \
+      -updatefunction iteration2 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort3 \
+      -name iterationPort3 \
       -maxbytes 8 \
-      -updatefunction tick3 \
+      -updatefunction iteration3 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort4 \
+      -name iterationPort4 \
       -maxbytes 8 \
-      -updatefunction tick4 \
+      -updatefunction iteration4 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort5 \
+      -name iterationPort5 \
       -maxbytes 8 \
-      -updatefunction tick5 \
+      -updatefunction iteration5 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort6 \
+      -name iterationPort6 \
       -maxbytes 8 \
-      -updatefunction tick6 \
+      -updatefunction iteration6 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort7 \
+      -name iterationPort7 \
       -maxbytes 8 \
-      -updatefunction tick7 \
+      -updatefunction iteration7 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort8 \
+      -name iterationPort8 \
       -maxbytes 8 \
-      -updatefunction tick8 \
+      -updatefunction iteration8 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort9 \
+      -name iterationPort9 \
       -maxbytes 8 \
-      -updatefunction tick9 \
+      -updatefunction iteration9 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort10 \
+      -name iterationPort10 \
       -maxbytes 8 \
-      -updatefunction tick10 \
+      -updatefunction iteration10 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort11 \
+      -name iterationPort11 \
       -maxbytes 8 \
-      -updatefunction tick11 \
+      -updatefunction iteration11 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort12 \
+      -name iterationPort12 \
       -maxbytes 8 \
-      -updatefunction tick12 \
+      -updatefunction iteration12 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort13 \
+      -name iterationPort13 \
       -maxbytes 8 \
-      -updatefunction tick13 \
+      -updatefunction iteration13 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort14 \
+      -name iterationPort14 \
       -maxbytes 8 \
-      -updatefunction tick14 \
+      -updatefunction iteration14 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort15 \
+      -name iterationPort15 \
       -maxbytes 8 \
-      -updatefunction tick15 \
+      -updatefunction iteration15 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort16 \
+      -name iterationPort16 \
       -maxbytes 8 \
-      -updatefunction tick16 \
+      -updatefunction iteration16 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort17 \
+      -name iterationPort17 \
       -maxbytes 8 \
-      -updatefunction tick17 \
+      -updatefunction iteration17 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort18 \
+      -name iterationPort18 \
       -maxbytes 8 \
-      -updatefunction tick18 \
+      -updatefunction iteration18 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort19 \
+      -name iterationPort19 \
       -maxbytes 8 \
-      -updatefunction tick19 \
+      -updatefunction iteration19 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort20 \
+      -name iterationPort20 \
       -maxbytes 8 \
-      -updatefunction tick20 \
+      -updatefunction iteration20 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort21 \
+      -name iterationPort21 \
       -maxbytes 8 \
-      -updatefunction tick21 \
+      -updatefunction iteration21 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort22 \
+      -name iterationPort22 \
       -maxbytes 8 \
-      -updatefunction tick22 \
+      -updatefunction iteration22 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort23 \
+      -name iterationPort23 \
       -maxbytes 8 \
-      -updatefunction tick23 \
+      -updatefunction iteration23 \
       -updatefunctionargument 0x00
 
 imodeladdpacketnetport  \
-      -name tickPort24 \
+      -name iterationPort24 \
       -maxbytes 8 \
-      -updatefunction tick24 \
+      -updatefunction iteration24 \
       -updatefunctionargument 0x00
 

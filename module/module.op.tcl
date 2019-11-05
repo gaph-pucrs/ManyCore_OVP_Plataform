@@ -877,81 +877,81 @@ ihwconnect -bus syncBus -busmasterport pm -instancename bridge23 -loaddress 0x00
 ihwconnect -bus cpu24Bus -busslaveport ps -instancename bridge24 -loaddress 0x80000014 -hiaddress 0x8000001B
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge24 -loaddress 0x00000000 -hiaddress 0x00000007
 
-ihwaddperipheral -instancename ticker -modelfile peripheral/ticker/pse.pse
+ihwaddperipheral -instancename iterator -modelfile peripheral/iterator/pse.pse
 
-ihwaddpacketnet -instancename tick_0
-ihwconnect -instancename router0 -packetnetport iterationsPort -packetnet tick_0
-ihwconnect -instancename ticker -packetnetport tickPort0 -packetnet tick_0
-ihwaddpacketnet -instancename tick_1
-ihwconnect -instancename router1 -packetnetport iterationsPort -packetnet tick_1
-ihwconnect -instancename ticker -packetnetport tickPort1 -packetnet tick_1
-ihwaddpacketnet -instancename tick_2
-ihwconnect -instancename router2 -packetnetport iterationsPort -packetnet tick_2
-ihwconnect -instancename ticker -packetnetport tickPort2 -packetnet tick_2
-ihwaddpacketnet -instancename tick_3
-ihwconnect -instancename router3 -packetnetport iterationsPort -packetnet tick_3
-ihwconnect -instancename ticker -packetnetport tickPort3 -packetnet tick_3
-ihwaddpacketnet -instancename tick_4
-ihwconnect -instancename router4 -packetnetport iterationsPort -packetnet tick_4
-ihwconnect -instancename ticker -packetnetport tickPort4 -packetnet tick_4
-ihwaddpacketnet -instancename tick_5
-ihwconnect -instancename router5 -packetnetport iterationsPort -packetnet tick_5
-ihwconnect -instancename ticker -packetnetport tickPort5 -packetnet tick_5
-ihwaddpacketnet -instancename tick_6
-ihwconnect -instancename router6 -packetnetport iterationsPort -packetnet tick_6
-ihwconnect -instancename ticker -packetnetport tickPort6 -packetnet tick_6
-ihwaddpacketnet -instancename tick_7
-ihwconnect -instancename router7 -packetnetport iterationsPort -packetnet tick_7
-ihwconnect -instancename ticker -packetnetport tickPort7 -packetnet tick_7
-ihwaddpacketnet -instancename tick_8
-ihwconnect -instancename router8 -packetnetport iterationsPort -packetnet tick_8
-ihwconnect -instancename ticker -packetnetport tickPort8 -packetnet tick_8
-ihwaddpacketnet -instancename tick_9
-ihwconnect -instancename router9 -packetnetport iterationsPort -packetnet tick_9
-ihwconnect -instancename ticker -packetnetport tickPort9 -packetnet tick_9
-ihwaddpacketnet -instancename tick_10
-ihwconnect -instancename router10 -packetnetport iterationsPort -packetnet tick_10
-ihwconnect -instancename ticker -packetnetport tickPort10 -packetnet tick_10
-ihwaddpacketnet -instancename tick_11
-ihwconnect -instancename router11 -packetnetport iterationsPort -packetnet tick_11
-ihwconnect -instancename ticker -packetnetport tickPort11 -packetnet tick_11
-ihwaddpacketnet -instancename tick_12
-ihwconnect -instancename router12 -packetnetport iterationsPort -packetnet tick_12
-ihwconnect -instancename ticker -packetnetport tickPort12 -packetnet tick_12
-ihwaddpacketnet -instancename tick_13
-ihwconnect -instancename router13 -packetnetport iterationsPort -packetnet tick_13
-ihwconnect -instancename ticker -packetnetport tickPort13 -packetnet tick_13
-ihwaddpacketnet -instancename tick_14
-ihwconnect -instancename router14 -packetnetport iterationsPort -packetnet tick_14
-ihwconnect -instancename ticker -packetnetport tickPort14 -packetnet tick_14
-ihwaddpacketnet -instancename tick_15
-ihwconnect -instancename router15 -packetnetport iterationsPort -packetnet tick_15
-ihwconnect -instancename ticker -packetnetport tickPort15 -packetnet tick_15
-ihwaddpacketnet -instancename tick_16
-ihwconnect -instancename router16 -packetnetport iterationsPort -packetnet tick_16
-ihwconnect -instancename ticker -packetnetport tickPort16 -packetnet tick_16
-ihwaddpacketnet -instancename tick_17
-ihwconnect -instancename router17 -packetnetport iterationsPort -packetnet tick_17
-ihwconnect -instancename ticker -packetnetport tickPort17 -packetnet tick_17
-ihwaddpacketnet -instancename tick_18
-ihwconnect -instancename router18 -packetnetport iterationsPort -packetnet tick_18
-ihwconnect -instancename ticker -packetnetport tickPort18 -packetnet tick_18
-ihwaddpacketnet -instancename tick_19
-ihwconnect -instancename router19 -packetnetport iterationsPort -packetnet tick_19
-ihwconnect -instancename ticker -packetnetport tickPort19 -packetnet tick_19
-ihwaddpacketnet -instancename tick_20
-ihwconnect -instancename router20 -packetnetport iterationsPort -packetnet tick_20
-ihwconnect -instancename ticker -packetnetport tickPort20 -packetnet tick_20
-ihwaddpacketnet -instancename tick_21
-ihwconnect -instancename router21 -packetnetport iterationsPort -packetnet tick_21
-ihwconnect -instancename ticker -packetnetport tickPort21 -packetnet tick_21
-ihwaddpacketnet -instancename tick_22
-ihwconnect -instancename router22 -packetnetport iterationsPort -packetnet tick_22
-ihwconnect -instancename ticker -packetnetport tickPort22 -packetnet tick_22
-ihwaddpacketnet -instancename tick_23
-ihwconnect -instancename router23 -packetnetport iterationsPort -packetnet tick_23
-ihwconnect -instancename ticker -packetnetport tickPort23 -packetnet tick_23
-ihwaddpacketnet -instancename tick_24
-ihwconnect -instancename router24 -packetnetport iterationsPort -packetnet tick_24
-ihwconnect -instancename ticker -packetnetport tickPort24 -packetnet tick_24
+ihwaddpacketnet -instancename iteration_0
+ihwconnect -instancename router0 -packetnetport iterationsPort -packetnet iteration_0
+ihwconnect -instancename iterator -packetnetport iterationPort0 -packetnet iteration_0
+ihwaddpacketnet -instancename iteration_1
+ihwconnect -instancename router1 -packetnetport iterationsPort -packetnet iteration_1
+ihwconnect -instancename iterator -packetnetport iterationPort1 -packetnet iteration_1
+ihwaddpacketnet -instancename iteration_2
+ihwconnect -instancename router2 -packetnetport iterationsPort -packetnet iteration_2
+ihwconnect -instancename iterator -packetnetport iterationPort2 -packetnet iteration_2
+ihwaddpacketnet -instancename iteration_3
+ihwconnect -instancename router3 -packetnetport iterationsPort -packetnet iteration_3
+ihwconnect -instancename iterator -packetnetport iterationPort3 -packetnet iteration_3
+ihwaddpacketnet -instancename iteration_4
+ihwconnect -instancename router4 -packetnetport iterationsPort -packetnet iteration_4
+ihwconnect -instancename iterator -packetnetport iterationPort4 -packetnet iteration_4
+ihwaddpacketnet -instancename iteration_5
+ihwconnect -instancename router5 -packetnetport iterationsPort -packetnet iteration_5
+ihwconnect -instancename iterator -packetnetport iterationPort5 -packetnet iteration_5
+ihwaddpacketnet -instancename iteration_6
+ihwconnect -instancename router6 -packetnetport iterationsPort -packetnet iteration_6
+ihwconnect -instancename iterator -packetnetport iterationPort6 -packetnet iteration_6
+ihwaddpacketnet -instancename iteration_7
+ihwconnect -instancename router7 -packetnetport iterationsPort -packetnet iteration_7
+ihwconnect -instancename iterator -packetnetport iterationPort7 -packetnet iteration_7
+ihwaddpacketnet -instancename iteration_8
+ihwconnect -instancename router8 -packetnetport iterationsPort -packetnet iteration_8
+ihwconnect -instancename iterator -packetnetport iterationPort8 -packetnet iteration_8
+ihwaddpacketnet -instancename iteration_9
+ihwconnect -instancename router9 -packetnetport iterationsPort -packetnet iteration_9
+ihwconnect -instancename iterator -packetnetport iterationPort9 -packetnet iteration_9
+ihwaddpacketnet -instancename iteration_10
+ihwconnect -instancename router10 -packetnetport iterationsPort -packetnet iteration_10
+ihwconnect -instancename iterator -packetnetport iterationPort10 -packetnet iteration_10
+ihwaddpacketnet -instancename iteration_11
+ihwconnect -instancename router11 -packetnetport iterationsPort -packetnet iteration_11
+ihwconnect -instancename iterator -packetnetport iterationPort11 -packetnet iteration_11
+ihwaddpacketnet -instancename iteration_12
+ihwconnect -instancename router12 -packetnetport iterationsPort -packetnet iteration_12
+ihwconnect -instancename iterator -packetnetport iterationPort12 -packetnet iteration_12
+ihwaddpacketnet -instancename iteration_13
+ihwconnect -instancename router13 -packetnetport iterationsPort -packetnet iteration_13
+ihwconnect -instancename iterator -packetnetport iterationPort13 -packetnet iteration_13
+ihwaddpacketnet -instancename iteration_14
+ihwconnect -instancename router14 -packetnetport iterationsPort -packetnet iteration_14
+ihwconnect -instancename iterator -packetnetport iterationPort14 -packetnet iteration_14
+ihwaddpacketnet -instancename iteration_15
+ihwconnect -instancename router15 -packetnetport iterationsPort -packetnet iteration_15
+ihwconnect -instancename iterator -packetnetport iterationPort15 -packetnet iteration_15
+ihwaddpacketnet -instancename iteration_16
+ihwconnect -instancename router16 -packetnetport iterationsPort -packetnet iteration_16
+ihwconnect -instancename iterator -packetnetport iterationPort16 -packetnet iteration_16
+ihwaddpacketnet -instancename iteration_17
+ihwconnect -instancename router17 -packetnetport iterationsPort -packetnet iteration_17
+ihwconnect -instancename iterator -packetnetport iterationPort17 -packetnet iteration_17
+ihwaddpacketnet -instancename iteration_18
+ihwconnect -instancename router18 -packetnetport iterationsPort -packetnet iteration_18
+ihwconnect -instancename iterator -packetnetport iterationPort18 -packetnet iteration_18
+ihwaddpacketnet -instancename iteration_19
+ihwconnect -instancename router19 -packetnetport iterationsPort -packetnet iteration_19
+ihwconnect -instancename iterator -packetnetport iterationPort19 -packetnet iteration_19
+ihwaddpacketnet -instancename iteration_20
+ihwconnect -instancename router20 -packetnetport iterationsPort -packetnet iteration_20
+ihwconnect -instancename iterator -packetnetport iterationPort20 -packetnet iteration_20
+ihwaddpacketnet -instancename iteration_21
+ihwconnect -instancename router21 -packetnetport iterationsPort -packetnet iteration_21
+ihwconnect -instancename iterator -packetnetport iterationPort21 -packetnet iteration_21
+ihwaddpacketnet -instancename iteration_22
+ihwconnect -instancename router22 -packetnetport iterationsPort -packetnet iteration_22
+ihwconnect -instancename iterator -packetnetport iterationPort22 -packetnet iteration_22
+ihwaddpacketnet -instancename iteration_23
+ihwconnect -instancename router23 -packetnetport iterationsPort -packetnet iteration_23
+ihwconnect -instancename iterator -packetnetport iterationPort23 -packetnet iteration_23
+ihwaddpacketnet -instancename iteration_24
+ihwconnect -instancename router24 -packetnetport iterationsPort -packetnet iteration_24
+ihwconnect -instancename iterator -packetnetport iterationPort24 -packetnet iteration_24
 

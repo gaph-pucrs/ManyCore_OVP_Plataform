@@ -25,17 +25,19 @@
 #define IN_TIME     0x00000001
 #define OUT_TIME    0x00000000
 
+// NoC Dimensions
 #define DIM_X 5
 #define DIM_Y 5
-
 #define N_PES 25
 
 //Ticks
-#define TICK            0
-#define TICK_OFF        0x0FF
-#define TICK_ON         0x011
-#define TICK_ON_LOCAL   0x022
-#define TICK_OFF_LOCAL  0x033
+#define ITERATION           0
+#define ITERATION_OFF       0x0FF
+#define ITERATION_ON        0x011
+#define ITERATION_ON_LOCAL  0x022
+#define ITERATION_OFF_LOCAL 0x033
+#define ITERATION_ON_LOCAL2 0X044
+
 
 // PreBuffer
 #define PREBUFFER_SIZE  25000

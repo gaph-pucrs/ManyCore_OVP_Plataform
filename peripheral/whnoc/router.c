@@ -78,10 +78,10 @@ unsigned int contPriority[N_PORTS] = {0,0,0,0,1};
 #endif
 
 // Stores the atual router tick status
-unsigned short int myTickStatus = TICK_OFF;
+unsigned short int myTickStatus = ITERATION_OFF;
 
 // Stores the prebuffer autorization tick
-unsigned short int myIterationStatusLocal = TICK_OFF_LOCAL;
+unsigned short int myIterationStatusLocal = ITERATION_OFF_LOCAL;
 
 // Gets the actual "time" of the system
 unsigned long long int currentTime; // %llu
@@ -118,35 +118,35 @@ int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
 
 // Informs the ticker that this router needs ticks
 void turn_TickOn(){
-    unsigned short int inftick = TICK_ON;
-    myTickStatus = TICK_ON;
+    unsigned short int inftick = ITERATION_ON;
+    myTickStatus = ITERATION_ON;
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
 
 // Informs the ticker that this router does not needs ticks
 void turn_TickOff(){
-    unsigned short int inftick = TICK_OFF;
-    myTickStatus = TICK_OFF;
+    unsigned short int inftick = ITERATION_OFF;
+    myTickStatus = ITERATION_OFF;
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
 
 // Informs the ticker that the local port needs ticks
 void informIteratorLocalOn(){
-    unsigned short int inftick = TICK_ON_LOCAL;
-    myIterationStatusLocal = TICK_ON_LOCAL;
+    unsigned short int inftick = ITERATION_ON_LOCAL;
+    myIterationStatusLocal = ITERATION_ON_LOCAL;
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
 
 // Informs the ticker that the local port does not needs ticks
 void informIteratorLocalOff(){
-    unsigned short int inftick = TICK_OFF_LOCAL;
-    myIterationStatusLocal = TICK_OFF_LOCAL;
+    unsigned short int inftick = ITERATION_OFF_LOCAL;
+    myIterationStatusLocal = ITERATION_OFF_LOCAL;
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
 
 // Inform the ticker that the PE is waiting a packet 
 void informIterator(){
-    unsigned short int inftick = TICK;
+    unsigned short int inftick = ITERATION;
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
 
@@ -235,7 +235,7 @@ void bufferPush(unsigned int port){
     }
 
     // Inform the ticker that this router has something to send
-    if(myTickStatus == TICK_OFF) turn_TickOn();
+    if(myTickStatus == ITERATION_OFF) turn_TickOn();
 
     // Update the buffer status
     bufferStatusUpdate(port);
@@ -291,7 +291,7 @@ unsigned int bufferPop(unsigned int port){
         flitCountOut[port] = HEADER;
 
         // If every buffer is empty this router does not need to be ticked
-        if(myTickStatus == TICK_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && preBuffer_isEmpty()){
+        if(myTickStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && preBuffer_isEmpty()){
             turn_TickOff();
         }
         
@@ -601,7 +601,7 @@ void preBuffer_statusUpdate(){
 }
 
 // Stores a flit that is incomming from the local IP
-void preBuffe_push(unsigned int newFlit){
+void preBuffer_push(unsigned int newFlit){
     contFlitsPacket[LOCAL]++;
     preBufferPackets[preBuffer_last] = newFlit;
 
@@ -619,7 +619,7 @@ void preBuffe_push(unsigned int newFlit){
     }else if(contFlitsPacket[LOCAL] == sizeCurrentPacket[LOCAL]+2){ // if we are receiving the last flit
         contFlitsPacket[LOCAL] = 0;
     }else if(contFlitsPacket[LOCAL]==3){ // inform the iterator that this router has a packet in the prebuffer
-        if(myIterationStatusLocal == TICK_OFF_LOCAL){
+        if(myIterationStatusLocal == ITERATION_OFF_LOCAL){
             informIteratorLocalOn();
             ppmPacketnetWrite(handles.iterationsPort, &newFlit, sizeof(newFlit));              
         }                  
@@ -663,7 +663,7 @@ void preBuffer_pop(){
         }
         else if(flitCountIn == OUT_TIME){
             flitCountIn = HEADER;
-            myIterationStatusLocal = TICK_OFF_LOCAL;
+            myIterationStatusLocal = ITERATION_OFF_LOCAL;
 
             // Informs that there is another packet inside the prebuffer to send
             if(preBuffer_last != (preBuffer_first+1)){
@@ -697,7 +697,7 @@ void preBuffer_pop(){
 
 void iterate(){
     // Send a flit from the PREBUFFER to the local buffer
-    if(myIterationStatusLocal == TICK_ON_LOCAL){
+    if(myIterationStatusLocal == ITERATION_ON_LOCAL){
         preBuffer_pop();
     }
     ////////////////////////////////////////////
@@ -845,7 +845,7 @@ PPM_REG_READ_CB(rxRead) {
 // WRITE OPERATION IN THE REGISTER: dataRxLocal
 PPM_REG_WRITE_CB(rxWrite) {
     // Stores the incomming data in the pre_buffer
-    preBuffe_push(data);
+    preBuffer_push(data);
     *(Uns32*)user = data;
 }
 
@@ -882,7 +882,7 @@ PPM_PACKETNET_CB(iterationPort) {
 
     //Checks if it is a local iteration
     if((currentTime >> 31) == 1){
-        myIterationStatusLocal = TICK_ON_LOCAL;
+        myIterationStatusLocal = ITERATION_ON_LOCAL;
         currentTime = (unsigned long long int )(0x7FFFFFFFULL & currentTime);
     }
 
