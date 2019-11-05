@@ -121,55 +121,55 @@ void releasePackets(send *sendV, int id){
 // Send one iteration for each router that has something to send
 void runIterations(){  
     iteration = iterationN;
-    if((iterateMap[0] == ITERATION_ON)||(iterateMapLocal[0] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
+    if((iterateMap[0] == ITERATION_ON)||(iterateMapLocal[0] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[1] == ITERATION_ON)||(iterateMapLocal[1] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));
+    if((iterateMap[1] == ITERATION_ON)||(iterateMapLocal[1] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[2] == ITERATION_ON)||(iterateMapLocal[2] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort2, &iteration, sizeof(iteration));
+    if((iterateMap[2] == ITERATION_ON)||(iterateMapLocal[2] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort2, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[3] == ITERATION_ON)||(iterateMapLocal[3] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort3, &iteration, sizeof(iteration));
+    if((iterateMap[3] == ITERATION_ON)||(iterateMapLocal[3] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort3, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[4] == ITERATION_ON)||(iterateMapLocal[4] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort4, &iteration, sizeof(iteration));
+    if((iterateMap[4] == ITERATION_ON)||(iterateMapLocal[4] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort4, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[5] == ITERATION_ON)||(iterateMapLocal[5] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort5, &iteration, sizeof(iteration));
+    if((iterateMap[5] == ITERATION_ON)||(iterateMapLocal[5] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort5, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[6] == ITERATION_ON)||(iterateMapLocal[6] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort6, &iteration, sizeof(iteration));
+    if((iterateMap[6] == ITERATION_ON)||(iterateMapLocal[6] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort6, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[7] == ITERATION_ON)||(iterateMapLocal[7] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort7, &iteration, sizeof(iteration));
+    if((iterateMap[7] == ITERATION_ON)||(iterateMapLocal[7] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort7, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[8] == ITERATION_ON)||(iterateMapLocal[8] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort8, &iteration, sizeof(iteration));
+    if((iterateMap[8] == ITERATION_ON)||(iterateMapLocal[8] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort8, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[9] == ITERATION_ON)||(iterateMapLocal[9] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort9, &iteration, sizeof(iteration));
+    if((iterateMap[9] == ITERATION_ON)||(iterateMapLocal[9] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort9, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[10] == ITERATION_ON)||(iterateMapLocal[10] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort10, &iteration, sizeof(iteration));
+    if((iterateMap[10] == ITERATION_ON)||(iterateMapLocal[10] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort10, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[11] == ITERATION_ON)||(iterateMapLocal[11] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort11, &iteration, sizeof(iteration));
+    if((iterateMap[11] == ITERATION_ON)||(iterateMapLocal[11] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort11, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[12] == ITERATION_ON)||(iterateMapLocal[12] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort12, &iteration, sizeof(iteration));
+    if((iterateMap[12] == ITERATION_ON)||(iterateMapLocal[12] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort12, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[13] == ITERATION_ON)||(iterateMapLocal[13] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort13, &iteration, sizeof(iteration));
+    if((iterateMap[13] == ITERATION_ON)||(iterateMapLocal[13] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort13, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[14] == ITERATION_ON)||(iterateMapLocal[14] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort14, &iteration, sizeof(iteration));
+    if((iterateMap[14] == ITERATION_ON)||(iterateMapLocal[14] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort14, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[15] == ITERATION_ON)||(iterateMapLocal[15] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort15, &iteration, sizeof(iteration));
+    if((iterateMap[15] == ITERATION_ON)||(iterateMapLocal[15] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort15, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[16] == ITERATION_ON)||(iterateMapLocal[16] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort16, &iteration, sizeof(iteration));
+    if((iterateMap[16] == ITERATION_ON)||(iterateMapLocal[16] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort16, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[17] == ITERATION_ON)||(iterateMapLocal[17] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort17, &iteration, sizeof(iteration));
+    if((iterateMap[17] == ITERATION_ON)||(iterateMapLocal[17] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort17, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[18] == ITERATION_ON)||(iterateMapLocal[18] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort18, &iteration, sizeof(iteration));
+    if((iterateMap[18] == ITERATION_ON)||(iterateMapLocal[18] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort18, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[19] == ITERATION_ON)||(iterateMapLocal[19] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort19, &iteration, sizeof(iteration));
+    if((iterateMap[19] == ITERATION_ON)||(iterateMapLocal[19] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort19, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[20] == ITERATION_ON)||(iterateMapLocal[20] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort20, &iteration, sizeof(iteration));
+    if((iterateMap[20] == ITERATION_ON)||(iterateMapLocal[20] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort20, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[21] == ITERATION_ON)||(iterateMapLocal[21] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort21, &iteration, sizeof(iteration));
+    if((iterateMap[21] == ITERATION_ON)||(iterateMapLocal[21] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort21, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[22] == ITERATION_ON)||(iterateMapLocal[22] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort22, &iteration, sizeof(iteration));
+    if((iterateMap[22] == ITERATION_ON)||(iterateMapLocal[22] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort22, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[23] == ITERATION_ON)||(iterateMapLocal[23] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort23, &iteration, sizeof(iteration));
+    if((iterateMap[23] == ITERATION_ON)||(iterateMapLocal[23] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort23, &iteration, sizeof(iteration));
     iteration = iterationN;
-    if((iterateMap[24] == ITERATION_ON)||(iterateMapLocal[24] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort24, &iteration, sizeof(iteration));
+    if((iterateMap[24] == ITERATION_ON)||(iterateMapLocal[24] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort24, &iteration, sizeof(iteration));
 }
 
 // Insertion Sort function used to sort packet input time in the NoC
@@ -208,7 +208,7 @@ void statusHandler(unsigned int router, unsigned int status){
             runIterations();
         }
     // if NO, then it is a status update for the local port or... 
-    }else if((status == ITERATION_ON_LOCAL) || (status == ITERATION_OFF_LOCAL)){
+    }else if((status == ITERATION_BLOCKED_LOCAL) || (status == ITERATION_OFF_LOCAL)){
         iterateMapLocal[router] = status;
     // for the router as a hole
     } else if((status == ITERATION_ON) || (ITERATION_OFF)){
@@ -765,7 +765,7 @@ int main(int argc, char *argv[]) {
 
         // For each PE, verify if it has something to send to the local port
         for(i=0;i<N_PES;i++){
-            if(iterateMapLocal[i] == ITERATION_ON_LOCAL){
+            if(iterateMapLocal[i] == ITERATION_BLOCKED_LOCAL){
                 run = 1;
                 break;
             }
@@ -807,7 +807,7 @@ int main(int argc, char *argv[]) {
 
             // ???
             for(i=0;i<sendV[0].equals;i++){
-                iterateMapLocal[sendV[i].idPE] = ITERATION_ON_LOCAL2;
+                iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;
             }
           
             // For each packet starting on the last sent... 
@@ -822,7 +822,7 @@ int main(int argc, char *argv[]) {
                 runIterations();
 
                 for(j=0;j<sendV[i].equals;i++){
-                    iterateMapLocal[sendV[i].idPE] = ITERATION_ON_LOCAL2;
+                    iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;
                 }
                 i = i + sendV[i].equals - 1;
            
