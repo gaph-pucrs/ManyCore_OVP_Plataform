@@ -124,7 +124,7 @@ echo "void runIterations(){  " >> iterator.igen.c
 for i in $(seq 0 $N)
 do
     echo "    iteration = iterationN;" >> iterator.igen.c
-    echo "    if((iterateMap["$i"] == ITERATION_ON)||(iterateMapLocal["$i"] == ITERATION_ON_LOCAL2)) ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iterator.igen.c
+    echo "    if((iterateMap["$i"] == ITERATION_ON)||(iterateMapLocal["$i"] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iterator.igen.c
 done
 echo "}" >> iterator.igen.c
 echo "" >> iterator.igen.c
@@ -164,7 +164,7 @@ echo "        }else{ // else, just deliver iterations to every router" >> iterat
 echo "            runIterations();" >> iterator.igen.c
 echo "        }" >> iterator.igen.c
 echo "    // if NO, then it is a status update for the local port or... " >> iterator.igen.c
-echo "    }else if((status == ITERATION_ON_LOCAL) || (status == ITERATION_OFF_LOCAL)){" >> iterator.igen.c
+echo "    }else if((status == ITERATION_BLOCKED_LOCAL) || (status == ITERATION_OFF_LOCAL)){" >> iterator.igen.c
 echo "        iterateMapLocal[router] = status;" >> iterator.igen.c
 echo "    // for the router as a hole" >> iterator.igen.c
 echo "    } else if((status == ITERATION_ON) || (ITERATION_OFF)){" >> iterator.igen.c
@@ -268,7 +268,7 @@ echo "        }" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "        // For each PE, verify if it has something to send to the local port" >> iterator.igen.c
 echo "        for(i=0;i<N_PES;i++){" >> iterator.igen.c
-echo "            if(iterateMapLocal[i] == ITERATION_ON_LOCAL){" >> iterator.igen.c
+echo "            if(iterateMapLocal[i] == ITERATION_BLOCKED_LOCAL){" >> iterator.igen.c
 echo "                run = 1;" >> iterator.igen.c
 echo "                break;" >> iterator.igen.c
 echo "            }" >> iterator.igen.c
@@ -310,7 +310,7 @@ echo "            runIterations();" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "            // ???" >> iterator.igen.c
 echo "            for(i=0;i<sendV[0].equals;i++){" >> iterator.igen.c
-echo "                iterateMapLocal[sendV[i].idPE] = ITERATION_ON_LOCAL2;" >> iterator.igen.c
+echo "                iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;" >> iterator.igen.c
 echo "            }" >> iterator.igen.c
 echo "          " >> iterator.igen.c
 echo "            // For each packet starting on the last sent... " >> iterator.igen.c
@@ -325,7 +325,7 @@ echo "                releasePackets(sendV, i);" >> iterator.igen.c
 echo "                runIterations();" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "                for(j=0;j<sendV[i].equals;i++){" >> iterator.igen.c
-echo "                    iterateMapLocal[sendV[i].idPE] = ITERATION_ON_LOCAL2;" >> iterator.igen.c
+echo "                    iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;" >> iterator.igen.c
 echo "                }" >> iterator.igen.c
 echo "                i = i + sendV[i].equals - 1;" >> iterator.igen.c
 echo "           " >> iterator.igen.c

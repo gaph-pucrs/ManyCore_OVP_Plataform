@@ -132,8 +132,8 @@ void turn_TickOff(){
 
 // Informs the ticker that the local port needs ticks
 void informIteratorLocalOn(){
-    unsigned short int inftick = ITERATION_ON_LOCAL;
-    myIterationStatusLocal = ITERATION_ON_LOCAL;
+    unsigned short int inftick = ITERATION_BLOCKED_LOCAL;
+    myIterationStatusLocal = ITERATION_BLOCKED_LOCAL;
     ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
 }
 
@@ -697,7 +697,7 @@ void preBuffer_pop(){
 
 void iterate(){
     // Send a flit from the PREBUFFER to the local buffer
-    if(myIterationStatusLocal == ITERATION_ON_LOCAL){
+    if(myIterationStatusLocal == ITERATION_BLOCKED_LOCAL){
         preBuffer_pop();
     }
     ////////////////////////////////////////////
@@ -882,7 +882,7 @@ PPM_PACKETNET_CB(iterationPort) {
 
     //Checks if it is a local iteration
     if((currentTime >> 31) == 1){
-        myIterationStatusLocal = ITERATION_ON_LOCAL;
+        myIterationStatusLocal = ITERATION_BLOCKED_LOCAL;
         currentTime = (unsigned long long int )(0x7FFFFFFFULL & currentTime);
     }
 

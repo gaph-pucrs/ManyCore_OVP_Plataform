@@ -31,12 +31,12 @@
 #define N_PES 25
 
 //Ticks
-#define ITERATION           0
-#define ITERATION_OFF       0x0FF
-#define ITERATION_ON        0x011
-#define ITERATION_ON_LOCAL  0x022
-#define ITERATION_OFF_LOCAL 0x033
-#define ITERATION_ON_LOCAL2 0X044
+#define ITERATION                0
+#define ITERATION_OFF            0x0FF
+#define ITERATION_ON             0x011
+#define ITERATION_BLOCKED_LOCAL  0x022
+#define ITERATION_OFF_LOCAL      0x033
+#define ITERATION_RELEASED_LOCAL 0X044
 
 
 // PreBuffer
