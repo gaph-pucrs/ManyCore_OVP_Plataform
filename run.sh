@@ -20,10 +20,12 @@ cd ..
 
 cd peripheral
 cd whnoc
+sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
+sed -i 's/#define DIM_Y.*/#define DIM_Y '$Y'/' noc.h
 sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
 cd ..
-cd ticker
-#./tickerGenerator.sh $X $Y
+cd iterator
+./iteratorGenerator.sh $X $Y
 cd ../..
 
 cd harness
@@ -44,7 +46,7 @@ echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
-echo "make -C peripheral/ticker NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/iterator NOVLNV=1" >> ovp_compiler.sh
 echo "make -C harness" >> ovp_compiler.sh
 # --------- Sem HARNESS modificado
 echo "harness/harness.\${IMPERAS_ARCH}.exe \\" >> ovp_compiler.sh 

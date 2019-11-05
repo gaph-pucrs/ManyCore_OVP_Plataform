@@ -7,8 +7,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef TICKER_MACROS_IGEN_H
-#define TICKER_MACROS_IGEN_H
+#ifndef ITERATOR_MACROS_IGEN_H
+#define ITERATOR_MACROS_IGEN_H
 // Before including this file in the application, define the indicated macros
 // to fix the base address of each slave port.
 

@@ -258,14 +258,14 @@ do
 done
 echo "" >> module.op.tcl
 
-echo "ihwaddperipheral -instancename ticker -modelfile peripheral/ticker/pse.pse" >> module.op.tcl
+echo "ihwaddperipheral -instancename iterator -modelfile peripheral/iterator/pse.pse" >> module.op.tcl
 
 echo "" >> module.op.tcl
 for i in $(seq 0 $N);
 	do
-	echo "ihwaddpacketnet -instancename tick_"$i"" >> module.op.tcl
-	echo "ihwconnect -instancename router"$i" -packetnetport iterationsPort -packetnet tick_"$i"" >> module.op.tcl
-	echo "ihwconnect -instancename ticker -packetnetport tickPort"$i" -packetnet tick_"$i"" >> module.op.tcl
+	echo "ihwaddpacketnet -instancename iteration_"$i"" >> module.op.tcl
+	echo "ihwconnect -instancename router"$i" -packetnetport iterationsPort -packetnet iteration_"$i"" >> module.op.tcl
+	echo "ihwconnect -instancename iterator -packetnetport iterationPort"$i" -packetnet iteration_"$i"" >> module.op.tcl
 done 
 echo "" >> module.op.tcl
 
