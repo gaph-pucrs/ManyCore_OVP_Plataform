@@ -7,7 +7,7 @@
 #define ND      5 // Not Defined
 
 // NoC Structure configuration
-#define N_PORTS 	    5
+#define N_PORTS 	5
 #define BUFFER_SIZE 	17
 
 // Control flags
@@ -31,7 +31,7 @@
 #define N_PES 25
 
 //Ticks
-#define ITERATION                0
+#define ITERATION                0x5555
 #define ITERATION_OFF            0x0FF
 #define ITERATION_ON             0x011
 #define ITERATION_BLOCKED_LOCAL  0x022
@@ -44,9 +44,9 @@
 
 ///// CODE DEFINES
 // Arbitration
-#define ARBITER_RR      0
+#define ARBITER_RR      1
 #define ARBITER_HERMES  0
-#define ARBITER_TTL     1
+#define ARBITER_TTL     0
 // Debug logs
 #define LOG_OUTPUTFLITS 1
 

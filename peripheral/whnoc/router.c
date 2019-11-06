@@ -118,36 +118,36 @@ int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
 
 // Informs the ticker that this router needs ticks
 void turn_TickOn(){
-    unsigned short int inftick = ITERATION_ON;
+    unsigned short int iterAux = ITERATION_ON;
     myTickStatus = ITERATION_ON;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
 // Informs the ticker that this router does not needs ticks
 void turn_TickOff(){
-    unsigned short int inftick = ITERATION_OFF;
+    unsigned short int iterAux = ITERATION_OFF;
     myTickStatus = ITERATION_OFF;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
 // Informs the ticker that the local port needs ticks
 void informIteratorLocalOn(){
-    unsigned short int inftick = ITERATION_BLOCKED_LOCAL;
+    unsigned short int iterAux = ITERATION_BLOCKED_LOCAL;
     myIterationStatusLocal = ITERATION_BLOCKED_LOCAL;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
 // Informs the ticker that the local port does not needs ticks
 void informIteratorLocalOff(){
-    unsigned short int inftick = ITERATION_OFF_LOCAL;
+    unsigned short int iterAux = ITERATION_OFF_LOCAL;
     myIterationStatusLocal = ITERATION_OFF_LOCAL;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
-// Inform the ticker that the PE is waiting a packet 
+// Inform the iterator that the PE is waiting a packet 
 void informIterator(){
-    unsigned short int inftick = ITERATION;
-    ppmPacketnetWrite(handles.iterationsPort, &inftick, sizeof(inftick));
+    unsigned short int iterAux = ITERATION;
+    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
 // Extract the Y position for a given address
@@ -235,7 +235,7 @@ void bufferPush(unsigned int port){
     }
 
     // Inform the ticker that this router has something to send
-    if(myTickStatus == ITERATION_OFF) turn_TickOn();
+    if(myTickStatus == ITERATION_OFF) turn_TickOn(); 
 
     // Update the buffer status
     bufferStatusUpdate(port);
@@ -763,7 +763,6 @@ PPM_PACKETNET_CB(controlEast) {
     // When receving a time for the incoming flit... (8 bytes info)
     else if(bytes == 8){
         incomingFlit.inTime = *(unsigned long long int *)data;
-       // bhmMessage("I","IN TIME = %llu", incomingFlit.inTime);
     }
 }
 

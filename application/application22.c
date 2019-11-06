@@ -162,20 +162,26 @@ int main(int argc, char **argv)
     tsend = clock(); /* marca o tempo inicial */
     tsend = tsend - tinicio;
     int a=5;
+    int status[25];
+    for(i=0;i<25;i++) status[i] = 0;
     /* printf("comecou\n");
    /* while(i<10000){
        a = *rxLocal;
         i++;
     }
     printf("i= %d a = %d\n",i, a);*/
-    for(i=0;i<48;i++){
+    for(i=0;i<2400;i++){
      //   printf("comecou\n");
         receivePckt();
-        LOG(" Pacote recebido de: %d - nHops: %d - inTime: %d - outTime: %d \n",rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
+        status[rxPacket.message[15]] = status[rxPacket.message[15]] + 1;
+        for(a=0;a<25;a++){
+            LOG("%d ----- %d\n",a,status[a]);
+        }
+        LOG(" Pacote %d recebido de: %d - nHops: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[15], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();
     }
 
-    LOG("48 PACOTES RRECEBIDOS!\n");
+    LOG("%d PACOTES RRECEBIDOS!\n",i);
 
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
