@@ -138,7 +138,7 @@ int main(int argc, char **argv)
     }
     txPacket.message[15] = 0x04;
     
-    for(i=0;i<2;i++){
+    for(i=0;i<100;i++){
         sendPckt();
     }
     //////////////////////////////////////////////////////

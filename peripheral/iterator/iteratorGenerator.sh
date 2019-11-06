@@ -185,6 +185,7 @@ do
     echo "    // If bytes == 2 then we have a status change or a iteration request" >> iterator.igen.c
     echo "    if(bytes == 2){" >> iterator.igen.c
     echo "        unsigned int status = *(unsigned int *)data;" >> iterator.igen.c
+    echo "        status = status & 0xFFFF;" >> iterator.igen.c
     echo "        statusHandler("$i", status);" >> iterator.igen.c
     echo "    // In other case, we have the information about a new packet incoming in the preBuffer" >> iterator.igen.c
     echo "    }else{" >> iterator.igen.c
@@ -196,6 +197,10 @@ do
     echo "        contTotal++;" >> iterator.igen.c
     echo "        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){" >> iterator.igen.c
     echo "        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));" >> iterator.igen.c
+    echo "        if(sendVector == NULL){" >> iterator.igen.c
+    echo "            bhmMessage(\"I\", \"ITERATOR\", \"ERROR - REALLOC RETURN NULL\");" >> iterator.igen.c
+    echo "            while(1){}" >> iterator.igen.c
+    echo "        }" >> iterator.igen.c
     echo "        //}" >> iterator.igen.c
     echo "        sendVector[contTotal-1] = newSend;" >> iterator.igen.c
     echo "    }" >> iterator.igen.c
@@ -262,6 +267,10 @@ echo "        // Reading values from the previous quantum" >> iterator.igen.c
 echo "        cont = contTotal;" >> iterator.igen.c
 echo "        contTotal = 0;" >> iterator.igen.c
 echo "        sendV = malloc (cont * sizeof (send));" >> iterator.igen.c
+echo "        if(sendV == NULL){" >> iterator.igen.c
+echo "            bhmMessage(\"I\", \"ITERATOR\", \"ERROR - MALLOC RETURN NULL\");" >> iterator.igen.c
+echo "            while(1){}" >> iterator.igen.c
+echo "        }" >> iterator.igen.c
 echo "        for(i=0;i<cont;i++){" >> iterator.igen.c
 echo "            sendV[i] = sendVector[i];" >> iterator.igen.c
 echo "        }" >> iterator.igen.c
@@ -334,6 +343,10 @@ echo "            free(sendVector);" >> iterator.igen.c
 echo "            free(sendV);" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "            sendVector = malloc (1 * sizeof (send));" >> iterator.igen.c
+echo "            if(sendVector == NULL){" >> iterator.igen.c
+echo "                bhmMessage(\"I\", \"ITERATOR\", \"ERROR - MALLOC RETURN NULL\");" >> iterator.igen.c
+echo "                while(1){}" >> iterator.igen.c
+echo "            }" >> iterator.igen.c
 echo "            cont=0;" >> iterator.igen.c
 echo "            run = 0;" >> iterator.igen.c
 echo "        } " >> iterator.igen.c
