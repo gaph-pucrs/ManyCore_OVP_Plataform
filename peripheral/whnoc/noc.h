@@ -26,9 +26,9 @@
 #define OUT_TIME    0x00000000
 
 // NoC Dimensions
-#define DIM_X 5
-#define DIM_Y 5
-#define N_PES 25
+#define DIM_X 8
+#define DIM_Y 8
+#define N_PES 64
 
 //Ticks
 #define ITERATION                0x5555
@@ -44,9 +44,9 @@
 
 ///// CODE DEFINES
 // Arbitration
-#define ARBITER_RR      1
+#define ARBITER_RR      0
 #define ARBITER_HERMES  0
-#define ARBITER_TTL     0
+#define ARBITER_TTL     1
 // Debug logs
 #define LOG_OUTPUTFLITS 1
 

@@ -5,12 +5,12 @@ from PIL import Image, ImageDraw, ImageTk, ImageFont, ImageColor
 
 size = 60
 bigBlock = size * 3
-DIM_X = 5
-DIM_Y = 5
-MAX_FLITS = 150
-N_PES = 25
-QUANTUMS_PER_IMG = 12
-QUANTUMS = 98
+DIM_X = 8
+DIM_Y = 8
+MAX_FLITS = 500
+N_PES = 64
+QUANTUMS_PER_IMG = 4
+QUANTUMS = 15
 
 
 class quantumFlits():
@@ -27,6 +27,7 @@ def loadQuantum(input_file):
     pWest = []
     pNorth = []
     pSouth = []
+    j = 0
     for row in input_file:
         if "Quantum" in row[0] :
             j = 0
@@ -178,7 +179,7 @@ if __name__ == '__main__':
     pNorthImg = [0 for i in range(N_PES)]
     pSouthImg = [0 for i in range (N_PES)]
   
-    with open('data17.csv') as csv_file:
+    with open('dataTranspose.csv') as csv_file:
         for _ in range(0,QUANTUMS,QUANTUMS_PER_IMG):
             csv_reader = csv.reader(csv_file, delimiter=',')
             for _ in range(QUANTUMS_PER_IMG):

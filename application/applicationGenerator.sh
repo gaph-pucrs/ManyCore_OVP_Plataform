@@ -21,6 +21,13 @@ do
         sed -i 's/LOG(\"Application.*/LOG(\"Application ROUTER'$i' done!\\n\\n\")\;/' application$i.c               
 done
 
+
+for i in $(seq 0 $N);
+do
+
+    	sed -i 's/txPacket.message\[1\].*/txPacket.message\[1\]='$i'\;/' application$i.c
+done
+
 cont=0
 for i in $(seq 0 $(($Y-1)));
 do

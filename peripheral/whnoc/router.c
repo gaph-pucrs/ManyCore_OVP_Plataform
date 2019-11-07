@@ -602,6 +602,7 @@ void preBuffer_statusUpdate(){
 
 // Stores a flit that is incomming from the local IP
 void preBuffer_push(unsigned int newFlit){
+   // if(myID==48)bhmMessage("I","PREBUFFERPUSH","PREBUFFERPUSH");
     contFlitsPacket[LOCAL]++;
     preBufferPackets[preBuffer_last] = newFlit;
 
@@ -620,6 +621,7 @@ void preBuffer_push(unsigned int newFlit){
         contFlitsPacket[LOCAL] = 0;
     }else if(contFlitsPacket[LOCAL]==3){ // inform the iterator that this router has a packet in the prebuffer
         if(myIterationStatusLocal == ITERATION_OFF_LOCAL){
+            //if(myID==48)bhmMessage("I","PREBUFFERPUSH","INFORMING ITERATOR"); OK
             informIteratorLocalOn();
             ppmPacketnetWrite(handles.iterationsPort, &newFlit, sizeof(newFlit));              
         }                  
@@ -633,6 +635,8 @@ void preBuffer_pop(){
     unsigned int difX, difY;
     
     if(!preBuffer_isEmpty() && localStatus == GO){
+            //    if(myID==8)bhmMessage("I","ITERATE","PREBUFFERPOP");
+
         ////////////////////////
         // Control insertions //
         ////////////////////////
@@ -642,6 +646,7 @@ void preBuffer_pop(){
         }
         // Decrease the flitCount
         flitCountIn = flitCountIn - 1;
+       // if(myID==8)bhmMessage("I","prebufferPop","flitCountIn = %d",flitCountIn);
 
         // Register the size of a new packet to insert some control information in the tail
         if (flitCountIn == SIZE){
@@ -696,8 +701,9 @@ void preBuffer_pop(){
 ////////////////////////////////////////////////////////////////////////////////
 
 void iterate(){
+    //bhmMessage("I","ITERATE","Iterate"); 
     // Send a flit from the PREBUFFER to the local buffer
-    if(myIterationStatusLocal == ITERATION_BLOCKED_LOCAL){
+    if(myIterationStatusLocal == ITERATION_RELEASED_LOCAL){
         preBuffer_pop();
     }
     ////////////////////////////////////////////
@@ -851,6 +857,7 @@ PPM_REG_WRITE_CB(rxWrite) {
 // READ OPERATION IN THE REGISTER: controlTxLocal
 PPM_REG_READ_CB(txCtrlRead) {
     // Inform the iterator that some IP waiting a packet...
+    //if(myID==1)bhmMessage("I","txCtrlRead","IP waiting a packet"); 
     informIterator();
     return *(Uns32*)user;
 }
@@ -876,12 +883,14 @@ PPM_REG_WRITE_CB(txWrite) {
 }
 
 PPM_PACKETNET_CB(iterationPort) {
+
     // Stores the actual iteration time
     currentTime = *(unsigned long long int *)data;
 
     //Checks if it is a local iteration
     if((currentTime >> 31) == 1){
-        myIterationStatusLocal = ITERATION_BLOCKED_LOCAL;
+
+        myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
         currentTime = (unsigned long long int )(0x7FFFFFFFULL & currentTime);
     }
 
