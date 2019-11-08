@@ -45,8 +45,8 @@
 ///// CODE DEFINES
 // Arbitration
 #define ARBITER_RR      0
-#define ARBITER_HERMES  0
-#define ARBITER_TTL     1
+#define ARBITER_HERMES  1
+#define ARBITER_TTL     0
 // Debug logs
 #define LOG_OUTPUTFLITS 1
 
