@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     for(i=0;i<100;i++){
      //   printf("comecou\n");
         receivePckt();
-        //LOG(" Pacote %d recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[1], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
+        //LOG("aplicacao 2 Pacote %d recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[1], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
         packetConsumed();
     }
 

@@ -357,18 +357,14 @@ void statusHandler(unsigned int router, unsigned int status){
     // if YES then iteration is incremented...
     if((status == ITERATION) && (mapOr)){
         iterationN++;
-
         // if it is time to release new packets...
         if(iterationN == nextLocalIteration){
-           // bhmMessage("I","ITERATOR","ativou evento");
             bhmTriggerEvent(releaseLocal);
         }else{ // else, just deliver iterations to every router
-        //bhmMessage("I","STATUSHANDLER","RUNITERATIONS");
             runIterations();
         }
     // if NO, then it is a status update for the local port or... 
     }else if((status == ITERATION_BLOCKED_LOCAL) || (status == ITERATION_OFF_LOCAL)){
-        //bhmMessage("I","statusHandler","setando status para blockedLocal");
         iterateMapLocal[router] = status;
     // for the router as a hole
     } else if((status == ITERATION_ON) || (ITERATION_OFF)){
@@ -532,8 +528,6 @@ PPM_PACKETNET_CB(iteration6) {
     if(bytes == 2){
         unsigned int status = *(unsigned int *)data;
         status = status & 0xFFFF;
-//        bhmMessage("I","ITERATION6","Iterator status = %d",status); OK
-
         statusHandler(6, status);
     // In other case, we have the information about a new packet incoming in the preBuffer
     }else{
@@ -1734,18 +1728,15 @@ PPM_PACKETNET_CB(iteration56) {
     if(bytes == 2){
         unsigned int status = *(unsigned int *)data;
         status = status & 0xFFFF;
-
         statusHandler(56, status);
     // In other case, we have the information about a new packet incoming in the preBuffer
     }else{
-
         send newSend;
         newSend.time = htonl(*(unsigned int *)data);
         newSend.idPE = 56;
         newSend.start = 0;
         newSend.equals = 0;
         contTotal++;
-
         //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
         sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
         if(sendVector == NULL){
@@ -1980,7 +1971,6 @@ int main(int argc, char *argv[]) {
 
         // Wait until the next quantum 
         bhmWaitDelay(QUANTUM_DELAY);
-      //  bhmMessage("I","ITERATOR","PASSOU UM QUANTUM");
         
         // Reading values from the previous quantum
         cont = contTotal;
@@ -2007,7 +1997,7 @@ int main(int argc, char *argv[]) {
 
             // Sort the packets that will be transmitted
             insertionSort(cont, sendV);
-          
+
             // The first packet will be sent in the next iteration
             sendV[0].start = 1;
             sendV[0].equals = 0;
@@ -2026,30 +2016,25 @@ int main(int argc, char *argv[]) {
                     }
                 }
             }
-              
+          
             // Increments the tick
             iterationN++;
-            //bhmMessage("I","ITERATOR","iteration = %llu",iterationN);
             aux = iterationN;
 
             // Sends the tick for the first(s) packet(s)
             releasePackets(sendV, 0);
             // Sends the tick for routers
             runIterations();
-          //  bhmMessage("I","ITERATOR","iteration = %llu",iterationN);
 
             // ???
             for(i=0;i<sendV[0].equals;i++){
                 iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;
             }
-
           
             // For each packet starting on the last sent... 
             for(i=sendV[0].equals;i<cont;i++){
-               
 
                 nextLocalIteration =  aux + sendV[i].start + 1;
-
                 // Wait for the next tick
                 bhmWaitEvent(releaseLocal);
                 
@@ -2057,12 +2042,11 @@ int main(int argc, char *argv[]) {
                 releasePackets(sendV, i);
                 runIterations();
 
-
                 for(j=0;j<sendV[i].equals;j++){
-                    iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;
+                    iterateMapLocal[sendV[j].idPE] = ITERATION_RELEASED_LOCAL;
                 }
-
                 i = i + sendV[i].equals - 1;
+           
             }
             free(sendVector);
             free(sendV);

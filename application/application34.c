@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     }
     txPacket.message[1]=34;
    for(i=0;i<100;i++){
-        sendPckt(txPacket);
+        sendPckt(txPacket); 
     }
 
     //////////////////////////////////////////////////////

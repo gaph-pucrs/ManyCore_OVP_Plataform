@@ -333,8 +333,8 @@ echo "                // send the ticks for this packets and routers" >> iterato
 echo "                releasePackets(sendV, i);" >> iterator.igen.c
 echo "                runIterations();" >> iterator.igen.c
 echo "" >> iterator.igen.c
-echo "                for(j=0;j<sendV[i].equals;i++){" >> iterator.igen.c
-echo "                    iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;" >> iterator.igen.c
+echo "                for(j=0;j<sendV[i].equals;j++){" >> iterator.igen.c
+echo "                    iterateMapLocal[sendV[j].idPE] = ITERATION_RELEASED_LOCAL;" >> iterator.igen.c
 echo "                }" >> iterator.igen.c
 echo "                i = i + sendV[i].equals - 1;" >> iterator.igen.c
 echo "           " >> iterator.igen.c

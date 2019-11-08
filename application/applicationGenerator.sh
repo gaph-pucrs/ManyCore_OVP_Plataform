@@ -9,7 +9,7 @@ N=$(($N-1))
 for i in $(seq 0 $N);
 do
 
-    cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
+    #cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 
 done
 

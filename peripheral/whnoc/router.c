@@ -34,6 +34,8 @@ unsigned int ntohl(unsigned int x){
 unsigned int myAddress = 0xFFFFFFFF;
 // local ID Router
 int myID = 0xFFFFFFFF;
+// Number of packets delivered to the Local port
+unsigned int localDeliveredPckts = 0;
 
 // Countdown value per Packet, informing how many flits are left to be transmitted 
 unsigned int flitCountOut[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
@@ -280,6 +282,12 @@ unsigned int bufferPop(unsigned int port){
     // If the flitCountOut goes to EMPTY then the transmission is done!
     if (flitCountOut[port] == EMPTY){
         
+        //Log info about the end of transmittion of a packet
+        if (routingTable[port] == LOCAL){
+            localDeliveredPckts++;
+            bhmMessage("I", "Router", "Packet delivered at %d-(%d,%d) - total delivered: %d\n",myID, positionX(myAddress), positionY(myAddress), localDeliveredPckts);
+        }
+
         // Updates the routing table, releasing the output port
         routingTable[port] = ND;
 
@@ -602,7 +610,6 @@ void preBuffer_statusUpdate(){
 
 // Stores a flit that is incomming from the local IP
 void preBuffer_push(unsigned int newFlit){
-   // if(myID==48)bhmMessage("I","PREBUFFERPUSH","PREBUFFERPUSH");
     contFlitsPacket[LOCAL]++;
     preBufferPackets[preBuffer_last] = newFlit;
 
@@ -621,7 +628,6 @@ void preBuffer_push(unsigned int newFlit){
         contFlitsPacket[LOCAL] = 0;
     }else if(contFlitsPacket[LOCAL]==3){ // inform the iterator that this router has a packet in the prebuffer
         if(myIterationStatusLocal == ITERATION_OFF_LOCAL){
-            //if(myID==48)bhmMessage("I","PREBUFFERPUSH","INFORMING ITERATOR"); OK
             informIteratorLocalOn();
             ppmPacketnetWrite(handles.iterationsPort, &newFlit, sizeof(newFlit));              
         }                  
@@ -646,7 +652,6 @@ void preBuffer_pop(){
         }
         // Decrease the flitCount
         flitCountIn = flitCountIn - 1;
-       // if(myID==8)bhmMessage("I","prebufferPop","flitCountIn = %d",flitCountIn);
 
         // Register the size of a new packet to insert some control information in the tail
         if (flitCountIn == SIZE){
@@ -669,7 +674,7 @@ void preBuffer_pop(){
         else if(flitCountIn == OUT_TIME){
             flitCountIn = HEADER;
             myIterationStatusLocal = ITERATION_OFF_LOCAL;
-
+            informIteratorLocalOff();
             // Informs that there is another packet inside the prebuffer to send
             if(preBuffer_last != (preBuffer_first+1)){
                 informIteratorLocalOn();
@@ -701,7 +706,6 @@ void preBuffer_pop(){
 ////////////////////////////////////////////////////////////////////////////////
 
 void iterate(){
-    //bhmMessage("I","ITERATE","Iterate"); 
     // Send a flit from the PREBUFFER to the local buffer
     if(myIterationStatusLocal == ITERATION_RELEASED_LOCAL){
         preBuffer_pop();
@@ -857,7 +861,6 @@ PPM_REG_WRITE_CB(rxWrite) {
 // READ OPERATION IN THE REGISTER: controlTxLocal
 PPM_REG_READ_CB(txCtrlRead) {
     // Inform the iterator that some IP waiting a packet...
-    //if(myID==1)bhmMessage("I","txCtrlRead","IP waiting a packet"); 
     informIterator();
     return *(Uns32*)user;
 }
@@ -889,7 +892,6 @@ PPM_PACKETNET_CB(iterationPort) {
 
     //Checks if it is a local iteration
     if((currentTime >> 31) == 1){
-
         myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
         currentTime = (unsigned long long int )(0x7FFFFFFFULL & currentTime);
     }
