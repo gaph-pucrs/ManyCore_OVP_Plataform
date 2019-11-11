@@ -11,7 +11,7 @@ source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
 setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
 
 cd application
-./applicationGenerator.sh $X $Y
+#./applicationGenerator.sh $X $Y
 cd ..
 
 cd module
@@ -25,7 +25,7 @@ sed -i 's/#define DIM_Y.*/#define DIM_Y '$Y'/' noc.h
 sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
 cd ..
 cd iterator
-./iteratorGenerator.sh $X $Y
+#./iteratorGenerator.sh $X $Y
 cd ../..
 
 cd harness

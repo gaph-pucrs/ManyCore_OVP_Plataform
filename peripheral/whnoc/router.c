@@ -120,6 +120,7 @@ int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
 
 // Informs the ticker that this router needs ticks
 void turn_TickOn(){
+   // if(myID==1)bhmMessage("I","ROUTER","TURN_TICK_ON");
     unsigned short int iterAux = ITERATION_ON;
     myTickStatus = ITERATION_ON;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
@@ -127,6 +128,8 @@ void turn_TickOn(){
 
 // Informs the ticker that this router does not needs ticks
 void turn_TickOff(){
+     //   if(myID==1)bhmMessage("I","ROUTER","TURN_TICK_OFF");
+
     unsigned short int iterAux = ITERATION_OFF;
     myTickStatus = ITERATION_OFF;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
@@ -134,6 +137,8 @@ void turn_TickOff(){
 
 // Informs the ticker that the local port needs ticks
 void informIteratorLocalOn(){
+      //  if(myID==1)bhmMessage("I","ROUTER","TURN_TICK_ON");
+
     unsigned short int iterAux = ITERATION_BLOCKED_LOCAL;
     myIterationStatusLocal = ITERATION_BLOCKED_LOCAL;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
@@ -141,6 +146,8 @@ void informIteratorLocalOn(){
 
 // Informs the ticker that the local port does not needs ticks
 void informIteratorLocalOff(){
+      //  if(myID==1)bhmMessage("I","ROUTER","TURN_TICK_OFF");
+
     unsigned short int iterAux = ITERATION_OFF_LOCAL;
     myIterationStatusLocal = ITERATION_OFF_LOCAL;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
@@ -148,6 +155,8 @@ void informIteratorLocalOff(){
 
 // Inform the iterator that the PE is waiting a packet 
 void informIterator(){
+
+   // if(myID==1)bhmMessage("I","ROUTER","TURN_TICK_ON");
     unsigned short int iterAux = ITERATION;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
@@ -629,6 +638,8 @@ void preBuffer_push(unsigned int newFlit){
     }else if(contFlitsPacket[LOCAL]==3){ // inform the iterator that this router has a packet in the prebuffer
         if(myIterationStatusLocal == ITERATION_OFF_LOCAL){
             informIteratorLocalOn();
+            if(myID==1)bhmMessage("I","prebufferPush","Informing Send");
+
             ppmPacketnetWrite(handles.iterationsPort, &newFlit, sizeof(newFlit));              
         }                  
     } 
@@ -655,7 +666,7 @@ void preBuffer_pop(){
 
         // Register the size of a new packet to insert some control information in the tail
         if (flitCountIn == SIZE){
-            flitCountIn = htonl(preBufferPackets[preBuffer_first]);
+            flitCountIn = htonl(preBufferPackets[preBuffer_first]) ;
         }
         else if(flitCountIn == HOPES){
             // Calculate the number of hopes to achiev the destination address
@@ -673,12 +684,20 @@ void preBuffer_pop(){
         }
         else if(flitCountIn == OUT_TIME){
             flitCountIn = HEADER;
-            myIterationStatusLocal = ITERATION_OFF_LOCAL;
-            informIteratorLocalOff();
+           
             // Informs that there is another packet inside the prebuffer to send
+            if(myID==1)bhmMessage("I","ROUTER","preBufferLast = %d and preBuffer_first + 1 = %d", preBuffer_last,preBuffer_first+1);
             if(preBuffer_last != (preBuffer_first+1)){
+
+             //preBufferLast = 288 and preBuffer_first + 1 = 154
+                
                 informIteratorLocalOn();
+                if(myID==1)bhmMessage("I","ROUTER","INFORMING SEND");
                 ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));// LOOKS DANGEROUS
+            }else{
+                myIterationStatusLocal = ITERATION_OFF_LOCAL;
+                informIteratorLocalOff();
+
             }
         }
         // Register the flit data
@@ -696,6 +715,7 @@ void preBuffer_pop(){
             preBuffer_first = 0;
         }
 
+        if(myID==1)bhmMessage("I","ROUTER","flitCountIn = %d and flit = %d ",flitCountIn, htonl(incomingFlit.data));
         // Update the prebuffer status
         preBuffer_statusUpdate();
     }

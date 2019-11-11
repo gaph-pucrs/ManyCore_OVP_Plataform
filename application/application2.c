@@ -47,11 +47,11 @@ int main(int argc, char **argv)
         txPacket.message[i] = i;
     }
     txPacket.message[1]=2;
-   for(i=0;i<100;i++){
+   for(i=0;i<2;i++){
         sendPckt(txPacket);
     }
 
-    for(i=0;i<100;i++){
+    for(i=0;i<2;i++){
      //   printf("comecou\n");
         receivePckt();
         //LOG("aplicacao 2 Pacote %d recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[1], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);

@@ -5,8 +5,8 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
+#include <time.h>
 #include "api.h"
-
 packet txPacket;
 int main(int argc, char **argv)
 {
@@ -47,10 +47,11 @@ int main(int argc, char **argv)
         txPacket.message[i] = i;
     }
     txPacket.message[1]=1;
-   for(i=0;i<100;i++){
+   for(i=0;i<2;i++){
         sendPckt(txPacket);
+
     }
- for(i=0;i<100;i++){
+ for(i=0;i<2;i++){
      //   printf("comecou\n");
         receivePckt();
         //LOG(" aplicacao 1 Pacote %d recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[1], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);

@@ -10,6 +10,7 @@ typedef struct {
    unsigned int inTime;
    unsigned int outTime;
    unsigned int destination;
+   time_t sendTime;
    int *message;
 }packet;
 
@@ -47,6 +48,9 @@ void interruptHandler(void) {
                 rxPacket.message = (int *)malloc(rxPacket.size * sizeof(unsigned int));
                 *control = ACK;
                 //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+            } else if(rxPointer ==2){
+                rxPacket.sendTime = *rxLocal;
+                *control = ACK;
             }
             else if (rxPointer == rxPacket.size + 2){   // HOPES
                 rxPacket.hopes = *rxLocal;
@@ -66,7 +70,7 @@ void interruptHandler(void) {
                 return;
             }
             else{                                       // MESSAGE
-                rxPacket.message[rxPointer-2] = *rxLocal;
+                rxPacket.message[rxPointer-3] = *rxLocal;
                 *control = ACK;
                 //if(rxPointer == 17) printf("source = %d",*rxLocal);
                 // printf("flit %d = %d \n",rxPointer,*rxLocal);
@@ -83,26 +87,31 @@ void sendPckt(packet thisPacket){
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
     volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
-    //                      HEADER   + 2 (header + sizer)
+    //                      HEADER   + 3 (header + size + sendTime)
     //                      TAIL         + 3 (hopes + inTime + outTime)
     tsend = clock();
 	tsend = tsend - tinicio;
-    thisPacket.message[0] = tsend;
+    thisPacket.sendTime = tsend;
+    //thisPacket.message[0] = tsend;
 
-    while(txPointer < (thisPacket.size + 2 + 3)){
+    while(txPointer < (thisPacket.size + 3 + 3)){
         while(*controlTx != GO){ /* Waiting for space in the preBuffer */}
 
         if(txPointer == 0){
             *txLocal = thisPacket.destination;
         }
         else if (txPointer == 1){
-            *txLocal = thisPacket.size + 3; // + 3 for the TAIL
+            *txLocal = thisPacket.size + 3 + 1; // + 3 for the TAIL + 1 for sendTime
+        } else if (txPointer ==2){
+            *txLocal = thisPacket.sendTime;
+           // printf("application 1 sendTime = %d\n",thisPacket.sendTime);
+
         }
         else if (txPointer >= (thisPacket.size + 2)){
             *txLocal = 0;
         }
         else{
-            *txLocal = thisPacket.message[txPointer-2];
+            *txLocal = thisPacket.message[txPointer-3];
         }
 
         txPointer++;

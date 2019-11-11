@@ -406,6 +406,8 @@ PPM_PACKETNET_CB(iteration0) {
 PPM_PACKETNET_CB(iteration1) {
     // If bytes == 2 then we have a status change or a iteration request
     if(bytes == 2){
+              //  bhmMessage("I","ITERATOR","CHANGING STATUS");
+
         unsigned int status = *(unsigned int *)data;
         status = status & 0xFFFF;
         statusHandler(1, status);
@@ -413,6 +415,8 @@ PPM_PACKETNET_CB(iteration1) {
     }else{
         send newSend;
         newSend.time = htonl(*(unsigned int *)data);
+        bhmMessage("I","ITERATOR","SEND TIME = %d",newSend.time);
+
         newSend.idPE = 1;
         newSend.start = 0;
         newSend.equals = 0;
