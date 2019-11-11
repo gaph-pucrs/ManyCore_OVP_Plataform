@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     tinicio = tignore - (tignore - tinicio);
 
     int i;
-   for(i=0;i<100;i++){
+   for(i=0;i<10;i++){
      //   printf("comecou\n");
         receivePckt();
         //LOG(" Pacote %d recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[1], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
@@ -52,8 +52,8 @@ int main(int argc, char **argv)
         txPacket.message[i] = i;
     }
     txPacket.message[1]=34;
-   for(i=0;i<100;i++){
-        sendPckt(txPacket);
+   for(i=0;i<10;i++){
+        sendPckt(txPacket); 
     }
 
     //////////////////////////////////////////////////////

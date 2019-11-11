@@ -283,6 +283,8 @@ unsigned int bufferPop(unsigned int port){
         // Updates the routing table, releasing the output port
         routingTable[port] = ND;
 
+        //
+
         if(flitCountOut[port] == OUT_TIME){
             value = ntohl(currentTime); // << 24;
         }
@@ -511,6 +513,7 @@ void transmitt(){
                     localPort_regs_data.controlTxLocal.value = htonl(REQ);
                     // Set the flit value in the memory mapped reg
                     localPort_regs_data.dataTxLocal.value = flit;
+                    
                     // Interrupt the processor (this will occur one time per packet)
                     ppmWriteNet(handles.INTTC, 1);
                 }
@@ -669,7 +672,7 @@ void preBuffer_pop(){
         else if(flitCountIn == OUT_TIME){
             flitCountIn = HEADER;
             myIterationStatusLocal = ITERATION_OFF_LOCAL;
-
+            informIteratorLocalOff();
             // Informs that there is another packet inside the prebuffer to send
             if(preBuffer_last != (preBuffer_first+1)){
                 informIteratorLocalOn();

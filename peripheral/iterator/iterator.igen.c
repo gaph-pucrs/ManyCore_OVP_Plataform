@@ -2059,7 +2059,7 @@ int main(int argc, char *argv[]) {
 
 
                 for(j=0;j<sendV[i].equals;j++){
-                    iterateMapLocal[sendV[i].idPE] = ITERATION_RELEASED_LOCAL;
+                    iterateMapLocal[sendV[j].idPE] = ITERATION_RELEASED_LOCAL;
                 }
 
                 i = i + sendV[i].equals - 1;

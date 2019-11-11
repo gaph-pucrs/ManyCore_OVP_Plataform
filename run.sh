@@ -11,7 +11,7 @@ source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
 setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
 
 cd application
-./applicationGenerator.sh $X $Y
+#./applicationGenerator.sh $X $Y
 cd ..
 
 cd module

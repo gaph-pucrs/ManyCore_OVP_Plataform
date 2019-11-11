@@ -40,14 +40,20 @@ int main(int argc, char **argv)
 
 
     int i;
-    txPacket.destination = 0x24;
+     for(i=0;i<10;i++){
+     //   printf("comecou\n");
+        receivePckt();
+        //LOG(" Pacote %d recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[1], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
+        packetConsumed();
+    }
+    txPacket.destination = 0x33;
     txPacket.size = 138;
     txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
     for(i = 0; i<txPacket.size; i++){
         txPacket.message[i] = i;
     }
     txPacket.message[1]=36;
-   for(i=0;i<100;i++){
+   for(i=0;i<10;i++){
         sendPckt(txPacket);
     }
 

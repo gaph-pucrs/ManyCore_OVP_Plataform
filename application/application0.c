@@ -39,17 +39,6 @@ int main(int argc, char **argv)
     tinicio = tignore - (tignore - tinicio);
 
 
-    int i;
-    txPacket.destination = 0x24;
-    txPacket.size = 138;
-    txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
-    for(i = 0; i<txPacket.size; i++){
-        txPacket.message[i] = i;
-    }
-    txPacket.message[1]=0;
-   for(i=0;i<100;i++){
-        sendPckt(txPacket);
-    }
 
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
