@@ -9,10 +9,11 @@ N=$(($N-1))
 
 for i in $(seq 0 $N);
 do
-	if [ APP_NAME != "" ]; then
-		FILE = source/$APP_NAME/application$i.c
-		if [ test -f "$FILE" ]; then
-			cp -u -v source/$APP_NAME/application$i.c application$i.c
+	if [ ! -z "$APP_NAME" ] 
+	then
+		file="source/"$APP_NAME"/application"$i".c"
+		if [ -f "$file" ]; then
+			cp -u -v source/"$APP_NAME"/application$i.c application$i.c
 		else 
 			cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 		fi

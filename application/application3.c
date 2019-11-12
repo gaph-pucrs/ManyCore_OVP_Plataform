@@ -13,7 +13,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
     //////////////////////////////////////////////////////
-    LOG("Starting ROUTER0 application! \n");
+    LOG("Starting ROUTER3 application! \n\n");
     //////////////////////////////////////////////////////
     //////////////// Interruption config /////////////////
     // Attach the external interrupt handler for 'intr0'
@@ -27,8 +27,8 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     //////////////// PEs Synchronization /////////////////
     int start = 0;
-    *myAddress = 0x00;
-    *PEToSync = 0x00;
+    *myAddress = 0x30;
+    *PEToSync = 0x30;
     while(start != 1){ start = *SyncToPE >> 24; }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
@@ -44,6 +44,6 @@ int main(int argc, char **argv)
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
 
-    LOG("Application ROUTER0 done!\n\n");
+    LOG("Application ROUTER3 done!\n\n");
     return 1;
 }

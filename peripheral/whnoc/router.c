@@ -640,9 +640,7 @@ void preBuffer_push(unsigned int newFlit){
 void preBuffer_pop(){
     unsigned int difX, difY;
     
-    if(!preBuffer_isEmpty() && localStatus == GO){
-            //    if(myID==8)bhmMessage("I","ITERATE","PREBUFFERPOP");
-
+    if(!preBuffer_isEmpty() && localStatus == GO){  
         ////////////////////////
         // Control insertions //
         ////////////////////////

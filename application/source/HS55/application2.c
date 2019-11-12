@@ -13,7 +13,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
     //////////////////////////////////////////////////////
-    LOG("Starting ROUTER0 application! \n");
+    LOG("Starting ROUTER2 application! \n\n");
     //////////////////////////////////////////////////////
     //////////////// Interruption config /////////////////
     // Attach the external interrupt handler for 'intr0'
@@ -27,23 +27,29 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     //////////////// PEs Synchronization /////////////////
     int start = 0;
-    *myAddress = 0x00;
-    *PEToSync = 0x00;
+    *myAddress = 0x20;
+    *PEToSync = 0x20;
     while(start != 1){ start = *SyncToPE >> 24; }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    
-
-    //LOG("Hello World!");
-
-
+    int i;
+    txPacket.destination = 0x24;
+    txPacket.size = 138;
+    txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
+    for(i = 0; i<txPacket.size; i++){
+        txPacket.message[i] = i;
+    }
+    txPacket.message[1]=2;
+    for(i=0;i<10;i++){
+        sendPckt(txPacket);
+    }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
 
-    LOG("Application ROUTER0 done!\n\n");
+    LOG("Application ROUTER2 done!\n\n");
     return 1;
 }

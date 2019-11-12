@@ -10,7 +10,7 @@ typedef struct {
    unsigned int inTime;
    unsigned int outTime;
    unsigned int destination;
-   int *message;
+   unsigned int *message;
 }packet;
 
 packet rxPacket;
@@ -28,8 +28,8 @@ time_t tinicio, tsend, tfim, tignore;                   // auxiliar time variabl
 
 // Function to handle the interruption -> receives a packet
 void interruptHandler(void) {
-    volatile static Uns32 txPointer = 0;
-    int i = 0;
+    volatile static Uns32 rxPointer;
+    rxPointer = 0;
     while(*control!=STALL){
         if(*control == REQ){
             if (rxPointer == 0){                        // HEADER
@@ -66,11 +66,11 @@ void interruptHandler(void) {
 
 // Sends a packet to the router
 void sendPckt(packet thisPacket){
-    volatile static Uns32 rxPointer = 0;
+    volatile static Uns32 txPointer = 0;
     volatile unsigned int *txLocal = ROUTER_BASE + 0x2; // dataRxLocal
     volatile unsigned int *controlTx = ROUTER_BASE + 0x3; // controlRxLocal
     txPointer = 0;
-    //                      HEADER   + 2 (header + sizer)
+    //                      HEADER   + 2 (header + size)
     //                      TAIL         + 3 (hopes + inTime + outTime)
     tsend = clock();
 	tsend = tsend - tinicio;
