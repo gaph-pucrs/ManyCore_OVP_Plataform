@@ -1,5 +1,4 @@
-
-imodelnewperipheral -name router \
+imodelnewperipheral -name networkInterface \
                     -constructor constructor \
                     -destructor  destructor \
                     -vendor gaph \
@@ -7,115 +6,34 @@ imodelnewperipheral -name router \
                     -version 1.0 
 
 iadddocumentation -name Description \
-                  -text "A OVP Wormhole Router"
+                  -text "A OVP DMA for a router"
 
 #########################################
 ## A slave port on the processor bus
 #########################################
-imodeladdbusslaveport -name localPort \
-                      -size 20 \
-                      -mustbeconnected
+imodeladdbusslaveport -name DMAC -size 8 -mustbeconnected
 
-#########################################
-## The whole address space of the slave port (four integers)
-## is taken up by four registers
-#########################################
-imodeladdaddressblock -name regs   \
-                      -port localPort \
-                      -offset 0x0  \
-                      -width 32    \
-                      -size 20
+# Address block for 8 bit control registers
+imodeladdaddressblock -port DMAC -name ab8 -width 32 -offset 0 -size 8
 
-imodeladdmmregister  -name myAddress \
-                     -readfunction   addressRead \
-                     -writefunction  addressWrite \
-                     -offset 0 
-
-imodeladdmmregister  -name dataTxLocal \
-                     -readfunction   txRead \
-                     -writefunction  txWrite \
-                     -offset 4
-
-imodeladdmmregister  -name dataRxLocal \
-                     -readfunction   rxRead \
-                     -writefunction  rxWrite \
-                     -offset 8
-
-imodeladdmmregister  -name controlRxLocal \
-                     -readfunction   rxCtrlRead \
-                     -writefunction  rxCtrlWrite \
-                     -offset 12
-
-imodeladdmmregister  -name controlTxLocal \
-                     -readfunction   txCtrlRead \
-                     -writefunction  txCtrlWrite \
-                     -offset 16 
-
+# 8 bit control registers
+imodeladdmmregister -addressblock DMAC/ab8 -name status     -offset 0x00 -readfunction statusRead -writefunction statusWrite
+imodeladdmmregister -addressblock DMAC/ab8 -name address    -offset 0x04 -readfunction addressRead -writefunction addressWrite
 
 #########################################
 ## Data ports between routers
 #########################################
 imodeladdpacketnetport \
-    -name portDataEast \
+    -name dataPort \
     -maxbytes 4 \
-    -updatefunction dataEast \
+    -updatefunction dataPortUpd \
     -updatefunctionargument 0x00
 
 imodeladdpacketnetport \
-    -name portDataWest \
+    -name controlPort \
     -maxbytes 4 \
-    -updatefunction dataWest \
+    -updatefunction controlPortUpd \
     -updatefunctionargument 0x00
-
-imodeladdpacketnetport \
-    -name portDataNorth \
-    -maxbytes 4 \
-    -updatefunction dataNorth \
-    -updatefunctionargument 0x00
-
-imodeladdpacketnetport \
-    -name portDataSouth \
-    -maxbytes 4 \
-    -updatefunction dataSouth \
-    -updatefunctionargument 0x00
-
-#########################################
-## To Tick
-#########################################
-
-imodeladdpacketnetport \
-    -name iterationsPort \
-    -maxbytes 8 \
-    -updatefunction iterationPort \
-    -updatefunctionargument 0x00
-
-#########################################
-## Control ports between routers
-#########################################
-imodeladdpacketnetport \
-    -name portControlEast \
-    -maxbytes 8 \
-    -updatefunction controlEast \
-    -updatefunctionargument 0x00
-
-imodeladdpacketnetport \
-    -name portControlWest \
-    -maxbytes 8 \
-    -updatefunction controlWest \
-    -updatefunctionargument 0x00
-
-imodeladdpacketnetport \
-    -name portControlNorth \
-    -maxbytes 8 \
-    -updatefunction controlNorth \
-    -updatefunctionargument 0x00
-
-imodeladdpacketnetport \
-    -name portControlSouth \
-    -maxbytes 8 \
-    -updatefunction controlSouth \
-    -updatefunctionargument 0x00
-
 
 #########################################
 ## Processor interrupt line

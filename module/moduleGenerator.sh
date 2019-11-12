@@ -67,14 +67,16 @@ done
 # Defines each router 
 for i in $(seq 0 $N);
 do
-	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/whnoc/pse.pse" >> module.op.tcl
+	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/whnoc_dma/pse.pse" >> module.op.tcl
+	echo "ihwaddperipheral -instancename ni"$i" -modelfile peripheral/networkinterface/pse.pse" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
 # Defines the connection between each router and the processor bus
 for i in $(seq 0 $N);
 do
-	echo "ihwconnect -instancename router"$i" -busslaveport localPort -bus cpu"$i"Bus -loaddress 0x80000000 -hiaddress 0x80000013" >> module.op.tcl
+	echo "ihwconnect -instancename router"$i" -busslaveport localPort -bus cpu"$i"Bus -loaddress 0x80000000 -hiaddress 0x80000003" >> module.op.tcl
+	echo "ihwconnect -instancename ni"$i" -busslaveport localPort -bus cpu"$i"Bus -loaddress 0x80000004 -hiaddress 0x8000000B" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
@@ -82,7 +84,9 @@ echo "" >> module.op.tcl
 for i in $(seq 0 $(($Y-1)));
 	do
 	for j in $(seq 0 $(($X-1)));
-	do
+	do	
+		echo "ihwaddpacketnet -instancename data_"$i"_"$j"_L" >> module.op.tcl
+		echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_L" >> module.op.tcl
 		if [ $(($j%2)) = 0 ];
 		then 
 			if [ $(($i%2)) = 0 ];
@@ -125,7 +129,11 @@ for i in $(seq 0 $bordaY);
 	do
 	for j in $(seq 0 $bordaX);
 	do
-
+		echo "ihwconnect -instancename router"$cont" -packetnetport portDataLocal -packetnet data_"$i"_"$j"_L" >> module.op.tcl
+		echo "ihwconnect -instancename ni"$cont" -packetnetport dataPort -packetnet data_"$i"_"$j"_L" >> module.op.tcl
+		
+		echo "ihwconnect -instancename router"$cont" -packetnetport portControlLocal -packetnet ctrl_"$i"_"$j"_L" >> module.op.tcl
+		echo "ihwconnect -instancename ni"$cont" -packetnetport controlPort -packetnet ctrl_"$i"_"$j"_L" >> module.op.tcl
 		if [ $(($j%2)) = 0 ];
 		then
 			if [ $(($i%2)) = 0 ];
@@ -172,9 +180,9 @@ for i in $(seq 0 $bordaY);
 
 			fi
 	
-	else
-		if [ $(($i%2)) != 0 ];
-		then
+		else
+			if [ $(($i%2)) != 0 ];
+			then
 
 				if [ $j -lt $bordaX ];
 				then
@@ -224,7 +232,7 @@ echo "" >> module.op.tcl
 # Connects every interruption signal from each router to the associated processor
 for i in $(seq 0 $N);
 do
-	echo "ihwconnect -instancename router"$i" -netport       INTTC  -net int"$i >> module.op.tcl
+	echo "ihwconnect -instancename ni"$i" -netport       INTTC  -net int"$i >> module.op.tcl
 done
 
 echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
