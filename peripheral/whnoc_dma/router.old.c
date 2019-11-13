@@ -209,7 +209,8 @@ void bufferStatusUpdate(unsigned int port){
 
     // Transmitt the new buffer status to the neighbor
     if (port == LOCAL){
-        ppmPacketnetWrite(handles.portControlLocal, &status, sizeof(status));
+        // Local variable to communicate the status to the preBuffer
+        localStatus = status;
     }
     else if (port == EAST){
         ppmPacketnetWrite(handles.portControlEast, &status, sizeof(status));
@@ -505,7 +506,7 @@ void transmitt(){
             if ((currentTime > buffers[port][first[port]].inTime)||((port == LOCAL) && (lastTickLocal != currentTime))) { // MAYBE lastTickLocal IS LEGACY!
                  
                 // Transmission to the local IP
-                /*if(routingTable[port] == LOCAL && txCtrl == ACK){
+                if(routingTable[port] == LOCAL && txCtrl == ACK){
                     // Refresh lastTickLocal
                     lastTickLocal = currentTime;
                     flit = bufferPop(port);
@@ -521,22 +522,6 @@ void transmitt(){
                     localPort_regs_data.dataTxLocal.value = flit;
                     // Interrupt the processor (this will occur one time per packet)
                     ppmWriteNet(handles.INTTC, 1);
-                }*/
-
-                // Transmit it to the LOCAL router
-                if(routingTable[port] == LOCAL){
-                    /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
-                    if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
-                        // Gets a flit from the buffer 
-                        flit = bufferPop(port);
-
-                        #if LOG_OUTPUTFLITS
-                        contFlits[LOCAL]= contFlits[LOCAL]++;
-                        #endif
-                        // Send the flit transmission time followed by the data
-                        ppmPacketnetWrite(handles.portControlLocal, &currentTime, sizeof(currentTime));
-                        ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
-                    }
                 }
 
                 // Transmit it to the EAST router
@@ -708,7 +693,7 @@ void preBuffer_pop(){
         if(preBuffer_first < PREBUFFER_SIZE-1){
             preBuffer_first++;
         }
-        else if(preBuffer_first == PREBUFFER_SIZE-1){else
+        else if(preBuffer_first == PREBUFFER_SIZE-1){
             preBuffer_first = 0;
         }
 
@@ -722,6 +707,10 @@ void preBuffer_pop(){
 ////////////////////////////////////////////////////////////////////////////////
 
 void iterate(){
+    // Send a flit from the PREBUFFER to the local buffer
+    if(myIterationStatusLocal == ITERATION_RELEASED_LOCAL){
+        preBuffer_pop();
+    }
     ////////////////////////////////////////////
     // Arbitration Process - defined in noc.h //
     ////////////////////////////////////////////
@@ -744,6 +733,7 @@ void iterate(){
     #endif
     ////////////////////////////////////////////
     ////////////////////////////////////////////
+
     ////////////////////////////////////////////
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
     transmitt(); 
@@ -752,8 +742,16 @@ void iterate(){
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// Callback stubs ////////////////////////////////
 
+PPM_REG_READ_CB(DMAread) {
+    // YOUR CODE HERE (DMAread)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(DMAwrite) {
+    
+}
+
 PPM_REG_READ_CB(addressRead) {
-    // YOUR CODE HERE (addressRead)
     return *(Uns32*)user;
 }
 
@@ -788,15 +786,7 @@ PPM_PACKETNET_CB(controlEast) {
 }
 
 PPM_PACKETNET_CB(controlLocal) {
-    // When receving a control value... (4 bytes info)
-    if(bytes == 4){
-        unsigned int ctrl = *(unsigned int *)data;
-        controlUpdate(LOCAL, ctrl);
-    }
-    // When receving a time for the incoming flit... (8 bytes info)
-    else if(bytes == 8){
-        incomingFlit.inTime = *(unsigned long long int *)data;
-    }
+    // YOUR CODE HERE (controlLocal)
 }
 
 PPM_PACKETNET_CB(controlNorth) {
@@ -842,9 +832,7 @@ PPM_PACKETNET_CB(dataEast) {
 }
 
 PPM_PACKETNET_CB(dataLocal) {
-    unsigned int newFlit = *(unsigned int *)data;
-    incomingFlit.data = newFlit;
-    bufferPush(LOCAL);
+    // YOUR CODE HERE (dataLocal)
 }
 
 PPM_PACKETNET_CB(dataNorth) {
@@ -877,6 +865,16 @@ PPM_PACKETNET_CB(iterationPort) {
 
     //Runs iterate
     iterate();
+}
+
+PPM_REG_WRITE_CB(statusDMAwrite) {
+    // YOUR CODE HERE (statusDMAwrite)
+    *(Uns32*)user = data;
+}
+
+PPM_REG_READ_CB(stautsDMAread) {
+    // YOUR CODE HERE (stautsDMAread)
+    return *(Uns32*)user;
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {

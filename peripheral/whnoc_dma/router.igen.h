@@ -39,12 +39,6 @@ typedef struct localPort_regs_dataS {
     union { 
         Uns32 value;
     } myAddress;
-    union { 
-        Uns32 value;
-    } DMAaddress;
-    union { 
-        Uns32 value;
-    } DMAstatus;
 } localPort_regs_dataT, *localPort_regs_dataTP;
 
 /////////////////////////////// Port Declarations //////////////////////////////
@@ -73,8 +67,6 @@ extern handlesT handles;
 
 ////////////////////////////// Callback prototypes /////////////////////////////
 
-PPM_REG_READ_CB(DMAread);
-PPM_REG_WRITE_CB(DMAwrite);
 PPM_REG_READ_CB(addressRead);
 PPM_REG_WRITE_CB(addressWrite);
 PPM_PACKETNET_CB(controlEast);
@@ -88,8 +80,6 @@ PPM_PACKETNET_CB(dataNorth);
 PPM_PACKETNET_CB(dataSouth);
 PPM_PACKETNET_CB(dataWest);
 PPM_PACKETNET_CB(iterationPort);
-PPM_REG_WRITE_CB(statusDMAwrite);
-PPM_REG_READ_CB(stautsDMAread);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
 PPM_CONSTRUCTOR_CB(constructor);
