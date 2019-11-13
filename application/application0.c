@@ -40,13 +40,10 @@ int main(int argc, char **argv)
 
     startingApplication();
     message *new = initMessage(0x10);
+
     send(new);
-
-    message *aa = initMessage(0x01);
-    send(aa);
-
-
-
+    endApplication();
+ 
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////

@@ -497,15 +497,20 @@ void transmitt(){
     unsigned int port, flit;
     // For each port...
     for(port = 0; port <= LOCAL; port++){
+
    
         // Verify if the port is routed and if it has something to transmmit 
         if((routingTable[port] < ND) && (!isEmpty(port))){
 
+
             // Checks if at least one tick has passed since the flit arrived in this router
             if ((currentTime > buffers[port][first[port]].inTime)||((port == LOCAL) && (lastTickLocal != currentTime))) { // MAYBE lastTickLocal IS LEGACY!
-                 
+
                 // Transmission to the local IP
                 if(routingTable[port] == LOCAL && txCtrl == ACK){
+                    
+
+
                     // Refresh lastTickLocal
                     lastTickLocal = currentTime;
                     flit = bufferPop(port);
@@ -520,6 +525,8 @@ void transmitt(){
                     // Set the flit value in the memory mapped reg
                     localPort_regs_data.dataTxLocal.value = flit;
                     // Interrupt the processor (this will occur one time per packet)
+                  //  if(myID==0)bhmMessage("I","transmiit","traaaaansmiting");
+
                     ppmWriteNet(handles.INTTC, 1);
                 }
 
@@ -550,6 +557,8 @@ void transmitt(){
                         contFlits[WEST]= contFlits[WEST]++;
                         #endif
                         // Send the flit transmission time followed by the data
+                       // if(myID==1) bhmMessage("I","transmit","TRAAAAAAAAAAAAAAAAAAAANSMITING\n");
+
                         ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
                         ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
                     }
@@ -854,12 +863,14 @@ PPM_REG_READ_CB(rxRead) {
 // WRITE OPERATION IN THE REGISTER: dataRxLocal
 PPM_REG_WRITE_CB(rxWrite) {
     // Stores the incomming data in the pre_buffer
+    //bhmMessage("I","rxWrite","Stores the incomming data in the buffer\n");
     preBuffer_push(data);
     *(Uns32*)user = data;
 }
 
 // READ OPERATION IN THE REGISTER: controlTxLocal
 PPM_REG_READ_CB(txCtrlRead) {
+    //if(myID ==1)printf("******************************INFORM ITERATOR\n\n");
     // Inform the iterator that some IP waiting a packet...
     informIterator();
     return *(Uns32*)user;

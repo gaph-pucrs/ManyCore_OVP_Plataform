@@ -5,9 +5,9 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
+#include <time.h>
+#include "../peripheral/whnoc/noc.h"
 #include "api.h"
-
-
 
 int main(int argc, char **argv)
 {
@@ -30,15 +30,15 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x70;
+    *myAddress = 0x12;
 
-    *PEToSync = 0x70;
+    *PEToSync = 0x12;
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
-
+   
 
     LOG("Application ROUTER7 done!\n\n");
     return 1;

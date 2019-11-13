@@ -6,10 +6,10 @@ Y=$2
 N=$(($X*$Y))
 N=$(($N-1))
 
-for i in $(seq 2 $N);
+for i in $(seq 3 $N);
 do
 
-    cp -u -v application1.c application$i.c
+    cp -u -v application2.c application$i.c
 
 done
 

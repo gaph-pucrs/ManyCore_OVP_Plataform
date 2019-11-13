@@ -5,9 +5,9 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
+#include <time.h>
+#include "../peripheral/whnoc/noc.h"
 #include "api.h"
-
-
 
 int main(int argc, char **argv)
 {
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
-
+   
 
     LOG("Application ROUTER2 done!\n\n");
     return 1;
