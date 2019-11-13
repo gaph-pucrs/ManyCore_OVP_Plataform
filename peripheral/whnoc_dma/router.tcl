@@ -13,7 +13,7 @@ iadddocumentation -name Description \
 ## A slave port on the processor bus
 #########################################
 imodeladdbusslaveport -name localPort \
-                      -size 12 \
+                      -size 4 \
                       -mustbeconnected
 
 #########################################
@@ -24,13 +24,9 @@ imodeladdaddressblock -name regs   \
                       -port localPort \
                       -offset 0x0  \
                       -width 32    \
-                      -size 12
+                      -size 4
 
 imodeladdmmregister -name myAddress -readfunction addressRead -writefunction addressWrite -offset 0 
-
-imodeladdmmregister -name DMAaddress -readfunction DMAread -writefunction  DMAwrite -offset 4
-
-imodeladdmmregister -name DMAstatus -readfunction stautsDMAread -writefunction statusDMAwrite -offset 8
 
 #########################################
 ## Data ports between routers
