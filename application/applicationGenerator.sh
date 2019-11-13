@@ -6,10 +6,10 @@ Y=$2
 N=$(($X*$Y))
 N=$(($N-1))
 
-for i in $(seq 0 $N);
+for i in $(seq 2 $N);
 do
 
-    #cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
+    cp -u -v application1.c application$i.c
 
 done
 
@@ -22,11 +22,11 @@ do
 done
 
 
-for i in $(seq 0 $N);
-do
+#for i in $(seq 0 $N);
+#do
 
-    	sed -i 's/txPacket.message\[1\].*/txPacket.message\[1\]='$i'\;/' application$i.c
-done
+ #   	sed -i 's/txMessage.payload\[1\].*/txMessage.payload\[1\]='$i'\;/' application$i.c
+#done
 
 cont=0
 for i in $(seq 0 $(($Y-1)));

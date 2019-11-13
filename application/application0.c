@@ -7,7 +7,7 @@
 #include "../peripheral/whnoc/noc.h"
 #include "api.h"
 
-packet txPacket;
+message txMessage;
 int main(int argc, char **argv)
 {
     //////////////////////////////////////////////////////
@@ -37,6 +37,13 @@ int main(int argc, char **argv)
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
+
+    startingApplication();
+    message *new = initMessage(0x10);
+    send(new);
+
+    message *aa = initMessage(0x01);
+    send(aa);
 
 
 
