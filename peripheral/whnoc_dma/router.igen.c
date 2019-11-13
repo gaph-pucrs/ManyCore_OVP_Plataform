@@ -35,7 +35,7 @@ static PPM_VIEW_CB(view32) {  *(Uns32*)data = *(Uns32*)user; }
 //////////////////////////////// Bus Slave Ports ///////////////////////////////
 
 static void installSlavePorts(void) {
-    handles.localPort = ppmCreateSlaveBusPort("localPort", 12);
+    handles.localPort = ppmCreateSlaveBusPort("localPort", 4);
     if (!handles.localPort) {
         bhmMessage("E", "PPM_SPNC", "Could not connect port 'localPort'");
     }
@@ -55,28 +55,6 @@ static void installRegisters(void) {
         addressWrite,
         view32,
         &(localPort_regs_data.myAddress.value),
-        True
-    );
-    ppmCreateRegister("regs_DMAaddress",
-        0,
-        handles.localPort,
-        4,
-        4,
-        DMAread,
-        DMAwrite,
-        view32,
-        &(localPort_regs_data.DMAaddress.value),
-        True
-    );
-    ppmCreateRegister("regs_DMAstatus",
-        0,
-        handles.localPort,
-        8,
-        4,
-        stautsDMAread,
-        statusDMAwrite,
-        view32,
-        &(localPort_regs_data.DMAstatus.value),
         True
     );
 
