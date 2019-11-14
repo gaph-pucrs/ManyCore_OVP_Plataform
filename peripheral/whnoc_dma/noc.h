@@ -38,6 +38,15 @@
 #define ITERATION_OFF_LOCAL      0x033
 #define ITERATION_RELEASED_LOCAL 0X044
 
+//NI
+#define TRUE                1
+#define FALSE               0
+#define IDLE                0x1111
+#define TX                  0x2222
+#define RX                  0x3333
+#define INFORM_ITERATION    0xFFFFFFFFFFFFFFFFULL
+
+
 
 // PreBuffer
 #define PREBUFFER_SIZE  25000
