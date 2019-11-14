@@ -5,8 +5,6 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
-#include <time.h>
-#include "../peripheral/whnoc/noc.h"
 
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
 #define SYNC_BASE ((unsigned int *) 0x80000014)
@@ -95,6 +93,7 @@ int insertMessage(bufferMSG *buffer, message *msg){
         buffer->size++;
         return 1;
     }else if((buffer->size > 0) &&(buffer->size < BUFFER_APP_SIZE)){
+
         if((newMessage = (message*) malloc (sizeof(*newMessage))) == NULL) return 0;
         *newMessage = *msg;
         message *aux = buffer->end;
@@ -174,17 +173,30 @@ int searchOldMessage(bufferMSG *buffer,int PE, message *c){
 	int i;
 	message *aux = buffer->init;
 	for(i=0;i<buffer->size;i++){
-
+       // printf("message dest = %x\n",aux->header.destination);
 		if(aux->header.destination == PE){
-            c = aux;
+            //*c = aux;
+            c->header = aux->header;
+           // printf("sizeC = %d\n",c->header.size);
+            c->tail = aux->tail;
+            memcpy(c->payload,aux->payload,(c->header.size* sizeof(c->payload[0])));
+            c->nextMessage=aux->nextMessage;
 			c->position = i;
-			//c->msg = aux;
+
+           /* for(i=0;i<c->header.size;i++){
+                printf("payload = %d\n",c->payload[i]);
+            }*/
+           
+           // printf("messageRequestDest = %x",aux->header.destination);
+           // printf("messageRequestDest = %x",c->header.destination);
+
 			return 1;
 		}
 		aux = aux->nextMessage;
 	}
 	return 0;
 }
+
 
 int routerID(unsigned int address){
     int x = (address & 0xF0) >> 4;
@@ -229,31 +241,33 @@ void transmit(message *thisMessage){
     tsend = clock();
 	tsend = tsend - tinicio;
     thisMessage->header.sendTime = tsend;
-    printf("\n\n\n\n\n----------------------------> %d\n",thisMessage->header.size + 7);
+    int i;
+    
+    //printf("\n\n\n\n\n----------------------------> %d\n",thisMessage->header.size + 7);
     while(txPointer < (thisMessage->header.size + 4 + 3)){
         while(*controlTx != GO){  }
 
         if(txPointer == 0){
             *txLocal = thisMessage->header.destination;
-            printf("transmitindo mensagem de requisicao para destino [%x]\n",thisMessage->header.destination);
+           // printf("transmitindo mensagem para destino [%x]\n",thisMessage->header.destination);
         } else if (txPointer == 1){
             *txLocal = thisMessage->header.size + 3 + 2; // + 3 for the TAIL + 1 for sendTime +1  for service
-            printf("transmitindo mensagem de requisicao com tamanho [%d]\n",*txLocal);
+           // printf("transmitindo mensagem com tamanho [%d]\n",*txLocal);
 
         } else if (txPointer ==2){
             *txLocal = thisMessage->header.sendTime;
-            printf("transmitindo mensagem de requisicao no tempo [%d]\n",*txLocal);
 
-           // printf("application 1 sendTime = %d\n",thisPacket.sendTime);
         } else if(txPointer ==3){
             *txLocal = thisMessage->header.service;
-            printf("transmitindo mensagem de requisicao do tipo %d\n",thisMessage->header.service);
+           // printf("transmitindo mensagem do tipo %d\n",thisMessage->header.service);
 
         } else if (txPointer >= (thisMessage->header.size + 4)){
             *txLocal = 0;
         } else {
             *txLocal = thisMessage->payload[txPointer-4];
-            printf("transmitindo da aplicação %x\n",*txLocal);
+          //  printf("transmitindo da aplicação %d\n",*txLocal);
+           // printf("payload = %d\n",*txLocal);
+
         }
 
         txPointer++;
@@ -263,8 +277,7 @@ void transmit(message *thisMessage){
 }
 
 
-
-void interruptHandler(void) {
+/*void interruptHandler(void) {
     int i = 0;
     while(*control!=STALL){
         if(*control == REQ){
@@ -330,10 +343,65 @@ void interruptHandler(void) {
     }
     
     
+}*/
+void interruptHandler(void) {
+    printf("--------------------->recebendo requisicao\n");
+    int i = 0;
+    while(*control!=STALL){
+        if(*control == REQ){
+            
+            if (rxPointer == 0){                        // HEADER
+                rxMessage.header.destination = *rxLocal;
+                *control = ACK;
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+            }
+            else if (rxPointer == 1){                   // SIZE
+                rxMessage.header.size = *rxLocal - 3; // -3 to eliminate the control data from the tail
+                //rxPacket.message = (int *)malloc(rxPacket.size * sizeof(unsigned int));
+                *control = ACK;
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+            } else if(rxPointer ==2){
+                rxMessage.header.sendTime = *rxLocal;
+                *control = ACK;
+            } else if (rxPointer == 3){
+                rxMessage.header.service = *rxLocal;
+
+                *control = ACK;
+                                
+            } else if (rxPointer == rxMessage.header.size + 2){   // HOPES
+                rxMessage.tail.hops = *rxLocal;
+                *control = ACK;
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+            }
+            else if (rxPointer == rxMessage.header.size + 3){   // IN TIME
+                rxMessage.tail.inTime = *rxLocal;
+                *control = ACK;
+                //  printf("flit %d = %d \n",rxPointer,*rxLocal);
+            }
+            else if (rxPointer == rxMessage.header.size + 4){   // OUT TIME
+                printf("****buffer size = %d\n",buffer.size);
+
+                rxMessage.tail.outTime = *rxLocal;
+                intr0 = 1;
+                *control = STALL;
+                // printf("flit %d = %d \n",rxPointer,*rxLocal);
+                return;
+            }else{          
+
+
+                             // MESSAGE
+                rxMessage.payload[rxPointer-4] = *rxLocal;
+                *control = ACK;
+       
+            }
+            rxPointer++;
+        }
+    }
+       
 }
 
 
-void send(message *thisMessage){
+/*void send(message *thisMessage){
     while(buffer.size >= BUFFER_APP_SIZE){
 
     }
@@ -364,12 +432,64 @@ void send(message *thisMessage){
 
     }  
 
+}*/
+void send(message *thisMessage){
+    while(buffer.size >= BUFFER_APP_SIZE){
+        while(*control!=STALL){
+                 //printf("aqqqqqqq\n");
+
+        }
+
+        if(rxMessage.header.service == MESSAGE_REQ){
+            message messageRequested;
+          //  printf("payload[0] = %x\n",rxMessage.payload[0]);
+            int destID = routerID(rxMessage.payload[0]);
+
+            if(searchOldMessage(&buffer,rxMessage.payload[0],&messageRequested)){   
+                //printf("encontrou mensagem\n");
+                searchOldMessage(&buffer,rxMessage.payload[0],&messageRequested);
+            //printf("\n-----messageReqDest = %x\n",messageRequested.header.destination);
+                transmit(&messageRequested);
+                removeMessage(&buffer,&messageRequested);
+             }else{
+                pendingRequest[destID]++;
+            }
+        }
+
+        printf(" = %d\n",buffer.size);
+    }
+    int i;
+    //printf("seeend \n\n");
+   
+    insertMessage(&buffer,thisMessage);
+   
+   /* message *aux;
+    aux = buffer.init;
+    for(i=0;i<buffer.size;i++){
+      //  printf("---------------------------------------->aa %d\n",aux->header.destination);
+        aux=aux->nextMessage;
+    }*/
+
+    int destID = routerID(thisMessage->header.destination);
+    if(pendingRequest[destID]>0){
+        message messageRequested;
+
+        if(searchOldMessage(&buffer,thisMessage->header.destination,&messageRequested)){
+            transmit(&messageRequested);
+            removeMessage(&buffer,&messageRequested);
+
+        }else{
+            printf("message not found\n");
+        }
+
+    }  
+
 }
 
 
 void receive(int destination){
     message *request = initService(destination,MESSAGE_REQ); 
-    printf("transmitindo\n");
+   // printf("transmitindo\n");
     transmit(request);
     while(intr0!=1){
         if(*control!=STALL){
@@ -382,9 +502,37 @@ void receive(int destination){
 void packetConsumed(){
     rxPointer = 0;
     intr0 = 0;
-    //free(rxPacket.message);
+    free(rxMessage.payload);
     *control = ACK;
 }
+void endApplication(){
+    while(buffer.size>0){
+        while(*control!=STALL){
+                // printf("aqqqqqqq\n");
+
+        }
+
+        if(rxMessage.header.service == MESSAGE_REQ){
+            message messageRequested;
+          //  printf("payload[0] = %x\n",rxMessage.payload[0]);
+            int destID = routerID(rxMessage.payload[0]);
+
+            if(searchOldMessage(&buffer,rxMessage.payload[0],&messageRequested)){   
+                //printf("encontrou mensagem\n");
+                searchOldMessage(&buffer,rxMessage.payload[0],&messageRequested);
+            //printf("\n-----messageReqDest = %x\n",messageRequested.header.destination);
+                transmit(&messageRequested);
+                removeMessage(&buffer,&messageRequested);
+             }else{
+                pendingRequest[destID]++;
+            }
+        }
+
+        printf("----bufferSize = %d\n",buffer.size);
+    }
+
+}
+
 
 
 
@@ -417,8 +565,11 @@ int main(int argc, char **argv)
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
-    receive(0x00);
-
+    int i;
+    for(i=0;i<150;i++){
+        receive(0x00);
+        //packetConsumed();
+    }
     LOG("Application ROUTER1 done!\n\n");
     return 1;
 }

@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 
     int start = 0;
     *myAddress = 0x00;
+   // *niaddr = &vetoraux;
 
     *PEToSync = 0x00;
     while(start != 1){
@@ -40,9 +41,15 @@ int main(int argc, char **argv)
 
     startingApplication();
     message *new = initMessage(0x10);
-
-    send(new);
+    int i;
+    for(i=0;i<128;i++){
+        new->payload[i]=i;
+    }
+    for(i=0;i<150;i++){
+        send(new);
+    }
     endApplication();
+
  
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
