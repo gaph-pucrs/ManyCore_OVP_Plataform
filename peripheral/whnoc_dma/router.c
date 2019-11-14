@@ -534,7 +534,7 @@ void transmitt(){
                         contFlits[LOCAL]= contFlits[LOCAL]++;
                         #endif
                         // Send the flit transmission time followed by the data
-                        ppmPacketnetWrite(handles.portControlLocal, &currentTime, sizeof(currentTime));
+                        //ppmPacketnetWrite(handles.portControlLocal, &currentTime, sizeof(currentTime));
                         ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                     }
                 }
@@ -795,7 +795,8 @@ PPM_PACKETNET_CB(controlLocal) {
     }
     // When receving a time for the incoming flit... (8 bytes info)
     else if(bytes == 8){
-        incomingFlit.inTime = *(unsigned long long int *)data;
+        //incomingFlit.inTime = *(unsigned long long int *)data;
+        iterate();
     }
 }
 
