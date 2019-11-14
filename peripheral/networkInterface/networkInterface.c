@@ -20,26 +20,49 @@ unsigned int htonl(unsigned int x){
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-unsigned int internalStatus = IDLE;
-unsigned int myStatus = GO;
+unsigned int internalStatus = IDLE; 
+unsigned int myStatus = GO; // the availability to write something in the memory
 //RX Variables
 unsigned int receivingAddress = 0;
-unsigned int receivingCount = HEADER;
+unsigned int receivingAddressCopy = 0;
+unsigned int receivingField = HEADER;
+unsigned int receivingCount;
+unsigned int receivingBuffer[4];
 
 //TX Variables
 unsigned int transmittingAddress = 0;
 unsigned int transmittingCount = HEADER;
-unsigned int localStatus = GO;
+unsigned int localStatus = GO; // the router local buffer status
 
 // Aux
 unsigned int auxAddress = 0;
 unsigned int waitingCommand = FALSE;
+unsigned int serviceAddress = 0xFFFFFFFFFFFFFFFF;
+unsigned int serviceReceiving = FALSE;
+
+void setGO(){
+    myStatus = GO;
+    ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
+}
+
+void setSTALL(){
+    myStatus = GO;
+    ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
+}
+
+void statusUpdate(unsigned int status){
+    internalStatus = status;
+    DMAC_ab8_data.status.value = internalStatus;
+}
 
 void niIteration(){
     unsigned int flit;
     unsigned long long int informIteration = INFORM_ITERATION;
     if(internalStatus == TX && localStatus == GO){
-        flit = //comandoParaLerDaMemoria(transmittingAddress);
+        //flit = memory(transmittingAddress);
+        ppmAddressHandle h = ppmOpenAddressSpace(“portNI”); 
+        ppmReadAddressSpace(h, transmittingAddress, sizeof(flit), flit);
+        ppmCloseAddressSpace(h);
         if(transmittingCount == HEADER){
             transmittingCount = SIZE;
         }
@@ -55,16 +78,11 @@ void niIteration(){
         ppmPacketnetWrite(handles.dataPort, &flit, sizeof(flit));
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
-            internalStatus = IDLE;
-            myStatus = GO;
-            ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
+            statusUpdate(IDLE); // sm3
+            setGO();
         }
     }
-    else if(internalStatus == RX){
-        ppmPacketnetWrite(handles.controlPort, &informIteration, sizeof(informIteration));
-    }
 }
-
 
 //////////////////////////////// Callback stubs ////////////////////////////////
 
@@ -74,8 +92,13 @@ PPM_REG_READ_CB(addressRead) {
 }
 
 PPM_REG_WRITE_CB(addressWrite) {
-    auxAddress = htonl(data);
-    waitingCommand = TRUE;
+    // If is the first address write then, by definition, the IP is writing the address to store the service packets
+    if(serviceAddress == 0xFFFFFFFFFFFFFFFF){
+        serviceAddress = htonl(data);
+    }else{
+        auxAddress = htonl(data);
+        waitingCommand = TRUE;
+    }
     *(Uns32*)user = data;
 }
 
@@ -89,8 +112,90 @@ PPM_PACKETNET_CB(controlPortUpd) {
 
 // Receiving a flit from the router...
 PPM_PACKETNET_CB(dataPortUpd) {
+    unsigned int flit = data;
+    int i;
+    // This will happen if the NI is receiving a service packet when it is in a idle state
+    if(internalStatus == IDLE){
+        statusUpdate(RX); // sm2
+        receivingAddress = serviceAddress;
+        receivingField = HEADER;
+        serviceReceiving = FROM_IDLE;
+        setGO();
+    }
+    // Proceed to the regular receiving routine
     if(internalStatus == RX){
-
+        if(receivingField == HEADER){
+            receivingField = SIZE;
+            receivingBuffer[0] = flit;
+        }
+        else if(receivingField == SIZE){
+            receivingField = SENDTIME;
+            receivingCount = htonl(flit);
+            receivingBuffer[1] = flit;
+        }
+        else if(receivingField == SENDTIME){
+            receivingField = SERVICE;
+            receivingCount = receivingCount - 1;
+            receivingBuffer[2] = flit;
+        }
+        else if(receivingField == SERVICE){
+            receivingField = PAYLOAD;
+            receivingCount = receivingCount - 1;
+            receivingBuffer[3] = flit;
+            if(htonl(flit) == MSG_DELIVERY){
+                ppmAddressHandle h = ppmOpenAddressSpace(“portNI”);
+                for(i=0;i<4;i++){
+                    flit = receivingBuffer[i];
+                    ppmWriteAddressSpace(h, receivingAddress, sizeof(flit), flit);
+                    // Increments the pointer, to write the next flit
+                    receivingAddress = receivingAddress + 4;
+                }
+                ppmCloseAddressSpace(h);
+            }
+            else{
+                receivingAddressCopy = receivingAddress; // to restore the receiving address latter
+                receivingAddress = serviceAddress; // 
+                serviceReceiving = FROM_RX;
+                setGO();
+                ppmAddressHandle h = ppmOpenAddressSpace(“portNI”);
+                for(i=0;i<4;i++){
+                    flit = receivingBuffer[i];
+                    ppmWriteAddressSpace(h, receivingAddress, sizeof(flit), flit);
+                    // Increments the pointer, to write the next flit
+                    receivingAddress = receivingAddress + 4;
+                }
+                ppmCloseAddressSpace(h);
+            }
+        }
+        // Receiving the packet payload
+        else{
+            receivingCount = receivingCount - 1;
+            ppmAddressHandle h = ppmOpenAddressSpace(“portNI”);
+            ppmWriteAddressSpace(h, receivingAddress, sizeof(flit), flit);
+            // Increments the pointer, to write the next flit
+            receivingAddress = receivingAddress + 4;
+            ppmCloseAddressSpace(h);
+        }
+        
+        if(receivingCount == EMPTY){
+            if(serviceReceiving == FROM_IDLE){
+                statusUpdate(IDLE); // sm4
+                serviceReceiving = FALSE;
+                ppmWriteNet(handles.INTTC, 1);
+                setSTALL();
+            }
+            if(serviceReceiving == FROM_RX){
+                statusUpdate(RX); // stay in the RX state to receive the message
+                receivingAddress = receivingAddressCopy; // restore the address will be used to store the new packet
+                receivingField = HEADER; // Restore the receiving state to 
+                serviceReceiving = FALSE;
+                ppmWriteNet(handles.INTTC, 1);
+                setGO();
+            }
+            else(){
+                setGO();
+            }          
+        }
     }
 }
 
@@ -106,16 +211,22 @@ PPM_REG_WRITE_CB(statusWrite) {
     unsigned int command = htonl(data);
     waitingCommand = FALSE;
     if(command == TX){ // avisar que chegou tick local?
-        internalStatus = TX;
+        statusUpdate(TX); // sm1
         transmittingAddress = auxAddress;
         transmittingCount = HEADER;
         // Change the local status to STALL
-        myStatus = STALL;
-        ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
+        setSTALL();
         niIteration();
     }
     else if(command == RX){ //aqui os ticks vão chegar no roteador e o dado vai chegar por callback
+        statusUpdate(RX); // sm2
         receivingAddress = auxAddress;
+        receivingCount = HEADER;
+        setGO();
+    }
+    else if(command == DONE){
+        ppmWriteNet(handles.INTTC, 0);
+        setGO();
     }
     *(Uns32*)user = data;
 }

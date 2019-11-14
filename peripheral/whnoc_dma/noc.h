@@ -21,9 +21,16 @@
 #define EMPTY       0x00000000
 #define HEADER      0xFFFFFFFF
 #define SIZE        0xFFFFFFFD
+#define SENDTIME    0xFFFFFFFE
+#define SERVICE     0xFFFFFFFC
+#define PAYLOAD     0x00000000
 #define HOPES       0x00000002
 #define IN_TIME     0x00000001
 #define OUT_TIME    0x00000000
+
+//Services
+#define MSG_DELIVERY    0x20;
+#define MSG_REQ         0x30;
 
 // NoC Dimensions
 #define DIM_X 8
@@ -44,6 +51,7 @@
 #define IDLE                0x1111
 #define TX                  0x2222
 #define RX                  0x3333
+#define DONE                0x4444
 #define INFORM_ITERATION    0xFFFFFFFFFFFFFFFFULL
 
 
