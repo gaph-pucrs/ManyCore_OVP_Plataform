@@ -30,9 +30,9 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x02;
+    *myAddress = 0x11;
 
-    *PEToSync = 0x02;
+    *PEToSync = 0x11;
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }

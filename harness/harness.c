@@ -20,7 +20,7 @@
 struct optionsS {
 } options = {
 };
-int N_PES =9;
+int N_PES =25;
 
 
 static OP_POST_SIMULATE_FN(modulePostSimulate) {

@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     for(i=0;i<128;i++){
         new->payload[i]=i;
     }
-    for(i=0;i<150;i++){
+    for(i=0;i<15;i++){
         send(new);
     }
     endApplication();
