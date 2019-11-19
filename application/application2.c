@@ -16,6 +16,8 @@ int main(int argc, char **argv)
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
+    volatile unsigned int *NIaddr = NI_BASE + 0x0;
+    volatile unsigned int *NIstatus = NI_BASE + 0x1;
 
     LOG("Starting ROUTER2 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
@@ -29,34 +31,14 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x20;
+    *myAddress = 0x01;
 
-    *PEToSync = 0x20;
+    *PEToSync = 0x01;
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
-
-
-    int i;
-    txPacket.destination = 0x02;
-    txPacket.size = 138;
-    txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
-    for(i = 0; i<txPacket.size; i++){
-        txPacket.message[i] = i;
-    }
-    txPacket.message[1]=2;
-   for(i=0;i<100;i++){
-        sendPckt(txPacket);
-    }
-
-    for(i=0;i<100;i++){
-     //   printf("comecou\n");
-        receivePckt();
-        //LOG("aplicacao 2 Pacote %d recebido de: %d - nHopes: %d - inTime: %d - outTime: %d \n",i,rxPacket.message[1], rxPacket.hopes, rxPacket.inTime, rxPacket.outTime);
-        packetConsumed();
-    }
 
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////

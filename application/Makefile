@@ -11,6 +11,7 @@ ifeq ($($(CROSS)_CC),)
     IMPERAS_ERROR := $(error "Please install the toolchain to support $(CROSS) ")
 endif
 
+#OPTIMISATION=-O0
 OPTIMISATION?=-O2
 
 SRC = $(sort $(wildcard *.c))

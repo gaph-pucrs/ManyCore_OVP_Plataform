@@ -28,6 +28,20 @@ static ppmBusPort busPorts[] = {
         .remappable      = 0,
         .description     = 0,
     },
+    {
+        .name            = "MREAD",
+        .type            = PPM_MASTER_PORT,
+        .addrBits        = 32,
+        .mustBeConnected = 0,
+        .description     = 0,
+    },
+    {
+        .name            = "MWRITE",
+        .type            = PPM_MASTER_PORT,
+        .addrBits        = 32,
+        .mustBeConnected = 0,
+        .description     = 0,
+    },
     { 0 }
 };
 
@@ -63,7 +77,7 @@ static PPM_NET_PORT_FN(nextNetPort) {
 //                     Shared data for packetnet interface
 
 Uns8 dataPort_pnsd[4];
-Uns8 controlPort_pnsd[4];
+Uns8 controlPort_pnsd[8];
 
 static ppmPacketnetPort packetnetPorts[] = {
     {
@@ -81,7 +95,7 @@ static ppmPacketnetPort packetnetPorts[] = {
         .mustBeConnected = 0,
         .description     = 0,
         .sharedData      = controlPort_pnsd,
-        .sharedDataBytes = 4,
+        .sharedDataBytes = 8,
         .handlePtr       = &handles.controlPort,
         .packetnetCB     = controlPortUpd,
         .userData        = (void*)0

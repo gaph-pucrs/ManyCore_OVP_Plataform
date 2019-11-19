@@ -95,12 +95,12 @@ unsigned long long int enteringTime;
 // Maybe LEGACY!
 unsigned int lastTickLocal = 0;
 
-// PreBuffer variables
+/*// PreBuffer variables
 unsigned int preBufferPackets[PREBUFFER_SIZE];
 unsigned int preBuffer_packetDest;
 static unsigned int preBuffer_last = 0;
 static unsigned int preBuffer_first = 0;
-
+*/
 
 
 #if LOG_OUTPUTFLITS
@@ -151,6 +151,11 @@ void informIteratorLocalOff(){
 void informIterator(){
     unsigned short int iterAux = ITERATION;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
+}
+
+void iterateNI(){
+    unsigned long long int iterate = 0xFFFFFFFFFFFFFFFFULL;
+    ppmPacketnetWrite(handles.portControlLocal, &iterate, sizeof(iterate));
 }
 
 // Extract the Y position for a given address
@@ -228,6 +233,7 @@ void bufferStatusUpdate(unsigned int port){
 
 void bufferPush(unsigned int port){
     // Write a new flit in the buffer
+    //bhmMessage("I", "bpush", "chegou um flit: %x", htonl(incomingFlit.data));
     buffers[port][last[port]] = incomingFlit;
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;
@@ -252,7 +258,7 @@ unsigned int isEmpty(unsigned int port){
     }
 }
 
-//verify if the preBuffer is empty 
+/*//verify if the preBuffer is empty 
 unsigned int preBuffer_isEmpty(){
 	if(preBuffer_first != (preBuffer_last)){
 		return 0; // no, it is not empty
@@ -260,7 +266,7 @@ unsigned int preBuffer_isEmpty(){
     else{
 		return 1; // yes, it is empty
 	}
-}
+}*/
 
 unsigned int bufferPop(unsigned int port){
     unsigned long long int value;
@@ -299,7 +305,7 @@ unsigned int bufferPop(unsigned int port){
         flitCountOut[port] = HEADER;
 
         // If every buffer is empty this router does not need to be ticked
-        if(myTickStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL) && preBuffer_isEmpty()){
+        if(myTickStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){// && preBuffer_isEmpty()){
             turn_TickOff();
         }
         
@@ -612,7 +618,7 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
     control[port] = ctrlData;
 }
 
-// Pre-Buffer status update - warns the IP is there is space or not inside the buffer
+/*// Pre-Buffer status update - warns the IP is there is space or not inside the buffer
 void preBuffer_statusUpdate(){
     unsigned int status;
     if((preBuffer_first == 0 && preBuffer_last == PREBUFFER_SIZE-1) || (preBuffer_first == (preBuffer_last+1))){
@@ -621,7 +627,7 @@ void preBuffer_statusUpdate(){
     else{
         status = GO;
     }
-    localPort_regs_data.controlRxLocal.value = status;
+    //localPort_regs_data.controlRxLocal.value = status;
 }
 
 // Stores a flit that is incomming from the local IP
@@ -707,21 +713,22 @@ void preBuffer_pop(){
         // preBuffer_first++
         if(preBuffer_first < PREBUFFER_SIZE-1){
             preBuffer_first++;
-        }
-        else if(preBuffer_first == PREBUFFER_SIZE-1){else
-            preBuffer_first = 0;
-        }
+        }iterationsPort
+        eiterationsPort{else
+         iterationsPort
+        }iterationsPort
 
-        // Update the prebuffer status
-        preBuffer_statusUpdate();
+        /iterationsPort
+        piterationsPort
     }
-}
+}*/
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// Interaction Function //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 void iterate(){
+    iterateNI();
     ////////////////////////////////////////////
     // Arbitration Process - defined in noc.h //
     ////////////////////////////////////////////
@@ -796,7 +803,8 @@ PPM_PACKETNET_CB(controlLocal) {
     // When receving a time for the incoming flit... (8 bytes info)
     else if(bytes == 8){
         //incomingFlit.inTime = *(unsigned long long int *)data;
-        iterate();
+        //bhmMessage("I", "ctrlLocal", "iterate!");
+        informIterator();
     }
 }
 
@@ -845,6 +853,7 @@ PPM_PACKETNET_CB(dataEast) {
 PPM_PACKETNET_CB(dataLocal) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
     bufferPush(LOCAL);
 }
 
@@ -867,6 +876,7 @@ PPM_PACKETNET_CB(dataWest) {
 }
 
 PPM_PACKETNET_CB(iterationPort) {
+    //bhmMessage("I", "iteport", "iterate!");
     // Stores the actual iteration time
     currentTime = *(unsigned long long int *)data;
 

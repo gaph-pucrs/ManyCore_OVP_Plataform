@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ <peripheral constructor="constructor"
+    destructor="destructor"
+    httpvis="F"
+    imagefile="pse.pse"
+    library="peripheral"
+    name="networkInterface"
+    releasestatus="0"
+    saveRestore="F"
+    vendor="gaph"
+    version="1.0"
+    visibility="0">
+    <docsection name="doc"
+        text="Description">
+        <doctext name="txt"
+            text="A OVP DMA for a router"/>
+    </docsection>
+    <busslaveport addresswidth="32"
+        mustbeconnected="T"
+        name="DMAC"
+        size="0x8">
+        <addressblock name="ab8"
+            size="0x8"
+            width="32">
+            <memorymappedregister access="rw"
+                isvolatile="T"
+                name="status"
+                readfunction="statusRead"
+                width="32"
+                writefunction="statusWrite"/>
+            <memorymappedregister access="rw"
+                isvolatile="T"
+                name="address"
+                offset="0x4"
+                readfunction="addressRead"
+                width="32"
+                writefunction="addressWrite"/>
+        </addressblock>
+    </busslaveport>
+    <packetnetport maxbytes="4"
+        mustbeconnected="F"
+        name="dataPort"
+        updatefunction="dataPortUpd"
+        updatefunctionargument="0"/>
+    <packetnetport maxbytes="4"
+        mustbeconnected="F"
+        name="controlPort"
+        updatefunction="controlPortUpd"
+        updatefunctionargument="0"/>
+    <netport name="INTTC"
+        type="output"
+        updatefunctionargument="0">
+        <docsection name="doc"
+            text="Description">
+            <doctext name="txt"
+                text="Interrupt Request"/>
+        </docsection>
+    </netport>
+    <fileversion major="1"
+        minor="0"
+        name="_version_0"/>
+ </peripheral>

@@ -8,7 +8,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "networkInterface.igen.h"
+#include "peripheral/impTypes.h"
+#include "peripheral/bhm.h"
+#include "peripheral/bhmHttp.h"
+#include "peripheral/ppm.h"
 #include "../whnoc_dma/noc.h"
+
 
 // BIG ENDIAN/LITTLE ENDIAN
 #define __bswap_constant_32(x) \
@@ -37,8 +42,38 @@ unsigned int localStatus = GO; // the router local buffer status
 // Aux
 unsigned int auxAddress = 0;
 unsigned int waitingCommand = FALSE;
-unsigned int serviceAddress = 0xFFFFFFFFFFFFFFFF;
+unsigned int serviceAddress = 0xFFFFFFFF;
 unsigned int serviceReceiving = FALSE;
+
+//
+char chFlit[4];
+unsigned int usFlit;
+
+void vec2usi(){
+    unsigned int auxFlit = 0x00000000;
+    unsigned int aux;
+    aux = 0x000000FF & chFlit[3];
+    auxFlit = ((aux << 24) & 0xFF000000);
+
+    aux = 0x000000FF & chFlit[2];
+    auxFlit = auxFlit | ((aux << 16) & 0x00FF0000);
+
+    aux = 0x000000FF & chFlit[1];
+    auxFlit = auxFlit | ((aux << 8) & 0x0000FF00);
+
+    aux = 0x000000FF & chFlit[0];
+    auxFlit = auxFlit | ((aux) & 0x000000FF);
+
+    usFlit = auxFlit;
+    return;
+}
+
+void usi2vec(){
+    chFlit[3] = (usFlit >> 24) & 0x000000FF;
+    chFlit[2] = (usFlit >> 16) & 0x000000FF;
+    chFlit[1] = (usFlit >> 8) & 0x000000FF;
+    chFlit[0] = usFlit & 0x000000FF;
+}
 
 void setGO(){
     myStatus = GO;
@@ -51,23 +86,36 @@ void setSTALL(){
 }
 
 void statusUpdate(unsigned int status){
+    bhmMessage("I", "statusUpdt", "estou: %x mudando para: %x", internalStatus, status);
     internalStatus = status;
     DMAC_ab8_data.status.value = internalStatus;
 }
 
+void informIteration(){
+    unsigned long long int iterate = 0xFFFFFFFFFFFFFFFFULL;
+    ppmPacketnetWrite(handles.controlPort, &iterate, sizeof(iterate));
+}
+
 void niIteration(){
-    unsigned int flit;
-    unsigned long long int informIteration = INFORM_ITERATION;
+    //unsigned long long int informIteration = INFORM_ITERATION;
+    //bhmMessage("I", "ctrlLocal", "iterate! mystatus: %x", internalStatus);
     if(internalStatus == TX && localStatus == GO){
+        //bhmMessage("I", "ctrlLocal", "i2terate!");
         //flit = memory(transmittingAddress);
-        ppmAddressHandle h = ppmOpenAddressSpace(“portNI”); 
-        ppmReadAddressSpace(h, transmittingAddress, sizeof(flit), flit);
+        ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
+        if(!h) {
+            bhmMessage("I", "NI_ITERATOR", "ERROR h handling!");
+            while(1){} // error handling
+        }
+        ppmReadAddressSpace(h, transmittingAddress, sizeof(chFlit), chFlit);
         ppmCloseAddressSpace(h);
         if(transmittingCount == HEADER){
             transmittingCount = SIZE;
         }
-        if(transmittingCount == SIZE){
-            transmittingCount = htonl(flit);
+        else if(transmittingCount == SIZE){
+            vec2usi(); // transform the data from vector to a single unsigned int
+            bhmMessage("I", "niiteration", "size: %x - %x", usFlit, htonl(usFlit));
+            transmittingCount = htonl(usFlit);
         }
         else{
             transmittingCount = transmittingCount - 1;
@@ -75,7 +123,7 @@ void niIteration(){
         // Increments the memory pointer
         transmittingAddress = transmittingAddress + 4;
         // Sends the data to the local router
-        ppmPacketnetWrite(handles.dataPort, &flit, sizeof(flit));
+        ppmPacketnetWrite(handles.dataPort, &chFlit, sizeof(chFlit));
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
             statusUpdate(IDLE); // sm3
@@ -93,7 +141,8 @@ PPM_REG_READ_CB(addressRead) {
 
 PPM_REG_WRITE_CB(addressWrite) {
     // If is the first address write then, by definition, the IP is writing the address to store the service packets
-    if(serviceAddress == 0xFFFFFFFFFFFFFFFF){
+    bhmMessage("I", "addresswrite", "chegou um endereço: %x - serviceaddress: %x", htonl(data), serviceAddress);
+    if(serviceAddress == 0xFFFFFFFF){
         serviceAddress = htonl(data);
     }else{
         auxAddress = htonl(data);
@@ -107,12 +156,17 @@ PPM_PACKETNET_CB(controlPortUpd) {
         unsigned int ctrl = *(unsigned int *)data;
         localStatus = ctrl;
     }
-    niIteration(); // The NI will not receive direct iterations signals from the iterator. So the router will comunicate every iteration using this control signal.  
+    else if(bytes == 8) {
+        //*(unsigned long long int *) data;
+        //bhmMessage("I", "ctrliterate", "iterate!");
+        niIteration();
+    }
+    //niIteration(); // The NI will not receive direct iterations signals from the iterator. So the router will comunicate every iteration using this control signal.  
 }
 
 // Receiving a flit from the router...
 PPM_PACKETNET_CB(dataPortUpd) {
-    unsigned int flit = data;
+    unsigned int flit = *((unsigned int*)data);
     int i;
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(internalStatus == IDLE){
@@ -124,6 +178,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
     }
     // Proceed to the regular receiving routine
     if(internalStatus == RX){
+        bhmMessage("I", "Receive", "recebendo flit! %d", htonl(flit));
         if(receivingField == HEADER){
             receivingField = SIZE;
             receivingBuffer[0] = flit;
@@ -143,10 +198,11 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingCount = receivingCount - 1;
             receivingBuffer[3] = flit;
             if(htonl(flit) == MSG_DELIVERY){
-                ppmAddressHandle h = ppmOpenAddressSpace(“portNI”);
+                ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
                 for(i=0;i<4;i++){
-                    flit = receivingBuffer[i];
-                    ppmWriteAddressSpace(h, receivingAddress, sizeof(flit), flit);
+                    usFlit = receivingBuffer[i];
+                    usi2vec();
+                    ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
                     // Increments the pointer, to write the next flit
                     receivingAddress = receivingAddress + 4;
                 }
@@ -157,10 +213,11 @@ PPM_PACKETNET_CB(dataPortUpd) {
                 receivingAddress = serviceAddress; // 
                 serviceReceiving = FROM_RX;
                 setGO();
-                ppmAddressHandle h = ppmOpenAddressSpace(“portNI”);
+                ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
                 for(i=0;i<4;i++){
-                    flit = receivingBuffer[i];
-                    ppmWriteAddressSpace(h, receivingAddress, sizeof(flit), flit);
+                    usFlit = receivingBuffer[i];
+                    usi2vec();
+                    ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
                     // Increments the pointer, to write the next flit
                     receivingAddress = receivingAddress + 4;
                 }
@@ -170,8 +227,10 @@ PPM_PACKETNET_CB(dataPortUpd) {
         // Receiving the packet payload
         else{
             receivingCount = receivingCount - 1;
-            ppmAddressHandle h = ppmOpenAddressSpace(“portNI”);
-            ppmWriteAddressSpace(h, receivingAddress, sizeof(flit), flit);
+            ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
+            usFlit = flit;
+            usi2vec();
+            ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
             // Increments the pointer, to write the next flit
             receivingAddress = receivingAddress + 4;
             ppmCloseAddressSpace(h);
@@ -192,7 +251,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
                 ppmWriteNet(handles.INTTC, 1);
                 setGO();
             }
-            else(){
+            else{
                 setGO();
             }          
         }
@@ -200,17 +259,18 @@ PPM_PACKETNET_CB(dataPortUpd) {
 }
 
 PPM_REG_READ_CB(statusRead) {
-    niIteration();  // When the processor is reading the NI status, we have one of two situations: 
-                    //      (i) the processor is blocked by a Receive() function or
-                    //      (ii) it is waiting the NI to enter in IDLE to start a new transmittion
-                    // for both situations we need to generate iterations that will be communicated to the iterator by the router that is attached to this NI
+    //bhmMessage("I", "StatusRead", "iteration!");
+    informIteration();  // When the processor is reading the NI status, we have one of two situations: 
+                        //      (i) the processor is blocked by a Receive() function or
+                        //      (ii) it is waiting the NI to enter in IDLE to start a new transmittion
+                        // for both situations we need to generate iterations that will be communicated to the iterator by the router that is attached to this NI
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(statusWrite) {
     unsigned int command = htonl(data);
     waitingCommand = FALSE;
-    if(command == TX){ // avisar que chegou tick local?
+    if(command == TX){
         statusUpdate(TX); // sm1
         transmittingAddress = auxAddress;
         transmittingCount = HEADER;
