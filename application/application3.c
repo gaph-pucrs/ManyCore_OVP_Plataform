@@ -16,6 +16,18 @@
 volatile unsigned int auxiliar[256];
 volatile unsigned int myPacket[256];
 
+void interruptHandler2(void){
+    volatile unsigned int *NIstatus = NI_BASE + 0x0;
+    //LOG("Hello there!");
+    intr0 = 1;
+    *NIstatus = 0x4444; // DONE// o correto seria desabilitar a interrupção e ligar d novo no packetConsumed()!!!!! - PERIGOSO
+}
+
+void packetConsumed2(){
+    intr0 = 0;
+    // dar o done aqui! e ativar a interrupção depois
+}
+
 int main(int argc, char **argv)
 {
     //////////////////////////////////////////////////////
@@ -30,9 +42,9 @@ int main(int argc, char **argv)
     LOG("Starting ROUTER3 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler, NULL);
+    int_add(0, (void *)interruptHandler2, NULL);
     int_enable(0);
-
+    intr0 = 0;
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
@@ -52,18 +64,30 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    LOG("3 - end auxiliar: %x\n", &auxiliar);
+    //LOG("3 - end auxiliar: %x\n", &auxiliar);
     *NIaddr = &auxiliar;
 
     // receive /////////
-    LOG("3 - end pacote: %x\n", &myPacket);
+    //LOG("3 - end pacote: %x\n", &myPacket);
     *NIaddr = &myPacket;
     *NIstatus = 0x3333; // config pra RX
     while(*NIstatus != 0x1111){}
-    ////////////////////
 
-    for(i = 0; i<20; i++){
-        LOG("flit %d - %d", i, myPacket[i]);
+    auxiliar[4] = myPacket[4];
+    ////////////////////
+    for(i = 0; i<200; i++){
+        ////////////////////
+        // Printa
+        LOG("3 - pong %d\n",auxiliar[4]);
+        //
+        myPacket[0] = 0x00;
+        myPacket[3] = 0x55;
+        myPacket[4] = auxiliar[4] + 1;
+        packetConsumed2();
+        // send /////////////
+        *NIaddr = &myPacket;
+        *NIstatus = 0x2222; // config pra TX
+        while(intr0!=1){} // aguarda até o pacote chegar por interrupcao
     }
     /////////////////////
     //////////////////////////////////////////////////////

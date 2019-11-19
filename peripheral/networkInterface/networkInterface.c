@@ -86,9 +86,9 @@ void setSTALL(){
 }
 
 void statusUpdate(unsigned int status){
-    bhmMessage("I", "statusUpdt", "estou: %x mudando para: %x", internalStatus, status);
+    //bhmMessage("I", "statusUpdt", "estou: %x mudando para: %x", internalStatus, status);
     internalStatus = status;
-    DMAC_ab8_data.status.value = internalStatus;
+    DMAC_ab8_data.status.value = htonl(status);
 }
 
 void informIteration(){
@@ -109,12 +109,14 @@ void niIteration(){
         }
         ppmReadAddressSpace(h, transmittingAddress, sizeof(chFlit), chFlit);
         ppmCloseAddressSpace(h);
+        vec2usi();
+        //bhmMessage("I", "niiteration", "transmittingCount: %d - flit: %d",transmittingCount, htonl(usFlit));
         if(transmittingCount == HEADER){
             transmittingCount = SIZE;
         }
         else if(transmittingCount == SIZE){
-            vec2usi(); // transform the data from vector to a single unsigned int
-            bhmMessage("I", "niiteration", "size: %x - %x", usFlit, htonl(usFlit));
+            //vec2usi(); // transform the data from vector to a single unsigned int
+            //bhmMessage("I", "niiteration", "size: %x - %x", usFlit, htonl(usFlit));
             transmittingCount = htonl(usFlit);
         }
         else{
@@ -123,7 +125,7 @@ void niIteration(){
         // Increments the memory pointer
         transmittingAddress = transmittingAddress + 4;
         // Sends the data to the local router
-        ppmPacketnetWrite(handles.dataPort, &chFlit, sizeof(chFlit));
+        ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
             statusUpdate(IDLE); // sm3
@@ -141,7 +143,7 @@ PPM_REG_READ_CB(addressRead) {
 
 PPM_REG_WRITE_CB(addressWrite) {
     // If is the first address write then, by definition, the IP is writing the address to store the service packets
-    bhmMessage("I", "addresswrite", "chegou um endereço: %x - serviceaddress: %x", htonl(data), serviceAddress);
+    //bhmMessage("I", "addresswrite", "chegou um endereço: %x - serviceaddress: %x", htonl(data), serviceAddress);
     if(serviceAddress == 0xFFFFFFFF){
         serviceAddress = htonl(data);
     }else{
@@ -170,15 +172,17 @@ PPM_PACKETNET_CB(dataPortUpd) {
     int i;
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(internalStatus == IDLE){
+        //bhmMessage("I", "Receive", "----------------------------------");
         statusUpdate(RX); // sm2
         receivingAddress = serviceAddress;
         receivingField = HEADER;
+        receivingCount = 0xFF; // qqr coisa
         serviceReceiving = FROM_IDLE;
         setGO();
     }
     // Proceed to the regular receiving routine
     if(internalStatus == RX){
-        bhmMessage("I", "Receive", "recebendo flit! %d", htonl(flit));
+        //bhmMessage("I", "Receive", "recebendo flit! %d - FIELD: %x - COUNT %d", htonl(flit), receivingField, receivingCount);
         if(receivingField == HEADER){
             receivingField = SIZE;
             receivingBuffer[0] = flit;
@@ -198,7 +202,12 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingCount = receivingCount - 1;
             receivingBuffer[3] = flit;
             if(htonl(flit) == MSG_DELIVERY){
+                //bhmMessage("I", "rx", "MSG_DELIVERY!");
                 ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
+                if(!h) {
+                    bhmMessage("I", "NI_ITERATOR", "ERROR h handling!");
+                    while(1){} // error handling
+                }
                 for(i=0;i<4;i++){
                     usFlit = receivingBuffer[i];
                     usi2vec();
@@ -211,7 +220,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
             else{
                 receivingAddressCopy = receivingAddress; // to restore the receiving address latter
                 receivingAddress = serviceAddress; // 
-                serviceReceiving = FROM_RX;
+                if(serviceReceiving == FALSE) serviceReceiving = FROM_RX;
                 setGO();
                 ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
                 for(i=0;i<4;i++){
@@ -228,6 +237,10 @@ PPM_PACKETNET_CB(dataPortUpd) {
         else{
             receivingCount = receivingCount - 1;
             ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
+            if(!h) {
+                bhmMessage("I", "NI_ITERATOR", "ERROR h handling!");
+                while(1){} // error handling
+            }
             usFlit = flit;
             usi2vec();
             ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
@@ -235,16 +248,18 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingAddress = receivingAddress + 4;
             ppmCloseAddressSpace(h);
         }
-        
+        //bhmMessage("I", "Receive", "pos recebimento: tipo: %x", serviceReceiving);
         if(receivingCount == EMPTY){
             if(serviceReceiving == FROM_IDLE){
+                //bhmMessage("I", "Receive", "servico retornando proo idle");
                 statusUpdate(IDLE); // sm4
                 serviceReceiving = FALSE;
                 ppmWriteNet(handles.INTTC, 1);
                 setSTALL();
             }
-            if(serviceReceiving == FROM_RX){
+            else if(serviceReceiving == FROM_RX){
                 statusUpdate(RX); // stay in the RX state to receive the message
+                receivingCount = 0xFF; //qqrcoisa
                 receivingAddress = receivingAddressCopy; // restore the address will be used to store the new packet
                 receivingField = HEADER; // Restore the receiving state to 
                 serviceReceiving = FALSE;
@@ -252,6 +267,9 @@ PPM_PACKETNET_CB(dataPortUpd) {
                 setGO();
             }
             else{
+                //bhmMessage("I", "Receive", "regular retornando pro idle");
+                statusUpdate(IDLE); // sm4
+                serviceReceiving = FALSE;
                 setGO();
             }          
         }
@@ -282,6 +300,7 @@ PPM_REG_WRITE_CB(statusWrite) {
         statusUpdate(RX); // sm2
         receivingAddress = auxAddress;
         receivingCount = HEADER;
+        receivingCount = 0xFF; //qqrcoisa
         setGO();
     }
     else if(command == DONE){
@@ -294,7 +313,8 @@ PPM_REG_WRITE_CB(statusWrite) {
 PPM_CONSTRUCTOR_CB(constructor) {
     // YOUR CODE HERE (pre constructor)
     periphConstructor();
-    // YOUR CODE HERE (post constructor)
+    myStatus = STALL;
+    ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
 }
 
 PPM_DESTRUCTOR_CB(destructor) {

@@ -291,6 +291,11 @@ int main(int argc, char *argv[]) {
 
         // Wait until the next quantum 
         bhmWaitDelay(QUANTUM_DELAY);
+        int k;
+        for(k=0;k<25;k++){
+            iterationN++;
+            runIterations();
+        }
         
         // Reading values from the previous quantum
         cont = contTotal;
