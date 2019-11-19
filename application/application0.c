@@ -16,6 +16,17 @@
 volatile unsigned int auxiliar[256];
 volatile unsigned int myPacket[256];
 
+void interruptHandler2(void){
+    volatile unsigned int *NIstatus = NI_BASE + 0x0;
+    //LOG("Hello there!");
+    intr0 = 1;
+    *NIstatus = 0x4444; // DONE// o correto seria desabilitar a interrupção e ligar d novo no packetConsumed()!!!!! - PERIGOSO
+}
+
+void packetConsumed2(){
+    intr0 = 0;
+}
+
 int main(int argc, char **argv)
 {
     //////////////////////////////////////////////////////
@@ -30,9 +41,9 @@ int main(int argc, char **argv)
     LOG("Starting ROUTER0 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler, NULL);
+    int_add(0, (void *)interruptHandler2, NULL);
     int_enable(0);
-
+    intr0 = 0;
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
@@ -52,20 +63,39 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    LOG("0 - end auxiliar: %x\n", &auxiliar);
+    //LOG("0 - end auxiliar: %x\n", &auxiliar);
     *NIaddr = &auxiliar;
 
     for(i = 0; i<20; i++){
         myPacket[i] = i*10;
     }
-    myPacket[0] = 0x11;
-    myPacket[1] = 18;
+    myPacket[0] = 0x11; // HEADER
+    myPacket[1] = 18; // SIZE
+    myPacket[2] = clock(); // SENDTIME
+    myPacket[3] = 0x20; // MSG_DELIVERY
+    myPacket[4] = 0; // PINGPONG
     // send /////////////
-    LOG("0 - end pacote: %x\n", &myPacket);
+    //LOG("0 - end pacote: %x\n", &myPacket);
     *NIaddr = &myPacket;
     *NIstatus = 0x2222; // config pra TX
+    while(*NIstatus!=0x1111){}
     /////////////////////
-
+    
+    for(i = 0; i<200; i++){
+        while(intr0!=1){}
+        ////////////////////
+        // Printa
+        LOG("0 - ping %d\n",auxiliar[4]);
+        //
+        myPacket[0] = 0x11;
+        myPacket[4] = auxiliar[4] + 1;
+        myPacket[3] = 0x55;
+        packetConsumed2();
+        // send /////////////
+        *NIaddr = &myPacket;
+        *NIstatus = 0x2222; // config pra TX
+    }
+    
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

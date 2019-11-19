@@ -273,7 +273,6 @@ unsigned int bufferPop(unsigned int port){
 
     // Read the first flit from the buffer
     value = buffers[port][first[port]].data;
-
     // Increments the "first" pointer
     if(first[port] < BUFFER_SIZE-1){
         first[port]++;
@@ -541,6 +540,7 @@ void transmitt(){
                         #endif
                         // Send the flit transmission time followed by the data
                         //ppmPacketnetWrite(handles.portControlLocal, &currentTime, sizeof(currentTime));
+                        //bhmMessage("I", "localport", "enviando flit: %d",htonl(flit));
                         ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                     }
                 }
@@ -556,6 +556,7 @@ void transmitt(){
                         contFlits[EAST]= contFlits[EAST]++;
                         #endif
                         // Send the flit transmission time followed by the data
+                        //bhmMessage("I", "localport", "TO EAST: enviando flit: %d",htonl(flit));
                         ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
                         ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
                     }

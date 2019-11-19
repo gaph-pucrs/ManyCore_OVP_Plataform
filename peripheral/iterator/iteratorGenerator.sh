@@ -262,6 +262,11 @@ echo "    while(1){" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "        // Wait until the next quantum " >> iterator.igen.c
 echo "        bhmWaitDelay(QUANTUM_DELAY);" >> iterator.igen.c
+echo "        int k;" >> iterator.igen.c
+echo "        for(k=0;k<25;k++){" >> iterator.igen.c
+echo "            iterationN++;" >> iterator.igen.c
+echo "            runIterations();" >> iterator.igen.c
+echo "        }" >> iterator.igen.c
 echo "        " >> iterator.igen.c
 echo "        // Reading values from the previous quantum" >> iterator.igen.c
 echo "        cont = contTotal;" >> iterator.igen.c
