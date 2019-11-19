@@ -60,11 +60,6 @@ int main(int argc, char **argv)
     }
     myPacket[0] = 0x11;
     myPacket[1] = 18;
-
-    for(i = 0; i<20; i++){
-        LOG("%d\n",myPacket[i]);
-    }
-
     // send /////////////
     LOG("0 - end pacote: %x\n", &myPacket);
     *NIaddr = &myPacket;
