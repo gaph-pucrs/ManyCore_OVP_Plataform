@@ -2,6 +2,7 @@
 
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
 #define SYNC_BASE ((unsigned int *) 0x80000014)
+#define NI_BASE ((unsigned int *) 0x80000004)
 #define LOG(_FMT, ...)  printf( "Info " _FMT,  ## __VA_ARGS__)
 
 typedef struct {
@@ -26,9 +27,9 @@ volatile unsigned int *control = ROUTER_BASE + 0x4;  // controlTxLocal
 volatile unsigned int count = 0;
 volatile unsigned int *rxLocal = ROUTER_BASE + 0x1;  // dataTxLocal 
 
-   volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
-    volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
-    volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
+volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
+volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
+volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
 
 time_t tinicio, tsend, tfim, tignore; /* variaveis do "tipo" tempo */

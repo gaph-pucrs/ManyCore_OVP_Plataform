@@ -71,6 +71,13 @@ static void installRegisters(void) {
 
 }
 
+/////////////////////////////// Bus Master Ports ///////////////////////////////
+
+static void installMasterPorts(void) {
+    handles.MREAD = ppmOpenAddressSpace("MREAD");
+    handles.MWRITE = ppmOpenAddressSpace("MWRITE");
+}
+
 /////////////////////////////////// Net Ports //////////////////////////////////
 
 static void installNetPorts(void) {
@@ -85,6 +92,7 @@ static void installNetPorts(void) {
 PPM_CONSTRUCTOR_CB(periphConstructor) {
     installSlavePorts();
     installRegisters();
+    installMasterPorts();
     installNetPorts();
 }
 

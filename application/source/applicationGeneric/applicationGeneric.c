@@ -16,6 +16,8 @@ int main(int argc, char **argv)
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
+    volatile unsigned int *NIaddr = NI_BASE + 0x0;
+    volatile unsigned int *NIstatus = NI_BASE + 0x1;
 
     LOG("Starting ROUTER0 application! \n");
     // Attach the external interrupt handler for 'intr0'
@@ -37,19 +39,6 @@ int main(int argc, char **argv)
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
-
-
-    int i;
-    txPacket.destination = 0x24;
-    txPacket.size = 138;
-    txPacket.message = (int *)malloc(txPacket.size * sizeof(int));
-    for(i = 0; i<txPacket.size; i++){
-        txPacket.message[i] = i;
-    }
-    txPacket.message[1] = 0;
-   for(i=0;i<100;i++){
-        sendPckt(txPacket);
-    }
 
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////

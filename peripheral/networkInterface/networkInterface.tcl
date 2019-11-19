@@ -7,6 +7,12 @@ imodelnewperipheral -name networkInterface \
 
 iadddocumentation -name Description \
                   -text "A OVP DMA for a router"
+                  
+#########################################
+# Master read and write ports
+#########################################
+imodeladdbusmasterport -name "MREAD"   -addresswidth 32
+imodeladdbusmasterport -name "MWRITE"  -addresswidth 32
 
 #########################################
 ## A slave port on the processor bus
@@ -14,11 +20,11 @@ iadddocumentation -name Description \
 imodeladdbusslaveport -name DMAC -size 8 -mustbeconnected
 
 # Address block for 8 bit control registers
-imodeladdaddressblock -port DMAC -name ab8 -width 32 -offset 0 -size 8
+imodeladdaddressblock -name ab8 -port DMAC -offset 0x0 -width 32 -size 8
 
 # 8 bit control registers
-imodeladdmmregister -addressblock DMAC/ab8 -name status     -offset 0x00 -readfunction statusRead -writefunction statusWrite
-imodeladdmmregister -addressblock DMAC/ab8 -name address    -offset 0x04 -readfunction addressRead -writefunction addressWrite
+imodeladdmmregister -addressblock DMAC/ab8 -name status -readfunction statusRead -writefunction statusWrite -offset 0
+imodeladdmmregister -addressblock DMAC/ab8 -name address -readfunction addressRead -writefunction addressWrite -offset 4
 
 #########################################
 ## Data ports between routers
@@ -31,7 +37,7 @@ imodeladdpacketnetport \
 
 imodeladdpacketnetport \
     -name controlPort \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction controlPortUpd \
     -updatefunctionargument 0x00
 

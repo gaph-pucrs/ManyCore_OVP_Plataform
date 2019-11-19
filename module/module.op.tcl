@@ -75,22 +75,30 @@ ihwconnect -bus cpu3Bus -instancename ram7 -busslaveport sp3 -loaddress 0xf00000
 
 
 ihwaddperipheral -instancename router0 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni0 -modelfile peripheral/networkinterface/pse.pse
+ihwaddperipheral -instancename ni0 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename router1 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni1 -modelfile peripheral/networkinterface/pse.pse
+ihwaddperipheral -instancename ni1 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename router2 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni2 -modelfile peripheral/networkinterface/pse.pse
+ihwaddperipheral -instancename ni2 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename router3 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni3 -modelfile peripheral/networkinterface/pse.pse
+ihwaddperipheral -instancename ni3 -modelfile peripheral/networkInterface/pse.pse
 
 ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename ni0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni0 -busslaveport DMAC -bus cpu0Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni0 -busmasterport MREAD  -bus cpu0Bus
+ihwconnect -instancename ni0 -busmasterport MWRITE -bus cpu0Bus
 ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename ni1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni1 -busslaveport DMAC -bus cpu1Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni1 -busmasterport MREAD  -bus cpu1Bus
+ihwconnect -instancename ni1 -busmasterport MWRITE -bus cpu1Bus
 ihwconnect -instancename router2 -busslaveport localPort -bus cpu2Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename ni2 -busslaveport localPort -bus cpu2Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni2 -busslaveport DMAC -bus cpu2Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni2 -busmasterport MREAD  -bus cpu2Bus
+ihwconnect -instancename ni2 -busmasterport MWRITE -bus cpu2Bus
 ihwconnect -instancename router3 -busslaveport localPort -bus cpu3Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename ni3 -busslaveport localPort -bus cpu3Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni3 -busslaveport DMAC -bus cpu3Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni3 -busmasterport MREAD  -bus cpu3Bus
+ihwconnect -instancename ni3 -busmasterport MWRITE -bus cpu3Bus
 
 ihwaddpacketnet -instancename data_0_0_L
 ihwaddpacketnet -instancename ctrl_0_0_L

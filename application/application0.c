@@ -6,8 +6,16 @@
 #include "spr_defs.h"
 #include "../peripheral/whnoc/noc.h"
 #include "api.h"
+#include <time.h>
 
-packet txPacket;
+#define ROUTER_BASE ((unsigned int *) 0x80000000)
+#define SYNC_BASE ((unsigned int *) 0x80000014)
+#define NI_BASE ((unsigned int *) 0x80000004)
+#define LOG(_FMT, ...)  printf( "Info " _FMT,  ## __VA_ARGS__)
+
+volatile unsigned int auxiliar[256];
+volatile unsigned int myPacket[256];
+
 int main(int argc, char **argv)
 {
     //////////////////////////////////////////////////////
@@ -16,6 +24,8 @@ int main(int argc, char **argv)
     volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
     volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
     volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
+    volatile unsigned int *NIaddr = NI_BASE + 0x1;
+    volatile unsigned int *NIstatus = NI_BASE + 0x0;
 
     LOG("Starting ROUTER0 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
@@ -38,15 +48,28 @@ int main(int argc, char **argv)
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
 
-
-
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    
+    int i;
+    LOG("0 - end auxiliar: %x\n", &auxiliar);
+    *NIaddr = &auxiliar;
 
-    //LOG("Hello World!");
+    for(i = 0; i<20; i++){
+        myPacket[i] = i*10;
+    }
+    myPacket[0] = 0x11;
+    myPacket[1] = 18;
 
+    for(i = 0; i<20; i++){
+        LOG("%d\n",myPacket[i]);
+    }
+
+    // send /////////////
+    LOG("0 - end pacote: %x\n", &myPacket);
+    *NIaddr = &myPacket;
+    *NIstatus = 0x2222; // config pra TX
+    /////////////////////
 
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////

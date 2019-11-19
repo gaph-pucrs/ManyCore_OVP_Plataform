@@ -29,8 +29,8 @@
 #define OUT_TIME    0x00000000
 
 //Services
-#define MSG_DELIVERY    0x20;
-#define MSG_REQ         0x30;
+#define MSG_DELIVERY    0x20
+#define MSG_REQ         0x30
 
 // NoC Dimensions
 #define DIM_X 8
@@ -53,6 +53,8 @@
 #define RX                  0x3333
 #define DONE                0x4444
 #define INFORM_ITERATION    0xFFFFFFFFFFFFFFFFULL
+#define FROM_IDLE           0x2525
+#define FROM_RX             0x3535
 
 
 

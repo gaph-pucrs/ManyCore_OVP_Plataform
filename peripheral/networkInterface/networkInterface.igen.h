@@ -52,6 +52,8 @@ extern DMAC_ab8_dataT DMAC_ab8_data;
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
+    ppmAddressSpaceHandle MREAD;
+    ppmAddressSpaceHandle MWRITE;
     void                 *DMAC;
     ppmNetHandle          INTTC;
     ppmPacketnetHandle    dataPort;
