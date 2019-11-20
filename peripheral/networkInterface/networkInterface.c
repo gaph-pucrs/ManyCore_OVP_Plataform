@@ -25,24 +25,27 @@ unsigned int htonl(unsigned int x){
 }
 ////////////////////////////////////////////////////////////////////////////////
 
-unsigned int internalStatus = IDLE; 
-unsigned int myStatus = GO; // the availability to write something in the memory
+unsigned int internalStatus = IDLE;     // IDLE - waiting for a TX or a RX
+                                        // TX   - transmitting a packet
+                                        // RX   - receiving a packet --- (i) actived by processor command -pulling- (ii) service packet -interruption-
+unsigned int myStatus = GO;             // the availability to receive something from the NoC and write it in the memory
+unsigned int auxAddress;                // Auxiliar address to store temporarily the address incomming address from the processor
+
 //RX Variables
-unsigned int receivingAddress = 0;
-unsigned int receivingAddressCopy = 0;
-unsigned int receivingField = HEADER;
-unsigned int receivingCount;
-unsigned int receivingBuffer[4];
+unsigned int receivingAddress = 0;      // Stores the address where the packet will be stored RX(i)
+unsigned int serviceAddress=0xFFFFFFFF; // Stores the address associated to the RX(ii)
+unsigned int receivingAddressCopy = 0;  // Auxiliar variable to store the receivingAddress to restore the RX(i) state after a RX(ii) interruption
+unsigned int receivingField = HEADER;   // Control variable to identify which packet field is the next to be read
+unsigned int receivingCount;            // Counts the amount of remaining flits to be received 
+unsigned int receivingBuffer[4];        // Receiving buffer, to store the first four flits of a given packet - diferentiation of RX(i) and RX(ii)
 
 //TX Variables
-unsigned int transmittingAddress = 0;
-unsigned int transmittingCount = HEADER;
-unsigned int localStatus = GO; // the router local buffer status
+unsigned int transmittingAddress = 0;   // Stores TX packet address
+unsigned int transmittingCount = HEADER;// Counts the amount of remaining flits to be transmitted
+unsigned int control_in_STALLGO = GO;   // Stores the router input buffer status
 
 // Aux
-unsigned int auxAddress = 0;
-unsigned int waitingCommand = FALSE;
-unsigned int serviceAddress = 0xFFFFFFFF;
+unsigned int waitingCommand = FALSE;    // Register that the NI is waiting a command (required to create a monotonic)
 unsigned int serviceReceiving = FALSE;
 
 //
@@ -99,7 +102,7 @@ void informIteration(){
 void niIteration(){
     //unsigned long long int informIteration = INFORM_ITERATION;
     //bhmMessage("I", "ctrlLocal", "iterate! mystatus: %x", internalStatus);
-    if(internalStatus == TX && localStatus == GO){
+    if(internalStatus == TX && control_in_STALLGO == GO){
         //bhmMessage("I", "ctrlLocal", "i2terate!");
         //flit = memory(transmittingAddress);
         ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
@@ -156,7 +159,7 @@ PPM_REG_WRITE_CB(addressWrite) {
 PPM_PACKETNET_CB(controlPortUpd) {
     if(bytes == 4){
         unsigned int ctrl = *(unsigned int *)data;
-        localStatus = ctrl;
+        control_in_STALLGO = ctrl;
     }
     else if(bytes == 8) {
         //*(unsigned long long int *) data;
