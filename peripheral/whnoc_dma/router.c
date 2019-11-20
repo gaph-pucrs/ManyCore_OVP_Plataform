@@ -95,9 +95,12 @@ unsigned long long int enteringTime;
 // Maybe LEGACY!
 unsigned int lastTickLocal = 0;
 
+// BufferPop aux signals
+unsigned int localBuffer_packetDest;
+
 /*// PreBuffer variables
 unsigned int preBufferPackets[PREBUFFER_SIZE];
-unsigned int preBuffer_packetDest;
+unsigned int ;
 static unsigned int preBuffer_last = 0;
 static unsigned int preBuffer_first = 0;
 */
@@ -270,6 +273,7 @@ unsigned int preBuffer_isEmpty(){
 
 unsigned int bufferPop(unsigned int port){
     unsigned long long int value;
+    unsigned int difX, difY;
 
     // Read the first flit from the buffer
     value = buffers[port][first[port]].data;
@@ -318,16 +322,110 @@ unsigned int bufferPop(unsigned int port){
         contPriority[port] = 0;
         #endif*/    
     }
+    else if(port == LOCAL && flitCountOut[port] == HEADER-1){
+        localBuffer_packetDest = htonl(value);
+        enteringTime = currentTime;
+    }
     // If it is the packet size flit then we store the value for the countdown
     else if (flitCountOut[port] == SIZE){
         flitCountOut[port] = htonl(value);
     }
+    else if(port == LOCAL && flitCountOut[port] == HOPES){
+        // Calculate the number of hopes to achiev the destination address
+        // Calculate the X dif
+        if(positionX(myAddress)>positionX(localBuffer_packetDest)) difX = positionX(myAddress) - positionX(localBuffer_packetDest);
+        else difX = positionX(localBuffer_packetDest) - positionX(myAddress);
+        // Calculate the Y dif
+        if(positionY(myAddress)>positionY(localBuffer_packetDest)) difY = positionY(myAddress) - positionY(localBuffer_packetDest);
+        else difY = positionY(localBuffer_packetDest) - positionY(myAddress);
+        // Adds both difs to determine the amount of hops
+        value = ntohl(difX + difY);
+    }
+    else if(port == LOCAL && flitCountOut[port] == IN_TIME){
+        value = ntohl(enteringTime);
+    }
+    /*else if(port == LOCAL && flitCountOut[port] == OUT_TIME){
+        myIterationStatusLocal = ITERATION_OFF_LOCAL;
+        informIteratorLocalOff();
+        // Informs that there is another packet inside the prebuffer to send
+        if(preBuffer_last != (preBuffer_first+1)){
+            informIteratorLocalOn();
+            ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));// LOOKS DANGEROUS
+        }
+    }*/
     
     // Update the buffer status
     bufferStatusUpdate(port);
     
     return value;
 }
+
+
+/*void preBuffer_pop(){
+    unsigned int difX, difY;
+    
+    if(!preBuffer_isEmpty() && localStatus == GO){
+            //    if(myID==8)bhmMessage("I","ITERATE","PREBUFFERPOP");
+
+        ////////////////////////
+        // Control insertions //
+        ////////////////////////
+        if(flitCountIn == HEADER){
+            enteringTime = currentTime;
+            preBuffer_packetDest = htonl(preBufferPackets[preBuffer_first]); //>> 24;
+        }
+        // Decrease the flitCount
+        flitCountIn = flitCountIn - 1;
+
+        // Register the size of a new packet to insert some control information in the tail
+        if (flitCountIn == SIZE){
+            flitCountIn = htonl(preBufferPackets[preBuffer_first]);
+        }
+        else if(flitCountIn == HOPES){
+            // Calculate the number of hopes to achiev the destination address
+            // Calculate the X dif
+            if(positionX(myAddress)>positionX(preBuffer_packetDest)) difX = positionX(myAddress) - positionX(preBuffer_packetDest);
+            else difX = positionX(preBuffer_packetDest) - positionX(myAddress);
+            // Calculate the Y dif
+            if(positionY(myAddress)>positionY(preBuffer_packetDest)) difY = positionY(myAddress) - positionY(preBuffer_packetDest);
+            else difY = positionY(preBuffer_packetDest) - positionY(myAddress);
+            // Adds both difs to determine the amount of hops
+            preBufferPackets[preBuffer_first] = ntohl(difX + difY);
+        }
+        else if(flitCountIn == IN_TIME){
+            preBufferPackets[preBuffer_first] = ntohl(enteringTime);
+        }
+        else if(flitCountIn == OUT_TIME){
+            flitCountIn = HEADER;
+            myIterationStatusLocal = ITERATION_OFF_LOCAL;
+            informIteratorLocalOff();
+            // Informs that there is another packet inside the prebuffer to send
+            if(preBuffer_last != (preBuffer_first+1)){
+                informIteratorLocalOn();
+                ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));// LOOKS DANGEROUS
+            }
+        }
+        // Register the flit data
+        incomingFlit.data = preBufferPackets[preBuffer_first];
+        // Register the time that this flit is recieved by the local buffer
+        incomingFlit.inTime = currentTime;
+        // Stores the flit in the local buffer
+        bufferPush(LOCAL);
+
+        // preBuffer_first++
+        if(preBuffer_first < PREBUFFER_SIZE-1){
+            preBuffer_first++;
+        }iterationsPort
+        eiterationsPort{else
+         iterationsPort
+        }iterationsPort
+
+        /iterationsPort
+        piterationsPort
+    }
+}*/
+
+
 
 #if ARBITER_RR
 // Select the port with the biggest priority
@@ -660,69 +758,7 @@ void preBuffer_push(unsigned int newFlit){
     preBuffer_statusUpdate();
 }
 
-void preBuffer_pop(){
-    unsigned int difX, difY;
-    
-    if(!preBuffer_isEmpty() && localStatus == GO){
-            //    if(myID==8)bhmMessage("I","ITERATE","PREBUFFERPOP");
-
-        ////////////////////////
-        // Control insertions //
-        ////////////////////////
-        if(flitCountIn == HEADER){
-            enteringTime = currentTime;
-            preBuffer_packetDest = htonl(preBufferPackets[preBuffer_first]); //>> 24;
-        }
-        // Decrease the flitCount
-        flitCountIn = flitCountIn - 1;
-
-        // Register the size of a new packet to insert some control information in the tail
-        if (flitCountIn == SIZE){
-            flitCountIn = htonl(preBufferPackets[preBuffer_first]);
-        }
-        else if(flitCountIn == HOPES){
-            // Calculate the number of hopes to achiev the destination address
-            // Calculate the X dif
-            if(positionX(myAddress)>positionX(preBuffer_packetDest)) difX = positionX(myAddress) - positionX(preBuffer_packetDest);
-            else difX = positionX(preBuffer_packetDest) - positionX(myAddress);
-            // Calculate the Y dif
-            if(positionY(myAddress)>positionY(preBuffer_packetDest)) difY = positionY(myAddress) - positionY(preBuffer_packetDest);
-            else difY = positionY(preBuffer_packetDest) - positionY(myAddress);
-            // Adds both difs to determine the amount of hops
-            preBufferPackets[preBuffer_first] = ntohl(difX + difY);
-        }
-        else if(flitCountIn == IN_TIME){
-            preBufferPackets[preBuffer_first] = ntohl(enteringTime);
-        }
-        else if(flitCountIn == OUT_TIME){
-            flitCountIn = HEADER;
-            myIterationStatusLocal = ITERATION_OFF_LOCAL;
-            informIteratorLocalOff();
-            // Informs that there is another packet inside the prebuffer to send
-            if(preBuffer_last != (preBuffer_first+1)){
-                informIteratorLocalOn();
-                ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));// LOOKS DANGEROUS
-            }
-        }
-        // Register the flit data
-        incomingFlit.data = preBufferPackets[preBuffer_first];
-        // Register the time that this flit is recieved by the local buffer
-        incomingFlit.inTime = currentTime;
-        // Stores the flit in the local buffer
-        bufferPush(LOCAL);
-
-        // preBuffer_first++
-        if(preBuffer_first < PREBUFFER_SIZE-1){
-            preBuffer_first++;
-        }iterationsPort
-        eiterationsPort{else
-         iterationsPort
-        }iterationsPort
-
-        /iterationsPort
-        piterationsPort
-    }
-}*/
+*/
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// Interaction Function //////////////////////////
