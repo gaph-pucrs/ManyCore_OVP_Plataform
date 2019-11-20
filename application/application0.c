@@ -64,7 +64,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int i;
     //LOG("0 - end auxiliar: %x\n", &auxiliar);
-    *NIaddr = &auxiliar;
+    *NIaddr = (unsigned int)&auxiliar;
 
     for(i = 0; i<20; i++){
         myPacket[i] = i*10;
@@ -76,12 +76,12 @@ int main(int argc, char **argv)
     myPacket[4] = 0; // PINGPONG
     // send /////////////
     //LOG("0 - end pacote: %x\n", &myPacket);
-    *NIaddr = &myPacket;
+    *NIaddr = (unsigned int)&myPacket;
     *NIstatus = 0x2222; // config pra TX
     while(*NIstatus!=0x1111){}
     /////////////////////
     
-    for(i = 0; i<200; i++){
+    for(i = 0; i<100; i++){
         while(intr0!=1){}
         ////////////////////
         // Printa
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
         myPacket[3] = 0x55;
         packetConsumed2();
         // send /////////////
-        *NIaddr = &myPacket;
+        *NIaddr = (unsigned int)&myPacket;
         *NIstatus = 0x2222; // config pra TX
     }
     

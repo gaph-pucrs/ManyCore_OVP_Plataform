@@ -65,17 +65,17 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int i;
     //LOG("3 - end auxiliar: %x\n", &auxiliar);
-    *NIaddr = &auxiliar;
+    *NIaddr = (unsigned int)&auxiliar;
 
     // receive /////////
     //LOG("3 - end pacote: %x\n", &myPacket);
-    *NIaddr = &myPacket;
+    *NIaddr = (unsigned int)&myPacket;
     *NIstatus = 0x3333; // config pra RX
     while(*NIstatus != 0x1111){}
 
     auxiliar[4] = myPacket[4];
     ////////////////////
-    for(i = 0; i<200; i++){
+    for(i = 0; i<100; i++){
         ////////////////////
         // Printa
         LOG("3 - pong %d\n",auxiliar[4]);
@@ -85,9 +85,13 @@ int main(int argc, char **argv)
         myPacket[4] = auxiliar[4] + 1;
         packetConsumed2();
         // send /////////////
-        *NIaddr = &myPacket;
+        *NIaddr = (unsigned int)&myPacket;
         *NIstatus = 0x2222; // config pra TX
         while(intr0!=1){} // aguarda até o pacote chegar por interrupcao
+    }
+
+    for(i=0;i<auxiliar[1]+2;i++){
+        LOG("%d - %d\n",i, auxiliar[i]);
     }
     /////////////////////
     //////////////////////////////////////////////////////
