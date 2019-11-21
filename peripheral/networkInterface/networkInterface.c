@@ -89,7 +89,6 @@ void setSTALL(){
 }
 
 void statusUpdate(unsigned int status){
-    //bhmMessage("I", "statusUpdt", "estou: %x mudando para: %x", internalStatus, status);
     internalStatus = status;
     DMAC_ab8_data.status.value = htonl(status);
 }
@@ -100,10 +99,7 @@ void informIteration(){
 }
 
 void niIteration(){
-    //unsigned long long int informIteration = INFORM_ITERATION;
-    //bhmMessage("I", "ctrlLocal", "iterate! mystatus: %x", internalStatus);
     if(internalStatus == TX && control_in_STALLGO == GO){
-        //bhmMessage("I", "ctrlLocal", "i2terate!");
         //flit = memory(transmittingAddress);
         ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
         if(!h) {
@@ -113,13 +109,11 @@ void niIteration(){
         ppmReadAddressSpace(h, transmittingAddress, sizeof(chFlit), chFlit);
         ppmCloseAddressSpace(h);
         vec2usi();
-        //bhmMessage("I", "niiteration", "transmittingCount: %d - flit: %d",transmittingCount, htonl(usFlit));
         if(transmittingCount == HEADER){
             transmittingCount = SIZE;
         }
         else if(transmittingCount == SIZE){
             //vec2usi(); // transform the data from vector to a single unsigned int
-            //bhmMessage("I", "niiteration", "size: %x - %x", usFlit, htonl(usFlit));
             transmittingCount = htonl(usFlit);
         }
         else{
@@ -146,7 +140,6 @@ PPM_REG_READ_CB(addressRead) {
 
 PPM_REG_WRITE_CB(addressWrite) {
     // If is the first address write then, by definition, the IP is writing the address to store the service packets
-    //bhmMessage("I", "addresswrite", "chegou um endereço: %x - serviceaddress: %x", htonl(data), serviceAddress);
     if(serviceAddress == 0xFFFFFFFF){
         serviceAddress = htonl(data);
     }else{
@@ -162,8 +155,6 @@ PPM_PACKETNET_CB(controlPortUpd) {
         control_in_STALLGO = ctrl;
     }
     else if(bytes == 8) {
-        //*(unsigned long long int *) data;
-        //bhmMessage("I", "ctrliterate", "iterate!");
         niIteration();
     }
     //niIteration(); // The NI will not receive direct iterations signals from the iterator. So the router will comunicate every iteration using this control signal.  
@@ -175,7 +166,6 @@ PPM_PACKETNET_CB(dataPortUpd) {
     int i;
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(internalStatus == IDLE){
-        //bhmMessage("I", "Receive", "----------------------------------");
         statusUpdate(RX); // sm2
         receivingAddress = serviceAddress;
         receivingField = HEADER;
@@ -185,7 +175,6 @@ PPM_PACKETNET_CB(dataPortUpd) {
     }
     // Proceed to the regular receiving routine
     if(internalStatus == RX){
-        //bhmMessage("I", "Receive", "recebendo flit! %d - FIELD: %x - COUNT %d", htonl(flit), receivingField, receivingCount);
         if(receivingField == HEADER){
             receivingField = SIZE;
             receivingBuffer[0] = flit;
@@ -205,7 +194,6 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingCount = receivingCount - 1;
             receivingBuffer[3] = flit;
             if(htonl(flit) == MSG_DELIVERY){
-                //bhmMessage("I", "rx", "MSG_DELIVERY!");
                 ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
                 if(!h) {
                     bhmMessage("I", "NI_ITERATOR", "ERROR h handling!");
@@ -251,10 +239,8 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingAddress = receivingAddress + 4;
             ppmCloseAddressSpace(h);
         }
-        //bhmMessage("I", "Receive", "pos recebimento: tipo: %x", serviceReceiving);
         if(receivingCount == EMPTY){
             if(serviceReceiving == FROM_IDLE){
-                //bhmMessage("I", "Receive", "servico retornando proo idle");
                 statusUpdate(IDLE); // sm4
                 serviceReceiving = FALSE;
                 ppmWriteNet(handles.INTTC, 1);
@@ -270,7 +256,6 @@ PPM_PACKETNET_CB(dataPortUpd) {
                 setGO();
             }
             else{
-                //bhmMessage("I", "Receive", "regular retornando pro idle");
                 statusUpdate(IDLE); // sm4
                 serviceReceiving = FALSE;
                 setGO();
@@ -280,7 +265,6 @@ PPM_PACKETNET_CB(dataPortUpd) {
 }
 
 PPM_REG_READ_CB(statusRead) {
-    //bhmMessage("I", "StatusRead", "iteration!");
     informIteration();  // When the processor is reading the NI status, we have one of two situations: 
                         //      (i) the processor is blocked by a Receive() function or
                         //      (ii) it is waiting the NI to enter in IDLE to start a new transmittion

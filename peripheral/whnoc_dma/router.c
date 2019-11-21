@@ -56,6 +56,7 @@ flit incomingFlit;
 unsigned int last[N_PORTS] = {0,0,0,0,0};
 unsigned int first[N_PORTS] = {0,0,0,0,0};
 unsigned int localStatus = GO;
+unsigned int localBufferAmount = 0;
 
 // Stores the control status of each port
 unsigned int control[N_PORTS+1] = {GO,GO,GO,GO,GO,GO};
@@ -81,7 +82,7 @@ unsigned int contPriority[N_PORTS] = {0,0,0,0,1};
 #endif
 
 // Stores the atual router tick status
-unsigned short int myTickStatus = ITERATION_OFF;
+unsigned short int myIterationStatus = ITERATION_OFF;
 
 // Stores the prebuffer autorization tick
 unsigned short int myIterationStatusLocal = ITERATION_OFF_LOCAL;
@@ -98,25 +99,10 @@ unsigned int lastTickLocal = 0;
 // BufferPop aux signals
 unsigned int localBuffer_packetDest;
 
-/*// PreBuffer variables
-unsigned int preBufferPackets[PREBUFFER_SIZE];
-unsigned int ;
-static unsigned int preBuffer_last = 0;
-static unsigned int preBuffer_first = 0;
-*/
-
-
 #if LOG_OUTPUTFLITS
 // flit counter of each port, is reseted in each quantum in router.igen.c
 int contFlits[N_PORTS];
 #endif
-
-// counter flits of each packet
-int contFlitsPacket[N_PORTS] = {0,0,0,0,0};
-
-// size of currentPacket
-int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
-
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
@@ -125,14 +111,14 @@ int sizeCurrentPacket[N_PORTS] = {0,0,0,0,0};
 // Informs the ticker that this router needs ticks
 void turn_TickOn(){
     unsigned short int iterAux = ITERATION_ON;
-    myTickStatus = ITERATION_ON;
+    myIterationStatus = ITERATION_ON;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
 // Informs the ticker that this router does not needs ticks
 void turn_TickOff(){
     unsigned short int iterAux = ITERATION_OFF;
-    myTickStatus = ITERATION_OFF;
+    myIterationStatus = ITERATION_OFF;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
@@ -236,7 +222,6 @@ void bufferStatusUpdate(unsigned int port){
 
 void bufferPush(unsigned int port){
     // Write a new flit in the buffer
-    //bhmMessage("I", "bpush", "chegou um flit: %x", htonl(incomingFlit.data));
     buffers[port][last[port]] = incomingFlit;
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;
@@ -245,8 +230,10 @@ void bufferPush(unsigned int port){
         last[port] = 0;
     }
 
+    if(port == LOCAL) localBufferAmount++;
+
     // Inform the ticker that this router has something to send
-    if(myTickStatus == ITERATION_OFF) turn_TickOn(); 
+    if(myIterationStatus == ITERATION_OFF) turn_TickOn(); 
 
     // Update the buffer status
     bufferStatusUpdate(port);
@@ -261,16 +248,6 @@ unsigned int isEmpty(unsigned int port){
     }
 }
 
-/*//verify if the preBuffer is empty 
-unsigned int preBuffer_isEmpty(){
-	if(preBuffer_first != (preBuffer_last)){
-		return 0; // no, it is not empty
-	}
-    else{
-		return 1; // yes, it is empty
-	}
-}*/
-
 unsigned int bufferPop(unsigned int port){
     unsigned long long int value;
     unsigned int difX, difY;
@@ -284,6 +261,8 @@ unsigned int bufferPop(unsigned int port){
     else if(first[port] == BUFFER_SIZE-1){
         first[port] = 0;
     }
+
+    if(port == LOCAL) localBufferAmount--;
     
     // Decreases the flitCountOut
     flitCountOut[port] = flitCountOut[port] - 1;
@@ -291,8 +270,12 @@ unsigned int bufferPop(unsigned int port){
     // If the flitCountOut goes to EMPTY then the transmission is done!
     if (flitCountOut[port] == EMPTY){
         
+        // inform the Iterator that this local port has finnished the transmittion of one packet
+        informIteratorLocalOff();
+
         //Log info about the end of transmittion of a packet
         if (routingTable[port] == LOCAL){
+            value = ntohl(currentTime); // Register the out-iteration in the last flit
             localDeliveredPckts++;
             bhmMessage("I", "Router", "Packet delivered at %d-(%d,%d) - total delivered: %d\n",myID, positionX(myAddress), positionY(myAddress), localDeliveredPckts);
         }
@@ -300,15 +283,11 @@ unsigned int bufferPop(unsigned int port){
         // Updates the routing table, releasing the output port
         routingTable[port] = ND;
 
-        if(flitCountOut[port] == OUT_TIME){
-            value = ntohl(currentTime); // << 24;
-        }
-
         // Inform that the next flit will be a header
         flitCountOut[port] = HEADER;
 
         // If every buffer is empty this router does not need to be ticked
-        if(myTickStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){// && preBuffer_isEmpty()){
+        if(myIterationStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){// && preBuffer_isEmpty()){
             turn_TickOff();
         }
         
@@ -344,88 +323,37 @@ unsigned int bufferPop(unsigned int port){
     else if(port == LOCAL && flitCountOut[port] == IN_TIME){
         value = ntohl(enteringTime);
     }
-    /*else if(port == LOCAL && flitCountOut[port] == OUT_TIME){
-        myIterationStatusLocal = ITERATION_OFF_LOCAL;
-        informIteratorLocalOff();
-        // Informs that there is another packet inside the prebuffer to send
-        if(preBuffer_last != (preBuffer_first+1)){
-            informIteratorLocalOn();
-            ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));// LOOKS DANGEROUS
-        }
-    }*/
-    
+        
     // Update the buffer status
     bufferStatusUpdate(port);
     
     return value;
 }
 
-
-/*void preBuffer_pop(){
-    unsigned int difX, difY;
-    
-    if(!preBuffer_isEmpty() && localStatus == GO){
-            //    if(myID==8)bhmMessage("I","ITERATE","PREBUFFERPOP");
-
-        ////////////////////////
-        // Control insertions //
-        ////////////////////////
-        if(flitCountIn == HEADER){
-            enteringTime = currentTime;
-            preBuffer_packetDest = htonl(preBufferPackets[preBuffer_first]); //>> 24;
+void verifyLocalBuffer(){
+    // The local buffer has a special behavior - to create ordenation in the packets transmittion
+    unsigned int access;
+    if(myIterationStatusLocal == ITERATION_OFF_LOCAL && localBufferAmount >= 3){ // using "greater or equal to 3" because the sendtime is registered in the 3th flit
+        informIteratorLocalOn();
+        switch (first[LOCAL]+4){ // calculates the sendtime position inside the buffer
+            case (BUFFER_SIZE):
+                access = 0;
+                break;
+            case (BUFFER_SIZE+1):
+                access = 1;
+                break;
+            case (BUFFER_SIZE+2):
+                access = 2;
+                break;
+            case (BUFFER_SIZE+3):
+                access = 3;
+                break;
+            default:
+                access = first[LOCAL]+4;
         }
-        // Decrease the flitCount
-        flitCountIn = flitCountIn - 1;
-
-        // Register the size of a new packet to insert some control information in the tail
-        if (flitCountIn == SIZE){
-            flitCountIn = htonl(preBufferPackets[preBuffer_first]);
-        }
-        else if(flitCountIn == HOPES){
-            // Calculate the number of hopes to achiev the destination address
-            // Calculate the X dif
-            if(positionX(myAddress)>positionX(preBuffer_packetDest)) difX = positionX(myAddress) - positionX(preBuffer_packetDest);
-            else difX = positionX(preBuffer_packetDest) - positionX(myAddress);
-            // Calculate the Y dif
-            if(positionY(myAddress)>positionY(preBuffer_packetDest)) difY = positionY(myAddress) - positionY(preBuffer_packetDest);
-            else difY = positionY(preBuffer_packetDest) - positionY(myAddress);
-            // Adds both difs to determine the amount of hops
-            preBufferPackets[preBuffer_first] = ntohl(difX + difY);
-        }
-        else if(flitCountIn == IN_TIME){
-            preBufferPackets[preBuffer_first] = ntohl(enteringTime);
-        }
-        else if(flitCountIn == OUT_TIME){
-            flitCountIn = HEADER;
-            myIterationStatusLocal = ITERATION_OFF_LOCAL;
-            informIteratorLocalOff();
-            // Informs that there is another packet inside the prebuffer to send
-            if(preBuffer_last != (preBuffer_first+1)){
-                informIteratorLocalOn();
-                ppmPacketnetWrite(handles.iterationsPort, &preBufferPackets[preBuffer_first+4], sizeof(preBufferPackets[preBuffer_first+4]));// LOOKS DANGEROUS
-            }
-        }
-        // Register the flit data
-        incomingFlit.data = preBufferPackets[preBuffer_first];
-        // Register the time that this flit is recieved by the local buffer
-        incomingFlit.inTime = currentTime;
-        // Stores the flit in the local buffer
-        bufferPush(LOCAL);
-
-        // preBuffer_first++
-        if(preBuffer_first < PREBUFFER_SIZE-1){
-            preBuffer_first++;
-        }iterationsPort
-        eiterationsPort{else
-         iterationsPort
-        }iterationsPort
-
-        /iterationsPort
-        piterationsPort
+        ppmPacketnetWrite(handles.iterationsPort, &buffers[LOCAL][access].data, sizeof(buffers[LOCAL][access].data)); // inform the sendtime to the iterator
     }
-}*/
-
-
+}
 
 #if ARBITER_RR
 // Select the port with the biggest priority
@@ -600,111 +528,86 @@ void transmitt(){
     unsigned int port, flit;
     // For each port...
     for(port = 0; port <= LOCAL; port++){
-   
-        // Verify if the port is routed and if it has something to transmmit 
-        if((routingTable[port] < ND) && (!isEmpty(port))){
+        // Verify if the local port is allowed to transmitt
+        if(port != LOCAL || (port == LOCAL && myIterationStatusLocal == ITERATION_RELEASED_LOCAL)){
+            // Verify if the port is routed and if it has something to transmmit 
+            if((routingTable[port] < ND) && (!isEmpty(port))){
 
-            // Checks if at least one tick has passed since the flit arrived in this router
-            if ((currentTime > buffers[port][first[port]].inTime)||((port == LOCAL) && (lastTickLocal != currentTime))) { // MAYBE lastTickLocal IS LEGACY!
-                 
-                // Transmission to the local IP
-                /*if(routingTable[port] == LOCAL && txCtrl == ACK){
-                    // Refresh lastTickLocal
-                    lastTickLocal = currentTime;
-                    flit = bufferPop(port);
-                    
-                    #if LOG_OUTPUTFLITS
-                    contFlits[LOCAL]= contFlits[LOCAL]++;
-                    #endif
-                    
-                    // Set the TX to REQUEST
-                    txCtrl = REQ;
-                    localPort_regs_data.controlTxLocal.value = htonl(REQ);
-                    // Set the flit value in the memory mapped reg
-                    localPort_regs_data.dataTxLocal.value = flit;
-                    // Interrupt the processor (this will occur one time per packet)
-                    ppmWriteNet(handles.INTTC, 1);
-                }*/
+                // Checks if at least one tick has passed since the flit arrived in this router
+                if ((currentTime > buffers[port][first[port]].inTime)||((port == LOCAL) && (lastTickLocal != currentTime))) { // MAYBE lastTickLocal IS LEGACY!
 
-                // Transmit it to the LOCAL router
-                if(routingTable[port] == LOCAL){
-                    /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
-                    if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
-                        // Gets a flit from the buffer 
-                        flit = bufferPop(port);
-
-                        #if LOG_OUTPUTFLITS
-                        contFlits[LOCAL]= contFlits[LOCAL]++;
-                        #endif
-                        // Send the flit transmission time followed by the data
-                        //ppmPacketnetWrite(handles.portControlLocal, &currentTime, sizeof(currentTime));
-                        //bhmMessage("I", "localport", "enviando flit: %d",htonl(flit));
-                        ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
+                    // Transmit it to the LOCAL router
+                    if(routingTable[port] == LOCAL){
+                        /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
+                        if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
+                            // Gets a flit from the buffer 
+                            flit = bufferPop(port);
+                            #if LOG_OUTPUTFLITS
+                            contFlits[LOCAL]= contFlits[LOCAL]++;
+                            #endif
+                            // Send the flit transmission time followed by the data
+                            ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
+                        }
                     }
-                }
 
-                // Transmit it to the EAST router
-                else if(routingTable[port] == EAST){
-                    /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
-                    if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
-                        // Gets a flit from the buffer 
-                        flit = bufferPop(port);
-
-                        #if LOG_OUTPUTFLITS
-                        contFlits[EAST]= contFlits[EAST]++;
-                        #endif
-                        // Send the flit transmission time followed by the data
-                        //bhmMessage("I", "localport", "TO EAST: enviando flit: %d",htonl(flit));
-                        ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
-                        ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
+                    // Transmit it to the EAST router
+                    else if(routingTable[port] == EAST){
+                        /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
+                        if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
+                            // Gets a flit from the buffer 
+                            flit = bufferPop(port);
+                            #if LOG_OUTPUTFLITS
+                            contFlits[EAST]= contFlits[EAST]++;
+                            #endif
+                            // Send the flit transmission time followed by the data
+                            ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
+                            ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
+                        }
                     }
-                }
 
-                // Transmit it to the WEST router
-                else if(routingTable[port] == WEST){
-                    /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
-                    if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
-                        // Gets a flit from the buffer 
-                        flit = bufferPop(port);
-                        
-                        #if LOG_OUTPUTFLITS
-                        contFlits[WEST]= contFlits[WEST]++;
-                        #endif
-                        // Send the flit transmission time followed by the data
-                        ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
-                        ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
+                    // Transmit it to the WEST router
+                    else if(routingTable[port] == WEST){
+                        /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
+                        if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
+                            // Gets a flit from the buffer 
+                            flit = bufferPop(port);
+                            #if LOG_OUTPUTFLITS
+                            contFlits[WEST]= contFlits[WEST]++;
+                            #endif
+                            // Send the flit transmission time followed by the data
+                            ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
+                            ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
+                        }
                     }
-                }
 
-                // Transmit it to the NORTH router
-                else if(routingTable[port] == NORTH){
-                    /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
-                    if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
-                        // Gets a flit from the buffer 
-                        flit = bufferPop(port);
-
-                        #if LOG_OUTPUTFLITS
-                        contFlits[NORTH]= contFlits[NORTH]++;
-                        #endif
-                        // Send the flit transmission time followed by the data
-                        ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
-                        ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
+                    // Transmit it to the NORTH router
+                    else if(routingTable[port] == NORTH){
+                        /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
+                        if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
+                            // Gets a flit from the buffer 
+                            flit = bufferPop(port);
+                            #if LOG_OUTPUTFLITS
+                            contFlits[NORTH]= contFlits[NORTH]++;
+                            #endif
+                            // Send the flit transmission time followed by the data
+                            ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
+                            ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
+                        }
                     }
-                }
 
-                // Transmit it to the SOUTH router
-                else if(routingTable[port] == SOUTH){
-                    /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
-                    if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
-                        // Gets a flit from the buffer 
-                        flit = bufferPop(port);
-
-                        #if LOG_OUTPUTFLITS
-                        contFlits[SOUTH]= contFlits[SOUTH]++;
-                        #endif
-                        // Send the flit transmission time followed by the data
-                        ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
-                        ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
+                    // Transmit it to the SOUTH router
+                    else if(routingTable[port] == SOUTH){
+                        /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
+                        if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
+                            // Gets a flit from the buffer 
+                            flit = bufferPop(port);
+                            #if LOG_OUTPUTFLITS
+                            contFlits[SOUTH]= contFlits[SOUTH]++;
+                            #endif
+                            // Send the flit transmission time followed by the data
+                            ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
+                            ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
+                        }
                     }
                 }
             }
@@ -717,55 +620,15 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
     control[port] = ctrlData;
 }
 
-/*// Pre-Buffer status update - warns the IP is there is space or not inside the buffer
-void preBuffer_statusUpdate(){
-    unsigned int status;
-    if((preBuffer_first == 0 && preBuffer_last == PREBUFFER_SIZE-1) || (preBuffer_first == (preBuffer_last+1))){
-        status = STALL;
-    }
-    else{
-        status = GO;
-    }
-    //localPort_regs_data.controlRxLocal.value = status;
-}
-
-// Stores a flit that is incomming from the local IP
-void preBuffer_push(unsigned int newFlit){
-    contFlitsPacket[LOCAL]++;
-    preBufferPackets[preBuffer_last] = newFlit;
-
-    // preBuffer_last++
-    if(preBuffer_last < PREBUFFER_SIZE-1){
-        preBuffer_last++;
-    }
-    else if(preBuffer_last == PREBUFFER_SIZE-1){
-        preBuffer_last = 0;
-    }
-
-    // Register the size of the incomming packet
-    if(contFlitsPacket[LOCAL] == 2){ // register the packet size
-        sizeCurrentPacket[LOCAL] = htonl(newFlit);
-    }else if(contFlitsPacket[LOCAL] == sizeCurrentPacket[LOCAL]+2){ // if we are receiving the last flit
-        contFlitsPacket[LOCAL] = 0;
-    }else if(contFlitsPacket[LOCAL]==3){ // inform the iterator that this router has a packet in the prebuffer
-        if(myIterationStatusLocal == ITERATION_OFF_LOCAL){
-            informIteratorLocalOn();
-            ppmPacketnetWrite(handles.iterationsPort, &newFlit, sizeof(newFlit));              
-        }                  
-    } 
-
-    //Update the prebuffer status
-    preBuffer_statusUpdate();
-}
-
-*/
-
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// Interaction Function //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 void iterate(){
+    // Sends the iteration signal to the NI module
     iterateNI();
+    // Verify if the LOCAL buffer has something to send
+    verifyLocalBuffer();
     ////////////////////////////////////////////
     // Arbitration Process - defined in noc.h //
     ////////////////////////////////////////////
@@ -840,7 +703,6 @@ PPM_PACKETNET_CB(controlLocal) {
     // When receving a time for the incoming flit... (8 bytes info)
     else if(bytes == 8){
         //incomingFlit.inTime = *(unsigned long long int *)data;
-        //bhmMessage("I", "ctrlLocal", "iterate!");
         informIterator();
     }
 }
@@ -913,7 +775,6 @@ PPM_PACKETNET_CB(dataWest) {
 }
 
 PPM_PACKETNET_CB(iterationPort) {
-    //bhmMessage("I", "iteport", "iterate!");
     // Stores the actual iteration time
     currentTime = *(unsigned long long int *)data;
 
