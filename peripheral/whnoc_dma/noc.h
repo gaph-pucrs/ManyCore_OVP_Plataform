@@ -33,8 +33,8 @@
 #define MSG_REQ         0x30
 
 // NoC Dimensions
-#define DIM_X 8
-#define DIM_Y 8
+#define DIM_X 2
+#define DIM_Y 2
 #define N_PES 64
 
 //Ticks
