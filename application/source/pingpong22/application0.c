@@ -25,7 +25,6 @@ void interruptHandler2(void){
 
 void packetConsumed2(){
     intr0 = 0;
-    // dar o done aqui! e ativar a interrupção depois
 }
 
 int main(int argc, char **argv)
@@ -39,7 +38,7 @@ int main(int argc, char **argv)
     volatile unsigned int *NIaddr = NI_BASE + 0x1;
     volatile unsigned int *NIstatus = NI_BASE + 0x0;
 
-    LOG("Starting ROUTER3 application! \n\n");
+    LOG("Starting ROUTER0 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler2, NULL);
@@ -51,9 +50,9 @@ int main(int argc, char **argv)
     MTSPR(17, spr);
 
     int start = 0;
-    *myAddress = 0x11;
+    *myAddress = 0x00;
 
-    *PEToSync = 0x11;
+    *PEToSync = 0x00;
     while(start != 1){
 	    start = *SyncToPE >> 24;
     }
@@ -61,43 +60,46 @@ int main(int argc, char **argv)
     tinicio = tignore - (tignore - tinicio);
 
     //////////////////////////////////////////////////////
-    /////////////// YOUR CODE START HERE ///////////////// 
+    /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    //LOG("3 - end auxiliar: %x\n", &auxiliar);
+    //LOG("0 - end auxiliar: %x\n", &auxiliar);
     *NIaddr = (unsigned int)&auxiliar;
 
-    // receive /////////
-    //LOG("3 - end pacote: %x\n", &myPacket);
+    for(i = 0; i<20; i++){
+        myPacket[i] = i*10;
+    }
+    myPacket[0] = 0x11; // HEADER
+    myPacket[1] = 18; // SIZE
+    myPacket[2] = clock(); // SENDTIME
+    myPacket[3] = 0x20; // MSG_DELIVERY
+    myPacket[4] = 0; // PINGPONG
+    // send /////////////
+    //LOG("0 - end pacote: %x\n", &myPacket);
     *NIaddr = (unsigned int)&myPacket;
-    *NIstatus = 0x3333; // config pra RX
-    while(*NIstatus != 0x1111){}
-
-    auxiliar[4] = myPacket[4];
-    ////////////////////
+    *NIstatus = 0x2222; // config pra TX
+    while(*NIstatus!=0x1111){}
+    /////////////////////
+    
     for(i = 0; i<100; i++){
+        while(intr0!=1){}
         ////////////////////
         // Printa
-        LOG("3 - pong %d\n",auxiliar[4]);
+        LOG("0 - ping %d\n",auxiliar[4]);
         //
-        myPacket[0] = 0x00;
-        myPacket[3] = 0x55;
+        myPacket[0] = 0x11;
         myPacket[4] = auxiliar[4] + 1;
+        myPacket[3] = 0x55;
         packetConsumed2();
         // send /////////////
         *NIaddr = (unsigned int)&myPacket;
         *NIstatus = 0x2222; // config pra TX
-        while(intr0!=1){} // aguarda até o pacote chegar por interrupcao
     }
-
-    for(i=0;i<auxiliar[1]+2;i++){
-        LOG("%d - %d\n",i, auxiliar[i]);
-    }
-    /////////////////////
+    
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
 
-    LOG("Application ROUTER3 done!\n\n");
+    LOG("Application ROUTER0 done!\n\n");
     return 1;
 }

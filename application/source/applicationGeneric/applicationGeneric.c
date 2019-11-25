@@ -7,39 +7,39 @@
 #include "../peripheral/whnoc/noc.h"
 #include "api.h"
 
+unsigned int servicePacket[PACKET_MAX_SIZE];
+
 packet txPacket;
 int main(int argc, char **argv)
 {
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
     //////////////////////////////////////////////////////
-    volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
-    volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
-    volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
-    volatile unsigned int *NIaddr = NI_BASE + 0x0;
-    volatile unsigned int *NIstatus = NI_BASE + 0x1;
-
     LOG("Starting ROUTER0 application! \n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler, NULL);
+    int_add(0, (void *)interruptHandler2, NULL);
     int_enable(0);
-
+    intr0 = 0;
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
     MTSPR(17, spr);
 
-    int start = 0;
+    // Inform the local address to the router
     *myAddress = 0x00;
 
+    // Inform the NI an address to store the service packet 
+    *NIaddr = (unsigned int)&servicePacket;
+
+    // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
-    while(start != 1){
-	    start = *SyncToPE >> 24;
+    int init_start = 0;
+    while(init_start != 1){
+	    init_start = *SyncToPE >> 24;
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
-
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
@@ -52,6 +52,6 @@ int main(int argc, char **argv)
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
 
-    LOG("Application ROUTER0 done!\n\n");
+    LOG("Application ROUTER0 done!\n");
     return 1;
 }
