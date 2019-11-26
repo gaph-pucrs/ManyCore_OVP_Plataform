@@ -32,7 +32,9 @@ unsigned int myStatus = GO;             // the availability to receive something
 unsigned int auxAddress;                // Auxiliar address to store temporarily the address incomming address from the processor
 
 // RX Variables
-unsigned int addressStart = 0xFFFFFFFF;
+unsigned int address1 = 0xFFFFFFFF;
+unsigned int address2 = 0xFFFFFFFF;
+unsigned int addrSel = 1;
 unsigned int receivingAddress = 0;
 unsigned int receivingField = HEADER;   // Control variable to identify which packet field is the next to be read
 unsigned int receivingCount;            // Counts the amount of remaining flits to be received
@@ -83,7 +85,6 @@ void setSTALL(){
 }
 
 void statusUpdate(unsigned int status){
-    //bhmMessage("I", "statusUpdate", "Atualizando status para: %x",status);
     internalStatus = status;
     DMAC_ab8_data.status.value = htonl(status);
 }
@@ -93,22 +94,16 @@ void informIteration(){
     ppmPacketnetWrite(handles.controlPort, &iterate, sizeof(iterate));
 }
 
+
 void writeMem(unsigned int flit){
     usFlit = flit;
     usi2vec();
-    ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
-    if(!h) {
-        bhmMessage("I", "NI_ITERATOR", "ERROR_WRITE h handling!");
-        while(1){} // error handling
-    }
     ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
-    ppmCloseAddressSpace(h);
     // Increments the pointer, to write the next flit
     receivingAddress = receivingAddress+4;
 }
 
 unsigned int readMem(unsigned int flit, unsigned int addr){
-    //TODO encapsular o envio nesta funcao
     return 0;
 }
 
@@ -117,7 +112,7 @@ void niIteration(){
         //flit = memory(transmittingAddress);
         ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
         if(!h) {
-            bhmMessage("I", "NI_ITERATOR", "ERROR_READ h handling!");
+            bhmMessage("I", "NI_ITERATOR", "ERROR h handling!");
             while(1){} // error handling
         }
         ppmReadAddressSpace(h, transmittingAddress, sizeof(chFlit), chFlit);
@@ -145,8 +140,17 @@ void niIteration(){
     }
 }
 
-void resetAddress(){
-    receivingAddress = addressStart;
+void rotateAddress(){
+    if(addrSel == 1){
+        bhmMessage("I", "rotateAddr", "Address2 selected\n");
+        receivingAddress = address2;
+        addrSel = 2;
+    }
+    else{
+        bhmMessage("I", "rotateAddr", "Address1 selected\n");
+        receivingAddress = address1;
+        addrSel = 1;
+    }
 }
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// Callback stubs ////////////////////////////////
@@ -158,14 +162,18 @@ PPM_REG_READ_CB(addressRead) {
 
 PPM_REG_WRITE_CB(addressWrite) {
     // In the beggining of everything the PE will write two addresses in the NI. They will be used to write the incomming packets
-    if(addressStart == 0xFFFFFFFF){
-        addressStart = htonl(data);
-        statusUpdate(IDLE);
-        bhmMessage("I", "addressWrite", "addressStart received\n");
+    if(address1 == 0xFFFFFFFF){
+        address1 = htonl(data);
+        bhmMessage("I", "addressWrite", "Address1 received\n");
+    }
+    else if(address2 == 0xFFFFFFFF){
+        address2 = htonl(data);
+        bhmMessage("I", "addressWrite", "Address2 received\n");
+        rotateAddress();
     }
     else{
         auxAddress = htonl(data);
-        setSTALL(); // changing to TX state
+        setSTALL();
     }
     *(Uns32*)user = data;
 }
@@ -183,36 +191,149 @@ PPM_PACKETNET_CB(controlPortUpd) {
 // Receiving a flit from the router...
 PPM_PACKETNET_CB(dataPortUpd) {
     unsigned int flit = *((unsigned int*)data);
+    int i;
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(internalStatus == IDLE){
         statusUpdate(RX);
-        resetAddress();
+        receivingField = HEADER;
+        receivingCount = 0xFF; // qqrcoisa
+        setGO();
+    }
+    else if(internalStatus == IDLE_II){
+        statusUpdate(RX_II);
         receivingField = HEADER;
         receivingCount = 0xFF; // qqrcoisa
         setGO();
     }
     // Receiving process
-    if(internalStatus == RX){
+    if(internalStatus == RX || internalStatus == RX_II){
         if(receivingField == HEADER){
             receivingField = SIZE;
-            writeMem(flit);
+            writeMem(flit, addrSel);
         }
         else if(receivingField == SIZE){
             receivingField = PAYLOAD;
             receivingCount = htonl(flit);
-            writeMem(flit);
+            writeMem(flit, addrSel);
         }
         else{
             receivingCount = receivingCount - 1;
-            writeMem(flit);
+            writeMem(flit, addrSel);
         }
     }
     // Detects the receiving finale
     if(receivingCount == EMPTY){
-        setSTALL();
+        if(internalStatus == RX_II){
+            statusUpdate(WAIT_PE);
+            setSTALL();
+        }
+        else if(internalStatus == RX){
+            statusUpdate(IDLE);
+            setGO();
+        }
+        rotateAddress();
         ppmWriteNet(handles.INTTC, 1);
     }
 }
+    /*
+    if(internalStatus == IDLE){
+        statusUpdate(RX); // sm2
+        receivingAddress = serviceAddress;
+        receivingField = HEADER;
+        receivingCount = 0xFF; // qqr coisa
+        serviceReceiving = FROM_IDLE;
+        setGO();
+    }
+    // Proceed to the regular receiving routine
+    if(internalStatus == RX){
+        if(receivingField == HEADER){
+            receivingField = SIZE;
+            receivingBuffer[0] = flit;
+        }
+        else if(receivingField == SIZE){
+            receivingField = SENDTIME;
+            receivingCount = htonl(flit);
+            receivingBuffer[1] = flit;
+        }
+        else if(receivingField == SENDTIME){
+            receivingField = SERVICE;
+            receivingCount = receivingCount - 1;
+            receivingBuffer[2] = flit;
+        }
+        else if(receivingField == SERVICE){
+            receivingField = PAYLOAD;
+            receivingCount = receivingCount - 1;
+            receivingBuffer[3] = flit;
+            if(htonl(flit) == MSG_DELIVERY){
+                ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
+                if(!h) {
+                    bhmMessage("I", "NI_ITERATOR", "ERROR h handling!");
+                    while(1){} // error handling
+                }
+                for(i=0;i<4;i++){
+                    usFlit = receivingBuffer[i];
+                    usi2vec();
+                    ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
+                    // Increments the pointer, to write the next flit
+                    receivingAddress = receivingAddress + 4;
+                }
+                ppmCloseAddressSpace(h);
+            }
+            else{
+                receivingAddressCopy = receivingAddress; // to restore the receiving address latter
+                receivingAddress = serviceAddress; // 
+                if(serviceReceiving == FALSE) serviceReceiving = FROM_RX;
+                setGO();
+                ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
+                for(i=0;i<4;i++){
+                    usFlit = receivingBuffer[i];
+                    usi2vec();
+                    ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
+                    // Increments the pointer, to write the next flit
+                    receivingAddress = receivingAddress + 4;
+                }
+                ppmCloseAddressSpace(h);
+            }
+        }
+        // Receiving the packet payload
+        else{
+            receivingCount = receivingCount - 1;
+            ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
+            if(!h) {
+                bhmMessage("I", "NI_ITERATOR", "ERROR h handling!");
+                while(1){} // error handling
+            }
+            usFlit = flit;
+            usi2vec();
+            ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
+            // Increments the pointer, to write the next flit
+            receivingAddress = receivingAddress + 4;
+            ppmCloseAddressSpace(h);
+        }
+        if(receivingCount == EMPTY){
+            if(serviceReceiving == FROM_IDLE){
+                statusUpdate(IDLE); // sm4
+                serviceReceiving = FALSE;
+                ppmWriteNet(handles.INTTC, 1);
+                setSTALL();
+            }
+            else if(serviceReceiving == FROM_RX){
+                statusUpdate(RX); // stay in the RX state to receive the message
+                receivingCount = 0xFF; //qqrcoisa
+                receivingAddress = receivingAddressCopy; // restore the address will be used to store the new packet
+                receivingField = HEADER; // Restore the receiving state to 
+                serviceReceiving = FALSE;
+                ppmWriteNet(handles.INTTC, 1);
+                setGO();
+            }
+            else{
+                statusUpdate(IDLE); // sm4
+                serviceReceiving = FALSE;
+                setGO();
+            }          
+        }
+    }
+}*/
 
 PPM_REG_READ_CB(statusRead) {
     informIteration();  // When the processor is reading the NI status, we have one of two situations: 
@@ -227,10 +348,9 @@ PPM_REG_WRITE_CB(statusWrite) {
     if(command == TX){
         if(internalStatus == IDLE){
             statusUpdate(TX);
-            setSTALL();
         }
-        else{
-            bhmMessage("I", "statusWrite", "ERROR_TX: UNEXPECTED STATE REACHED"); while(1){}
+        else if(internalStatus == IDLE_II){
+            statusUpdate(TX_II);
         }
         transmittingAddress = auxAddress;
         transmittingCount = HEADER;
@@ -239,25 +359,25 @@ PPM_REG_WRITE_CB(statusWrite) {
         niIteration();
     }
     else if(command == READING){
-        bhmMessage("I", "statusWrite", "RECEBI UM READING- status: %x\n",internalStatus);
-        if(internalStatus == RX){
-            statusUpdate(WAIT_PE);
-            setSTALL();
-        }
-        else{
-            bhmMessage("I", "statusWrite", "ERROR_READING: UNEXPECTED STATE REACHED"); while(1){}
-        }
         // Turn the interruption signal down
         ppmWriteNet(handles.INTTC, 0);
     }
     else if(command == DONE){
-        //bhmMessage("I", "statusWrite", "RECEBI UM DONE");
-        if(internalStatus == WAIT_PE){
+        if(internalStatus == IDLE_II){
             statusUpdate(IDLE);
+        }
+        if(internalStatus == TX_II){
+            statusUpdate(TX);
+        }
+        else if(internalStatus == RX_II){
+            statusUpdate(RX);
+        }
+        else if(internalStatus == WAIT_PE){
+            statusUpdate(IDLE_II);
             setGO();
         }
         else{
-            bhmMessage("I", "statusWrite", "ERROR_DONE: UNEXPECTED STATE REACHED"); while(1){}
+            bhmMessage("I", "Command", "ERROR: UNEXPECTED STATE REACHED\n");
         }
     }
     *(Uns32*)user = data;

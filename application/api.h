@@ -1,6 +1,8 @@
 #include <time.h>
 #include "../peripheral/whnoc/noc.h"
 
+typedef unsigned int  Uns32;
+typedef unsigned char Uns8;
 #define ROUTER_BASE ((unsigned int *) 0x80000000)
 #define SYNC_BASE   ((unsigned int *) 0x80000014)
 #define NI_BASE     ((unsigned int *) 0x80000004)
@@ -26,15 +28,22 @@ volatile unsigned int *NIcmd = NI_BASE + 0x0;
 #define MESSAGE_MAX_SIZE    256
 #define PACKET_MAX_SIZE     MESSAGE_MAX_SIZE+4+3 // +3(destination, size, sendtime, service)+3(hopes,in_iteration,out_iteration) 
 // Packet indexes
-#define DESTINATION     0
-#define SIZE            1
-#define SEND_TIME       2
-#define SERVICE         3
-#define REQUESTER       4
+#define PI_DESTINATION     0
+#define PI_SIZE            1
+#define PI_SEND_TIME       2
+#define PI_SERVICE         3
+#define PI_REQUESTER       4
 // Packet information
-#define HOPES           3
-#define IN_ITERATION    2   
-#define OUT_ITERATION   1
+#define PI_HOPES           3
+#define PI_IN_ITERATION    2   
+#define PI_OUT_ITERATION   1
+// NI stuff
+#define IDLE               0x1111
+#define TX                 0x2222
+#define RX                 0x3333
+#define WAIT_PE            0x4444
+#define DONE               0x5555
+#define READING            0x6666
 
 // Message type
 typedef struct Message {
@@ -43,23 +52,22 @@ typedef struct Message {
 }message;
 
 // API Packets
-unsigned int incomingPacket[2][PACKET_MAX_SIZE];
-unsigned int nextReceive;
-unsigned int myServicePacket[PACKET_MAX_SIZE];
-unsigned int receivingActive;
+volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
+volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
+volatile unsigned int receivingActive;
 
 // Message buffer
 unsigned int buffer_packets[PACKET_BUFF_SIZE][PACKET_MAX_SIZE];
 unsigned int buffer_map[PACKET_BUFF_SIZE];
 unsigned int buffer_history[PACKET_BUFF_SIZE];
-unsigned int pendingReq[N_PES];
+volatile unsigned int pendingReq[N_PES];
 
 // Time variables
 time_t tinicio, tsend, tfim, tignore;
 
 // Functions
 unsigned int bufferHasSpace();
-void SendMessage(unsigned int *message, int size, unsigned int destination);
+void SendMessage(message *theMessage, unsigned int destination);
 void SendRaw(unsigned int addr);
 unsigned int checkPendingReq(unsigned int destID);
 unsigned int getEmptyIndex();
@@ -67,27 +75,25 @@ void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
 void requestMsg(unsigned int from);
-void ReceiveMessage(unsigned int from, message *theMessage);
+void ReceiveMessage(message *theMessage, unsigned int from);
 unsigned int sendFromMsgBuffer(unsigned int requester);
 
-
+///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 // Functions implementation ///////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-
 ///////////////////////////////////////////////////////////////////
 // Verify if a message for a given requester is inside the buffer, if yes send it and return 1 else returns 0.
 unsigned int sendFromMsgBuffer(unsigned int requester){
     int i;
     for(i=0;i<PACKET_BUFF_SIZE;i++){
         if(buffer_map[i]==OCCUPIED){ // if this position has something valid
-            if(buffer_packets[i][DESTINATION] == requester){ // and the destination is the same as the requester
+            if(buffer_packets[i][PI_DESTINATION] == requester){ // and the destination is the same as the requester
                 // Sends the packet
-                SendRaw((unsigned int)&buffer_packets[index]); 
+                SendRaw((unsigned int)&buffer_packets[i]); 
                 // Releses the buffer position
-                bufferPop(index);
+                bufferPop(i);
                 return 1; // sent with success
             }
         }
@@ -97,36 +103,37 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
 
 ///////////////////////////////////////////////////////////////////
 // Receives a message and alocates it in the application structure
-void ReceiveMessage(unsigned int from, message *theMessage){
-    unsigned int auxPacket[PACKET_MAX_SIZE];
+void ReceiveMessage(message *theMessage, unsigned int from){
+    //unsigned int auxPacket[PACKET_MAX_SIZE];
     unsigned int i;
     // Sends the request to the transmitter
     requestMsg(from);
-    /*while(*NIcmd!=IDLE){}// waits until the NI is ready to start receving process 
-    // Informs the NI the address where the packet must be stored
-    //*NIaddr = (unsigned int)&auxPacket;
-    // Commands the NI to receive a packet
-    *NIcmd = RX;*/
     receivingActive = 0;
     while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     // Alocate the packet message inside the structure
-    theMessage.size = incomingPacket[receivingActive-1][SIZE];
-    for(i=0;i<theMessage.size;i++){
-        theMessage.msg[i] = incomingPacket1[receivingActive-1][i+4];
+    theMessage->size = incomingPacket[PI_SIZE];
+    for(i=0;i<theMessage->size;i++){
+        theMessage->msg[i] = incomingPacket[i+4];
     }
     receivingActive = 0;
+    // Inform the NI a packet was read
+    *NIcmd = DONE;
 }
 
 ///////////////////////////////////////////////////////////////////
 // Creates the request message and send it to the transmitter
 void requestMsg(unsigned int from){
-    myServicePacket[DESTINATION] = from;
-    myServicePacket[SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hopes,inIteration,outIteration)
+    int i;
+    myServicePacket[PI_DESTINATION] = from;
+    myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hopes,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
-    myServicePacket[IN_TIME] = tsend;
-    myServicePacket[SERVICE] = MESSAGE_REQ;
-    myServicePacket[REQUESTER] = *myAddress; 
+    myServicePacket[PI_SEND_TIME] = tsend;
+    myServicePacket[PI_SERVICE] = MESSAGE_REQ;
+    myServicePacket[PI_REQUESTER] = *myAddress;
+    /*for(i=0;i<myServicePacket[PI_SIZE]+2;i++){
+        LOG("--%d- %x\n",getID(*myAddress),myServicePacket[i]);
+    }*/
     SendRaw((unsigned int)&myServicePacket);
 }
 
@@ -137,21 +144,24 @@ void SendMessage(message *theMessage, unsigned int destination){
     do{index = getEmptyIndex();/*stay bloqued here while the message buffer is full*/}while(index==WAIT);
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
-    buffer_packets[index][DESTINATION] = destination;
-    buffer_packets[index][SIZE] = theMessage.size + 2 + 3; // +2 (sendTime,service) +3 (hopes,inIteration,outIteration)
+    buffer_packets[index][PI_DESTINATION] = destination;
+    buffer_packets[index][PI_SIZE] = theMessage->size + 2 + 3; // +2 (sendTime,service) +3 (hopes,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
-    buffer_packets[index][IN_TIME] = tsend;
-    buffer_packets[index][SERVICE] = MESSAGE_DELIVERY;
+    buffer_packets[index][PI_SEND_TIME] = tsend;
+    buffer_packets[index][PI_SERVICE] = MESSAGE_DELIVERY;
     int a;
-    for(a=0;a<size;a++){
-        buffer_packets[index][a+4] = theMessage.msg[a];
+    for(a=0;a<theMessage->size;a++){
+        buffer_packets[index][a+4] = theMessage->msg[a];
     }
     //////////////////////////////////////////
     // Change the selected buffer position to occupied
     bufferPush(index);
+    LOG("ADICIONADO NO INDEX: %d\n",index);
+    //LOG("---> %x Verificando no pendingRequest %d - value: %d\n",*myAddress,getID(destination),pendingReq[getID(destination)]);
     // Once the packet is ready, check if the request has arrived
     if(checkPendingReq(getID(destination))){
+        LOG("PENDING REQUEST ENCONTRADO!\n");
         // Sends the packet
         SendRaw((unsigned int)&buffer_packets[index]);
         // Releses the buffer
@@ -162,31 +172,33 @@ void SendMessage(message *theMessage, unsigned int destination){
 }
 
 ///////////////////////////////////////////////////////////////////
-//
+// Interruption function
 void interruptHandler(void) {
     int requester;
-    if(incomingPacket[nextReceive-1][SERVICE] == MESSAGE_DELIVERY){
-        receivingActive = nextReceive; // Inform the index where the received packet is stored
+    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
+        LOG("Chegou um pacote de entrega de mensagem!\n");
+        receivingActive = 1; // Inform the index where the received packet is stored
+        //LOG("\nChegou um pacote de entrega de mensagem! %d\n",receivingActive);
+        *NIcmd = READING; // turn down the interruption
     }
-    else if(incomingPacket[nextReceive-1][SERVICE] == MESSAGE_REQ){
-        requester = incomingPacket[nextReceive-1][REQUESTER];
+    else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
+        LOG("Chegou um pacote de requisicao de mensagem!\n");
+        requester = incomingPacket[PI_REQUESTER];
+        *NIcmd = READING; // turn down the interruption
+        //LOG("DEPOIS DO READING: %x\n",*NIcmd);
+        *NIcmd = DONE; // releases the NI to return to the IDLE state
+        //LOG("DEPOIS DO DONE: %x\n",*NIcmd);
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             pendingReq[getID(requester)] = MESSAGE_REQ;
+            LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
         }
     }
-
-    // Rotate the next receive pointer
-    if(nextReceive == 1) nextReceive = 2;
-    else nextReceive = 1;
-
-    // Informs the NI to turn the interruption down
-    *NIcmd = DONE;
 }
 
 ///////////////////////////////////////////////////////////////////
 // Check if there is any requested message for a given destination ID 
 unsigned int checkPendingReq(unsigned int destID){
-    if(pendingReq(destID)==MESSAGE_REQ) return 1; //it has a pending request
+    if(pendingReq[destID]==MESSAGE_REQ) return 1; //it has a pending request
     else return 0;
 }
 
@@ -195,9 +207,11 @@ unsigned int checkPendingReq(unsigned int destID){
 unsigned int getEmptyIndex(){
     int i;
     int tempIdx = WAIT;
+    int tempHist = WAIT;
     for(i=0;i<PACKET_BUFF_SIZE;i++){
-        if(buffer_map[i] == FREE && buffer_history[i]<=buffer_history[tempIdx]){
+        if(buffer_map[i] == FREE && buffer_history[i]<=tempHist){
             tempIdx = i;
+            tempHist = buffer_history[i];
         }
     }
     return tempIdx;
@@ -212,7 +226,7 @@ void bufferPush(unsigned int index){
 ///////////////////////////////////////////////////////////////////
 // Releases a buffer position and increases the history
 void bufferPop(unsigned int index){
-    buffer_history++; // Increase the history
+    buffer_history[index]++; // Increase the history
     buffer_map[index] = FREE;
 }
 
@@ -227,7 +241,7 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 // Configure the NI to transmitt a given packet
 void SendRaw(unsigned int addr){
-    while(*NIcmd!=IDLE){/*waits until NI is ready to execute an operation*/}
+    while(*NIcmd!=IDLE && *NIcmd!=DONE){ /*LOG("eu: %x status:%x\n",*myAddress,*NIcmd);/*waits until NI is ready to execute an operation*/}
     *NIaddr = addr;
     *NIcmd = TX;   
 }
