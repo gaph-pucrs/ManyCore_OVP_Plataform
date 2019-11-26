@@ -24,6 +24,11 @@ sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
 sed -i 's/#define DIM_Y.*/#define DIM_Y '$Y'/' noc.h
 sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
 cd ..
+cd whnoc_dma
+sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
+sed -i 's/#define DIM_Y.*/#define DIM_Y '$Y'/' noc.h
+sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
+cd ..
 
 cd iterator
 ./iteratorGenerator.sh $X $Y
