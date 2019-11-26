@@ -5,9 +5,6 @@
 #include "spr_defs.h"
 #include "api.h"
 
-unsigned int servicePacket[PACKET_MAX_SIZE];
-
-packet txPacket;
 int main(int argc, char **argv)
 {
     //////////////////////////////////////////////////////
@@ -16,9 +13,8 @@ int main(int argc, char **argv)
     LOG("Starting ROUTER0 application! \n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler2, NULL);
+    int_add(0, (void *)interruptHandler, NULL);
     int_enable(0);
-    intr0 = 0;
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
@@ -28,10 +24,8 @@ int main(int argc, char **argv)
     *myAddress = 0x00;
 
     // Inform the NI addresses to store the incomming packets
-    *NIaddr = (unsigned int)&incomingPacket[0];
-    *NIaddr = (unsigned int)&incomingPacket[1];
-    nextReceive = 1;
-
+    *NIaddr = (unsigned int)&incomingPacket;
+ 
     // Initiate the packets buffer map to free
     int o;
     for(o=0;o<PACKET_BUFF_SIZE;o++){

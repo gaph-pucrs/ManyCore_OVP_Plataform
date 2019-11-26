@@ -44,10 +44,15 @@
 //NI
 #define TRUE                1
 #define FALSE               0
+// states
 #define IDLE                0x1111
 #define TX                  0x2222
 #define RX                  0x3333
-#define DONE                0x4444
+#define WAIT_PE             0x4444
+
+#define DONE                0x5555
+#define READING             0x6666
+
 #define INFORM_ITERATION    0xFFFFFFFFFFFFFFFFULL
 #define FROM_IDLE           0x2525
 #define FROM_RX             0x3535

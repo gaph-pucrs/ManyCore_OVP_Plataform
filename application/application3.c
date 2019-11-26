@@ -1,103 +1,79 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <stdlib.h>
 #include "interrupt.h"
 #include "spr_defs.h"
-#include "../peripheral/whnoc/noc.h"
 #include "api.h"
-#include <time.h>
 
-#define ROUTER_BASE ((unsigned int *) 0x80000000)
-#define SYNC_BASE ((unsigned int *) 0x80000014)
-#define NI_BASE ((unsigned int *) 0x80000004)
-#define LOG(_FMT, ...)  printf( "Info " _FMT,  ## __VA_ARGS__)
-
-volatile unsigned int auxiliar[256];
-volatile unsigned int myPacket[256];
-
-void interruptHandler2(void){
-    volatile unsigned int *NIstatus = NI_BASE + 0x0;
-    //LOG("Hello there!");
-    intr0 = 1;
-    *NIstatus = 0x4444; // DONE// o correto seria desabilitar a interrupção e ligar d novo no packetConsumed()!!!!! - PERIGOSO
-}
-
-void packetConsumed2(){
-    intr0 = 0;
-    // dar o done aqui! e ativar a interrupção depois
-}
+message pongping;
 
 int main(int argc, char **argv)
-{
+{ 
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
     //////////////////////////////////////////////////////
-    volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
-    volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
-    volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
-    volatile unsigned int *NIaddr = NI_BASE + 0x1;
-    volatile unsigned int *NIstatus = NI_BASE + 0x0;
-
-    LOG("Starting ROUTER3 application! \n\n");
+    LOG("3-Starting ROUTER3 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler2, NULL);
+    int_add(0, (void *)interruptHandler, NULL);
     int_enable(0);
-    intr0 = 0;
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
     MTSPR(17, spr);
 
-    int start = 0;
+    // Inform the local address to the router
     *myAddress = 0x11;
 
+    // Inform the NI addresses to store the incomming packets
+    *NIaddr = (unsigned int)&incomingPacket; 
+
+    // Initiate the packets buffer map to free
+    int o;
+    for(o=0;o<PACKET_BUFF_SIZE;o++){
+        buffer_map[o] = FREE;
+    }
+
+    // Initiate the message request queue
+    for(o=0;o<N_PES;o++){
+        pendingReq[o] = 0; 
+    }
+
+    // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x11;
-    while(start != 1){
-	    start = *SyncToPE >> 24;
+    int init_start = 0;
+    while(init_start != 1){
+	    init_start = *SyncToPE >> 24;
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
-
     //////////////////////////////////////////////////////
-    /////////////// YOUR CODE START HERE ///////////////// 
+    /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
+    
     int i;
-    //LOG("3 - end auxiliar: %x\n", &auxiliar);
-    *NIaddr = (unsigned int)&auxiliar;
-
-    // receive /////////
-    //LOG("3 - end pacote: %x\n", &myPacket);
-    *NIaddr = (unsigned int)&myPacket;
-    *NIstatus = 0x3333; // config pra RX
-    while(*NIstatus != 0x1111){}
-
-    auxiliar[4] = myPacket[4];
-    ////////////////////
-    for(i = 0; i<100; i++){
-        ////////////////////
-        // Printa
-        LOG("3 - pong %d\n",auxiliar[4]);
-        //
-        myPacket[0] = 0x00;
-        myPacket[3] = 0x55;
-        myPacket[4] = auxiliar[4] + 1;
-        packetConsumed2();
-        // send /////////////
-        *NIaddr = (unsigned int)&myPacket;
-        *NIstatus = 0x2222; // config pra TX
-        while(intr0!=1){} // aguarda até o pacote chegar por interrupcao
+    LOG("3-RECEBENDO MENSAGEM\n");
+    ReceiveMessage(&pongping, 0x00);
+    LOG("3-MENSAGEM RECEBIDA\n");
+    for(i=0;i<100;i++){
+        LOG("3-PONG: %d\n",pongping.msg[0]);
+        pongping.msg[0] = pongping.msg[0] + 1;
+        LOG("3-ENVIANDO MENSAGEM\n");
+        SendMessage(&pongping, 0x00);
+        LOG("3-MENSAGEM ENVIADA\n");
+        LOG("3-RECEBENDO MENSAGEM");
+        ReceiveMessage(&pongping, 0x00);
+    }
+    LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
+    for(i=0;i<pongping.size;i++){
+        LOG("3-- %d",pongping.msg[i]);
     }
 
-    for(i=0;i<auxiliar[1]+2;i++){
-        LOG("%d - %d\n",i, auxiliar[i]);
-    }
-    /////////////////////
+
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
 
-    LOG("Application ROUTER3 done!\n\n");
+    LOG("3-Application ROUTER3 done!\n\n");
     return 1;
 }

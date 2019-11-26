@@ -1,59 +1,43 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <stdlib.h>
 #include "interrupt.h"
 #include "spr_defs.h"
-#include "../peripheral/whnoc/noc.h"
 #include "api.h"
-#include <time.h>
 
-#define ROUTER_BASE ((unsigned int *) 0x80000000)
-#define SYNC_BASE ((unsigned int *) 0x80000014)
-#define NI_BASE ((unsigned int *) 0x80000004)
-#define LOG(_FMT, ...)  printf( "Info " _FMT,  ## __VA_ARGS__)
-
-volatile unsigned int servicePacket[256];
-volatile unsigned int myPacket[256];
-
-void interruptHandler2(void){
-    volatile unsigned int *NIstatus = NI_BASE + 0x0;
-    //LOG("Hello there!");
-    intr0 = 1;
-    *NIstatus = 0x4444; // DONE// o correto seria desabilitar a interrupção e ligar d novo no packetConsumed()!!!!! - PERIGOSO
-}
-
-void packetConsumed2(){
-    intr0 = 0;
-}
+message pingpong;
 
 int main(int argc, char **argv)
 {
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
-    ////////////////////////////////////////////////////// 
-    volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
-    volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
-    volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
-    volatile unsigned int *NIaddr = NI_BASE + 0x1;
-    volatile unsigned int *NIstatus = NI_BASE + 0x0;
-
-    LOG("Starting ROUTER0 application! \n\n");
+    //////////////////////////////////////////////////////
+    LOG("0-Starting ROUTER0 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler2, NULL);
+    int_add(0, (void *)interruptHandler, NULL);
     int_enable(0);
-    intr0 = 0;
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
     MTSPR(17, spr);
 
-    // Inform the local address to the router
+    // Inform the local address to the router 
     *myAddress = 0x00;
 
-    // Inform the NI an address to store the service packet 
-    *NIaddr = (unsigned int)&servicePacket;
+    // Inform the NI addresses to store the incomming packets
+    *NIaddr = (unsigned int)&incomingPacket; 
+
+    // Initiate the packets buffer map to free
+    int o;
+    for(o=0;o<PACKET_BUFF_SIZE;o++){
+        buffer_map[o] = FREE;
+    }
+
+    // Initiate the message request queue
+    for(o=0;o<N_PES;o++){
+        pendingReq[o] = 0; 
+    }
 
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
@@ -66,44 +50,33 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
+    
     int i;
-    //LOG("0 - end auxiliar: %x\n", &auxiliar);
-    
-
-    for(i = 0; i<20; i++){
-        myPacket[i] = i*10;
+    pingpong.size = 10;
+    for(i=0;i<10;i++){
+        pingpong.msg[i] = i;
     }
-    myPacket[0] = 0x11; // HEADER
-    myPacket[1] = 18; // SIZE
-    myPacket[2] = clock(); // SENDTIME
-    myPacket[3] = 0x20; // MSG_DELIVERY
-    myPacket[4] = 0; // PINGPONG
-    // send /////////////
-    //LOG("0 - end pacote: %x\n", &myPacket);
-    *NIaddr = (unsigned int)&myPacket;
-    *NIstatus = 0x2222; // config pra TX
-    while(*NIstatus!=0x1111){}
-    /////////////////////
-    
-    for(i = 0; i<100; i++){
-        while(intr0!=1){}
-        ////////////////////
-        // Printa
-        LOG("0 - ping %d\n",servicePacket[4]);
-        //
-        myPacket[0] = 0x11;
-        myPacket[4] = servicePacket[4] + 1;
-        myPacket[3] = 0x55;
-        packetConsumed2();
-        // send /////////////
-        *NIaddr = (unsigned int)&myPacket;
-        *NIstatus = 0x2222; // config pra TX
+    LOG("0-ENVIANDO MENSAGEM\n");
+    SendMessage(&pingpong, 0x11);
+    LOG("0-MENSAGEM ENVIADA\n");
+    for(i=0;i<100;i++){
+        LOG("0-RECEBENDO MENSAGEM\n");
+        ReceiveMessage(&pingpong, 0x11);
+        LOG("0-MENSAGEM RECEBIDA\n");
+        LOG("0-PING: %d\n",pingpong.msg[0]);
+        pingpong.msg[0] = pingpong.msg[0] + 1;
+        LOG("0-ENVIANDO MENSAGEM\n");
+        SendMessage(&pingpong, 0x11);
+    }
+    LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");
+    for(i=0;i<pingpong.size;i++){
+        LOG("0-- %d",pingpong.msg[i]);
     }
     
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
 
-    LOG("Application ROUTER0 done!\n\n");
+    LOG("0-Application ROUTER0 done!\n\n");
     return 1;
 }
