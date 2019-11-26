@@ -56,16 +56,16 @@ int main(int argc, char **argv)
     for(i=0;i<10;i++){
         pingpong.msg[i] = i;
     }
-    LOG("0-ENVIANDO MENSAGEM\n");
+    //LOG("0-ENVIANDO MENSAGEM\n");
     SendMessage(&pingpong, 0x11);
-    LOG("0-MENSAGEM ENVIADA\n");
+    //LOG("0-MENSAGEM ENVIADA\n");
     for(i=0;i<100;i++){
-        LOG("0-RECEBENDO MENSAGEM\n");
+        //LOG("0-RECEBENDO MENSAGEM\n");
         ReceiveMessage(&pingpong, 0x11);
-        LOG("0-MENSAGEM RECEBIDA\n");
+        //LOG("0-MENSAGEM RECEBIDA\n");
         LOG("0-PING: %d\n",pingpong.msg[0]);
         pingpong.msg[0] = pingpong.msg[0] + 1;
-        LOG("0-ENVIANDO MENSAGEM\n");
+        //LOG("0-ENVIANDO MENSAGEM\n");
         SendMessage(&pingpong, 0x11);
     }
     LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");

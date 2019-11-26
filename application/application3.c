@@ -52,19 +52,19 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     
     int i;
-    LOG("3-RECEBENDO MENSAGEM\n");
+    //LOG("3-RECEBENDO MENSAGEM\n");
     ReceiveMessage(&pongping, 0x00);
-    LOG("3-MENSAGEM RECEBIDA\n");
+    //LOG("3-MENSAGEM RECEBIDA\n");
     for(i=0;i<100;i++){
         LOG("3-PONG: %d\n",pongping.msg[0]);
         pongping.msg[0] = pongping.msg[0] + 1;
-        LOG("3-ENVIANDO MENSAGEM\n");
+        //LOG("3-ENVIANDO MENSAGEM\n");
         SendMessage(&pongping, 0x00);
-        LOG("3-MENSAGEM ENVIADA\n");
-        LOG("3-RECEBENDO MENSAGEM");
+        //LOG("3-MENSAGEM ENVIADA\n");
+        //LOG("3-RECEBENDO MENSAGEM");
         ReceiveMessage(&pongping, 0x00);
     }
-    LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
+    //LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
     for(i=0;i<pongping.size;i++){
         LOG("3-- %d",pongping.msg[i]);
     }

@@ -161,7 +161,7 @@ PPM_REG_WRITE_CB(addressWrite) {
     if(addressStart == 0xFFFFFFFF){
         addressStart = htonl(data);
         statusUpdate(IDLE);
-        bhmMessage("I", "addressWrite", "addressStart received\n");
+        //bhmMessage("I", "addressWrite", "addressStart received\n");
     }
     else{
         auxAddress = htonl(data);
@@ -225,6 +225,7 @@ PPM_REG_READ_CB(statusRead) {
 PPM_REG_WRITE_CB(statusWrite) {
     unsigned int command = htonl(data);
     if(command == TX){
+        //bhmMessage("I", "statusWrite", "RECEBI UM TX- status: %x\n",internalStatus);
         if(internalStatus == IDLE){
             statusUpdate(TX);
             setSTALL();
@@ -239,7 +240,7 @@ PPM_REG_WRITE_CB(statusWrite) {
         niIteration();
     }
     else if(command == READING){
-        bhmMessage("I", "statusWrite", "RECEBI UM READING- status: %x\n",internalStatus);
+        //bhmMessage("I", "statusWrite", "RECEBI UM READING- status: %x\n",internalStatus);
         if(internalStatus == RX){
             statusUpdate(WAIT_PE);
             setSTALL();

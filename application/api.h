@@ -157,11 +157,11 @@ void SendMessage(message *theMessage, unsigned int destination){
     //////////////////////////////////////////
     // Change the selected buffer position to occupied
     bufferPush(index);
-    LOG("ADICIONADO NO INDEX: %d\n",index);
+    //LOG("ADICIONADO NO INDEX: %d\n",index);
     //LOG("---> %x Verificando no pendingRequest %d - value: %d\n",*myAddress,getID(destination),pendingReq[getID(destination)]);
     // Once the packet is ready, check if the request has arrived
     if(checkPendingReq(getID(destination))){
-        LOG("PENDING REQUEST ENCONTRADO!\n");
+        //LOG("PENDING REQUEST ENCONTRADO!\n");
         // Sends the packet
         SendRaw((unsigned int)&buffer_packets[index]);
         // Releses the buffer
@@ -176,13 +176,13 @@ void SendMessage(message *theMessage, unsigned int destination){
 void interruptHandler(void) {
     int requester;
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
-        LOG("Chegou um pacote de entrega de mensagem!\n");
+        //LOG("%x - Chegou um pacote de entrega de mensagem!\n",*myAddress);
         receivingActive = 1; // Inform the index where the received packet is stored
         //LOG("\nChegou um pacote de entrega de mensagem! %d\n",receivingActive);
         *NIcmd = READING; // turn down the interruption
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        LOG("Chegou um pacote de requisicao de mensagem!\n");
+        //LOG("%x - Chegou um pacote de requisicao de mensagem!\n",*myAddress);
         requester = incomingPacket[PI_REQUESTER];
         *NIcmd = READING; // turn down the interruption
         //LOG("DEPOIS DO READING: %x\n",*NIcmd);
@@ -190,7 +190,7 @@ void interruptHandler(void) {
         //LOG("DEPOIS DO DONE: %x\n",*NIcmd);
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             pendingReq[getID(requester)] = MESSAGE_REQ;
-            LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
+            //LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
         }
     }
 }
