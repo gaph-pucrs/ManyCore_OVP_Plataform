@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <stdlib.h>
 #include "interrupt.h"
 #include "spr_defs.h"
-#include "../peripheral/whnoc/noc.h"
 #include "api.h"
 
 unsigned int servicePacket[PACKET_MAX_SIZE];
@@ -29,8 +27,21 @@ int main(int argc, char **argv)
     // Inform the local address to the router
     *myAddress = 0x00;
 
-    // Inform the NI an address to store the service packet 
-    *NIaddr = (unsigned int)&servicePacket;
+    // Inform the NI addresses to store the incomming packets
+    *NIaddr = (unsigned int)&incomingPacket[0];
+    *NIaddr = (unsigned int)&incomingPacket[1];
+    nextReceive = 1;
+
+    // Initiate the packets buffer map to free
+    int o;
+    for(o=0;o<PACKET_BUFF_SIZE;o++){
+        buffer_map[o] = FREE;
+    }
+
+    // Initiate the message request queue
+    for(o=0;o<N_PES;o++){
+        pendingReq[o] = 0; 
+    }
 
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;

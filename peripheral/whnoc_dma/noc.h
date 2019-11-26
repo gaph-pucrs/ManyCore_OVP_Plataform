@@ -28,14 +28,10 @@
 #define IN_TIME     0x00000001
 #define OUT_TIME    0x00000000
 
-//Services
-#define MSG_DELIVERY    0x20
-#define MSG_REQ         0x30
-
 // NoC Dimensions
 #define DIM_X 2
 #define DIM_Y 2
-#define N_PES 64
+#define N_PES 4
 
 //Ticks
 #define ITERATION                0x5555
