@@ -2,16 +2,19 @@
 
 X=$1
 Y=$2
+APP_NAME=$3
 N=$(($X*$Y))
-
 
 #source /soft64/source_gaph
 # module load ovp/20170201
 # source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
 # setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
+cd simulation
+rm -f flitsFlow.csv
+cd ..
 
 cd application
-./applicationGenerator.sh $X $Y
+./applicationGenerator.sh $X $Y $APP_NAME
 cd ..
 
 cd module
