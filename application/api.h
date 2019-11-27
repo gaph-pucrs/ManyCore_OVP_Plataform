@@ -132,9 +132,6 @@ void requestMsg(unsigned int from){
     myServicePacket[PI_SEND_TIME] = tsend;
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[PI_REQUESTER] = *myAddress;
-    /*for(i=0;i<myServicePacket[PI_SIZE]+2;i++){
-        LOG("--%d- %x\n",getID(*myAddress),myServicePacket[i]);
-    }*/
     SendRaw((unsigned int)&myServicePacket);
 }
 

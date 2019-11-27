@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     //LOG("0-ENVIANDO MENSAGEM\n");
     SendMessage(&pingpong, 0x11);
     //LOG("0-MENSAGEM ENVIADA\n");
-    for(i=0;i<100;i++){
+    for(i=0;i<50;i++){
         //LOG("0-RECEBENDO MENSAGEM\n");
         ReceiveMessage(&pingpong, 0x11);
         //LOG("0-MENSAGEM RECEBIDA\n");
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
     }
     LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");
     for(i=0;i<pingpong.size;i++){
-        LOG("0-- %d",pingpong.msg[i]);
+        LOG("0-- %d\n",pingpong.msg[i]);
     }
     
     //////////////////////////////////////////////////////

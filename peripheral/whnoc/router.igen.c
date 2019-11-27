@@ -163,13 +163,12 @@ int main(int argc, char *argv[]) {
       //  if(i<145){
             bhmWaitDelay(QUANTUM_DELAY);
             if(myID==0){
-     
-                fp = fopen ("dataTranspose2.csv","a");
+                fp = fopen ("simulation/flitFlow.csv","a");
                 fprintf(fp,"Quantum %d\n",i);
                 fprintf(fp,"Routers ; LOCAL ; EAST ; WEST ; NORTH ; SOUTH \n");
                 fclose(fp);       
             }  
-           fp = fopen ("dataTranspose2.csv","a");
+            fp = fopen ("simulation/flitFlow.csv","a");
    
             fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
   
@@ -177,11 +176,9 @@ int main(int argc, char *argv[]) {
             contFlits[LOCAL] = 0;
             contFlits[WEST] = 0;
             contFlits[EAST] = 0;
-            contFlits[NORTH] = 0;
+            contFlits[NORTH] = 0;"dataTranspose2.csv","a"
             contFlits[SOUTH] = 0;
-    
             i++;
-
        // }
     }
     
