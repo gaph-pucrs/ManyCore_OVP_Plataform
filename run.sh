@@ -85,5 +85,12 @@ done
         #echo "     --verbose " >> ovp_compiler.sh
 
 chmod +x ovp_compiler.sh
-
 ./ovp_compiler.sh
+
+cd application
+# for i in $(seq 0 $N);
+# do
+#     ./assemblyExtractor.sh application"$i".OR1K.elf
+# done
+rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
+rm -rf *.elf

@@ -56,13 +56,9 @@ int main(int argc, char **argv)
     for(i=0;i<10;i++){
         pingpong.msg[i] = i;
     }
-    //LOG("0-ENVIANDO MENSAGEM\n");
     SendMessage(&pingpong, 0x11);
-    //LOG("0-MENSAGEM ENVIADA\n");
-    for(i=0;i<400;i++){
-        //LOG("0-RECEBENDO MENSAGEM\n");
+    for(i=0;i<50;i++){
         ReceiveMessage(&pingpong, 0x11);
-        //LOG("0-MENSAGEM RECEBIDA\n");
         LOG("0-PING: %d\n",pingpong.msg[0]);
         pingpong.msg[0] = pingpong.msg[0] + 1;
         SendMessage(&pingpong, 0x11);
@@ -75,7 +71,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
-
+    finishApplication();
     LOG("0-Application ROUTER0 done!\n\n");
     return 1;
 }

@@ -52,16 +52,11 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     
     int i;
-    //LOG("3-RECEBENDO MENSAGEM\n");
     ReceiveMessage(&pongping, 0x00);
-    //LOG("3-MENSAGEM RECEBIDA\n");
-    for(i=0;i<400;i++){
+    for(i=0;i<50;i++){
         LOG("3-PONG: %d\n",pongping.msg[0]);
         pongping.msg[0] = pongping.msg[0] + 1;
-        //LOG("3-ENVIANDO MENSAGEM\n");
         SendMessage(&pongping, 0x00);
-        //LOG("3-MENSAGEM ENVIADA\n");
-        //LOG("3-RECEBENDO MENSAGEM");
         ReceiveMessage(&pongping, 0x00);
     }
     LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
@@ -73,7 +68,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
-
+    finishApplication();
     LOG("3-Application ROUTER3 done!\n\n");
     return 1;
 }

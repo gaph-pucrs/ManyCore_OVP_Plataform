@@ -77,6 +77,7 @@ unsigned int getID(unsigned int address);
 void requestMsg(unsigned int from);
 void ReceiveMessage(message *theMessage, unsigned int from);
 unsigned int sendFromMsgBuffer(unsigned int requester);
+void finishApplication();
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -242,4 +243,18 @@ void SendRaw(unsigned int addr){
     while(*NIcmd!=IDLE && *NIcmd!=DONE){ /*LOG("eu: %x status:%x\n",*myAddress,*NIcmd);/*waits until NI is ready to execute an operation*/}
     *NIaddr = addr;
     *NIcmd = TX;   
+}
+
+///////////////////////////////////////////////////////////////////
+// Waits until every packet is transmitted
+void finishApplication(){
+    unsigned int done;
+    unsigned int i;
+    do{
+        done = 1; // assumes that every packet was transmitted 
+        for(i=0;i<PACKET_BUFF_SIZE;i++){
+            if(buffer_map[i]!=EMPTY) done = 0; // if some position in the buffer is occupied then the program must wait!
+        }
+    }while(done==0);
+    return;
 }
