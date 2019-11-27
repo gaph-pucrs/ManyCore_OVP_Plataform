@@ -65,7 +65,6 @@ int main(int argc, char **argv)
         //LOG("0-MENSAGEM RECEBIDA\n");
         LOG("0-PING: %d\n",pingpong.msg[0]);
         pingpong.msg[0] = pingpong.msg[0] + 1;
-        //LOG("0-ENVIANDO MENSAGEM\n");
         SendMessage(&pingpong, 0x11);
     }
     LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");

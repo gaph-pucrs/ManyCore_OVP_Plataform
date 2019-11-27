@@ -111,7 +111,8 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     receivingActive = 0;
     while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     // Alocate the packet message inside the structure
-    theMessage->size = incomingPacket[PI_SIZE];
+    theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hopes,inIteration,outIteration)
+    // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPES - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
     for(i=0;i<theMessage->size;i++){
         theMessage->msg[i] = incomingPacket[i+4];
     }
@@ -141,7 +142,7 @@ void requestMsg(unsigned int from){
 // Sends a message to a given destination
 void SendMessage(message *theMessage, unsigned int destination){
     unsigned int index;
-    do{index = getEmptyIndex();/*stay bloqued here while the message buffer is full*/}while(index==WAIT);
+    do{index = getEmptyIndex(); /*stay bloqued here while the message buffer is full*/}while(index==WAIT);
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
     buffer_packets[index][PI_DESTINATION] = destination;
@@ -207,7 +208,7 @@ unsigned int checkPendingReq(unsigned int destID){
 unsigned int getEmptyIndex(){
     int i;
     int tempIdx = WAIT;
-    int tempHist = WAIT;
+    unsigned int tempHist = WAIT;
     for(i=0;i<PACKET_BUFF_SIZE;i++){
         if(buffer_map[i] == FREE && buffer_history[i]<=tempHist){
             tempIdx = i;
