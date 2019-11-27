@@ -9,7 +9,7 @@
 #include "router.igen.h"
 #include "noc.h"
 #include <stdlib.h>
-#include<stdio.h>
+#include <stdio.h>
 
 
 #define __bswap_constant_32(x) \
