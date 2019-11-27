@@ -10,7 +10,7 @@ N=$(($X*$Y))
 # source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
 # setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
 cd simulation
-rm -f flitsFlow.csv
+rm -f flitFlow.csv
 cd ..
 
 cd application
