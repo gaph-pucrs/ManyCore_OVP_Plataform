@@ -51,6 +51,7 @@ int main(int argc, const char *argv[]) {
 
     /* create the root module with reduced Quantum (in line with Custom Scheduler) */
     optParamP params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
+    //optParamP params = OP_PARAMS(OP_PARAM_BOOL_SET(OP_FP_GDBCONSOLE, 1));
     optCmdParserP parser = opCmdParserNew(MODULE_NAME, OP_AC_ALL);
     opCmdParseArgs(parser, argc, argv);
     optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);

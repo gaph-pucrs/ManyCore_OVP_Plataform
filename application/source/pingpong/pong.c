@@ -5,14 +5,16 @@
 #include "spr_defs.h"
 #include "api.h"
 
-message pingpong;
+#include "pingpong_config.h"
+
+message pongping;
 
 int main(int argc, char **argv)
-{
+{ 
     //////////////////////////////////////////////////////
     ////////////////// INITIALIZATION ////////////////////
     //////////////////////////////////////////////////////
-    LOG("0-Starting ROUTER0 application! \n\n");
+    LOG("3-Starting ROUTER3 application! \n\n");
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -22,8 +24,8 @@ int main(int argc, char **argv)
     spr |= 0x4;
     MTSPR(17, spr);
 
-    // Inform the local address to the router 
-    *myAddress = 0x00;
+    // Inform the local address to the router
+    *myAddress = 0x11;
 
     // Inform the NI addresses to store the incomming packets
     *NIaddr = (unsigned int)&incomingPacket; 
@@ -40,7 +42,7 @@ int main(int argc, char **argv)
     }
 
     // Comunicate to the sync that this PE is ready to start the code execution
-    *PEToSync = 0x00;
+    *PEToSync = 0x11;
     int init_start = 0;
     while(init_start != 1){
 	    init_start = *SyncToPE >> 24;
@@ -52,26 +54,23 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     
     int i;
-    pingpong.size = 10;
-    for(i=0;i<10;i++){
-        pingpong.msg[i] = i;
+    ReceiveMessage(&pongping, ping_addr);
+    for(i=0;i<N_PINGPONG;i++){
+        LOG("3-PONG: %d\n",pongping.msg[0]);
+        pongping.msg[0] = pongping.msg[0] + 1;
+        SendMessage(&pongping, ping_addr);
+        ReceiveMessage(&pongping, ping_addr);
     }
-    SendMessage(&pingpong, 0x11);
-    for(i=0;i<50;i++){
-        ReceiveMessage(&pingpong, 0x11);
-        LOG("0-PING: %d\n",pingpong.msg[0]);
-        pingpong.msg[0] = pingpong.msg[0] + 1;
-        SendMessage(&pingpong, 0x11);
+    LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
+    for(i=0;i<pongping.size;i++){
+        LOG("3-- %d\n",pongping.msg[i]);
     }
-    LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");
-    for(i=0;i<pingpong.size;i++){
-        LOG("0-- %d\n",pingpong.msg[i]);
-    }
-    
+
+
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
     finishApplication();
-    LOG("0-Application ROUTER0 done!\n\n");
+    LOG("3-Application ROUTER3 done!\n\n");
     return 1;
 }
