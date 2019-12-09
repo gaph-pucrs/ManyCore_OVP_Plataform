@@ -42,27 +42,14 @@ def main():
     #Copy scenario.yaml to scenario dir
     copyfile(INPUT_SCENARIO_FILE_PATH, SCENARIO_PATH+"/"+SCENARIO_NAME+".yaml")
 
-    #system_model = get_model_description(yaml_testcase_r)
-    ##subprocess.call("cd "+testacase_dir+"; vsim -c -do sim.do", shell=True)
-    # if system_model == "sc":
-    #     #Copy the executable
-    #     copyfile(TESTCASE_PATH + "/base_scenario/" + TESTCASE_NAME +"", SCENARIO_PATH + "/" + SCENARIO_NAME)
-    #     os.system("chmod 777 "+SCENARIO_PATH + "/" + SCENARIO_NAME)
-        
-    # elif system_model == "scmod" or system_model == "vhdl":
-    #     copyfile(TESTCASE_PATH+"/base_scenario/sim.do" , SCENARIO_PATH+"/sim.do")
-    #     copyfile(TESTCASE_PATH+"/base_scenario/wave.do" , SCENARIO_PATH+"/wave.do")
-    #     delete_if_exists(SCENARIO_PATH+"/hardware")
-    #     create_ifn_exists(SCENARIO_PATH+"/hardware")
-    #     create_ifn_exists(SCENARIO_PATH+"/hardware/work")
-    #     generic_copy(TESTCASE_PATH+"/hardware/work", SCENARIO_PATH+"/hardware/work", [".svn"])
-        
-    # if system_model == "sc" or system_model == "scmod":
-    #     #Copy ram_pe
-    #     delete_if_exists(SCENARIO_PATH+"/ram_pe")
-    #     os.system("cp -rf "+TESTCASE_PATH+"/base_scenario/ram_pe "+SCENARIO_PATH)    
-
-    apps_name_list = get_apps_name_list(yaml_scenario_r)
+    # Generate applications
+    app_info = get_app_info_list(yaml_scenario_r, APPS_PATH)
+    DIM_X = get_mpsoc_x_dim(yaml_testcase_r)
+    DIM_Y = get_mpsoc_y_dim(yaml_testcase_r)
+    applicationGeneration(yaml_scenario_r, TESTCASE_PATH, DIM_X, DIM_Y)
+    #apps_name_list = get_apps_name_list(yaml_scenario_r)
+    
+    
     
     # checks the apps
     create_apps(apps_name_list, TESTCASE_PATH)
@@ -78,9 +65,20 @@ def main():
     #Calls the deloream_env.py to generate all necessary debugging dir and files
     generate_deloream_env(TESTCASE_PATH, yaml_testcase_r, SCENARIO_PATH, yaml_scenario_r)
 
-    DIM_X = get_mpsoc_x_dim(yaml_testcase_r)
-    DIM_Y = get_mpsoc_y_dim(yaml_testcase_r)
+    
     os.system("../run.sh "+DIM_X+" "+DIM_Y+" simulation/")
+
+def applicationGeneration(yaml_scenario_r, testcase_path, DIM_X, DIM_Y):
+    app_repo_path = testcase_path + "/applications"
+
+
+
+    if os.path.exists(app_repo_path) == False:
+        os.system("mkdir "+testcase_path+"/applications")
+        for x in range(DIM_X)
+            for y in range(DIM_Y)
+
+
 
 
 #Receives a int, convert to string and fills to a 32 bits word
@@ -109,6 +107,8 @@ def check_app_exist(app_name_list, testcase_path):
             print "- " + app_name
     
         sys.exit(1)
+
+    
 
 def generate_appstart_file(apps_start_obj_list, testcase_path, scenario_path):
     
