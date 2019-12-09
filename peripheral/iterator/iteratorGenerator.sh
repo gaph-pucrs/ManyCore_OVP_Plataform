@@ -167,7 +167,7 @@ echo "    // if NO, then it is a status update for the local port or... " >> ite
 echo "    }else if((status == ITERATION_BLOCKED_LOCAL) || (status == ITERATION_OFF_LOCAL)){" >> iterator.igen.c
 echo "        iterateMapLocal[router] = status;" >> iterator.igen.c
 echo "    // for the router as a hole" >> iterator.igen.c
-echo "    } else if((status == ITERATION_ON) || (ITERATION_OFF)){" >> iterator.igen.c
+echo "    } else if((status == ITERATION_ON) || (status == ITERATION_OFF)){" >> iterator.igen.c
 echo "        iterateMap[router] = status;" >> iterator.igen.c
 echo "    }" >> iterator.igen.c
 echo "}" >> iterator.igen.c
