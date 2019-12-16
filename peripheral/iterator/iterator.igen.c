@@ -127,7 +127,7 @@ void statusHandler(unsigned int router, unsigned int status){
     }else if((status == ITERATION_BLOCKED_LOCAL) || (status == ITERATION_OFF_LOCAL)){
         iterateMapLocal[router] = status;
     // for the router as a hole
-    } else if((status == ITERATION_ON) || (ITERATION_OFF)){
+    } else if((status == ITERATION_ON) || (status == ITERATION_OFF)){
         iterateMap[router] = status;
     }
 }
