@@ -65,6 +65,10 @@ volatile unsigned int pendingReq[N_PES];
 // Time variables
 time_t tinicio, tsend, tfim, tignore;
 
+// OVP Initiation function
+void interruptHandler(void);
+void OVP_init();
+
 // Functions
 unsigned int bufferHasSpace();
 void SendMessage(message *theMessage, unsigned int destination);
@@ -84,6 +88,73 @@ void finishApplication();
 ///////////////////////////////////////////////////////////////////
 // Functions implementation ///////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+// Interruption function
+void interruptHandler(void) {
+    int requester;
+    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
+        //LOG("%x - Chegou um pacote de entrega de mensagem!\n",*myAddress);
+        receivingActive = 1; // Inform the index where the received packet is stored
+        //LOG("\nChegou um pacote de entrega de mensagem! %d\n",receivingActive);
+        *NIcmd = READING; // turn down the interruption
+    }
+    else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
+        //LOG("%x - Chegou um pacote de requisicao de mensagem!\n",*myAddress);
+        requester = incomingPacket[PI_REQUESTER];
+        *NIcmd = READING; // turn down the interruption
+        //LOG("DEPOIS DO READING: %x\n",*NIcmd);
+        *NIcmd = DONE; // releases the NI to return to the IDLE state
+        //LOG("DEPOIS DO DONE: %x\n",*NIcmd);
+        if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+            pendingReq[getID(requester)] = MESSAGE_REQ;
+            //LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////////////
+// Initiation function
+void OVP_init(){
+    LOG("Starting ROUTER %d application! \n",*myAddress);
+    // Attach the external interrupt handler for 'intr0'
+    int_init();
+    int_add(0, (void *)interruptHandler, NULL);
+    int_enable(0);
+    // Enable external interrupts
+    Uns32 spr = MFSPR(17);
+    spr |= 0x4;
+    MTSPR(17, spr);
+
+    // Inform the processor ID to the router
+    //*myAddress = impProcessorId();
+    
+
+    // Inform the NI addresses to store the incomming packets
+    *NIaddr = (unsigned int)&incomingPacket;
+ 
+    // Initiate the packets buffer map to free
+    int o;
+    for(o=0;o<PACKET_BUFF_SIZE;o++){
+        buffer_map[o] = FREE;
+    }
+
+    // Initiate the message request queue
+    for(o=0;o<N_PES;o++){
+        pendingReq[o] = 0; 
+    }
+
+    // Comunicate to the sync that this PE is ready to start the code execution
+    *PEToSync = 0x00;
+    int init_start = 0;
+    while(init_start != 1){
+	    init_start = *SyncToPE >> 24;
+    }
+    tignore = clock();
+    tinicio = tignore - (tignore - tinicio);
+    return;
+}
 ///////////////////////////////////////////////////////////////////
 // Verify if a message for a given requester is inside the buffer, if yes send it and return 1 else returns 0.
 unsigned int sendFromMsgBuffer(unsigned int requester){
@@ -171,30 +242,6 @@ void SendMessage(message *theMessage, unsigned int destination){
 }
 
 ///////////////////////////////////////////////////////////////////
-// Interruption function
-void interruptHandler(void) {
-    int requester;
-    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
-        //LOG("%x - Chegou um pacote de entrega de mensagem!\n",*myAddress);
-        receivingActive = 1; // Inform the index where the received packet is stored
-        //LOG("\nChegou um pacote de entrega de mensagem! %d\n",receivingActive);
-        *NIcmd = READING; // turn down the interruption
-    }
-    else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        //LOG("%x - Chegou um pacote de requisicao de mensagem!\n",*myAddress);
-        requester = incomingPacket[PI_REQUESTER];
-        *NIcmd = READING; // turn down the interruption
-        //LOG("DEPOIS DO READING: %x\n",*NIcmd);
-        *NIcmd = DONE; // releases the NI to return to the IDLE state
-        //LOG("DEPOIS DO DONE: %x\n",*NIcmd);
-        if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
-            pendingReq[getID(requester)] = MESSAGE_REQ;
-            //LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
-        }
-    }
-}
-
-///////////////////////////////////////////////////////////////////
 // Check if there is any requested message for a given destination ID 
 unsigned int checkPendingReq(unsigned int destID){
     if(pendingReq[destID]==MESSAGE_REQ) return 1; //it has a pending request
@@ -256,5 +303,6 @@ void finishApplication(){
             if(buffer_map[i]!=EMPTY) done = 0; // if some position in the buffer is occupied then the program must wait!
         }
     }while(done==0);
+    LOG("Application ROUTER %x done!\n\n",*myAddress);
     return;
 }
