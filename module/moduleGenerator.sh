@@ -30,7 +30,7 @@ echo "" >> module.op.tcl
 # Defines the processor type
 for i in $(seq 0 $N);
 do
-	echo "ihwaddprocessor -instancename cpu"$i" \\" >> module.op.tcl	
+	echo "ihwaddprocessor -instancename cpu"$i" -id "$i" \\" >> module.op.tcl	
 	echo "                -vendor ovpworld.org -library processor -type or1k -version 1.0 \\" >> module.op.tcl
 	echo "                -variant generic \\" >> module.op.tcl
 	echo "                -semihostname or1kNewlib" >> module.op.tcl

@@ -78,7 +78,7 @@ do
     then
         echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
     else
-        echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
+        echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf --imperasintercepts \$* \\" >> ovp_compiler.sh
     fi
 done
 	echo "\$*" >> ovp_compiler.sh

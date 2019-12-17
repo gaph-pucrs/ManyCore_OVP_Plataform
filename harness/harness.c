@@ -18,7 +18,9 @@
 #define QUANTUM_TIME_SLICE            0.0001
 #define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //10000
 struct optionsS {
+    Bool         configurecpuinstance;
 } options = {
+    .configurecpuinstance = False,
 };
 int N_PES =4;
 
@@ -53,7 +55,13 @@ int main(int argc, const char *argv[]) {
     optParamP params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
     //optParamP params = OP_PARAMS(OP_PARAM_BOOL_SET(OP_FP_GDBCONSOLE, 1));
     optCmdParserP parser = opCmdParserNew(MODULE_NAME, OP_AC_ALL);
-    opCmdParseArgs(parser, argc, argv);
+    opCmdParserAdd(parser, "configurecpuinstance", 0, "bool", "user", OP_FT_BOOLVAL,
+                           &options.configurecpuinstance,
+                           "Add configuration to enable Imperas Intercepts to CPU instance",
+                           OP_AC_ALL, 0, 0); // enable interception
+    if (!opCmdParseArgs(parser, argc, argv)) {
+        opMessage("E", MODULE_NAME, "Command line parse incomplete");
+    }
     optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);
     optModuleP  modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 

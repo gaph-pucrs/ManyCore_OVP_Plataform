@@ -4,18 +4,17 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "api.h"
+#include "simulatorIntercepts.h"
 
 message pingpong;
 
 int main(int argc, char **argv)
-{
-    *myAddress = 0x00;
+{   
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    
-    int i;
+    int i; 
     pingpong.size = 10;
     for(i=0;i<10;i++){
         pingpong.msg[i] = i; 

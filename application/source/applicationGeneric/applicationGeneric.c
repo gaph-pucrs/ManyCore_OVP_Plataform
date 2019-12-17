@@ -7,7 +7,6 @@
 
 int main(int argc, char **argv)
 {
-    *myAddress = 0x00; // TODO: REMOVE IT AND GET DE ID USING THE OVP
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////

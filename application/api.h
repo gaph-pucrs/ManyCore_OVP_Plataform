@@ -117,7 +117,6 @@ void interruptHandler(void) {
 ///////////////////////////////////////////////////////////////////
 // Initiation function
 void OVP_init(){
-    LOG("Starting ROUTER %d application! \n",*myAddress);
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler, NULL);
@@ -128,8 +127,8 @@ void OVP_init(){
     MTSPR(17, spr);
 
     // Inform the processor ID to the router
-    //*myAddress = impProcessorId();
-    
+    *myAddress = impProcessorId();
+    LOG("Starting ROUTER %x application! \n", *myAddress);
 
     // Inform the NI addresses to store the incomming packets
     *NIaddr = (unsigned int)&incomingPacket;

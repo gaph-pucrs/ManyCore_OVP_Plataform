@@ -108,6 +108,10 @@ int contFlits[N_PORTS];
 /////////////////////// FUNCTIONS //////////////////////////
 ////////////////////////////////////////////////////////////
 
+unsigned int xy2addr(unsigned int x, unsigned int y){
+    return (y | (x << 4));
+}
+
 // Informs the ticker that this router needs ticks
 void turn_TickOn(){
     unsigned short int iterAux = ITERATION_ON;
@@ -660,21 +664,27 @@ void iterate(){
 //////////////////////////////// Callback stubs ////////////////////////////////
 
 PPM_REG_READ_CB(addressRead) {
-    // YOUR CODE HERE (addressRead)
+    localPort_regs_data.myAddress.value = htonl(myAddress);
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(addressWrite) {
     // By define - the address start with 0xF...F
     if(myAddress == 0xFFFFFFFF){
+        myID = htonl((unsigned int)data);
+        int y = myID/DIM_Y;
+        int x = myID-(DIM_X*y);
+        myAddress = xy2addr(x, y);
+        bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
+        bhmMessage("INFO","MYADRESS","MY ID = %d", myID);
         // Stores the first write in this register as local address
-        myAddress = htonl((unsigned int)data);
+        /*myAddress = htonl((unsigned int)data);
         int x = positionX(myAddress);
         int y = positionY(myAddress);
         bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
         // Calculates the router ID
         myID = (DIM_X*y)+x;
-        bhmMessage("INFO","MYADRESS","MY ID = %d", myID);
+        bhmMessage("INFO","MYADRESS","MY ID = %d", myID);*/
     }
     else{ // Display an error message when another write operation is made in this register!!
         bhmMessage("INFO", "MY_ADRESS", "ERROR: The address can not be changed!");
