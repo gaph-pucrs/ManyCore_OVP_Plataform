@@ -121,6 +121,7 @@ echo "}" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "// Send one iteration for each router that has something to send" >> iterator.igen.c
 echo "void runIterations(){  " >> iterator.igen.c
+echo "   bhmMessage(\"I\", \"ITERATOR\", \"Iteration number: %llu!\",iterationN);" >> iterator.igen.c ## REMOVE
 for i in $(seq 0 $N)
 do
     echo "    iteration = iterationN;" >> iterator.igen.c
@@ -262,11 +263,12 @@ echo "    while(1){" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "        // Wait until the next quantum " >> iterator.igen.c
 echo "        bhmWaitDelay(QUANTUM_DELAY);" >> iterator.igen.c
-echo "        int k;" >> iterator.igen.c
+echo "        bhmMessage(\"I\", \"ITERATOR\", \"------>>>>>> FIM DO QUANTUM!\");" >> iterator.igen.c ## REMOVE
+echo "        /*int k;" >> iterator.igen.c
 echo "        for(k=0;k<25;k++){" >> iterator.igen.c
 echo "            iterationN++;" >> iterator.igen.c
 echo "            runIterations();" >> iterator.igen.c
-echo "        }" >> iterator.igen.c
+echo "        }*/" >> iterator.igen.c
 echo "        " >> iterator.igen.c
 echo "        // Reading values from the previous quantum" >> iterator.igen.c
 echo "        cont = contTotal;" >> iterator.igen.c
