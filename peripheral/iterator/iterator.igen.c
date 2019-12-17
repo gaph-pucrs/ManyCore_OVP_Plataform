@@ -78,6 +78,7 @@ void releasePackets(send *sendV, int id){
 
 // Send one iteration for each router that has something to send
 void runIterations(){  
+   bhmMessage("I", "ITERATOR", "Iteration number: %llu!",iterationN);
     iteration = iterationN;
     if((iterateMap[0] == ITERATION_ON)||(iterateMapLocal[0] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
     iteration = iterationN;
@@ -291,11 +292,12 @@ int main(int argc, char *argv[]) {
 
         // Wait until the next quantum 
         bhmWaitDelay(QUANTUM_DELAY);
-        int k;
+        bhmMessage("I", "ITERATOR", "------>>>>>> FIM DO QUANTUM!");
+        /*int k;
         for(k=0;k<25;k++){
             iterationN++;
             runIterations();
-        }
+        }*/
         
         // Reading values from the previous quantum
         cont = contTotal;

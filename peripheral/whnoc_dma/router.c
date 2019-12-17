@@ -142,8 +142,12 @@ void informIteratorLocalOff(){
 
 // Inform the iterator that the PE is waiting a packet 
 void informIterator(){
-    unsigned short int iterAux = ITERATION;
-    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
+    if(myIterationStatusLocal == ITERATION_RELEASED_LOCAL || localBufferAmount <= 3){ /* \
+      (myIterationStatusLocal == ITERATION_BLOCKED_LOCAL && ) || \
+      (myIterationStatusLocal == ITERATION_OFF_LOCAL && localBufferAmount <= 4)) { */
+        unsigned short int iterAux = ITERATION;
+        ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
+    }
 }
 
 void iterateNI(){
