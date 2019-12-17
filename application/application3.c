@@ -4,17 +4,17 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "api.h"
+#include "simulatorIntercepts.h"
+
 
 message pongping;
 
 int main(int argc, char **argv)
 { 
-    *myAddress = 0x11;
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    
     int i;
     ReceiveMessage(&pongping, 0x00);
     for(i=0;i<50;i++){

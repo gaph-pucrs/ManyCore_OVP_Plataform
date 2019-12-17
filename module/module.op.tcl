@@ -10,22 +10,22 @@ ihwaddnet -instancename int1
 ihwaddnet -instancename int2
 ihwaddnet -instancename int3
 
-ihwaddprocessor -instancename cpu0 \
+ihwaddprocessor -instancename cpu0 -id 0 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
                 -variant generic \
                 -semihostname or1kNewlib
 
-ihwaddprocessor -instancename cpu1 \
+ihwaddprocessor -instancename cpu1 -id 1 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
                 -variant generic \
                 -semihostname or1kNewlib
 
-ihwaddprocessor -instancename cpu2 \
+ihwaddprocessor -instancename cpu2 -id 2 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
                 -variant generic \
                 -semihostname or1kNewlib
 
-ihwaddprocessor -instancename cpu3 \
+ihwaddprocessor -instancename cpu3 -id 3 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
                 -variant generic \
                 -semihostname or1kNewlib
