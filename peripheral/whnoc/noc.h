@@ -21,7 +21,7 @@
 #define EMPTY       0x00000000
 #define HEADER      0xFFFFFFFF
 #define SIZE        0xFFFFFFFD
-#define HOPES       0x00000002
+#define HOPS       0x00000002
 #define IN_TIME     0x00000001
 #define OUT_TIME    0x00000000
 

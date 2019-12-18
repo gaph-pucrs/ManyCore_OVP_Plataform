@@ -24,7 +24,7 @@
 #define SENDTIME    0xFFFFFFFE
 #define SERVICE     0xFFFFFFFC
 #define PAYLOAD     0x00000000
-#define HOPES       0x00000002
+#define HOPS       0x00000002
 #define IN_TIME     0x00000001
 #define OUT_TIME    0x00000000
 
@@ -64,9 +64,9 @@
 
 ///// CODE DEFINES
 // Arbitration
-#define ARBITER_RR      0
+#define ARBITER_RR      1
 #define ARBITER_HERMES  0
-#define ARBITER_TTL     1
+#define ARBITER_TTL     0
 // Debug logs
 #define LOG_OUTPUTFLITS 1
 

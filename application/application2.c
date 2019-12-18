@@ -13,11 +13,18 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-
-
-    //LOG("Hello World!");
- 
-
+    /*int i;
+    ReceiveMessage(&pongping, 0x10);
+    for(i=0;i<50;i++){
+        LOG("3-PONG: %d\n",pongping.msg[0]);
+        pongping.msg[0] = pongping.msg[0] + 1;
+        SendMessage(&pongping, 0x10);
+        ReceiveMessage(&pongping, 0x10);
+    }
+    LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
+    for(i=0;i<pongping.size;i++){
+        LOG("3-- %d\n",pongping.msg[i]);
+    }*/
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

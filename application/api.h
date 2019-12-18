@@ -26,7 +26,7 @@ volatile unsigned int *NIcmd = NI_BASE + 0x0;
 #define WAIT                0xFFFFFFFF
 // Packet defines
 #define MESSAGE_MAX_SIZE    256
-#define PACKET_MAX_SIZE     MESSAGE_MAX_SIZE+4+3 // +3(destination, size, sendtime, service)+3(hopes,in_iteration,out_iteration) 
+#define PACKET_MAX_SIZE     MESSAGE_MAX_SIZE+4+3 // +3(destination, size, sendtime, service)+3(hops,in_iteration,out_iteration) 
 // Packet indexes
 #define PI_DESTINATION     0
 #define PI_SIZE            1
@@ -34,7 +34,7 @@ volatile unsigned int *NIcmd = NI_BASE + 0x0;
 #define PI_SERVICE         3
 #define PI_REQUESTER       4
 // Packet information
-#define PI_HOPES           3
+#define PI_HOPS            3
 #define PI_IN_ITERATION    2   
 #define PI_OUT_ITERATION   1
 // NI stuff
@@ -55,6 +55,7 @@ typedef struct Message {
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
 volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
 volatile unsigned int receivingActive;
+volatile unsigned int transmittingActive = WAIT;
 
 // Message buffer
 unsigned int buffer_packets[PACKET_BUFF_SIZE][PACKET_MAX_SIZE];
@@ -94,14 +95,22 @@ void finishApplication();
 // Interruption function
 void interruptHandler(void) {
     int requester;
-    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
+    if(transmittingActive != WAIT){
+        if(transmittingActive < 0xFFFFFFFE){
+            // Releses the buffer
+            bufferPop(transmittingActive);
+        }
+        transmittingActive = WAIT;
+        *NIcmd = DONE;
+    }
+    else if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
         //LOG("%x - Chegou um pacote de entrega de mensagem!\n",*myAddress);
         receivingActive = 1; // Inform the index where the received packet is stored
         //LOG("\nChegou um pacote de entrega de mensagem! %d\n",receivingActive);
         *NIcmd = READING; // turn down the interruption
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        //LOG("%x - Chegou um pacote de requisicao de mensagem!\n",*myAddress);
+        //LOG("%x - Chegou um pacote de requisicao fffffffede mensagem!\n",*myAddress);
         requester = incomingPacket[PI_REQUESTER];
         *NIcmd = READING; // turn down the interruption
         //LOG("DEPOIS DO READING: %x\n",*NIcmd);
@@ -158,18 +167,29 @@ void OVP_init(){
 // Verify if a message for a given requester is inside the buffer, if yes send it and return 1 else returns 0.
 unsigned int sendFromMsgBuffer(unsigned int requester){
     int i;
+    unsigned int found = WAIT;
+    unsigned int foundHist = WAIT;
     for(i=0;i<PACKET_BUFF_SIZE;i++){
         if(buffer_map[i]==OCCUPIED){ // if this position has something valid
             if(buffer_packets[i][PI_DESTINATION] == requester){ // and the destination is the same as the requester
-                // Sends the packet
-                SendRaw((unsigned int)&buffer_packets[i]); 
-                // Releses the buffer position
-                bufferPop(i);
-                return 1; // sent with success
+                if(foundHist >= buffer_history[i]){
+                    foundHist = buffer_history[i];
+                    found = i;
+                }
             }
         }
     }
-    return 0; // packet is not in the buffer yet
+    if(found != WAIT){
+        // Sends the packet
+        SendRaw((unsigned int)&buffer_packets[found]);
+        transmittingActive = found;
+        // Releses the buffer position
+        //bufferPop(found);
+        return 1; // sent with success
+    }
+    else{
+        return 0; // packet is not in the buffer yet
+    }
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -182,8 +202,8 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     receivingActive = 0;
     while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     // Alocate the packet message inside the structure
-    theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hopes,inIteration,outIteration)
-    // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPES - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
+    theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
+    // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
     for(i=0;i<theMessage->size;i++){
         theMessage->msg[i] = incomingPacket[i+4];
     }
@@ -197,13 +217,14 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 void requestMsg(unsigned int from){
     int i;
     myServicePacket[PI_DESTINATION] = from;
-    myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hopes,inIteration,outIteration)
+    myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
     myServicePacket[PI_SEND_TIME] = tsend;
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[PI_REQUESTER] = *myAddress;
     SendRaw((unsigned int)&myServicePacket);
+    transmittingActive = 0xFFFFFFFE;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -214,7 +235,7 @@ void SendMessage(message *theMessage, unsigned int destination){
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
     buffer_packets[index][PI_DESTINATION] = destination;
-    buffer_packets[index][PI_SIZE] = theMessage->size + 2 + 3; // +2 (sendTime,service) +3 (hopes,inIteration,outIteration)
+    buffer_packets[index][PI_SIZE] = theMessage->size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
     buffer_packets[index][PI_SEND_TIME] = tsend;
@@ -233,8 +254,7 @@ void SendMessage(message *theMessage, unsigned int destination){
         //LOG("PENDING REQUEST ENCONTRADO!\n");
         // Sends the packet
         SendRaw((unsigned int)&buffer_packets[index]);
-        // Releses the buffer
-        bufferPop(index);
+        transmittingActive = index;
         // Clear the pending request
         pendingReq[getID(destination)] = 0;
     }

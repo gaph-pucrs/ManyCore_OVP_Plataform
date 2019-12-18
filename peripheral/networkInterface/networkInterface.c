@@ -83,7 +83,7 @@ void setSTALL(){
 }
 
 void statusUpdate(unsigned int status){
-    //bhmMessage("I", "statusUpdate", "Atualizando status para: %x",status);
+    //bhmMessage("I", "statusUpdate", "Atualizando status de: %x para: %x",internalStatus,status);
     internalStatus = status;
     DMAC_ab8_data.status.value = htonl(status);
 }
@@ -139,8 +139,7 @@ void niIteration(){
         ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
-            statusUpdate(IDLE); // sm3
-            setGO();
+            ppmWriteNet(handles.INTTC, 1);
         }
     }
 }
@@ -161,7 +160,6 @@ PPM_REG_WRITE_CB(addressWrite) {
     if(addressStart == 0xFFFFFFFF){
         addressStart = htonl(data);
         statusUpdate(IDLE);
-        //bhmMessage("I", "addressWrite", "addressStart received\n");
     }
     else{
         auxAddress = htonl(data);
@@ -215,6 +213,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
 }
 
 PPM_REG_READ_CB(statusRead) {
+    //DMAC_ab8_data.status.value = internalStatus;
     informIteration();  // When the processor is reading the NI status, we have one of two situations: 
                         //      (i) the processor is blocked by a Receive() function or
                         //      (ii) it is waiting the NI to enter in IDLE to start a new transmittion
@@ -225,7 +224,6 @@ PPM_REG_READ_CB(statusRead) {
 PPM_REG_WRITE_CB(statusWrite) {
     unsigned int command = htonl(data);
     if(command == TX){
-        //bhmMessage("I", "statusWrite", "RECEBI UM TX- status: %x\n",internalStatus);
         if(internalStatus == IDLE){
             statusUpdate(TX);
             setSTALL();
@@ -240,7 +238,6 @@ PPM_REG_WRITE_CB(statusWrite) {
         niIteration();
     }
     else if(command == READING){
-        //bhmMessage("I", "statusWrite", "RECEBI UM READING- status: %x\n",internalStatus);
         if(internalStatus == RX){
             statusUpdate(WAIT_PE);
             setSTALL();
@@ -252,14 +249,15 @@ PPM_REG_WRITE_CB(statusWrite) {
         ppmWriteNet(handles.INTTC, 0);
     }
     else if(command == DONE){
-        //bhmMessage("I", "statusWrite", "RECEBI UM DONE");
-        if(internalStatus == WAIT_PE){
+        if(internalStatus == WAIT_PE || internalStatus == TX){
             statusUpdate(IDLE);
             setGO();
         }
         else{
             bhmMessage("I", "statusWrite", "ERROR_DONE: UNEXPECTED STATE REACHED"); while(1){}
         }
+        // Turn the interruption signal down
+        ppmWriteNet(handles.INTTC, 0);
     }
     *(Uns32*)user = data;
 }

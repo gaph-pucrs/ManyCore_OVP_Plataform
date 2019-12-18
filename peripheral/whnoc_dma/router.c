@@ -142,12 +142,10 @@ void informIteratorLocalOff(){
 
 // Inform the iterator that the PE is waiting a packet 
 void informIterator(){
-    if(myIterationStatusLocal == ITERATION_RELEASED_LOCAL || localBufferAmount <= 3){ /* \
-      (myIterationStatusLocal == ITERATION_BLOCKED_LOCAL && ) || \
-      (myIterationStatusLocal == ITERATION_OFF_LOCAL && localBufferAmount <= 4)) { */
+    //if(myIterationStatusLocal == ITERATION_RELEASED_LOCAL || localBufferAmount <= 4){
         unsigned short int iterAux = ITERATION;
         ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-    }
+    //}
 }
 
 void iterateNI(){
@@ -317,8 +315,8 @@ unsigned int bufferPop(unsigned int port){
     else if (flitCountOut[port] == SIZE){
         flitCountOut[port] = htonl(value);
     }
-    else if(port == LOCAL && flitCountOut[port] == HOPES){
-        // Calculate the number of hopes to achiev the destination address
+    else if(port == LOCAL && flitCountOut[port] == HOPS){
+        // Calculate the number of hops to achiev the destination address
         // Calculate the X dif
         if(positionX(myAddress)>positionX(localBuffer_packetDest)) difX = positionX(myAddress) - positionX(localBuffer_packetDest);
         else difX = positionX(localBuffer_packetDest) - positionX(myAddress);
@@ -625,7 +623,8 @@ void transmitt(){
 
 // Stores the control signal for a given port
 void controlUpdate(unsigned int port, unsigned int ctrlData){
-    control[port] = ctrlData;
+    if (myID >= 0 && myID < 0xFFFFFFFF)
+        control[port] = ctrlData;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -676,7 +675,7 @@ PPM_REG_WRITE_CB(addressWrite) {
     // By define - the address start with 0xF...F
     if(myAddress == 0xFFFFFFFF){
         myID = htonl((unsigned int)data);
-        int y = myID/DIM_Y;
+        int y = myID/DIM_X;
         int x = myID-(DIM_X*y);
         myAddress = xy2addr(x, y);
         bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
