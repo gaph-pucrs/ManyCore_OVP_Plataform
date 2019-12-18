@@ -4,10 +4,10 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "api.h"
-#include "simulatorIntercepts.h"
 
+#include "prodcons_config.h"
 
-message pongping;
+message newMessage;
 
 int main(int argc, char **argv)
 { 
@@ -15,20 +15,17 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
+    // CONS!
+    int order[N_MESSAGES];
     int i;
-    ReceiveMessage(&pongping, 0x00);
-    for(i=0;i<50;i++){
-        LOG("3-PONG: %d\n",pongping.msg[0]);
-        pongping.msg[0] = pongping.msg[0] + 1;
-        SendMessage(&pongping, 0x00);
-        ReceiveMessage(&pongping, 0x00);
+    for(i=0;i<N_MESSAGES;i++){
+        ReceiveMessage(&newMessage, prod_addr);
+        order[i] = newMessage.msg[0];
     }
-    LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
-    for(i=0;i<pongping.size;i++){
-        LOG("3-- %d\n",pongping.msg[i]);
+    LOG("3-PRINT FINAL DA ORDEM:\n");
+    for(i=0;i<N_MESSAGES;i++){
+        LOG("%d-- %d\n",i,order[i]);
     }
-
-
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

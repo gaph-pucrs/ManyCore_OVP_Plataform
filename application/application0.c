@@ -4,33 +4,28 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "api.h"
-#include "simulatorIntercepts.h"
 
-message pingpong;
+#include "prodcons_config.h"
+
+message theMessage;
 
 int main(int argc, char **argv)
-{   
+{
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    int i; 
-    pingpong.size = 10;
-    for(i=0;i<10;i++){
-        pingpong.msg[i] = i; 
+    // PROD!
+    int i;
+    theMessage.size = 10;
+    for(i=0;i<theMessage.size;i++){
+        theMessage.msg[i] = i;
     }
-    SendMessage(&pingpong, 0x11);
-    for(i=0;i<50;i++){
-        ReceiveMessage(&pingpong, 0x11);
-        LOG("0-PING: %d\n",pingpong.msg[0]);
-        pingpong.msg[0] = pingpong.msg[0] + 1;
-        SendMessage(&pingpong, 0x11);
+    for(i=0;i<N_MESSAGES;i++){
+        theMessage.msg[0] = (i) * 10;
+        SendMessage(&theMessage, cons_addr);
     }
-    LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");
-    for(i=0;i<pingpong.size;i++){
-        LOG("0-- %d\n",pingpong.msg[i]);
-    }
-    
+    LOG("PROD FINISH THE MESSAGE GENERATION!");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

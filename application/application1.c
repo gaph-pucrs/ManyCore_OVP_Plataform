@@ -13,11 +13,22 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-
-
-    //LOG("Hello World!");
- 
-
+    /*int i; 
+    pingpong.size = 10;
+    for(i=0;i<10;i++){
+        pingpong.msg[i] = i; 
+    }
+    SendMessage(&pingpong, 0x01);
+    for(i=0;i<50;i++){
+        ReceiveMessage(&pingpong, 0x01);
+        LOG("0-PING: %d\n",pingpong.msg[0]);
+        pingpong.msg[0] = pingpong.msg[0] + 1;
+        SendMessage(&pingpong, 0x01);
+    }
+    LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");
+    for(i=0;i<pingpong.size;i++){
+        LOG("0-- %d\n",pingpong.msg[i]);
+    }*/
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

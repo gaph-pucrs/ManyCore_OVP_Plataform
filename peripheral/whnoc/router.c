@@ -657,8 +657,8 @@ void preBuffer_pop(){
         if (flitCountIn == SIZE){
             flitCountIn = htonl(preBufferPackets[preBuffer_first]);
         }
-        else if(flitCountIn == HOPES){
-            // Calculate the number of hopes to achiev the destination address
+        else if(flitCountIn == HOPS){
+            // Calculate the number of hops to achiev the destination address
             // Calculate the X dif
             if(positionX(myAddress)>positionX(preBuffer_packetDest)) difX = positionX(myAddress) - positionX(preBuffer_packetDest);
             else difX = positionX(preBuffer_packetDest) - positionX(myAddress);
