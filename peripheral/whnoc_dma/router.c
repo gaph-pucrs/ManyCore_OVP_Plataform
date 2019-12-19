@@ -85,8 +85,8 @@ unsigned int contPriority[N_PORTS] = {0,0,0,0,1};
 unsigned short int myIterationStatus = ITERATION_OFF;
 
 // Stores the prebuffer autorization tick
-unsigned short int myIterationStatusLocal = ITERATION_OFF_LOCAL;
-
+//unsigned short int myIterationStatusLocal = ITERATION_OFF_LOCAL;
+unsigned short int myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
 // Gets the actual "time" of the system
 unsigned long long int currentTime; // %llu
 
@@ -228,6 +228,7 @@ void bufferStatusUpdate(unsigned int port){
 
 void bufferPush(unsigned int port){
     // Write a new flit in the buffer
+    //if(myID == 3)bhmMessage("I", "BUFFERPUSH", "Chegou: %x no buffer %d", htonl(incomingFlit.data), port);
     buffers[port][last[port]] = incomingFlit;
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;
@@ -257,7 +258,7 @@ unsigned int isEmpty(unsigned int port){
 unsigned int bufferPop(unsigned int port){
     unsigned long long int value;
     unsigned int difX, difY;
-
+    
     // Read the first flit from the buffer
     value = buffers[port][first[port]].data;
     // Increments the "first" pointer
@@ -329,7 +330,9 @@ unsigned int bufferPop(unsigned int port){
     else if(port == LOCAL && flitCountOut[port] == IN_TIME){
         value = ntohl(enteringTime);
     }
-        
+    
+    //bhmMessage("I", "BPOP", "Status: E-%d, W-%d, N-%d, S-%d, L-%d",isEmpty(EAST), isEmpty(WEST), isEmpty(NORTH), isEmpty(SOUTH), isEmpty(LOCAL));
+
     // Update the buffer status
     bufferStatusUpdate(port);
     
@@ -548,7 +551,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
-                            bhmMessage("I", "LOCALOUT", "Enviando flit: %x",htonl(flit));
+                            //bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
                             #if LOG_OUTPUTFLITS
                             contFlits[LOCAL]= contFlits[LOCAL]++;
                             #endif

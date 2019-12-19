@@ -39,6 +39,7 @@ unsigned int receivingCount;            // Counts the amount of remaining flits 
 
 // TX Variables
 unsigned int transmittingAddress = 0;   // Stores TX packet address
+unsigned int transmittionEnd = FALSE;
 unsigned int transmittingCount = HEADER;// Counts the amount of remaining flits to be transmitted
 unsigned int control_in_STALLGO = GO;   // Stores the router input buffer status
 
@@ -83,6 +84,7 @@ void setSTALL(){
 }
 
 void statusUpdate(unsigned int status){
+    if(status == TX) transmittionEnd = FALSE;
     //bhmMessage("I", "statusUpdate", "Atualizando status de: %x para: %x",internalStatus,status);
     internalStatus = status;
     DMAC_ab8_data.status.value = htonl(status);
@@ -113,8 +115,9 @@ unsigned int readMem(unsigned int flit, unsigned int addr){
 }
 
 void niIteration(){
-    if(internalStatus == TX && control_in_STALLGO == GO){
+    if(internalStatus == TX && control_in_STALLGO == GO && transmittionEnd == FALSE){
         //flit = memory(transmittingAddress);
+        //bhmMessage("I", "NIITERATION", "Count: %x",transmittingCount);
         ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
         if(!h) {
             bhmMessage("I", "NI_ITERATOR", "ERROR_READ h handling!");
@@ -140,6 +143,7 @@ void niIteration(){
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
             ppmWriteNet(handles.INTTC, 1);
+            transmittionEnd = TRUE;
         }
     }
 }
