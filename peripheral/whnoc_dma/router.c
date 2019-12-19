@@ -548,6 +548,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
+                            bhmMessage("I", "LOCALOUT", "Enviando flit: %x",htonl(flit));
                             #if LOG_OUTPUTFLITS
                             contFlits[LOCAL]= contFlits[LOCAL]++;
                             #endif
