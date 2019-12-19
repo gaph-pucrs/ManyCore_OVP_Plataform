@@ -118,6 +118,7 @@ void interruptHandler(void) {
         //LOG("DEPOIS DO DONE: %x\n",*NIcmd);
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             pendingReq[getID(requester)] = MESSAGE_REQ;
+            LOG("---------------------------------------ADICIONANDO NO LOG PENDING!\n");
             //LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
         }
     }
@@ -183,8 +184,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         // Sends the packet
         SendRaw((unsigned int)&buffer_packets[found]);
         transmittingActive = found;
-        // Releses the buffer position
-        //bufferPop(found);
         return 1; // sent with success
     }
     else{
