@@ -7,7 +7,7 @@
 
 #include "prodcons_config.h"
 
-message newMessage;
+message theMessage;
 
 int main(int argc, char **argv)
 { 
@@ -15,17 +15,17 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    // CONS!
-    int order[N_MESSAGES];
+    // PROD!
     int i;
-    for(i=0;i<N_MESSAGES;i++){
-        ReceiveMessage(&newMessage, prod_addr);
-        order[i] = newMessage.msg[0];
+    theMessage.size = 10;
+    for(i=0;i<theMessage.size;i++){
+        theMessage.msg[i] = i;
     }
-    LOG("3-PRINT FINAL DA ORDEM:\n");
     for(i=0;i<N_MESSAGES;i++){
-        LOG("%d-- %d\n",i,order[i]);
+        theMessage.msg[0] = (i) * 10;
+        SendMessage(&theMessage, cons_addr);
     }
+    LOG("PROD FINISH THE MESSAGE GENERATION!");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
