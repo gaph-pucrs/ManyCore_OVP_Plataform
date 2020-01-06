@@ -34,7 +34,7 @@ sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
 cd ..
 
 cd iterator
-#./iteratorGenerator.sh $X $Y
+./iteratorGenerator.sh $X $Y
 cd ../..
 
 cd harness

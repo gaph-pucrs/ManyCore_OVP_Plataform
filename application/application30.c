@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "api.h"
 
-#include "transpose5x5.h"
+#include "transpose5x5_config.h"
 
 message theMessage;
 
@@ -21,9 +21,10 @@ int main(int argc, char **argv)
         theMessage.msg[i] = (i+1)*2;
     }
     for(i=0;i<N_MESSAGES;i++){
-        SendMessage(&theMessage, transpose35);
-        ReceiveMessage(&theMessage, transpose35);
+        SendMessage(&theMessage, transpose5_addr);
+        ReceiveMessage(&theMessage, transpose5_addr);
     }
+    
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
