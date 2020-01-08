@@ -141,7 +141,8 @@ void releasePackets(send *sendV, int id){
 }
 
 // Send one iteration for each router that has something to send
-void runIterations(){  
+void runIterations(){
+    //bhmMessage("INFO", "Iterator", "%llu\n", iteration);
     iteration = iterationN;
     if((iterateMap[0] == ITERATION_ON)||(iterateMapLocal[0] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
     iteration = iterationN;
@@ -242,15 +243,17 @@ void statusHandler(unsigned int router, unsigned int status){
             break;
         }
     }
+    //bhmMessage("INFO", "STATUSHANDLER", "mapOr %d", mapOr);
     // if YES then iteration is incremented...
     if((status == ITERATION) && (mapOr)){
         iterationN++;
         // if it is time to release new packets...
-        if(iterationN == nextLocalIteration){
+        /*if(iterationN == nextLocalIteration){
             bhmTriggerEvent(releaseLocal);
         }else{ // else, just deliver iterations to every router
             runIterations();
-        }
+        }*/
+        runIterations();
     // if NO, then it is a status update for the local port or... 
     }else if((status == ITERATION_BLOCKED_LOCAL) || (status == ITERATION_OFF_LOCAL)){
         iterateMapLocal[router] = status;
@@ -1174,11 +1177,11 @@ int main(int argc, char *argv[]) {
     constructor();
 
     
-    int i, j, aux;
+    //int i, j, aux;
     // Run is 1 if has somehing to transmit in any local ports
-    int run = 0;
+    //int run = 0;
 
-    send *sendV;
+    //send *sendV;
 
     //Event releaseLocal will be triggered when the next packet can be sended in LOCAL!!
     releaseLocal = bhmCreateNamedEvent("start","releases a packet to the Local port");
@@ -1188,13 +1191,13 @@ int main(int argc, char *argv[]) {
         // Wait until the next quantum 
         bhmWaitDelay(QUANTUM_DELAY);
         bhmMessage("I", "ITERATOR", "------>>>>>> FIM DO QUANTUM!");
-        /*int k;
+    }    /*int k;
         for(k=0;k<25;k++){
             iterationN++;
             runIterations();
         }*/
         
-        // Reading values from the previous quantum
+    /*    // Reading values from the previous quantum
         cont = contTotal;
         contTotal = 0;
         sendV = malloc (cont * sizeof (send));
@@ -1281,7 +1284,7 @@ int main(int argc, char *argv[]) {
             cont=0;
             run = 0;
         } 
-    }
+    }*/
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();

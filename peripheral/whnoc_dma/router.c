@@ -86,7 +86,7 @@ unsigned short int myIterationStatus = ITERATION_OFF;
 
 // Stores the prebuffer autorization tick
 //unsigned short int myIterationStatusLocal = ITERATION_OFF_LOCAL;
-unsigned short int myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
+//unsigned short int myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
 // Gets the actual "time" of the system
 unsigned long long int currentTime; // %llu
 
@@ -127,18 +127,18 @@ void turn_TickOff(){
 }
 
 // Informs the ticker that the local port needs ticks
-void informIteratorLocalOn(){
+/*void informIteratorLocalOn(){
     unsigned short int iterAux = ITERATION_BLOCKED_LOCAL;
     myIterationStatusLocal = ITERATION_BLOCKED_LOCAL;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-}
+}*/
 
 // Informs the ticker that the local port does not needs ticks
-void informIteratorLocalOff(){
+/*void informIteratorLocalOff(){
     unsigned short int iterAux = ITERATION_OFF_LOCAL;
     myIterationStatusLocal = ITERATION_OFF_LOCAL;
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-}
+}*/
 
 // Inform the iterator that the PE is waiting a packet 
 void informIterator(){
@@ -278,7 +278,7 @@ unsigned int bufferPop(unsigned int port){
     if (flitCountOut[port] == EMPTY){
         
         // inform the Iterator that this local port has finnished the transmittion of one packet
-        informIteratorLocalOff();
+        //informIteratorLocalOff();
 
         //Log info about the end of transmittion of a packet
         if (routingTable[port] == LOCAL){
@@ -339,7 +339,7 @@ unsigned int bufferPop(unsigned int port){
     return value;
 }
 
-void verifyLocalBuffer(){
+/*void verifyLocalBuffer(){
     // The local buffer has a special behavior - to create ordenation in the packets transmittion
     unsigned int access;
     if(myIterationStatusLocal == ITERATION_OFF_LOCAL && localBufferAmount >= 3){ // using "greater or equal to 3" because the sendtime is registered in the 3th flit
@@ -362,7 +362,7 @@ void verifyLocalBuffer(){
         }
         ppmPacketnetWrite(handles.iterationsPort, &buffers[LOCAL][access].data, sizeof(buffers[LOCAL][access].data)); // inform the sendtime to the iterator
     }
-}
+}*/
 
 #if ARBITER_RR
 // Select the port with the biggest priority
@@ -538,7 +538,7 @@ void transmitt(){
     // For each port...
     for(port = 0; port <= LOCAL; port++){
         // Verify if the local port is allowed to transmitt
-        if(port != LOCAL || (port == LOCAL && myIterationStatusLocal == ITERATION_RELEASED_LOCAL)){
+        //if(port != LOCAL || (port == LOCAL && myIterationStatusLocal == ITERATION_RELEASED_LOCAL)){
             // Verify if the port is routed and if it has something to transmmit 
             if((routingTable[port] < ND) && (!isEmpty(port))){
 
@@ -621,7 +621,7 @@ void transmitt(){
                     }
                 }
             }
-        }
+        //}
     }
 }
 
@@ -639,7 +639,7 @@ void iterate(){
     // Sends the iteration signal to the NI module
     iterateNI();
     // Verify if the LOCAL buffer has something to send
-    verifyLocalBuffer();
+    //verifyLocalBuffer();
     ////////////////////////////////////////////
     // Arbitration Process - defined in noc.h //
     ////////////////////////////////////////////
@@ -796,11 +796,10 @@ PPM_PACKETNET_CB(iterationPort) {
     currentTime = *(unsigned long long int *)data;
 
     //Checks if it is a local iteration
-    if((currentTime >> 31) == 1){
+    /*if((currentTime >> 31) == 1){
         myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
         currentTime = (unsigned long long int )(0x7FFFFFFFULL & currentTime);
-    }
-
+    }*/
     //Runs iterate
     iterate();
 }
