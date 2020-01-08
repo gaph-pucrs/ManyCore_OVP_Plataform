@@ -79,7 +79,7 @@ void setGO(){
 }
 
 void setSTALL(){
-    myStatus = GO;
+    myStatus = STALL;
     ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
 }
 
@@ -91,6 +91,7 @@ void statusUpdate(unsigned int status){
 }
 
 void informIteration(){
+    //bhmMessage("INFO", "ITERATIONPORT", "Informando iteracao - myInternalStatus: %x", internalStatus);
     unsigned long long int iterate = 0xFFFFFFFFFFFFFFFFULL;
     ppmPacketnetWrite(handles.controlPort, &iterate, sizeof(iterate));
 }
@@ -115,6 +116,7 @@ unsigned int readMem(unsigned int flit, unsigned int addr){
 }
 
 void niIteration(){
+    //bhmMessage("INFO", "ITERATIONPORT", "Recebendo iteracao - myInternalStatus: %x", internalStatus);
     if(internalStatus == TX && control_in_STALLGO == GO && transmittionEnd == FALSE){
         //flit = memory(transmittingAddress);
         //bhmMessage("I", "NIITERATION", "Count: %x",transmittingCount);
@@ -166,6 +168,7 @@ PPM_REG_WRITE_CB(addressWrite) {
         statusUpdate(IDLE);
     }
     else{
+        //bhmMessage("INFO", "ADDRWR", "Recebendo um endereço...\n");
         auxAddress = htonl(data);
         setSTALL(); // changing to TX state
     }
@@ -209,9 +212,11 @@ PPM_PACKETNET_CB(dataPortUpd) {
             writeMem(flit);
         }
     }
+    //bhmMessage("INFO", "RECEIVING", "==x=x=x=x=x=x=xx=x=x=x=: %x",receivingCount);
     // Detects the receiving finale
     if(receivingCount == EMPTY){
         setSTALL();
+        //bhmMessage("INFO", "RECEIVER", "====== = = = = = = Informing that a packet was received!\n");
         ppmWriteNet(handles.INTTC, 1);
     }
 }

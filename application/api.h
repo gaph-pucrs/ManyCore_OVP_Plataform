@@ -102,12 +102,14 @@ void interruptHandler(void) {
         }
         transmittingActive = WAIT;
         *NIcmd = DONE;
+        //LOG("%x INTERRUPCAO 1!\n",*myAddress);
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
         //LOG("%x - Chegou um pacote de entrega de mensagem!\n",*myAddress);
         receivingActive = 1; // Inform the index where the received packet is stored
         //LOG("\nChegou um pacote de entrega de mensagem! %d\n",receivingActive);
         *NIcmd = READING; // turn down the interruption
+        //LOG("%x INTERRUPCAO 2!\n",*myAddress);
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
         //LOG("%x - Chegou um pacote de requisicao fffffffede mensagem!\n",*myAddress);
@@ -119,7 +121,7 @@ void interruptHandler(void) {
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             pendingReq[getID(requester)] = MESSAGE_REQ;
             //LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
-        }
+        }       
     }
 }
 
@@ -167,6 +169,7 @@ void OVP_init(){
 // Verify if a message for a given requester is inside the buffer, if yes send it and return 1 else returns 0.
 unsigned int sendFromMsgBuffer(unsigned int requester){
     int i;
+    //LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
     unsigned int found = WAIT;
     unsigned int foundHist = WAIT;
     for(i=0;i<PACKET_BUFF_SIZE;i++){
@@ -180,12 +183,14 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         }
     }
     if(found != WAIT){
+    //LOG("~~~~> ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));       
         // Sends the packet
         SendRaw((unsigned int)&buffer_packets[found]);
         transmittingActive = found;
         return 1; // sent with success
     }
     else{
+        //LOG("~~~~> NAO! ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));   
         return 0; // packet is not in the buffer yet
     }
 }
@@ -196,8 +201,8 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     //unsigned int auxPacket[PACKET_MAX_SIZE];
     unsigned int i;
     // Sends the request to the transmitter
-    requestMsg(from);
     receivingActive = 0;
+    requestMsg(from);
     while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     // Alocate the packet message inside the structure
     theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
@@ -223,6 +228,7 @@ void requestMsg(unsigned int from){
     myServicePacket[PI_REQUESTER] = *myAddress;
     SendRaw((unsigned int)&myServicePacket);
     transmittingActive = 0xFFFFFFFE;
+    //LOG("=%d===========================REQ ENVIADO PRA NI!\n",getID(*myAddress));
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -306,7 +312,7 @@ unsigned int getID(unsigned int address){
 void SendRaw(unsigned int addr){
     while(*NIcmd!=IDLE && *NIcmd!=DONE){ /*LOG("eu: %x status:%x\n",*myAddress,*NIcmd);/*waits until NI is ready to execute an operation*/}
     *NIaddr = addr;
-    *NIcmd = TX;   
+    *NIcmd = TX;
 }
 
 ///////////////////////////////////////////////////////////////////
