@@ -95,33 +95,31 @@ void finishApplication();
 // Interruption function
 void interruptHandler(void) {
     int requester;
-    if(transmittingActive != WAIT){
+    if(transmittingActive != WAIT && incomingPacket[PI_SERVICE] == 0){
         if(transmittingActive < 0xFFFFFFFE){
             // Releses the buffer
             bufferPop(transmittingActive);
         }
         transmittingActive = WAIT;
         *NIcmd = DONE;
-        //LOG("%x INTERRUPCAO 1!\n",*myAddress);
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
-        //LOG("%x - Chegou um pacote de entrega de mensagem!\n",*myAddress);
+        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         receivingActive = 1; // Inform the index where the received packet is stored
-        //LOG("\nChegou um pacote de entrega de mensagem! %d\n",receivingActive);
         *NIcmd = READING; // turn down the interruption
-        //LOG("%x INTERRUPCAO 2!\n",*myAddress);
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        //LOG("%x - Chegou um pacote de requisicao fffffffede mensagem!\n",*myAddress);
         requester = incomingPacket[PI_REQUESTER];
         *NIcmd = READING; // turn down the interruption
-        //LOG("DEPOIS DO READING: %x\n",*NIcmd);
+        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         *NIcmd = DONE; // releases the NI to return to the IDLE state
-        //LOG("DEPOIS DO DONE: %x\n",*NIcmd);
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             pendingReq[getID(requester)] = MESSAGE_REQ;
-            //LOG("Mensagem ainda não está pronta myaddr: %x requester: %d  value: %d\n",*myAddress,getID(requester),pendingReq[getID(requester)]);
         }       
+    }
+    else{
+        LOG("ERROR! Unexpected interruption! - can not handle it! Call the SAC!\n");
+        while(1){}
     }
 }
 
@@ -226,8 +224,8 @@ void requestMsg(unsigned int from){
     myServicePacket[PI_SEND_TIME] = tsend;
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[PI_REQUESTER] = *myAddress;
-    SendRaw((unsigned int)&myServicePacket);
-    transmittingActive = 0xFFFFFFFE;
+    SendRaw((unsigned int)&myServicePacket); // WARNING: This may cause a problem!!!!
+    transmittingActive = 0xFFFFFFFE;         // Because the SendRaw could be interrupted during the execution (by the quantum end) and the transmittingActive is modified only after the execution.
     //LOG("=%d===========================REQ ENVIADO PRA NI!\n",getID(*myAddress));
 }
 

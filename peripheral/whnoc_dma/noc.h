@@ -24,7 +24,7 @@
 #define SENDTIME    0xFFFFFFFE
 #define SERVICE     0xFFFFFFFC
 #define PAYLOAD     0x00000000
-#define HOPS       0x00000002
+#define HOPS        0x00000002
 #define IN_TIME     0x00000001
 #define OUT_TIME    0x00000000
 
