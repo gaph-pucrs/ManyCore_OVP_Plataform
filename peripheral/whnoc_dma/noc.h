@@ -57,8 +57,6 @@
 #define FROM_IDLE           0x2525
 #define FROM_RX             0x3535
 
-
-
 // PreBuffer
 #define PREBUFFER_SIZE  25000
 

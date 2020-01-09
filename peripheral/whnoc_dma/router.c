@@ -277,9 +277,10 @@ unsigned int bufferPop(unsigned int port){
     // If the flitCountOut goes to EMPTY then the transmission is done!
     if (flitCountOut[port] == EMPTY){
         
-        // inform the Iterator that this local port has finnished the transmittion of one packet
-        informIteratorLocalOff();
-
+        if(port == LOCAL){
+            // inform the Iterator that this local port has finnished the transmittion of one packet
+            informIteratorLocalOff();
+        }
         //Log info about the end of transmittion of a packet
         if (routingTable[port] == LOCAL){
             value = ntohl(currentTime); // Register the out-iteration in the last flit
@@ -539,6 +540,7 @@ void transmitt(){
     for(port = 0; port <= LOCAL; port++){
         // Verify if the local port is allowed to transmitt
         if(port != LOCAL || (port == LOCAL && myIterationStatusLocal == ITERATION_RELEASED_LOCAL)){
+
             // Verify if the port is routed and if it has something to transmmit 
             if((routingTable[port] < ND) && (!isEmpty(port))){
 
@@ -800,7 +802,7 @@ PPM_PACKETNET_CB(iterationPort) {
         myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
         currentTime = (unsigned long long int )(0x7FFFFFFFULL & currentTime);
     }
-
+    //bhmMessage("INFO", "iteracao", "Recebendo iteração - %llu - LOCAL: %x", currentTime);
     //Runs iterate
     iterate();
 }

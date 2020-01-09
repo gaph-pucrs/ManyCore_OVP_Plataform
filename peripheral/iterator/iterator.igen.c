@@ -141,7 +141,8 @@ void releasePackets(send *sendV, int id){
 }
 
 // Send one iteration for each router that has something to send
-void runIterations(){  
+void runIterations(){ 
+    // bhmMessage("INFO", "Iteration", "Iteration %llu",iteration);
     iteration = iterationN;
     if((iterateMap[0] == ITERATION_ON)||(iterateMapLocal[0] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
     iteration = iterationN;
