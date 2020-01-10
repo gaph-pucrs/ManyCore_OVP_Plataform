@@ -144,6 +144,10 @@ void releasePackets(send *sendV, int id){
 void runIterations(){
     //bhmMessage("INFO", "Iterator", "%llu\n", iteration);
     iteration = iterationN;
+    /*int i;
+    for(i=0;i<N_PES;i++){
+        bhmMessage("INFO", "Iterate", "IterationMap[%d] = %d\n",i,iterateMap[i]);
+    }*/
     if((iterateMap[0] == ITERATION_ON)||(iterateMapLocal[0] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
     iteration = iterationN;
     if((iterateMap[1] == ITERATION_ON)||(iterateMapLocal[1] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));

@@ -99,6 +99,7 @@ int main(int argc, const char *argv[]) {
                 "I", "HARNESS",
                 "printPROC contador = %d",contador);*/
 
+                //opMessage("I", "HARNESS", "=x=x=x=x=x=x=x=x=x=x=> Executando novo processador...\n");
                 /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
                 stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
                 

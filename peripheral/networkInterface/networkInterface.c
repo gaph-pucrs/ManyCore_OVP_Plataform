@@ -119,7 +119,7 @@ void niIteration(){
     //bhmMessage("INFO", "ITERATIONPORT", "Recebendo iteracao - myInternalStatus: %x", internalStatus);
     if(internalStatus == TX && control_in_STALLGO == GO && transmittionEnd == FALSE){
         //flit = memory(transmittingAddress);
-        //bhmMessage("I", "NIITERATION", "Count: %x",transmittingCount);
+        //bhmMessage("I", "NIITERATION", "Count: %d",transmittingCount);
         ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
         if(!h) {
             bhmMessage("I", "NI_ITERATOR", "ERROR_READ h handling!");
@@ -128,6 +128,7 @@ void niIteration(){
         ppmReadAddressSpace(h, transmittingAddress, sizeof(chFlit), chFlit);
         ppmCloseAddressSpace(h);
         vec2usi();
+        //bhmMessage("INFO", "NIITERATION", "Enviando o flit %d\n",htonl(usFlit));
         if(transmittingCount == HEADER){
             transmittingCount = SIZE;
         }
@@ -144,6 +145,7 @@ void niIteration(){
         ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
+            //bhmMessage("INFO", "NIITERATION", "Terminando envio!!!\n");
             ppmWriteNet(handles.INTTC, 1);
             transmittionEnd = TRUE;
         }
@@ -242,9 +244,8 @@ PPM_REG_WRITE_CB(statusWrite) {
         }
         transmittingAddress = auxAddress;
         transmittingCount = HEADER;
-        // Change the local status to STALL
-        setSTALL();
-        niIteration();
+        setSTALL();     // Change the local status to STALL 
+        niIteration();  // Send a flit to the ROUTER, this way it will inform the iterator that this PE is waiting for "iterations"
     }
     else if(command == READING){
         if(internalStatus == RX){
