@@ -16,15 +16,9 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i;
-    theMessage.size = MESSAGE_SIZE;
-    for(i=0;i<theMessage.size;i++){
-        theMessage.msg[i] = (i+1)*2;
+    while(*NIcmd == IDLE){
+        i = *NIcmd;
     }
-    for(i=0;i<N_MESSAGES;i++){
-        SendMessage(&theMessage, transpose0_addr);
-        ReceiveMessage(&theMessage, transpose0_addr);
-    }
-    
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

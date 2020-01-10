@@ -42,4 +42,4 @@
 //////////////////////////////////////
 // Task defines //////////////////////
 #define N_MESSAGES 25
-#define MESSAGE_SIZE 120
+#define MESSAGE_SIZE 33

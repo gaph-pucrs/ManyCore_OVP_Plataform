@@ -84,9 +84,6 @@ unsigned int contPriority[N_PORTS] = {0,0,0,0,1};
 // Stores the atual router tick status
 unsigned short int myIterationStatus = ITERATION_OFF;
 
-// Stores the prebuffer autorization tick
-//unsigned short int myIterationStatusLocal = ITERATION_OFF_LOCAL;
-//unsigned short int myIterationStatusLocal = ITERATION_RELEASED_LOCAL;
 // Gets the actual "time" of the system
 unsigned long long int currentTime; // %llu
 
@@ -126,26 +123,13 @@ void turn_TickOff(){
     ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
-// Informs the ticker that the local port needs ticks
-/*void informIteratorLocalOn(){
-    unsigned short int iterAux = ITERATION_BLOCKED_LOCAL;
-    myIterationStatusLocal = ITERATION_BLOCKED_LOCAL;
-    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-}*/
-
-// Informs the ticker that the local port does not needs ticks
-/*void informIteratorLocalOff(){
-    unsigned short int iterAux = ITERATION_OFF_LOCAL;
-    myIterationStatusLocal = ITERATION_OFF_LOCAL;
-    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-}*/
-
 // Inform the iterator that the PE is waiting a packet 
 void informIterator(){
-    //if(myIterationStatusLocal == ITERATION_RELEASED_LOCAL || localBufferAmount <= 4){
+    if(myAddress==0x55){
+        //bhmMessage("INFO", "TICK", "INFORMANDO TICK!");
         unsigned short int iterAux = ITERATION;
         ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-    //}
+    }
 }
 
 void iterateNI(){
@@ -228,7 +212,6 @@ void bufferStatusUpdate(unsigned int port){
 
 void bufferPush(unsigned int port){
     // Write a new flit in the buffer
-    //if(myID == 3)bhmMessage("I", "BUFFERPUSH", "Chegou: %x no buffer %d", htonl(incomingFlit.data), port);
     buffers[port][last[port]] = incomingFlit;
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;
@@ -276,9 +259,6 @@ unsigned int bufferPop(unsigned int port){
     
     // If the flitCountOut goes to EMPTY then the transmission is done!
     if (flitCountOut[port] == EMPTY){
-        
-        // inform the Iterator that this local port has finnished the transmittion of one packet
-        //informIteratorLocalOff();
 
         //Log info about the end of transmittion of a packet
         if (routingTable[port] == LOCAL){
@@ -298,15 +278,15 @@ unsigned int bufferPop(unsigned int port){
             turn_TickOff();
         }
         
-        #if ARBITER_RR
+#if ARBITER_RR
         // Reset it's priority
         priority[port] = 0;
-        #endif
+#endif
 
-        /*#if ARBITER_TTL //////// ACHO QUE DA PRA TIRAR ISSO. JÁ PARECE ESTAR GARANTIDO PELA FUNCAO searchAndAllocate
+/*#if ARBITER_TTL //////// ACHO QUE DA PRA TIRAR ISSO. JÁ PARECE ESTAR GARANTIDO PELA FUNCAO searchAndAllocate
         // Reset it's priority
         contPriority[port] = 0;
-        #endif*/    
+#endif*/    
     }
     else if(port == LOCAL && flitCountOut[port] == HEADER-1){
         localBuffer_packetDest = htonl(value);
@@ -330,8 +310,6 @@ unsigned int bufferPop(unsigned int port){
     else if(port == LOCAL && flitCountOut[port] == IN_TIME){
         value = ntohl(enteringTime);
     }
-    
-    //bhmMessage("I", "BPOP", "Status: E-%d, W-%d, N-%d, S-%d, L-%d",isEmpty(EAST), isEmpty(WEST), isEmpty(NORTH), isEmpty(SOUTH), isEmpty(LOCAL));
 
     // Update the buffer status
     bufferStatusUpdate(port);
