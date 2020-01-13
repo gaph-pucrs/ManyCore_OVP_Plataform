@@ -1,5 +1,5 @@
 #include <time.h>
-#include "../peripheral/whnoc/noc.h"
+#include "../../../peripheral/whnoc/noc.h"
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;

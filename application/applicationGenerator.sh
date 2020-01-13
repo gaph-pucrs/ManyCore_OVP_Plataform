@@ -7,6 +7,9 @@ APP_NAME=$3
 N=$(($X*$Y))
 N=$(($N-1))
 
+rm *.c
+rm *.h
+
 for i in $(seq 0 $N);
 do
 	if [ ! -z "$APP_NAME" ] 
@@ -50,6 +53,7 @@ do
     done
 done
 
+python3 applicationMapping.py $X $Y
 
 # X=$1
 # Y=$2
