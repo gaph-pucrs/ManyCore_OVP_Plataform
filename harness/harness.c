@@ -22,7 +22,7 @@ struct optionsS {
 } options = {
     .configurecpuinstance = False,
 };
-int N_PES =36;
+int N_PES =64;
 
 
 static OP_POST_SIMULATE_FN(modulePostSimulate) {

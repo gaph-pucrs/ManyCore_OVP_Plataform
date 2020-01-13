@@ -134,6 +134,62 @@ void releasePackets(send *sendV, int id){
             ppmPacketnetWrite(handles.iterationPort34, &iteration, sizeof(iteration));
         }else if(sendV[id + i].idPE == 35){
             ppmPacketnetWrite(handles.iterationPort35, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 36){
+            ppmPacketnetWrite(handles.iterationPort36, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 37){
+            ppmPacketnetWrite(handles.iterationPort37, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 38){
+            ppmPacketnetWrite(handles.iterationPort38, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 39){
+            ppmPacketnetWrite(handles.iterationPort39, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 40){
+            ppmPacketnetWrite(handles.iterationPort40, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 41){
+            ppmPacketnetWrite(handles.iterationPort41, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 42){
+            ppmPacketnetWrite(handles.iterationPort42, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 43){
+            ppmPacketnetWrite(handles.iterationPort43, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 44){
+            ppmPacketnetWrite(handles.iterationPort44, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 45){
+            ppmPacketnetWrite(handles.iterationPort45, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 46){
+            ppmPacketnetWrite(handles.iterationPort46, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 47){
+            ppmPacketnetWrite(handles.iterationPort47, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 48){
+            ppmPacketnetWrite(handles.iterationPort48, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 49){
+            ppmPacketnetWrite(handles.iterationPort49, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 50){
+            ppmPacketnetWrite(handles.iterationPort50, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 51){
+            ppmPacketnetWrite(handles.iterationPort51, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 52){
+            ppmPacketnetWrite(handles.iterationPort52, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 53){
+            ppmPacketnetWrite(handles.iterationPort53, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 54){
+            ppmPacketnetWrite(handles.iterationPort54, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 55){
+            ppmPacketnetWrite(handles.iterationPort55, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 56){
+            ppmPacketnetWrite(handles.iterationPort56, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 57){
+            ppmPacketnetWrite(handles.iterationPort57, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 58){
+            ppmPacketnetWrite(handles.iterationPort58, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 59){
+            ppmPacketnetWrite(handles.iterationPort59, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 60){
+            ppmPacketnetWrite(handles.iterationPort60, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 61){
+            ppmPacketnetWrite(handles.iterationPort61, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 62){
+            ppmPacketnetWrite(handles.iterationPort62, &iteration, sizeof(iteration));
+        }else if(sendV[id + i].idPE == 63){
+            ppmPacketnetWrite(handles.iterationPort63, &iteration, sizeof(iteration));
         }
     }
     // Remove the MSB from the iteration counter
@@ -141,13 +197,8 @@ void releasePackets(send *sendV, int id){
 }
 
 // Send one iteration for each router that has something to send
-void runIterations(){
-    //bhmMessage("INFO", "Iterator", "%llu\n", iteration);
+void runIterations(){  
     iteration = iterationN;
-    /*int i;
-    for(i=0;i<N_PES;i++){
-        bhmMessage("INFO", "Iterate", "IterationMap[%d] = %d\n",i,iterateMap[i]);
-    }*/
     if((iterateMap[0] == ITERATION_ON)||(iterateMapLocal[0] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
     iteration = iterationN;
     if((iterateMap[1] == ITERATION_ON)||(iterateMapLocal[1] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));
@@ -219,6 +270,62 @@ void runIterations(){
     if((iterateMap[34] == ITERATION_ON)||(iterateMapLocal[34] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort34, &iteration, sizeof(iteration));
     iteration = iterationN;
     if((iterateMap[35] == ITERATION_ON)||(iterateMapLocal[35] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort35, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[36] == ITERATION_ON)||(iterateMapLocal[36] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort36, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[37] == ITERATION_ON)||(iterateMapLocal[37] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort37, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[38] == ITERATION_ON)||(iterateMapLocal[38] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort38, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[39] == ITERATION_ON)||(iterateMapLocal[39] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort39, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[40] == ITERATION_ON)||(iterateMapLocal[40] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort40, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[41] == ITERATION_ON)||(iterateMapLocal[41] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort41, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[42] == ITERATION_ON)||(iterateMapLocal[42] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort42, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[43] == ITERATION_ON)||(iterateMapLocal[43] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort43, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[44] == ITERATION_ON)||(iterateMapLocal[44] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort44, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[45] == ITERATION_ON)||(iterateMapLocal[45] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort45, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[46] == ITERATION_ON)||(iterateMapLocal[46] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort46, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[47] == ITERATION_ON)||(iterateMapLocal[47] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort47, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[48] == ITERATION_ON)||(iterateMapLocal[48] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort48, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[49] == ITERATION_ON)||(iterateMapLocal[49] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort49, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[50] == ITERATION_ON)||(iterateMapLocal[50] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort50, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[51] == ITERATION_ON)||(iterateMapLocal[51] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort51, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[52] == ITERATION_ON)||(iterateMapLocal[52] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort52, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[53] == ITERATION_ON)||(iterateMapLocal[53] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort53, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[54] == ITERATION_ON)||(iterateMapLocal[54] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort54, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[55] == ITERATION_ON)||(iterateMapLocal[55] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort55, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[56] == ITERATION_ON)||(iterateMapLocal[56] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort56, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[57] == ITERATION_ON)||(iterateMapLocal[57] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort57, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[58] == ITERATION_ON)||(iterateMapLocal[58] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort58, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[59] == ITERATION_ON)||(iterateMapLocal[59] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort59, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[60] == ITERATION_ON)||(iterateMapLocal[60] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort60, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[61] == ITERATION_ON)||(iterateMapLocal[61] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort61, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[62] == ITERATION_ON)||(iterateMapLocal[62] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort62, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    if((iterateMap[63] == ITERATION_ON)||(iterateMapLocal[63] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort63, &iteration, sizeof(iteration));
 }
 
 // Insertion Sort function used to sort packet input time in the NoC
@@ -247,17 +354,15 @@ void statusHandler(unsigned int router, unsigned int status){
             break;
         }
     }
-    //bhmMessage("INFO", "STATUSHANDLER", "mapOr %d", mapOr);
     // if YES then iteration is incremented...
     if((status == ITERATION) && (mapOr)){
         iterationN++;
         // if it is time to release new packets...
-        /*if(iterationN == nextLocalIteration){
+        if(iterationN == nextLocalIteration){
             bhmTriggerEvent(releaseLocal);
         }else{ // else, just deliver iterations to every router
             runIterations();
-        }*/
-        runIterations();
+        }
     // if NO, then it is a status update for the local port or... 
     }else if((status == ITERATION_BLOCKED_LOCAL) || (status == ITERATION_OFF_LOCAL)){
         iterateMapLocal[router] = status;
@@ -1138,6 +1243,678 @@ PPM_PACKETNET_CB(iteration35) {
         sendVector[contTotal-1] = newSend;
     }
 }
+PPM_PACKETNET_CB(iteration36) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(36, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 36;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration37) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(37, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 37;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration38) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(38, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 38;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration39) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(39, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 39;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration40) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(40, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 40;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration41) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(41, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 41;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration42) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(42, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 42;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration43) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(43, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 43;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration44) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(44, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 44;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration45) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(45, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 45;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration46) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(46, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 46;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration47) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(47, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 47;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration48) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(48, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 48;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration49) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(49, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 49;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration50) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(50, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 50;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration51) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(51, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 51;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration52) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(52, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 52;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration53) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(53, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 53;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration54) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(54, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 54;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration55) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(55, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 55;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration56) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(56, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 56;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration57) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(57, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 57;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration58) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(58, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 58;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration59) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(59, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 59;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration60) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(60, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 60;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration61) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(61, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 61;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration62) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(62, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 62;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
+PPM_PACKETNET_CB(iteration63) {
+    // If bytes == 2 then we have a status change or a iteration request
+    if(bytes == 2){
+        unsigned int status = *(unsigned int *)data;
+        status = status & 0xFFFF;
+        statusHandler(63, status);
+    // In other case, we have the information about a new packet incoming in the preBuffer
+    }else{
+        send newSend;
+        newSend.time = htonl(*(unsigned int *)data);
+        newSend.idPE = 63;
+        newSend.start = 0;
+        newSend.equals = 0;
+        contTotal++;
+        //if(sizeof(sendVector)/sizeof(sendVector[0]) != contTotal){
+        sendVector = (send*) realloc (sendVector, contTotal * sizeof (send));
+        if(sendVector == NULL){
+            bhmMessage("I", "ITERATOR", "ERROR - REALLOC RETURN NULL");
+            while(1){}
+        }
+        //}
+        sendVector[contTotal-1] = newSend;
+    }
+}
 
 PPM_CONSTRUCTOR_CB(constructor) {
     periphConstructor();
@@ -1181,11 +1958,11 @@ int main(int argc, char *argv[]) {
     constructor();
 
     
-    //int i, j, aux;
+    int i, j, aux;
     // Run is 1 if has somehing to transmit in any local ports
-    //int run = 0;
+    int run = 0;
 
-    //send *sendV;
+    send *sendV;
 
     //Event releaseLocal will be triggered when the next packet can be sended in LOCAL!!
     releaseLocal = bhmCreateNamedEvent("start","releases a packet to the Local port");
@@ -1195,13 +1972,13 @@ int main(int argc, char *argv[]) {
         // Wait until the next quantum 
         bhmWaitDelay(QUANTUM_DELAY);
         bhmMessage("I", "ITERATOR", "------>>>>>> FIM DO QUANTUM!");
-    }    /*int k;
+        /*int k;
         for(k=0;k<25;k++){
             iterationN++;
             runIterations();
         }*/
         
-    /*    // Reading values from the previous quantum
+        // Reading values from the previous quantum
         cont = contTotal;
         contTotal = 0;
         sendV = malloc (cont * sizeof (send));
@@ -1288,7 +2065,7 @@ int main(int argc, char *argv[]) {
             cont=0;
             run = 0;
         } 
-    }*/
+    }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
