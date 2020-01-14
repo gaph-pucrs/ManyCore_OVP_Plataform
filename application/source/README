@@ -1,0 +1,13 @@
+Atualizado em: 14/01/2020 - Iaçanã Weber
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+Todas as aplicações disponibilizadas no repositório "source" devem atender aos seguintes requerimentos:
+
+1 - O nome da pasta da aplicação é o nome da aplicação.
+2 - Cada arquivo .c dentro da pasta é uma tarefa que compõe a aplicação.
+3 - Dentro da pasta da aplicação é necessario que exista um header (.h) nomeado da seguinte forma: APPLICATION_NAME_config.h
+    - Por exemplo, a aplicação "prodcons" possui o arquivo "prodcons_config.h"
+    - É recomendável deixar uma linha em branco ao final do arquivo header
+4 - Quando o script instancia as aplicações no SoC ele irá criar automaticamente os endereços das tarefas
+    - Os endereços seguem o seguinte padrão: TASK_NAME_addr
+    - Por exemplo, a aplicação "prodcons" possui duas tarefas "prod" e "cons" e seus endereços serão definidos por, "prod_addr" e "cons_addr", respectivamente.
+///////////////////////////////////////////////////////////////////////////////////////////////////////
