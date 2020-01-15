@@ -200,15 +200,16 @@ PPM_PACKETNET_CB(controlPortUpd) {
 PPM_PACKETNET_CB(dataPortUpd) {
     unsigned int flit = *((unsigned int*)data);
     // This will happen if the NI is receiving a service packet when it is in a idle state
-    if(internalStatus == IDLE){
-        statusUpdate(RX);
+    if(control_RX == OFF){
+        //statusUpdate(RX);
+        control_RX = ON;
         resetAddress();
         receivingField = HEADER;
         receivingCount = 0xFF; // qqrcoisa
         setGO();
     }
     // Receiving process
-    if(internalStatus == RX){
+    if(control_RX == ON){
         if(receivingField == HEADER){
             receivingField = SIZE;
             writeMem(flit, receivingAddress);
@@ -230,8 +231,11 @@ PPM_PACKETNET_CB(dataPortUpd) {
     // Detects the receiving finale
     if(receivingCount == EMPTY){
         setSTALL();
-        //bhmMessage("INFO", "RECEIVER", "====== = = = = = = Informing that a packet was received!\n");
-        ppmWriteNet(handles.INTTC, 1);
+        if(control_TX != INTERRUPTION){
+            control_RX = INTERRUPTION;
+            writeMem(INT_TYPE_RX, intTypeAddr); // Writes the interruption type to the processor
+            ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
+        }
     }
 }
 
