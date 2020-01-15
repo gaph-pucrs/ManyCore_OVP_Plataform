@@ -44,6 +44,9 @@ volatile unsigned int *NIcmd = NI_BASE + 0x0;
 #define WAIT_PE            0x4444
 #define DONE               0x5555
 #define READING            0x6666
+#define INT_TYPE_CLEAR     0x0000
+#define INT_TYPE_TX        0xF222
+#define INT_TYPE_RX        0xF333
 
 // Message type
 typedef struct Message {
@@ -56,6 +59,7 @@ volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
 volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
 volatile unsigned int receivingActive;
 volatile unsigned int transmittingActive = WAIT;
+volatile unsigned int interruptionType = 0;
 
 // Message buffer
 unsigned int buffer_packets[PACKET_BUFF_SIZE][PACKET_MAX_SIZE];
@@ -95,7 +99,43 @@ void finishApplication();
 // Interruption function
 void interruptHandler(void) {
     int requester;
-    if(transmittingActive != WAIT && incomingPacket[PI_SERVICE] == 0){
+    if(interruptionType == INT_TYPE_RX){
+        if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
+            incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
+            receivingActive = 1; // Inform the index where the received packet is stored
+            *NIcmd = READING; // turn down the interruption
+        }
+        else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
+            requester = incomingPacket[PI_REQUESTER];
+            *NIcmd = READING; // turn down the interruption
+            incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
+            *NIcmd = DONE; // releases the NI to return to the IDLE state
+            if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+                pendingReq[getID(requester)] = MESSAGE_REQ;
+            }       
+        }
+    }
+    else if(interruptionType == INT_TYPE_TX){
+        if(transmittingActive > PACKET_BUFF_SIZE){
+            LOG("ERROR! Unexpected interruption! - can not handle it! Call the SAC!\n");
+            while(1){}
+        }
+        else{
+            // Releses the buffer
+            bufferPop(transmittingActive);
+            transmittingActive = WAIT;
+            *NIcmd = DONE;
+        }
+    }
+    else{
+        LOG("ERROR! Unexpected interruption! - can not handle it! Call the SAC!\n");
+        while(1){}
+    }
+    // Reset the interruptionType
+    interruptionType = INT_TYPE_CLEAR; 
+}
+
+    /*if(transmittingActive != WAIT && incomingPacket[PI_SERVICE] == 0){
         if(transmittingActive < 0xFFFFFFFE){
             // Releses the buffer
             bufferPop(transmittingActive);
@@ -121,7 +161,7 @@ void interruptHandler(void) {
         LOG("ERROR! Unexpected interruption! - can not handle it! Call the SAC!\n");
         while(1){}
     }
-}
+}*/
 
 ///////////////////////////////////////////////////////////////////
 // Initiation function
@@ -139,8 +179,9 @@ void OVP_init(){
     *myAddress = impProcessorId();
     LOG("Starting ROUTER %x application! \n", *myAddress);
 
-    // Inform the NI addresses to store the incomming packets
+    // Inform the NI addresses to store the incomming packets and then the interruptionType address
     *NIaddr = (unsigned int)&incomingPacket;
+    *NIaddr = (unsigned int)&interruptionType;
  
     // Initiate the packets buffer map to free
     int o;
