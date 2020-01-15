@@ -30,6 +30,7 @@ unsigned int internalStatus = IDLE;     // IDLE - waiting for a TX or a RX
                                         // RX   - receiving a packet --- (i) actived by processor command -pulling- (ii) service packet -interruption-
 unsigned int myStatus = GO;             // the availability to receive something from the NoC and write it in the memory
 unsigned int auxAddress;                // Auxiliar address to store temporarily the address incomming address from the processor
+unsigned int intTypeAddr = 0xFFFFFFFF;  // Stores the address to write the interruptionType
 
 // RX Variables
 unsigned int addressStart = 0xFFFFFFFF;
@@ -42,6 +43,10 @@ unsigned int transmittingAddress = 0;   // Stores TX packet address
 unsigned int transmittionEnd = FALSE;
 unsigned int transmittingCount = HEADER;// Counts the amount of remaining flits to be transmitted
 unsigned int control_in_STALLGO = GO;   // Stores the router input buffer status
+
+// Status control variables
+unsigned int control_TX = OFF;
+unsigned int control_RX = OFF;
 
 //
 char chFlit[4];
@@ -96,7 +101,7 @@ void informIteration(){
     ppmPacketnetWrite(handles.controlPort, &iterate, sizeof(iterate));
 }
 
-void writeMem(unsigned int flit){
+void writeMem(unsigned int flit, unsigned int addr){
     usFlit = flit;
     usi2vec();
     ppmAddressSpaceHandle h = ppmOpenAddressSpace("MWRITE");
@@ -104,50 +109,51 @@ void writeMem(unsigned int flit){
         bhmMessage("I", "NI_ITERATOR", "ERROR_WRITE h handling!");
         while(1){} // error handling
     }
-    ppmWriteAddressSpace(h, receivingAddress, sizeof(chFlit), chFlit);
+    ppmWriteAddressSpace(h, addr, sizeof(chFlit), chFlit);
     ppmCloseAddressSpace(h);
-    // Increments the pointer, to write the next flit
-    receivingAddress = receivingAddress+4;
 }
 
-unsigned int readMem(unsigned int flit, unsigned int addr){
+unsigned int readMem(unsigned int addr){
     //TODO encapsular o envio nesta funcao
     return 0;
 }
 
 void niIteration(){
     //bhmMessage("INFO", "ITERATIONPORT", "Recebendo iteracao - myInternalStatus: %x", internalStatus);
-    if(internalStatus == TX && control_in_STALLGO == GO && transmittionEnd == FALSE){
-        //flit = memory(transmittingAddress);
-        //bhmMessage("I", "NIITERATION", "Count: %d",transmittingCount);
-        ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
-        if(!h) {
-            bhmMessage("I", "NI_ITERATOR", "ERROR_READ h handling!");
-            while(1){} // error handling
+    if(control_TX == ON && control_in_STALLGO == GO){
+        // If the transmittion isn't finished yet...
+        if(transmittingCount != EMPTY){
+            // READ - encapsular
+            ppmAddressSpaceHandle h = ppmOpenAddressSpace("MREAD");
+            if(!h) {
+                bhmMessage("I", "NI_ITERATOR", "ERROR_READ h handling!");
+                while(1){} // error handling
+            }
+            ppmReadAddressSpace(h, transmittingAddress, sizeof(chFlit), chFlit);
+            ppmCloseAddressSpace(h);
+            vec2usi(); // transform the data from vector to a single unsigned int
+            // READ - encapsular
+            //bhmMessage("INFO", "NIITERATION", "Enviando o flit %d\n",htonl(usFlit));
+            if(transmittingCount == HEADER){
+                transmittingCount = SIZE;
+            }
+            else if(transmittingCount == SIZE){
+                transmittingCount = htonl(usFlit);
+            }
+            else{
+                transmittingCount = transmittingCount - 1;
+            }
+            // Increments the memory pointer
+            transmittingAddress = transmittingAddress + 4;
+            // Sends the data to the local router
+            ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         }
-        ppmReadAddressSpace(h, transmittingAddress, sizeof(chFlit), chFlit);
-        ppmCloseAddressSpace(h);
-        vec2usi();
-        //bhmMessage("INFO", "NIITERATION", "Enviando o flit %d\n",htonl(usFlit));
-        if(transmittingCount == HEADER){
-            transmittingCount = SIZE;
-        }
-        else if(transmittingCount == SIZE){
-            //vec2usi(); // transform the data from vector to a single unsigned int
-            transmittingCount = htonl(usFlit);
-        }
-        else{
-            transmittingCount = transmittingCount - 1;
-        }
-        // Increments the memory pointer
-        transmittingAddress = transmittingAddress + 4;
-        // Sends the data to the local router
-        ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         // If the packet transmittion is done, change the NI status to IDLE
-        if(transmittingCount == EMPTY){
+        if(transmittingCount == EMPTY && control_RX != INTERRUPTION){
             //bhmMessage("INFO", "NIITERATION", "Terminando envio!!!\n");
-            ppmWriteNet(handles.INTTC, 1);
-            transmittionEnd = TRUE;
+            control_TX = INTERRUPTION; // Changes the TX status to INTERRUPTION
+            writeMem(INT_TYPE_TX, intTypeAddr); // Writes the interruption type to the processor
+            ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
         }
     }
 }
@@ -164,9 +170,12 @@ PPM_REG_READ_CB(addressRead) {
 }
 
 PPM_REG_WRITE_CB(addressWrite) {
-    // In the beggining of everything the PE will write two addresses in the NI. They will be used to write the incomming packets
+    // In the beggining of everything the PE will write two addresses in the NI. They will be used to write the incomming packet and the interruptiontype(RX or TX) 
     if(addressStart == 0xFFFFFFFF){
         addressStart = htonl(data);
+    }
+    else if(intTypeAddr == 0xFFFFFFFF){
+        intTypeAddr = htonl(data);
         statusUpdate(IDLE);
     }
     else{
@@ -202,16 +211,19 @@ PPM_PACKETNET_CB(dataPortUpd) {
     if(internalStatus == RX){
         if(receivingField == HEADER){
             receivingField = SIZE;
-            writeMem(flit);
+            writeMem(flit, receivingAddress);
+            receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
         }
         else if(receivingField == SIZE){
             receivingField = PAYLOAD;
             receivingCount = htonl(flit);
-            writeMem(flit);
+            writeMem(flit, receivingAddress);
+            receivingAddress = receivingAddress + 4;     // Increments the pointer, to write the next flit
         }
         else{
             receivingCount = receivingCount - 1;
-            writeMem(flit);
+            writeMem(flit, receivingAddress);
+            receivingAddress = receivingAddress + 4;     // Increments the pointer, to write the next flit
         }
     }
     //bhmMessage("INFO", "RECEIVING", "==x=x=x=x=x=x=xx=x=x=x=: %x",receivingCount);
