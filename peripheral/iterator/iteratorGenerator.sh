@@ -125,7 +125,7 @@ echo "void runIterations(){  " >> iterator.igen.c
 for i in $(seq 0 $N)
 do
     echo "    iteration = iterationN;" >> iterator.igen.c
-    echo "    if((iterateMap["$i"] == ITERATION_ON)||(iterateMapLocal["$i"] == ITERATION_RELEASED_LOCAL)) ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iterator.igen.c
+    echo "    /*if((iterateMap["$i"] == ITERATION_ON)||(iterateMapLocal["$i"] == ITERATION_RELEASED_LOCAL))*/ ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iterator.igen.c
 done
 echo "}" >> iterator.igen.c
 echo "" >> iterator.igen.c
@@ -147,7 +147,7 @@ echo "" >> iterator.igen.c
 echo "// Handles the incomming status from a router" >> iterator.igen.c
 echo "void statusHandler(unsigned int router, unsigned int status){" >> iterator.igen.c
 echo "    int i;" >> iterator.igen.c
-echo "    int mapOr = 0;" >> iterator.igen.c
+echo "    int mapOr = 1; // 0" >> iterator.igen.c
 echo "    // Verify if any PE has something to send..." >> iterator.igen.c
 echo "    for(i=0;i<N_PES;i++){" >> iterator.igen.c
 echo "        if((iterateMap[i]==ITERATION_ON)||(cont!=0)){" >> iterator.igen.c
