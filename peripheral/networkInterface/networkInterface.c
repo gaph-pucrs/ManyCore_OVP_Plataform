@@ -45,8 +45,8 @@ unsigned int transmittingCount = HEADER;// Counts the amount of remaining flits 
 unsigned int control_in_STALLGO = GO;   // Stores the router input buffer status
 
 // Status control variables
-unsigned int control_TX = OFF;
-unsigned int control_RX = OFF;
+unsigned int control_TX = NI_STATUS_OFF;
+unsigned int control_RX = NI_STATUS_OFF;
 
 //
 char chFlit[4];
@@ -120,7 +120,7 @@ unsigned int readMem(unsigned int addr){
 
 void niIteration(){
     //bhmMessage("INFO", "ITERATIONPORT", "Recebendo iteracao - myInternalStatus: %x", internalStatus);
-    if(control_TX == ON && control_in_STALLGO == GO){
+    if(control_TX == NI_STATUS_ON && control_in_STALLGO == GO){
         // If the transmittion isn't finished yet...
         if(transmittingCount != EMPTY){
             // READ - encapsular
@@ -133,7 +133,7 @@ void niIteration(){
             ppmCloseAddressSpace(h);
             vec2usi(); // transform the data from vector to a single unsigned int
             // READ - encapsular
-            //bhmMessage("INFO", "NIITERATION", "Enviando o flit %d\n",htonl(usFlit));
+            //bhmMessage("INFO", "NIITERATION", "Enviando o flit %x\n",htonl(usFlit));
             if(transmittingCount == HEADER){
                 transmittingCount = SIZE;
             }
@@ -149,12 +149,21 @@ void niIteration(){
             ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         }
         // If the packet transmittion is done, change the NI status to IDLE
-        if(transmittingCount == EMPTY && control_RX != INTERRUPTION){
+        //bhmMessage("INFO", "NIITERATION", "transmittingCount %x - control_RX %x - control_TX %x\n",transmittingCount, control_RX, control_TX);
+        if(transmittingCount == EMPTY && control_RX != NI_STATUS_INTER){
             //bhmMessage("INFO", "NIITERATION", "Terminando envio!!!\n");
-            control_TX = INTERRUPTION; // Changes the TX status to INTERRUPTION
-            writeMem(INT_TYPE_TX, intTypeAddr); // Writes the interruption type to the processor
+            control_TX = NI_STATUS_INTER; // Changes the TX status to INTERRUPTION
+            writeMem(htonl(NI_INT_TYPE_TX), intTypeAddr); // Writes the interruption type to the processor
             ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
         }
+    }
+
+    // This is needed to handle the interruption delivery when the packet arrived during another interruption
+    if(control_RX == NI_STATUS_ON && receivingCount == EMPTY && control_TX != NI_STATUS_INTER){
+        //bhmMessage("INFO", "NIITERATION", "-------------------------------___SPECIAL!!!!\n");
+        control_RX = NI_STATUS_INTER;
+        writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
+        ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
     }
 }
 
@@ -181,7 +190,7 @@ PPM_REG_WRITE_CB(addressWrite) {
     else{
         //bhmMessage("INFO", "ADDRWR", "Recebendo um endereço...\n");
         auxAddress = htonl(data);
-        setSTALL(); // changing to TX state
+        //setSTALL(); // changing to TX state
     }
     *(Uns32*)user = data;
 }
@@ -199,17 +208,18 @@ PPM_PACKETNET_CB(controlPortUpd) {
 // Receiving a flit from the router...
 PPM_PACKETNET_CB(dataPortUpd) {
     unsigned int flit = *((unsigned int*)data);
+    //bhmMessage("I", "FLIT", "Flit: %x\n",htonl(flit));
     // This will happen if the NI is receiving a service packet when it is in a idle state
-    if(control_RX == OFF){
+    if(control_RX == NI_STATUS_OFF){
         //statusUpdate(RX);
-        control_RX = ON;
+        control_RX = NI_STATUS_ON;
         resetAddress();
         receivingField = HEADER;
         receivingCount = 0xFF; // qqrcoisa
         setGO();
     }
     // Receiving process
-    if(control_RX == ON){
+    if(control_RX == NI_STATUS_ON){
         if(receivingField == HEADER){
             receivingField = SIZE;
             writeMem(flit, receivingAddress);
@@ -219,28 +229,30 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingField = PAYLOAD;
             receivingCount = htonl(flit);
             writeMem(flit, receivingAddress);
-            receivingAddress = receivingAddress + 4;     // Increments the pointer, to write the next flit
+            receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
         }
         else{
             receivingCount = receivingCount - 1;
             writeMem(flit, receivingAddress);
-            receivingAddress = receivingAddress + 4;     // Increments the pointer, to write the next flit
+            receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
         }
     }
     //bhmMessage("INFO", "RECEIVING", "==x=x=x=x=x=x=xx=x=x=x=: %x",receivingCount);
+    //bhmMessage("INFO", "NIITERATION", "receivingCount %x - control_RX %x - control_TX %x\n",receivingCount, control_RX, control_TX);
     // Detects the receiving finale
     if(receivingCount == EMPTY){
         setSTALL();
-        if(control_TX != INTERRUPTION){
-            control_RX = INTERRUPTION;
-            writeMem(INT_TYPE_RX, intTypeAddr); // Writes the interruption type to the processor
+        if(control_TX != NI_STATUS_INTER){
+            control_RX = NI_STATUS_INTER;
+            writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
             ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
         }
     }
 }
 
 PPM_REG_READ_CB(statusRead) {
-    //DMAC_ab8_data.status.value = internalStatus;
+    DMAC_ab8_data.status.value = htonl(control_TX);
+    //bhmMessage("INFO", "INFORMINGITERATION", "Informando iteracao!\n");
     informIteration();  // When the processor is reading the NI status, we have one of two situations: 
                         //      (i) the processor is blocked by a Receive() function or
                         //      (ii) it is waiting the NI to enter in IDLE to start a new transmittion
@@ -250,40 +262,40 @@ PPM_REG_READ_CB(statusRead) {
 
 PPM_REG_WRITE_CB(statusWrite) {
     unsigned int command = htonl(data);
+    //bhmMessage("I", "COMANDO", "Recebido %x\n",command);
     if(command == TX){
-        if(internalStatus == IDLE){
-            statusUpdate(TX);
-            setSTALL();
+        if(control_TX == NI_STATUS_OFF){
+            control_TX = NI_STATUS_ON;
+            transmittingAddress = auxAddress;
+            transmittingCount = HEADER;
+            niIteration();  // Send a flit to the ROUTER, this way it will inform the iterator that this PE is waiting for "iterations"
         }
         else{
+            bhmMessage("I", "statusDUMP", "controlTX: %x --- controlRX: %x", control_TX, control_RX);
             bhmMessage("I", "statusWrite", "ERROR_TX: UNEXPECTED STATE REACHED"); while(1){}
         }
-        transmittingAddress = auxAddress;
-        transmittingCount = HEADER;
-        setSTALL();     // Change the local status to STALL 
-        niIteration();  // Send a flit to the ROUTER, this way it will inform the iterator that this PE is waiting for "iterations"
     }
     else if(command == READING){
-        if(internalStatus == RX){
-            statusUpdate(WAIT_PE);
-            setSTALL();
+        if(control_RX == NI_STATUS_INTER){
+            // Turn the interruption signal down
+            ppmWriteNet(handles.INTTC, 0);  
         }
         else{
             bhmMessage("I", "statusWrite", "ERROR_READING: UNEXPECTED STATE REACHED"); while(1){}
         }
-        // Turn the interruption signal down
-        ppmWriteNet(handles.INTTC, 0);
     }
     else if(command == DONE){
-        if(internalStatus == WAIT_PE || internalStatus == TX){
-            statusUpdate(IDLE);
+        if(control_RX == NI_STATUS_INTER){
+            control_RX = NI_STATUS_OFF;
             setGO();
+        }
+        else if(control_TX == NI_STATUS_INTER){
+            control_TX = NI_STATUS_OFF;
+            ppmWriteNet(handles.INTTC, 0);  // Turn the interruption signal down
         }
         else{
             bhmMessage("I", "statusWrite", "ERROR_DONE: UNEXPECTED STATE REACHED"); while(1){}
         }
-        // Turn the interruption signal down
-        ppmWriteNet(handles.INTTC, 0);
     }
     *(Uns32*)user = data;
 }

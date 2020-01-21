@@ -111,12 +111,12 @@ int main(int argc, char *argv[]) {
             if(myID==0){
                 fp = fopen ("simulation/flitFlow.csv","a");
                 fprintf(fp,"Quantum %d\n",i);
-                fprintf(fp,"Routers ; LOCAL ; EAST ; WEST ; NORTH ; SOUTH \n");
+                fprintf(fp,"Routers , LOCAL , EAST , WEST , NORTH , SOUTH \n");
                 fclose(fp);       
             } 
             if(i>0){
                 fp = fopen ("simulation/flitFlow.csv","a");
-                fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+                fprintf(fp,"Router %d, %d, %d, %d, %d, %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
                 fclose(fp);
             } 
             contFlits[LOCAL] = 0;

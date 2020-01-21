@@ -53,6 +53,13 @@
 #define DONE                0x5555
 #define READING             0x6666
 
+#define NI_STATUS_ON        0x0011
+#define NI_STATUS_OFF       0x00FF
+#define NI_STATUS_INTER     0x0F0F
+#define NI_INT_TYPE_CLEAR   0x0000
+#define NI_INT_TYPE_TX      0xF222
+#define NI_INT_TYPE_RX      0xF333
+
 #define INFORM_ITERATION    0xFFFFFFFFFFFFFFFFULL
 #define FROM_IDLE           0x2525
 #define FROM_RX             0x3535
