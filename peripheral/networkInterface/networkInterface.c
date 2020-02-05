@@ -133,7 +133,7 @@ void niIteration(){
             ppmCloseAddressSpace(h);
             vec2usi(); // transform the data from vector to a single unsigned int
             // READ - encapsular
-            //bhmMessage("INFO", "NIITERATION", "Enviando o flit %x\n",htonl(usFlit));
+            bhmMessage("INFO", "NIITERATION", "Enviando o flit %x\n",htonl(usFlit));
             if(transmittingCount == HEADER){
                 transmittingCount = SIZE;
             }
@@ -262,7 +262,7 @@ PPM_REG_READ_CB(statusRead) {
 
 PPM_REG_WRITE_CB(statusWrite) {
     unsigned int command = htonl(data);
-    //bhmMessage("I", "COMANDO", "Recebido %x\n",command);
+    bhmMessage("I", "COMANDO", "Recebido %x\n",command);
     if(command == TX){
         if(control_TX == NI_STATUS_OFF){
             control_TX = NI_STATUS_ON;
