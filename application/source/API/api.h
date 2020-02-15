@@ -220,15 +220,9 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         }
     }
     if(found != PIPE_WAIT){
-    //LOG("~\n");       
         // Sends the packet
-        //SendRaw((unsigned int)&buffer_packets[found]);
-        //if(*NIcmd == IDLE || *NIcmd == DONE){
-        //int_disable(0);    
         if(*NIcmd == NI_STATUS_OFF){
             SendSlot((unsigned int)&buffer_packets[found], found);
-            /**NIaddr = (unsigned int)&buffer_packets[found];
-            *NIcmd = TX;*/
         }
         else{
             while(interruptionType != NI_INT_TYPE_TX){} // waiting it finish the TX
@@ -248,8 +242,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
             }
             SendSlot((unsigned int)&buffer_packets[found], found);
         }
-        //transmittingActive = found;
-        //int_enable(0);
         return 1; // sent with success
     }
     else{
@@ -289,10 +281,7 @@ void requestMsg(unsigned int from){
     myServicePacket[PI_SEND_TIME] = tsend;
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[PI_REQUESTER] = *myAddress;
-    //int_disable(0);
     SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
-    //transmittingActive = 0xFFFFFFFE;         // Because the SendRaw could be interrupted during the execution (by the quantum end) and the transmittingActive is modified only after the execution.
-    //int_enable(0);
     //LOG("=%d===========================REQ ENVIADO PRA NI!\n",getID(*myAddress));
 }
 
@@ -322,10 +311,7 @@ void SendMessage(message *theMessage, unsigned int destination){
     if(checkPendingReq(getID(destination))){
         //LOG("PENDING REQUEST ENCONTRADO!\n");
         // Sends the packet
-        //int_disable(0);
         SendSlot((unsigned int)&buffer_packets[index], index);
-        //transmittingActive = index;
-        //int_enable(0);
         // Clear the pending request
         pendingReq[getID(destination)] = 0;
     }
