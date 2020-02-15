@@ -119,12 +119,12 @@ void interruptHandler(void) {
             *NIcmd = DONE;
         }
         else{
-            LOG("%x - ERROR! Unexpected interruption! (%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);
-            while(1){LOG("%x - ERROR! Unexpected interruption! (%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
+           // LOG("%x - ERROR! Unexpected interruption! (%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);
+            while(1){LOG("%x - ERROR! Unexpected interruption! TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
         }
     }
     else{
-        LOG("%x - ERROR! Unexpected interruption! (%x) - can not handle it! Call the SAC!\n",*myAddress,interruptionType);
+        LOG("%x - ERROR! Unexpected interruption! IT(%x) - can not handle it! Call the SAC!\n",*myAddress,interruptionType);
         while(1){}
     }
     // Reset the interruptionType
