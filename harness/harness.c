@@ -46,6 +46,17 @@ optModuleAttr modelAttrs = {
     .destructCB           = moduleDestruct,
 };
 
+// Fetch Callback
+static OP_MONITOR_FN(fetchCallBack) { 
+    opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um fetch no processador '%s' - arg '%s' - bytes '%u' - address 0x" FMT_A0Nx "- virtual 0x" FMT_A0Nx,
+    processor ? opObjectName(processor) : "artifact", // if no processor this is an
+    (const char*)userData,
+    bytes,
+    addr,
+    VA);
+}
+
+
 int main(int argc, const char *argv[]) {
 
     /*Required to init the simulation */
@@ -65,76 +76,69 @@ int main(int argc, const char *argv[]) {
     optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);
     optModuleP  modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 
-    /*count the numbers of quantums */
-    int contQuantum = 0;
+    // counts the numbers of quantums 
+    int countQuantum = 0;
 
+    optTime       myTime     = QUANTUM_TIME_SLICE;
+    optStopReason stopReason = OP_SR_SCHED;   
+    optProcessorP proc;
+    
+    // must advance to next phase for the API calls that follow
+    opRootModulePreSimulate(mi);
+    
+    // flag to add the callbacks during the first quantum
+    int firstRun = N_PES;
+    do {
+        // move time forward by time slice on root module
+        // NOTE: This matches the standard scheduler which moves time forward in
+        //       the system and then executes instructions on all processors
+        opRootModuleTimeAdvance(mi, myTime);
 
-     optTime       myTime     = QUANTUM_TIME_SLICE;
-     optStopReason stopReason = OP_SR_SCHED;   
-     optProcessorP proc;
-       
-     // must advance to next phase for the API calls that follow
-     opRootModulePreSimulate(mi);
-        
-        do {
-
-            // move time forward by time slice on root module
-            // NOTE: This matches the standard scheduler which moves time forward in
-            //       the system and then executes instructions on all processors
-            opRootModuleTimeAdvance(mi, myTime);
-             /*opMessage(
-                "I", "HARNESS",
-                "---------------------------------------------------------------------------->Advance Time to %g seconds",
-                (double)myTime
-            );*/
-            //fprintf(stderr,"---------------------------------------------------------------------------->Advance Time to %g seconds",
-              //  (double)myTime);
-           
-            /*cont the number of processors that has exited */
-            int cont = 0;
-        
-            /* loop for all processors */   
-            while ((proc = opProcessorNext(modNew, proc))) {
-                /*  opMessage(
-                "I", "HARNESS",
-                "printPROC contador = %d",contador);*/
-
-                //opMessage("I", "HARNESS", "=x=x=x=x=x=x=x=x=x=x=> Executando novo processador...\n");
-                /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
-                stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
-                
-                /*checks if the processor has exited */
-                if(stopReason == OP_SR_EXIT){
-                    cont++;
-                }
-
-                
+        /*cont the number of processors that has exited */
+        int cont = 0;
+    
+        /* loop for all processors */   
+        while ((proc = opProcessorNext(modNew, proc))) {
+            if(firstRun){
+                // Add a fetch callback to each processor
+                opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
+                firstRun--;
             }
+            
+            /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
+            stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+            
+            /*checks if the processor has exited */
+            if(stopReason == OP_SR_EXIT){
+                cont++;
+            }    
+        }
 
-            contQuantum++;
-            /*opMessage(
+        countQuantum++;
+        opMessage("I", "HARNESS INFO", "Iniciando Quantum %d", countQuantum);
+        /*opMessage(
+            "I", "HARNESS",
+            "countQuantum = %d",countQuantum);*/
+
+        /*checks if all processors has exited */
+        if (cont==N_PES) {
+
+            opMessage(
                 "I", "HARNESS",
-                "contQuantum = %d",contQuantum);*/
+                "Simulation Complete (%s) e %d quantums",
+                opStopReasonString(stopReason),countQuantum
+            );
 
-            /*checks if all processors has exited */
-            if (cont==N_PES) {
+            break;  // finish simulation loop
 
-                opMessage(
-                    "I", "HARNESS",
-                    "Simulation Complete (%s) e %d quantums",
-                    opStopReasonString(stopReason),contQuantum
-                );
+        }
 
-                break;  // finish simulation loop
+        myTime += QUANTUM_TIME_SLICE;
 
-            }
+    } while (1);
 
-            myTime += QUANTUM_TIME_SLICE;
-
-        } while (1);
-
-    /*Required for the end of simulation*/
-    opSessionTerminate();
+/*Required for the end of simulation*/
+opSessionTerminate();
 
     return 0;
 }

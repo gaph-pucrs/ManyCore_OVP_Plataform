@@ -263,7 +263,7 @@ echo "    while(1){" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "        // Wait until the next quantum " >> iterator.igen.c
 echo "        bhmWaitDelay(QUANTUM_DELAY);" >> iterator.igen.c
-echo "        bhmMessage(\"I\", \"ITERATOR\", \"------>>>>>> FIM DO QUANTUM!\");" >> iterator.igen.c ## REMOVE
+echo "        //bhmMessage(\"I\", \"ITERATOR\", \"------>>>>>> FIM DO QUANTUM!\");" >> iterator.igen.c ## REMOVE
 echo "        /*int k;" >> iterator.igen.c
 echo "        for(k=0;k<25;k++){" >> iterator.igen.c
 echo "            iterationN++;" >> iterator.igen.c

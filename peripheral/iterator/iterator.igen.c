@@ -1187,7 +1187,7 @@ int main(int argc, char *argv[]) {
 
         // Wait until the next quantum 
         bhmWaitDelay(QUANTUM_DELAY);
-        bhmMessage("I", "ITERATOR", "------>>>>>> FIM DO QUANTUM!");
+        //bhmMessage("I", "ITERATOR", "------>>>>>> FIM DO QUANTUM!");
         /*int k;
         for(k=0;k<25;k++){
             iterationN++;
