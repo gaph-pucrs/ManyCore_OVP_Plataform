@@ -3,9 +3,10 @@
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
-#define ROUTER_BASE ((unsigned int *) 0x80000000)
-#define SYNC_BASE   ((unsigned int *) 0x80000014)
-#define NI_BASE     ((unsigned int *) 0x80000004)
+#define ROUTER_BASE   ((unsigned int *) 0x80000000)
+#define SYNC_BASE     ((unsigned int *) 0x80000014)
+#define NI_BASE       ((unsigned int *) 0x80000004)
+#define EXECUTED_INST ((unsigned int *) 0x0FFFFFFC)
 #define LOG(_FMT, ...) printf( "Info " _FMT,  ## __VA_ARGS__)
 // Router - mapped registers
 volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
@@ -57,7 +58,7 @@ volatile unsigned int pendingReq[N_PES];
 // Time variables
 time_t tinicio, tsend, tfim, tignore;
 
-// OVP Initiation function
+// OVP functions
 void interruptHandler(void);
 void OVP_init();
 
@@ -258,7 +259,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     // Sends the request to the transmitter
     receivingActive = 0;
     requestMsg(from);
-    while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    while(receivingActive==0){ /*i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     // Alocate the packet message inside the structure
     theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
     // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!

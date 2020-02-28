@@ -125,11 +125,11 @@ void turn_TickOff(){
 
 // Inform the iterator that the PE is waiting a packet 
 void informIterator(){
-    //if(myAddress==0x55){
+    if(myAddress==0x55){
         //bhmMessage("INFO", "TICK", "INFORMANDO TICK!");
         unsigned short int iterAux = ITERATION;
         ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-    //}
+    }
 }
 
 void iterateNI(){

@@ -38,7 +38,7 @@ cd iterator
 cd ../..
 
 cd harness
-sed -i 's/int N_PES.*/int N_PES ='$N';/' harness.c
+sed -i 's/#define N_PE.*/#define N_PES '$N'/' harness.c
 cd ..
 
 N=$(($N-1))

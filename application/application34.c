@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "transpose6x6_config.h"
+#include "transpose6x6_PEextra_config.h"
 
 message theMessage;
 

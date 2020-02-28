@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "transpose6x6_config.h"
+#include "transpose6x6_PEextra_config.h"
 
 message theMessage;
 
@@ -16,7 +16,48 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     unsigned int i;
-    //while(1){/* stay here forever*/ }
+    while(1){
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+        i = *NIcmd;
+    }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
