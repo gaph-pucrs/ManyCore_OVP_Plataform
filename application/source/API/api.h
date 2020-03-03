@@ -16,6 +16,8 @@ volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 // Network Interface - mapped registers
 volatile unsigned int *NIaddr = NI_BASE + 0x1;
 volatile unsigned int *NIcmd = NI_BASE + 0x0;
+// Executed Instructions 
+volatile unsigned int *instructionCounter = EXECUTED_INST;
 
 // Services
 #define MESSAGE_REQ         0x20
@@ -76,6 +78,8 @@ void requestMsg(unsigned int from);
 void ReceiveMessage(message *theMessage, unsigned int from);
 unsigned int sendFromMsgBuffer(unsigned int requester);
 void finishApplication();
+void resetExecutedInstructions();
+unsigned int getExecutedInstructions();
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -201,6 +205,10 @@ void OVP_init(){
     }
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
+    
+    //
+    resetExecutedInstructions();
+
     return;
 }
 ///////////////////////////////////////////////////////////////////
@@ -256,10 +264,11 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
 void ReceiveMessage(message *theMessage, unsigned int from){
     //unsigned int auxPacket[PACKET_MAX_SIZE];
     unsigned int i;
+    unsigned int num_inst;
     // Sends the request to the transmitter
     receivingActive = 0;
     requestMsg(from);
-    while(receivingActive==0){ /*i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    while(receivingActive==0){ /*i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */ }
     // Alocate the packet message inside the structure
     theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
     // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
@@ -269,6 +278,19 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     receivingActive = 0;
     // Inform the NI a packet was read
     *NIcmd = DONE;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+void resetExecutedInstructions(){
+    *instructionCounter = 0;
+    return;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+unsigned int getExecutedInstructions(){
+    return *instructionCounter;
 }
 
 ///////////////////////////////////////////////////////////////////

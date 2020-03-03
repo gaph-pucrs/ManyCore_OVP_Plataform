@@ -60,6 +60,20 @@ optModuleAttr modelAttrs = {
     .destructCB           = moduleDestruct,
 };
 
+unsigned int vec2usi(char *vec){
+    unsigned int auxValue = 0x00000000;
+    unsigned int aux;
+    aux = 0x000000FF & vec[3];
+    auxValue = ((aux << 24) & 0xFF000000);
+    aux = 0x000000FF & vec[2];
+    auxValue = auxValue | ((aux << 16) & 0x00FF0000);
+    aux = 0x000000FF & vec[1];
+    auxValue = auxValue | ((aux << 8) & 0x0000FF00);
+    aux = 0x000000FF & vec[0];
+    auxValue = auxValue | ((aux) & 0x000000FF);
+    return auxValue;
+}
+
 // Fetch Callback
 static OP_MONITOR_FN(fetchCallBack) { 
     /*opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um fetch no processador '%s' - arg '%s' - bytes '%u' - address 0x" FMT_A0Nx " - virtual 0x" FMT_A0Nx,
@@ -124,13 +138,18 @@ static OP_MONITOR_FN(fetchCallBack) {
         while(1){}
     }
 
-    executedInstructions[processorID]++;
-    //opMessage("I", "FETCH", "Processador %d - Instrucoes executadas até agora %u",processorID, executedInstructions[processorID]);
+    //executedInstructions[processorID]++;
+    char read_EI[4];
+    opProcessorRead(processor, 0x0FFFFFFC, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    unsigned int read_executedInstructions = vec2usi(read_EI);
+    read_executedInstructions = htonl(read_executedInstructions) + 1;
+
+    //opMessage("I", "FETCH", "Processador %d - Instrucoes executadas até agora %u",processorID, read_executedInstructions);
     char EI[4];
-    EI[3] = (htonl(executedInstructions[processorID]) >> 24) & 0x000000FF;
-    EI[2] = (htonl(executedInstructions[processorID]) >> 16) & 0x000000FF;
-    EI[1] = (htonl(executedInstructions[processorID]) >> 8) & 0x000000FF;
-    EI[0] = htonl(executedInstructions[processorID]) & 0x000000FF;
+    EI[3] = (htonl(read_executedInstructions) >> 24) & 0x000000FF;
+    EI[2] = (htonl(read_executedInstructions) >> 16) & 0x000000FF;
+    EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
+    EI[0] = htonl(read_executedInstructions) & 0x000000FF;
     opProcessorWrite(processor, 0x0FFFFFFC, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
 
 }
