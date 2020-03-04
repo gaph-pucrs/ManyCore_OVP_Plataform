@@ -89,7 +89,7 @@ unsigned int getExecutedInstructions();
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
-// Interruption function
+/* Interruption function */ 
 void interruptHandler(void) {
     int requester;
     //LOG("%x~~type:%x~!\n",*myAddress,interruptionType);
@@ -125,7 +125,6 @@ void interruptHandler(void) {
             *NIcmd = DONE;
         }
         else{
-           // LOG("%x - ERROR! Unexpected interruption! (%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);
             while(1){LOG("%x - ERROR! Unexpected interruption! TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
         }
     }
@@ -135,39 +134,10 @@ void interruptHandler(void) {
     }
     // Reset the interruptionType
     interruptionType = NI_INT_TYPE_CLEAR;
-    //LOG("%xSAIU\n",*myAddress);
 }
 
-    /*if(transmittingActive != WAIT && incomingPacket[PI_SERVICE] == 0){
-        if(transmittingActive < 0xFFFFFFFE){
-            // Releses the buffer
-            bufferPop(transmittingActive);
-        }
-        transmittingActive = WAIT;
-        *NIcmd = DONE;
-    }
-    else if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
-        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        receivingActive = 1; // Inform the index where the received packet is stored
-        *NIcmd = READING; // turn down the interruption
-    }
-    else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        requester = incomingPacket[PI_REQUESTER];
-        *NIcmd = READING; // turn down the interruption
-        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        *NIcmd = DONE; // releases the NI to return to the IDLE state
-        if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
-            pendingReq[getID(requester)] = MESSAGE_REQ;
-        }       
-    }
-    else{
-        LOG("ERROR! Unexpected interruption! - can not handle it! Call the SAC!\n");
-        while(1){}
-    }
-}*/
-
 ///////////////////////////////////////////////////////////////////
-// Initiation function
+/* Initiation function */
 void OVP_init(){
     // Attach the external interrupt handler for 'intr0'
     int_init();
@@ -211,8 +181,9 @@ void OVP_init(){
 
     return;
 }
+
 ///////////////////////////////////////////////////////////////////
-// Verify if a message for a given requester is inside the buffer, if yes send it and return 1 else returns 0.
+/* Verify if a message for a given requester is inside the buffer, if yes send it and return 1 else returns 0 */
 unsigned int sendFromMsgBuffer(unsigned int requester){
     int i;
     //LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
@@ -260,15 +231,14 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
 }
 
 ///////////////////////////////////////////////////////////////////
-// Receives a message and alocates it in the application structure
+/* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
     //unsigned int auxPacket[PACKET_MAX_SIZE];
     unsigned int i;
-    unsigned int num_inst;
     // Sends the request to the transmitter
     receivingActive = 0;
     requestMsg(from);
-    while(receivingActive==0){ /*i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */ }
+    while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */ }
     // Alocate the packet message inside the structure
     theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
     // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
@@ -294,7 +264,7 @@ unsigned int getExecutedInstructions(){
 }
 
 ///////////////////////////////////////////////////////////////////
-// Creates the request message and send it to the transmitter
+/* Creates the request message and send it to the transmitter */
 void requestMsg(unsigned int from){
     int i;
     myServicePacket[PI_DESTINATION] = from;
@@ -305,11 +275,10 @@ void requestMsg(unsigned int from){
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[PI_REQUESTER] = *myAddress;
     SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
-    //LOG("=%d===========================REQ ENVIADO PRA NI!\n",getID(*myAddress));
 }
 
 ///////////////////////////////////////////////////////////////////
-// Sends a message to a given destination
+/* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination){
     unsigned int index;
     do{index = getEmptyIndex(); /*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
@@ -341,14 +310,14 @@ void SendMessage(message *theMessage, unsigned int destination){
 }
 
 ///////////////////////////////////////////////////////////////////
-// Check if there is any requested message for a given destination ID 
+/* Check if there is any requested message for a given destination ID */
 unsigned int checkPendingReq(unsigned int destID){
     if(pendingReq[destID]==MESSAGE_REQ) return 1; //it has a pending request
     else return 0;
 }
 
 ///////////////////////////////////////////////////////////////////
-// Gets an index in the buffer that is empty and is the least used position
+/* Gets an index in the buffer that is empty and is the least used position */
 unsigned int getEmptyIndex(){
     int i;
     int tempIdx = PIPE_WAIT;
@@ -363,41 +332,46 @@ unsigned int getEmptyIndex(){
 }
 
 ///////////////////////////////////////////////////////////////////
-// Changes the buffer controls to occupied for a given index
+/* Changes the buffer controls to occupied for a given index */
 void bufferPush(unsigned int index){
     buffer_map[index] = PIPE_OCCUPIED;
 }
 
 ///////////////////////////////////////////////////////////////////
-// Releases a buffer position and increases the history
+/* Releases a buffer position and increases the history */
 void bufferPop(unsigned int index){
     buffer_history[index]++; // Increase the history
     buffer_map[index] = PIPE_FREE;
 }
 
 ///////////////////////////////////////////////////////////////////
-// Calculate the ID for a given address
+/* Calculate the ID for a given address */
 unsigned int getID(unsigned int address){
     unsigned int x = (address & 0xF0) >> 4;
     unsigned int y = address & 0xF;
     return (DIM_X*y)+x;
 }
+
 ///////////////////////////////////////////////////////////////////
-// Configure the NI to transmitt a given packet
+/* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
+    while(*NIcmd != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    int_disable(0);
     while(*NIcmd != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
     transmittingActive = slot;
     SendRaw(addr);
+    int_enable(0);
 }
+
 ///////////////////////////////////////////////////////////////////
-// Configure the NI to transmitt a given packet
+/* Configure the NI to transmitt a given packet */
 void SendRaw(unsigned int addr){
     *NIaddr = addr;
     *NIcmd = TX;
 }
 
 ///////////////////////////////////////////////////////////////////
-// Waits until every packet is transmitted
+/* Waits until every packet is transmitted */
 void finishApplication(){
     unsigned int done;
     unsigned int i;

@@ -14,7 +14,7 @@
 #define MODULE_NAME "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
-#define N_PES 36
+#define N_PES 9
 #define INSTRUCTIONS_PER_SECOND       100000000
 #define QUANTUM_TIME_SLICE            0.0001
 #define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //10000
@@ -25,8 +25,6 @@
 
 // Instructions
 char instructions [][12] = {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
-
-unsigned int executedInstructions[N_PES];
 
 unsigned int htonl(unsigned int x){
     return __bswap_constant_32(x);
@@ -138,7 +136,6 @@ static OP_MONITOR_FN(fetchCallBack) {
         while(1){}
     }
 
-    //executedInstructions[processorID]++;
     char read_EI[4];
     opProcessorRead(processor, 0x0FFFFFFC, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int read_executedInstructions = vec2usi(read_EI);
@@ -172,11 +169,6 @@ int main(int argc, const char *argv[]) {
     }
     optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);
     optModuleP  modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
-
-    int n;
-    for(n=0;n<N_PES;n++){
-        executedInstructions[n] = 0;
-    }
 
     // counts the numbers of quantums 
     int countQuantum = 0;
@@ -229,7 +221,7 @@ int main(int argc, const char *argv[]) {
             "countQuantum = %d",countQuantum);*/
 
         /*checks if all processors has exited */
-        if (cont==N_PES-1) {
+        if (cont==N_PES) {
 
             opMessage(
                 "I", "HARNESS",

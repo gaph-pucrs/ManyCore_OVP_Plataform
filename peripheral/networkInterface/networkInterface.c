@@ -271,7 +271,7 @@ PPM_REG_WRITE_CB(statusWrite) {
             niIteration();  // Send a flit to the ROUTER, this way it will inform the iterator that this PE is waiting for "iterations"
         }
         else{
-            bhmMessage("I", "statusDUMP", "controlTX: %x --- controlRX: %x", control_TX, control_RX);
+            bhmMessage("I", "statusDUMP", "controlTX: %x --- controlRX: %x --- command: %x", control_TX, control_RX, command);
             bhmMessage("I", "statusWrite", "ERROR_TX: UNEXPECTED STATE REACHED"); while(1){}
         }
     }

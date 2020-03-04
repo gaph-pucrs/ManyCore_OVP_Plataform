@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-int i;
+    int i;
     int instructions;
     theMessage.size = MESSAGE_SIZE;
     for(i=0;i<theMessage.size;i++){

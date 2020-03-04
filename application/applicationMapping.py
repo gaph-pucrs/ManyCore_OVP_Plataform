@@ -60,10 +60,10 @@ with open('scenario.yaml') as file:
 					configLines = configFile.readlines()
 					numberOfLines = len(configLines)
 				#Wrie the programs adressess in the '.h' file
-				with open(updatedConfigPath, 'w') as configFile:
-					newLine = "#define " + p + "_addr " + "0x" + str(progX) + str(progY) + "\n"
-					if(configLines[numberOfLines-1].find("/")!=-1):
-						configLines.insert(numberOfLines, '\n')
-						numberOfLines = numberOfLines + 1
-					configLines.insert(numberOfLines, newLine)
-					configFile.writelines(configLines)
+				#with open(updatedConfigPath, 'w') as configFile:
+				#	newLine = "#define " + p + "_addr " + "0x" + str(progX) + str(progY) + "\n"
+				#	if(configLines[numberOfLines-1].find("/")!=-1):
+				#		configLines.insert(numberOfLines, '\n')
+				#		numberOfLines = numberOfLines + 1
+				#	configLines.insert(numberOfLines, newLine)
+				#	configFile.writelines(configLines)

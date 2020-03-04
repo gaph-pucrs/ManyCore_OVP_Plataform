@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-int i;
+    int i;
     int instructions;
     theMessage.size = MESSAGE_SIZE;
     for(i=0;i<theMessage.size;i++){
@@ -24,6 +24,8 @@ int i;
     for(i=0;i<N_MESSAGES;i++){
         SendMessage(&theMessage, transpose32_addr);
         ReceiveMessage(&theMessage, transpose32_addr);
+        instructions = getExecutedInstructions();
+        LOG("%d - Instrucoes executadas: %d\n",*myAddress,instructions);
     }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
