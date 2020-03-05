@@ -157,14 +157,14 @@ void OVP_init(){
     *NIaddr = (unsigned int)&interruptionType;
  
     // Initiate the packets buffer map to free
-    int o;
-    for(o=0;o<PIPE_SIZE;o++){
-        buffer_map[o] = PIPE_FREE;
+    int i;
+    for(i=0;i<PIPE_SIZE;i++){
+        buffer_map[i] = PIPE_FREE;
     }
 
     // Initiate the message request queue
-    for(o=0;o<N_PES;o++){
-        pendingReq[o] = 0; 
+    for(i=0;i<N_PES;i++){
+        pendingReq[i] = 0; 
     }
 
     // Comunicate to the sync that this PE is ready to start the code execution

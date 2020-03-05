@@ -1,3 +1,4 @@
+#include "source/dtw/dtw_stdlib.h"
 #include "dtw_config.h"
 #include "source/API/api.h"
 
@@ -10,7 +11,7 @@ int main(int argc, char **argv)
 	/////////////// YOUR CODE START HERE /////////////////
 	/////////////////////////////////////////////////////
 
-	int test[MATX_SIZE][MATX_SIZE];
+	unsigned int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
 	int result, j;
 

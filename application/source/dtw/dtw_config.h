@@ -1,4 +1,4 @@
-#include "source/dtw/dtw_stdlib.h"
+//#include "source/dtw/dtw_stdlib.h"
 
 #define bank_addr 0x00
 #define p1_addr 0x01
@@ -15,28 +15,24 @@
 
 int P[TOTAL_TASKS] = {p1_addr, p2_addr, p3_addr, p4_addr};
 
-int dtw_euclideanDistance(int *x, int *y)
-{
+int dtw_euclideanDistance(int *x, int *y){
 	int ed = 0.0f;
 	int aux = 0.0f;
 	int i;
-	for (i = 0; i < MATX_SIZE; i++)
-	{
+	for (i = 0; i < MATX_SIZE; i++){
 		aux = x[i] - y[i];
 		ed += aux * aux;
 	}
 	return ed;
 }
 
-int dtw_min(int x, int y)
-{
+int dtw_min(int x, int y){
 	if (x > y)
 		return y;
 	return x;
 }
 
-int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE])
-{
+int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE]){
 	int lastCol[MATX_SIZE];
 	int currCol[MATX_SIZE];
 	int temp[MATX_SIZE];
@@ -46,22 +42,16 @@ int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SI
 	int i, j;
 
 	currCol[0] = dtw_euclideanDistance(x[0], y[0]);
-	for (j = 1; j <= maxJ; j++)
-	{
+	for (j = 1; j <= maxJ; j++)	{
 		currCol[j] = currCol[j - 1] + dtw_euclideanDistance(x[0], y[j]);
 	}
 
-	for (i = 1; i <= maxI; i++)
-	{
-
+	for (i = 1; i <= maxI; i++){
 		dtw_memcopy(temp, lastCol, sizeof(lastCol));
 		dtw_memcopy(lastCol, currCol, sizeof(lastCol));
 		dtw_memcopy(currCol, currCol, sizeof(lastCol));
-
 		currCol[0] = lastCol[0] + dtw_euclideanDistance(x[i], y[0]);
-
-		for (j = 1; j <= maxJ; j++)
-		{
+		for (j = 1; j <= maxJ; j++){
 			minGlobalCost = dtw_min(lastCol[j], dtw_min(lastCol[j - 1], currCol[j - 1]));
 			currCol[j] = minGlobalCost + dtw_euclideanDistance(x[i], y[j]);
 		}
