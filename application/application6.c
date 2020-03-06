@@ -17,20 +17,22 @@ int main(int argc, char **argv)
 
 	ReceiveMessage(&msg, recognizer_addr);
 
-	LOG("Task P2 INIT\n");
+	LOG("Task P1 INIT\n");
 
-	dtw_memcopy(test, msg.msg, sizeof(test));
+	memcpy(test, msg.msg, sizeof(test));
 
 	for (j = 0; j < PATTERN_PER_TASK; j++)
 	{
 
-		dtw_memset(msg.msg, 0, sizeof(int) * 128);
+		LOG("Task P1 FOR\n");
+
+		dtw_memset(msg.msg, 0, sizeof(int) * MESSAGE_MAX_SIZE);
 
 		ReceiveMessage(&msg, bank_addr);
 
-		//LOG("Task P2 ReceiveMessaged pattern from bank\n");
+		//LOG("Task P1 ReceiveMessaged pattern from bank\n");
 
-		dtw_memcopy(pattern, msg.msg, sizeof(pattern));
+		memcpy(pattern, msg.msg, sizeof(pattern));
 
 		result = dtw_dynamicTimeWarping(test, pattern);
 
@@ -41,7 +43,7 @@ int main(int argc, char **argv)
 		SendMessage(&msg, recognizer_addr);
 	}
 
-	LOG("Task P2 FINISHEDD IN\n");
+	LOG("Task P1 FINISHEDD IN\n");
 	LOG("%d\n", clock());
 
 	//////////////////////////////////////////////////////

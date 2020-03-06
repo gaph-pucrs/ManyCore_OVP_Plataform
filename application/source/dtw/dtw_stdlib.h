@@ -37,7 +37,7 @@ void *dtw_memset(void *dst, int c, unsigned long bytes) {
    return dst;
 }
 
-void dtw_memcopy(unsigned int *dest, const unsigned int *src, size_t n) {
+void memcpy(unsigned int *dest, const unsigned int *src, size_t n) {
 	unsigned int i = n/4;
 	while(i--)
 		dest[i] = src[i];

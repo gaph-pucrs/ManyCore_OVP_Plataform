@@ -36,20 +36,15 @@ int main(int argc, char **argv)
 
 	int i, j;
 	int pattern[MATX_SIZE][MATX_SIZE];
-	//char a[50];
 
 	theMsg.size = MATX_SIZE * MATX_SIZE; //MATX_SIZE*MATX_SIZE nao pode ser maior que 128, senao usar o SendMessageData
-	randPattern(pattern); //gera uma matriz de valores aleatorios, poderiam ser coeficientes MFCC
-
-	for (j = 0; j < MATX_SIZE; j++)
-	{
-		for (i = 0; i < MATX_SIZE; i++)
-		{
-			dtw_memcopy(theMsg.msg, &pattern[j][i], sizeof(pattern[j][i]));
+	
+	for (j = 0; j<PATTERN_PER_TASK; j++){
+		for (i = 0; i<TOTAL_TASKS; i++){
+			randPattern(pattern); //gera uma matriz de valores aleatorios, poderiam ser coeficientes MFCC
+			memcpy(theMsg.msg, pattern, sizeof(pattern));
 			theMsg.size = MATX_SIZE * MATX_SIZE;
 			SendMessage(&theMsg, P[i]);
-			//sprintf(a, "Bank SendMessageedd pattern to task %d", (i+1));
-			//LOG(a);
 		}
 	}
 

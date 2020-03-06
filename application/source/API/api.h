@@ -1,4 +1,6 @@
 #include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "../../../peripheral/whnoc_dma/noc.h"
 
 typedef unsigned int  Uns32;
@@ -28,7 +30,7 @@ volatile unsigned int *instructionCounter = EXECUTED_INST;
 #define PIPE_FREE           0
 #define PIPE_WAIT           0xFFFFFFFF
 // Packet defines
-#define MESSAGE_MAX_SIZE    256
+#define MESSAGE_MAX_SIZE    512
 #define PACKET_MAX_SIZE     MESSAGE_MAX_SIZE+4+3 // +3(destination, size, sendtime, service)+3(hops,in_iteration,out_iteration) 
 // Packet indexes
 #define PI_DESTINATION      0

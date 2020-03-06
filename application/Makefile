@@ -21,11 +21,11 @@ all: $(EXE)
 
 %.$(CROSS).elf: %.o
 	$(V)  echo "# Linking $@"
-	$(V)  $(IMPERAS_LINK) -o $@ $< $(IMPERAS_LDFLAGS) -lm
+	$(V)  $(IMPERAS_LINK) -Wall -o $@ $< $(IMPERAS_LDFLAGS) -lm
 
 %.o: %.c
 	$(V)  echo "# Compiling $<"
-	$(V)  $(IMPERAS_CC) -g  -c -o $@ $< $(OPTIMISATION)
+	$(V)  $(IMPERAS_CC) -g  -c -Wall -o $@ $< $(OPTIMISATION)
 
 clean:
 	-rm -f *.elf *.o 

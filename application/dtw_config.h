@@ -7,11 +7,10 @@
 #define p4_addr 0x11
 #define recognizer_addr 0x12
 
-#define MATX_SIZE 11		  //tamanho da matriz
-#define TOTAL_TASKS 4 //deve ser PAR para dividir igualmente o numero de padroes por task
-#define PATTERN_PER_TASK NUM_PATTERNS / TOTAL_TASKS
-
-#define NUM_PATTERNS 80 //40
+#define MATX_SIZE 			11		  	//tamanho da matriz
+#define TOTAL_TASKS 		4 			//deve ser PAR para dividir igualmente o numero de padroes por task
+#define NUM_PATTERNS 		80 			//40
+#define PATTERN_PER_TASK 	NUM_PATTERNS/TOTAL_TASKS
 
 int P[TOTAL_TASKS] = {p1_addr, p2_addr, p3_addr, p4_addr};
 
@@ -47,9 +46,9 @@ int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SI
 	}
 
 	for (i = 1; i <= maxI; i++){
-		dtw_memcopy(temp, lastCol, sizeof(lastCol));
-		dtw_memcopy(lastCol, currCol, sizeof(lastCol));
-		dtw_memcopy(currCol, currCol, sizeof(lastCol));
+		memcpy(temp, lastCol, sizeof(lastCol));
+		memcpy(lastCol, currCol, sizeof(lastCol));
+		memcpy(currCol, currCol, sizeof(lastCol));
 		currCol[0] = lastCol[0] + dtw_euclideanDistance(x[i], y[0]);
 		for (j = 1; j <= maxJ; j++){
 			minGlobalCost = dtw_min(lastCol[j], dtw_min(lastCol[j - 1], currCol[j - 1]));
