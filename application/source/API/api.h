@@ -63,25 +63,26 @@ volatile unsigned int pendingReq[N_PES];
 time_t tinicio, tsend, tfim, tignore;
 
 // OVP functions
-void interruptHandler(void);
 void OVP_init();
 
 // Functions
-unsigned int bufferHasSpace();
 void SendMessage(message *theMessage, unsigned int destination);
-void SendRaw(unsigned int addr);
+void ReceiveMessage(message *theMessage, unsigned int from);
+void ResetExecutedInstructions();
+unsigned int GetExecutedInstructions();
+void FinishApplication();
+//////////////////////////
 void SendSlot(unsigned int addr, unsigned int slot);
+void SendRaw(unsigned int addr);
+void requestMsg(unsigned int from);
 unsigned int checkPendingReq(unsigned int destID);
 unsigned int getEmptyIndex();
 void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
-void requestMsg(unsigned int from);
-void ReceiveMessage(message *theMessage, unsigned int from);
 unsigned int sendFromMsgBuffer(unsigned int requester);
-void finishApplication();
-void resetExecutedInstructions();
-unsigned int getExecutedInstructions();
+void interruptHandler(void);
+
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -178,14 +179,14 @@ void OVP_init(){
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
     
-    //
-    resetExecutedInstructions();
+    // Reset the amount of executed instructions
+    ResetExecutedInstructions();
 
     return;
 }
 
 ///////////////////////////////////////////////////////////////////
-/* Verify if a message for a given requester is inside the buffer, if yes send it and return 1 else returns 0 */
+/* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
 unsigned int sendFromMsgBuffer(unsigned int requester){
     int i;
     //LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
@@ -235,7 +236,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
 ///////////////////////////////////////////////////////////////////
 /* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
-    //unsigned int auxPacket[PACKET_MAX_SIZE];
     unsigned int i;
     // Sends the request to the transmitter
     receivingActive = 0;
@@ -254,14 +254,14 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 
 ///////////////////////////////////////////////////////////////////
 //
-void resetExecutedInstructions(){
+void ResetExecutedInstructions(){
     *instructionCounter = 0;
     return;
 }
 
 ///////////////////////////////////////////////////////////////////
 //
-unsigned int getExecutedInstructions(){
+unsigned int GetExecutedInstructions(){
     return *instructionCounter;
 }
 
@@ -374,7 +374,7 @@ void SendRaw(unsigned int addr){
 
 ///////////////////////////////////////////////////////////////////
 /* Waits until every packet is transmitted */
-void finishApplication(){
+void FinishApplication(){
     unsigned int done;
     unsigned int i;
     do{

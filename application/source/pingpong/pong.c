@@ -24,15 +24,10 @@ int main(int argc, char **argv)
         SendMessage(&pongping, ping_addr);
         ReceiveMessage(&pongping, ping_addr);
     }
-    LOG("3-PRINT FINAL DO PACOTE COMPLETO:\n");
-    for(i=0;i<pongping.size;i++){
-        LOG("3-- %d\n",pongping.msg[i]);
-    }
-
-
+    LOG("Pong Finalizado!\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
-    finishApplication();
+    FinishApplication();
     return 1;
 }

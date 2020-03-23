@@ -24,12 +24,12 @@ int main(int argc, char **argv)
     for(i=0;i<N_MESSAGES;i++){
         SendMessage(&theMessage, transpose28_addr);
         ReceiveMessage(&theMessage, transpose28_addr);
-        instructions = getExecutedInstructions();
+        instructions = GetExecutedInstructions();
         LOG("%d - Instrucoes executadas: %d\n",*myAddress,instructions);
     }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
-    finishApplication();
+    FinishApplication();
     return 1;
 }

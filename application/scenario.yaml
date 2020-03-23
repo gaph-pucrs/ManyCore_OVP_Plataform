@@ -1,10 +1,6 @@
 apps:
- - name: dtw
+ - name: pingpong
    cluster: 0
    static_mapping:
-    bank: [0,0]
-    p1: [0,1]
-    p2: [0,2]
-    p3: [1,0]
-    p4: [1,1]
-    recognizer: [1,2]
+    ping: [0,0]
+    pong: [2,2]

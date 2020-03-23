@@ -27,14 +27,10 @@ int main(int argc, char **argv)
         pingpong.msg[0] = pingpong.msg[0] + 1;
         SendMessage(&pingpong, pong_addr);
     }
-    LOG("0-PRINT FINAL DO PACOTE COMPLETO:\n");
-    for(i=0;i<pingpong.size;i++){
-        LOG("-- %d\n",pingpong.msg[i]);
-    }
-    
+    LOG("Ping Finalizado!\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
-    finishApplication();
+    FinishApplication();
     return 1;
 }

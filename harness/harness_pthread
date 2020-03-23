@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <pthread.h>
 #include "op/op.h"
 
 
@@ -43,6 +44,10 @@ static OP_POST_SIMULATE_FN(modulePostSimulate) {
 static OP_DESTRUCT_FN(moduleDestruct) {
 // insert moduleDestruct code here
 }
+
+
+optStopReason stopReason[N_PES];
+optProcessorP proc[N_PES];
 
 /*Attributes Set in Module Construction */
 optModuleAttr modelAttrs = {
@@ -150,12 +155,25 @@ static OP_MONITOR_FN(fetchCallBack) {
 
 }
 
+void * opProcessorSimulate_thread(void *arg){
+    int processorID = *((int*)arg);
+    printf("P %d\n",processorID);
+    stopReason[processorID] = opProcessorSimulate(proc[processorID], INSTRUCTIONS_PER_TIME_SLICE);
+    pthread_exit(NULL);
+}
+
+
 int main(int argc, const char *argv[]) {
+    /*threads to execute each PE separately*/
+    pthread_t threads[N_PES];
+    int threadStatus[N_PES];
+    int currentProcessor[N_PES];
+    int i;
     /*Required to init the simulation */
     opSessionInit(OP_VERSION);
 
     /* create the root module with reduced Quantum (in line with Custom Scheduler) */
-    optParamP params = OP_PARAMS(OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
+    optParamP params = OP_PARAMS (OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
     //optParamP params = OP_PARAMS(OP_PARAM_BOOL_SET(OP_FP_GDBCONSOLE, 1));
     optCmdParserP parser = opCmdParserNew(MODULE_NAME, OP_AC_ALL);
     opCmdParserAdd(parser, "configurecpuinstance", 0, "bool", "user", OP_FT_BOOLVAL,
@@ -172,8 +190,14 @@ int main(int argc, const char *argv[]) {
     int countQuantum = 0;
 
     optTime       myTime     = QUANTUM_TIME_SLICE;
-    optStopReason stopReason = OP_SR_SCHED;   
-    optProcessorP proc;
+    //optStopReason stopReason = OP_SR_SCHED;   
+    //optProcessorP proc;
+    
+    for(i = 0; i<N_PES; i++){
+        stopReason[i] = OP_SR_SCHED;
+        currentProcessor[i] = i;
+    }
+
 
     // must advance to next phase for the API calls that follow
     opRootModulePreSimulate(mi);
@@ -187,36 +211,67 @@ int main(int argc, const char *argv[]) {
         opRootModuleTimeAdvance(mi, myTime);
 
         /*cont the number of processors that has exited */
-        int finishedProcessors = 0;
+        int cont = 0;
 
+        /* count the processor that is being started */
+        i = 0;
         
         /* loop for all processors */
-        while ((proc = opProcessorNext(modNew, proc))) {
+        while ((proc[currentProcessor[i]] = opProcessorNext(modNew, proc[currentProcessor[i]-1]))) {
             if(firstRun){
                 // Add a fetch callback to each processor
-                opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
+                opProcessorFetchMonitorAdd(proc[currentProcessor[i]], 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
                 firstRun--;
             }
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
-            stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
-            if(stopReason == OP_SR_EXIT){
-                finishedProcessors++;
+            /* Create independent threads each of which will execute function */
+                //opMessage("I", "THREAD", "PROC: %i\n",proc);
+            
+            opMessage("I", "THREAD", "AAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+            threadStatus[currentProcessor[i]] = pthread_create(&threads[currentProcessor[i]], NULL, opProcessorSimulate_thread, &currentProcessor[i]);
+            opMessage("I", "THREAD", "BBBBBBBBBBBBBBBBBBBBBBBBBB");
+            if(threadStatus[currentProcessor[i]] != 0){
+                printf("Erro ao criar o thread.\n");
+                while(1){}
+            }
+            /*stopReason[currentProcessor] = opProcessorSimulate(proc[currentProcessor], INSTRUCTIONS_PER_TIME_SLICE);
+            if(stopReason[currentProcessor] == OP_SR_EXIT){
+                cont++;
+            }*/
+
+            /* count the processor that is being started */
+            i++;
+        }
+        /* Join the threads */
+        for(i=0; i<N_PES; i++){
+            threadStatus[currentProcessor[i]] = pthread_join(threads[currentProcessor[i]], NULL);
+            if(threadStatus[currentProcessor[i]] != 0){
+                printf ("Erro ao dar join na thread.\n");
+                while(1){}
+            }
+            if(stopReason[currentProcessor[i]] == OP_SR_EXIT){
+                cont++;
             }
         }
 
         countQuantum++;
         opMessage("I", "HARNESS INFO", "Iniciando Quantum %d", countQuantum);
+        /*opMessage(
+            "I", "HARNESS",
+            "countQuantum = %d",countQuantum);*/
 
         /*checks if all processors has exited */
-        if (finishedProcessors == N_PES) {
+        if (cont==N_PES) {
 
             opMessage(
                 "I", "HARNESS",
                 "Simulation Complete (%s) e %d quantums",
-                opStopReasonString(stopReason),countQuantum);
+                opStopReasonString(stopReason[N_PES-1]),countQuantum
+            );
 
-            break; // finish simulation loop
+            break;  // finish simulation loop
 
         }
 
