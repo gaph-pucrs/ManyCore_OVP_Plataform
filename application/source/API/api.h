@@ -5,10 +5,12 @@
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
-#define ROUTER_BASE   ((unsigned int *) 0x80000000)
-#define SYNC_BASE     ((unsigned int *) 0x80000014)
-#define NI_BASE       ((unsigned int *) 0x80000004)
-#define EXECUTED_INST ((unsigned int *) 0x0FFFFFFC)
+#define ROUTER_BASE    ((unsigned int *) 0x80000000)
+#define SYNC_BASE      ((unsigned int *) 0x80000014)
+#define NI_BASE        ((unsigned int *) 0x80000004)
+#define WAITING_PKG    ((unsigned int *) 0x0FFFFFFC)
+#define EXECUTED_INST  ((unsigned int *) 0x0FFFFFF8)
+
 #define LOG(_FMT, ...) printf( "Info " _FMT,  ## __VA_ARGS__)
 // Router - mapped registers
 volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
@@ -20,6 +22,8 @@ volatile unsigned int *NIaddr = NI_BASE + 0x1;
 volatile unsigned int *NIcmd = NI_BASE + 0x0;
 // Executed Instructions 
 volatile unsigned int *instructionCounter = EXECUTED_INST;
+// Activate this flag to deactivate the instruction count
+volatile unsigned int *waitingPckg_flag = WAITING_PKG;
 
 // Services
 #define MESSAGE_REQ         0x20
@@ -181,7 +185,6 @@ void OVP_init(){
     
     // Reset the amount of executed instructions
     ResetExecutedInstructions();
-
     return;
 }
 
@@ -240,7 +243,9 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     // Sends the request to the transmitter
     receivingActive = 0;
     requestMsg(from);
+    *waitingPckg_flag = 1;
     while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */ }
+    *waitingPckg_flag = 0;
     // Alocate the packet message inside the structure
     theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
     // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
@@ -256,6 +261,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 //
 void ResetExecutedInstructions(){
     *instructionCounter = 0;
+    *waitingPckg_flag = 0;
     return;
 }
 
