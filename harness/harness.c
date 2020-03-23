@@ -95,7 +95,7 @@ static OP_MONITOR_FN(fetchCallBack) {
 
     /**/
     char value[4];
-    opProcessorRead(processor, addr, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int intValue = char2int(value);
     
     if(intValue){
