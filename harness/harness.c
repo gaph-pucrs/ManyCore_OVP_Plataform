@@ -84,6 +84,25 @@ unsigned int char2int(char *value){
     return intValue;
 }
 
+int getProcessorID(optProcessorP processor){
+    int processorID;
+    char processorName[7] = "@@@@@@@";
+    strcpy(processorName,opObjectName(processor)); 
+    if(((int)processorName[5] - 48) >= 0 && ((int)processorName[5] - 48) <= 9){
+        processorID = ((int)processorName[3] - 48)*100 + ((int)processorName[4] - 48)*10 + ((int)processorName[5] - 48);
+    }
+    else if(((int)processorName[4] - 48) >= 0 && ((int)processorName[4] - 48) <= 9){
+        processorID = ((int)processorName[3] - 48)*10 + ((int)processorName[4] - 48);
+    }
+    else processorID = ((int)processorName[3] - 48);
+    /*ERROR CATCHER!*/
+    if(processorID < 0 || processorID > N_PES){
+        opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d",processorID);
+        while(1){}     
+    }
+    return processorID;
+}
+
 // Fetch Callback
 static OP_MONITOR_FN(fetchCallBack) { 
     /*opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um fetch no processador '%s' - arg '%s' - bytes '%u' - address 0x" FMT_A0Nx " - virtual 0x" FMT_A0Nx,
@@ -100,22 +119,7 @@ static OP_MONITOR_FN(fetchCallBack) {
     
     if(intValue){
         /* get the processor id*/
-        int processorID;
-        char processorName[7] = "@@@@@@@";
-        strcpy(processorName,opObjectName(processor)); 
-        if(((int)processorName[5] - 48) >= 0 && ((int)processorName[5] - 48) <= 9){
-            processorID = ((int)processorName[3] - 48)*100 + ((int)processorName[4] - 48)*10 + ((int)processorName[5] - 48);
-        }
-        else if(((int)processorName[4] - 48) >= 0 && ((int)processorName[4] - 48) <= 9){
-            processorID = ((int)processorName[3] - 48)*10 + ((int)processorName[4] - 48);
-        }
-        else processorID = ((int)processorName[3] - 48);
-        /*ERROR CATCHER!*/
-        if(processorID < 0 || processorID > N_PES){
-            opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d",processorID);
-            while(1){}     
-        }
-
+        int processorID = getProcessorID(processor);
         
 
         //opMessage("I", "FETCHINFO", "Processor %s fetched the instruction x type %s at 0x" FMT_A0Nx, 
@@ -156,9 +160,9 @@ static OP_MONITOR_FN(fetchCallBack) {
         EI[0] = htonl(read_executedInstructions) & 0x000000FF;
         opProcessorWrite(processor, 0x0FFFFFFC, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
     }
-    else{
+    /*else{
         opMessage("I", "FETCH", "processador esperando mensagem");
-    }
+    }*/
 }
 
 int main(int argc, const char *argv[]) {
