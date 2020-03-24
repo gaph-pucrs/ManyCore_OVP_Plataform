@@ -11,20 +11,125 @@
 #include "op/op.h"
 
 
-#define MODULE_NAME "top"
+#define MODULE_NAME     "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
 #define N_PES 9
-#define INSTRUCTIONS_PER_SECOND       100000000
-#define QUANTUM_TIME_SLICE            0.0001
-#define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //10000
 #define __bswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
+/* Quantum defines */
+#define INSTRUCTIONS_PER_SECOND       100000000
+#define QUANTUM_TIME_SLICE            0.0001
+#define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //10000
 
+#define BRANCH  1
+#define ARITH   2
+#define JUMP    3
+#define MOVE    4
+#define LOAD    5
+#define STORE   6
+#define SHIFT   7
+#define NOP     8
+#define LOGICAL 9
+#define MULTDIV 10
+#define WEIRD   11
 
 // Instructions
-char instructions [][12] = {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
+//char instructions [][12] = {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
+char branchInstructions[][12]   = {"l.bf","l.bnf","EndList@"};
+char arithInstructions[][12]    = {"l.add","l.addc","l.addi","l.addic","l.sub","l.adrp","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","EndList@"};
+char jumpInstructions[][12]     = {"l.j","l.jal","l.jalr","l.jr","EndList@"};
+char moveInstructions[][12]     = {"l.cmov","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.mfspr","l.movhi","l.mtspr","EndList@"};
+char loadInstructions[][12]     = {"l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","EndList@"};
+char storeInstructions[][12]    = {"l.sb","l.sd","l.sh","l.sw","l.swa","EndList@"};
+char shiftInstructions[][12]    = {"l.ror","l.rori","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","EndList@"};
+char nopInstructions[][12]      = {"l.nop","EndList@"};
+char logicalInstructions[][12]  = {"l.and","l.andi","l.ff1","l.fl1","l.or","l.ori","l.xor","l.xori","EndList@"};
+char multDivInstructions[][12]  = {"l.div","l.divu","l.mac","l.maci","l.macrc","l.macu","l.msb","l.msbu","l.mul","l.muld","l.muldu","l.muli","l.mulu","EndList@"};
+char weirdInstructions[][12]    = {"l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.msync","l.psync","l.rfe","l.sys","l.trap","EndList@"};
+
+unsigned int getInstructionType(char *instruction){
+    int i = 0;
+    while(strcmp(branchInstructions[i],"EndList@") != 0) { // Branch type
+        if(strcmp(branchInstructions[i],instruction) == 0){
+            return BRANCH;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(arithInstructions[i],"EndList@") != 0) { // Arith type
+        if(strcmp(arithInstructions[i],instruction) == 0){
+            return ARITH;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(jumpInstructions[i],"EndList@") != 0) { // Jump type
+        if(strcmp(jumpInstructions[i],instruction) == 0){
+            return JUMP;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(moveInstructions[i],"EndList@") != 0) { // Move type
+        if(strcmp(moveInstructions[i],instruction) == 0){
+            return JUMP;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(loadInstructions[i],"EndList@") != 0) { // Load type
+        if(strcmp(loadInstructions[i],instruction) == 0){
+            return LOAD;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(storeInstructions[i],"EndList@") != 0) { // Store type
+        if(strcmp(storeInstructions[i],instruction) == 0){
+            return STORE;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(shiftInstructions[i],"EndList@") != 0) { // Shift type
+        if(strcmp(shiftInstructions[i],instruction) == 0){
+            return SHIFT;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(nopInstructions[i],"EndList@") != 0) { // Nop type
+        if(strcmp(nopInstructions[i],instruction) == 0){
+            return NOP;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(logicalInstructions[i],"EndList@") != 0) { // Logical type
+        if(strcmp(logicalInstructions[i],instruction) == 0){
+            return LOGICAL;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(multDivInstructions[i],"EndList@") != 0) { // Multiplication and Division type
+        if(strcmp(multDivInstructions[i],instruction) == 0){
+            return MULTDIV;
+        }
+        i++;
+    }
+    i = 0;
+    while(strcmp(weirdInstructions[i],"EndList@") != 0) { // Weird stuff type
+        if(strcmp(weirdInstructions[i],instruction) == 0){
+            return WEIRD;
+        }
+        i++;
+    }
+    opMessage("I", "FETCH", "Instrucao nao encontrada! %s",instruction);
+    while(1){}
+}
 
 unsigned int htonl(unsigned int x){
     return __bswap_constant_32(x);
@@ -71,19 +176,6 @@ unsigned int vec2usi(char *vec){
     return auxValue;
 }
 
-unsigned int char2int(char *value){
-    unsigned int intValue = 0x00000000;
-    unsigned int aux = 0x000000FF & value[3];
-    intValue = ((aux << 24) & 0xFF000000);
-    aux = 0x000000FF & value[2];
-    intValue = intValue | ((aux << 16) & 0x00FF0000);
-    aux = 0x000000FF & value[1];
-    intValue = intValue | ((aux << 8) & 0x0000FF00);
-    aux = 0x000000FF & value[0];
-    intValue = intValue | ((aux) & 0x000000FF);
-    return intValue;
-}
-
 int getProcessorID(optProcessorP processor){
     int processorID;
     char processorName[7] = "@@@@@@@";
@@ -112,21 +204,16 @@ static OP_MONITOR_FN(fetchCallBack) {
     addr,
     VA);*/
 
-    /**/
+    /*get the waiting packet flag*/
     char value[4];
     opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
-    unsigned int intValue = char2int(value);
+    unsigned int intValue = htonl(vec2usi(value));
     
+    /*if the processor is not waiting a packet then run the disassemble*/
     if(intValue){
         /* get the processor id*/
-        int processorID = getProcessorID(processor);
+        //int processorID = getProcessorID(processor);
         
-
-        //opMessage("I", "FETCHINFO", "Processor %s fetched the instruction x type %s at 0x" FMT_A0Nx, 
-        //processor ? opObjectName(processor) : "artifact",           // processor name
-        /*htonl(intValue),                                          // fetched instruction*/
-        //opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED),   // disassembled instruction (string)
-        //addr);                                                      // fetch address
         char instruction[60];
         strcpy(instruction,opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
         sscanf(instruction,"%s %*s\n",instruction);
