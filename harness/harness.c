@@ -100,7 +100,7 @@ unsigned int getInstructionType(char *instruction){
         i++;
     }
     i = 0;
-    while(strcmp(nopInstructions[i],"EndList@") != 0) { // Nop type
+    while(strcmp(nopInstructions[i],"EndList@") != 0) { // NOP type
         if(strcmp(nopInstructions[i],instruction) == 0){
             return NOP;
         }

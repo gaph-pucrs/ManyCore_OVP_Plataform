@@ -10,6 +10,19 @@ typedef unsigned char Uns8;
 #define NI_BASE        ((unsigned int *) 0x80000004)
 #define WAITING_PKG    ((unsigned int *) 0x0FFFFFFC)
 #define EXECUTED_INST  ((unsigned int *) 0x0FFFFFF8)
+/* -------------------------------------------------
+// Instruction Type Counter ----------------------*/
+#define BRANCH_INST    ((unsigned int *) 0x0FFFFFF4)
+#define ARITH_INST     ((unsigned int *) 0x0FFFFFF0)
+#define JUMP_INST      ((unsigned int *) 0x0FFFFFEC)
+#define MOVE_INST      ((unsigned int *) 0x0FFFFFE8)
+#define LOAD_INST      ((unsigned int *) 0x0FFFFFE4)
+#define STORE_INST     ((unsigned int *) 0x0FFFFFE0)
+#define SHIFT_INST     ((unsigned int *) 0x0FFFFFDC)
+#define NOP_INST       ((unsigned int *) 0x0FFFFFD8)
+#define LOGICAL_INST   ((unsigned int *) 0x0FFFFFD4)
+#define MULT_DIV_INST  ((unsigned int *) 0x0FFFFFD0)
+
 
 #define LOG(_FMT, ...) printf( "Info " _FMT,  ## __VA_ARGS__)
 // Router - mapped registers
@@ -22,6 +35,17 @@ volatile unsigned int *NIaddr = NI_BASE + 0x1;
 volatile unsigned int *NIcmd = NI_BASE + 0x0;
 // Executed Instructions 
 volatile unsigned int *instructionCounter = EXECUTED_INST;
+volatile unsigned int *branchCounter =      BRANCH_INST;
+volatile unsigned int *arithCounter =       ARITH_INST;
+volatile unsigned int *jumpCounter =        JUMP_INST;
+volatile unsigned int *moveCounter =        MOVE_INST;
+volatile unsigned int *loadCounter =        LOAD_INST;
+volatile unsigned int *storeCounter =       STORE_INST;
+volatile unsigned int *shiftCounter =       SHIFT_INST;
+volatile unsigned int *nopCounter =         NOP_INST;
+volatile unsigned int *logicalCounter =     LOGICAL_INST;
+volatile unsigned int *multDivCounter =     MULT_DIV_INST;
+
 // Activate this flag to deactivate the instruction count
 volatile unsigned int *waitingPckg_flag = WAITING_PKG;
 
