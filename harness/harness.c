@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include "op/op.h"
 
-
 #define MODULE_NAME     "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
@@ -19,9 +18,9 @@
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 /* Quantum defines */
-#define INSTRUCTIONS_PER_SECOND       100000000
+#define INSTRUCTIONS_PER_SECOND       1000000000
 #define QUANTUM_TIME_SLICE            0.0001
-#define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //10000
+#define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //100000
 
 #define BRANCH  1
 #define ARITH   2
