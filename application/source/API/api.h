@@ -330,7 +330,7 @@ void ReportExecutedInstructions(){
         fprintf(log,"==========================================================\n");
         fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
         fprintf(log,"==========================================================\n");
-        fprintf(log,"== Total: %d\n - not implemented yet",*instructionCounter);
+        fprintf(log,"== Total: %d - not implemented yet\n",*instructionCounter);
         fprintf(log,"== Branch: %d\n",*branchCounter);
         fprintf(log,"== Arithmetics: %d\n",*arithCounter);
         fprintf(log,"== Jump: %d\n",*jumpCounter);
