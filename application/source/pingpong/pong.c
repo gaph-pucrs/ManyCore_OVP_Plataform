@@ -24,6 +24,7 @@ int main(int argc, char **argv)
         SendMessage(&pongping, ping_addr);
         ReceiveMessage(&pongping, ping_addr);
     }
+    ReportExecutedInstructions();
     LOG("Pong Finalizado!\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////

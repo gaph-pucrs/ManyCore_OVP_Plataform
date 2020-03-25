@@ -74,7 +74,7 @@ unsigned int getInstructionType(char *instruction){
     i = 0;
     while(strcmp(moveInstructions[i],"EndList@") != 0) { // Move type
         if(strcmp(moveInstructions[i],instruction) == 0){
-            return JUMP;
+            return MOVE;
         }
         i++;
     }
@@ -197,12 +197,8 @@ int getProcessorID(optProcessorP processor){
 
 // Fetch Callback
 static OP_MONITOR_FN(fetchCallBack) { 
-    /*opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um fetch no processador '%s' - arg '%s' - bytes '%u' - address 0x" FMT_A0Nx " - virtual 0x" FMT_A0Nx,
-    processor ? opObjectName(processor) : "artifact", 
-    (const char*)userData,
-    bytes,
-    addr,
-    VA);*/
+    /* get the processor id*/
+    //int processorID = getProcessorID(processor);
 
     /*get the waiting packet flag*/
     char value[4];
@@ -211,45 +207,28 @@ static OP_MONITOR_FN(fetchCallBack) {
     
     /*if the processor is not waiting a packet then run the disassemble*/
     if(intValue){
-        /* get the processor id*/
-        //int processorID = getProcessorID(processor);
-        
         char instruction[60];
         strcpy(instruction,opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
         sscanf(instruction,"%s %*s\n",instruction);
         //opMessage("I", "FETCH", "pos-Instrucao: %s",instruction);
 
-        int i = 0;
-        int found = 0;
-        while(strcmp(instructions[i],"EndList@") != 0 || found == 0) { //instructions
-            
-            if(strcmp(instructions[i],instruction) == 0){
-                found = 1;
-                break;
-            }
-            i++;
-        }
-        if(found == 0){ /*ERROR CLAUSULE!*/ 
-            opMessage("I", "FETCH", "Instrucao nao encontrada! %s",instruction);
-            while(1){}
-        }
+        //                         BASE ADDRESS -  (INSTRUCTION TYPE OFFSET)
+        unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction)*4);
 
+        /* Load the atual value and add one */
         char read_EI[4];
-        opProcessorRead(processor, 0x0FFFFFFC, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
+        opProcessorRead(processor, countAddress, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
         unsigned int read_executedInstructions = vec2usi(read_EI);
         read_executedInstructions = htonl(read_executedInstructions) + 1;
 
-        //opMessage("I", "FETCH", "Processador %d - Instrucoes executadas até agora %u",processorID, read_executedInstructions);
+        /* Store the atual value */
         char EI[4];
         EI[3] = (htonl(read_executedInstructions) >> 24) & 0x000000FF;
         EI[2] = (htonl(read_executedInstructions) >> 16) & 0x000000FF;
         EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
         EI[0] = htonl(read_executedInstructions) & 0x000000FF;
-        opProcessorWrite(processor, 0x0FFFFFFC, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
+        opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
     }
-    /*else{
-        opMessage("I", "FETCH", "processador esperando mensagem");
-    }*/
 }
 
 int main(int argc, const char *argv[]) {

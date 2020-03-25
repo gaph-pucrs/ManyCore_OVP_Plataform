@@ -22,7 +22,20 @@ typedef unsigned char Uns8;
 #define NOP_INST       ((unsigned int *) 0x0FFFFFD8)
 #define LOGICAL_INST   ((unsigned int *) 0x0FFFFFD4)
 #define MULT_DIV_INST  ((unsigned int *) 0x0FFFFFD0)
-
+#define WEIRD_INST     ((unsigned int *) 0x0FFFFFCC)
+/* -------------------------------------------------
+// Instruction Type Offset -----------------------*/
+#define BRANCH  1
+#define ARITH   2
+#define JUMP    3
+#define MOVE    4
+#define LOAD    5
+#define STORE   6
+#define SHIFT   7
+#define NOP     8
+#define LOGICAL 9
+#define MULTDIV 10
+#define WEIRD   11
 
 #define LOG(_FMT, ...) printf( "Info " _FMT,  ## __VA_ARGS__)
 // Router - mapped registers
@@ -45,6 +58,7 @@ volatile unsigned int *shiftCounter =       SHIFT_INST;
 volatile unsigned int *nopCounter =         NOP_INST;
 volatile unsigned int *logicalCounter =     LOGICAL_INST;
 volatile unsigned int *multDivCounter =     MULT_DIV_INST;
+volatile unsigned int *weirdCounter =       WEIRD_INST;
 
 // Activate this flag to deactivate the instruction count
 volatile unsigned int *waitingPckg_flag = WAITING_PKG;
@@ -97,7 +111,7 @@ void OVP_init();
 void SendMessage(message *theMessage, unsigned int destination);
 void ReceiveMessage(message *theMessage, unsigned int from);
 void ResetExecutedInstructions();
-unsigned int GetExecutedInstructions();
+void ReportExecutedInstructions();
 void FinishApplication();
 //////////////////////////
 void SendSlot(unsigned int addr, unsigned int slot);
@@ -285,14 +299,42 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 //
 void ResetExecutedInstructions(){
     *instructionCounter = 0;
+    *branchCounter = 0;
+    *arithCounter = 0;  
+    *jumpCounter = 0;   
+    *moveCounter = 0;    
+    *loadCounter = 0;    
+    *storeCounter = 0;    
+    *shiftCounter = 0;   
+    *nopCounter = 0;   
+    *logicalCounter = 0;    
+    *multDivCounter = 0;
+    *weirdCounter = 0;
     *waitingPckg_flag = 0;
     return;
 }
 
 ///////////////////////////////////////////////////////////////////
 //
-unsigned int GetExecutedInstructions(){
-    return *instructionCounter;
+void ReportExecutedInstructions(){
+    LOG("==========================================================\n");
+    LOG("========EXECUTED INSTRUCTIONS REPORT======================\n");
+    LOG("==========================================================\n");
+    LOG("== Total: %d\n - not implemented yet",*instructionCounter);
+    LOG("== Branch: %d\n",*branchCounter);
+    LOG("== Arithmetics: %d\n",*arithCounter);
+    LOG("== Jump: %d\n",*jumpCounter);
+    LOG("== Move: %d\n",*moveCounter);
+    LOG("== Load: %d\n",*loadCounter);
+    LOG("== Store: %d\n",*storeCounter);
+    LOG("== Shift: %d\n",*shiftCounter);
+    LOG("== Nop: %d\n",*nopCounter);
+    LOG("== Logial: %d\n",*logicalCounter);
+    LOG("== Multiplication and Division: %d\n",*multDivCounter);
+    LOG("== Weird Stuff: %d\n",*weirdCounter);
+    LOG("==========================================================\n");
+    LOG("==========================================================\n");
+    return;
 }
 
 ///////////////////////////////////////////////////////////////////
