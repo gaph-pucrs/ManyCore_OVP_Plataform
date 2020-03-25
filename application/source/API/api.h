@@ -342,7 +342,7 @@ void ReportExecutedInstructions(){
         fprintf(log,"== Weird Stuff: %d\n",*weirdCounter);
         fprintf(log,"==========================================================\n");
         fprintf(log,"==========================================================\n");
-        fclose(log);
+        //fclose(log);
     }
     else{
         printf("~~~~~~~~~~~~~~ERROOOOOOOO!!!~\n");
