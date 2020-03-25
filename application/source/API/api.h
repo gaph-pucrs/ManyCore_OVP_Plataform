@@ -300,6 +300,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 ///////////////////////////////////////////////////////////////////
 //
 void ResetExecutedInstructions(){
+    *waitingPckg_flag = 1;
     *instructionCounter = 0;
     *branchCounter = 0;
     *arithCounter = 0;  
@@ -319,6 +320,7 @@ void ResetExecutedInstructions(){
 ///////////////////////////////////////////////////////////////////
 //
 void ReportExecutedInstructions(){
+    *waitingPckg_flag = 1;
     FILE *log;
     char log_name[50];
     sprintf(log_name, "..\\simulation\\exec_inst_PE%d.txt",*myAddress);
