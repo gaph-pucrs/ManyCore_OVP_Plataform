@@ -56,10 +56,16 @@ static PPM_BUS_PORT_FN(nextBusPort) {
 
 static ppmNetPort netPorts[] = {
     {
-        .name            = "INTTC",
+        .name            = "INT_NI",
         .type            = PPM_OUTPUT_PORT,
         .mustBeConnected = 0,
-        .description     = "Interrupt Request"
+        .description     = "NI Interrupt Request"
+    },
+    {
+        .name            = "INT_TIMER",
+        .type            = PPM_OUTPUT_PORT,
+        .mustBeConnected = 0,
+        .description     = "Timer Interrupt Request"
     },
     { 0 }
 };

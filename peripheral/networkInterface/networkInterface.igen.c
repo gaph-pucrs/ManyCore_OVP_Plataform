@@ -81,9 +81,13 @@ static void installMasterPorts(void) {
 /////////////////////////////////// Net Ports //////////////////////////////////
 
 static void installNetPorts(void) {
-// To write to this net, use ppmWriteNet(handles.INTTC, value);
+// To write to this net, use ppmWriteNet(handles.INT_NI, value);
 
-    handles.INTTC = ppmOpenNetPort("INTTC");
+    handles.INT_NI = ppmOpenNetPort("INT_NI");
+
+// To write to this net, use ppmWriteNet(handles.INT_TIMER, value);
+
+    handles.INT_TIMER = ppmOpenNetPort("INT_TIMER");
 
 }
 
