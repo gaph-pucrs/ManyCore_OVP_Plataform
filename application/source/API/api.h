@@ -323,9 +323,9 @@ void ReportExecutedInstructions(){
     *waitingPckg_flag = 1;
     FILE *log;
     char log_name[50];
-    sprintf(log_name, "..\\simulation\\exec_inst_PE%d.txt",*myAddress);
-    printf("%s\n",log_name);
-    log = fopen("execInstPE.txt", "w+");
+    sprintf(log_name, "\\simulation\\exec_inst_PE%d.txt",*myAddress);
+    //printf("%s\n",log_name);
+    log = fopen(log_name, "w+");
     if(log != NULL){
         fprintf(log,"==========================================================\n");
         fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
@@ -344,7 +344,7 @@ void ReportExecutedInstructions(){
         fprintf(log,"== Weird Stuff: %d\n",*weirdCounter);
         fprintf(log,"==========================================================\n");
         fprintf(log,"==========================================================\n");
-        //fclose(log);
+        fclose(log);
     }
     else{
         printf("~~~~~~~~~~~~~~ERROOOOOOOO!!!~\n");
