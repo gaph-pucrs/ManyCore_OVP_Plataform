@@ -320,11 +320,11 @@ void ResetExecutedInstructions(){
 ///////////////////////////////////////////////////////////////////
 //
 void ReportExecutedInstructions(){
-    *waitingPckg_flag = 1;
+    //*waitingPckg_flag = 1;
     FILE *log;
     char log_name[50];
     sprintf(log_name, "simulation/exec_inst_PE%d.txt",*myAddress);
-    log = fopen(log_name, "w+");
+    log = fopen(log_name, "a+");
     if(log != NULL){
         fprintf(log,"==========================================================\n");
         fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
