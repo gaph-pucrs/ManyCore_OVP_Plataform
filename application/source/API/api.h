@@ -342,6 +342,9 @@ void ReportExecutedInstructions(){
         fprintf(log,"==========================================================\n");
         fclose(log);
     }
+    else{
+        printf("~~~~~~~~~~~~~~ERROOOOOOOO!!!~\n");
+    }
     return;
 }
 
