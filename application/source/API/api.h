@@ -319,7 +319,7 @@ void ResetExecutedInstructions(){
 void ReportExecutedInstructions(){
     FILE *log;
     char log_name[50];
-    sprintf(log_name, "../simulation/exec_inst_PE%d.txt",*myAddress);
+    sprintf(log_name, "..\\simulation\\exec_inst_PE%d.txt",*myAddress);
     printf("%s\n",log_name);
     log = fopen(log_name, "w+");
     if(log != NULL){
