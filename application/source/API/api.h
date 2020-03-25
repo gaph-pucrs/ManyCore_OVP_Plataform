@@ -1,6 +1,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
 #include "../../../peripheral/whnoc_dma/noc.h"
 
 typedef unsigned int  Uns32;
@@ -321,7 +323,7 @@ void ReportExecutedInstructions(){
     char log_name[50];
     sprintf(log_name, "..\\simulation\\exec_inst_PE%d.txt",*myAddress);
     printf("%s\n",log_name);
-    log = fopen(log_name, "w");
+    log = fopen("..\\simulation\\exec_inst_PE.txt", "w");
     if(log != NULL){
         fprintf(log,"==========================================================\n");
         fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
