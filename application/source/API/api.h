@@ -318,7 +318,9 @@ void ResetExecutedInstructions(){
 //
 void ReportExecutedInstructions(){
     FILE *log;
-    log = fopen(sprintf("../simulation/exec_inst_PE%d.txt",*myAddress), "w");
+    char log_name[50];
+    sprintf(log_name, "../simulation/exec_inst_PE%d.txt",*myAddress);
+    log = fopen(log_name, "w");
     if(log != NULL){
         fprintf(log,"==========================================================\n");
         fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
