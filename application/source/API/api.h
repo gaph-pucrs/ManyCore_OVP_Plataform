@@ -470,7 +470,7 @@ void FinishApplication(){
             if(buffer_map[i]!=EMPTY) done = 0; // if some position in the buffer is occupied then the program must wait!
         }
     }while(done==0);
-    LOG("Application ROUTER %x done!\n\n",*myAddress);
     ReportExecutedInstructions();
+    LOG("Application ROUTER %x done!\n\n",*myAddress);
     return;
 }
