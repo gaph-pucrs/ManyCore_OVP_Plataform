@@ -205,7 +205,7 @@ static OP_MONITOR_FN(fetchCallBack) {
     unsigned int intValue = htonl(vec2usi(value));
     
     /*if the processor is not waiting a packet then run the disassemble*/
-    if(intValue){
+    if(!intValue){
         char instruction[60];
         strcpy(instruction,opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
         sscanf(instruction,"%s %*s\n",instruction);
