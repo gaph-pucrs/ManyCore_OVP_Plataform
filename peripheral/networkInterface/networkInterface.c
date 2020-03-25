@@ -154,7 +154,7 @@ void niIteration(){
             //bhmMessage("INFO", "NIITERATION", "Terminando envio!!!\n");
             control_TX = NI_STATUS_INTER; // Changes the TX status to INTERRUPTION
             writeMem(htonl(NI_INT_TYPE_TX), intTypeAddr); // Writes the interruption type to the processor
-            ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
+            ppmWriteNet(handles.INT_NI, 1); // Turns the interruption on
         }
     }
 
@@ -163,7 +163,7 @@ void niIteration(){
         //bhmMessage("INFO", "NIITERATION", "-------------------------------___SPECIAL!!!!\n");
         control_RX = NI_STATUS_INTER;
         writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
-        ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
+        ppmWriteNet(handles.INT_NI, 1); // Turns the interruption on
     }
 }
 
@@ -245,7 +245,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
         if(control_TX != NI_STATUS_INTER){
             control_RX = NI_STATUS_INTER;
             writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
-            ppmWriteNet(handles.INTTC, 1); // Turns the interruption on
+            ppmWriteNet(handles.INT_NI, 1); // Turns the interruption on
         }
     }
 }
@@ -278,7 +278,7 @@ PPM_REG_WRITE_CB(statusWrite) {
     else if(command == READING){
         if(control_RX == NI_STATUS_INTER){
             // Turn the interruption signal down
-            ppmWriteNet(handles.INTTC, 0);  
+            ppmWriteNet(handles.INT_NI, 0);  
         }
         else{
             bhmMessage("I", "statusWrite", "ERROR_READING: UNEXPECTED STATE REACHED"); while(1){}
@@ -291,7 +291,7 @@ PPM_REG_WRITE_CB(statusWrite) {
         }
         else if(control_TX == NI_STATUS_INTER){
             control_TX = NI_STATUS_OFF;
-            ppmWriteNet(handles.INTTC, 0);  // Turn the interruption signal down
+            ppmWriteNet(handles.INT_NI, 0);  // Turn the interruption signal down
         }
         else{
             bhmMessage("I", "statusWrite", "ERROR_DONE: UNEXPECTED STATE REACHED"); while(1){}

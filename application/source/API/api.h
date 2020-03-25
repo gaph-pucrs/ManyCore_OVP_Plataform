@@ -139,7 +139,6 @@ void interruptHandler(void);
 /* Interruption function */ 
 void interruptHandler(void) {
     int requester;
-    //LOG("%x~~type:%x~!\n",*myAddress,interruptionType);
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
         if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
@@ -324,7 +323,7 @@ void ReportExecutedInstructions(){
     FILE *log;
     char log_name[50];
     sprintf(log_name, "simulation/exec_inst_PE%d.txt",*myAddress);
-    log = fopen(log_name, "a+");
+    log = fopen(log_name, "w+");
     if(log != NULL){
         fprintf(log,"==========================================================\n");
         fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");

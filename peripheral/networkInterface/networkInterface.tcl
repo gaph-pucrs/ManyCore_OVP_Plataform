@@ -44,5 +44,7 @@ imodeladdpacketnetport \
 #########################################
 ## Processor interrupt line
 #########################################
-imodeladdnetport -name INTTC -type output
-iadddocumentation -name Description -text "Interrupt Request"
+imodeladdnetport -name INT_NI -type output
+iadddocumentation -name Description -text "NI Interrupt Request"
+imodeladdnetport -name INT_TIMER -type output
+iadddocumentation -name Description -text "Timer Interrupt Request"

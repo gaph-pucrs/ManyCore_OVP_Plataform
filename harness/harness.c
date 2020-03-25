@@ -268,7 +268,6 @@ int main(int argc, const char *argv[]) {
 
         /*cont the number of processors that has exited */
         int finishedProcessors = 0;
-
         
         /* loop for all processors */
         while ((proc = opProcessorNext(modNew, proc))) {

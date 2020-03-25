@@ -23,7 +23,8 @@ echo "" >> module.op.tcl
 # Creates the interruption signals
 for i in $(seq 0 $N);
 do
-	echo "ihwaddnet -instancename int"$i >> module.op.tcl
+	echo "ihwaddnet -instancename intNI"$i >> module.op.tcl
+	echo "ihwaddnet -instancename intTIMER"$i >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
@@ -42,7 +43,8 @@ for i in $(seq 0 $N);
 do
 	echo "ihwconnect -bus cpu"$i"Bus -instancename cpu"$i" -busmasterport INSTRUCTION" >> module.op.tcl
 	echo "ihwconnect -bus cpu"$i"Bus -instancename cpu"$i" -busmasterport DATA" >> module.op.tcl
-	echo "ihwconnect -instancename cpu"$i" -netport       intr0       -net int"$i >> module.op.tcl
+	echo "ihwconnect -instancename cpu"$i" -netport       intr0       -net intNI"$i >> module.op.tcl
+	echo "ihwconnect -instancename cpu"$i" -netport       intr1       -net intTIMER"$i >> module.op.tcl
 	echo "" >> module.op.tcl
 done
 
@@ -234,7 +236,8 @@ echo "" >> module.op.tcl
 # Connects every interruption signal from each router to the associated processor
 for i in $(seq 0 $N);
 do
-	echo "ihwconnect -instancename ni"$i" -netport       INTTC  -net int"$i >> module.op.tcl
+	echo "ihwconnect -instancename ni"$i" -netport       INT_NI  -net intNI"$i >> module.op.tcl
+	echo "ihwconnect -instancename ni"$i" -netport       INT_TIMER  -net intTIMER"$i >> module.op.tcl
 done
 
 echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
