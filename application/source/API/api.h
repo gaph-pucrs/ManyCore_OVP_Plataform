@@ -317,23 +317,28 @@ void ResetExecutedInstructions(){
 ///////////////////////////////////////////////////////////////////
 //
 void ReportExecutedInstructions(){
-    LOG("==========================================================\n");
-    LOG("========EXECUTED INSTRUCTIONS REPORT======================\n");
-    LOG("==========================================================\n");
-    LOG("== Total: %d\n - not implemented yet",*instructionCounter);
-    LOG("== Branch: %d\n",*branchCounter);
-    LOG("== Arithmetics: %d\n",*arithCounter);
-    LOG("== Jump: %d\n",*jumpCounter);
-    LOG("== Move: %d\n",*moveCounter);
-    LOG("== Load: %d\n",*loadCounter);
-    LOG("== Store: %d\n",*storeCounter);
-    LOG("== Shift: %d\n",*shiftCounter);
-    LOG("== Nop: %d\n",*nopCounter);
-    LOG("== Logial: %d\n",*logicalCounter);
-    LOG("== Multiplication and Division: %d\n",*multDivCounter);
-    LOG("== Weird Stuff: %d\n",*weirdCounter);
-    LOG("==========================================================\n");
-    LOG("==========================================================\n");
+    FILE *log;
+    log = fopen(sprintf("../simulation/exec_inst_PE%d.txt",*myAddress), "w");
+    if(log != NULL){
+        fprintf(log,"==========================================================\n");
+        fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
+        fprintf(log,"==========================================================\n");
+        fprintf(log,"== Total: %d\n - not implemented yet",*instructionCounter);
+        fprintf(log,"== Branch: %d\n",*branchCounter);
+        fprintf(log,"== Arithmetics: %d\n",*arithCounter);
+        fprintf(log,"== Jump: %d\n",*jumpCounter);
+        fprintf(log,"== Move: %d\n",*moveCounter);
+        fprintf(log,"== Load: %d\n",*loadCounter);
+        fprintf(log,"== Store: %d\n",*storeCounter);
+        fprintf(log,"== Shift: %d\n",*shiftCounter);
+        fprintf(log,"== Nop: %d\n",*nopCounter);
+        fprintf(log,"== Logial: %d\n",*logicalCounter);
+        fprintf(log,"== Multiplication and Division: %d\n",*multDivCounter);
+        fprintf(log,"== Weird Stuff: %d\n",*weirdCounter);
+        fprintf(log,"==========================================================\n");
+        fprintf(log,"==========================================================\n");
+        fclose(log);
+    }
     return;
 }
 
@@ -456,5 +461,6 @@ void FinishApplication(){
         }
     }while(done==0);
     LOG("Application ROUTER %x done!\n\n",*myAddress);
+    ReportExecutedInstructions();
     return;
 }
