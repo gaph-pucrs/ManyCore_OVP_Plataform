@@ -19,7 +19,7 @@
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 /* Quantum defines */
 #define INSTRUCTIONS_PER_SECOND       1000000000
-#define QUANTUM_TIME_SLICE            0.0001
+#define QUANTUM_TIME_SLICE            0.00001
 #define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  //100000
 
 #define BRANCH  1
