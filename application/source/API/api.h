@@ -323,7 +323,7 @@ void ReportExecutedInstructions(){
     char log_name[50];
     sprintf(log_name, "..\\simulation\\exec_inst_PE%d.txt",*myAddress);
     printf("%s\n",log_name);
-    log = fopen("..\\simulation\\execInstPE.txt", "w+");
+    log = fopen("..\\execInstPE.txt", "w+");
     if(log != NULL){
         fprintf(log,"==========================================================\n");
         fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
