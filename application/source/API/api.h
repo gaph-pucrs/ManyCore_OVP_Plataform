@@ -164,7 +164,6 @@ void interruptHandler_timer(void);
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
-    int i;
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 11 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
@@ -407,7 +406,6 @@ void ReportExecutedInstructions(){
 ///////////////////////////////////////////////////////////////////
 /* Creates the request message and send it to the transmitter */
 void requestMsg(unsigned int from){
-    int i;
     myServicePacket[PI_DESTINATION] = from;
     myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
@@ -421,13 +419,13 @@ void requestMsg(unsigned int from){
 ///////////////////////////////////////////////////////////////////
 /* Gets the PE address from a given ID */
 unsigned int getAddress(unsigned int id){
-    return 1
+    return 1;
 }
 
 ///////////////////////////////////////////////////////////////////
 /* Gets the PE ID from a given address */
 unsigned int getID(unsigned int addr){
-    return 1
+    return 1;
 }
 
 ///////////////////////////////////////////////////////////////////
