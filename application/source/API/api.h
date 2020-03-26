@@ -141,8 +141,8 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
-    *timerConfig = 0xFFFFFFFF;
-    LOG("Timer interruption!\n");
+    *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
+    //LOG("Timer interruption!\n");
 }
 
 ///////////////////////////////////////////////////////////////////
