@@ -11,6 +11,7 @@ make -C peripheral/whnoc_dma NOVLNV=1
 make -C peripheral/synchronizer NOVLNV=1
 make -C peripheral/iterator NOVLNV=1
 make -C peripheral/networkInterface NOVLNV=1
+make -C peripheral/timer NOVLNV=1
 make -C harness
 harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu0=application/application0.${CROSS}.elf $* \
