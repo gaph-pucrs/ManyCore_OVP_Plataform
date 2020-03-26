@@ -105,6 +105,10 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optNetP intNI8_n = opNetNew(mi, "intNI8", 0, 0);
     optNetP intTIMER8_n = opNetNew(mi, "intTIMER8", 0, 0);
 
+    optPacketnetP data_0_0_TEA_pkn = opPacketnetNew(mi, "data_0_0_TEA", 0, 0);
+
+    optPacketnetP ctrl_0_0_TEA_pkn = opPacketnetNew(mi, "ctrl_0_0_TEA", 0, 0);
+
     optPacketnetP data_0_0_L_pkn = opPacketnetNew(mi, "data_0_0_L", 0, 0);
 
     optPacketnetP ctrl_0_0_L_pkn = opPacketnetNew(mi, "ctrl_0_0_L", 0, 0);
@@ -1075,6 +1079,22 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE tea
+
+    const char *tea_path = "peripheral/tea/pse.pse";
+    opPeripheralNew(
+        mi,
+        tea_path,
+        "tea",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_0_TEA_pkn, "portData"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_TEA_pkn, "portControl")
+            )
+        ),
+        0
+    );
+
     // PSE router0
 
     const char *router0_path = "peripheral/whnoc_dma/pse.pse";
@@ -1087,6 +1107,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu0Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_0_TEA_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_TEA_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_0_0_L_pkn, "portDataLocal"),
                 OP_PACKETNET_CONNECT(ctrl_0_0_L_pkn, "portControlLocal"),
                 OP_PACKETNET_CONNECT(data_0_0_E_pkn, "portDataEast"),

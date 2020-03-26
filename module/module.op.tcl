@@ -182,6 +182,7 @@ ihwaddmemory -instancename ram17 -type ram
 ihwconnect -bus cpu8Bus -instancename ram17 -busslaveport sp8 -loaddress 0xf0000000 -hiaddress 0xffffffff
 
 
+ihwaddperipheral -instancename tea -modelfile peripheral/tea/pse.pse
 ihwaddperipheral -instancename router0 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni0 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer0 -modelfile peripheral/timer/pse.pse
@@ -256,6 +257,8 @@ ihwconnect -instancename ni8 -busmasterport MREAD  -bus cpu8Bus
 ihwconnect -instancename ni8 -busmasterport MWRITE -bus cpu8Bus
 ihwconnect -instancename timer8 -busslaveport TIMEREG -bus cpu8Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 
+ihwaddpacketnet -instancename data_0_0_TEA
+ihwaddpacketnet -instancename ctrl_0_0_TEA
 ihwaddpacketnet -instancename data_0_0_L
 ihwaddpacketnet -instancename ctrl_0_0_L
 ihwaddpacketnet -instancename data_0_0_E
@@ -315,6 +318,10 @@ ihwaddpacketnet -instancename ctrl_2_2_W
 ihwaddpacketnet -instancename ctrl_2_2_N
 ihwaddpacketnet -instancename ctrl_2_2_S
 
+ihwconnect -instancename router0 -packetnetport portDataWest -packetnet data_0_0_TEA
+ihwconnect -instancename router0 -packetnetport portControlWest -packetnet ctrl_0_0_TEA
+ihwconnect -instancename tea -packetnetport portData -packetnet data_0_0_TEA
+ihwconnect -instancename tea -packetnetport portControl -packetnet ctrl_0_0_TEA
 ihwconnect -instancename router0 -packetnetport portDataLocal -packetnet data_0_0_L
 ihwconnect -instancename ni0 -packetnetport dataPort -packetnet data_0_0_L
 ihwconnect -instancename router0 -packetnetport portControlLocal -packetnet ctrl_0_0_L

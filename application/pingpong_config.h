@@ -7,5 +7,5 @@
 // Tasks addresses ///////////////////
 //////////////////////////////////////
 
-#define ping_addr 0x00
-#define pong_addr 0x22
+#define ping_addr 0x000
+#define pong_addr 0x202
