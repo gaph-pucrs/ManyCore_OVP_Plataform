@@ -8,10 +8,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#include "networkInterface.igen.h"
+#include "timer.igen.h"
 /////////////////////////////// Port Declarations //////////////////////////////
 
-DMAC_ab8_dataT DMAC_ab8_data;
+TIMEREG_ab8_dataT TIMEREG_ab8_data;
 
 handlesT handles;
 
@@ -35,9 +35,9 @@ static PPM_VIEW_CB(view32) {  *(Uns32*)data = *(Uns32*)user; }
 //////////////////////////////// Bus Slave Ports ///////////////////////////////
 
 static void installSlavePorts(void) {
-    handles.DMAC = ppmCreateSlaveBusPort("DMAC", 8);
-    if (!handles.DMAC) {
-        bhmMessage("E", "PPM_SPNC", "Could not connect port 'DMAC'");
+    handles.TIMEREG = ppmCreateSlaveBusPort("TIMEREG", 8);
+    if (!handles.TIMEREG) {
+        bhmMessage("E", "PPM_SPNC", "Could not connect port 'TIMEREG'");
     }
 
 }
@@ -46,44 +46,26 @@ static void installSlavePorts(void) {
 
 static void installRegisters(void) {
 
-    ppmCreateRegister("ab8_status",
+    ppmCreateRegister("ab8_timerCfg",
         0,
-        handles.DMAC,
+        handles.TIMEREG,
         0,
         4,
-        statusRead,
-        statusWrite,
+        cfgRead,
+        cfgWrite,
         view32,
-        &(DMAC_ab8_data.status.value),
-        True
-    );
-    ppmCreateRegister("ab8_address",
-        0,
-        handles.DMAC,
-        4,
-        4,
-        addressRead,
-        addressWrite,
-        view32,
-        &(DMAC_ab8_data.address.value),
+        &(TIMEREG_ab8_data.timerCfg.value),
         True
     );
 
-}
-
-/////////////////////////////// Bus Master Ports ///////////////////////////////
-
-static void installMasterPorts(void) {
-    handles.MREAD = ppmOpenAddressSpace("MREAD");
-    handles.MWRITE = ppmOpenAddressSpace("MWRITE");
 }
 
 /////////////////////////////////// Net Ports //////////////////////////////////
 
 static void installNetPorts(void) {
-// To write to this net, use ppmWriteNet(handles.INT_NI, value);
+// To write to this net, use ppmWriteNet(handles.INT_TIMER, value);
 
-    handles.INT_NI = ppmOpenNetPort("INT_NI");
+    handles.INT_TIMER = ppmOpenNetPort("INT_TIMER");
 
 }
 
@@ -92,7 +74,6 @@ static void installNetPorts(void) {
 PPM_CONSTRUCTOR_CB(periphConstructor) {
     installSlavePorts();
     installRegisters();
-    installMasterPorts();
     installNetPorts();
 }
 

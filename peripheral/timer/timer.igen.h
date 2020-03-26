@@ -7,8 +7,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef NETWORKINTERFACE_IGEN_H
-#define NETWORKINTERFACE_IGEN_H
+#ifndef TIMER_IGEN_H
+#define TIMER_IGEN_H
 
 #ifdef _PSE_
 #    include "peripheral/impTypes.h"
@@ -35,41 +35,30 @@ extern Uns32 diagnosticLevel;
 
 /////////////////////////// Register data declaration //////////////////////////
 
-typedef struct DMAC_ab8_dataS { 
+typedef struct TIMEREG_ab8_dataS { 
     union { 
         Uns32 value;
-    } status;
-    union { 
-        Uns32 value;
-    } address;
-} DMAC_ab8_dataT, *DMAC_ab8_dataTP;
+    } timerCfg;
+} TIMEREG_ab8_dataT, *TIMEREG_ab8_dataTP;
 
 /////////////////////////////// Port Declarations //////////////////////////////
 
-extern DMAC_ab8_dataT DMAC_ab8_data;
+extern TIMEREG_ab8_dataT TIMEREG_ab8_data;
 
 #ifdef _PSE_
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
-    ppmAddressSpaceHandle MREAD;
-    ppmAddressSpaceHandle MWRITE;
-    void                 *DMAC;
-    ppmNetHandle          INT_NI;
-    ppmPacketnetHandle    dataPort;
-    ppmPacketnetHandle    controlPort;
+    void                 *TIMEREG;
+    ppmNetHandle          INT_TIMER;
 } handlesT, *handlesTP;
 
 extern handlesT handles;
 
 ////////////////////////////// Callback prototypes /////////////////////////////
 
-PPM_REG_READ_CB(addressRead);
-PPM_REG_WRITE_CB(addressWrite);
-PPM_PACKETNET_CB(controlPortUpd);
-PPM_PACKETNET_CB(dataPortUpd);
-PPM_REG_READ_CB(statusRead);
-PPM_REG_WRITE_CB(statusWrite);
+PPM_REG_READ_CB(cfgRead);
+PPM_REG_WRITE_CB(cfgWrite);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
 PPM_CONSTRUCTOR_CB(constructor);
