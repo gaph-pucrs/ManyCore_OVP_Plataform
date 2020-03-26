@@ -98,13 +98,12 @@ PPM_REG_READ_CB(cfgRead) {
 }
 
 PPM_REG_WRITE_CB(cfgWrite) {
-    // YOUR CODE HERE (cfgWrite)
     unsigned int value = htonl(data);
     if(value == 0xFFFFFFFF){
         ppmWriteNet(handles.INT_TIMER, 0);
-        bhmMessage("I", "TIMER", "baixando interrupcao!");
     }
     else{
+        bhmMessage("I", "TIMER", "Timer set to interrupt the processor once every %d us!",value);
         timer_us = (double)value;
     }
     *(Uns32*)user = data;
@@ -145,14 +144,14 @@ int main(int argc, char *argv[]) {
     constructor();
 
     while(1){
-        bhmMessage("I", "TIMER", "vou interromper o processador em %lf us!", timer_us);
+        //bhmMessage("I", "TIMER", "vou interromper o processador em %lf us!", timer_us);
         if(timer_us == 0){
             bhmWaitDelay(1); // if the timer is unset then waits for 10 us to check if the timer was reprogrammed
         }
         else{
             bhmWaitDelay(timer_us); // Every time_us 
             ppmWriteNet(handles.INT_TIMER, 1);
-            bhmMessage("I", "TIMER", "interrompendo processador depois de %lf us", timer_us);
+            //bhmMessage("I", "TIMER", "interrompendo processador depois de %lf us", timer_us);
         }
     }
 

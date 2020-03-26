@@ -131,7 +131,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester);
 void interruptHandler_NI(void);
 void interruptHandler_timer(void);
 
-int value = 1000;
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -142,7 +141,6 @@ int value = 1000;
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
-    *timerConfig = value-10;
     *timerConfig = 0xFFFFFFFF;
     LOG("Timer interruption!\n");
 }
@@ -227,6 +225,9 @@ void OVP_init(){
         pendingReq[i] = 0; 
     }
 
+    // Configure the timer to interrupt once every 1 ms (1000 us)
+    *timerConfig = 1000; 
+
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
     int init_start = 0;
@@ -236,6 +237,7 @@ void OVP_init(){
     tignore = clock();
     tinicio = tignore - (tignore - tinicio);
     
+
     // Reset the amount of executed instructions
     ResetExecutedInstructions();
     return;
