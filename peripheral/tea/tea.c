@@ -16,7 +16,7 @@ PPM_PACKETNET_CB(controlUpdate) {
 
 PPM_PACKETNET_CB(dataUpdate) {
     unsigned int newFlit = *(unsigned int *)data;
-    bhmMessage("I", "Chegou um flit: %x", newFlit);
+    bhmMessage("I", "TEA", "Chegou um flit: %x", newFlit);
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {
