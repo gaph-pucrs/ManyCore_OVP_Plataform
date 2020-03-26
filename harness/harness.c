@@ -285,7 +285,7 @@ int main(int argc, const char *argv[]) {
         }
 
         countQuantum++;
-        opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lf seconds", countQuantum, (countQuantum*QUANTUM_TIME_SLICE));
+        opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %lfms", countQuantum, (countQuantum*QUANTUM_TIME_SLICE),(countQuantum*QUANTUM_TIME_SLICE*1000));
 
         /*checks if all processors has exited */
         if (finishedProcessors == N_PES) {
