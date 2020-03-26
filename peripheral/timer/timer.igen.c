@@ -101,7 +101,7 @@ PPM_REG_WRITE_CB(cfgWrite) {
     // YOUR CODE HERE (cfgWrite)
     unsigned int value = htonl(data);
     if(value == 0xFFFFFFFF){
-        ppmWriteNet(handles.INT_NI, 0);
+        ppmWriteNet(handles.INT_TIMER, 0);
         bhmMessage("I", "TIMER", "baixando interrupcao!");
     }
     else{
@@ -145,6 +145,7 @@ int main(int argc, char *argv[]) {
     constructor();
 
     while(1){
+        bhmMessage("I", "TIMER", "vou interromper o processador em %d us!", timer_us);
         if(timer_us == 0){
             bhmWaitDelay(1); // if the timer is unset then waits for 10 us to check if the timer was reprogrammed
         }
