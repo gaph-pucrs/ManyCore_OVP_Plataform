@@ -10,15 +10,24 @@ ihwaddbus -instancename cpu6Bus -addresswidth 32
 ihwaddbus -instancename cpu7Bus -addresswidth 32
 ihwaddbus -instancename cpu8Bus -addresswidth 32
 
-ihwaddnet -instancename int0
-ihwaddnet -instancename int1
-ihwaddnet -instancename int2
-ihwaddnet -instancename int3
-ihwaddnet -instancename int4
-ihwaddnet -instancename int5
-ihwaddnet -instancename int6
-ihwaddnet -instancename int7
-ihwaddnet -instancename int8
+ihwaddnet -instancename intNI0
+ihwaddnet -instancename intTIMER0
+ihwaddnet -instancename intNI1
+ihwaddnet -instancename intTIMER1
+ihwaddnet -instancename intNI2
+ihwaddnet -instancename intTIMER2
+ihwaddnet -instancename intNI3
+ihwaddnet -instancename intTIMER3
+ihwaddnet -instancename intNI4
+ihwaddnet -instancename intTIMER4
+ihwaddnet -instancename intNI5
+ihwaddnet -instancename intTIMER5
+ihwaddnet -instancename intNI6
+ihwaddnet -instancename intTIMER6
+ihwaddnet -instancename intNI7
+ihwaddnet -instancename intTIMER7
+ihwaddnet -instancename intNI8
+ihwaddnet -instancename intTIMER8
 
 ihwaddprocessor -instancename cpu0 -id 0 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
@@ -67,39 +76,48 @@ ihwaddprocessor -instancename cpu8 -id 8 \
 
 ihwconnect -bus cpu0Bus -instancename cpu0 -busmasterport INSTRUCTION
 ihwconnect -bus cpu0Bus -instancename cpu0 -busmasterport DATA
-ihwconnect -instancename cpu0 -netport       intr0       -net int0
+ihwconnect -instancename cpu0 -netport       intr0       -net intNI0
+ihwconnect -instancename cpu0 -netport       intr1       -net intTIMER0
 
 ihwconnect -bus cpu1Bus -instancename cpu1 -busmasterport INSTRUCTION
 ihwconnect -bus cpu1Bus -instancename cpu1 -busmasterport DATA
-ihwconnect -instancename cpu1 -netport       intr0       -net int1
+ihwconnect -instancename cpu1 -netport       intr0       -net intNI1
+ihwconnect -instancename cpu1 -netport       intr1       -net intTIMER1
 
 ihwconnect -bus cpu2Bus -instancename cpu2 -busmasterport INSTRUCTION
 ihwconnect -bus cpu2Bus -instancename cpu2 -busmasterport DATA
-ihwconnect -instancename cpu2 -netport       intr0       -net int2
+ihwconnect -instancename cpu2 -netport       intr0       -net intNI2
+ihwconnect -instancename cpu2 -netport       intr1       -net intTIMER2
 
 ihwconnect -bus cpu3Bus -instancename cpu3 -busmasterport INSTRUCTION
 ihwconnect -bus cpu3Bus -instancename cpu3 -busmasterport DATA
-ihwconnect -instancename cpu3 -netport       intr0       -net int3
+ihwconnect -instancename cpu3 -netport       intr0       -net intNI3
+ihwconnect -instancename cpu3 -netport       intr1       -net intTIMER3
 
 ihwconnect -bus cpu4Bus -instancename cpu4 -busmasterport INSTRUCTION
 ihwconnect -bus cpu4Bus -instancename cpu4 -busmasterport DATA
-ihwconnect -instancename cpu4 -netport       intr0       -net int4
+ihwconnect -instancename cpu4 -netport       intr0       -net intNI4
+ihwconnect -instancename cpu4 -netport       intr1       -net intTIMER4
 
 ihwconnect -bus cpu5Bus -instancename cpu5 -busmasterport INSTRUCTION
 ihwconnect -bus cpu5Bus -instancename cpu5 -busmasterport DATA
-ihwconnect -instancename cpu5 -netport       intr0       -net int5
+ihwconnect -instancename cpu5 -netport       intr0       -net intNI5
+ihwconnect -instancename cpu5 -netport       intr1       -net intTIMER5
 
 ihwconnect -bus cpu6Bus -instancename cpu6 -busmasterport INSTRUCTION
 ihwconnect -bus cpu6Bus -instancename cpu6 -busmasterport DATA
-ihwconnect -instancename cpu6 -netport       intr0       -net int6
+ihwconnect -instancename cpu6 -netport       intr0       -net intNI6
+ihwconnect -instancename cpu6 -netport       intr1       -net intTIMER6
 
 ihwconnect -bus cpu7Bus -instancename cpu7 -busmasterport INSTRUCTION
 ihwconnect -bus cpu7Bus -instancename cpu7 -busmasterport DATA
-ihwconnect -instancename cpu7 -netport       intr0       -net int7
+ihwconnect -instancename cpu7 -netport       intr0       -net intNI7
+ihwconnect -instancename cpu7 -netport       intr1       -net intTIMER7
 
 ihwconnect -bus cpu8Bus -instancename cpu8 -busmasterport INSTRUCTION
 ihwconnect -bus cpu8Bus -instancename cpu8 -busmasterport DATA
-ihwconnect -instancename cpu8 -netport       intr0       -net int8
+ihwconnect -instancename cpu8 -netport       intr0       -net intNI8
+ihwconnect -instancename cpu8 -netport       intr1       -net intTIMER8
 
 ihwaddmemory -instancename ram0 -type ram
 ihwconnect -bus cpu0Bus -instancename ram0 -busslaveport sp0 -loaddress 0x0 -hiaddress 0x0fffffff
@@ -166,59 +184,77 @@ ihwconnect -bus cpu8Bus -instancename ram17 -busslaveport sp8 -loaddress 0xf0000
 
 ihwaddperipheral -instancename router0 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni0 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer0 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router1 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni1 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer1 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router2 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni2 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer2 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router3 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni3 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer3 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router4 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni4 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer4 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router5 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni5 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer5 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router6 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni6 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer6 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router7 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni7 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer7 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router8 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni8 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer8 -modelfile peripheral/timer/pse.pse
 
 ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni0 -busslaveport DMAC -bus cpu0Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni0 -busmasterport MREAD  -bus cpu0Bus
 ihwconnect -instancename ni0 -busmasterport MWRITE -bus cpu0Bus
+ihwconnect -instancename timer0 -busslaveport TIMEREG -bus cpu0Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni1 -busslaveport DMAC -bus cpu1Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni1 -busmasterport MREAD  -bus cpu1Bus
 ihwconnect -instancename ni1 -busmasterport MWRITE -bus cpu1Bus
+ihwconnect -instancename timer1 -busslaveport TIMEREG -bus cpu1Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router2 -busslaveport localPort -bus cpu2Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni2 -busslaveport DMAC -bus cpu2Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni2 -busmasterport MREAD  -bus cpu2Bus
 ihwconnect -instancename ni2 -busmasterport MWRITE -bus cpu2Bus
+ihwconnect -instancename timer2 -busslaveport TIMEREG -bus cpu2Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router3 -busslaveport localPort -bus cpu3Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni3 -busslaveport DMAC -bus cpu3Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni3 -busmasterport MREAD  -bus cpu3Bus
 ihwconnect -instancename ni3 -busmasterport MWRITE -bus cpu3Bus
+ihwconnect -instancename timer3 -busslaveport TIMEREG -bus cpu3Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router4 -busslaveport localPort -bus cpu4Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni4 -busslaveport DMAC -bus cpu4Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni4 -busmasterport MREAD  -bus cpu4Bus
 ihwconnect -instancename ni4 -busmasterport MWRITE -bus cpu4Bus
+ihwconnect -instancename timer4 -busslaveport TIMEREG -bus cpu4Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router5 -busslaveport localPort -bus cpu5Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni5 -busslaveport DMAC -bus cpu5Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni5 -busmasterport MREAD  -bus cpu5Bus
 ihwconnect -instancename ni5 -busmasterport MWRITE -bus cpu5Bus
+ihwconnect -instancename timer5 -busslaveport TIMEREG -bus cpu5Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router6 -busslaveport localPort -bus cpu6Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni6 -busslaveport DMAC -bus cpu6Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni6 -busmasterport MREAD  -bus cpu6Bus
 ihwconnect -instancename ni6 -busmasterport MWRITE -bus cpu6Bus
+ihwconnect -instancename timer6 -busslaveport TIMEREG -bus cpu6Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router7 -busslaveport localPort -bus cpu7Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni7 -busslaveport DMAC -bus cpu7Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni7 -busmasterport MREAD  -bus cpu7Bus
 ihwconnect -instancename ni7 -busmasterport MWRITE -bus cpu7Bus
+ihwconnect -instancename timer7 -busslaveport TIMEREG -bus cpu7Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router8 -busslaveport localPort -bus cpu8Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni8 -busslaveport DMAC -bus cpu8Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni8 -busmasterport MREAD  -bus cpu8Bus
 ihwconnect -instancename ni8 -busmasterport MWRITE -bus cpu8Bus
+ihwconnect -instancename timer8 -busslaveport TIMEREG -bus cpu8Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 
 ihwaddpacketnet -instancename data_0_0_L
 ihwaddpacketnet -instancename ctrl_0_0_L
@@ -364,15 +400,24 @@ ihwconnect -instancename router5 -packetnetport portDataNorth -packetnet data_2_
 ihwconnect -instancename router8 -packetnetport portControlSouth -packetnet ctrl_2_2_S
 ihwconnect -instancename router5 -packetnetport portControlNorth -packetnet ctrl_2_2_S
 
-ihwconnect -instancename ni0 -netport       INTTC  -net int0
-ihwconnect -instancename ni1 -netport       INTTC  -net int1
-ihwconnect -instancename ni2 -netport       INTTC  -net int2
-ihwconnect -instancename ni3 -netport       INTTC  -net int3
-ihwconnect -instancename ni4 -netport       INTTC  -net int4
-ihwconnect -instancename ni5 -netport       INTTC  -net int5
-ihwconnect -instancename ni6 -netport       INTTC  -net int6
-ihwconnect -instancename ni7 -netport       INTTC  -net int7
-ihwconnect -instancename ni8 -netport       INTTC  -net int8
+ihwconnect -instancename ni0 -netport       INT_NI  -net intNI0
+ihwconnect -instancename timer0 -netport       INT_TIMER  -net intTIMER0
+ihwconnect -instancename ni1 -netport       INT_NI  -net intNI1
+ihwconnect -instancename timer1 -netport       INT_TIMER  -net intTIMER1
+ihwconnect -instancename ni2 -netport       INT_NI  -net intNI2
+ihwconnect -instancename timer2 -netport       INT_TIMER  -net intTIMER2
+ihwconnect -instancename ni3 -netport       INT_NI  -net intNI3
+ihwconnect -instancename timer3 -netport       INT_TIMER  -net intTIMER3
+ihwconnect -instancename ni4 -netport       INT_NI  -net intNI4
+ihwconnect -instancename timer4 -netport       INT_TIMER  -net intTIMER4
+ihwconnect -instancename ni5 -netport       INT_NI  -net intNI5
+ihwconnect -instancename timer5 -netport       INT_TIMER  -net intTIMER5
+ihwconnect -instancename ni6 -netport       INT_NI  -net intNI6
+ihwconnect -instancename timer6 -netport       INT_TIMER  -net intTIMER6
+ihwconnect -instancename ni7 -netport       INT_NI  -net intNI7
+ihwconnect -instancename timer7 -netport       INT_TIMER  -net intTIMER7
+ihwconnect -instancename ni8 -netport       INT_NI  -net intNI8
+ihwconnect -instancename timer8 -netport       INT_TIMER  -net intTIMER8
 ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse
 
 ihwaddbus -instancename syncBus -addresswidth 32

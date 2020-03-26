@@ -35,7 +35,7 @@ static PPM_VIEW_CB(view32) {  *(Uns32*)data = *(Uns32*)user; }
 //////////////////////////////// Bus Slave Ports ///////////////////////////////
 
 static void installSlavePorts(void) {
-    handles.TIMEREG = ppmCreateSlaveBusPort("TIMEREG", 8);
+    handles.TIMEREG = ppmCreateSlaveBusPort("TIMEREG", 4);
     if (!handles.TIMEREG) {
         bhmMessage("E", "PPM_SPNC", "Could not connect port 'TIMEREG'");
     }

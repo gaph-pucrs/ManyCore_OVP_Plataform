@@ -23,7 +23,7 @@ static ppmBusPort busPorts[] = {
     {
         .name            = "TIMEREG",
         .type            = PPM_SLAVE_PORT,
-        .addrHi          = 0x7LL,
+        .addrHi          = 0x3LL,
         .mustBeConnected = 1,
         .remappable      = 0,
         .description     = 0,

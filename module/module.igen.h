@@ -86,15 +86,24 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 //                                    NETS
 ////////////////////////////////////////////////////////////////////////////////
 
-    optNetP int0_n = opNetNew(mi, "int0", 0, 0);
-    optNetP int1_n = opNetNew(mi, "int1", 0, 0);
-    optNetP int2_n = opNetNew(mi, "int2", 0, 0);
-    optNetP int3_n = opNetNew(mi, "int3", 0, 0);
-    optNetP int4_n = opNetNew(mi, "int4", 0, 0);
-    optNetP int5_n = opNetNew(mi, "int5", 0, 0);
-    optNetP int6_n = opNetNew(mi, "int6", 0, 0);
-    optNetP int7_n = opNetNew(mi, "int7", 0, 0);
-    optNetP int8_n = opNetNew(mi, "int8", 0, 0);
+    optNetP intNI0_n = opNetNew(mi, "intNI0", 0, 0);
+    optNetP intTIMER0_n = opNetNew(mi, "intTIMER0", 0, 0);
+    optNetP intNI1_n = opNetNew(mi, "intNI1", 0, 0);
+    optNetP intTIMER1_n = opNetNew(mi, "intTIMER1", 0, 0);
+    optNetP intNI2_n = opNetNew(mi, "intNI2", 0, 0);
+    optNetP intTIMER2_n = opNetNew(mi, "intTIMER2", 0, 0);
+    optNetP intNI3_n = opNetNew(mi, "intNI3", 0, 0);
+    optNetP intTIMER3_n = opNetNew(mi, "intTIMER3", 0, 0);
+    optNetP intNI4_n = opNetNew(mi, "intNI4", 0, 0);
+    optNetP intTIMER4_n = opNetNew(mi, "intTIMER4", 0, 0);
+    optNetP intNI5_n = opNetNew(mi, "intNI5", 0, 0);
+    optNetP intTIMER5_n = opNetNew(mi, "intTIMER5", 0, 0);
+    optNetP intNI6_n = opNetNew(mi, "intNI6", 0, 0);
+    optNetP intTIMER6_n = opNetNew(mi, "intTIMER6", 0, 0);
+    optNetP intNI7_n = opNetNew(mi, "intNI7", 0, 0);
+    optNetP intTIMER7_n = opNetNew(mi, "intTIMER7", 0, 0);
+    optNetP intNI8_n = opNetNew(mi, "intNI8", 0, 0);
+    optNetP intTIMER8_n = opNetNew(mi, "intTIMER8", 0, 0);
 
     optPacketnetP data_0_0_L_pkn = opPacketnetNew(mi, "data_0_0_L", 0, 0);
 
@@ -252,7 +261,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu0Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int0_n, "intr0")
+                OP_NET_CONNECT(intNI0_n, "intr0"),
+                OP_NET_CONNECT(intTIMER0_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -299,7 +309,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu1Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int1_n, "intr0")
+                OP_NET_CONNECT(intNI1_n, "intr0"),
+                OP_NET_CONNECT(intTIMER1_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -347,7 +358,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu2Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int2_n, "intr0")
+                OP_NET_CONNECT(intNI2_n, "intr0"),
+                OP_NET_CONNECT(intTIMER2_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -395,7 +407,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu3Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int3_n, "intr0")
+                OP_NET_CONNECT(intNI3_n, "intr0"),
+                OP_NET_CONNECT(intTIMER3_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -443,7 +456,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu4Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int4_n, "intr0")
+                OP_NET_CONNECT(intNI4_n, "intr0"),
+                OP_NET_CONNECT(intTIMER4_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -491,7 +505,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu5Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int5_n, "intr0")
+                OP_NET_CONNECT(intNI5_n, "intr0"),
+                OP_NET_CONNECT(intTIMER5_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -539,7 +554,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu6Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int6_n, "intr0")
+                OP_NET_CONNECT(intNI6_n, "intr0"),
+                OP_NET_CONNECT(intTIMER6_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -587,7 +603,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu7Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int7_n, "intr0")
+                OP_NET_CONNECT(intNI7_n, "intr0"),
+                OP_NET_CONNECT(intTIMER7_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -635,7 +652,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu8Bus_b, "DATA")
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int8_n, "intr0")
+                OP_NET_CONNECT(intNI8_n, "intr0"),
+                OP_NET_CONNECT(intTIMER8_n, "intr1")
             )
         ),
         OP_PARAMS(
@@ -1095,11 +1113,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu0Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int0_n, "INTTC")
+                OP_NET_CONNECT(intNI0_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_0_0_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_0_0_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer0
+
+    const char *timer0_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer0_path,
+        "timer0",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu0Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER0_n, "INT_TIMER")
             )
         ),
         0
@@ -1145,11 +1181,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu1Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int1_n, "INTTC")
+                OP_NET_CONNECT(intNI1_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_0_1_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_0_1_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer1
+
+    const char *timer1_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer1_path,
+        "timer1",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu1Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER1_n, "INT_TIMER")
             )
         ),
         0
@@ -1193,11 +1247,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu2Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int2_n, "INTTC")
+                OP_NET_CONNECT(intNI2_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_0_2_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_0_2_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer2
+
+    const char *timer2_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer2_path,
+        "timer2",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu2Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER2_n, "INT_TIMER")
             )
         ),
         0
@@ -1243,11 +1315,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu3Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int3_n, "INTTC")
+                OP_NET_CONNECT(intNI3_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_1_0_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_1_0_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer3
+
+    const char *timer3_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer3_path,
+        "timer3",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu3Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER3_n, "INT_TIMER")
             )
         ),
         0
@@ -1295,11 +1385,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu4Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int4_n, "INTTC")
+                OP_NET_CONNECT(intNI4_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_1_1_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer4
+
+    const char *timer4_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer4_path,
+        "timer4",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu4Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER4_n, "INT_TIMER")
             )
         ),
         0
@@ -1345,11 +1453,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu5Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int5_n, "INTTC")
+                OP_NET_CONNECT(intNI5_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_1_2_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_1_2_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer5
+
+    const char *timer5_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer5_path,
+        "timer5",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu5Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER5_n, "INT_TIMER")
             )
         ),
         0
@@ -1393,11 +1519,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu6Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int6_n, "INTTC")
+                OP_NET_CONNECT(intNI6_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_2_0_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_2_0_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer6
+
+    const char *timer6_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer6_path,
+        "timer6",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu6Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER6_n, "INT_TIMER")
             )
         ),
         0
@@ -1443,11 +1587,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu7Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int7_n, "INTTC")
+                OP_NET_CONNECT(intNI7_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_2_1_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_2_1_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer7
+
+    const char *timer7_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer7_path,
+        "timer7",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu7Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER7_n, "INT_TIMER")
             )
         ),
         0
@@ -1491,11 +1653,29 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu8Bus_b, "DMAC", .slave=1, .addrLo=0x80000004ULL, .addrHi=0x8000000bULL)
             ),
             OP_NET_CONNECTIONS(
-                OP_NET_CONNECT(int8_n, "INTTC")
+                OP_NET_CONNECT(intNI8_n, "INT_NI")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_2_2_L_pkn, "dataPort"),
                 OP_PACKETNET_CONNECT(ctrl_2_2_L_pkn, "controlPort")
+            )
+        ),
+        0
+    );
+
+    // PSE timer8
+
+    const char *timer8_path = "peripheral/timer/pse.pse";
+    opPeripheralNew(
+        mi,
+        timer8_path,
+        "timer8",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu8Bus_b, "TIMEREG", .slave=1, .addrLo=0x8000001cULL, .addrHi=0x8000001fULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intTIMER8_n, "INT_TIMER")
             )
         ),
         0
