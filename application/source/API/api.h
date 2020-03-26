@@ -125,7 +125,8 @@ void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
 unsigned int sendFromMsgBuffer(unsigned int requester);
-void interruptHandler(void);
+void interruptHandler_NI(void);
+void interruptHandler_timer(void);
 
 
 ///////////////////////////////////////////////////////////////////
@@ -136,8 +137,14 @@ void interruptHandler(void);
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
-/* Interruption function */ 
-void interruptHandler(void) {
+/* Interruption function for Timer */ 
+void interruptHandler_timer(void) {
+    LOG("Timer interruption!\n");
+}
+
+///////////////////////////////////////////////////////////////////
+/* Interruption function for Network Interface */ 
+void interruptHandler_NI(void) {
     int requester;
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
@@ -187,8 +194,10 @@ void interruptHandler(void) {
 void OVP_init(){
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler, NULL);
+    int_add(0, (void *)interruptHandler_NI, NULL);
+    int_add(1, (void *)interruptHandler_timer, NULL);
     int_enable(0);
+    int_enable(1);
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;

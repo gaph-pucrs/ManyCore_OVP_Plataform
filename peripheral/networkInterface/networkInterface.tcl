@@ -46,5 +46,3 @@ imodeladdpacketnetport \
 #########################################
 imodeladdnetport -name INT_NI -type output
 iadddocumentation -name Description -text "NI Interrupt Request"
-imodeladdnetport -name INT_TIMER -type output
-iadddocumentation -name Description -text "Timer Interrupt Request"
