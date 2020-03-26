@@ -95,6 +95,7 @@ volatile unsigned int *waitingPckg_flag = WAITING_PKG;
 #define PI_I_LOGICAL        12
 #define PI_I_MULTDIV        13
 #define PI_I_WEIRD          14
+#define PI_I_MYADDR         15
 
 
 
@@ -160,7 +161,7 @@ void interruptHandler_timer(void);
 void interruptHandler_timer(void) {
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
-    executedInstPacket[PI_SIZE] = 11 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
     executedInstPacket[PI_SEND_TIME] = tsend;
@@ -176,6 +177,7 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;
+    executedInstPacket[PI_I_MYADDR] = *myAddress;
     SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     //LOG("Timer interruption!\n");
 }
