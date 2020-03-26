@@ -146,7 +146,7 @@ int main(int argc, char *argv[]) {
     while(1){
         //bhmMessage("I", "TIMER", "vou interromper o processador em %lf us!", timer_us);
         if(timer_us == 0){
-            bhmWaitDelay(1); // if the timer is unset then waits for 10 us to check if the timer was reprogrammed
+            bhmWaitDelay(10); // if the timer is unset then waits for 10 us to check if the timer was reprogrammed
         }
         else{
             bhmWaitDelay(timer_us); // Every time_us 

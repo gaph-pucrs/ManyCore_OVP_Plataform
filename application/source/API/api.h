@@ -67,7 +67,11 @@ volatile unsigned int *weirdCounter =       WEIRD_INST;
 
 // Activate this flag to deactivate the instruction count
 volatile unsigned int *waitingPckg_flag = WAITING_PKG;
-
+// Peripheral Ports
+#define PERIPH_EAST         0x00010000
+#define PERIPH_WEST         0x00020000
+#define PERIPH_NORTH        0x00030000
+#define PERIPH_SOUTH        0x00040000
 // Services
 #define MESSAGE_REQ         0x20
 #define MESSAGE_DELIVERY    0x30
@@ -78,13 +82,25 @@ volatile unsigned int *waitingPckg_flag = WAITING_PKG;
 #define PIPE_WAIT           0xFFFFFFFF
 // Packet defines
 #define MESSAGE_MAX_SIZE    512
-#define PACKET_MAX_SIZE     MESSAGE_MAX_SIZE+4+3 // +3(destination, size, sendtime, service)+3(hops,in_iteration,out_iteration) 
+#define PACKET_MAX_SIZE     MESSAGE_MAX_SIZE+4+3 // +4(destination, size, sendtime, service)+3(hops,in_iteration,out_iteration) 
 // Packet indexes
 #define PI_DESTINATION      0
 #define PI_SIZE             1
 #define PI_SEND_TIME        2
 #define PI_SERVICE          3
 #define PI_REQUESTER        4
+#define PI_I_BRANCH         4
+#define PI_I_ARITH          5
+#define PI_I_JUMP           6
+#define PI_I_MOVE           7
+#define PI_I_LOAD           8
+#define PI_I_STORE          9
+#define PI_I_SHIFT          10
+#define PI_I_NOP            11
+#define PI_I_LOGICAL        12
+#define PI_I_MULTDIV        13
+#define PI_I_WEIRD          14
+
 
 
 // Message type
@@ -96,6 +112,7 @@ typedef struct Message {
 // API Packets
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
 volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
+volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];
 volatile unsigned int receivingActive;
 volatile unsigned int transmittingActive = PIPE_WAIT;
 volatile unsigned int interruptionType = 0;
@@ -107,7 +124,7 @@ unsigned int buffer_history[PIPE_SIZE];
 volatile unsigned int pendingReq[N_PES];
 
 // Time variables
-time_t tinicio, tsend, tfim, tignore;
+time_t tinicio, tsend;//, tfim, tignore; // ver com a geaninne!
 
 // OVP functions
 void OVP_init();
@@ -142,6 +159,25 @@ void interruptHandler_timer(void);
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
+    int i;
+    executedInstPacket[PI_DESTINATION] = 0x00000000 | PERIPH_WEST; // Send the packet to the router 00 in the port west
+    executedInstPacket[PI_SIZE] = 11 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    tsend = clock();
+	tsend = tsend - tinicio;
+    executedInstPacket[PI_SEND_TIME] = tsend;
+    executedInstPacket[PI_SERVICE] = MESSAGE_REQ;
+    executedInstPacket[PI_I_BRANCH] = *branchCounter;
+    executedInstPacket[PI_I_ARITH] = *arithCounter;
+    executedInstPacket[PI_I_JUMP] = *jumpCounter;
+    executedInstPacket[PI_I_MOVE] = *moveCounter;
+    executedInstPacket[PI_I_LOAD] = *loadCounter;
+    executedInstPacket[PI_I_STORE] = *storeCounter;
+    executedInstPacket[PI_I_SHIFT] = *shiftCounter;
+    executedInstPacket[PI_I_NOP] = *nopCounter;
+    executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
+    executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
+    executedInstPacket[PI_I_WEIRD] = *weirdCounter;
+    SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     //LOG("Timer interruption!\n");
 }
 
@@ -234,8 +270,8 @@ void OVP_init(){
     while(init_start != 1){
 	    init_start = *SyncToPE >> 24;
     }
-    tignore = clock();
-    tinicio = tignore - (tignore - tinicio);
+    tinicio = clock();
+    //tinicio = tignore - (tignore - tinicio);
     
 
     // Reset the amount of executed instructions
