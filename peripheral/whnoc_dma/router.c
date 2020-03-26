@@ -168,7 +168,7 @@ unsigned int XYrouting(unsigned int current, unsigned int dest){
             return LOCAL;
         else if(peripheralPort(destination) == PERIPH_EAST)
             return EAST;
-        else if(peripheralPort(destination) == PERIPH_WEST
+        else if(peripheralPort(destination) == PERIPH_WEST)
             return WEST;
         else if(peripheralPort(destination) == PERIPH_NORTH)
             return NORTH;
