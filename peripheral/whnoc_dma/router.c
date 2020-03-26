@@ -106,7 +106,7 @@ int contFlits[N_PORTS];
 ////////////////////////////////////////////////////////////
 
 unsigned int xy2addr(unsigned int x, unsigned int y){
-    return (y | (x << 4));
+    return (y | (x << 8));
 }
 
 // Informs the ticker that this router needs ticks
@@ -139,18 +139,17 @@ void iterateNI(){
 
 // Extract the Y position for a given address
 unsigned int positionY(unsigned int address){
-    unsigned int mask =  0xF;
+    unsigned int mask =  0xFF;
     unsigned int masked_n = address & mask;
-    unsigned int thebit = masked_n;
-    return thebit;
+    return masked_n;
 }
 
 // Extract the X position for a given address
 unsigned int positionX(unsigned int address){
-    unsigned int mask =  0xF0;
+    unsigned int mask =  0xFF00;
     unsigned int masked_n = address & mask;
-    unsigned int thebit = masked_n >> 4;
-    return thebit;
+    unsigned int thebyte = masked_n >> 8;
+    return thebyte;
 }
 
 // Calculates the output port for a given local address and a destination address

@@ -419,7 +419,9 @@ void requestMsg(unsigned int from){
 ///////////////////////////////////////////////////////////////////
 /* Gets the PE address from a given ID */
 unsigned int getAddress(unsigned int id){
-    return 1;
+    unsigned int y = id/DIM_X;
+    unsigned int x = id-(DIM_X*y);
+    myAddress = makeAddress(x, y);
 }
 
 ///////////////////////////////////////////////////////////////////

@@ -65,10 +65,6 @@
 #define FROM_RX             0x3535
 
 
-
-// PreBuffer
-#define PREBUFFER_SIZE  25000
-
 ///// CODE DEFINES
 // Arbitration
 #define ARBITER_RR      1
@@ -76,7 +72,6 @@
 #define ARBITER_TTL     0
 // Debug logs
 #define LOG_OUTPUTFLITS 1
-
 
 #if LOG_OUTPUTFLITS
 extern int contFlits[N_PORTS];
