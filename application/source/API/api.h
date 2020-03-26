@@ -10,6 +10,7 @@ typedef unsigned char Uns8;
 #define ROUTER_BASE    ((unsigned int *) 0x80000000)
 #define SYNC_BASE      ((unsigned int *) 0x80000014)
 #define NI_BASE        ((unsigned int *) 0x80000004)
+#define TIMER_BASE     ((unsigned int *) 0x8000001C)
 #define WAITING_PKG    ((unsigned int *) 0x0FFFFFFC)
 #define EXECUTED_INST  ((unsigned int *) 0x0FFFFFF8)
 /* -------------------------------------------------

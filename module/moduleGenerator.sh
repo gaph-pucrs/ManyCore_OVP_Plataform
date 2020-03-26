@@ -71,6 +71,7 @@ for i in $(seq 0 $N);
 do
 	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/whnoc_dma/pse.pse" >> module.op.tcl
 	echo "ihwaddperipheral -instancename ni"$i" -modelfile peripheral/networkInterface/pse.pse" >> module.op.tcl
+	echo "ihwaddperipheral -instancename timer"$i" -modelfile peripheral/timer/pse.pse" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
@@ -81,6 +82,7 @@ do
 	echo "ihwconnect -instancename ni"$i" -busslaveport DMAC -bus cpu"$i"Bus -loaddress 0x80000004 -hiaddress 0x8000000B" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MREAD  -bus cpu"$i"Bus" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MWRITE -bus cpu"$i"Bus" >> module.op.tcl
+	echo "ihwconnect -instancename timer"$i" -busslaveport TIMEREG -bus cpu"$i"Bus -loaddress 0x8000001C -hiaddress 0x8000001F" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
@@ -237,7 +239,7 @@ echo "" >> module.op.tcl
 for i in $(seq 0 $N);
 do
 	echo "ihwconnect -instancename ni"$i" -netport       INT_NI  -net intNI"$i >> module.op.tcl
-	echo "ihwconnect -instancename ni"$i" -netport       INT_TIMER  -net intTIMER"$i >> module.op.tcl
+	echo "ihwconnect -instancename timer"$i" -netport       INT_TIMER  -net intTIMER"$i >> module.op.tcl
 done
 
 echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
