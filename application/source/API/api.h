@@ -131,7 +131,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester);
 void interruptHandler_NI(void);
 void interruptHandler_timer(void);
 
-
+int value = 1000;
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -142,6 +142,7 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
+    *timerConfig = value-10;
     *timerConfig = 0xFFFFFFFF;
     LOG("Timer interruption!\n");
 }
