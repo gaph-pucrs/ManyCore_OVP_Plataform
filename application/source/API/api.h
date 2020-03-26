@@ -416,7 +416,7 @@ void requestMsg(unsigned int from){
 unsigned int getAddress(unsigned int id){
     unsigned int y = id/DIM_X;
     unsigned int x = id-(DIM_X*y);
-    myAddress = makeAddress(x, y);
+    return makeAddress(x, y);
 }
 
 ///////////////////////////////////////////////////////////////////
