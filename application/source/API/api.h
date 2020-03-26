@@ -139,6 +139,11 @@ void FinishApplication();
 void SendSlot(unsigned int addr, unsigned int slot);
 void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
+unsigned int getAddress(unsigned int id);
+unsigned int getID(unsigned int addr);
+unsigned int getXpos(unsigned int addr);
+unsigned int getYpos(unsigned int addr);
+unsigned int makeAddress(unsigned int x, unsigned int y);
 unsigned int checkPendingReq(unsigned int destID);
 unsigned int getEmptyIndex();
 void bufferPush(unsigned int index);
@@ -160,7 +165,7 @@ void interruptHandler_timer(void);
 void interruptHandler_timer(void) {
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     int i;
-    executedInstPacket[PI_DESTINATION] = 0x00000000 | PERIPH_WEST; // Send the packet to the router 00 in the port west
+    executedInstPacket[PI_DESTINATION] = getAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 11 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
@@ -411,6 +416,37 @@ void requestMsg(unsigned int from){
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[PI_REQUESTER] = *myAddress;
     SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+}
+
+///////////////////////////////////////////////////////////////////
+/* Gets the PE address from a given ID */
+unsigned int getAddress(unsigned int id){
+    return 1
+}
+
+///////////////////////////////////////////////////////////////////
+/* Gets the PE ID from a given address */
+unsigned int getID(unsigned int addr){
+    return 1
+}
+
+///////////////////////////////////////////////////////////////////
+/* Gets the X coordinate from the address */
+unsigned int getXpos(unsigned int addr){
+    return ((addr & 0x0000FF00) >> 8);
+}
+
+///////////////////////////////////////////////////////////////////
+/* Gets the Y coordinate from the address */
+unsigned int getYpos(unsigned int addr){
+    return (addr & 0x000000FF);
+}
+
+///////////////////////////////////////////////////////////////////
+/* Creates the PE address */
+unsigned int makeAddress(unsigned int x, unsigned int y){
+    unsigned int address = 0x00000000;
+    return (address | (x << 8) | y);
 }
 
 ///////////////////////////////////////////////////////////////////

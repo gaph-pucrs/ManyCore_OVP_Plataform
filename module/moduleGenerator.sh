@@ -66,7 +66,8 @@ do
 	echo "" >> module.op.tcl
 done
 
-# Defines each router 
+# Ceates the TEA and each router, NI and timer
+echo "ihwaddperipheral -instancename tea -modelfile peripheral/tea/pse.pse" >> module.op.tcl
 for i in $(seq 0 $N);
 do
 	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/whnoc_dma/pse.pse" >> module.op.tcl
@@ -85,6 +86,10 @@ do
 	echo "ihwconnect -instancename timer"$i" -busslaveport TIMEREG -bus cpu"$i"Bus -loaddress 0x8000001C -hiaddress 0x8000001F" >> module.op.tcl
 done
 echo "" >> module.op.tcl
+
+# Creates the wire to connect the TEA with one router
+echo "ihwaddpacketnet -instancename data_0_0_TEA" >> module.op.tcl
+echo "ihwaddpacketnet -instancename ctrl_0_0_TEA" >> module.op.tcl
 
 # Creates all ports to make the connection between routers (data and control)
 for i in $(seq 0 $(($Y-1)));
@@ -126,6 +131,12 @@ for i in $(seq 0 $(($Y-1)));
 	done
 done 
 echo "" >> module.op.tcl
+
+# Connects the TEA peripheral to one given PE
+echo "ihwconnect -instancename router0 -packetnetport portDataWest -packetnet data_0_0_TEA" >> module.op.tcl
+echo "ihwconnect -instancename router0 -packetnetport portControlWest -packetnet ctrl_0_0_TEA" >> module.op.tcl
+echo "ihwconnect -instancename tea -packetnetport portData -packetnet data_0_0_TEA" >> module.op.tcl
+echo "ihwconnect -instancename tea -packetnetport portControl -packetnet ctrl_0_0_TEA" >> module.op.tcl
 
 # Connects each router to its neighbor
 cont=0;
