@@ -152,13 +152,31 @@ unsigned int positionX(unsigned int address){
     return thebyte;
 }
 
+unsigned int peripheralPort(unsigned int address){
+    unsigned int mask = 0x000F0000;
+    unsigned int masked_n = address & mask;
+    return masked_n;
+}
+
 // Calculates the output port for a given local address and a destination address
 // using a XY routing algorithm
 unsigned int XYrouting(unsigned int current, unsigned int dest){
     unsigned int destination = ntohl(dest);
     //bhmMessage("INFO", "XY", "dest: %d --- %d", dest, destination);
     if(positionX(current) == positionX(destination) && positionY(current) == positionY(destination)){
-        return LOCAL;
+        if(peripheralPort(destination) == PERIPH_LOCAL)
+            return LOCAL;
+        else if(peripheralPort(destination) == PERIPH_EAST)
+            return EAST;
+        else if(peripheralPort(destination) == PERIPH_WEST
+            return WEST;
+        else if(peripheralPort(destination) == PERIPH_NORTH)
+            return NORTH;
+        else if(peripheralPort(destination) == PERIPH_SOUTH)
+            return SOUTH;
+        else
+            bhmMessage("I", "XYRouting", "Something is not quite right in the peripheral! ERROR!!!\n");
+            return ND; // ERROR
     }
     else if(positionX(current) < positionX(destination)){
         return EAST;

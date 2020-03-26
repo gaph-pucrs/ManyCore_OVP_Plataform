@@ -5,6 +5,12 @@
 #define SOUTH 	3
 #define LOCAL 	4
 #define ND      5 // Not Defined
+// Peripheral Ports
+#define PERIPH_LOCAL        0x00000000
+#define PERIPH_EAST         0x00010000
+#define PERIPH_WEST         0x00020000
+#define PERIPH_NORTH        0x00030000
+#define PERIPH_SOUTH        0x00040000
 
 // NoC Structure configuration
 #define N_PORTS 	    5

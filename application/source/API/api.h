@@ -67,11 +67,6 @@ volatile unsigned int *weirdCounter =       WEIRD_INST;
 
 // Activate this flag to deactivate the instruction count
 volatile unsigned int *waitingPckg_flag = WAITING_PKG;
-// Peripheral Ports
-#define PERIPH_EAST         0x00010000
-#define PERIPH_WEST         0x00020000
-#define PERIPH_NORTH        0x00030000
-#define PERIPH_SOUTH        0x00040000
 // Services
 #define MESSAGE_REQ         0x20
 #define MESSAGE_DELIVERY    0x30
