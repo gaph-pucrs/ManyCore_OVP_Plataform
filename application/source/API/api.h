@@ -165,7 +165,7 @@ void interruptHandler_timer(void);
 void interruptHandler_timer(void) {
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     int i;
-    executedInstPacket[PI_DESTINATION] = getAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
+    executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 11 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
