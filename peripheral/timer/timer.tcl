@@ -11,7 +11,7 @@ iadddocumentation -name Description \
 #########################################
 ## A slave port on the processor bus
 #########################################
-imodeladdbusslaveport -name TIMEREG -size 8 -mustbeconnected
+imodeladdbusslaveport -name TIMEREG -size 4 -mustbeconnected
 
 # Address block for 8 bit control registers
 imodeladdaddressblock -name ab8 -port TIMEREG -offset 0x0 -width 32 -size 4
