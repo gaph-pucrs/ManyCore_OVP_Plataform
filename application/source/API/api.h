@@ -423,12 +423,6 @@ unsigned int getAddress(unsigned int id){
 }
 
 ///////////////////////////////////////////////////////////////////
-/* Gets the PE ID from a given address */
-unsigned int getID(unsigned int addr){
-    return 1;
-}
-
-///////////////////////////////////////////////////////////////////
 /* Gets the X coordinate from the address */
 unsigned int getXpos(unsigned int addr){
     return ((addr & 0x0000FF00) >> 8);
