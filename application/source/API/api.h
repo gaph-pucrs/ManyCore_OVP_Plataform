@@ -41,6 +41,8 @@ typedef unsigned char Uns8;
 #define WEIRD   11
 
 #define LOG(_FMT, ...) printf( "Info " _FMT,  ## __VA_ARGS__)
+// Timer - mapped register to configure the Timer
+volatile unsigned int *timerConfig = TIMER_BASE;
 // Router - mapped registers
 volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 // Synchronizer - mapped registers
@@ -140,6 +142,7 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
+    *timerConfig = 0xFFFFFFFF;
     LOG("Timer interruption!\n");
 }
 

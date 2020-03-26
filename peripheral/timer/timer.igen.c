@@ -11,9 +11,22 @@
 #include "timer.igen.h"
 /////////////////////////////// Port Declarations //////////////////////////////
 
+// BIG ENDIAN/LITTLE ENDIAN
+#define __bswap_constant_32(x) \
+     ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
+      (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
+
+unsigned int htonl(unsigned int x){
+    return __bswap_constant_32(x);
+}
+
 TIMEREG_ab8_dataT TIMEREG_ab8_data;
 
 handlesT handles;
+
+/////////////////////////////// Global Variable ////////////////////////////////
+
+double timer_us = 1000; // interruption timer in us ~~ default is 1 ms!
 
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
@@ -77,10 +90,50 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
     installNetPorts();
 }
 
+//////////////////////////////// Callback stubs ////////////////////////////////
+
+PPM_REG_READ_CB(cfgRead) {
+    // YOUR CODE HERE (cfgRead)
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(cfgWrite) {
+    // YOUR CODE HERE (cfgWrite)
+    unsigned int value = htonl(data);
+    if(value == 0xFFFFFFFF){
+        ppmWriteNet(handles.INT_NI, 0);
+        bhmMessage("I", "TIMER", "baixando interrupcao!");
+    }
+    else{
+        timer_us = (double)value;
+    }
+    *(Uns32*)user = data;
+}
+
+PPM_CONSTRUCTOR_CB(constructor) {
+    // YOUR CODE HERE (pre constructor)
+    periphConstructor();
+    // YOUR CODE HERE (post constructor)
+}
+
+PPM_DESTRUCTOR_CB(destructor) {
+    // YOUR CODE HERE (destructor)
+}
+
+
+PPM_SAVE_STATE_FN(peripheralSaveState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
+PPM_RESTORE_STATE_FN(peripheralRestoreState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
+
 ///////////////////////////////////// Main /////////////////////////////////////
 
 int main(int argc, char *argv[]) {
-
+    
     ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
     {
         ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
@@ -90,6 +143,17 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
+
+    while(1){
+        if(timer_us == 0){
+            bhmWaitDelay(1); // if the timer is unset then waits for 10 us to check if the timer was reprogrammed
+        }
+        else{
+            bhmWaitDelay(timer_us); // Every time_us 
+            ppmWriteNet(handles.INT_TIMER, 1);
+            bhmMessage("I", "TIMER", "interrompendo processador depois de %d us", timer_us);
+        }
+    }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
