@@ -54,7 +54,7 @@ echo "#include \"iterator.igen.h\""  >> iterator.igen.c
 echo "#include <stdlib.h>" >> iterator.igen.c
 echo "#include <string.h>" >> iterator.igen.c
 echo "#include <stdio.h>" >> iterator.igen.c
-echo "#include \"../whnoc/noc.h\"" >> iterator.igen.c
+echo "#include \"../whnoc_dma/noc.h\"" >> iterator.igen.c
 echo "" >> iterator.igen.c
 echo "#define __bswap_constant_32(x) ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) | (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))" >> iterator.igen.c
 echo "" >> iterator.igen.c
