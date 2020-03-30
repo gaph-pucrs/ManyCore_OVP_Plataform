@@ -8,8 +8,8 @@ N=$((X*Y))
 N=$(($N-1))
 
 # Removes the old .tcl
-rm -rf iterator.tcl
-rm -rf iterator.c
+rm -rf iteratorMonoTrigger.tcl
+rm -rf iteratorMonoTrigger.c
 
 # Creating the new iterator.tcl
 echo "imodelnewperipheral -name iteratorMonoTrigger \\" >> iteratorMonoTrigger.tcl
