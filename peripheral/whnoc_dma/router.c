@@ -125,11 +125,8 @@ void turn_TickOff(){
 
 // Inform the iterator that the PE is waiting a packet 
 void informIterator(){
-    //if(myAddress==0x55){
-        //bhmMessage("INFO", "TICK", "INFORMANDO TICK!");
-        unsigned short int iterAux = ITERATION;
-        ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
-    //}
+    unsigned short int iterAux = ITERATION;
+    ppmPacketnetWrite(handles.iterationsPort, &iterAux, sizeof(iterAux));
 }
 
 void iterateNI(){
@@ -242,7 +239,7 @@ void bufferPush(unsigned int port){
     if(port == LOCAL) localBufferAmount++;
 
     // Inform the ticker that this router has something to send
-    if(myIterationStatus == ITERATION_OFF) turn_TickOn(); 
+    //if(myIterationStatus == ITERATION_OFF) turn_TickOn(); 
 
     // Update the buffer status
     bufferStatusUpdate(port);
@@ -293,9 +290,9 @@ unsigned int bufferPop(unsigned int port){
         flitCountOut[port] = HEADER;
 
         // If every buffer is empty this router does not need to be ticked
-        if(myIterationStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){// && preBuffer_isEmpty()){
+        /*if(myIterationStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){// && preBuffer_isEmpty()){
             turn_TickOff();
-        }
+        }*/
         
 #if ARBITER_RR
         // Reset it's priority
@@ -681,14 +678,6 @@ PPM_REG_WRITE_CB(addressWrite) {
         myAddress = xy2addr(x, y);
         bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
         bhmMessage("INFO","MYADRESS","MY ID = %d", myID);
-        // Stores the first write in this register as local address
-        /*myAddress = htonl((unsigned int)data);
-        int x = positionX(myAddress);
-        int y = positionY(myAddress);
-        bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
-        // Calculates the router ID
-        myID = (DIM_X*y)+x;
-        bhmMessage("INFO","MYADRESS","MY ID = %d", myID);*/
     }
     else{ // Display an error message when another write operation is made in this register!!
         bhmMessage("INFO", "MY_ADRESS", "ERROR: The address can not be changed!");
@@ -717,7 +706,7 @@ PPM_PACKETNET_CB(controlLocal) {
     // When receving a time for the incoming flit... (8 bytes info)
     else if(bytes == 8){
         //incomingFlit.inTime = *(unsigned long long int *)data;
-        informIterator();
+        //informIterator();
     }
 }
 
