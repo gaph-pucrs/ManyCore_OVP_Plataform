@@ -15,6 +15,33 @@ iteratorReg_ab8_dataT iteratorReg_ab8_data;
 
 handlesT handles;
 
+// Iteration counter
+unsigned long long int iterationN = 0;
+unsigned long long int iteration;
+
+////////////////////////////// Functions ///////////////////////////////////////
+/* Make a callback to each router */
+void runIterations(){  
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort2, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort3, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort4, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort5, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort6, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort7, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort8, &iteration, sizeof(iteration));
+}
+
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
 // Test this variable to determine what diagnostics to output.
@@ -67,10 +94,79 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
     installRegisters();
 }
 
+
+//////////////////////////////// Callback stubs ////////////////////////////////
+
+PPM_REG_READ_CB(iterateRead) {
+    //bhmMessage("I", "Iterator", "ITERATE!");
+    iterationN++;
+    runIterations();
+    return *(Uns32*)user;
+}
+
+PPM_REG_WRITE_CB(iterateWrite) {
+    // YOUR CODE HERE (iterateWrite)
+    *(Uns32*)user = data;
+}
+
+PPM_PACKETNET_CB(iteration0) {
+    // YOUR CODE HERE (iteration1)
+}
+
+PPM_PACKETNET_CB(iteration1) {
+    // YOUR CODE HERE (iteration1)
+}
+
+PPM_PACKETNET_CB(iteration2) {
+    // YOUR CODE HERE (iteration2)
+}
+
+PPM_PACKETNET_CB(iteration3) {
+    // YOUR CODE HERE (iteration3)
+}
+
+PPM_PACKETNET_CB(iteration4) {
+    // YOUR CODE HERE (iteration4)
+}
+
+PPM_PACKETNET_CB(iteration5) {
+    // YOUR CODE HERE (iteration5)
+}
+
+PPM_PACKETNET_CB(iteration6) {
+    // YOUR CODE HERE (iteration6)
+}
+
+PPM_PACKETNET_CB(iteration7) {
+    // YOUR CODE HERE (iteration7)
+}
+
+PPM_PACKETNET_CB(iteration8) {
+    // YOUR CODE HERE (iteration8)
+}
+
+PPM_CONSTRUCTOR_CB(constructor) {
+    // YOUR CODE HERE (pre constructor)
+    periphConstructor();
+    // YOUR CODE HERE (post constructor)
+}
+
+PPM_DESTRUCTOR_CB(destructor) {
+    // YOUR CODE HERE (destructor)
+}
+
+
+PPM_SAVE_STATE_FN(peripheralSaveState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
+PPM_RESTORE_STATE_FN(peripheralRestoreState) {
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+}
+
 ///////////////////////////////////// Main /////////////////////////////////////
 
 int main(int argc, char *argv[]) {
-
     ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
     {
         ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
