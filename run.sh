@@ -50,7 +50,7 @@ echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc_dma NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
-echo "make -C peripheral/iterator NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/iteratorMonoTrigger NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/networkInterface NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/timer NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/tea NOVLNV=1" >> ovp_compiler.sh
