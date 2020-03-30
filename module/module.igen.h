@@ -77,6 +77,11 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optBusP cpu8Bus_b = opBusNew(mi, "cpu8Bus", 32, 0, 0);
 
 
+    // Bus cpuIteratorBus
+
+    optBusP cpuIteratorBus_b = opBusNew(mi, "cpuIteratorBus", 32, 0, 0);
+
+
     // Bus syncBus
 
     optBusP syncBus_b = opBusNew(mi, "syncBus", 32, 0, 0);
@@ -683,6 +688,51 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // Processor cpuIterator
+
+    const char *cpuIterator_path = opVLNVString(
+        0, // use the default VLNV path
+        "ovpworld.org",
+        "processor",
+        "or1k",
+        "1.0",
+        OP_PROCESSOR,
+        1   // report errors
+    );
+
+    optProcessorP cpuIterator_c = opProcessorNew(
+        mi,
+        cpuIterator_path,
+        "cpuIterator",
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpuIteratorBus_b, "INSTRUCTION"),
+                OP_BUS_CONNECT(cpuIteratorBus_b, "DATA")
+            )
+        ),
+        OP_PARAMS(
+             OP_PARAM_UNS32_SET("cpuid", 9)
+            ,OP_PARAM_STRING_SET("variant", "generic")
+        )
+    );
+
+    const char *or1kNewlib_9_expath = opVLNVString(
+        0, // use the default VLNV path
+        0,
+        0,
+        "or1kNewlib",
+        0,
+        OP_EXTENSION,
+        1   // report errors
+    );
+
+    opProcessorExtensionNew(
+        cpuIterator_c,
+        or1kNewlib_9_expath,
+        "or1kNewlib_9",
+        0
+    );
+
     // Memory ram0
 
     opMemoryNew(
@@ -948,6 +998,36 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
                 OP_BUS_CONNECT(cpu8Bus_b, "sp8", .slave=1, .addrLo=0xf0000000ULL, .addrHi=0xffffffffULL)
+            )
+        ),
+        0
+    );
+
+    // Memory ramIterator
+
+    opMemoryNew(
+        mi,
+        "ramIterator",
+        OP_PRIV_RWX,
+        (0xfffffffULL) - (0x0ULL),
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpuIteratorBus_b, "sp9", .slave=1, .addrLo=0x0ULL, .addrHi=0xfffffffULL)
+            )
+        ),
+        0
+    );
+
+    // Memory ramIterator2
+
+    opMemoryNew(
+        mi,
+        "ramIterator2",
+        OP_PRIV_RWX,
+        (0xffffffffULL) - (0xf0000000ULL),
+        OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpuIteratorBus_b, "sp9", .slave=1, .addrLo=0xf0000000ULL, .addrHi=0xffffffffULL)
             )
         ),
         0
@@ -1720,12 +1800,15 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 
     // PSE iterator
 
-    const char *iterator_path = "peripheral/iterator/pse.pse";
+    const char *iterator_path = "peripheral/iteratorMonoTrigger/pse.pse";
     opPeripheralNew(
         mi,
         iterator_path,
         "iterator",
         OP_CONNECTIONS(
+            OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpuIteratorBus_b, "iteratorReg", .slave=1, .addrLo=0x90000000ULL, .addrHi=0x90000003ULL)
+            ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(iteration_0_pkn, "iterationPort0"),
                 OP_PACKETNET_CONNECT(iteration_1_pkn, "iterationPort1"),

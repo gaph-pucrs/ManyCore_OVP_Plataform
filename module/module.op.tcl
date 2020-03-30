@@ -9,6 +9,7 @@ ihwaddbus -instancename cpu5Bus -addresswidth 32
 ihwaddbus -instancename cpu6Bus -addresswidth 32
 ihwaddbus -instancename cpu7Bus -addresswidth 32
 ihwaddbus -instancename cpu8Bus -addresswidth 32
+ihwaddbus -instancename cpuIteratorBus -addresswidth 32
 
 ihwaddnet -instancename intNI0
 ihwaddnet -instancename intTIMER0
@@ -74,6 +75,11 @@ ihwaddprocessor -instancename cpu8 -id 8 \
                 -variant generic \
                 -semihostname or1kNewlib
 
+ihwaddprocessor -instancename cpuIterator -id 9 \
+                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
+                -variant generic \
+                -semihostname or1kNewlib
+
 ihwconnect -bus cpu0Bus -instancename cpu0 -busmasterport INSTRUCTION
 ihwconnect -bus cpu0Bus -instancename cpu0 -busmasterport DATA
 ihwconnect -instancename cpu0 -netport       intr0       -net intNI0
@@ -118,6 +124,9 @@ ihwconnect -bus cpu8Bus -instancename cpu8 -busmasterport INSTRUCTION
 ihwconnect -bus cpu8Bus -instancename cpu8 -busmasterport DATA
 ihwconnect -instancename cpu8 -netport       intr0       -net intNI8
 ihwconnect -instancename cpu8 -netport       intr1       -net intTIMER8
+
+ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport INSTRUCTION
+ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport DATA
 
 ihwaddmemory -instancename ram0 -type ram
 ihwconnect -bus cpu0Bus -instancename ram0 -busslaveport sp0 -loaddress 0x0 -hiaddress 0x0fffffff
@@ -180,6 +189,13 @@ ihwconnect -bus cpu8Bus -instancename ram16 -busslaveport sp8 -loaddress 0x0 -hi
 
 ihwaddmemory -instancename ram17 -type ram
 ihwconnect -bus cpu8Bus -instancename ram17 -busslaveport sp8 -loaddress 0xf0000000 -hiaddress 0xffffffff
+
+
+ihwaddmemory -instancename ramIterator -type ram
+ihwconnect -bus cpuIteratorBus -instancename ramIterator -busslaveport sp9 -loaddress 0x0 -hiaddress 0x0fffffff
+
+ihwaddmemory -instancename ramIterator2 -type ram
+ihwconnect -bus cpuIteratorBus -instancename ramIterator2 -busslaveport sp9 -loaddress 0xf0000000 -hiaddress 0xffffffff
 
 
 ihwaddperipheral -instancename tea -modelfile peripheral/tea/pse.pse
@@ -459,7 +475,8 @@ ihwconnect -bus syncBus -busmasterport pm -instancename bridge7 -loaddress 0x000
 ihwconnect -bus cpu8Bus -busslaveport ps -instancename bridge8 -loaddress 0x80000014 -hiaddress 0x8000001B
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge8 -loaddress 0x00000000 -hiaddress 0x00000007
 
-ihwaddperipheral -instancename iterator -modelfile peripheral/iterator/pse.pse
+ihwaddperipheral -instancename iterator -modelfile peripheral/iteratorMonoTrigger/pse.pse
+ihwconnect -instancename iterator -busslaveport iteratorReg -bus cpuIteratorBus -loaddress 0x90000000 -hiaddress 0x90000003
 
 ihwaddpacketnet -instancename iteration_0
 ihwconnect -instancename router0 -packetnetport iterationsPort -packetnet iteration_0
