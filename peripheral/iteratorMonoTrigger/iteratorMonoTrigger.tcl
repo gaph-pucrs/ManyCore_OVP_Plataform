@@ -1,4 +1,4 @@
-imodelnewperipheral -name iterator \
+imodelnewperipheral -name iteratorMonoTrigger \
                     -constructor constructor \
                     -destructor  destructor \
                     -vendor gaph \
@@ -6,12 +6,23 @@ imodelnewperipheral -name iterator \
                     -version 1.0
 
 iadddocumentation -name Description \
-                  -text "The NoC iterator"
+                  -text "The NoC iteratorMonoTrigger"
+
+#########################################
+## A slave port on the processor bus
+#########################################
+imodeladdbusslaveport -name iteratorReg -size 4 -mustbeconnected
+
+# Address block for 8 bit control registers
+imodeladdaddressblock -name ab8 -port iteratorReg -offset 0x0 -width 32 -size 4
+
+# 8 bit control registers
+imodeladdmmregister -addressblock iteratorReg/ab8 -name iterationPort -readfunction iterateRead -writefunction iterateWrite -offset 0
+
 
 #############################################
 ## Data ports between iterator and routers ##
 #############################################
-
 imodeladdpacketnetport  \
       -name iterationPort0 \
       -maxbytes 8 \

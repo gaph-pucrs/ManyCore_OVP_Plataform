@@ -19,6 +19,27 @@
 
 #include "iteratorMonoTrigger.igen.h"
 
+static ppmBusPort busPorts[] = {
+    {
+        .name            = "iteratorReg",
+        .type            = PPM_SLAVE_PORT,
+        .addrHi          = 0x3LL,
+        .mustBeConnected = 1,
+        .remappable      = 0,
+        .description     = 0,
+    },
+    { 0 }
+};
+
+static PPM_BUS_PORT_FN(nextBusPort) {
+    if(!busPort) {
+        busPort = busPorts;
+    } else {
+        busPort++;
+    }
+    return busPort->name ? busPort : 0;
+}
+
 
 //                     Shared data for packetnet interface
 
@@ -140,6 +161,7 @@ ppmModelAttr modelAttrs = {
     .versionString    = PPM_VERSION_STRING,
     .type             = PPM_MT_PERIPHERAL,
 
+    .busPortsCB       = nextBusPort,  
     .packetnetPortsCB = nextPacketnetPort,
 
     .saveCB        = peripheralSaveState,
@@ -148,7 +170,7 @@ ppmModelAttr modelAttrs = {
     .vlnv          = {
         .vendor  = "gaph",
         .library = "peripheral",
-        .name    = "iterator",
+        .name    = "iteratorMonoTrigger",
         .version = "1.0"
     },
 

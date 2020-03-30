@@ -35,12 +35,21 @@ extern Uns32 diagnosticLevel;
 
 /////////////////////////// Register data declaration //////////////////////////
 
+typedef struct iteratorReg_ab8_dataS { 
+    union { 
+        Uns32 value;
+    } iterationPort;
+} iteratorReg_ab8_dataT, *iteratorReg_ab8_dataTP;
+
 /////////////////////////////// Port Declarations //////////////////////////////
+
+extern iteratorReg_ab8_dataT iteratorReg_ab8_data;
 
 #ifdef _PSE_
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
+    void                 *iteratorReg;
     ppmPacketnetHandle    iterationPort0;
     ppmPacketnetHandle    iterationPort1;
     ppmPacketnetHandle    iterationPort2;
@@ -56,6 +65,8 @@ extern handlesT handles;
 
 ////////////////////////////// Callback prototypes /////////////////////////////
 
+PPM_REG_READ_CB(iterateRead);
+PPM_REG_WRITE_CB(iterateWrite);
 PPM_PACKETNET_CB(iteration0);
 PPM_PACKETNET_CB(iteration1);
 PPM_PACKETNET_CB(iteration2);
