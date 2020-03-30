@@ -9,7 +9,7 @@ make -C application CROSS=${CROSS}
 make -C module
 make -C peripheral/whnoc_dma NOVLNV=1
 make -C peripheral/synchronizer NOVLNV=1
-make -C peripheral/iteratorMonoTrigger NOVLNV=1
+make -C peripheral/iterator NOVLNV=1
 make -C peripheral/networkInterface NOVLNV=1
 make -C peripheral/timer NOVLNV=1
 make -C peripheral/tea NOVLNV=1
