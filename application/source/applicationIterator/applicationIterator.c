@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#define ITERATOR_BASE        ((unsigned int *) 0x90000000)
+#define ITERATOR_BASE ((unsigned int *) 0x90000000)
 
 int main(int argc, char **argv){
     volatile unsigned int *iterate = ITERATOR_BASE;
