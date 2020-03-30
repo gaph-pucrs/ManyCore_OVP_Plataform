@@ -10,30 +10,30 @@ N=$(($X*$Y))
 # source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
 # setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
 cd simulation
-rm -f flitFlow.csv
+    rm -f flitFlow.csv
 cd ..
 
 cd application
-./applicationGenerator.sh $X $Y $APP_NAME
+    ./applicationGenerator.sh $X $Y $APP_NAME
 cd ..
 
 cd module
-./moduleGenerator.sh $X $Y
+    ./moduleGenerator.sh $X $Y
 cd ..
 
 cd peripheral
-cd whnoc_dma
-sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
-sed -i 's/#define DIM_Y.*/#define DIM_Y '$Y'/' noc.h
-sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
-cd ..
+    cd whnoc_dma
+        sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
+        sed -i 's/#define DIM_Y.*/#define DIM_Y '$Y'/' noc.h
+        sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
+    cd ..
 
-cd iterator
-./iteratorGenerator.sh $X $Y
+    cd iteratorMonoTrigger
+        ./iteratorGenerator.sh $X $Y
 cd ../..
 
 cd harness
-sed -i 's/#define N_PE.*/#define N_PES '$N'/' harness.c
+    sed -i 's/#define N_PE.*/#define N_PES '$N'/' harness.c
 cd ..
 
 N=$(($N-1))
@@ -71,13 +71,14 @@ echo "harness/harness.\${IMPERAS_ARCH}.exe \\" >> ovp_compiler.sh
 # -------------------------------
 for i in $(seq 0 $N);
 do
-    if [ $i != $N ];
-    then
+    #if [ $i != $N ];
+    #then
         echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
-    else
-        echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf --imperasintercepts \$* \\" >> ovp_compiler.sh
-    fi
+    #else
+    #    echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf --imperasintercepts \$* \\" >> ovp_compiler.sh
+    #fi
 done
+    echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts \$* \\" >> ovp_compiler.sh
 	echo "\$*" >> ovp_compiler.sh
         #echo "     --verbose " >> ovp_compiler.sh
 

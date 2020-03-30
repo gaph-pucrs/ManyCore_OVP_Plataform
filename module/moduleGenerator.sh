@@ -18,6 +18,7 @@ for i in $(seq 0 $N);
 do
 	echo "ihwaddbus -instancename cpu"$i"Bus -addresswidth 32" >> module.op.tcl
 done
+echo "ihwaddbus -instancename cpuIteratorBus -addresswidth 32" >> module.op.tcl # Iterator
 echo "" >> module.op.tcl
 
 # Creates the interruption signals
@@ -37,6 +38,11 @@ do
 	echo "                -semihostname or1kNewlib" >> module.op.tcl
 	echo "" >> module.op.tcl
 done
+echo "ihwaddprocessor -instancename cpuIterator -id "$(($N+1))" \\" >> module.op.tcl	# Iterator
+echo "                -vendor ovpworld.org -library processor -type or1k -version 1.0 \\" >> module.op.tcl # Iterator
+echo "                -variant generic \\" >> module.op.tcl # Iterator
+echo "                -semihostname or1kNewlib" >> module.op.tcl # Iterator
+echo "" >> module.op.tcl # Iterator
 
 # Creates a bus that will conntect the processor to the memories (data and instruction)
 for i in $(seq 0 $N);
@@ -47,6 +53,9 @@ do
 	echo "ihwconnect -instancename cpu"$i" -netport       intr1       -net intTIMER"$i >> module.op.tcl
 	echo "" >> module.op.tcl
 done
+echo "ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport INSTRUCTION" >> module.op.tcl # Iterator
+echo "ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport DATA" >> module.op.tcl # Iterator
+echo "" >> module.op.tcl # Iterator
 
 # Configures the bus address spaces
 for i in $(seq 0 $N);
@@ -65,6 +74,14 @@ do
 	echo "" >> module.op.tcl
 	echo "" >> module.op.tcl
 done
+echo "ihwaddmemory -instancename ramIterator -type ram" >> module.op.tcl # Iterator
+echo "ihwconnect -bus cpuIteratorBus -instancename ramIterator -busslaveport sp"$(($N+1))" -loaddress 0x0 -hiaddress 0x0fffffff" >> module.op.tcl # Iterator
+echo "" >> module.op.tcl # Iterator
+echo "ihwaddmemory -instancename ramIterator2 -type ram" >> module.op.tcl # Iterator
+echo "ihwconnect -bus cpuIteratorBus -instancename ramIterator2 -busslaveport sp"$(($N+1))" -loaddress 0xf0000000 -hiaddress 0xffffffff" >> module.op.tcl # Iterator
+echo "" >> module.op.tcl # Iterator
+echo "" >> module.op.tcl # Iterator
+
 
 # Ceates the TEA and each router, NI and timer
 echo "ihwaddperipheral -instancename tea -modelfile peripheral/tea/pse.pse" >> module.op.tcl
@@ -284,7 +301,9 @@ do
 done
 echo "" >> module.op.tcl
 
-echo "ihwaddperipheral -instancename iterator -modelfile peripheral/iterator/pse.pse" >> module.op.tcl
+echo "ihwaddperipheral -instancename iterator -modelfile peripheral/iteratorMonoTrigger/pse.pse" >> module.op.tcl #iterator
+echo "ihwconnect -instancename iterator -busslaveport iteratorReg -bus cpuIteratorBus -loaddress 0x90000000 -hiaddress 0x90000003" >> module.op.tcl #iterator
+
 
 echo "" >> module.op.tcl
 for i in $(seq 0 $N);
