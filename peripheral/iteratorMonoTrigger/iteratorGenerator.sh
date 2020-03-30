@@ -9,7 +9,7 @@ N=$(($N-1))
 
 # Removes the old .tcl
 rm -rf iteratorMonoTrigger.tcl
-rm -rf iteratorMonoTrigger.c
+#rm -rf iteratorMonoTrigger.c
 
 # Creating the new iterator.tcl
 echo "imodelnewperipheral -name iteratorMonoTrigger \\" >> iteratorMonoTrigger.tcl
