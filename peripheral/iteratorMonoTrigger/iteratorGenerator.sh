@@ -12,39 +12,39 @@ rm -rf iterator.tcl
 rm -rf iterator.c
 
 # Creating the new iterator.tcl
-echo "imodelnewperipheral -name iteratorMonoTrigger \\" >> iterator.tcl
-echo "                    -constructor constructor \\" >> iterator.tcl
-echo "                    -destructor  destructor \\" >> iterator.tcl
-echo "                    -vendor gaph \\" >> iterator.tcl
-echo "                    -library peripheral \\" >> iterator.tcl
-echo "                    -version 1.0" >> iterator.tcl
-echo "" >> iterator.tcl
-echo "iadddocumentation -name Description \\" >> iterator.tcl
-echo "                  -text \"The NoC iteratorMonoTrigger\"" >> iterator.tcl
-echo "" >> iterator.tcl
-echo "#############################################" >> iterator.tcl
-echo "## Data ports between iterator and routers ##" >> iterator.tcl
-echo "#############################################" >> iterator.tcl
-echo "" >> iterator.tcl
-echo "#########################################" >> iterator.tcl
-echo "## A slave port on the processor bus" >> iterator.tcl
-echo "#########################################" >> iterator.tcl
-echo "imodeladdbusslaveport -name iteratorReg -size 4 -mustbeconnected" >> iterator.tcl
-echo "" >> iterator.tcl
-echo "# Address block for 8 bit control registers" >> iterator.tcl
-echo "imodeladdaddressblock -name ab8 -port iteratorReg -offset 0x0 -width 32 -size 4" >> iterator.tcl
-echo "" >> iterator.tcl
-echo "# 8 bit control registers" >> iterator.tcl
-echo "imodeladdmmregister -addressblock iteratorReg/ab8 -name iterationPort -readfunction iterateRead -writefunction iterateWrite -offset 0" >> iterator.tcl
-echo "" >> iterator.tcl
+echo "imodelnewperipheral -name iteratorMonoTrigger \\" >> iteratorMonoTrigger.tcl
+echo "                    -constructor constructor \\" >> iteratorMonoTrigger.tcl
+echo "                    -destructor  destructor \\" >> iteratorMonoTrigger.tcl
+echo "                    -vendor gaph \\" >> iteratorMonoTrigger.tcl
+echo "                    -library peripheral \\" >> iteratorMonoTrigger.tcl
+echo "                    -version 1.0" >> iteratorMonoTrigger.tcl
+echo "" >> iteratorMonoTrigger.tcl
+echo "iadddocumentation -name Description \\" >> iteratorMonoTrigger.tcl
+echo "                  -text \"The NoC iteratorMonoTrigger\"" >> iteratorMonoTrigger.tcl
+echo "" >> iteratorMonoTrigger.tcl
+echo "#########################################" >> iteratorMonoTrigger.tcl
+echo "## A slave port on the processor bus" >> iteratorMonoTrigger.tcl
+echo "#########################################" >> iteratorMonoTrigger.tcl
+echo "imodeladdbusslaveport -name iteratorReg -size 4 -mustbeconnected" >> iteratorMonoTrigger.tcl
+echo "" >> iteratorMonoTrigger.tcl
+echo "# Address block for 8 bit control registers" >> iteratorMonoTrigger.tcl
+echo "imodeladdaddressblock -name ab8 -port iteratorReg -offset 0x0 -width 32 -size 4" >> iteratorMonoTrigger.tcl
+echo "" >> iteratorMonoTrigger.tcl
+echo "# 8 bit control registers" >> iteratorMonoTrigger.tcl
+echo "imodeladdmmregister -addressblock iteratorReg/ab8 -name iterationPort -readfunction iterateRead -writefunction iterateWrite -offset 0" >> iteratorMonoTrigger.tcl
+echo "" >> iteratorMonoTrigger.tcl
+echo "" >> iteratorMonoTrigger.tcl
+echo "#############################################" >> iteratorMonoTrigger.tcl
+echo "## Data ports between iterator and routers ##" >> iteratorMonoTrigger.tcl
+echo "#############################################" >> iteratorMonoTrigger.tcl
 for i in $(seq 0 $N);
 do
-	echo "imodeladdpacketnetport  \\" >> iterator.tcl
-    echo "      -name iterationPort"$i" \\" >> iterator.tcl
-    echo "      -maxbytes 8 \\" >> iterator.tcl
-    echo "      -updatefunction iteration"$i" \\" >> iterator.tcl
-    echo "      -updatefunctionargument 0x00" >> iterator.tcl
-    echo "" >> iterator.tcl
+	echo "imodeladdpacketnetport  \\" >> iteratorMonoTrigger.tcl
+    echo "      -name iterationPort"$i" \\" >> iteratorMonoTrigger.tcl
+    echo "      -maxbytes 8 \\" >> iteratorMonoTrigger.tcl
+    echo "      -updatefunction iteration"$i" \\" >> iteratorMonoTrigger.tcl
+    echo "      -updatefunctionargument 0x00" >> iteratorMonoTrigger.tcl
+    echo "" >> iteratorMonoTrigger.tcl
 done
 
 # Runs igen to create the peripheral
