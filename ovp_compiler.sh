@@ -6,6 +6,7 @@ cd ..
 checkinstall.exe -p install.pkg --nobanner || exit
 CROSS=OR1K
 make -C application CROSS=${CROSS}
+make -C application/source/applicationIterator CROSS=${CROSS}
 make -C module
 make -C peripheral/whnoc_dma NOVLNV=1
 make -C peripheral/synchronizer NOVLNV=1
