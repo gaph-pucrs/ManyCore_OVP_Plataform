@@ -11,7 +11,7 @@
 //////////////////////////////// Callback stubs ////////////////////////////////
 
 PPM_REG_READ_CB(iterateRead) {
-    bhmMessage("I", "Iterator", "ITERATE!");
+    //bhmMessage("I", "Iterator", "ITERATE!");
     return *(Uns32*)user;
 }
 
