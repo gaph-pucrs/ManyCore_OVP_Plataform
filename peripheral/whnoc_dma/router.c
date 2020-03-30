@@ -229,6 +229,7 @@ void bufferStatusUpdate(unsigned int port){
 void bufferPush(unsigned int port){
     // Write a new flit in the buffer
     buffers[port][last[port]] = incomingFlit;
+    bhmMessage("I", "PUSH", "Flit value: %x", incomingFlit.data);
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;
     }
