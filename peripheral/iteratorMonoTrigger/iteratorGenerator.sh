@@ -49,7 +49,7 @@ done
 
 # Runs igen to create the peripheral
 igen.exe --batch iteratorMonoTrigger.tcl --writec iteratorMonoTrigger
-rm iteratorMonoTrigger.c.igen.stubs
+#rm iteratorMonoTrigger.c.igen.stubs
 rm iteratorMonoTrigger.igen.c
 
 ##== # Creates the peripheral behavioral file
