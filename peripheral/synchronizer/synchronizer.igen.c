@@ -28,6 +28,7 @@
 
 
 #include "synchronizer.igen.h"
+#include "../whnoc_dma/noc.h"
 /////////////////////////////// Port Declarations //////////////////////////////
 
 syncPort_regs_dataT syncPort_regs_data;
@@ -40,20 +41,19 @@ handlesT handles;
 // eg. if (diagnosticLevel >= 1) bhmMessage("I", "sync", "Example");
 //     Predefined macros PSE_DIAG_LOW, PSE_DIAG_MEDIUM and PSE_DIAG_HIGH may be used
 Uns32 diagnosticLevel;
-////////////////////////////////////////////////////////////////////////////////
-//
-//                W R I T T E N   B Y   I M P E R A S   I G E N
-//
-//                             Version 20170201.0
-//
-////////////////////////////////////////////////////////////////////////////////
 
-#include "synchronizer.igen.h"
-#include "../whnoc_dma/noc.h"
 //////////////////////////////// Callback stubs ////////////////////////////////
 unsigned int startedPEs = 0;
 unsigned int status = 0; // 0 not started - 1 started
 bhmEventHandle goEvent;
+
+#define __bswap_constant_32(x) \
+     ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
+      (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
+
+unsigned int htonl(unsigned int x){
+    return __bswap_constant_32(x);
+}
 
 PPM_REG_READ_CB(goRead) {
     // YOUR CODE HERE (goRead)
