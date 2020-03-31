@@ -161,7 +161,6 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
-    LOG("INTTIMER: %x - nicmd: %x\n", *myAddress, *NIcmd);
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
@@ -185,14 +184,12 @@ void interruptHandler_timer(void) {
     else
         sendExecutedInstPacket = TRUE;
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
-    LOG("INTsent: %x\n", *myAddress);
     //LOG("Timer interruption!\n");
 }
 
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface */ 
 void interruptHandler_NI(void) {
-    LOG("INTNI: %x t: %x\n", *myAddress, interruptionType);
     int requester;
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
@@ -203,7 +200,6 @@ void interruptHandler_NI(void) {
             *NIcmd = READING; // turn down the interruption
         }
         else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-            LOG("De req\n");
             requester = incomingPacket[PI_REQUESTER];
             *NIcmd = READING; // turn down the interruption
             incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
@@ -239,7 +235,6 @@ void interruptHandler_NI(void) {
     }
     // Reset the interruptionType
     interruptionType = NI_INT_TYPE_CLEAR;
-    LOG("INTNIEND: %x\n", *myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
