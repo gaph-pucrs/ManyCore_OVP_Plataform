@@ -188,7 +188,7 @@ void interruptHandler_timer(void) {
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface */ 
 void interruptHandler_NI(void) {
-    LOG("INTNI: %x\n", *myAddress);
+    LOG("INTNI: %x t: %x\n", *myAddress, interruptionType);
     int requester;
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
