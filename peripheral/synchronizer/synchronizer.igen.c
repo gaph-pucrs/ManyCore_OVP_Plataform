@@ -83,7 +83,7 @@ PPM_REG_WRITE_CB(readyWrite) {
     else{
         startedPEs--;
         bhmMessage("I", "readyWrite", "Numero de PEs finalizados: %d\n",(N_PES-startedPEs));
-        if(startedPEs == N_PES){
+        if((N_PES-startedPEs) == N_PES){
             bhmMessage("I", "readyWrite", "Numero total de PEs finalizados: %d\n",(N_PES-startedPEs));
             bhmTriggerEvent(goEvent);
             status = 0; // Tasks are finished now.
