@@ -71,14 +71,14 @@ PPM_REG_READ_CB(readyRead) {
 }
 
 PPM_REG_WRITE_CB(readyWrite) {
-    if(!status){
+    if(status == 0){
         startedPEs++;
         bhmMessage("I", "readyWrite", "Numero de PEs prontos: %d\n",startedPEs);
         if(startedPEs == N_PES){
             bhmMessage("I", "readyWrite", "Numero total de PEs prontos: %d\n",startedPEs);
             bhmTriggerEvent(goEvent);
+            status = 1; // Tasks are running now.
         }
-        status = 1; // Tasks are running now.
     }
     else{
         startedPEs--;
@@ -86,8 +86,8 @@ PPM_REG_WRITE_CB(readyWrite) {
         if(startedPEs == N_PES){
             bhmMessage("I", "readyWrite", "Numero total de PEs finalizados: %d\n",(N_PES-startedPEs));
             bhmTriggerEvent(goEvent);
+            status = 0; // Tasks are finished now.
         }
-        status = 0; // Tasks are finished now.
     }
     *(Uns32*)user = data;
 }
