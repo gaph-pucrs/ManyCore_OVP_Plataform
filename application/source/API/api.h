@@ -180,7 +180,7 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;
     executedInstPacket[PI_I_MYADDR] = *myAddress;
-    if(*NIcmd != NI_STATUS_OFF)
+    if(*NIcmd == NI_STATUS_OFF)
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     else
         sendExecutedInstPacket = TRUE;
