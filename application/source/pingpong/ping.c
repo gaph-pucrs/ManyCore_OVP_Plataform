@@ -27,6 +27,7 @@ int main(int argc, char **argv)
         pingpong.msg[0] = pingpong.msg[0] + 1;
         SendMessage(&pingpong, pong_addr);
     }
+    while(1){}
     LOG("Ping Finalizado!\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
