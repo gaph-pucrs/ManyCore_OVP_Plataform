@@ -52,6 +52,7 @@ Uns32 diagnosticLevel;
 #include "../whnoc_dma/noc.h"
 //////////////////////////////// Callback stubs ////////////////////////////////
 unsigned int startedPEs = 0;
+unsigned int status = 0; // 0 not started - 1 started
 bhmEventHandle goEvent;
 
 PPM_REG_READ_CB(goRead) {
@@ -70,19 +71,24 @@ PPM_REG_READ_CB(readyRead) {
 }
 
 PPM_REG_WRITE_CB(readyWrite) {
-    startedPEs++;
-    //unsigned int aux = *(unsigned int *)data >> 24;
-    bhmMessage("I", "readyWrite", "incrementando numero de roteadores %d\n",startedPEs);
-    if(startedPEs == N_PES){
-       //  bhmWaitDelay(QUANTUM_DELAY);
-        bhmMessage("I", "readyWrite", " numero TOTAL de roteadores %d\n",startedPEs);
-	    bhmTriggerEvent(goEvent);
-    //	    syncPort_regs_data.syncToPE.value = 1;
+    if(!status){
+        startedPEs++;
+        bhmMessage("I", "readyWrite", "Numero de PEs prontos: %d\n",startedPEs);
+        if(startedPEs == N_PES){
+            bhmMessage("I", "readyWrite", "Numero total de PEs prontos: %d\n",startedPEs);
+            bhmTriggerEvent(goEvent);
+        }
+        status = 1; // Tasks are running now.
     }
-   /*  }else if(aux == 254){
-        syncPort_regs_data.syncToPE.value = 5;
-    }*/
-    // YOUR CODE HERE (re adyWrite)
+    else{
+        startedPEs--;
+        bhmMessage("I", "readyWrite", "Numero de PEs finalizados: %d\n",(N_PES-startedPEs));
+        if(startedPEs == N_PES){
+            bhmMessage("I", "readyWrite", "Numero total de PEs finalizados: %d\n",(N_PES-startedPEs));
+            bhmTriggerEvent(goEvent);
+        }
+        status = 0; // Tasks are finished now.
+    }
     *(Uns32*)user = data;
 }
 
@@ -179,7 +185,10 @@ int main(int argc, char *argv[]) {
     goEvent = bhmCreateNamedEvent("start","go");
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
-    syncPort_regs_data.syncToPE.value = 1;
+    syncPort_regs_data.syncToPE.value = htonl(1);
+    bhmWaitEvent(goEvent);
+    bhmWaitDelay(QUANTUM_DELAY);
+    syncPort_regs_data.syncToPE.value = htonl(0);
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
     return 0;

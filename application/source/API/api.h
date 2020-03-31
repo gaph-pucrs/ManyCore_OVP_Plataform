@@ -64,7 +64,8 @@ volatile unsigned int *nopCounter =         NOP_INST;
 volatile unsigned int *logicalCounter =     LOGICAL_INST;
 volatile unsigned int *multDivCounter =     MULT_DIV_INST;
 volatile unsigned int *weirdCounter =       WEIRD_INST;
-// Activate this flag to deactivate the instruction count
+
+// Activate this flag to deactivate the instruction count - "clock gating the processor"
 volatile unsigned int *clockGating_flag =   CLK_GATING;
 
 // Services
@@ -161,6 +162,8 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
+    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    *clockGating_flag = FALSE; // Turn the clkGating off
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
@@ -184,6 +187,7 @@ void interruptHandler_timer(void) {
     else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
         sendExecutedInstPacket = TRUE;
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
+    *clockGating_flag = auxClkGating; // Restore the previous clk gating state
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -468,11 +472,8 @@ void SendMessage(message *theMessage, unsigned int destination){
     //////////////////////////////////////////
     // Change the selected buffer position to occupied
     bufferPush(index);
-    //LOG("ADICIONADO NO INDEX: %d\n",index);
-    //LOG("---> %x Verificando no pendingRequest %d - value: %d\n",*myAddress,getID(destination),pendingReq[getID(destination)]);
     // Once the packet is ready, check if the request has arrived
     if(checkPendingReq(getID(destination))){
-        //LOG("PENDING REQUEST ENCONTRADO!\n");
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[index], index);
         // Clear the pending request
@@ -554,6 +555,15 @@ void FinishApplication(){
             if(buffer_map[i]!=EMPTY) done = 0; // if some position in the buffer is occupied then the program must wait!
         }
     }while(done==0);
+
+    // Activate the clock gating and waits until every other processor finish its task
+    *clockGating_flag = TRUE; // Because the task has finished
+    *PEToSync = 0xFF;
+    int init_end = 1;
+    while(init_end != 0){
+	    init_end = *SyncToPE;
+    }
+    
     ReportExecutedInstructions();
     LOG("Application ROUTER %x done!\n\n",*myAddress);
     return;

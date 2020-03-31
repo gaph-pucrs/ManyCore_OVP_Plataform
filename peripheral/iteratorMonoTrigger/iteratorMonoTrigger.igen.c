@@ -97,8 +97,8 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
 
 //////////////////////////////// Callback stubs ////////////////////////////////
 
-PPM_REG_READ_CB(iterateRead) {
-    //bhmMessage("I", "Iterator", "ITERATE!");
+/* Read callback from the extra PE */
+PPM_REG_READ_CB(iterateRead) { 
     iterationN++;
     runIterations();
     return *(Uns32*)user;
