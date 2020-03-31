@@ -230,6 +230,7 @@ void interruptHandler_NI(void) {
         }
         if(sendExecutedInstPacket == TRUE){
             SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+            sendExecutedInstPacket = FALSE;
         }
     }
     else{
