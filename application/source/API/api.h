@@ -160,7 +160,7 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
-    //LOG("INTTIMER: %x\n", *myAddress);
+    LOG("INTTIMER: %x\n", *myAddress);
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
@@ -188,6 +188,7 @@ void interruptHandler_timer(void) {
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface */ 
 void interruptHandler_NI(void) {
+    LOG("INTNI: %x\n", *myAddress);
     int requester;
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
