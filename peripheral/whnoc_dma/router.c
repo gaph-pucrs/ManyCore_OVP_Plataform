@@ -631,6 +631,7 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
 void iterate(){
     // Sends the iteration signal to the NI module
     iterateNI();
+    //iteratePeriph();
     // Verify if the LOCAL buffer has something to send
     //verifyLocalBuffer();
     ////////////////////////////////////////////
