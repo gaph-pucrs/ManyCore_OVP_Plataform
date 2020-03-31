@@ -70,6 +70,7 @@ volatile unsigned int *waitingPckg_flag = WAITING_PKG;
 // Services
 #define MESSAGE_REQ         0x20
 #define MESSAGE_DELIVERY    0x30
+#define INSTR_COUNT_PACKET  0x40
 // Buffer defines
 #define PIPE_SIZE           4
 #define PIPE_OCCUPIED       1
@@ -159,13 +160,13 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
-    *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
+    LOG("INTTIMER: %x", *myaddress);
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
     executedInstPacket[PI_SEND_TIME] = tsend;
-    executedInstPacket[PI_SERVICE] = MESSAGE_REQ;
+    executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
     executedInstPacket[PI_I_BRANCH] = *branchCounter;
     executedInstPacket[PI_I_ARITH] = *arithCounter;
     executedInstPacket[PI_I_JUMP] = *jumpCounter;
@@ -179,6 +180,7 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;
     executedInstPacket[PI_I_MYADDR] = *myAddress;
     SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+    *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     //LOG("Timer interruption!\n");
 }
 
