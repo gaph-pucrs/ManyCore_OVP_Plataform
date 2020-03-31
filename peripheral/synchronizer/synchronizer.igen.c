@@ -183,9 +183,11 @@ int main(int argc, char *argv[]) {
     bhmInstallDiagCB(setDiagLevel);
     constructor();
     goEvent = bhmCreateNamedEvent("start","go");
+    //
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
     syncPort_regs_data.syncToPE.value = htonl(1);
+    //
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
     syncPort_regs_data.syncToPE.value = htonl(0);

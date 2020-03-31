@@ -280,7 +280,7 @@ void OVP_init(){
     *PEToSync = 0x00;
     int init_start = 0;
     while(init_start != 1){
-	    init_start = *SyncToPE >> 24;
+	    init_start = *SyncToPE;
     }
     tinicio = clock();
     //tinicio = tignore - (tignore - tinicio);
