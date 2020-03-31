@@ -119,7 +119,7 @@ unsigned int readMem(unsigned int addr){
 }
 
 void niIteration(){
-    //bhmMessage("INFO", "ITERATIONPORT", "Recebendo iteracao - myInternalStatus: %x", internalStatus);
+    bhmMessage("INFO", "ITERATIONPORT", "Recebendo iteracao - myInternalStatus: %x - stallgo: %x", internalStatus, control_in_STALLGO);
     if(control_TX == NI_STATUS_ON && control_in_STALLGO == GO){
         // If the transmittion isn't finished yet...
         if(transmittingCount != EMPTY){
