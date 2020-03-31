@@ -385,7 +385,7 @@ void allocate(unsigned int port){
     if(port != ND && routingTable[port] == ND && !isEmpty(port)){
         // Discover to wich port the packet must go
         header = buffers[port][first[port]].data;
-        bhmMessage("INFO", "ALLOCATE", "Pedindo roteamento para o header %x", htonl(header));
+        //bhmMessage("INFO", "ALLOCATE", "Pedindo roteamento para o header %x", htonl(header));
         to = XYrouting(myAddress, header);
         // Verify if any other port is using the selected one
         allowed = 1;
