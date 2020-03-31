@@ -11,7 +11,7 @@ typedef unsigned char Uns8;
 #define SYNC_BASE      ((unsigned int *) 0x80000014)
 #define NI_BASE        ((unsigned int *) 0x80000004)
 #define TIMER_BASE     ((unsigned int *) 0x8000001C)
-#define WAITING_PKG    ((unsigned int *) 0x0FFFFFFC)
+#define CLK_GATING     ((unsigned int *) 0x0FFFFFFC)
 #define EXECUTED_INST  ((unsigned int *) 0x0FFFFFF8)
 /* -------------------------------------------------
 // Instruction Type Counter ----------------------*/
@@ -64,9 +64,9 @@ volatile unsigned int *nopCounter =         NOP_INST;
 volatile unsigned int *logicalCounter =     LOGICAL_INST;
 volatile unsigned int *multDivCounter =     MULT_DIV_INST;
 volatile unsigned int *weirdCounter =       WEIRD_INST;
-
 // Activate this flag to deactivate the instruction count
-volatile unsigned int *waitingPckg_flag = WAITING_PKG;
+volatile unsigned int *clockGating_flag =   CLK_GATING;
+
 // Services
 #define MESSAGE_REQ         0x20
 #define MESSAGE_DELIVERY    0x30
@@ -179,12 +179,11 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;
     executedInstPacket[PI_I_MYADDR] = *myAddress;
-    if(*NIcmd == NI_STATUS_OFF)
+    if(*NIcmd == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-    else
+    else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
         sendExecutedInstPacket = TRUE;
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
-    //LOG("Timer interruption!\n");
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -343,9 +342,9 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     // Sends the request to the transmitter
     receivingActive = 0;
     requestMsg(from);
-    *waitingPckg_flag = 1;
-    while(receivingActive==0){ i = *NIcmd; /* waits until the NI has received the hole packet, generating iterations to the peripheral */ }
-    *waitingPckg_flag = 0;
+    *clockGating_flag = TRUE;
+    while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    *clockGating_flag = FALSE;
     // Alocate the packet message inside the structure
     theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
     // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
@@ -360,7 +359,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 ///////////////////////////////////////////////////////////////////
 //
 void ResetExecutedInstructions(){
-    *waitingPckg_flag = 1;
+    *clockGating_flag = TRUE;
     *instructionCounter = 0;
     *branchCounter = 0;
     *arithCounter = 0;  
@@ -373,14 +372,14 @@ void ResetExecutedInstructions(){
     *logicalCounter = 0;    
     *multDivCounter = 0;
     *weirdCounter = 0;
-    *waitingPckg_flag = 0;
+    *clockGating_flag = FALSE;
     return;
 }
 
 ///////////////////////////////////////////////////////////////////
 //
 void ReportExecutedInstructions(){
-    *waitingPckg_flag = 1;
+    *clockGating_flag = TRUE;
     FILE *log;
     char log_name[50];
     sprintf(log_name, "simulation/exec_inst_PE%d.txt",*myAddress);
@@ -405,6 +404,7 @@ void ReportExecutedInstructions(){
         fprintf(log,"==========================================================\n");
         fclose(log);
     }
+    *clockGating_flag = FALSE;
     return;
 }
 
