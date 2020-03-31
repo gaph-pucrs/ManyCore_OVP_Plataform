@@ -161,7 +161,6 @@ void interruptHandler_timer(void);
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
     LOG("INTTIMER: %x - nicmd: %x\n", *myAddress, *NIcmd);
-    *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
@@ -181,6 +180,7 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;
     executedInstPacket[PI_I_MYADDR] = *myAddress;
     SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+    *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     LOG("INTsent: %x\n", *myAddress);
     //LOG("Timer interruption!\n");
 }
@@ -231,6 +231,7 @@ void interruptHandler_NI(void) {
     }
     // Reset the interruptionType
     interruptionType = NI_INT_TYPE_CLEAR;
+    LOG("INTNIEND: %x\n", *myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
