@@ -199,7 +199,7 @@ void interruptHandler_NI(void) {
             *NIcmd = READING; // turn down the interruption
         }
         else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-            //LOG("De req\n");
+            LOG("De req\n");
             requester = incomingPacket[PI_REQUESTER];
             *NIcmd = READING; // turn down the interruption
             incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
