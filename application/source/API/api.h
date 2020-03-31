@@ -523,11 +523,13 @@ unsigned int getID(unsigned int address){
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
     while(*NIcmd != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    int_disable(1);
     int_disable(0);
     while(*NIcmd != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
     transmittingActive = slot;
     SendRaw(addr);
     int_enable(0);
+    int_enable(1);
 }
 
 ///////////////////////////////////////////////////////////////////
