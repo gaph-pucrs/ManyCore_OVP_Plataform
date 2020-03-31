@@ -110,6 +110,7 @@ typedef struct Message {
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
 volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
 volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];
+volatile unsigned int sendExecutedInstPacket = FALSE;
 volatile unsigned int receivingActive;
 volatile unsigned int transmittingActive = PIPE_WAIT;
 volatile unsigned int interruptionType = 0;
@@ -179,7 +180,10 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;
     executedInstPacket[PI_I_MYADDR] = *myAddress;
-    SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+    if(*NIcmd != NI_STATUS_OFF)
+        SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+    else
+        sendExecutedInstPacket = TRUE;
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     LOG("INTsent: %x\n", *myAddress);
     //LOG("Timer interruption!\n");
@@ -223,6 +227,9 @@ void interruptHandler_NI(void) {
         }
         else{
             while(1){LOG("%x - ERROR! Unexpected interruption! TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
+        }
+        if(sendExecutedInstPacket == TRUE){
+            SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
         }
     }
     else{
