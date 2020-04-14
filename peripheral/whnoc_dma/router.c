@@ -59,7 +59,7 @@ unsigned int localStatus = GO;
 unsigned int localBufferAmount = 0;
 
 // Stores the control status of each port
-unsigned int control[N_PORTS+1] = {GO,GO,GO,GO,GO,GO};
+unsigned int control[N_PORTS] = {GO,GO,GO,GO,GO};
 unsigned int txCtrl;
 
 // Routing Table
