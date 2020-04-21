@@ -241,7 +241,7 @@ void bufferPush(unsigned int port){
     //if(myIterationStatus == ITERATION_OFF) turn_TickOn(); 
 
     // Update the buffer status
-    bhmMessage("INFO", "PUSH", "Foi push!\n");
+    bhmMessage("INFO", "PUSH", "Foi push! flit:%x\n", htonl(incomingFlit));
     bufferStatusUpdate(port);
 }
 
