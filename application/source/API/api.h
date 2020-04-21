@@ -558,6 +558,7 @@ void FinishApplication(){
 
     // Activate the clock gating and waits until every other processor finish its task
     *clockGating_flag = TRUE; // Because the task has finished
+    LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     int init_end = 1;
     while(init_end != 0){
