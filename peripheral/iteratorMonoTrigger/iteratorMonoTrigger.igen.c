@@ -22,6 +22,8 @@ unsigned long long int iteration;
 /* Make a callback to each router */
 void runIterations(){  
     iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
+    iteration = iterationN;
     ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));
     iteration = iterationN;
     ppmPacketnetWrite(handles.iterationPort2, &iteration, sizeof(iteration));
@@ -112,6 +114,10 @@ PPM_REG_WRITE_CB(iterateWrite) {
     *(Uns32*)user = data;
 }
 
+PPM_PACKETNET_CB(iteration0) {
+    // YOUR CODE HERE (iteration0)
+}
+
 PPM_PACKETNET_CB(iteration1) {
     // YOUR CODE HERE (iteration1)
 }
@@ -168,11 +174,11 @@ PPM_DESTRUCTOR_CB(destructor) {
 
 
 PPM_SAVE_STATE_FN(peripheralSaveState) {
-    bhmMessage(E, PPM_RSNI, Model does not implement save/restore);
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
 }
 
 PPM_RESTORE_STATE_FN(peripheralRestoreState) {
-    bhmMessage(E, PPM_RSNI, Model does not implement save/restore);
+    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
 }
 
 ///////////////////////////////////// Main /////////////////////////////////////
