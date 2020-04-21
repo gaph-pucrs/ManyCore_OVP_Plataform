@@ -76,24 +76,11 @@ echo "" >> iteratorMonoTrigger.igen.c
 echo "////////////////////////////// Functions ///////////////////////////////////////" >> iteratorMonoTrigger.igen.c
 echo "/* Make a callback to each router */" >> iteratorMonoTrigger.igen.c
 echo "void runIterations(){  " >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort2, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort3, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort4, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort5, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort6, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort7, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
-echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-echo "    ppmPacketnetWrite(handles.iterationPort8, &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
+for i in $(seq 1 $N)
+do
+    echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
+    echo "    ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
+done
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "/////////////////////////////// Diagnostic level ///////////////////////////////" >> iteratorMonoTrigger.igen.c
@@ -163,42 +150,13 @@ echo "    // YOUR CODE HERE (iterateWrite)" >> iteratorMonoTrigger.igen.c
 echo "    *(Uns32*)user = data;" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration0) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration1)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration1) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration1)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration2) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration2)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration3) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration3)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration4) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration4)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration5) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration5)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration6) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration6)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration7) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration7)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "PPM_PACKETNET_CB(iteration8) {" >> iteratorMonoTrigger.igen.c
-echo "    // YOUR CODE HERE (iteration8)" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
+for i in $(seq 1 $N)
+do
+    echo "PPM_PACKETNET_CB(iteration"$i") {" >> iteratorMonoTrigger.igen.c
+    echo "    // YOUR CODE HERE (iteration"$i")" >> iteratorMonoTrigger.igen.c
+    echo "}" >> iteratorMonoTrigger.igen.c
+    echo "" >> iteratorMonoTrigger.igen.c
+done
 echo "PPM_CONSTRUCTOR_CB(constructor) {" >> iteratorMonoTrigger.igen.c
 echo "    // YOUR CODE HERE (pre constructor)" >> iteratorMonoTrigger.igen.c
 echo "    periphConstructor();" >> iteratorMonoTrigger.igen.c
