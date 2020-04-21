@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Parameters
-Y=$1
-X=$2
+X=$1
+Y=$2
 
 # Removes the old .tcl
 rm -rf module.op.tcl
