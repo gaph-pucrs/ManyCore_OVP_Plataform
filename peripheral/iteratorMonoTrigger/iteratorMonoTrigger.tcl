@@ -95,3 +95,39 @@ imodeladdpacketnetport  \
       -updatefunction iteration11 \
       -updatefunctionargument 0x00
 
+imodeladdpacketnetport  \
+      -name iterationPort12 \
+      -maxbytes 8 \
+      -updatefunction iteration12 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort13 \
+      -maxbytes 8 \
+      -updatefunction iteration13 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort14 \
+      -maxbytes 8 \
+      -updatefunction iteration14 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort15 \
+      -maxbytes 8 \
+      -updatefunction iteration15 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort16 \
+      -maxbytes 8 \
+      -updatefunction iteration16 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort17 \
+      -maxbytes 8 \
+      -updatefunction iteration17 \
+      -updatefunctionargument 0x00
+

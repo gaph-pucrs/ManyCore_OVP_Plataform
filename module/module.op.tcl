@@ -12,6 +12,12 @@ ihwaddbus -instancename cpu8Bus -addresswidth 32
 ihwaddbus -instancename cpu9Bus -addresswidth 32
 ihwaddbus -instancename cpu10Bus -addresswidth 32
 ihwaddbus -instancename cpu11Bus -addresswidth 32
+ihwaddbus -instancename cpu12Bus -addresswidth 32
+ihwaddbus -instancename cpu13Bus -addresswidth 32
+ihwaddbus -instancename cpu14Bus -addresswidth 32
+ihwaddbus -instancename cpu15Bus -addresswidth 32
+ihwaddbus -instancename cpu16Bus -addresswidth 32
+ihwaddbus -instancename cpu17Bus -addresswidth 32
 ihwaddbus -instancename cpuIteratorBus -addresswidth 32
 
 ihwaddnet -instancename intNI0
@@ -38,6 +44,18 @@ ihwaddnet -instancename intNI10
 ihwaddnet -instancename intTIMER10
 ihwaddnet -instancename intNI11
 ihwaddnet -instancename intTIMER11
+ihwaddnet -instancename intNI12
+ihwaddnet -instancename intTIMER12
+ihwaddnet -instancename intNI13
+ihwaddnet -instancename intTIMER13
+ihwaddnet -instancename intNI14
+ihwaddnet -instancename intTIMER14
+ihwaddnet -instancename intNI15
+ihwaddnet -instancename intTIMER15
+ihwaddnet -instancename intNI16
+ihwaddnet -instancename intTIMER16
+ihwaddnet -instancename intNI17
+ihwaddnet -instancename intTIMER17
 
 ihwaddprocessor -instancename cpu0 -id 0 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
@@ -99,7 +117,37 @@ ihwaddprocessor -instancename cpu11 -id 11 \
                 -variant generic \
                 -semihostname or1kNewlib
 
-ihwaddprocessor -instancename cpuIterator -id 12 \
+ihwaddprocessor -instancename cpu12 -id 12 \
+                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
+                -variant generic \
+                -semihostname or1kNewlib
+
+ihwaddprocessor -instancename cpu13 -id 13 \
+                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
+                -variant generic \
+                -semihostname or1kNewlib
+
+ihwaddprocessor -instancename cpu14 -id 14 \
+                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
+                -variant generic \
+                -semihostname or1kNewlib
+
+ihwaddprocessor -instancename cpu15 -id 15 \
+                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
+                -variant generic \
+                -semihostname or1kNewlib
+
+ihwaddprocessor -instancename cpu16 -id 16 \
+                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
+                -variant generic \
+                -semihostname or1kNewlib
+
+ihwaddprocessor -instancename cpu17 -id 17 \
+                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
+                -variant generic \
+                -semihostname or1kNewlib
+
+ihwaddprocessor -instancename cpuIterator -id 18 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
                 -variant generic \
                 -semihostname or1kNewlib
@@ -163,6 +211,36 @@ ihwconnect -bus cpu11Bus -instancename cpu11 -busmasterport INSTRUCTION
 ihwconnect -bus cpu11Bus -instancename cpu11 -busmasterport DATA
 ihwconnect -instancename cpu11 -netport       intr0       -net intNI11
 ihwconnect -instancename cpu11 -netport       intr1       -net intTIMER11
+
+ihwconnect -bus cpu12Bus -instancename cpu12 -busmasterport INSTRUCTION
+ihwconnect -bus cpu12Bus -instancename cpu12 -busmasterport DATA
+ihwconnect -instancename cpu12 -netport       intr0       -net intNI12
+ihwconnect -instancename cpu12 -netport       intr1       -net intTIMER12
+
+ihwconnect -bus cpu13Bus -instancename cpu13 -busmasterport INSTRUCTION
+ihwconnect -bus cpu13Bus -instancename cpu13 -busmasterport DATA
+ihwconnect -instancename cpu13 -netport       intr0       -net intNI13
+ihwconnect -instancename cpu13 -netport       intr1       -net intTIMER13
+
+ihwconnect -bus cpu14Bus -instancename cpu14 -busmasterport INSTRUCTION
+ihwconnect -bus cpu14Bus -instancename cpu14 -busmasterport DATA
+ihwconnect -instancename cpu14 -netport       intr0       -net intNI14
+ihwconnect -instancename cpu14 -netport       intr1       -net intTIMER14
+
+ihwconnect -bus cpu15Bus -instancename cpu15 -busmasterport INSTRUCTION
+ihwconnect -bus cpu15Bus -instancename cpu15 -busmasterport DATA
+ihwconnect -instancename cpu15 -netport       intr0       -net intNI15
+ihwconnect -instancename cpu15 -netport       intr1       -net intTIMER15
+
+ihwconnect -bus cpu16Bus -instancename cpu16 -busmasterport INSTRUCTION
+ihwconnect -bus cpu16Bus -instancename cpu16 -busmasterport DATA
+ihwconnect -instancename cpu16 -netport       intr0       -net intNI16
+ihwconnect -instancename cpu16 -netport       intr1       -net intTIMER16
+
+ihwconnect -bus cpu17Bus -instancename cpu17 -busmasterport INSTRUCTION
+ihwconnect -bus cpu17Bus -instancename cpu17 -busmasterport DATA
+ihwconnect -instancename cpu17 -netport       intr0       -net intNI17
+ihwconnect -instancename cpu17 -netport       intr1       -net intTIMER17
 
 ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport INSTRUCTION
 ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport DATA
@@ -251,11 +329,53 @@ ihwaddmemory -instancename ram23 -type ram
 ihwconnect -bus cpu11Bus -instancename ram23 -busslaveport sp11 -loaddress 0xf0000000 -hiaddress 0xffffffff
 
 
+ihwaddmemory -instancename ram24 -type ram
+ihwconnect -bus cpu12Bus -instancename ram24 -busslaveport sp12 -loaddress 0x0 -hiaddress 0x0fffffff
+
+ihwaddmemory -instancename ram25 -type ram
+ihwconnect -bus cpu12Bus -instancename ram25 -busslaveport sp12 -loaddress 0xf0000000 -hiaddress 0xffffffff
+
+
+ihwaddmemory -instancename ram26 -type ram
+ihwconnect -bus cpu13Bus -instancename ram26 -busslaveport sp13 -loaddress 0x0 -hiaddress 0x0fffffff
+
+ihwaddmemory -instancename ram27 -type ram
+ihwconnect -bus cpu13Bus -instancename ram27 -busslaveport sp13 -loaddress 0xf0000000 -hiaddress 0xffffffff
+
+
+ihwaddmemory -instancename ram28 -type ram
+ihwconnect -bus cpu14Bus -instancename ram28 -busslaveport sp14 -loaddress 0x0 -hiaddress 0x0fffffff
+
+ihwaddmemory -instancename ram29 -type ram
+ihwconnect -bus cpu14Bus -instancename ram29 -busslaveport sp14 -loaddress 0xf0000000 -hiaddress 0xffffffff
+
+
+ihwaddmemory -instancename ram30 -type ram
+ihwconnect -bus cpu15Bus -instancename ram30 -busslaveport sp15 -loaddress 0x0 -hiaddress 0x0fffffff
+
+ihwaddmemory -instancename ram31 -type ram
+ihwconnect -bus cpu15Bus -instancename ram31 -busslaveport sp15 -loaddress 0xf0000000 -hiaddress 0xffffffff
+
+
+ihwaddmemory -instancename ram32 -type ram
+ihwconnect -bus cpu16Bus -instancename ram32 -busslaveport sp16 -loaddress 0x0 -hiaddress 0x0fffffff
+
+ihwaddmemory -instancename ram33 -type ram
+ihwconnect -bus cpu16Bus -instancename ram33 -busslaveport sp16 -loaddress 0xf0000000 -hiaddress 0xffffffff
+
+
+ihwaddmemory -instancename ram34 -type ram
+ihwconnect -bus cpu17Bus -instancename ram34 -busslaveport sp17 -loaddress 0x0 -hiaddress 0x0fffffff
+
+ihwaddmemory -instancename ram35 -type ram
+ihwconnect -bus cpu17Bus -instancename ram35 -busslaveport sp17 -loaddress 0xf0000000 -hiaddress 0xffffffff
+
+
 ihwaddmemory -instancename ramIterator -type ram
-ihwconnect -bus cpuIteratorBus -instancename ramIterator -busslaveport sp12 -loaddress 0x0 -hiaddress 0x0fffffff
+ihwconnect -bus cpuIteratorBus -instancename ramIterator -busslaveport sp18 -loaddress 0x0 -hiaddress 0x0fffffff
 
 ihwaddmemory -instancename ramIterator2 -type ram
-ihwconnect -bus cpuIteratorBus -instancename ramIterator2 -busslaveport sp12 -loaddress 0xf0000000 -hiaddress 0xffffffff
+ihwconnect -bus cpuIteratorBus -instancename ramIterator2 -busslaveport sp18 -loaddress 0xf0000000 -hiaddress 0xffffffff
 
 
 ihwaddperipheral -instancename tea -modelfile peripheral/tea/pse.pse
@@ -295,6 +415,24 @@ ihwaddperipheral -instancename timer10 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename router11 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni11 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer11 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename router12 -modelfile peripheral/whnoc_dma/pse.pse
+ihwaddperipheral -instancename ni12 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer12 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename router13 -modelfile peripheral/whnoc_dma/pse.pse
+ihwaddperipheral -instancename ni13 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer13 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename router14 -modelfile peripheral/whnoc_dma/pse.pse
+ihwaddperipheral -instancename ni14 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer14 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename router15 -modelfile peripheral/whnoc_dma/pse.pse
+ihwaddperipheral -instancename ni15 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer15 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename router16 -modelfile peripheral/whnoc_dma/pse.pse
+ihwaddperipheral -instancename ni16 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer16 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename router17 -modelfile peripheral/whnoc_dma/pse.pse
+ihwaddperipheral -instancename ni17 -modelfile peripheral/networkInterface/pse.pse
+ihwaddperipheral -instancename timer17 -modelfile peripheral/timer/pse.pse
 
 ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni0 -busslaveport DMAC -bus cpu0Bus -loaddress 0x80000004 -hiaddress 0x8000000B
@@ -356,6 +494,36 @@ ihwconnect -instancename ni11 -busslaveport DMAC -bus cpu11Bus -loaddress 0x8000
 ihwconnect -instancename ni11 -busmasterport MREAD  -bus cpu11Bus
 ihwconnect -instancename ni11 -busmasterport MWRITE -bus cpu11Bus
 ihwconnect -instancename timer11 -busslaveport TIMEREG -bus cpu11Bus -loaddress 0x8000001C -hiaddress 0x8000001F
+ihwconnect -instancename router12 -busslaveport localPort -bus cpu12Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename ni12 -busslaveport DMAC -bus cpu12Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni12 -busmasterport MREAD  -bus cpu12Bus
+ihwconnect -instancename ni12 -busmasterport MWRITE -bus cpu12Bus
+ihwconnect -instancename timer12 -busslaveport TIMEREG -bus cpu12Bus -loaddress 0x8000001C -hiaddress 0x8000001F
+ihwconnect -instancename router13 -busslaveport localPort -bus cpu13Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename ni13 -busslaveport DMAC -bus cpu13Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni13 -busmasterport MREAD  -bus cpu13Bus
+ihwconnect -instancename ni13 -busmasterport MWRITE -bus cpu13Bus
+ihwconnect -instancename timer13 -busslaveport TIMEREG -bus cpu13Bus -loaddress 0x8000001C -hiaddress 0x8000001F
+ihwconnect -instancename router14 -busslaveport localPort -bus cpu14Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename ni14 -busslaveport DMAC -bus cpu14Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni14 -busmasterport MREAD  -bus cpu14Bus
+ihwconnect -instancename ni14 -busmasterport MWRITE -bus cpu14Bus
+ihwconnect -instancename timer14 -busslaveport TIMEREG -bus cpu14Bus -loaddress 0x8000001C -hiaddress 0x8000001F
+ihwconnect -instancename router15 -busslaveport localPort -bus cpu15Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename ni15 -busslaveport DMAC -bus cpu15Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni15 -busmasterport MREAD  -bus cpu15Bus
+ihwconnect -instancename ni15 -busmasterport MWRITE -bus cpu15Bus
+ihwconnect -instancename timer15 -busslaveport TIMEREG -bus cpu15Bus -loaddress 0x8000001C -hiaddress 0x8000001F
+ihwconnect -instancename router16 -busslaveport localPort -bus cpu16Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename ni16 -busslaveport DMAC -bus cpu16Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni16 -busmasterport MREAD  -bus cpu16Bus
+ihwconnect -instancename ni16 -busmasterport MWRITE -bus cpu16Bus
+ihwconnect -instancename timer16 -busslaveport TIMEREG -bus cpu16Bus -loaddress 0x8000001C -hiaddress 0x8000001F
+ihwconnect -instancename router17 -busslaveport localPort -bus cpu17Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename ni17 -busslaveport DMAC -bus cpu17Bus -loaddress 0x80000004 -hiaddress 0x8000000B
+ihwconnect -instancename ni17 -busmasterport MREAD  -bus cpu17Bus
+ihwconnect -instancename ni17 -busmasterport MWRITE -bus cpu17Bus
+ihwconnect -instancename timer17 -busslaveport TIMEREG -bus cpu17Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 
 ihwaddpacketnet -instancename data_0_0_TEA
 ihwaddpacketnet -instancename ctrl_0_0_TEA
@@ -431,6 +599,42 @@ ihwaddpacketnet -instancename ctrl_3_1_N
 ihwaddpacketnet -instancename ctrl_3_1_S
 ihwaddpacketnet -instancename data_3_2_L
 ihwaddpacketnet -instancename ctrl_3_2_L
+ihwaddpacketnet -instancename data_4_0_L
+ihwaddpacketnet -instancename ctrl_4_0_L
+ihwaddpacketnet -instancename data_4_0_E
+ihwaddpacketnet -instancename data_4_0_W
+ihwaddpacketnet -instancename data_4_0_N
+ihwaddpacketnet -instancename data_4_0_S
+ihwaddpacketnet -instancename ctrl_4_0_E
+ihwaddpacketnet -instancename ctrl_4_0_W
+ihwaddpacketnet -instancename ctrl_4_0_N
+ihwaddpacketnet -instancename ctrl_4_0_S
+ihwaddpacketnet -instancename data_4_1_L
+ihwaddpacketnet -instancename ctrl_4_1_L
+ihwaddpacketnet -instancename data_4_2_L
+ihwaddpacketnet -instancename ctrl_4_2_L
+ihwaddpacketnet -instancename data_4_2_E
+ihwaddpacketnet -instancename data_4_2_W
+ihwaddpacketnet -instancename data_4_2_N
+ihwaddpacketnet -instancename data_4_2_S
+ihwaddpacketnet -instancename ctrl_4_2_E
+ihwaddpacketnet -instancename ctrl_4_2_W
+ihwaddpacketnet -instancename ctrl_4_2_N
+ihwaddpacketnet -instancename ctrl_4_2_S
+ihwaddpacketnet -instancename data_5_0_L
+ihwaddpacketnet -instancename ctrl_5_0_L
+ihwaddpacketnet -instancename data_5_1_L
+ihwaddpacketnet -instancename ctrl_5_1_L
+ihwaddpacketnet -instancename data_5_1_E
+ihwaddpacketnet -instancename data_5_1_W
+ihwaddpacketnet -instancename data_5_1_N
+ihwaddpacketnet -instancename data_5_1_S
+ihwaddpacketnet -instancename ctrl_5_1_E
+ihwaddpacketnet -instancename ctrl_5_1_W
+ihwaddpacketnet -instancename ctrl_5_1_N
+ihwaddpacketnet -instancename ctrl_5_1_S
+ihwaddpacketnet -instancename data_5_2_L
+ihwaddpacketnet -instancename ctrl_5_2_L
 
 ihwconnect -instancename router0 -packetnetport portDataWest -packetnet data_0_0_TEA
 ihwconnect -instancename router0 -packetnetport portControlWest -packetnet ctrl_0_0_TEA
@@ -544,6 +748,10 @@ ihwconnect -instancename router10 -packetnetport portDataWest -packetnet data_3_
 ihwconnect -instancename router9 -packetnetport portDataEast -packetnet data_3_1_W
 ihwconnect -instancename router10 -packetnetport portControlWest -packetnet ctrl_3_1_W
 ihwconnect -instancename router9 -packetnetport portControlEast -packetnet ctrl_3_1_W
+ihwconnect -instancename router10 -packetnetport portDataNorth -packetnet data_3_1_N
+ihwconnect -instancename router13 -packetnetport portDataSouth -packetnet data_3_1_N
+ihwconnect -instancename router10 -packetnetport portControlNorth -packetnet ctrl_3_1_N
+ihwconnect -instancename router13 -packetnetport portControlSouth -packetnet ctrl_3_1_N
 ihwconnect -instancename router10 -packetnetport portDataSouth -packetnet data_3_1_S
 ihwconnect -instancename router7 -packetnetport portDataNorth -packetnet data_3_1_S
 ihwconnect -instancename router10 -packetnetport portControlSouth -packetnet ctrl_3_1_S
@@ -552,6 +760,66 @@ ihwconnect -instancename router11 -packetnetport portDataLocal -packetnet data_3
 ihwconnect -instancename ni11 -packetnetport dataPort -packetnet data_3_2_L
 ihwconnect -instancename router11 -packetnetport portControlLocal -packetnet ctrl_3_2_L
 ihwconnect -instancename ni11 -packetnetport controlPort -packetnet ctrl_3_2_L
+ihwconnect -instancename router12 -packetnetport portDataLocal -packetnet data_4_0_L
+ihwconnect -instancename ni12 -packetnetport dataPort -packetnet data_4_0_L
+ihwconnect -instancename router12 -packetnetport portControlLocal -packetnet ctrl_4_0_L
+ihwconnect -instancename ni12 -packetnetport controlPort -packetnet ctrl_4_0_L
+ihwconnect -instancename router12 -packetnetport portDataEast -packetnet data_4_0_E
+ihwconnect -instancename router13 -packetnetport portDataWest -packetnet data_4_0_E
+ihwconnect -instancename router12 -packetnetport portControlEast -packetnet ctrl_4_0_E
+ihwconnect -instancename router13 -packetnetport portControlWest -packetnet ctrl_4_0_E
+ihwconnect -instancename router12 -packetnetport portDataNorth -packetnet data_4_0_N
+ihwconnect -instancename router15 -packetnetport portDataSouth -packetnet data_4_0_N
+ihwconnect -instancename router12 -packetnetport portControlNorth -packetnet ctrl_4_0_N
+ihwconnect -instancename router15 -packetnetport portControlSouth -packetnet ctrl_4_0_N
+ihwconnect -instancename router12 -packetnetport portDataSouth -packetnet data_4_0_S
+ihwconnect -instancename router9 -packetnetport portDataNorth -packetnet data_4_0_S
+ihwconnect -instancename router12 -packetnetport portControlSouth -packetnet ctrl_4_0_S
+ihwconnect -instancename router9 -packetnetport portControlNorth -packetnet ctrl_4_0_S
+ihwconnect -instancename router13 -packetnetport portDataLocal -packetnet data_4_1_L
+ihwconnect -instancename ni13 -packetnetport dataPort -packetnet data_4_1_L
+ihwconnect -instancename router13 -packetnetport portControlLocal -packetnet ctrl_4_1_L
+ihwconnect -instancename ni13 -packetnetport controlPort -packetnet ctrl_4_1_L
+ihwconnect -instancename router14 -packetnetport portDataLocal -packetnet data_4_2_L
+ihwconnect -instancename ni14 -packetnetport dataPort -packetnet data_4_2_L
+ihwconnect -instancename router14 -packetnetport portControlLocal -packetnet ctrl_4_2_L
+ihwconnect -instancename ni14 -packetnetport controlPort -packetnet ctrl_4_2_L
+ihwconnect -instancename router14 -packetnetport portDataWest -packetnet data_4_2_W
+ihwconnect -instancename router13 -packetnetport portDataEast -packetnet data_4_2_W
+ihwconnect -instancename router14 -packetnetport portControlWest -packetnet ctrl_4_2_W
+ihwconnect -instancename router13 -packetnetport portControlEast -packetnet ctrl_4_2_W
+ihwconnect -instancename router14 -packetnetport portDataNorth -packetnet data_4_2_N
+ihwconnect -instancename router17 -packetnetport portDataSouth -packetnet data_4_2_N
+ihwconnect -instancename router14 -packetnetport portControlNorth -packetnet ctrl_4_2_N
+ihwconnect -instancename router17 -packetnetport portControlSouth -packetnet ctrl_4_2_N
+ihwconnect -instancename router14 -packetnetport portDataSouth -packetnet data_4_2_S
+ihwconnect -instancename router11 -packetnetport portDataNorth -packetnet data_4_2_S
+ihwconnect -instancename router14 -packetnetport portControlSouth -packetnet ctrl_4_2_S
+ihwconnect -instancename router11 -packetnetport portControlNorth -packetnet ctrl_4_2_S
+ihwconnect -instancename router15 -packetnetport portDataLocal -packetnet data_5_0_L
+ihwconnect -instancename ni15 -packetnetport dataPort -packetnet data_5_0_L
+ihwconnect -instancename router15 -packetnetport portControlLocal -packetnet ctrl_5_0_L
+ihwconnect -instancename ni15 -packetnetport controlPort -packetnet ctrl_5_0_L
+ihwconnect -instancename router16 -packetnetport portDataLocal -packetnet data_5_1_L
+ihwconnect -instancename ni16 -packetnetport dataPort -packetnet data_5_1_L
+ihwconnect -instancename router16 -packetnetport portControlLocal -packetnet ctrl_5_1_L
+ihwconnect -instancename ni16 -packetnetport controlPort -packetnet ctrl_5_1_L
+ihwconnect -instancename router16 -packetnetport portDataEast -packetnet data_5_1_E
+ihwconnect -instancename router17 -packetnetport portDataWest -packetnet data_5_1_E
+ihwconnect -instancename router16 -packetnetport portControlEast -packetnet ctrl_5_1_E
+ihwconnect -instancename router17 -packetnetport portControlWest -packetnet ctrl_5_1_E
+ihwconnect -instancename router16 -packetnetport portDataWest -packetnet data_5_1_W
+ihwconnect -instancename router15 -packetnetport portDataEast -packetnet data_5_1_W
+ihwconnect -instancename router16 -packetnetport portControlWest -packetnet ctrl_5_1_W
+ihwconnect -instancename router15 -packetnetport portControlEast -packetnet ctrl_5_1_W
+ihwconnect -instancename router16 -packetnetport portDataSouth -packetnet data_5_1_S
+ihwconnect -instancename router13 -packetnetport portDataNorth -packetnet data_5_1_S
+ihwconnect -instancename router16 -packetnetport portControlSouth -packetnet ctrl_5_1_S
+ihwconnect -instancename router13 -packetnetport portControlNorth -packetnet ctrl_5_1_S
+ihwconnect -instancename router17 -packetnetport portDataLocal -packetnet data_5_2_L
+ihwconnect -instancename ni17 -packetnetport dataPort -packetnet data_5_2_L
+ihwconnect -instancename router17 -packetnetport portControlLocal -packetnet ctrl_5_2_L
+ihwconnect -instancename ni17 -packetnetport controlPort -packetnet ctrl_5_2_L
 
 ihwconnect -instancename ni0 -netport       INT_NI  -net intNI0
 ihwconnect -instancename timer0 -netport       INT_TIMER  -net intTIMER0
@@ -577,6 +845,18 @@ ihwconnect -instancename ni10 -netport       INT_NI  -net intNI10
 ihwconnect -instancename timer10 -netport       INT_TIMER  -net intTIMER10
 ihwconnect -instancename ni11 -netport       INT_NI  -net intNI11
 ihwconnect -instancename timer11 -netport       INT_TIMER  -net intTIMER11
+ihwconnect -instancename ni12 -netport       INT_NI  -net intNI12
+ihwconnect -instancename timer12 -netport       INT_TIMER  -net intTIMER12
+ihwconnect -instancename ni13 -netport       INT_NI  -net intNI13
+ihwconnect -instancename timer13 -netport       INT_TIMER  -net intTIMER13
+ihwconnect -instancename ni14 -netport       INT_NI  -net intNI14
+ihwconnect -instancename timer14 -netport       INT_TIMER  -net intTIMER14
+ihwconnect -instancename ni15 -netport       INT_NI  -net intNI15
+ihwconnect -instancename timer15 -netport       INT_TIMER  -net intTIMER15
+ihwconnect -instancename ni16 -netport       INT_NI  -net intNI16
+ihwconnect -instancename timer16 -netport       INT_TIMER  -net intTIMER16
+ihwconnect -instancename ni17 -netport       INT_NI  -net intNI17
+ihwconnect -instancename timer17 -netport       INT_TIMER  -net intTIMER17
 ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse
 
 ihwaddbus -instancename syncBus -addresswidth 32
@@ -594,6 +874,12 @@ ihwaddbridge -instancename bridge8
 ihwaddbridge -instancename bridge9
 ihwaddbridge -instancename bridge10
 ihwaddbridge -instancename bridge11
+ihwaddbridge -instancename bridge12
+ihwaddbridge -instancename bridge13
+ihwaddbridge -instancename bridge14
+ihwaddbridge -instancename bridge15
+ihwaddbridge -instancename bridge16
+ihwaddbridge -instancename bridge17
 
 ihwconnect -bus cpu0Bus -busslaveport ps -instancename bridge0 -loaddress 0x80000014 -hiaddress 0x8000001B
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge0 -loaddress 0x00000000 -hiaddress 0x00000007
@@ -619,6 +905,18 @@ ihwconnect -bus cpu10Bus -busslaveport ps -instancename bridge10 -loaddress 0x80
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge10 -loaddress 0x00000000 -hiaddress 0x00000007
 ihwconnect -bus cpu11Bus -busslaveport ps -instancename bridge11 -loaddress 0x80000014 -hiaddress 0x8000001B
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge11 -loaddress 0x00000000 -hiaddress 0x00000007
+ihwconnect -bus cpu12Bus -busslaveport ps -instancename bridge12 -loaddress 0x80000014 -hiaddress 0x8000001B
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge12 -loaddress 0x00000000 -hiaddress 0x00000007
+ihwconnect -bus cpu13Bus -busslaveport ps -instancename bridge13 -loaddress 0x80000014 -hiaddress 0x8000001B
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge13 -loaddress 0x00000000 -hiaddress 0x00000007
+ihwconnect -bus cpu14Bus -busslaveport ps -instancename bridge14 -loaddress 0x80000014 -hiaddress 0x8000001B
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge14 -loaddress 0x00000000 -hiaddress 0x00000007
+ihwconnect -bus cpu15Bus -busslaveport ps -instancename bridge15 -loaddress 0x80000014 -hiaddress 0x8000001B
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge15 -loaddress 0x00000000 -hiaddress 0x00000007
+ihwconnect -bus cpu16Bus -busslaveport ps -instancename bridge16 -loaddress 0x80000014 -hiaddress 0x8000001B
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge16 -loaddress 0x00000000 -hiaddress 0x00000007
+ihwconnect -bus cpu17Bus -busslaveport ps -instancename bridge17 -loaddress 0x80000014 -hiaddress 0x8000001B
+ihwconnect -bus syncBus -busmasterport pm -instancename bridge17 -loaddress 0x00000000 -hiaddress 0x00000007
 
 ihwaddperipheral -instancename iterator -modelfile peripheral/iteratorMonoTrigger/pse.pse
 ihwconnect -instancename iterator -busslaveport iteratorReg -bus cpuIteratorBus -loaddress 0x90000000 -hiaddress 0x90000003
@@ -659,4 +957,22 @@ ihwconnect -instancename iterator -packetnetport iterationPort10 -packetnet iter
 ihwaddpacketnet -instancename iteration_11
 ihwconnect -instancename router11 -packetnetport iterationsPort -packetnet iteration_11
 ihwconnect -instancename iterator -packetnetport iterationPort11 -packetnet iteration_11
+ihwaddpacketnet -instancename iteration_12
+ihwconnect -instancename router12 -packetnetport iterationsPort -packetnet iteration_12
+ihwconnect -instancename iterator -packetnetport iterationPort12 -packetnet iteration_12
+ihwaddpacketnet -instancename iteration_13
+ihwconnect -instancename router13 -packetnetport iterationsPort -packetnet iteration_13
+ihwconnect -instancename iterator -packetnetport iterationPort13 -packetnet iteration_13
+ihwaddpacketnet -instancename iteration_14
+ihwconnect -instancename router14 -packetnetport iterationsPort -packetnet iteration_14
+ihwconnect -instancename iterator -packetnetport iterationPort14 -packetnet iteration_14
+ihwaddpacketnet -instancename iteration_15
+ihwconnect -instancename router15 -packetnetport iterationsPort -packetnet iteration_15
+ihwconnect -instancename iterator -packetnetport iterationPort15 -packetnet iteration_15
+ihwaddpacketnet -instancename iteration_16
+ihwconnect -instancename router16 -packetnetport iterationsPort -packetnet iteration_16
+ihwconnect -instancename iterator -packetnetport iterationPort16 -packetnet iteration_16
+ihwaddpacketnet -instancename iteration_17
+ihwconnect -instancename router17 -packetnetport iterationsPort -packetnet iteration_17
+ihwconnect -instancename iterator -packetnetport iterationPort17 -packetnet iteration_17
 
