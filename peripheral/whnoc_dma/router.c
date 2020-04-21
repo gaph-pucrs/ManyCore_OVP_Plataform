@@ -196,6 +196,7 @@ unsigned int XYrouting(unsigned int current, unsigned int dest){
 // Updates the buffer status
 void bufferStatusUpdate(unsigned int port){
     unsigned int status = 0;
+    bhmMessage("INFO", "STATUSUPDT", "Enviando para packetnet port %d\n", port);
     // -- No available space in this buffer!
     if ((first[port] == 0 && last[port] == (BUFFER_SIZE-1)) || (first[port] == (last[port]+1))){
         status = STALL;
