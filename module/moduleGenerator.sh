@@ -109,9 +109,9 @@ echo "ihwaddpacketnet -instancename data_0_0_TEA" >> module.op.tcl
 echo "ihwaddpacketnet -instancename ctrl_0_0_TEA" >> module.op.tcl
 
 # Creates all ports to make the connection between routers (data and control)
-for i in $(seq 0 $(($Y-1)));
+for i in $(seq 0 $(($X-1)));
 	do
-	for j in $(seq 0 $(($X-1)));
+	for j in $(seq 0 $(($Y-1)));
 	do	
 		echo "ihwaddpacketnet -instancename data_"$i"_"$j"_L" >> module.op.tcl
 		echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_L" >> module.op.tcl
@@ -159,9 +159,9 @@ echo "ihwconnect -instancename tea -packetnetport portControl -packetnet ctrl_0_
 cont=0;
 bordaX=$(($X-1))
 bordaY=$(($Y-1))
-for i in $(seq 0 $bordaY);
+for i in $(seq 0 $bordaX);
 	do
-	for j in $(seq 0 $bordaX);
+	for j in $(seq 0 $bordaY);
 	do
 		echo "ihwconnect -instancename router"$cont" -packetnetport portDataLocal -packetnet data_"$i"_"$j"_L" >> module.op.tcl
 		echo "ihwconnect -instancename ni"$cont" -packetnetport dataPort -packetnet data_"$i"_"$j"_L" >> module.op.tcl
