@@ -169,11 +169,11 @@ echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "PPM_SAVE_STATE_FN(peripheralSaveState) {" >> iteratorMonoTrigger.igen.c
-echo "    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");" >> iteratorMonoTrigger.igen.c
+echo "    bhmMessage(\"E\", \"PPM_RSNI\", \"Model does not implement save/restore\");" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "PPM_RESTORE_STATE_FN(peripheralRestoreState) {" >> iteratorMonoTrigger.igen.c
-echo "    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");" >> iteratorMonoTrigger.igen.c
+echo "    bhmMessage(\"E\", \"PPM_RSNI\", \"Model does not implement save/restore\");" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "///////////////////////////////////// Main /////////////////////////////////////" >> iteratorMonoTrigger.igen.c
