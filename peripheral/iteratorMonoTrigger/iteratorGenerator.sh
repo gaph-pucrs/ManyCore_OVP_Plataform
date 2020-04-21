@@ -76,7 +76,7 @@ echo "" >> iteratorMonoTrigger.igen.c
 echo "////////////////////////////// Functions ///////////////////////////////////////" >> iteratorMonoTrigger.igen.c
 echo "/* Make a callback to each router */" >> iteratorMonoTrigger.igen.c
 echo "void runIterations(){  " >> iteratorMonoTrigger.igen.c
-for i in $(seq 1 $N)
+for i in $(seq 0 $N)
 do
     echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
     echo "    ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
@@ -150,7 +150,7 @@ echo "    // YOUR CODE HERE (iterateWrite)" >> iteratorMonoTrigger.igen.c
 echo "    *(Uns32*)user = data;" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
-for i in $(seq 1 $N)
+for i in $(seq 0 $N)
 do
     echo "PPM_PACKETNET_CB(iteration"$i") {" >> iteratorMonoTrigger.igen.c
     echo "    // YOUR CODE HERE (iteration"$i")" >> iteratorMonoTrigger.igen.c
