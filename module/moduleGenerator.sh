@@ -157,8 +157,8 @@ echo "ihwconnect -instancename tea -packetnetport portControl -packetnet ctrl_0_
 
 # Connects each router to its neighbor
 cont=0;
-bordaX=$(($X-1))
-bordaY=$(($Y-1))
+bordaX=$(($X-1));
+bordaY=$(($Y-1));
 for i in $(seq 0 $bordaX);
 	do
 	for j in $(seq 0 $bordaY);
@@ -173,7 +173,7 @@ for i in $(seq 0 $bordaX);
 			if [ $(($i%2)) = 0 ];
 			then 
 
-				if [ $j -lt $bordaX ];
+				if [ $i -lt $bordaX ]; # there is connection to the EAST
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataEast -packetnet data_"$i"_"$j"_E" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont+1))" -packetnetport portDataWest -packetnet data_"$i"_"$j"_E" >> module.op.tcl
@@ -183,7 +183,7 @@ for i in $(seq 0 $bordaX);
 				fi
 
 
-				if [ $j -gt 0 ];
+				if [ $i -gt 0 ]; # there is connection to the WEST
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataWest -packetnet data_"$i"_"$j"_W" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont-1))" -packetnetport portDataEast -packetnet data_"$i"_"$j"_W" >> module.op.tcl
@@ -193,7 +193,7 @@ for i in $(seq 0 $bordaX);
 				fi
 
 
-				if [ $i -lt $bordaY ];
+				if [ $j -lt $bordaY ]; # there is connection to NORTH
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_N" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont+$X))" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_N" >> module.op.tcl
@@ -203,7 +203,7 @@ for i in $(seq 0 $bordaX);
 				fi
 
 
-				if [ $i -gt 0 ];
+				if [ $j -gt 0 ]; # there is connection to SOUTH
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_S" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont-$X))" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_S" >> module.op.tcl
@@ -218,7 +218,7 @@ for i in $(seq 0 $bordaX);
 			if [ $(($i%2)) != 0 ];
 			then
 
-				if [ $j -lt $bordaX ];
+				if [ $i -lt $bordaX ];
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataEast -packetnet data_"$i"_"$j"_E" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont+1))" -packetnetport portDataWest -packetnet data_"$i"_"$j"_E" >> module.op.tcl
@@ -228,7 +228,7 @@ for i in $(seq 0 $bordaX);
 				fi
 
 
-				if [ $j -gt 0 ];
+				if [ $i -gt 0 ];
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataWest -packetnet data_"$i"_"$j"_W" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont-1))" -packetnetport portDataEast -packetnet data_"$i"_"$j"_W" >> module.op.tcl
@@ -238,7 +238,7 @@ for i in $(seq 0 $bordaX);
 				fi
 
 
-				if [ $i -lt $bordaY ];
+				if [ $j -lt $bordaY ];
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_N" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont+$X))" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_N" >> module.op.tcl
@@ -248,7 +248,7 @@ for i in $(seq 0 $bordaX);
 				fi
 
 
-				if [ $i -gt 0 ];
+				if [ $j -gt 0 ];
 				then
 					echo "ihwconnect -instancename router"$cont" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_S" >> module.op.tcl
 					echo "ihwconnect -instancename router"$(($cont-$X))" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_S" >> module.op.tcl
