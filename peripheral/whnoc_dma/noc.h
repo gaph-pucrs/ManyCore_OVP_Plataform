@@ -36,8 +36,8 @@
 
 // NoC Dimensions
 #define DIM_X 3
-#define DIM_Y 3
-#define N_PES 9
+#define DIM_Y 4
+#define N_PES 12
 
 //Ticks
 #define ITERATION                0x5555

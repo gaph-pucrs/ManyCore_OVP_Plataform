@@ -1,4 +1,3 @@
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
@@ -23,8 +22,6 @@ unsigned long long int iteration;
 /* Make a callback to each router */
 void runIterations(){  
     iteration = iterationN;
-    ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
-    iteration = iterationN;
     ppmPacketnetWrite(handles.iterationPort1, &iteration, sizeof(iteration));
     iteration = iterationN;
     ppmPacketnetWrite(handles.iterationPort2, &iteration, sizeof(iteration));
@@ -40,12 +37,18 @@ void runIterations(){
     ppmPacketnetWrite(handles.iterationPort7, &iteration, sizeof(iteration));
     iteration = iterationN;
     ppmPacketnetWrite(handles.iterationPort8, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort9, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort10, &iteration, sizeof(iteration));
+    iteration = iterationN;
+    ppmPacketnetWrite(handles.iterationPort11, &iteration, sizeof(iteration));
 }
 
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
 // Test this variable to determine what diagnostics to output.
-// eg. if (diagnosticLevel >= 1) bhmMessage("I", "iteratorMonoTrigger", "Example");
+// eg. if (diagnosticLevel >= 1) bhmMessage(I, iteratorMonoTrigger, Example);
 //     Predefined macros PSE_DIAG_LOW, PSE_DIAG_MEDIUM and PSE_DIAG_HIGH may be used
 Uns32 diagnosticLevel;
 
@@ -109,10 +112,6 @@ PPM_REG_WRITE_CB(iterateWrite) {
     *(Uns32*)user = data;
 }
 
-PPM_PACKETNET_CB(iteration0) {
-    // YOUR CODE HERE (iteration1)
-}
-
 PPM_PACKETNET_CB(iteration1) {
     // YOUR CODE HERE (iteration1)
 }
@@ -145,6 +144,18 @@ PPM_PACKETNET_CB(iteration8) {
     // YOUR CODE HERE (iteration8)
 }
 
+PPM_PACKETNET_CB(iteration9) {
+    // YOUR CODE HERE (iteration9)
+}
+
+PPM_PACKETNET_CB(iteration10) {
+    // YOUR CODE HERE (iteration10)
+}
+
+PPM_PACKETNET_CB(iteration11) {
+    // YOUR CODE HERE (iteration11)
+}
+
 PPM_CONSTRUCTOR_CB(constructor) {
     // YOUR CODE HERE (pre constructor)
     periphConstructor();
@@ -157,11 +168,11 @@ PPM_DESTRUCTOR_CB(destructor) {
 
 
 PPM_SAVE_STATE_FN(peripheralSaveState) {
-    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+    bhmMessage(E, PPM_RSNI, Model does not implement save/restore);
 }
 
 PPM_RESTORE_STATE_FN(peripheralRestoreState) {
-    bhmMessage("E", "PPM_RSNI", "Model does not implement save/restore");
+    bhmMessage(E, PPM_RSNI, Model does not implement save/restore);
 }
 
 ///////////////////////////////////// Main /////////////////////////////////////
@@ -181,4 +192,3 @@ int main(int argc, char *argv[]) {
     destructor();
     return 0;
 }
-
