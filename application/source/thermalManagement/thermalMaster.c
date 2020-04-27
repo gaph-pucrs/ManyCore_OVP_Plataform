@@ -21,7 +21,7 @@ int main(int argc, char **argv)
         // Aguarda os pacotes de energia dos PEs
         for(i=0;i<DIM_X;i++){
             for(j=0;j<DIM_Y;j++){
-                ReceiveRaw(theMsg);
+                ReceiveRaw(&theMsg);
                 ordem[(j*DIM_X)+i] = theMsg.msg[0];
             }
         }
