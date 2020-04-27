@@ -2,5 +2,9 @@ apps:
  - name: pingpong
    cluster: 0
    static_mapping:
-    ping: [0,0]
+    ping: [0,1]
     pong: [2,2]
+ - name: thermalManagement
+   cluster: 0
+   static_mapping:
+    thermalMaster: [0,0]

@@ -86,18 +86,19 @@ volatile unsigned int *clockGating_flag =   CLK_GATING;
 #define PI_SEND_TIME        2
 #define PI_SERVICE          3
 #define PI_REQUESTER        4
-#define PI_I_BRANCH         4
-#define PI_I_ARITH          5
-#define PI_I_JUMP           6
-#define PI_I_MOVE           7
-#define PI_I_LOAD           8
-#define PI_I_STORE          9
-#define PI_I_SHIFT          10
-#define PI_I_NOP            11
-#define PI_I_LOGICAL        12
-#define PI_I_MULTDIV        13
-#define PI_I_WEIRD          14
-#define PI_I_MYADDR         15
+#define PI_I_MYADDR         4
+#define PI_I_BRANCH         5
+#define PI_I_ARITH          6
+#define PI_I_JUMP           7
+#define PI_I_MOVE           8
+#define PI_I_LOAD           9
+#define PI_I_STORE          10
+#define PI_I_SHIFT          11
+#define PI_I_NOP            12
+#define PI_I_LOGICAL        13
+#define PI_I_MULTDIV        14
+#define PI_I_WEIRD          15
+
 
 
 
@@ -131,6 +132,7 @@ void OVP_init();
 // Functions
 void SendMessage(message *theMessage, unsigned int destination);
 void ReceiveMessage(message *theMessage, unsigned int from);
+void ReceiveRaw(message *theMessage);
 void ResetExecutedInstructions();
 void ReportExecutedInstructions();
 void FinishApplication();
@@ -164,12 +166,13 @@ void interruptHandler_timer(void);
 void interruptHandler_timer(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
-    executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST; // Send the packet to the router 0,0 in the port west
+    executedInstPacket[PI_DESTINATION] = makeAddress(0,0) //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
     executedInstPacket[PI_SEND_TIME] = tsend;
     executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
+    executedInstPacket[PI_I_MYADDR] = *myAddress;
     executedInstPacket[PI_I_BRANCH] = *branchCounter;
     executedInstPacket[PI_I_ARITH] = *arithCounter;
     executedInstPacket[PI_I_JUMP] = *jumpCounter;
@@ -181,7 +184,6 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;
-    executedInstPacket[PI_I_MYADDR] = *myAddress;
     if(*NIcmd == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
@@ -196,7 +198,7 @@ void interruptHandler_NI(void) {
     int requester;
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
-        if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY){
+        if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
             //LOG("De msg\n");
             incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
             receivingActive = 1; // Inform the index where the received packet is stored
@@ -346,6 +348,26 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     // Sends the request to the transmitter
     receivingActive = 0;
     requestMsg(from);
+    *clockGating_flag = TRUE;
+    while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    *clockGating_flag = FALSE;
+    // Alocate the packet message inside the structure
+    theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
+    // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
+    for(i=0;i<theMessage->size;i++){
+        theMessage->msg[i] = incomingPacket[i+4];
+    }
+    receivingActive = 0;
+    // Inform the NI a packet was read
+    *NIcmd = DONE;
+}
+
+///////////////////////////////////////////////////////////////////
+/* Receives a RAW message */
+void ReceiveRaw(message *theMessage){
+    unsigned int i;
+    // Sends the request to the transmitter
+    receivingActive = 0;
     *clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
