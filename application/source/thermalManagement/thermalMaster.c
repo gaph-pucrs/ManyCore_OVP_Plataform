@@ -16,14 +16,21 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int i, j;
-
-    // Aguarda os pacotes de energia dos PEs
-    for(i=0;i<DIM_X;i++){
-        for(j=0;j<DIM_Y;j++){
-            ReceiveRaw(theMsg);
+    int ordem[DIM_X*DIM_Y];
+    while(1){
+        // Aguarda os pacotes de energia dos PEs
+        for(i=0;i<DIM_X;i++){
+            for(j=0;j<DIM_Y;j++){
+                ReceiveRaw(theMsg);
+                ordem[(j*DIM_X)+i] = theMsg.msg[0];
+            }
+        }
+        LOG("Todos os pacotes foram recebidos!!!\n");
+        for(i=0;i<DIM_X*DIM_Y;i++){
+            LOG("%d > %x\n",i,ordem[i]);
         }
     }
-
+    
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

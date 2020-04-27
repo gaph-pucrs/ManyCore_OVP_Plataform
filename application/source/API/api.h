@@ -198,6 +198,7 @@ void interruptHandler_NI(void) {
     int requester;
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
+        /*IMPORTANTE: NO FUTURO O INCOMINGPACKET PRECISA SER DUPLICADO - CASO CHEGUE UM PACOTE E O PACOTE ANTERIOR AINDA NAO FOI LIDO */
         if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
             //LOG("De msg\n");
             incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
