@@ -118,7 +118,7 @@ PPM_PACKETNET_CB(dataUpdate) {
     }
     else if(flit_in_counter > 5){ // Power information
         power[y_data_counter][x_data_counter] = htonl(newFlit);
-        if(x_data_counter = getXpos(source_pe)+CLUSTER_X-1){ // ATUAL_X = ORIG_X + TAM_CLUSTER
+        if(x_data_counter == getXpos(source_pe)+CLUSTER_X-1){ // ATUAL_X = ORIG_X + TAM_CLUSTER
             x_data_counter = getXpos(source_pe);
             y_data_counter++;
         }
