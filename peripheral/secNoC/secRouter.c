@@ -158,7 +158,7 @@ void bufferStatusUpdate(unsigned int port){
     /*if (port == LOCAL){
         ppmPacketnetWrite(handles.portControlLocal, &status, sizeof(status));
     }*/
-    else if (port == EAST){
+    if (port == EAST){
         ppmPacketnetWrite(handles.portControlEast, &status, sizeof(status));
     }
     else if (port == WEST){
