@@ -155,9 +155,9 @@ void bufferStatusUpdate(unsigned int port){
     }
 
     // Transmitt the new buffer status to the neighbor
-    if (port == LOCAL){
+    /*if (port == LOCAL){
         ppmPacketnetWrite(handles.portControlLocal, &status, sizeof(status));
-    }
+    }*/
     else if (port == EAST){
         ppmPacketnetWrite(handles.portControlEast, &status, sizeof(status));
     }
@@ -446,7 +446,7 @@ void transmitt(){
                             flit = bufferPop(port);
                             //bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
+                           // ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                         }
                     }
 
