@@ -1,22 +1,3 @@
-/*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied.
- *
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -67,12 +48,14 @@ Uns8 portDataWest_pnsd[4];
 Uns8 portDataNorth_pnsd[4];
 Uns8 portDataSouth_pnsd[4];
 Uns8 portDataLocal_pnsd[4];
+Uns8 portSecNoC_pnsd[4];
 Uns8 iterationsPort_pnsd[8];
 Uns8 portControlEast_pnsd[8];
 Uns8 portControlWest_pnsd[8];
 Uns8 portControlNorth_pnsd[8];
 Uns8 portControlSouth_pnsd[8];
 Uns8 portControlLocal_pnsd[8];
+Uns8 portControlSecNoc_pnsd[8];
 
 static ppmPacketnetPort packetnetPorts[] = {
     {
@@ -123,6 +106,16 @@ static ppmPacketnetPort packetnetPorts[] = {
         .sharedDataBytes = 4,
         .handlePtr       = &handles.portDataLocal,
         .packetnetCB     = dataLocal,
+        .userData        = (void*)0
+    },
+    {
+        .name            = "portSecNoC",
+        .mustBeConnected = 0,
+        .description     = 0,
+        .sharedData      = portSecNoC_pnsd,
+        .sharedDataBytes = 4,
+        .handlePtr       = &handles.portSecNoC,
+        .packetnetCB     = secNoC,
         .userData        = (void*)0
     },
     {
@@ -178,11 +171,21 @@ static ppmPacketnetPort packetnetPorts[] = {
     {
         .name            = "portControlLocal",
         .mustBeConnected = 0,
-        .description     = "Interrupt Request",
+        .description     = 0,
         .sharedData      = portControlLocal_pnsd,
         .sharedDataBytes = 8,
         .handlePtr       = &handles.portControlLocal,
         .packetnetCB     = controlLocal,
+        .userData        = (void*)0
+    },
+    {
+        .name            = "portControlSecNoc",
+        .mustBeConnected = 0,
+        .description     = "Interrupt Request",
+        .sharedData      = portControlSecNoc_pnsd,
+        .sharedDataBytes = 8,
+        .handlePtr       = &handles.portControlSecNoc,
+        .packetnetCB     = controlSecNoc,
         .userData        = (void*)0
     },
     { 0 }
