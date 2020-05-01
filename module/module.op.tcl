@@ -202,30 +202,48 @@ ihwaddperipheral -instancename tea -modelfile peripheral/tea/pse.pse
 ihwaddperipheral -instancename router0 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni0 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer0 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter0 -modelfile peripheral/secNoC/pse.pse
+
+
 ihwaddperipheral -instancename router1 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni1 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer1 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter1 -modelfile peripheral/secNoC/pse.pse
+
 ihwaddperipheral -instancename router2 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni2 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer2 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter2 -modelfile peripheral/secNoC/pse.pse
+
 ihwaddperipheral -instancename router3 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni3 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer3 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter3 -modelfile peripheral/secNoC/pse.pse
+
 ihwaddperipheral -instancename router4 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni4 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer4 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter4 -modelfile peripheral/secNoC/pse.pse
+
 ihwaddperipheral -instancename router5 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni5 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer5 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter5 -modelfile peripheral/secNoC/pse.pse
+
 ihwaddperipheral -instancename router6 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni6 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer6 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter6 -modelfile peripheral/secNoC/pse.pse
+
 ihwaddperipheral -instancename router7 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni7 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer7 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter7 -modelfile peripheral/secNoC/pse.pse
+
 ihwaddperipheral -instancename router8 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni8 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer8 -modelfile peripheral/timer/pse.pse
+ihwaddperipheral -instancename secRouter8 -modelfile peripheral/secNoC/pse.pse
 
 ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni0 -busslaveport DMAC -bus cpu0Bus -loaddress 0x80000004 -hiaddress 0x8000000B
@@ -334,10 +352,169 @@ ihwaddpacketnet -instancename ctrl_2_2_W
 ihwaddpacketnet -instancename ctrl_2_2_N
 ihwaddpacketnet -instancename ctrl_2_2_S
 
+ihwaddpacketnet -instancename ctrl_0_0_safeNoC
+ihwaddpacketnet -instancename data_0_0_safeNoC
+ihwaddpacketnet -instancename ctrl_0_1_safeNoC
+ihwaddpacketnet -instancename data_0_1_safeNoC
+ihwaddpacketnet -instancename ctrl_0_2_safeNoC
+ihwaddpacketnet -instancename data_0_2_safeNoC
+ihwaddpacketnet -instancename ctrl_1_0_safeNoC
+ihwaddpacketnet -instancename data_1_0_safeNoC
+ihwaddpacketnet -instancename ctrl_1_1_safeNoC
+ihwaddpacketnet -instancename data_1_1_safeNoC
+ihwaddpacketnet -instancename ctrl_1_2_safeNoC
+ihwaddpacketnet -instancename data_1_2_safeNoC
+ihwaddpacketnet -instancename ctrl_2_0_safeNoC
+ihwaddpacketnet -instancename data_2_0_safeNoC
+ihwaddpacketnet -instancename ctrl_2_1_safeNoC
+ihwaddpacketnet -instancename data_2_1_safeNoC
+ihwaddpacketnet -instancename ctrl_2_2_safeNoC
+ihwaddpacketnet -instancename data_2_2_safeNoC
+
+
+ihwconnect -instancename router0 -packetnetport portSecNoC -packetnet data_0_0_safeNoC
+ihwconnect -instancename router0 -packetnetport portControlSecNoc -packetnet ctrl_0_0_safeNoC
+ihwconnect -instancename secRouter0 -packetnetport portUnsafeNoC -packetnet data_0_0_safeNoC
+ihwconnect -instancename secRouter0 -packetnetport portControlUnsafeNoC -packetnet ctrl_0_0_safeNoC
+
+ihwconnect -instancename router1 -packetnetport portSecNoC -packetnet data_0_1_safeNoC
+ihwconnect -instancename router1 -packetnetport portControlSecNoc -packetnet ctrl_0_1_safeNoC
+ihwconnect -instancename secRouter1 -packetnetport portUnsafeNoC -packetnet data_0_1_safeNoC
+ihwconnect -instancename secRouter1 -packetnetport portControlUnsafeNoC -packetnet ctrl_0_1_safeNoC
+
+ihwconnect -instancename router2 -packetnetport portSecNoC -packetnet data_0_2_safeNoC
+ihwconnect -instancename router2 -packetnetport portControlSecNoc -packetnet ctrl_0_2_safeNoC
+ihwconnect -instancename secRouter2 -packetnetport portUnsafeNoC -packetnet data_0_2_safeNoC
+ihwconnect -instancename secRouter2 -packetnetport portControlUnsafeNoC -packetnet ctrl_0_2_safeNoC
+
+ihwconnect -instancename router3 -packetnetport portSecNoC -packetnet data_1_0_safeNoC
+ihwconnect -instancename router3 -packetnetport portControlSecNoc -packetnet ctrl_1_0_safeNoC
+ihwconnect -instancename secRouter3 -packetnetport portUnsafeNoC -packetnet data_1_0_safeNoC
+ihwconnect -instancename secRouter3 -packetnetport portControlUnsafeNoC -packetnet ctrl_1_0_safeNoC
+
+ihwconnect -instancename router4 -packetnetport portSecNoC -packetnet data_1_1_safeNoC
+ihwconnect -instancename router4 -packetnetport portControlSecNoc -packetnet ctrl_1_1_safeNoC
+ihwconnect -instancename secRouter4 -packetnetport portUnsafeNoC -packetnet data_1_1_safeNoC
+ihwconnect -instancename secRouter4 -packetnetport portControlUnsafeNoC -packetnet ctrl_1_1_safeNoC
+
+ihwconnect -instancename router5 -packetnetport portSecNoC -packetnet data_1_2_safeNoC
+ihwconnect -instancename router5 -packetnetport portControlSecNoc -packetnet ctrl_1_2_safeNoC
+ihwconnect -instancename secRouter5 -packetnetport portUnsafeNoC -packetnet data_1_2_safeNoC
+ihwconnect -instancename secRouter5 -packetnetport portControlUnsafeNoC -packetnet ctrl_1_2_safeNoC
+
+ihwconnect -instancename router6 -packetnetport portSecNoC -packetnet data_2_0_safeNoC
+ihwconnect -instancename router6 -packetnetport portControlSecNoc -packetnet ctrl_2_0_safeNoC
+ihwconnect -instancename secRouter6 -packetnetport portUnsafeNoC -packetnet data_2_0_safeNoC
+ihwconnect -instancename secRouter6 -packetnetport portControlUnsafeNoC -packetnet ctrl_2_0_safeNoC
+
+ihwconnect -instancename router7 -packetnetport portSecNoC -packetnet data_2_1_safeNoC
+ihwconnect -instancename router7 -packetnetport portControlSecNoc -packetnet ctrl_2_1_safeNoC
+ihwconnect -instancename secRouter7 -packetnetport portUnsafeNoC -packetnet data_2_1_safeNoC
+ihwconnect -instancename secRouter7 -packetnetport portControlUnsafeNoC -packetnet ctrl_2_1_safeNoC
+
+ihwconnect -instancename router8 -packetnetport portSecNoC -packetnet data_2_2_safeNoC
+ihwconnect -instancename router8 -packetnetport portControlSecNoc -packetnet ctrl_2_2_safeNoC
+ihwconnect -instancename secRouter8 -packetnetport portUnsafeNoC -packetnet data_2_2_safeNoC
+ihwconnect -instancename secRouter8 -packetnetport portControlUnsafeNoC -packetnet ctrl_2_2_safeNoC
+
+ihwaddpacketnet -instancename data_0_0_E_secNoC
+ihwaddpacketnet -instancename data_0_0_W_secNoC
+ihwaddpacketnet -instancename data_0_0_N_secNoC
+ihwaddpacketnet -instancename data_0_0_S_secNoC
+ihwaddpacketnet -instancename ctrl_0_0_E_secNoC
+ihwaddpacketnet -instancename ctrl_0_0_W_secNoC
+ihwaddpacketnet -instancename ctrl_0_0_N_secNoC
+ihwaddpacketnet -instancename ctrl_0_0_S_secNoC
+ihwaddpacketnet -instancename data_0_2_E_secNoC
+ihwaddpacketnet -instancename data_0_2_W_secNoC
+ihwaddpacketnet -instancename data_0_2_N_secNoC
+ihwaddpacketnet -instancename data_0_2_S_secNoC
+ihwaddpacketnet -instancename ctrl_0_2_E_secNoC
+ihwaddpacketnet -instancename ctrl_0_2_W_secNoC
+ihwaddpacketnet -instancename ctrl_0_2_N_secNoC
+ihwaddpacketnet -instancename ctrl_0_2_S_secNoC
+ihwaddpacketnet -instancename data_1_1_E_secNoC
+ihwaddpacketnet -instancename data_1_1_W_secNoC
+ihwaddpacketnet -instancename data_1_1_N_secNoC
+ihwaddpacketnet -instancename data_1_1_S_secNoC
+ihwaddpacketnet -instancename ctrl_1_1_E_secNoC
+ihwaddpacketnet -instancename ctrl_1_1_W_secNoC
+ihwaddpacketnet -instancename ctrl_1_1_N_secNoC
+ihwaddpacketnet -instancename ctrl_1_1_S_secNoC
+ihwaddpacketnet -instancename data_2_0_E_secNoC
+ihwaddpacketnet -instancename data_2_0_W_secNoC
+ihwaddpacketnet -instancename data_2_0_N_secNoC
+ihwaddpacketnet -instancename data_2_0_S_secNoC
+ihwaddpacketnet -instancename ctrl_2_0_E_secNoC
+ihwaddpacketnet -instancename ctrl_2_0_W_secNoC
+ihwaddpacketnet -instancename ctrl_2_0_N_secNoC
+ihwaddpacketnet -instancename ctrl_2_0_S_secNoC
+ihwaddpacketnet -instancename data_2_2_E_secNoC
+ihwaddpacketnet -instancename data_2_2_W_secNoC
+ihwaddpacketnet -instancename data_2_2_N_secNoC
+ihwaddpacketnet -instancename data_2_2_S_secNoC
+ihwaddpacketnet -instancename ctrl_2_2_E_secNoC
+ihwaddpacketnet -instancename ctrl_2_2_W_secNoC
+ihwaddpacketnet -instancename ctrl_2_2_N_secNoC
+ihwaddpacketnet -instancename ctrl_2_2_S_secNoC
+
+ihwconnect -instancename secRouter0 -packetnetport portDataEast -packetnet data_0_0_E_secNoC
+ihwconnect -instancename secRouter1 -packetnetport portDataWest -packetnet data_0_0_E_secNoC
+ihwconnect -instancename secRouter0 -packetnetport portControlEast -packetnet ctrl_0_0_E_secNoC
+ihwconnect -instancename secRouter1 -packetnetport portControlWest -packetnet ctrl_0_0_E_secNoC
+ihwconnect -instancename secRouter0 -packetnetport portDataNorth -packetnet data_0_0_N_secNoC
+ihwconnect -instancename secRouter3 -packetnetport portDataSouth -packetnet data_0_0_N_secNoC
+ihwconnect -instancename secRouter0 -packetnetport portControlNorth -packetnet ctrl_0_0_N_secNoC
+ihwconnect -instancename secRouter3 -packetnetport portControlSouth -packetnet ctrl_0_0_N_secNoC
+ihwconnect -instancename secRouter2 -packetnetport portDataWest -packetnet data_0_2_W_secNoC
+ihwconnect -instancename secRouter1 -packetnetport portDataEast -packetnet data_0_2_W_secNoC
+ihwconnect -instancename secRouter2 -packetnetport portControlWest -packetnet ctrl_0_2_W_secNoC
+ihwconnect -instancename secRouter1 -packetnetport portControlEast -packetnet ctrl_0_2_W_secNoC
+ihwconnect -instancename secRouter2 -packetnetport portDataNorth -packetnet data_0_2_N_secNoC
+ihwconnect -instancename secRouter5 -packetnetport portDataSouth -packetnet data_0_2_N_secNoC
+ihwconnect -instancename secRouter2 -packetnetport portControlNorth -packetnet ctrl_0_2_N_secNoC
+ihwconnect -instancename secRouter5 -packetnetport portControlSouth -packetnet ctrl_0_2_N_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portDataEast -packetnet data_1_1_E_secNoC
+ihwconnect -instancename secRouter5 -packetnetport portDataWest -packetnet data_1_1_E_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portControlEast -packetnet ctrl_1_1_E_secNoC
+ihwconnect -instancename secRouter5 -packetnetport portControlWest -packetnet ctrl_1_1_E_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portDataWest -packetnet data_1_1_W_secNoC
+ihwconnect -instancename secRouter3 -packetnetport portDataEast -packetnet data_1_1_W_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portControlWest -packetnet ctrl_1_1_W_secNoC
+ihwconnect -instancename secRouter3 -packetnetport portControlEast -packetnet ctrl_1_1_W_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portDataNorth -packetnet data_1_1_N_secNoC
+ihwconnect -instancename secRouter7 -packetnetport portDataSouth -packetnet data_1_1_N_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portControlNorth -packetnet ctrl_1_1_N_secNoC
+ihwconnect -instancename secRouter7 -packetnetport portControlSouth -packetnet ctrl_1_1_N_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portDataSouth -packetnet data_1_1_S_secNoC
+ihwconnect -instancename secRouter1 -packetnetport portDataNorth -packetnet data_1_1_S_secNoC
+ihwconnect -instancename secRouter4 -packetnetport portControlSouth -packetnet ctrl_1_1_S_secNoC
+ihwconnect -instancename secRouter1 -packetnetport portControlNorth -packetnet ctrl_1_1_S_secNoC
+ihwconnect -instancename secRouter6 -packetnetport portDataEast -packetnet data_2_0_E_secNoC
+ihwconnect -instancename secRouter7 -packetnetport portDataWest -packetnet data_2_0_E_secNoC
+ihwconnect -instancename secRouter6 -packetnetport portControlEast -packetnet ctrl_2_0_E_secNoC
+ihwconnect -instancename secRouter7 -packetnetport portControlWest -packetnet ctrl_2_0_E_secNoC
+ihwconnect -instancename secRouter6 -packetnetport portDataSouth -packetnet data_2_0_S_secNoC
+ihwconnect -instancename secRouter3 -packetnetport portDataNorth -packetnet data_2_0_S_secNoC
+ihwconnect -instancename secRouter6 -packetnetport portControlSouth -packetnet ctrl_2_0_S_secNoC
+ihwconnect -instancename secRouter3 -packetnetport portControlNorth -packetnet ctrl_2_0_S_secNoC
+ihwconnect -instancename secRouter8 -packetnetport portDataWest -packetnet data_2_2_W_secNoC
+ihwconnect -instancename secRouter7 -packetnetport portDataEast -packetnet data_2_2_W_secNoC
+ihwconnect -instancename secRouter8 -packetnetport portControlWest -packetnet ctrl_2_2_W_secNoC
+ihwconnect -instancename secRouter7 -packetnetport portControlEast -packetnet ctrl_2_2_W_secNoC
+ihwconnect -instancename secRouter8 -packetnetport portDataSouth -packetnet data_2_2_S_secNoC
+ihwconnect -instancename secRouter5 -packetnetport portDataNorth -packetnet data_2_2_S_secNoC
+ihwconnect -instancename secRouter8 -packetnetport portControlSouth -packetnet ctrl_2_2_S_secNoC
+ihwconnect -instancename secRouter5 -packetnetport portControlNorth -packetnet ctrl_2_2_S_secNoC
+
+
+
+
 ihwconnect -instancename router0 -packetnetport portDataWest -packetnet data_0_0_TEA
 ihwconnect -instancename router0 -packetnetport portControlWest -packetnet ctrl_0_0_TEA
 ihwconnect -instancename tea -packetnetport portData -packetnet data_0_0_TEA
 ihwconnect -instancename tea -packetnetport portControl -packetnet ctrl_0_0_TEA
+
 ihwconnect -instancename router0 -packetnetport portDataLocal -packetnet data_0_0_L
 ihwconnect -instancename ni0 -packetnetport dataPort -packetnet data_0_0_L
 ihwconnect -instancename router0 -packetnetport portControlLocal -packetnet ctrl_0_0_L
