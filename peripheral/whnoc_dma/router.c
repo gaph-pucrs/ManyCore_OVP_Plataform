@@ -678,7 +678,7 @@ PPM_REG_WRITE_CB(addressWrite) {
         myAddress = xy2addr(x, y);
         bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
         bhmMessage("INFO","MYADRESS","MY ID = %d", myID);
-        ppmPacketnetWrite(handles.portsecNoC, &myID, sizeof(myID));
+        ppmPacketnetWrite(handles.portSecNoC, &myID, sizeof(myID));
     }
     else{ // Display an error message when another write operation is made in this register!!
         bhmMessage("INFO", "MY_ADRESS", "ERROR: The address can not be changed!");

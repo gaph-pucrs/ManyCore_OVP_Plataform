@@ -8,7 +8,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "secRouter.igen.h"
-#include "../peripheral/noc.h"
+#include "noc.h"
 #include <stdlib.h>
 #include<stdio.h>
 
