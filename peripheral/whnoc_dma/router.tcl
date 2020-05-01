@@ -61,6 +61,12 @@ imodeladdpacketnetport \
     -updatefunction dataLocal \
     -updatefunctionargument 0x00
 
+imodeladdpacketnetport \
+    -name portSecNoC \
+    -maxbytes 4 \
+    -updatefunction secNoC \
+    -updatefunctionargument 0x00
+
 #########################################
 ## To Tick
 #########################################
@@ -102,6 +108,13 @@ imodeladdpacketnetport \
     -name portControlLocal \
     -maxbytes 8 \
     -updatefunction controlLocal \
+    -updatefunctionargument 0x00
+
+
+imodeladdpacketnetport \
+    -name portControlSecNoc \
+    -maxbytes 8 \
+    -updatefunction controlSecNoc \
     -updatefunctionargument 0x00
 
 iadddocumentation -name Description -text "Interrupt Request"

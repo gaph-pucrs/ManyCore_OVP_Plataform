@@ -30,6 +30,7 @@
 #include "router.igen.h"
 #include "noc.h"
 #include <stdio.h>
+#include "router.c"
 /////////////////////////////// Port Declarations //////////////////////////////
 
 localPort_regs_dataT localPort_regs_data;
@@ -104,9 +105,12 @@ int main(int argc, char *argv[]) {
 
     FILE *fp;
     int i=0;
-    
+    int totalFlits = 0;
+    int numQuantums = 10;
+    int contQuantums = 0;
     while(1){
         bhmWaitDelay(QUANTUM_DELAY);
+        contQuantums ++;
         if(myID==0){
             fp = fopen ("simulation/flitFlow.csv","a");
             fprintf(fp,"Quantum %d\n",i);
@@ -125,6 +129,10 @@ int main(int argc, char *argv[]) {
         contFlits[SOUTH] = 0;
 
         i++;
+        if(contQuantums == numQuantums){
+            //ESCREVE NA PORTA SAFENOC
+            contQuantums = 0;
+        }
     }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));

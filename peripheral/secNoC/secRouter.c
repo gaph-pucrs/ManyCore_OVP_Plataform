@@ -496,7 +496,7 @@ void transmitt(){
                             ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
                         }
                     }
-                
+
             }
         //}
     }
@@ -509,7 +509,42 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
 }
 
 
+void iterate(){
+    // Sends the iteration signal to the NI module
+    //iteratePeriph();
+    // Verify if the LOCAL buffer has something to send
+    //verifyLocalBuffer();
+    ////////////////////////////////////////////
+    // Arbitration Process - defined in noc.h //
+    ////////////////////////////////////////////
+    #if ARBITER_RR
+    unsigned int selPort;
+    // Defines which port will be attended by the allocator
+    selPort = selectPort();
+    // Allocates the output port to the givel selPort if it is available
+    allocate(selPort);
+    #endif
+    ////////////////////////////////////////////
+    #if ARBITER_TTL
+    // Search and allocate the packet which is waiting more time
+    searchAndAllocate();
+    #endif
+    ////////////////////////////////////////////
+    #if ARBITER_HERMES
+    selectPort();
+    allocate();
+    #endif
+    ////////////////////////////////////////////
+    ////////////////////////////////////////////
+    ////////////////////////////////////////////
+    // Runs the transmittion of one flit to each direction (if there is a connection stablished)
+    transmitt(); 
+}
+
+
 //////////////////////////////// Callback stubs ////////////////////////////////
+
+
 
 PPM_PACKETNET_CB(controlEast) {
     unsigned int ctrl = *(unsigned int *)data;
@@ -558,10 +593,17 @@ PPM_PACKETNET_CB(dataWest) {
 
 PPM_PACKETNET_CB(unsafeNoC) {
 
-    unsigned int newFlit = *(unsigned int *)data;
-    incomingFlit.data = newFlit;
-    bufferPush(LOCAL);
-    
+    if(myAddress == 0xFFFFFFFF){
+        myID = htonl((unsigned int)data);
+        int y = myID/DIM_X;
+        int x = myID-(DIM_X*y);
+        myAddress = xy2addr(x, y);
+        bhmMessage("INFO", "MY_ADRESS UNSAFE NOC", "My Address: %d %d", x, y);
+        bhmMessage("INFO","MYADRESS UNSAFE NOC","MY ID = %d", myID);
+    }
+
+
+
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {

@@ -9,6 +9,7 @@
 
 
 #include "secRouter.igen.h"
+#include "secRouter.c"
 /////////////////////////////// Port Declarations //////////////////////////////
 
 handlesT handles;
@@ -44,6 +45,10 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
+
+    while(1){
+       iterate(); 
+    }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
