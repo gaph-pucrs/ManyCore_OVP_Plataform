@@ -7,6 +7,63 @@
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
+
+/* Instructions stuff */
+typedef struct {
+	unsigned int arith;
+	unsigned int logical;
+	unsigned int branch;	 
+	unsigned int jump;
+	unsigned int move;
+	unsigned int load;
+	unsigned int store;
+	unsigned int shift;
+	unsigned int nop;
+	unsigned int mult_div;
+    unsigned int weird;
+	unsigned int total;
+} Instrucions_class;
+
+typedef struct {
+	//total energy
+	unsigned int processor;
+	unsigned int router;
+	unsigned int memory;
+	//leakage energy
+	unsigned int leakage;
+	unsigned int n_inst;
+	//real sampling window
+	unsigned int real_window;
+} Estimation_of_energy;
+
+/* Global variables to capture the amount of instructions executed per type */
+unsigned int arith_inst;
+unsigned int logical_inst;
+unsigned int branch_inst;	  
+unsigned int jump_inst;
+unsigned int move_inst;
+unsigned int load_inst;
+unsigned int store_inst;
+unsigned int shift_inst;
+unsigned int nop_inst;
+unsigned int mult_div_inst;
+unsigned int weird_inst;
+
+void read_class_inst(){
+	arith_inst = *arithCounter;
+    logical_inst = *logicalCounter;
+    branch_inst =  *branchCounter;
+    jump_inst = *jumpCounter;
+    move_inst = *moveCounter;
+    load_inst = *loadCounter;
+    store_inst = *storeCounter; 
+    shift_inst = *shiftCounter; 
+    nop_inst = *nopCounter; 
+    mult_div_inst = *multDivCounter;
+    weird_inst = *weirdCounter;    
+    return;
+}
+
 #define ROUTER_BASE    ((unsigned int *) 0x80000000)
 #define SYNC_BASE      ((unsigned int *) 0x80000014)
 #define NI_BASE        ((unsigned int *) 0x80000004)
@@ -99,9 +156,6 @@ volatile unsigned int *clockGating_flag =   CLK_GATING;
 #define PI_I_MULTDIV        14
 #define PI_I_WEIRD          15
 
-
-
-
 // Message type
 typedef struct Message {
     unsigned int msg[MESSAGE_MAX_SIZE];
@@ -166,6 +220,24 @@ void interruptHandler_timer(void);
 void interruptHandler_timer(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
+    /*Read executed instructions*/ 
+	Instrucions_class inst_class;     //*inst_class_ptr,
+
+    inst_class.arith		= arith_inst;
+	inst_class.logical		= logical_inst;
+	inst_class.branch		= branch_inst;
+	inst_class.jump			= jump_inst;
+	inst_class.move			= move_inst;
+	inst_class.load			= load_inst;
+	inst_class.store		= store_inst;
+	inst_class.shift		= shift_inst;
+	inst_class.nop			= nop_inst;
+	inst_class.mult_div 	= mult_div_inst;
+    inst_class.weird        = weird_inst;
+	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst + weird_inst;
+
+
+
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();

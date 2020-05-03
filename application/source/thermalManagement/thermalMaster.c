@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int i, j;
     int ordem[DIM_X*DIM_Y];
-    while(*SyncToPE != 1){
+    while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
         // Aguarda os pacotes de energia dos PEs
         for(i=0;i<DIM_X;i++){
             for(j=0;j<DIM_Y;j++){
