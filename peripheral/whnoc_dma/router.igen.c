@@ -30,7 +30,7 @@
 #include "router.igen.h"
 #include "noc.h"
 #include <stdio.h>
-#include "router.c"
+
 /////////////////////////////// Port Declarations //////////////////////////////
 
 localPort_regs_dataT localPort_regs_data;

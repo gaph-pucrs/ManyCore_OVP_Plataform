@@ -230,6 +230,122 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
 
     optPacketnetP ctrl_2_2_S_pkn = opPacketnetNew(mi, "ctrl_2_2_S", 0, 0);
 
+    optPacketnetP ctrl_0_0_safeNoC_pkn = opPacketnetNew(mi, "ctrl_0_0_safeNoC", 0, 0);
+
+    optPacketnetP data_0_0_safeNoC_pkn = opPacketnetNew(mi, "data_0_0_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_0_1_safeNoC_pkn = opPacketnetNew(mi, "ctrl_0_1_safeNoC", 0, 0);
+
+    optPacketnetP data_0_1_safeNoC_pkn = opPacketnetNew(mi, "data_0_1_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_0_2_safeNoC_pkn = opPacketnetNew(mi, "ctrl_0_2_safeNoC", 0, 0);
+
+    optPacketnetP data_0_2_safeNoC_pkn = opPacketnetNew(mi, "data_0_2_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_1_0_safeNoC_pkn = opPacketnetNew(mi, "ctrl_1_0_safeNoC", 0, 0);
+
+    optPacketnetP data_1_0_safeNoC_pkn = opPacketnetNew(mi, "data_1_0_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_1_1_safeNoC_pkn = opPacketnetNew(mi, "ctrl_1_1_safeNoC", 0, 0);
+
+    optPacketnetP data_1_1_safeNoC_pkn = opPacketnetNew(mi, "data_1_1_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_1_2_safeNoC_pkn = opPacketnetNew(mi, "ctrl_1_2_safeNoC", 0, 0);
+
+    optPacketnetP data_1_2_safeNoC_pkn = opPacketnetNew(mi, "data_1_2_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_2_0_safeNoC_pkn = opPacketnetNew(mi, "ctrl_2_0_safeNoC", 0, 0);
+
+    optPacketnetP data_2_0_safeNoC_pkn = opPacketnetNew(mi, "data_2_0_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_2_1_safeNoC_pkn = opPacketnetNew(mi, "ctrl_2_1_safeNoC", 0, 0);
+
+    optPacketnetP data_2_1_safeNoC_pkn = opPacketnetNew(mi, "data_2_1_safeNoC", 0, 0);
+
+    optPacketnetP ctrl_2_2_safeNoC_pkn = opPacketnetNew(mi, "ctrl_2_2_safeNoC", 0, 0);
+
+    optPacketnetP data_2_2_safeNoC_pkn = opPacketnetNew(mi, "data_2_2_safeNoC", 0, 0);
+
+    optPacketnetP data_0_0_E_secNoC_pkn = opPacketnetNew(mi, "data_0_0_E_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_0_0_W_secNoC", 0, 0);
+
+    optPacketnetP data_0_0_N_secNoC_pkn = opPacketnetNew(mi, "data_0_0_N_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_0_0_S_secNoC", 0, 0);
+
+    optPacketnetP ctrl_0_0_E_secNoC_pkn = opPacketnetNew(mi, "ctrl_0_0_E_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_0_0_W_secNoC", 0, 0);
+
+    optPacketnetP ctrl_0_0_N_secNoC_pkn = opPacketnetNew(mi, "ctrl_0_0_N_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_0_0_S_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_0_2_E_secNoC", 0, 0);
+
+    optPacketnetP data_0_2_W_secNoC_pkn = opPacketnetNew(mi, "data_0_2_W_secNoC", 0, 0);
+
+    optPacketnetP data_0_2_N_secNoC_pkn = opPacketnetNew(mi, "data_0_2_N_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_0_2_S_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_0_2_E_secNoC", 0, 0);
+
+    optPacketnetP ctrl_0_2_W_secNoC_pkn = opPacketnetNew(mi, "ctrl_0_2_W_secNoC", 0, 0);
+
+    optPacketnetP ctrl_0_2_N_secNoC_pkn = opPacketnetNew(mi, "ctrl_0_2_N_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_0_2_S_secNoC", 0, 0);
+
+    optPacketnetP data_1_1_E_secNoC_pkn = opPacketnetNew(mi, "data_1_1_E_secNoC", 0, 0);
+
+    optPacketnetP data_1_1_W_secNoC_pkn = opPacketnetNew(mi, "data_1_1_W_secNoC", 0, 0);
+
+    optPacketnetP data_1_1_N_secNoC_pkn = opPacketnetNew(mi, "data_1_1_N_secNoC", 0, 0);
+
+    optPacketnetP data_1_1_S_secNoC_pkn = opPacketnetNew(mi, "data_1_1_S_secNoC", 0, 0);
+
+    optPacketnetP ctrl_1_1_E_secNoC_pkn = opPacketnetNew(mi, "ctrl_1_1_E_secNoC", 0, 0);
+
+    optPacketnetP ctrl_1_1_W_secNoC_pkn = opPacketnetNew(mi, "ctrl_1_1_W_secNoC", 0, 0);
+
+    optPacketnetP ctrl_1_1_N_secNoC_pkn = opPacketnetNew(mi, "ctrl_1_1_N_secNoC", 0, 0);
+
+    optPacketnetP ctrl_1_1_S_secNoC_pkn = opPacketnetNew(mi, "ctrl_1_1_S_secNoC", 0, 0);
+
+    optPacketnetP data_2_0_E_secNoC_pkn = opPacketnetNew(mi, "data_2_0_E_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_2_0_W_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_2_0_N_secNoC", 0, 0);
+
+    optPacketnetP data_2_0_S_secNoC_pkn = opPacketnetNew(mi, "data_2_0_S_secNoC", 0, 0);
+
+    optPacketnetP ctrl_2_0_E_secNoC_pkn = opPacketnetNew(mi, "ctrl_2_0_E_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_2_0_W_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_2_0_N_secNoC", 0, 0);
+
+    optPacketnetP ctrl_2_0_S_secNoC_pkn = opPacketnetNew(mi, "ctrl_2_0_S_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_2_2_E_secNoC", 0, 0);
+
+    optPacketnetP data_2_2_W_secNoC_pkn = opPacketnetNew(mi, "data_2_2_W_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "data_2_2_N_secNoC", 0, 0);
+
+    optPacketnetP data_2_2_S_secNoC_pkn = opPacketnetNew(mi, "data_2_2_S_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_2_2_E_secNoC", 0, 0);
+
+    optPacketnetP ctrl_2_2_W_secNoC_pkn = opPacketnetNew(mi, "ctrl_2_2_W_secNoC", 0, 0);
+
+    opPacketnetNew(mi, "ctrl_2_2_N_secNoC", 0, 0);
+
+    optPacketnetP ctrl_2_2_S_secNoC_pkn = opPacketnetNew(mi, "ctrl_2_2_S_secNoC", 0, 0);
+
     optPacketnetP iteration_0_pkn = opPacketnetNew(mi, "iteration_0", 0, 0);
 
     optPacketnetP iteration_1_pkn = opPacketnetNew(mi, "iteration_1", 0, 0);
@@ -1187,6 +1303,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu0Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_0_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_0_0_TEA_pkn, "portDataWest"),
                 OP_PACKETNET_CONNECT(ctrl_0_0_TEA_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_0_0_L_pkn, "portDataLocal"),
@@ -1243,6 +1361,26 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter0
+
+    const char *secRouter0_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter0_path,
+        "secRouter0",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_0_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_0_0_E_secNoC_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_E_secNoC_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(data_0_0_N_secNoC_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_N_secNoC_pkn, "portControlNorth")
+            )
+        ),
+        0
+    );
+
     // PSE router1
 
     const char *router1_path = "peripheral/whnoc_dma/pse.pse";
@@ -1255,6 +1393,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu1Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_1_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_0_1_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_0_0_E_pkn, "portDataWest"),
                 OP_PACKETNET_CONNECT(ctrl_0_0_E_pkn, "portControlWest"),
                 OP_PACKETNET_CONNECT(data_0_1_L_pkn, "portDataLocal"),
@@ -1311,6 +1451,28 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter1
+
+    const char *secRouter1_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter1_path,
+        "secRouter1",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_1_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_0_1_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_0_0_E_secNoC_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_E_secNoC_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_0_2_W_secNoC_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_0_2_W_secNoC_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(data_1_1_S_secNoC_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_S_secNoC_pkn, "portControlNorth")
+            )
+        ),
+        0
+    );
+
     // PSE router2
 
     const char *router2_path = "peripheral/whnoc_dma/pse.pse";
@@ -1323,6 +1485,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu2Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_2_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_0_2_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_0_2_L_pkn, "portDataLocal"),
                 OP_PACKETNET_CONNECT(ctrl_0_2_L_pkn, "portControlLocal"),
                 OP_PACKETNET_CONNECT(data_0_2_W_pkn, "portDataWest"),
@@ -1377,6 +1541,26 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter2
+
+    const char *secRouter2_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter2_path,
+        "secRouter2",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_0_2_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_0_2_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_0_2_W_secNoC_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_0_2_W_secNoC_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_0_2_N_secNoC_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_0_2_N_secNoC_pkn, "portControlNorth")
+            )
+        ),
+        0
+    );
+
     // PSE router3
 
     const char *router3_path = "peripheral/whnoc_dma/pse.pse";
@@ -1389,6 +1573,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu3Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_1_0_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_1_0_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_0_0_N_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_0_0_N_pkn, "portControlSouth"),
                 OP_PACKETNET_CONNECT(data_1_0_L_pkn, "portDataLocal"),
@@ -1445,6 +1631,28 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter3
+
+    const char *secRouter3_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter3_path,
+        "secRouter3",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_1_0_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_1_0_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_0_0_N_secNoC_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_0_0_N_secNoC_pkn, "portControlSouth"),
+                OP_PACKETNET_CONNECT(data_1_1_W_secNoC_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_W_secNoC_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(data_2_0_S_secNoC_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_2_0_S_secNoC_pkn, "portControlNorth")
+            )
+        ),
+        0
+    );
+
     // PSE router4
 
     const char *router4_path = "peripheral/whnoc_dma/pse.pse";
@@ -1457,6 +1665,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu4Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_1_1_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_1_1_L_pkn, "portDataLocal"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_L_pkn, "portControlLocal"),
                 OP_PACKETNET_CONNECT(data_1_1_E_pkn, "portDataEast"),
@@ -1515,6 +1725,30 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter4
+
+    const char *secRouter4_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter4_path,
+        "secRouter4",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_1_1_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_1_1_E_secNoC_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_E_secNoC_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(data_1_1_W_secNoC_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_W_secNoC_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_1_1_N_secNoC_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_N_secNoC_pkn, "portControlNorth"),
+                OP_PACKETNET_CONNECT(data_1_1_S_secNoC_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_S_secNoC_pkn, "portControlSouth")
+            )
+        ),
+        0
+    );
+
     // PSE router5
 
     const char *router5_path = "peripheral/whnoc_dma/pse.pse";
@@ -1527,6 +1761,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu5Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_1_2_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_1_2_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_0_2_N_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_0_2_N_pkn, "portControlSouth"),
                 OP_PACKETNET_CONNECT(data_1_1_E_pkn, "portDataWest"),
@@ -1583,6 +1819,28 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter5
+
+    const char *secRouter5_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter5_path,
+        "secRouter5",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_1_2_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_1_2_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_0_2_N_secNoC_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_0_2_N_secNoC_pkn, "portControlSouth"),
+                OP_PACKETNET_CONNECT(data_1_1_E_secNoC_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_E_secNoC_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_2_2_S_secNoC_pkn, "portDataNorth"),
+                OP_PACKETNET_CONNECT(ctrl_2_2_S_secNoC_pkn, "portControlNorth")
+            )
+        ),
+        0
+    );
+
     // PSE router6
 
     const char *router6_path = "peripheral/whnoc_dma/pse.pse";
@@ -1595,6 +1853,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu6Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_2_0_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_2_0_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_2_0_L_pkn, "portDataLocal"),
                 OP_PACKETNET_CONNECT(ctrl_2_0_L_pkn, "portControlLocal"),
                 OP_PACKETNET_CONNECT(data_2_0_E_pkn, "portDataEast"),
@@ -1649,6 +1909,26 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter6
+
+    const char *secRouter6_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter6_path,
+        "secRouter6",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_2_0_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_2_0_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_2_0_E_secNoC_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_2_0_E_secNoC_pkn, "portControlEast"),
+                OP_PACKETNET_CONNECT(data_2_0_S_secNoC_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_2_0_S_secNoC_pkn, "portControlSouth")
+            )
+        ),
+        0
+    );
+
     // PSE router7
 
     const char *router7_path = "peripheral/whnoc_dma/pse.pse";
@@ -1661,6 +1941,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu7Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_2_1_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_2_1_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_1_1_N_pkn, "portDataSouth"),
                 OP_PACKETNET_CONNECT(ctrl_1_1_N_pkn, "portControlSouth"),
                 OP_PACKETNET_CONNECT(data_2_0_E_pkn, "portDataWest"),
@@ -1717,6 +1999,28 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         0
     );
 
+    // PSE secRouter7
+
+    const char *secRouter7_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter7_path,
+        "secRouter7",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_2_1_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_2_1_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_1_1_N_secNoC_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_1_1_N_secNoC_pkn, "portControlSouth"),
+                OP_PACKETNET_CONNECT(data_2_0_E_secNoC_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_2_0_E_secNoC_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_2_2_W_secNoC_pkn, "portDataEast"),
+                OP_PACKETNET_CONNECT(ctrl_2_2_W_secNoC_pkn, "portControlEast")
+            )
+        ),
+        0
+    );
+
     // PSE router8
 
     const char *router8_path = "peripheral/whnoc_dma/pse.pse";
@@ -1729,6 +2033,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
                 OP_BUS_CONNECT(cpu8Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_2_2_safeNoC_pkn, "portSecNoC"),
+                OP_PACKETNET_CONNECT(ctrl_2_2_safeNoC_pkn, "portControlSecNoc"),
                 OP_PACKETNET_CONNECT(data_2_2_L_pkn, "portDataLocal"),
                 OP_PACKETNET_CONNECT(ctrl_2_2_L_pkn, "portControlLocal"),
                 OP_PACKETNET_CONNECT(data_2_2_W_pkn, "portDataWest"),
@@ -1778,6 +2084,26 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(intTIMER8_n, "INT_TIMER")
+            )
+        ),
+        0
+    );
+
+    // PSE secRouter8
+
+    const char *secRouter8_path = "peripheral/secNoC/pse.pse";
+    opPeripheralNew(
+        mi,
+        secRouter8_path,
+        "secRouter8",
+        OP_CONNECTIONS(
+            OP_PACKETNET_CONNECTIONS(
+                OP_PACKETNET_CONNECT(data_2_2_safeNoC_pkn, "portUnsafeNoC"),
+                OP_PACKETNET_CONNECT(ctrl_2_2_safeNoC_pkn, "portControlUnsafeNoC"),
+                OP_PACKETNET_CONNECT(data_2_2_W_secNoC_pkn, "portDataWest"),
+                OP_PACKETNET_CONNECT(ctrl_2_2_W_secNoC_pkn, "portControlWest"),
+                OP_PACKETNET_CONNECT(data_2_2_S_secNoC_pkn, "portDataSouth"),
+                OP_PACKETNET_CONNECT(ctrl_2_2_S_secNoC_pkn, "portControlSouth")
             )
         ),
         0

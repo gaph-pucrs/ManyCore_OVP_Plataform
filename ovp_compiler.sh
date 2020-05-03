@@ -14,6 +14,7 @@ make -C peripheral/iteratorMonoTrigger NOVLNV=1
 make -C peripheral/networkInterface NOVLNV=1
 make -C peripheral/timer NOVLNV=1
 make -C peripheral/tea NOVLNV=1
+make -C peripheral/secNoC NOVLNV=1
 make -C harness
 harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu0=application/application0.${CROSS}.elf $* \

@@ -44,7 +44,7 @@ imodeladdpacketnetport \
 
 imodeladdpacketnetport \
     -name portUnsafeNoC\
-    -maxbytes 8 \
+    -maxbytes 4 \
     -updatefunction unsafeNoC \
     -updatefunctionargument 0x00
 

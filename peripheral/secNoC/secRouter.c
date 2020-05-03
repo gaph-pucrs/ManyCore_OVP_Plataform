@@ -490,7 +490,7 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[SOUTH]= contFlits[SOUTH]++;
+                            //contFlits[SOUTH]= contFlits[SOUTH]++;
                             #endif
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
