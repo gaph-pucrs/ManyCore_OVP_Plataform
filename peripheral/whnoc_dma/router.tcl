@@ -10,6 +10,12 @@ iadddocumentation -name Description \
                   -text "A OVP Wormhole Router"
 
 #########################################
+# Master read and write ports
+#########################################
+imodeladdbusmasterport -name "RREAD"   -addresswidth 32
+imodeladdbusmasterport -name "RWRITE"  -addresswidth 32
+
+#########################################
 ## A slave port on the processor bus
 #########################################
 imodeladdbusslaveport -name localPort \
