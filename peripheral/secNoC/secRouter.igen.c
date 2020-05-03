@@ -28,6 +28,7 @@
 
 
 #include "secRouter.igen.h"
+#include "secRouter.c"
 /////////////////////////////// Port Declarations //////////////////////////////
 
 handlesT handles;
