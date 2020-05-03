@@ -97,6 +97,8 @@ echo "" >> module.op.tcl
 for i in $(seq 0 $N);
 do
 	echo "ihwconnect -instancename router"$i" -busslaveport localPort -bus cpu"$i"Bus -loaddress 0x80000000 -hiaddress 0x80000003" >> module.op.tcl
+	echo "ihwconnect -instancename router"$i" -busmasterport RREAD  -bus cpu"$i"Bus" >> module.op.tcl
+	echo "ihwconnect -instancename router"$i" -busmasterport RWRITE -bus cpu"$i"Bus" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busslaveport DMAC -bus cpu"$i"Bus -loaddress 0x80000004 -hiaddress 0x8000000B" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MREAD  -bus cpu"$i"Bus" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MWRITE -bus cpu"$i"Bus" >> module.op.tcl
