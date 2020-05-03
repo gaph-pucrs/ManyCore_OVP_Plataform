@@ -592,7 +592,7 @@ PPM_PACKETNET_CB(dataWest) {
     bufferPush(WEST);}
 
 PPM_PACKETNET_CB(unsafeNoC) {
-
+    int testando1=0;
     if(myAddress == 0xFFFFFFFF){
         myID = *(unsigned int *)data;
         myID = htonl((unsigned int)myID);
@@ -601,6 +601,7 @@ PPM_PACKETNET_CB(unsafeNoC) {
         myAddress = xy2addr(x, y);
         bhmMessage("INFO", "MY_ADRESS UNSAFE NOC", "My Address: %d %d", x, y);
         bhmMessage("INFO","MYADRESS UNSAFE NOC","MY ID = %d", myID);
+        ppmPacketnetWrite(handles.portDataEast, &testando1, sizeof(testando1));
     }
 
 
