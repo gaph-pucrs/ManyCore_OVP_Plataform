@@ -5,9 +5,9 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "pingpong_config.h"
+#include "thermalManagement_config.h"
 
-message pingpong;
+message theMsg;
 
 int main(int argc, char **argv)
 {
@@ -15,19 +15,21 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    int i;
-    pingpong.size = 10;
-    for(i=0;i<10;i++){
-        pingpong.msg[i] = i;
+    int i, j;
+    int ordem[DIM_X*DIM_Y];
+    while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
+        // Aguarda os pacotes de energia dos PEs
+        for(i=0;i<DIM_X;i++){
+            for(j=0;j<DIM_Y;j++){
+                ReceiveRaw(&theMsg);
+                ordem[(j*DIM_X)+i] = theMsg.msg[0];
+            }
+        }
+        LOG("Todos os pacotes foram recebidos!!!\n");
+        for(i=0;i<DIM_X*DIM_Y;i++){
+            LOG("%d > %x\n",i,ordem[i]);
+        }
     }
-    SendMessage(&pingpong, pong_addr);
-    for(i=0;i<N_PINGPONG;i++){
-        ReceiveMessage(&pingpong, pong_addr);
-        LOG("0-PING: %d\n",pingpong.msg[0]);
-        pingpong.msg[0] = pingpong.msg[0] + 1;
-        SendMessage(&pingpong, pong_addr);
-    }
-    LOG("Ping Finalizado!\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
