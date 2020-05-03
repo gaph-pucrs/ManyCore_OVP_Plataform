@@ -99,6 +99,8 @@ unsigned int localBuffer_packetDest;
 #if LOG_OUTPUTFLITS
 // flit counter of each port, is reseted in each quantum in router.igen.c
 int contFlits[N_PORTS];
+unsigned int countTotalPackets[N_PORTS] = {0,0,0,0,0};
+unsigned int countTotalFlits[N_PORTS] = {0,0,0,0,0};
 #endif
 
 ////////////////////////////////////////////////////////////
@@ -153,6 +155,49 @@ unsigned int peripheralPort(unsigned int address){
     unsigned int mask = 0x000F0000;
     unsigned int masked_n = address & mask;
     return masked_n;
+}
+
+// Variables to handle memory write and read
+char chValue[4];
+unsigned int usValue;
+
+void vec2usi(){
+    unsigned int auxFlit = 0x00000000;
+    unsigned int aux;
+    aux = 0x000000FF & chValue[3];
+    auxFlit = ((aux << 24) & 0xFF000000);
+
+    aux = 0x000000FF & chValue[2];
+    auxFlit = auxFlit | ((aux << 16) & 0x00FF0000);
+
+    aux = 0x000000FF & chValue[1];
+    auxFlit = auxFlit | ((aux << 8) & 0x0000FF00);
+
+    aux = 0x000000FF & chValue[0];
+    auxFlit = auxFlit | ((aux) & 0x000000FF);
+
+    usValue = auxFlit;
+    return;
+}
+
+void usi2vec(){
+    chValue[3] = (usValue >> 24) & 0x000000FF;
+    chValue[2] = (usValue >> 16) & 0x000000FF;
+    chValue[1] = (usValue >> 8) & 0x000000FF;
+    chValue[0] = usValue & 0x000000FF;
+}
+
+// Function to write something in the memory
+void writeMem(unsigned int value, unsigned int addr){
+    usValue = value;
+    usi2vec();
+    ppmAddressSpaceHandle h = ppmOpenAddressSpace("RWRITE");
+    if(!h) {
+        bhmMessage("I", "ROUTER_MEM_WRITE", "ERROR_WRITE h handling!");
+        while(1){} // error handling
+    }
+    ppmWriteAddressSpace(h, addr, sizeof(chValue), chValue);
+    ppmCloseAddressSpace(h);
 }
 
 // Calculates the output port for a given local address and a destination address
@@ -399,6 +444,12 @@ void allocate(unsigned int port){
         }
         if(allowed == 1){
             routingTable[port] = to;
+            countTotalPackets[to] = countTotalPackets[to]+1;
+            if(to==LOCAL)       writeMem(htonl(countTotalPackets[to]), LOCAL_PACKETS);
+            else if(to==EAST)   writeMem(htonl(countTotalPackets[to]), EAST_PACKETS);
+            else if(to==WEST)   writeMem(htonl(countTotalPackets[to]), WEST_PACKETS);
+            else if(to==NORTH)  writeMem(htonl(countTotalPackets[to]), NORTH_PACKETS);
+            else if(to==SOUTH)  writeMem(htonl(countTotalPackets[to]), SOUTH_PACKETS);
             // Once one port is attended, then reset it's priority.
             priority[port] = 1;
         }
@@ -549,8 +600,10 @@ void transmitt(){
                             flit = bufferPop(port);
                             //bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[LOCAL]= contFlits[LOCAL]++;
+                            contFlits[LOCAL] = contFlits[LOCAL]+1;
                             #endif
+                            countTotalFlits[LOCAL] = countTotalFlits[LOCAL]+1;
+                            writeMem(htonl(countTotalFlits[LOCAL]), LOCAL_FLITS);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                         }
@@ -563,8 +616,10 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[EAST]= contFlits[EAST]++;
+                            contFlits[EAST] = contFlits[EAST]+1;
                             #endif
+                            countTotalFlits[EAST] = countTotalFlits[EAST]+1;
+                            writeMem(htonl(countTotalFlits[EAST]), EAST_FLITS);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
@@ -578,8 +633,10 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[WEST]= contFlits[WEST]++;
+                            contFlits[WEST] = contFlits[WEST]+1;
                             #endif
+                            countTotalFlits[WEST] = countTotalFlits[WEST]+1;
+                            writeMem(htonl(countTotalFlits[WEST]), WEST_FLITS);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
@@ -593,8 +650,10 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[NORTH]= contFlits[NORTH]++;
+                            contFlits[NORTH] = contFlits[NORTH]+1;
                             #endif
+                            countTotalFlits[NORTH] = countTotalFlits[NORTH]+1;
+                            writeMem(htonl(countTotalFlits[NORTH]), NORTH_FLITS);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
@@ -608,8 +667,10 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[SOUTH]= contFlits[SOUTH]++;
+                            contFlits[SOUTH] = contFlits[SOUTH]+1;
                             #endif
+                            countTotalFlits[SOUTH] = countTotalFlits[SOUTH]+1;
+                            writeMem(htonl(countTotalFlits[SOUTH]), SOUTH_FLITS);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
