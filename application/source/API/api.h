@@ -583,7 +583,7 @@ void FinishApplication(){
     *clockGating_flag = TRUE; // Because the task has finished
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
-    int init_end = 1;
+    int init_end = *SyncToPE;
     while(init_end != 0){
 	    init_end = *SyncToPE;
     }
