@@ -586,7 +586,7 @@ void FinishApplication(){
     int init_end = *SyncToPE;
     while(init_end != 0){
 	    init_end = *SyncToPE;
-        LOG("~~~%x\n", init_end);
+        LOG("%x~~~%x\n",*myAddress, init_end);
     }
     
     ReportExecutedInstructions();
