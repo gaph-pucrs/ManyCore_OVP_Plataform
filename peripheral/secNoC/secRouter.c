@@ -592,16 +592,10 @@ PPM_PACKETNET_CB(dataWest) {
     bufferPush(WEST);}
 
 PPM_PACKETNET_CB(unsafeNoC) {
-    bhmMessage("INFO","ADDRESS","CHAMOU CALLBACK %d",(unsigned int) data);
-    
 
     if(myAddress == 0xFFFFFFFF){
-        bhmMessage("INFO","ADDRESS","ENTROU NO IF");
         myID = *(unsigned int *)data;
-        bhmMessage("INFO","MYADDRESS","MYID1 = %d",myID);
         myID = htonl((unsigned int)myID);
-
-        bhmMessage("INFO","MYADDRESS","MYID2 = %d",myID);
         int y = myID/DIM_X;
         int x = myID-(DIM_X*y);
         myAddress = xy2addr(x, y);
