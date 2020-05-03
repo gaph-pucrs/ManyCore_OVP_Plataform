@@ -592,7 +592,8 @@ PPM_PACKETNET_CB(dataWest) {
     bufferPush(WEST);}
 
 PPM_PACKETNET_CB(unsafeNoC) {
-    bhmMessage("INFO","ADDRESS","CHAMOU CALLBACK");
+    bhmMessage("INFO","ADDRESS","CHAMOU CALLBACK %d",(unsigned int) data);
+    
 
     if(myAddress == 0xFFFFFFFF){
         bhmMessage("INFO","ADDRESS","ENTROU NO IF");
