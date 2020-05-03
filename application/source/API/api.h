@@ -282,7 +282,7 @@ void OVP_init(){
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
     int init_start = 0;
-    while(init_start != N_PES){
+    while(init_start > 0){
 	    init_start = *SyncToPE;
     }
     tinicio = clock();
