@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int i, j;
     int ordem[DIM_X*DIM_Y];
-    unsigned int end;
+    unsigned int end=1;
     while(end != 0){
         // Aguarda os pacotes de energia dos PEs
         for(i=0;i<DIM_X;i++){
