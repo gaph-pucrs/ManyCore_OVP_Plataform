@@ -28,7 +28,7 @@ typedef unsigned char Uns8;
 #define WEIRD_INST     ((unsigned int *) 0x0FFFFFCC)
 /* -------------------------------------------------
 // Router Ocupation Info -------------------------*/
-/*#define EAST_FLITS     ((unsigned int *) 0x0FFFFFC8)
+#define EAST_FLITS     ((unsigned int *) 0x0FFFFFC8)
 #define EAST_PACKETS   ((unsigned int *) 0x0FFFFFC4)
 #define WEST_FLITS     ((unsigned int *) 0x0FFFFFC0)
 #define WEST_PACKETS   ((unsigned int *) 0x0FFFFFBC)
@@ -37,7 +37,7 @@ typedef unsigned char Uns8;
 #define SOUTH_FLITS    ((unsigned int *) 0x0FFFFFB0)
 #define SOUTH_PACKETS  ((unsigned int *) 0x0FFFFFAC)
 #define LOCAL_FLITS    ((unsigned int *) 0x0FFFFFA8)
-#define LOCAL_PACKETS  ((unsigned int *) 0x0FFFFFA4)*/
+#define LOCAL_PACKETS  ((unsigned int *) 0x0FFFFFA4)
 /* -------------------------------------------------
 // Instruction Type Offset -----------------------*/
 #define BRANCH  1

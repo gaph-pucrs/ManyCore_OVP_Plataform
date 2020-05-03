@@ -71,16 +71,16 @@
 #define FROM_RX             0x3535
 
 // Memory information localization
-#define EAST_FLITS     ((unsigned int *) 0x0FFFFFC8)
-#define EAST_PACKETS   ((unsigned int *) 0x0FFFFFC4)
-#define WEST_FLITS     ((unsigned int *) 0x0FFFFFC0)
-#define WEST_PACKETS   ((unsigned int *) 0x0FFFFFBC)
-#define NORTH_FLITS    ((unsigned int *) 0x0FFFFFB8)
-#define NORTH_PACKETS  ((unsigned int *) 0x0FFFFFB4)
-#define SOUTH_FLITS    ((unsigned int *) 0x0FFFFFB0)
-#define SOUTH_PACKETS  ((unsigned int *) 0x0FFFFFAC)
-#define LOCAL_FLITS    ((unsigned int *) 0x0FFFFFA8)
-#define LOCAL_PACKETS  ((unsigned int *) 0x0FFFFFA4)
+#define EAST_FLITS_ADDR    0x0FFFFFC8
+#define EAST_PACKETS_ADDR  0x0FFFFFC4
+#define WEST_FLITS_ADDR    0x0FFFFFC0
+#define WEST_PACKETS_ADDR  0x0FFFFFBC
+#define NORTH_FLITS_ADDR   0x0FFFFFB8
+#define NORTH_PACKETS_ADDR 0x0FFFFFB4
+#define SOUTH_FLITS_ADDR   0x0FFFFFB0
+#define SOUTH_PACKETS_ADDR 0x0FFFFFAC
+#define LOCAL_FLITS_ADDR   0x0FFFFFA8
+#define LOCAL_PACKETS_ADDR 0x0FFFFFA4
 
 ///// CODE DEFINES
 // Arbitration
