@@ -77,13 +77,14 @@ PPM_REG_WRITE_CB(readyWrite) {
         if(startedPEs == N_PES){
             bhmMessage("I", "readyWrite", "Numero total de PEs prontos: %d\n",startedPEs);
             bhmTriggerEvent(goEvent);
-            status = 1; // Tasks are running now.
+            status = N_PES; // Tasks are running now.
         }
     }
     else{
         startedPEs--;
         bhmMessage("I", "readyWrite", "Numero de PEs finalizados: %d\n",(N_PES-startedPEs));
-        if((N_PES-startedPEs) == (N_PES-1)){ // -1 do thermalMaster
+        syncPort_regs_data.syncToPE.value = htonl(startedPEs);
+        if((N_PES-startedPEs) == N_PES){ 
             bhmMessage("I", "readyWrite", "Numero total de PEs finalizados: %d\n",(N_PES-startedPEs));
             bhmTriggerEvent(goEvent);
             status = 0; // Tasks are finished now.
@@ -186,7 +187,7 @@ int main(int argc, char *argv[]) {
     //
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
-    syncPort_regs_data.syncToPE.value = htonl(1);
+    syncPort_regs_data.syncToPE.value = htonl(N_PES);
     //
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
