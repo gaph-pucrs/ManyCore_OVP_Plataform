@@ -77,15 +77,15 @@ volatile unsigned int *logicalCounter =     LOGICAL_INST;
 volatile unsigned int *multDivCounter =     MULT_DIV_INST;
 volatile unsigned int *weirdCounter =       WEIRD_INST;
 // Router Informations
-volatile unsigned int *eastFlits = EAST_FLITS;
-volatile unsigned int *eastPackets = EAST_PACKETS;
-volatile unsigned int *westFlits = WEST_FLITS;
-volatile unsigned int *westPackets = WEST_PACKETS;
-volatile unsigned int *northFlits = NORTH_FLITS;
+volatile unsigned int *eastFlits =    EAST_FLITS;
+volatile unsigned int *eastPackets =  EAST_PACKETS;
+volatile unsigned int *westFlits =    WEST_FLITS;
+volatile unsigned int *westPackets =  WEST_PACKETS;
+volatile unsigned int *northFlits =   NORTH_FLITS;
 volatile unsigned int *northPackets = NORTH_PACKETS;
-volatile unsigned int *southFlits = SOUTH_FLITS;
+volatile unsigned int *southFlits =   SOUTH_FLITS;
 volatile unsigned int *southPackets = SOUTH_PACKETS;
-volatile unsigned int *localFlits = LOCAL_FLITS;
+volatile unsigned int *localFlits =   LOCAL_FLITS;
 volatile unsigned int *localPackets = LOCAL_PACKETS;
 /* Instructions stuff */
 typedef struct {
@@ -259,7 +259,7 @@ void interruptHandler_timer(void) {
     inst_class.weird        = weird_inst;
 	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst + weird_inst;
 
-    LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d\n ",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
+    LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
 
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
