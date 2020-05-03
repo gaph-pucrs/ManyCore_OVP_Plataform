@@ -63,10 +63,13 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-
+    int i = 0;
     while(1){
 
-        iterate();
+        ppmPacketnetWrite(handles.portDataEast, &i, sizeof(i));
+
+
+        //iterate();
 
         //if(tem alguma coisa em alguma porta??){
             //transmitir (COMO???)
