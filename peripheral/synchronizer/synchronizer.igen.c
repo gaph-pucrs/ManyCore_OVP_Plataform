@@ -87,6 +87,7 @@ PPM_REG_WRITE_CB(readyWrite) {
         if((N_PES-startedPEs) == N_PES){ 
             bhmMessage("I", "readyWrite", "Numero total de PEs finalizados: %d\n",(N_PES-startedPEs));
             bhmTriggerEvent(goEvent);
+            syncPort_regs_data.syncToPE.value = htonl(0);
             status = 0; // Tasks are finished now.
         }
     }
@@ -191,7 +192,7 @@ int main(int argc, char *argv[]) {
     //
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
-    syncPort_regs_data.syncToPE.value = htonl(0);
+    //syncPort_regs_data.syncToPE.value = htonl(0);
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
     return 0;
