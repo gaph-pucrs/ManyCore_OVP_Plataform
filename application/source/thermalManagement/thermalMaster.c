@@ -17,7 +17,8 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int i, j;
     int ordem[DIM_X*DIM_Y];
-    while(1){
+    unsigned int end;
+    while(end != 0){
         // Aguarda os pacotes de energia dos PEs
         for(i=0;i<DIM_X;i++){
             for(j=0;j<DIM_Y;j++){
@@ -29,8 +30,8 @@ int main(int argc, char **argv)
         for(i=0;i<DIM_X*DIM_Y;i++){
             LOG("%d > %x\n",i,ordem[i]);
         }
+        end = *SyncToPE;
     }
-    
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
