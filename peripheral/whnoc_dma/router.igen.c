@@ -9,6 +9,8 @@
 
 
 #include "router.igen.h"
+#include "noc.h"
+#include <stdio.h>
 /////////////////////////////// Port Declarations //////////////////////////////
 
 localPort_regs_dataT localPort_regs_data;
