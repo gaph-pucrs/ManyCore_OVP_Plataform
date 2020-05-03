@@ -601,7 +601,7 @@ PPM_PACKETNET_CB(unsafeNoC) {
         myAddress = xy2addr(x, y);
         bhmMessage("INFO", "MY_ADRESS UNSAFE NOC", "My Address: %d %d", x, y);
         bhmMessage("INFO","MYADRESS UNSAFE NOC","MY ID = %d", myID);
-        ppmPacketnetWrite(handles.portUnsafeNoC, &testando1, sizeof(testando1));
+       // ppmPacketnetWrite(handles.portUnsafeNoC, &testando1, sizeof(testando1));
     }
 
 
