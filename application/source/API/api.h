@@ -282,7 +282,7 @@ void OVP_init(){
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
     int init_start = 0;
-    while(init_start > 0){
+    while(init_start != N_PES){
 	    init_start = *SyncToPE;
     }
     tinicio = clock();
@@ -584,10 +584,8 @@ void FinishApplication(){
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     unsigned int init_end = *SyncToPE;
-    LOG("%x~~~%x\n",*myAddress, init_end);
     while(init_end != 0){
 	    init_end = *SyncToPE;
-        LOG("%x~~~%x\n",*myAddress, init_end);
     }
     
     ReportExecutedInstructions();

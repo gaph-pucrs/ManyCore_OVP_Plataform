@@ -76,18 +76,21 @@ PPM_REG_WRITE_CB(readyWrite) {
         bhmMessage("I", "readyWrite", "Numero de PEs prontos: %d\n",startedPEs);
         if(startedPEs == N_PES){
             bhmMessage("I", "readyWrite", "Numero total de PEs prontos: %d\n",startedPEs);
-            bhmTriggerEvent(goEvent);
+            syncPort_regs_data.syncToPE.value = htonl(startedPEs);
+            //bhmTriggerEvent(goEvent);
             status = N_PES; // Tasks are running now.
         }
     }
     else{
         startedPEs--;
         bhmMessage("I", "readyWrite", "Numero de PEs finalizados: %d\n",(N_PES-startedPEs));
-        syncPort_regs_data.syncToPE.value = htonl(startedPEs);
-        if((N_PES-startedPEs) == N_PES){ 
+        if(startedPEs == 1){
+            syncPort_regs_data.syncToPE.value = htonl(startedPEs);
+        }
+        else if(startedPEs == 0){ 
             bhmMessage("I", "readyWrite", "Numero total de PEs finalizados: %d\n",(N_PES-startedPEs));
+            syncPort_regs_data.syncToPE.value = htonl(startedPEs);
             bhmTriggerEvent(goEvent);
-            syncPort_regs_data.syncToPE.value = htonl(0);
             status = 0; // Tasks are finished now.
         }
     }
@@ -186,9 +189,9 @@ int main(int argc, char *argv[]) {
     constructor();
     goEvent = bhmCreateNamedEvent("start","go");
     //
-    bhmWaitEvent(goEvent);
-    bhmWaitDelay(QUANTUM_DELAY);
-    syncPort_regs_data.syncToPE.value = htonl(N_PES);
+    //bhmWaitEvent(goEvent);
+    //bhmWaitDelay(QUANTUM_DELAY);
+    //syncPort_regs_data.syncToPE.value = htonl(N_PES);
     //
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
