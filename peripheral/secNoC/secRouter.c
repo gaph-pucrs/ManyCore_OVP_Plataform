@@ -21,6 +21,9 @@ unsigned int ntohl(unsigned int x){
     return __cswap_constant_32(x);
 }
 
+unsigned int htonl(unsigned int x){
+    return __bswap_constant_32(x);
+}
 // Local Address
 unsigned int myAddress = 0xFFFFFFFF;
 // local ID Router

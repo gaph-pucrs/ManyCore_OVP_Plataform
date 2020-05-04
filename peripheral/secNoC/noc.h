@@ -83,7 +83,7 @@
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 
-unsigned int htonl(unsigned int x){
+extern unsigned int htonl(unsigned int x){
     return __bswap_constant_32(x);
 }
 
