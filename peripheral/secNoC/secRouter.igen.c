@@ -373,6 +373,8 @@ int main(int argc, char *argv[]) {
 
        bhmWaitDelay(QUANTUM_DELAY);
        if(hasDataToSend){
+           bhmMessage("INFO","SECROUTER","IF ITERATE WORKING ========================================================================================================================= ");
+       // if(i==10){
             iterate();
        }
         //i++;
