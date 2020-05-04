@@ -283,20 +283,6 @@ unsigned int nop_inst;
 unsigned int mult_div_inst;
 unsigned int weird_inst;
 
-void read_class_inst(){
-	arith_inst =    *arithCounter;
-    logical_inst =  *logicalCounter;
-    branch_inst =   *branchCounter;
-    jump_inst =     *jumpCounter;
-    move_inst =     *moveCounter;
-    load_inst =     *loadCounter;
-    store_inst =    *storeCounter; 
-    shift_inst =    *shiftCounter; 
-    nop_inst =      *nopCounter; 
-    mult_div_inst = *multDivCounter;
-    weird_inst =    *weirdCounter;    
-    return;
-}
 
 time_t lastTimeInstructions = 0;
 Estimation_of_energy sampling;
@@ -394,6 +380,7 @@ void interruptHandler_NI(void);
 void interruptHandler_timer(void);
 unsigned int estimateNoCActivity();
 unsigned int getNumberOfPorts(unsigned int address);
+void read_class_inst();
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -401,6 +388,22 @@ unsigned int getNumberOfPorts(unsigned int address);
 // Functions implementation ///////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
+
+void read_class_inst(){
+	arith_inst =    *arithCounter;
+    logical_inst =  *logicalCounter;
+    branch_inst =   *branchCounter;
+    jump_inst =     *jumpCounter;
+    move_inst =     *moveCounter;
+    load_inst =     *loadCounter;
+    store_inst =    *storeCounter; 
+    shift_inst =    *shiftCounter; 
+    nop_inst =      *nopCounter; 
+    mult_div_inst = *multDivCounter;
+    weird_inst =    *weirdCounter;
+    ResetExecutedInstructions();
+    return;
+}
 
 ///////////////////////////////////////////////////////////////////
 /* Activity estimation based in the amount of flits and packets crossing the router */
