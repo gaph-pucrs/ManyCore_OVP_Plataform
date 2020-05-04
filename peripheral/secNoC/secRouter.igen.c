@@ -279,7 +279,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
-                            //bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d",myID);
                             // Send the flit transmission time followed by the data
                            // ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                         }
