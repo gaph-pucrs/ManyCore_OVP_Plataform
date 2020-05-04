@@ -442,6 +442,7 @@ void interruptHandler_timer(void) {
     lastTimeInstructions = (time_t)actualTime;
    
     /*Read executed instructions*/ 
+    read_class_inst();
 	Instrucions_class inst_class;     //*inst_class_ptr,
 
     inst_class.arith		= arith_inst>>6;
@@ -505,7 +506,7 @@ void interruptHandler_timer(void) {
 		energyProcDif_leak = energyLeakProc[Voltage+flag_DVS]*avoidOverflow *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;  
 
 		avoidOverflow = (difTime-latency_DVS)>>6;
-		energyProcDif_leak  	+= energyLeakProc[Voltage]*avoidOverflow  *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;  
+		energyProcDif_leak += energyLeakProc[Voltage]*avoidOverflow  *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;  
 	}else{ //no_voltage_scaling
 		avoidOverflow = difTime>>6;
 		energyProcDif_leak = energyLeakProc[Voltage]*avoidOverflow *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;  
