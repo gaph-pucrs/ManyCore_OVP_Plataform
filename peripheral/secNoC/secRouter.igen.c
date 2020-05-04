@@ -382,9 +382,6 @@ int main(int argc, char *argv[]) {
             iterate();
         }else{
             bhmWaitDelay(QUANTUM_DELAY);
-           
-            iterate();
-
             //esperar evento
         }
         //i++;
