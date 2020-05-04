@@ -9,8 +9,6 @@
 
 message theMsg;
 
-static unsigned int energyLocalsDif_total[XCLUSTER][YCLUSTER];
-
 unsigned int Power[DIM_X*DIM_Y];
 unsigned int Temperature[DIM_X*DIM_Y];
 unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
