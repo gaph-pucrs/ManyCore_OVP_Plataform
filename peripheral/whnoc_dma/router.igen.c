@@ -106,7 +106,8 @@ int main(int argc, char *argv[]) {
     FILE *fp;
     int i=0;
     int numQuantums = 20;
-    int flitsTotal = 0;
+    int contFlitsSecNoC = 0;
+
     while(1){
         bhmWaitDelay(QUANTUM_DELAY);
         if(myID==0){
@@ -120,6 +121,8 @@ int main(int argc, char *argv[]) {
             fprintf(fp,"Router %d, %d, %d, %d, %d, %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
             fclose(fp);
         } 
+
+        contFlitsSecNoC += contFlits[LOCAL] + contFlits[WEST] + contFlits[EAST] + contFlits[NORTH] + contFlits[SOUTH];
         contFlits[LOCAL] = 0;
         contFlits[WEST] = 0;
         contFlits[EAST] = 0;
@@ -129,10 +132,9 @@ int main(int argc, char *argv[]) {
         i++;
 
         if(i == numQuantums){
-            flitsTotal = contFlits[LOCAL] + contFlits[WEST] + contFlits[EAST] + contFlits[SOUTH] + contFlits[NORTH];
-            bhmMessage("INFO", "ROUTER 20 QUANTUMS", "--------------------------------------> sending flitsTotal = %d", flitsTotal);
-            ppmPacketnetWrite(handles.portSecNoC, &flitsTotal, sizeof(flitsTotal));
-            flitsTotal = 0;
+            bhmMessage("INFO", "ROUTER 20 QUANTUMS", "--------------------------------------> sending flitsTotal = %d", contFlitsSecNoC);
+            ppmPacketnetWrite(handles.portSecNoC, &contFlitsSecNoC, sizeof(contFlitsSecNoC));
+            contFlitsSecNoC = 0;
             i=0;
         }
     }
