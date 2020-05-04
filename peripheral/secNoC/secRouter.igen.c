@@ -179,8 +179,11 @@ unsigned int bufferPop(unsigned int port){
    // unsigned int difX, difY;
 
     // Read the first flit from the buffer
-    value = buffers[port][first[port]].data;
-    // Increments the "first" pointer
+    if(flitCountOut[port] == 2){
+        value = buffers[port][first[port]].source; 
+    }else{
+        value = buffers[port][first[port]].data;
+    }// Increments the "first" pointer
     if(first[port] < BUFFER_SIZE-1){
         first[port]++;
     }
@@ -201,7 +204,7 @@ unsigned int bufferPop(unsigned int port){
         // Updates the routing table, releasing the output port
         routingTable[port] = ND;
 
-        // Inform that the next flit will be a header
+        // Inform that the next flit will be the source
         flitCountOut[port] = 2;
 
 
@@ -279,7 +282,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
-                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d",myID);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d flit = %d",myID, flit);
                             // Send the flit transmission time followed by the data
                            // ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                         }
