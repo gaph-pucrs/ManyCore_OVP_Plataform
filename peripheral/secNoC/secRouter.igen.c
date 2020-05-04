@@ -28,6 +28,7 @@
 
 
 #include "secRouter.igen.h"
+#include "noc.h"
 /////////////////////////////// Port Declarations //////////////////////////////
 
 handlesT handles;
@@ -64,8 +65,11 @@ int main(int argc, char *argv[]) {
     bhmInstallDiagCB(setDiagLevel);
     constructor();
     int i = 0;
+    hasDataToSend = 0;
     while(1){
-        ppmPacketnetWrite(handles.portUnsafeNoC, &i, sizeof(i));
+        bhmMessage("INFO","SECROUTER","WHILE1");
+        ppmPacketnetWrite(handles.portUnsafeNoC, &i, sizeof(i)); // OK!!
+
 
         //CHECAR SE portDatAEAST MESMO PROBLEMA DO MODULE ??
 

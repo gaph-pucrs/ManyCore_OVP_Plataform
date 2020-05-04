@@ -12,13 +12,6 @@
 #include <stdlib.h>
 #include<stdio.h>
 
-#define __bswap_constant_32(x) \
-     ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
-      (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
-
-unsigned int htonl(unsigned int x){
-    return __bswap_constant_32(x);
-}
 
 #define __cswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
@@ -58,6 +51,7 @@ unsigned int control[N_PORTS] = {GO,GO,GO,GO,GO};
 unsigned int txCtrl;
 
 unsigned int routingTable[N_PORTS] = {ND,ND,ND,ND,ND};
+
 
 #if ARBITER_RR
 // Priority list 
@@ -602,6 +596,9 @@ PPM_PACKETNET_CB(unsafeNoC) {
         bhmMessage("INFO", "MY_ADRESS UNSAFE NOC", "My Address: %d %d", x, y);
         bhmMessage("INFO","MYADRESS UNSAFE NOC","MY ID = %d", myID);
        // ppmPacketnetWrite(handles.portUnsafeNoC, &testando1, sizeof(testando1));
+    }else{
+
+        //RECEIVING DATA
     }
 
 
