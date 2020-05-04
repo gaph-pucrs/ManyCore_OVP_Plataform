@@ -300,7 +300,7 @@ void interruptHandler_timer(void) {
     //Print router info
     //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
 
-    timeActiveNoC = estimate_NoCActivity();
+    timeActiveNoC = estimateNoCActivity();
 
     nPorts = getNumberOfPorts();
 
