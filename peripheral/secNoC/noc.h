@@ -83,6 +83,8 @@
 extern int contFlits[N_PORTS];
 #endif
 extern unsigned int first[N_PORTS];
+unsigned int last[N_PORTS];
+
 
 
 
