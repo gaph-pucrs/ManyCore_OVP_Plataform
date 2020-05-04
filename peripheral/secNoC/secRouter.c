@@ -167,9 +167,9 @@ PPM_PACKETNET_CB(unsafeNoC) {
 
         incomingFlit.source = myID;
         incomingFlit.data = *(unsigned int *) data;
-        incomingFlit.data = htonl1(incomingFlit.data);
+        //incomingFlit.data = htonl1(incomingFlit.data);
         bhmMessage("INFO", "SECROUTER", "-------------------------------------------------------------> flitTotal = %d received", incomingFlit.data);
-        bufferPush(LOCAL);
+       // bufferPush(LOCAL);
 
     }
 
