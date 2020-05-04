@@ -79,14 +79,6 @@
 // Debug logs
 #define LOG_OUTPUTFLITS 1
 
-#define __bswap_constant_32(x) \
-     ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
-      (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
-
-extern unsigned int htonl(unsigned int x){
-    return __bswap_constant_32(x);
-}
-
 #if LOG_OUTPUTFLITS
 extern int contFlits[N_PORTS];
 #endif
