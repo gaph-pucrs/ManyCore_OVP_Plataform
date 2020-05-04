@@ -274,12 +274,11 @@ void interruptHandler_timer(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
     //////////////////////////////////////////////////////////////
-    unsigned int timeActiveNoC, nPorts;
+    unsigned int timeActiveNoC, nPorts, actualTime, difTime, timeIdleNoC;
 
-    time_t actualTime, difTime;
-    actualTime = clock();
-    difTime = actualTime - lastTimeInstructions;
-    lastTimeInstructions = actualTime;
+    actualTime = (unsigned int)clock();
+    difTime = actualTime - (unsigned int)lastTimeInstructions;
+    lastTimeInstructions = (time_t)actualTime;
    
     /*Read executed instructions*/ 
 	Instrucions_class inst_class;     //*inst_class_ptr,
@@ -301,10 +300,14 @@ void interruptHandler_timer(void) {
     //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
 
     timeActiveNoC = estimateNoCActivity();
+    timeIdleNoC = difTime-timeActiveNoC;
 
     nPorts = getNumberOfPorts(*myAddress);
 
-    LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, difTime);
+    //energyActive = PERIOD_NS/10 * ((nPorts-1) * powerAvgBufferIdle[Voltage] + powerAvgBufferActive[Voltage] + powerSwitchControlActive[Voltage]);
+	//energyIdle   = PERIOD_NS/10 * ( nPorts * powerAvgBufferIdle[Voltage] + powerSwitchControlIdle[Voltage]);
+
+    //LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, difTime);
 
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
