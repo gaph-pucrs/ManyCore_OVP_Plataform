@@ -7,6 +7,161 @@
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
+
+/*--------------------------------------------------------------------------------
+ * OVERHEAD FINE-GRAIN VOLTAGE SCALING - *DC_DC_CONVERTER_ENERGY_OVERHEAD/10 
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * Class[0.9 V][1.0 V][1.1 V] - Power Leakage and Dynamic
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * Total leakage power of a bank without power gating, including its network outside (uW)
+ * -------------------------------------------------------------------------------*/
+
+//the period is actually 2.5 ns
+#define PERIOD_NS	1 // for 1 GHz
+//the period is actually 10%. Look the using of this constant
+#define DC_DC_CONVERTER_ENERGY_OVERHEAD 11
+
+/*--------------------------------------------------------------------------------
+ * Leakage energy of processor, router, and memory
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+#define LEAK_PROC_0 1
+#define LEAK_PROC_1 1
+#define LEAK_PROC_2 2
+
+#define LEAK_ROUTER_0 0
+#define LEAK_ROUTER_1 0
+#define LEAK_ROUTER_2 0
+
+#define LEAK_MEM_0 8
+#define LEAK_MEM_1 17
+#define LEAK_MEM_2 32
+
+
+/*--------------------------------------------------------------------------------
+ * PROCESSOR - Total dynamic energy per instruction class (pJ)
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+#define DYN_ARITH_0 859
+#define DYN_ARITH_1 1097
+#define DYN_ARITH_2 1370
+
+#define DYN_LOGICAL_0 743
+#define DYN_LOGICAL_1 949
+#define DYN_LOGICAL_2 1186
+
+#define DYN_SHIFT_0 660
+#define DYN_SHIFT_1 843
+#define DYN_SHIFT_2 1051
+
+#define DYN_MOVE_0 719
+#define DYN_MOVE_1 917
+#define DYN_MOVE_2 1145
+
+#define DYN_LOAD_0 1570
+#define DYN_LOAD_1 2001
+#define DYN_LOAD_2 2493
+
+#define DYN_MULT_DIV_0 1270
+#define DYN_MULT_DIV_1 1772
+#define DYN_MULT_DIV_2 2451
+
+#define DYN_NOP_0 453
+#define DYN_NOP_1 578
+#define DYN_NOP_2 719
+
+#define DYN_BRANCH_0 1350
+#define DYN_BRANCH_1 1725
+#define DYN_BRANCH_2 2157
+
+#define DYN_JUMP_0 761
+#define DYN_JUMP_1 971
+#define DYN_JUMP_2 2113
+
+#define DYN_WEIRD_0 (DYN_ARITH_0 + DYN_LOGICAL_0 + DYN_SHIFT_0 + DYN_MOVE_0 + DYN_LOAD_0 + DYN_MULT_DIV_0 + DYN_NOP_0 + DYN_BRANCH_0 + DYN_JUMP_0)/9
+#define DYN_WEIRD_1 (DYN_ARITH_1 + DYN_LOGICAL_1 + DYN_SHIFT_1 + DYN_MOVE_1 + DYN_LOAD_1 + DYN_MULT_DIV_1 + DYN_NOP_1 + DYN_BRANCH_1 + DYN_JUMP_1)/9
+#define DYN_WEIRD_2 (DYN_ARITH_2 + DYN_LOGICAL_2 + DYN_SHIFT_2 + DYN_MOVE_2 + DYN_LOAD_2 + DYN_MULT_DIV_2 + DYN_NOP_2 + DYN_BRANCH_2 + DYN_JUMP_2)/9
+/*--------------------------------------------------------------------------------
+ * MEMORY - Total dynamic read/write energy per access (pJ)
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+#define DYN_READ_MEM_0 6351
+#define DYN_READ_MEM_1 7796
+#define DYN_READ_MEM_2 9396
+
+#define DYN_WRITE_MEM_0 8843
+#define DYN_WRITE_MEM_1 11043
+#define DYN_WRITE_MEM_2 13497
+
+/*--------------------------------------------------------------------------------
+ * ROUTER - Multipling power and period results in energy (pJ)
+ * the energy is in pJ MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+//mW*100 or uW/10
+#define DYN_BUFFER_ACTIVE_0 118
+#define DYN_BUFFER_ACTIVE_1 151
+#define DYN_BUFFER_ACTIVE_2 188
+
+#define DYN_CTRL_ACTIVE_0 41
+#define DYN_CTRL_ACTIVE_1 52
+#define DYN_CTRL_ACTIVE_2 65
+
+#define DYN_BUFFER_IDLE_0 49
+#define DYN_BUFFER_IDLE_1 62
+#define DYN_BUFFER_IDLE_2 77
+
+#define DYN_CTRL_IDLE_0 14
+#define DYN_CTRL_IDLE_1 18
+#define DYN_CTRL_IDLE_2 22
+/*--------------------------------------------------------------------------------
+ * OVERHEAD FINE-GRAIN VOLTAGE SCALING - *DC_DC_CONVERTER_ENERGY_OVERHEAD/10 
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * Class[0.9 V][1.0 V][1.1 V] - Power Leakage and Dynamic
+ * Total leakage power of a bank without power gating, including its network outside (uW)
+ * -------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------
+ * Leakage energy of processor, router, and memory
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+const int energyLeakProc[3]={LEAK_PROC_0, LEAK_PROC_1, LEAK_PROC_2};
+const int energyLeakRouter[3]={LEAK_ROUTER_0, LEAK_ROUTER_1, LEAK_ROUTER_2};
+const int energyLeakMemory[3]={LEAK_MEM_0*PERIOD_NS/10, LEAK_MEM_1*PERIOD_NS/10, LEAK_MEM_2*PERIOD_NS/10};
+
+/*--------------------------------------------------------------------------------
+ * Total dynamic energy per instruction class (pJ)
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+const int arithDyn[3]={DYN_ARITH_0, DYN_ARITH_1, DYN_ARITH_2};
+const int logicalDyn[3]={DYN_LOGICAL_0, DYN_LOGICAL_1, DYN_LOGICAL_2};
+const int shiftDyn[3]={DYN_SHIFT_0, DYN_SHIFT_1, DYN_SHIFT_2};
+const int moveDyn[3]={DYN_MOVE_0, DYN_MOVE_1, DYN_MOVE_2};
+const int loadStoreDyn[3]={DYN_LOAD_0, DYN_LOAD_1, DYN_LOAD_2};
+const int multDivDyn[3]={DYN_MULT_DIV_0, DYN_MULT_DIV_1, DYN_MULT_DIV_2};
+const int nopDyn[3]={DYN_NOP_0, DYN_NOP_1, DYN_NOP_2};
+const int branchDyn[3]={DYN_BRANCH_0, DYN_BRANCH_1, DYN_BRANCH_2};
+const int jumpDyn[3]={DYN_JUMP_0, DYN_JUMP_1, DYN_JUMP_2};
+const int weirdDyn[3]={}
+
+/*--------------------------------------------------------------------------------
+ * Total dynamic read/write energy per access (pJ)
+ * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+const int readEnergyMemory[3]={DYN_READ_MEM_0, DYN_READ_MEM_1, DYN_READ_MEM_2};
+const int writeEnergyMemory[3]={DYN_WRITE_MEM_0, DYN_WRITE_MEM_1, DYN_WRITE_MEM_2};
+
+
+/*--------------------------------------------------------------------------------
+ * Multipling power and period results in energy (pJ)
+ * the energy is in pJ MULTIPLIED BY 100 (xxxx => xx.xx)
+ * -------------------------------------------------------------------------------*/
+//mW*100 or uW/10
+const int powerAvgBufferActive[3]={DYN_BUFFER_ACTIVE_0, DYN_BUFFER_ACTIVE_1, DYN_BUFFER_ACTIVE_2};
+const int powerSwitchControlActive[3]={DYN_CTRL_ACTIVE_0, DYN_CTRL_ACTIVE_1, DYN_CTRL_ACTIVE_2};
+
+const int powerAvgBufferIdle[3]={DYN_BUFFER_IDLE_0, DYN_BUFFER_IDLE_1, DYN_BUFFER_IDLE_2};
+const int powerSwitchControlIdle[3]={DYN_CTRL_IDLE_0, DYN_CTRL_IDLE_1, DYN_CTRL_IDLE_2};
+////////////////////////////////////////////////////////////////////////////////////
 #define ROUTER_BASE    ((unsigned int *) 0x80000000)
 #define SYNC_BASE      ((unsigned int *) 0x80000014)
 #define NI_BASE        ((unsigned int *) 0x80000004)
@@ -144,6 +299,11 @@ void read_class_inst(){
 }
 
 time_t lastTimeInstructions = 0;
+Estimation_of_energy sampling;
+unsigned int Voltage = 2;
+unsigned int flag_DFS = 7;
+unsigned int flag_DVS = 0;
+unsigned int latency_DVS = 0;
 /////////////////////////////////////////////////////////////////////////
 
 
@@ -274,7 +434,8 @@ void interruptHandler_timer(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
     //////////////////////////////////////////////////////////////
-    unsigned int timeActiveNoC, nPorts, actualTime, difTime, timeIdleNoC;
+    unsigned int timeActiveNoC, nPorts, actualTime, difTime, timeIdleNoC, energyActive, energyIdle, idleNoC, activeNoC, EnergyNoC, energyProcDif_dyn, energyMemoryDif_dyn, energyMemoryDif_leak;
+    unsigned int avoidOverflow, energyProcDif_leak, energyLocalDif_dyn, energyLocalDif_leak;
 
     actualTime = (unsigned int)clock();
     difTime = actualTime - (unsigned int)lastTimeInstructions;
@@ -283,33 +444,101 @@ void interruptHandler_timer(void) {
     /*Read executed instructions*/ 
 	Instrucions_class inst_class;     //*inst_class_ptr,
 
-    inst_class.arith		= arith_inst;
-	inst_class.logical		= logical_inst;
-	inst_class.branch		= branch_inst;
-	inst_class.jump			= jump_inst;
-	inst_class.move			= move_inst;
-	inst_class.load			= load_inst;
-	inst_class.store		= store_inst;
-	inst_class.shift		= shift_inst;
-	inst_class.nop			= nop_inst;
-	inst_class.mult_div 	= mult_div_inst;
-    inst_class.weird        = weird_inst;
+    inst_class.arith		= arith_inst>>6;
+	inst_class.logical		= logical_inst>>6;
+	inst_class.branch		= branch_inst>>6;
+	inst_class.jump			= jump_inst>>6;
+	inst_class.move			= move_inst>>6;
+	inst_class.load			= load_inst>>6;
+	inst_class.store		= store_inst>>6;
+	inst_class.shift		= shift_inst>>6;
+	inst_class.nop			= nop_inst>>6;
+	inst_class.mult_div 	= mult_div_inst>>6;
+    inst_class.weird        = weird_inst>>6;
 	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst + weird_inst;
 
     //Print router info
     //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
-
+    ////////////////////////////////
+    /* NOC ENERGY */
     timeActiveNoC = estimateNoCActivity();
     timeIdleNoC = difTime-timeActiveNoC;
 
     nPorts = getNumberOfPorts(*myAddress);
 
-    //energyActive = PERIOD_NS/10 * ((nPorts-1) * powerAvgBufferIdle[Voltage] + powerAvgBufferActive[Voltage] + powerSwitchControlActive[Voltage]);
-	//energyIdle   = PERIOD_NS/10 * ( nPorts * powerAvgBufferIdle[Voltage] + powerSwitchControlIdle[Voltage]);
+    energyActive = PERIOD_NS/10 * ((nPorts-1) * powerAvgBufferIdle[Voltage] + powerAvgBufferActive[Voltage] + powerSwitchControlActive[Voltage]);
+	energyIdle   = PERIOD_NS/10 * ( nPorts * powerAvgBufferIdle[Voltage] + powerSwitchControlIdle[Voltage]);
+
+    timeActiveNoC 	= timeActiveNoC>>6;
+	timeIdleNoC		= timeIdleNoC>>6;
+
+    idleNoC = timeIdleNoC*energyIdle *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
+	activeNoC = timeActiveNoC*energyActive *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
+
+    EnergyNoC =	idleNoC + activeNoC;
+    ////////////////////////////////
+    /* PE ENERGY */
+
+    energyProcDif_dyn = arithDyn[Voltage]*arith_inst + 
+						branchDyn[Voltage]*branch_inst + 
+						jumpDyn[Voltage]*jump_inst + 
+						moveDyn[Voltage]*move_inst + 
+						loadStoreDyn[Voltage]*(load_inst+store_inst) + 
+						shiftDyn[Voltage]*shift_inst + 
+						nopDyn[Voltage]*nop_inst + 
+						logicalDyn[Voltage]*logical_inst +
+						multDivDyn[Voltage]*mult_div_inst+
+                        weirdDyn[Voltage]*weird_inst;
+    
+    energyProcDif_dyn = energyProcDif_dyn *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
+
+    /* MEMORY ENERGY */
+    energyMemoryDif_dyn =	readEnergyMemory[Voltage]*load_inst +
+                            writeEnergyMemory[Voltage]*store_inst;
+
+
+    avoidOverflow = difTime>>6;
+	energyMemoryDif_leak = PERIOD_NS/10 * energyLeakMemory[Voltage]*avoidOverflow;
+
+    if(flag_DVS){ //voltage_scaling (flag_DVS==1 || flag_DVS==-1)
+		avoidOverflow = latency_DVS>>6;
+		energyProcDif_leak = energyLeakProc[Voltage+flag_DVS]*avoidOverflow *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;  
+
+		avoidOverflow = (difTime-latency_DVS)>>6;
+		energyProcDif_leak  	+= energyLeakProc[Voltage]*avoidOverflow  *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;  
+	}else{ //no_voltage_scaling
+		avoidOverflow = difTime>>6;
+		energyProcDif_leak = energyLeakProc[Voltage]*avoidOverflow *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;  
+	}
+
+    energyLocalDif_dyn = energyProcDif_dyn + energyMemoryDif_dyn + activeNoC + idleNoC;
+	energyLocalDif_leak = energyProcDif_leak + energyMemoryDif_leak;// + energyLeakNoC;
+
+    // Resultado
+    sampling.router 		= EnergyNoC;
+	sampling.processor 		= energyProcDif_leak + energyProcDif_dyn;
+	sampling.memory 		= energyMemoryDif_leak + energyMemoryDif_dyn;
+	sampling.leakage 		= energyLocalDif_leak;
+	sampling.real_window	= difTime;
+	sampling.n_inst			= inst_class.total;
+
+    executedInstPacket[PI_DESTINATION] = makeAddress(0,0);
+    executedInstPacket[PI_SIZE] = 3 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    tsend = clock();
+	tsend = tsend - tinicio;
+    executedInstPacket[PI_SEND_TIME] = tsend;
+    executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
+    executedInstPacket[4] = sampling.real_window;
+    executedInstPacket[5] = sampling.processor + sampling.router + sampling.memory;
+    executedInstPacket[6] = sampling.leakage;
+    executedInstPacket[7] = *myAddress;
+    //executedInstPacket[7] = router_congestion;
+    //executedInstPacket[8] = router_injection;
+    //executedInstPacket[9] = 0; // ((total_slack_time*100) / sampling->real_window);
 
     //LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, difTime);
 
-    executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
+    /*executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
@@ -326,7 +555,7 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_NOP] = *nopCounter;
     executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
-    executedInstPacket[PI_I_WEIRD] = *weirdCounter;
+    executedInstPacket[PI_I_WEIRD] = *weirdCounter;*/
     if(*NIcmd == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
