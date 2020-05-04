@@ -84,7 +84,7 @@
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 
 unsigned int htonl(unsigned int x){
-    return __bswap_constant-_32(x);
+    return __bswap_constant_32(x);
 }
 
 #if LOG_OUTPUTFLITS
