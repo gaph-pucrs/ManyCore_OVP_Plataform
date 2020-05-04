@@ -259,6 +259,8 @@ void searchAndAllocate(){
         // Updates the routingTable and reset the port priority
         routingTable[selectedPort] = XYrouting(myAddress,SEC_PE);
         contPriority[selectedPort] = 0;
+    }else{
+        hasDataToSend = 0;
     }
 }
 
@@ -366,11 +368,13 @@ int main(int argc, char *argv[]) {
     bhmInstallDiagCB(setDiagLevel);
     constructor();
     //int i = 0;
-    //hasDataToSend = 0;
+    hasDataToSend = 0;
     while(1){
 
        // bhmWaitDelay(QUANTUM_DELAY);
-        iterate();
+       if(hasDataToSend){
+            iterate();
+       }
         //i++;
        // bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
        // if(i==10){

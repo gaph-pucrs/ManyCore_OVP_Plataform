@@ -135,21 +135,25 @@ PPM_PACKETNET_CB(controlWest) {
 PPM_PACKETNET_CB(dataEast) {
 unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    hasDataToSend = 1;
     bufferPush(EAST);}
 
 PPM_PACKETNET_CB(dataNorth) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    hasDataToSend = 1;
     bufferPush(NORTH);}
 
 PPM_PACKETNET_CB(dataSouth) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    hasDataToSend = 1;
     bufferPush(SOUTH);}
 
 PPM_PACKETNET_CB(dataWest) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    hasDataToSend = 1;
     bufferPush(WEST);}
 
 PPM_PACKETNET_CB(unsafeNoC) {
@@ -170,7 +174,7 @@ PPM_PACKETNET_CB(unsafeNoC) {
         //incomingFlit.data = htonl1(incomingFlit.data);
         bhmMessage("INFO", "SECROUTER", "-------------------------------------------------------------> flitTotal = %d received", incomingFlit.data);
         bufferPush(LOCAL);
-
+        hasDataToSend = 1;
     }
 
 
