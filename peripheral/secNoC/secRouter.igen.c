@@ -369,10 +369,10 @@ int main(int argc, char *argv[]) {
    // hasDataToSend = 0;
     while(1){
 
-        //bhmWaitDelay(QUANTUM_DELAY);
+        bhmWaitDelay(QUANTUM_DELAY);
         iterate();
         //i++;
-       // bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
+        bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
         //if(i==10){
           //  i=0;
        // }
