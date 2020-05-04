@@ -92,6 +92,8 @@ typedef struct{
 
 // One buffer for each port
 extern flit buffers[N_PORTS][BUFFER_SIZE];
+extern int control[N_PORTS];
+
 
 
 
