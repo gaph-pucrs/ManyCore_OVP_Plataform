@@ -67,7 +67,11 @@ int main(int argc, char *argv[]) {
     int i = 0;
     hasDataToSend = 0;
     while(1){
-        bhmMessage("INFO","SECROUTER","WHILE1");
+        i++;
+        bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
+        if(i==10){
+            i=0;
+        }
         ppmPacketnetWrite(handles.portUnsafeNoC, &i, sizeof(i)); // OK!!
 
 
