@@ -381,7 +381,8 @@ int main(int argc, char *argv[]) {
        // if(i==10){
             iterate();
         }else{
-            bhmWaitEvent(goEvent);
+            bhmWaitDelay(QUANTUM_DELAY);
+           
             iterate();
 
             //esperar evento
