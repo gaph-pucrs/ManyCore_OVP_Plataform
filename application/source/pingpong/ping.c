@@ -8,7 +8,6 @@
 #include "pingpong_config.h"
 
 message pingpong;
-volatile int val = 0;
 
 int main(int argc, char **argv)
 {
@@ -16,7 +15,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    int i,f;
+    int i;
     pingpong.size = 10;
     for(i=0;i<10;i++){
         pingpong.msg[i] = i;
@@ -27,9 +26,6 @@ int main(int argc, char **argv)
         LOG("0-PING: %d\n",pingpong.msg[0]);
         pingpong.msg[0] = pingpong.msg[0] + 1;
         SendMessage(&pingpong, pong_addr);
-        for(f=0;f<1500;f++){
-            val++;
-        }
     }
     LOG("Ping Finalizado!\n");
     //////////////////////////////////////////////////////
