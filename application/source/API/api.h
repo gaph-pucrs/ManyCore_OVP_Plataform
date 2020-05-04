@@ -523,7 +523,7 @@ void interruptHandler_timer(void) {
 	sampling.n_inst			= inst_class.total;
 
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0);
-    executedInstPacket[PI_SIZE] = 3 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    executedInstPacket[PI_SIZE] = 4 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
 	tsend = tsend - tinicio;
     executedInstPacket[PI_SEND_TIME] = tsend;
