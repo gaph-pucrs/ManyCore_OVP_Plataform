@@ -65,10 +65,10 @@ int main(int argc, char *argv[]) {
     bhmInstallDiagCB(setDiagLevel);
     constructor();
     int i = 0;
-    hasDataToSend = 0;
+   // hasDataToSend = 0;
     while(1){
 
-        bhmWaitDelay(QUANTUM_DELAY);
+       // bhmWaitDelay(QUANTUM_DELAY);
 
         i++;
         bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
