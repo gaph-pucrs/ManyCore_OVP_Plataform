@@ -82,6 +82,8 @@
 #if LOG_OUTPUTFLITS
 extern int contFlits[N_PORTS];
 #endif
+extern unsigned int first[N_PORTS];
+
 
 
 extern int myID;
