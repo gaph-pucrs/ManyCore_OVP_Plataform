@@ -141,7 +141,7 @@ const int multDivDyn[3]={DYN_MULT_DIV_0, DYN_MULT_DIV_1, DYN_MULT_DIV_2};
 const int nopDyn[3]={DYN_NOP_0, DYN_NOP_1, DYN_NOP_2};
 const int branchDyn[3]={DYN_BRANCH_0, DYN_BRANCH_1, DYN_BRANCH_2};
 const int jumpDyn[3]={DYN_JUMP_0, DYN_JUMP_1, DYN_JUMP_2};
-const int weirdDyn[3]={}
+const int weirdDyn[3]={DYN_WEIRD_0, DYN_WEIRD_1, DYN_WEIRD_2};
 
 /*--------------------------------------------------------------------------------
  * Total dynamic read/write energy per access (pJ)
