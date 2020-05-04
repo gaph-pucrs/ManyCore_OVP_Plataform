@@ -44,7 +44,7 @@ int main(int argc, char **argv)
         LOG("Todos os pacotes foram recebidos!!!\n");
         for(y=0;y<DIM_Y;y++){
             for(x=0;x<DIM_X;x++){
-                Power[p_idx] = (unsigned int)((energyLocalsDif_total[x][y]); //*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
+                Power[p_idx] = (unsigned int)((energyLocalsDif_total[x][y])); //*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
                 LOG("%d,%d - energy: %u\n",x,y,Power[p_idx]);
                 p_idx++;
             }
