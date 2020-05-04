@@ -371,7 +371,7 @@ int main(int argc, char *argv[]) {
     hasDataToSend = 0;
     while(1){
 
-       // bhmWaitDelay(QUANTUM_DELAY);
+       bhmWaitDelay(QUANTUM_DELAY);
        if(hasDataToSend){
             iterate();
        }
