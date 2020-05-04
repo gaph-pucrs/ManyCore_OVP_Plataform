@@ -302,7 +302,7 @@ void interruptHandler_timer(void) {
 
     timeActiveNoC = estimateNoCActivity();
 
-    nPorts = getNumberOfPorts();
+    nPorts = getNumberOfPorts(*myAddress);
 
     LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, lastTimeInstructions);
 
