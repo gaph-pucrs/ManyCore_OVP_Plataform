@@ -24,7 +24,7 @@ unsigned int htonl1(unsigned int x){
 unsigned int myAddress = 0xFFFFFFFF;
 // local ID Router
 int myID = 0xFFFFFFFF;
-
+int hasDataToSend;
 // Countdown value per Packet, informing how many flits are left to be transmitted 
 
 
