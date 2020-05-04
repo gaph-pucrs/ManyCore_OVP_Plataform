@@ -27,7 +27,7 @@ int main(int argc, char **argv)
         LOG("0-PING: %d\n",pingpong.msg[0]);
         pingpong.msg[0] = pingpong.msg[0] + 1;
         SendMessage(&pingpong, pong_addr);
-        for(f=0;f<1500000;f++){
+        for(f=0;f<1500;f++){
             val++;
         }
     }
