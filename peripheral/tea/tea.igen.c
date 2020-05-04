@@ -47,6 +47,11 @@
 unsigned int t_steady[THERMAL_NODES];
 unsigned int temp_trace_end[THERMAL_NODES];
 
+unsigned int matrix_b[DIM_X*DIM_Y][THERMAL_NODES];
+unsigned int matrix_c[THERMAL_NODES][THERMAL_NODES];
+
+unsigned long int mac_accumulator;
+
 unsigned int power[DIM_Y][DIM_X];
 
 unsigned int flit_in_counter = 0;
@@ -73,6 +78,17 @@ unsigned int getXpos(unsigned int addr){
 /* Gets the Y coordinate from the address */
 unsigned int getYpos(unsigned int addr){
     return (addr & 0x000000FF);
+}
+
+///////////////////////////////////////////////////////////////////
+unsigned int mac_unit(unsigned int clear, unsigned int calc, unsigned int data_in_a, unsigned int data_in_b){
+    if(calc == 1 && clear == 1){
+        mac_accumulator = (unsigned long int)data_in_a * (unsigned long int)data_in_b;
+    }
+    else if(calc == 1){
+        mac_accumulator = mac_accumulator + (unsigned long int)data_in_a * (unsigned long int)data_in_b;
+    } 
+    return (unsigned int)mac_accumulator;
 }
 
 /////////////////////////////// Port Declarations //////////////////////////////
@@ -112,6 +128,7 @@ PPM_PACKETNET_CB(dataUpdate) {
         msg_size = htonl(newFlit);
         x_data_counter = 0; // atualmente sempre vem do 00
         y_data_counter = 0; // atualmente sempre vem do 00
+        source_pe = 0x0000;
     }
     /*else if(flit_in_counter == 5){  // Quinto flit - SOURCE
         source_pe =  htonl(newFlit);
@@ -130,6 +147,76 @@ PPM_PACKETNET_CB(dataUpdate) {
         }
     }
     else if(flit_in_counter == msg_size+2){ // Acabar a mensagem
+        unsigned int mat_b_line = 0;
+        unsigned int mat_b_column = 0;
+        unsigned int mat_c_line = 0;
+        unsigned int mat_c_column = 0;
+        unsigned int x_power_counter = 0;
+        unsigned int y_power_counter = 0;
+        unsigned int aux, clear;
+        
+        ////////////////////////////////////////////////////////////////////////
+        /*CALCULAR STEADY*/
+        /*Avança os ponteiros da matriz B*/
+        bhmMessage("I", "Input", "Calculando STEADY!\n");
+        for(mat_b_line=0;mat_b_line<THERMAL_NODES;mat_b_line++){
+            for(mat_b_column=0;mat_b_column<DIM_X*DIM_Y;mat_b_column++){
+                
+                if(mat_b_column == 0)
+                    clear = 1;
+                else
+                    clear = 0;
+
+                /* Faz operação de MAC */
+                aux = mac_unit(clear, 1, matrix_b[mat_b_column][mat_b_line], power[x_power_counter][y_power_counter]);
+
+                
+                if(mat_b_line != 0 && clear == 1){
+                    t_steady(mat_b_line-1) = (aux>>20)+31815;
+                }
+
+                /*Avança os ponteiros da matriz POWER*/
+                if(x_power_counter == DIM_X-1 && y_power_counter == DIM_Y-1){
+                    x_power_counter = 0;
+                    y_power_counter = 0;
+                }
+                else if(x_power_counter == DIM_X-1){
+                    x_power_counter = 0;
+                    y_power_counter++;
+                }
+                else{
+                    x_power_counter++;
+                }
+
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////
+        /*CALCULAR TRANSIENT*/
+        bhmMessage("I", "Input", "Calculando TRANSIENT!\n");
+
+        for(mat_c_line=0;mat_c_line<THERMAL_NODES;mat_c_line++){
+            for(mat_c_column=0;mat_c_column<THERMAL_NODES;mat_c_column++){
+                
+                if(mat_c_column == 0)
+                    clear = 1;
+                else
+                    clear = 0;
+
+                aux = mac_unit(clear, 1, matrix_c[mat_c_column][mat_c_line], (temp_trace_end[mat_c_column]-t_steady[mat_c_column]));
+
+                if(mat_c_line != 0 && clear == 1){
+                    if((0x80000000 & aux)>>31 == 1)
+                        aux = 0xFFFFF & (aux>>20);
+                    else
+                        aux = 0x00000 & (aux>>20);
+                    temp_trace_end(mat_c_line-1) = t_steady(mat_c_line-1) + aux;
+                }
+
+            }
+        }
+
+        bhmMessage("I", "Input", "TUDO CALCULADO!!! IhÀ!\n");
+
         flit_in_counter = 0;
         source_pe =  0;
         x_data_counter = 0;
@@ -175,6 +262,9 @@ int main(int argc, char *argv[]) {
         for(j=0;j<DIM_Y;j++){
             power[i][j] = 0;
         }
+    }
+    for(i=0;i<THERMAL_NODES;i++){
+        temp_trace_end = 31815;
     }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
