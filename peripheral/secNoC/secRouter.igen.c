@@ -353,7 +353,7 @@ void iterate(){
     ////////////////////////////////////////////
     ////////////////////////////////////////////
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-   // transmitt(); 
+    transmitt(); 
 }
 
 int main(int argc, char *argv[]) {
