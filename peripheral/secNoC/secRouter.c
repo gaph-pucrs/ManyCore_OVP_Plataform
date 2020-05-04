@@ -586,7 +586,7 @@ PPM_PACKETNET_CB(dataWest) {
     bufferPush(WEST);}
 
 PPM_PACKETNET_CB(unsafeNoC) {
-    int testando1=0;
+   // int testando1=0;
     if(myAddress == 0xFFFFFFFF){
         myID = *(unsigned int *)data;
         myID = htonl((unsigned int)myID);
