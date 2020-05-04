@@ -9,6 +9,8 @@
 
 message theMsg;
 
+unsigned int toPeriph[(DIM_X*DIM_Y)+2+3+1];
+
 unsigned int Power[DIM_X*DIM_Y];
 unsigned int Temperature[DIM_X*DIM_Y];
 unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
@@ -33,7 +35,6 @@ int main(int argc, char **argv)
     /* Wait for every PE to send each power estimation */
     while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
         // Aguarda os pacotes de energia dos PEs
-        p_idx=0;
         for(y=0;y<DIM_Y;y++){
             for(x=0;x<DIM_X;x++){
                 ReceiveRaw(&theMsg);
@@ -42,13 +43,25 @@ int main(int argc, char **argv)
             }
         }
         LOG("Todos os pacotes foram recebidos!!!\n");
+        
+        /*Mounts and send the packet to the peripheral*/
+        executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST;
+        executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
+        tsend = clock();
+	    tsend = tsend - tinicio;
+        executedInstPacket[PI_SEND_TIME] = tsend;
+        executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
+        p_idx=0;
         for(y=0;y<DIM_Y;y++){
             for(x=0;x<DIM_X;x++){
-                Power[p_idx] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
-                LOG("%d,%d - energy: %u\n",x,y,Power[p_idx]);
+                executedInstPacket[p_idx+4] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
                 p_idx++;
             }
         }
+        if(*NIcmd == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
+            SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+        else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
+            sendExecutedInstPacket = TRUE;
     }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
