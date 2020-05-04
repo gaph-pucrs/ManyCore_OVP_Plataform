@@ -70,11 +70,11 @@ int main(int argc, char *argv[]) {
 
        // bhmWaitDelay(QUANTUM_DELAY);
 
-        i++;
+        //i++;
        // bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
-        if(i==10){
-            i=0;
-        }
+        //if(i==10){
+          //  i=0;
+       // }
         ppmPacketnetWrite(handles.portUnsafeNoC, &i, sizeof(i)); // OK!!
 
 
