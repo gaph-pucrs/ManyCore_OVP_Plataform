@@ -110,14 +110,17 @@ PPM_PACKETNET_CB(dataUpdate) {
     flit_in_counter++;
     if(flit_in_counter == 2){       // Segundo flit - SIZE
         msg_size = htonl(newFlit);
+        x_data_counter = 0; // atualmente sempre vem do 00
+        y_data_counter = 0; // atualmente sempre vem do 00
     }
-    else if(flit_in_counter == 5){  // Quinto flit - SOURCE
+    /*else if(flit_in_counter == 5){  // Quinto flit - SOURCE
         source_pe =  htonl(newFlit);
         x_data_counter = getXpos(source_pe);
         y_data_counter = getYpos(source_pe);
-    }
-    else if(flit_in_counter > 5){ // Power information
+    }*/
+    else if(flit_in_counter >= 5){ // Power information
         power[y_data_counter][x_data_counter] = htonl(newFlit);
+        bhmMessage("I", "Input", "power[%d][%d]: %d\n",x_data_counter, y_data_counter, power[y_data_counter][x_data_counter]);
         if(x_data_counter == getXpos(source_pe)+CLUSTER_X-1){ // ATUAL_X = ORIG_X + TAM_CLUSTER
             x_data_counter = getXpos(source_pe);
             y_data_counter++;
