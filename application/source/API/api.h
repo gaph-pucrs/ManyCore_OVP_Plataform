@@ -242,6 +242,16 @@ volatile unsigned int *southFlits =   SOUTH_FLITS;
 volatile unsigned int *southPackets = SOUTH_PACKETS;
 volatile unsigned int *localFlits =   LOCAL_FLITS;
 volatile unsigned int *localPackets = LOCAL_PACKETS;
+unsigned int eastFlits_last = 0;
+unsigned int eastPackets_last = 0;
+unsigned int westFlits_last = 0;
+unsigned int westPackets_last = 0;
+unsigned int northFlits_last = 0;
+unsigned int northPackets_last = 0;
+unsigned int southFlits_last = 0;
+unsigned int southPackets_last = 0;
+unsigned int localFlits_last = 0;
+unsigned int localPackets_last = 0;
 /* Instructions stuff */
 typedef struct {
 	unsigned int arith;
@@ -408,8 +418,26 @@ void read_class_inst(){
 ///////////////////////////////////////////////////////////////////
 /* Activity estimation based in the amount of flits and packets crossing the router */
 unsigned int estimateNoCActivity(){
-    unsigned int totalPackets = *eastPackets + *westPackets + *southPackets + *localPackets + *northPackets;
-    unsigned int totalFlits = *eastFlits + *westFlits + *southFlits + *localFlits + *northFlits;
+    unsigned int totalPackets = *eastPackets - eastPackets_last +
+                                *westPackets - westPackets_last +
+                                *southPackets - southPackets_last +
+                                *localPackets - localPackets_last + 
+                                *northPackets - northPackets_last;
+    eastPackets_last = *eastPackets;
+    westPackets_last = *westPackets;
+    southPackets_last = *southPackets;
+    localPackets_last = *localPackets;
+    northPackets_last = *northPackets;
+    unsigned int totalFlits = *eastFlits - eastFlits_last + 
+                              *westFlits - westFlits_last + 
+                              *southFlits - southFlits_last + 
+                              *localFlits - localFlits_last + 
+                              *northFlits - northFlits_last;
+    eastFlits_last = *eastFlits ;
+    westFlits_last = *westFlits ;
+    southFlits_last = *southFlits;
+    localFlits_last = *localFlits;
+    northFlits_last = *northFlits;
     return ((totalPackets*5)+ totalFlits);
 }
 
