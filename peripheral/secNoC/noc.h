@@ -85,6 +85,14 @@ extern int contFlits[N_PORTS];
 extern unsigned int first[N_PORTS];
 unsigned int last[N_PORTS];
 
+typedef struct{
+    unsigned int data;
+   // unsigned int appID;
+}flit;
+
+// One buffer for each port
+extern flit buffers[N_PORTS][BUFFER_SIZE];
+
 
 
 

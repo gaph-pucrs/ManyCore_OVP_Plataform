@@ -15,7 +15,7 @@
 #define __bswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
-      
+
 #define __cswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
@@ -38,12 +38,6 @@ unsigned int flitCountIn = HEADER;
 
 
 // Define a struct that stores the number of packets and the application ID
-typedef struct{
-    unsigned int data;
-   // unsigned int appID;
-}flit;
-
-// One buffer for each port
 flit buffers[N_PORTS][BUFFER_SIZE];
 flit incomingFlit;
 
