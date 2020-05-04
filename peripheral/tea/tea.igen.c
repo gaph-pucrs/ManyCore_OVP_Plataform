@@ -129,7 +129,7 @@ PPM_PACKETNET_CB(dataUpdate) {
             x_data_counter++;
         }
     }
-    else if(flit_in_counter >= 5+(DIM_Y*DIM_X)){ // Acabar a mensagem
+    else if(flit_in_counter > 5+3+(DIM_Y*DIM_X)){ // Acabar a mensagem
         flit_in_counter = 0;
         source_pe =  0;
         x_data_counter = 0;
