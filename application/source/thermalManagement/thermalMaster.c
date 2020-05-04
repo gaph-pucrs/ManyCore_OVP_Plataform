@@ -45,7 +45,7 @@ int main(int argc, char **argv)
         LOG("Todos os pacotes foram recebidos!!!\n");
         
         /*Mounts and send the packet to the peripheral*/
-        executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST;
+        executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
         executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
         tsend = clock();
 	    tsend = tsend - tinicio;
