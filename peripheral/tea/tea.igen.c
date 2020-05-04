@@ -172,7 +172,7 @@ PPM_PACKETNET_CB(dataUpdate) {
 
                 
                 if(mat_b_line != 0 && clear == 1){
-                    t_steady(mat_b_line-1) = (aux>>20)+31815;
+                    t_steady[mat_b_line-1] = (aux>>20)+31815;
                 }
 
                 /*Avança os ponteiros da matriz POWER*/
@@ -209,7 +209,7 @@ PPM_PACKETNET_CB(dataUpdate) {
                         aux = 0xFFFFF & (aux>>20);
                     else
                         aux = 0x00000 & (aux>>20);
-                    temp_trace_end(mat_c_line-1) = t_steady(mat_c_line-1) + aux;
+                    temp_trace_end[mat_c_line-1] = t_steady[mat_c_line-1] + aux;
                 }
 
             }
@@ -264,7 +264,7 @@ int main(int argc, char *argv[]) {
         }
     }
     for(i=0;i<THERMAL_NODES;i++){
-        temp_trace_end = 31815;
+        temp_trace_end[i] = 31815;
     }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
