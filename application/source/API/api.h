@@ -279,7 +279,7 @@ void interruptHandler_timer(void) {
     time_t actualTime, difTime;
     actualTime = clock();
     difTime = actualTime - lastTimeInstructions;
-
+    lastTimeInstructions = actualTime;
    
     /*Read executed instructions*/ 
 	Instrucions_class inst_class;     //*inst_class_ptr,
@@ -304,7 +304,7 @@ void interruptHandler_timer(void) {
 
     nPorts = getNumberOfPorts(*myAddress);
 
-    LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, lastTimeInstructions);
+    LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, difTime);
 
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
