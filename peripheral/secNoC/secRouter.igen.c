@@ -46,7 +46,7 @@ unsigned int htonl2(unsigned int x){
 unsigned int ntohl(unsigned int x){
     return __cswap_constant_32(x);
 }
-unsigned int flitCountOut[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
+unsigned int flitCountOut[N_PORTS] = {2,2,2,2,2};
 unsigned int routingTable[N_PORTS] = {ND,ND,ND,ND,ND};
 
 
@@ -112,22 +112,11 @@ unsigned int peripheralPort(unsigned int address){
 }
 
 unsigned int XYrouting(unsigned int current, unsigned int dest){
-    unsigned int destination = ntohl(dest);
+    //unsigned int destination = ntohl(dest);
+    unsigned int destination = dest;
     //bhmMessage("INFO", "XY", "dest: %d --- %d", dest, destination);
     if(positionX(current) == positionX(destination) && positionY(current) == positionY(destination)){
-        if(peripheralPort(destination) == PERIPH_LOCAL)
-            return LOCAL;
-        else if(peripheralPort(destination) == PERIPH_EAST)
-            return EAST;
-        else if(peripheralPort(destination) == PERIPH_WEST)
-            return WEST;
-        else if(peripheralPort(destination) == PERIPH_NORTH)
-            return NORTH;
-        else if(peripheralPort(destination) == PERIPH_SOUTH)
-            return SOUTH;
-        else
-            bhmMessage("I", "XYRouting", "Something is not quite right in the peripheral! ERROR!!!\n");
-            return ND; // ERROR
+       return LOCAL;
     }
     else if(positionX(current) < positionX(destination)){
         return EAST;
@@ -202,7 +191,7 @@ unsigned int bufferPop(unsigned int port){
     // Decreases the flitCountOut
     flitCountOut[port] = flitCountOut[port] - 1;
     // If the flitCountOut goes to EMPTY then the transmission is done!
-    if (flitCountOut[port] == EMPTY){
+    if (flitCountOut[port] == 0){
 
         //Log info about the end of transmittion of a packet
         if (routingTable[port] == LOCAL){
@@ -213,36 +202,10 @@ unsigned int bufferPop(unsigned int port){
         routingTable[port] = ND;
 
         // Inform that the next flit will be a header
-        flitCountOut[port] = HEADER;
+        flitCountOut[port] = 2;
 
-        // If every buffer is empty this router does not need to be ticked
-        /*if(myIterationStatus == ITERATION_ON && isEmpty(EAST) && isEmpty(WEST) && isEmpty(NORTH) && isEmpty(SOUTH) && isEmpty(LOCAL)){// && preBuffer_isEmpty()){
-            turn_TickOff();
-        }*/
-        #if ARBITER_RR
-        // Reset it's priority
-            priority[port] = 0;
-        #endif
-    }else if(port == LOCAL && flitCountOut[port] == HEADER-1){
-        localBuffer_packetDest = htonl2(value);
 
     }
-    // If it is the packet size flit then we store the value for the countdown
-    else if (flitCountOut[port] == SIZE){
-        flitCountOut[port] = htonl2(value);
-    }
-    else if(port == LOCAL && flitCountOut[port] == HOPS){
-        // Calculate the number of hops to achiev the destination address
-        // Calculate the X dif
-        if(positionX(myAddress)>positionX(localBuffer_packetDest)) difX = positionX(myAddress) - positionX(localBuffer_packetDest);
-        else difX = positionX(localBuffer_packetDest) - positionX(myAddress);
-        // Calculate the Y dif
-        if(positionY(myAddress)>positionY(localBuffer_packetDest)) difY = positionY(myAddress) - positionY(localBuffer_packetDest);
-        else difY = positionY(localBuffer_packetDest) - positionY(myAddress);
-        // Adds both difs to determine the amount of hops
-        value = ntohl(difX + difY);
-    }
-
     // Update the buffer status
     bufferStatusUpdate2(port);
 
@@ -250,55 +213,7 @@ unsigned int bufferPop(unsigned int port){
 }
 
 
-#if ARBITER_RR
-// Select the port with the biggest priority
-    unsigned int selectPort(){
-        unsigned int selected = ND; // Starts selecting none;
-        unsigned int selPrio = 0; 
-        int k;
-        for(k = 0; k <= LOCAL; k++){
-            // Increases the priority every time that this function runs
-            priority[k] = priority[k] + 1;
-            // If the port has a request then...
-            if(!isEmpty(k) && routingTable[k]==ND){
-                if(priority[k] > selPrio){
-                    selected = k;
-                    selPrio = priority[k];
-                }
-            }
-        }
-        return selected;
-    }
 
-// Allocates the output port to the givel selPort if it is available
-    void allocate(unsigned int port){
-        unsigned int header, to, checkport, allowed;
-        // In the first place, verify if the port is not connected to any thing and has something to transmitt 
-        if(port != ND && routingTable[port] == ND && !isEmpty(port)){
-            // Discover to wich port the packet must go
-            header = buffers[port][first[port]].data;
-            //bhmMessage("INFO", "ALLOCATE", "Pedindo roteamento para o header %x", htonl(header));
-            to = XYrouting(myAddress, header);
-            // Verify if any other port is using the selected one
-            allowed = 1;
-            for(checkport = 0; checkport <= LOCAL; checkport++){
-                if (routingTable[checkport] == to){
-                    allowed = 0;
-                // If the port can't get routed, then turn it's priority down
-                    if(priority[port]>5) priority[port] = priority[port] - 5;
-                }
-            }
-            if(allowed == 1){
-                routingTable[port] = to;
-            // Once one port is attended, then reset it's priority.
-                priority[port] = 1;
-            }
-        }
-    }
-#endif //ARBITER_RR
-
-
-#if ARBITER_TTL
 // Checks if a given output port is available
 int portIsAvailable(int port){ 
     int checkport;
@@ -342,83 +257,10 @@ void searchAndAllocate(){
     // If some port was selected
     if(selectedPort!=ND){
         // Updates the routingTable and reset the port priority
-        routingTable[selectedPort] = XYrouting(myAddress,buffers[selectedPort][first[selectedPort]].data);
+        routingTable[selectedPort] = XYrouting(myAddress,SEC_PE);
         contPriority[selectedPort] = 0;
     }
 }
-#endif // ARBITER_TTL
-
-#if ARBITER_HERMES
-// Select the port with the biggest priority
-void selectPort(){
-    switch (actualPort){
-        case LOCAL:
-            if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
-            else if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
-            else if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
-            else if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
-            else nextPort = LOCAL;
-        break;
-
-        case EAST:
-            if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
-            else if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
-            else if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
-            else if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
-            else nextPort = EAST;
-        break;
-
-        case WEST:
-            if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
-            else if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
-            else if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
-            else if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
-            else nextPort = WEST;
-        break;
-
-        case NORTH:
-            if(!isEmpty(SOUTH) && routingTable[SOUTH]==ND) nextPort = SOUTH;
-            else if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
-            else if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
-            else if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
-            else nextPort = NORTH;
-        break;
-
-        case SOUTH:
-            if(!isEmpty(LOCAL) && routingTable[LOCAL]==ND) nextPort = LOCAL;
-            else if(!isEmpty(EAST) && routingTable[EAST]==ND) nextPort = EAST;
-            else if(!isEmpty(WEST) && routingTable[WEST]==ND) nextPort = WEST;
-            else if(!isEmpty(NORTH) && routingTable[NORTH]==ND) nextPort = NORTH;
-            else nextPort = SOUTH;
-        break;
-
-        default:
-            nextPort = LOCAL;
-    }
-    actualPort = nextPort;
-}
-
-// Allocates the output port to the givel selPort if it is available
-void allocate(){
-    unsigned int header, to, checkport, allowed;
-    // In the first place, verify if the port is not connected to any thing and has something to transmitt 
-    if(actualPort != ND && routingTable[actualPort] == ND && !isEmpty(actualPort)){
-        // Discover to wich port the packet must go
-        header = buffers[actualPort][first[actualPort]].data;
-        to = XYrouting(myAddress, header);
-        // Verify if any other port is using the selected one
-        allowed = 1;
-        for(checkport = 0; checkport <= LOCAL; checkport++){
-            if (routingTable[checkport] == to){
-                allowed = 0;
-            }
-        }
-        if(allowed == 1){
-            routingTable[actualPort] = to;
-        }
-    }
-}
-#endif // ARBITER_HERMES
 
 void transmitt(){
     unsigned int port, flit;
@@ -500,23 +342,11 @@ void iterate(){
     ////////////////////////////////////////////
     // Arbitration Process - defined in noc.h //
     ////////////////////////////////////////////
-    #if ARBITER_RR
-    unsigned int selPort;
-    // Defines which port will be attended by the allocator
-    selPort = selectPort();
-    // Allocates the output port to the givel selPort if it is available
-    allocate(selPort);
-    #endif
-    ////////////////////////////////////////////
-    #if ARBITER_TTL
+    
     // Search and allocate the packet which is waiting more time
     searchAndAllocate();
-    #endif
     ////////////////////////////////////////////
-    #if ARBITER_HERMES
-    selectPort();
-    allocate();
-    #endif
+
     ////////////////////////////////////////////
     ////////////////////////////////////////////
     ////////////////////////////////////////////
@@ -539,7 +369,7 @@ int main(int argc, char *argv[]) {
    // hasDataToSend = 0;
     while(1){
 
-        bhmWaitDelay(QUANTUM_DELAY);
+        //bhmWaitDelay(QUANTUM_DELAY);
         iterate();
         //i++;
        // bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
