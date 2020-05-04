@@ -41,7 +41,7 @@ unsigned int control[N_PORTS] = {GO,GO,GO,GO,GO};
 
 int receivingData = 0;
 
-
+bhmEventHandle goEvent;
 
 
 ////////////////////////////////////////////////////////////
@@ -175,6 +175,7 @@ PPM_PACKETNET_CB(unsafeNoC) {
         bhmMessage("INFO", "SECROUTER", "-------------------------------------------------------------> flitTotal = %d received", incomingFlit.data);
         bufferPush(LOCAL);
         hasDataToSend = 1;
+        bhmTriggerEvent(goEvent);
     }
 
 

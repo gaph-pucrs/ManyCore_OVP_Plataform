@@ -97,6 +97,7 @@ extern flit buffers[N_PORTS][BUFFER_SIZE];
 extern unsigned int control[N_PORTS];
 extern unsigned int myAddress;
 extern int hasDataToSend;
+extern bhmEventHandle goEvent;
 
 
 

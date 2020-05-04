@@ -39,6 +39,7 @@ unsigned int htonl2(unsigned int x){
 }
 
 
+
 #define __cswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
@@ -374,12 +375,17 @@ int main(int argc, char *argv[]) {
     hasDataToSend = 0;
     while(1){
 
-       bhmWaitDelay(QUANTUM_DELAY);
+      // bhmWaitDelay(QUANTUM_DELAY);
        if(hasDataToSend){
            bhmMessage("INFO","SECROUTER","IF ITERATE WORKING ========================================================================================================================= ");
        // if(i==10){
             iterate();
-       }
+        }else{
+            bhmWaitEvent(goEvent);
+            iterate();
+
+            //esperar evento
+        }
         //i++;
        // bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
        // if(i==10){
