@@ -351,13 +351,15 @@ void iterate(){
     
     // Search and allocate the packet which is waiting more time
     searchAndAllocate();
+    if(selectedPort!=ND){
     ////////////////////////////////////////////
 
     ////////////////////////////////////////////
     ////////////////////////////////////////////
     ////////////////////////////////////////////
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-    //transmitt(); 
+        transmitt();
+    } 
 }
 
 int main(int argc, char *argv[]) {
