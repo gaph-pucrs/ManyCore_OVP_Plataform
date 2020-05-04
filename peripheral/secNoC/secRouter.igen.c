@@ -64,18 +64,18 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-    int i = 0;
+   // int i = 0;
    // hasDataToSend = 0;
-    while(1){
+    //while(1){
 
-       // bhmWaitDelay(QUANTUM_DELAY);
+      //  bhmWaitDelay(QUANTUM_DELAY);
 
         //i++;
        // bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
         //if(i==10){
           //  i=0;
        // }
-        ppmPacketnetWrite(handles.portUnsafeNoC, &i, sizeof(i)); // OK!!
+        //ppmPacketnetWrite(handles.portUnsafeNoC, &i, sizeof(i)); // OK!!
 
 
         //CHECAR SE portDatAEAST MESMO PROBLEMA DO MODULE ??
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         //if(tem alguma coisa em alguma porta??){
             //transmitir (COMO???)
         //}
-    }
+    //}
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
