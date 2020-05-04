@@ -129,19 +129,21 @@ unsigned int mult_div_inst;
 unsigned int weird_inst;
 
 void read_class_inst(){
-	arith_inst = *arithCounter;
-    logical_inst = *logicalCounter;
-    branch_inst =  *branchCounter;
-    jump_inst = *jumpCounter;
-    move_inst = *moveCounter;
-    load_inst = *loadCounter;
-    store_inst = *storeCounter; 
-    shift_inst = *shiftCounter; 
-    nop_inst = *nopCounter; 
+	arith_inst =    *arithCounter;
+    logical_inst =  *logicalCounter;
+    branch_inst =   *branchCounter;
+    jump_inst =     *jumpCounter;
+    move_inst =     *moveCounter;
+    load_inst =     *loadCounter;
+    store_inst =    *storeCounter; 
+    shift_inst =    *shiftCounter; 
+    nop_inst =      *nopCounter; 
     mult_div_inst = *multDivCounter;
-    weird_inst = *weirdCounter;    
+    weird_inst =    *weirdCounter;    
     return;
 }
+
+time_t lastTimeInstructions = 0;
 /////////////////////////////////////////////////////////////////////////
 
 
@@ -230,6 +232,8 @@ unsigned int getID(unsigned int address);
 unsigned int sendFromMsgBuffer(unsigned int requester);
 void interruptHandler_NI(void);
 void interruptHandler_timer(void);
+unsigned int estimateNoCActivity();
+unsigned int getNumberOfPorts(unsigned int address);
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -239,10 +243,44 @@ void interruptHandler_timer(void);
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
+/* Activity estimation based in the amount of flits and packets crossing the router */
+unsigned int estimateNoCActivity(){
+    unsigned int totalPackets = *eastPackets + *westPackets + *southPackets + *localPackets + *northPackets;
+    unsigned int totalFlits = *eastFlits + *westFlits + *southFlits + *localFlits + *northFlits;
+    return ((totalPackets*5)+ totalFlits);
+}
+
+///////////////////////////////////////////////////////////////////
+/* Get the number of ports in the router based in his address*/
+unsigned int getNumberOfPorts(unsigned int address){
+	unsigned int x, y;
+	x = getXpos(address);
+	y = getYpos(address);
+
+	if( (x==0 || x==(DIM_X-1)) && (y==0 || y==(DIM_Y-1)) ){
+		return 3;
+	}else{
+		if( x==0 || x==(DIM_X-1) || y==0 || y==(DIM_Y-1) ){
+			return 4;
+		}else{
+			return 5;
+		}	
+	}
+}
+
+///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */ 
 void interruptHandler_timer(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
+    //////////////////////////////////////////////////////////////
+    unsigned int timeActiveNoC, nPorts;
+
+    time_t actualTime, difTime;
+    actualTime = clock();
+    difTime = actualTime - lastTimeInstructions;
+
+   
     /*Read executed instructions*/ 
 	Instrucions_class inst_class;     //*inst_class_ptr,
 
@@ -259,7 +297,14 @@ void interruptHandler_timer(void) {
     inst_class.weird        = weird_inst;
 	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst + weird_inst;
 
-    LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
+    //Print router info
+    //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
+
+    timeActiveNoC = estimate_NoCActivity();
+
+    nPorts = getNumberOfPorts();
+
+    LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, lastTimeInstructions);
 
     executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
@@ -381,6 +426,7 @@ void OVP_init(){
 	    init_start = *SyncToPE;
     }
     tinicio = clock();
+    lastTimeInstructions = tinicio;
     //tinicio = tignore - (tignore - tinicio);
     
 
