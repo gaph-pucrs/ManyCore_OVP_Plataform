@@ -176,7 +176,7 @@ unsigned int isEmpty(unsigned int port){
 
 unsigned int bufferPop(unsigned int port){
     unsigned long long int value;
-    unsigned int difX, difY;
+   // unsigned int difX, difY;
 
     // Read the first flit from the buffer
     value = buffers[port][first[port]].data;
