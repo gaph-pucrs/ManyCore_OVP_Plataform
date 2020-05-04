@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int y, x, p_idx = 0;;
-    int ordem[DIM_X*DIM_Y];
+    //int ordem[DIM_X*DIM_Y];
 
     /*Initialization*/
     for(y=0;y<DIM_Y;y++){
