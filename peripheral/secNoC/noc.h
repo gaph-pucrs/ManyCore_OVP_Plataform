@@ -16,6 +16,7 @@
 #define N_PORTS 	    5
 #define BUFFER_SIZE 	17
 
+#define SEC_PE 0
 // Control flags
 #define STALL   1
 #define GO      0
@@ -87,6 +88,7 @@ unsigned int last[N_PORTS];
 
 typedef struct{
     unsigned int data;
+    unsigned int source;
    // unsigned int appID;
 }flit;
 

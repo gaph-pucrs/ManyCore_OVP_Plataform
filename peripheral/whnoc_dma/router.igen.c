@@ -105,6 +105,8 @@ int main(int argc, char *argv[]) {
 
     FILE *fp;
     int i=0;
+    int numQuantums = 20;
+    int flitsTotal = 0;
     while(1){
         bhmWaitDelay(QUANTUM_DELAY);
         if(myID==0){
@@ -125,7 +127,14 @@ int main(int argc, char *argv[]) {
         contFlits[SOUTH] = 0;
 
         i++;
-        
+
+        if(i == numQuantums){
+            flitsTotal = contFlits[LOCAL] + contFlits[WEST] + contFlits[EAST] + contFlits[SOUTH] + contFlits[NORTH];
+            bhmMessage("INFO", "ROUTER 20 QUANTUMS", "--------------------------------------> sending flitsTotal = %d", flitsTotal);
+            ppmPacketnetWrite(handles.portSecNoC, &flitsTotal, sizeof(flitsTotal));
+            flitsTotal = 0;
+            i=0;
+        }
     }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));

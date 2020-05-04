@@ -39,6 +39,8 @@ unsigned int first[N_PORTS] = {0,0,0,0,0};
 // Stores the control status of each port
 unsigned int control[N_PORTS] = {GO,GO,GO,GO,GO};
 
+int receivingData = 0;
+
 
 
 
@@ -101,10 +103,6 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
         control[port] = ctrlData;
 }
 
-
-
-
-
 //////////////////////////////// Callback stubs ////////////////////////////////
 
 
@@ -156,20 +154,24 @@ PPM_PACKETNET_CB(dataWest) {
 
 PPM_PACKETNET_CB(unsafeNoC) {
    // int testando1=0;
+   
     if(myAddress == 0xFFFFFFFF){
         myID = *(unsigned int *)data;
         myID = htonl1((unsigned int)myID);
         int y = myID/DIM_X;
         int x = myID-(DIM_X*y);
         myAddress = xy2addr(x, y);
-        bhmMessage("INFO", "MY_ADRESS UNSAFE NOC", "My Address: %d %d", x, y);
-        bhmMessage("INFO","MYADRESS UNSAFE NOC","MY ID = %d", myID);
-       // ppmPacketnetWrite(handles.portUnsafeNoC, &testando1, sizeof(testando1));
+        bhmMessage("INFO", "MY_ADRESS SECURE NOC", "My Address: %d %d", x, y);
+        bhmMessage("INFO","MYADRESS SECURE NOC","MY ID = %d", myID);
     }else{
 
-        //RECEIVING DATA
-    }
+        incomingFlit.source = myID;
+        incomingFlit.data = *(unsigned int *) data;
+        incomingFlit.data = htonl1((unsigned int)incomingFlit.data);
+        bhmMessage("INFO", "SECROUTER", "-------------------------------------------------------------> flitTotal = %d received" incomingFlit.data);
+        bufferPush(LOCAL);}
 
+    }
 
 
 }
