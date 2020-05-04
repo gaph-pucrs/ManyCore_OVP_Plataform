@@ -118,7 +118,7 @@ PPM_PACKETNET_CB(dataUpdate) {
         x_data_counter = getXpos(source_pe);
         y_data_counter = getYpos(source_pe);
     }*/
-    else if(flit_in_counter >= 5){ // Power information
+    else if(flit_in_counter >= 5 && flit_in_counter <= 5+(DIM_Y*DIM_X)){ // Power information
         power[y_data_counter][x_data_counter] = htonl(newFlit);
         bhmMessage("I", "Input", "power[%d][%d]: %d\n",x_data_counter, y_data_counter, power[y_data_counter][x_data_counter]);
         if(x_data_counter == getXpos(source_pe)+CLUSTER_X-1){ // ATUAL_X = ORIG_X + TAM_CLUSTER
@@ -129,7 +129,7 @@ PPM_PACKETNET_CB(dataUpdate) {
             x_data_counter++;
         }
     }
-    else if(flit_in_counter > msg_size+1){ // Acabar a mensagem
+    else if(flit_in_counter > 5+(DIM_Y*DIM_X)){ // Acabar a mensagem
         flit_in_counter = 0;
         source_pe =  0;
         x_data_counter = 0;
