@@ -66,9 +66,9 @@ void bufferStatusUpdate1(unsigned int port){
     }
 
     // Transmitt the new buffer status to the neighbor
-    /*if (port == LOCAL){
-        ppmPacketnetWrite(handles.portControlLocal, &status, sizeof(status));
-    }*/
+    if (port == LOCAL){
+        ppmPacketnetWrite(handles.portControlUnsafeNoC, &status, sizeof(status));
+    }
     if (port == EAST){
         ppmPacketnetWrite(handles.portControlEast, &status, sizeof(status));
     }
