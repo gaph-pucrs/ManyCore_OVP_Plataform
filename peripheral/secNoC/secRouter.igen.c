@@ -358,6 +358,7 @@ void iterate(){
     ////////////////////////////////////////////
     ////////////////////////////////////////////
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
+        bhmMessage("INFO", "SECNOC", "-------------------------------------------------------------------------------------------- CHAMANDO TRANSMMIT");
         transmitt();
     } 
 }
