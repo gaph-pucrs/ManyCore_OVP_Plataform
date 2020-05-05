@@ -351,7 +351,7 @@ void iterate(){
     
     // Search and allocate the packet which is waiting more time
     searchAndAllocate();
-    if(selectedPort!=ND){
+    if(hasDataToSend){
     ////////////////////////////////////////////
 
     ////////////////////////////////////////////
