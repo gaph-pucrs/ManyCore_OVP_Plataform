@@ -1518,6 +1518,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router0",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu0Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu0Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu0Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -1586,6 +1588,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router1",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu1Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu1Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu1Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -1654,6 +1658,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router2",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu2Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu2Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu2Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -1720,6 +1726,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router3",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu3Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu3Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu3Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -1788,6 +1796,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router4",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu4Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu4Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu4Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -1858,6 +1868,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router5",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu5Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu5Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu5Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -1926,6 +1938,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router6",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu6Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu6Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu6Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -1994,6 +2008,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router7",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu7Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu7Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu7Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -2064,6 +2080,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router8",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu8Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu8Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu8Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -2132,6 +2150,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router9",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu9Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu9Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu9Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -2198,6 +2218,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router10",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu10Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu10Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu10Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
@@ -2266,6 +2288,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router11",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu11Bus_b, "RREAD"),
+                OP_BUS_CONNECT(cpu11Bus_b, "RWRITE"),
                 OP_BUS_CONNECT(cpu11Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_PACKETNET_CONNECTIONS(
