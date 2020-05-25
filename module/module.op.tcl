@@ -297,61 +297,85 @@ ihwaddperipheral -instancename ni11 -modelfile peripheral/networkInterface/pse.p
 ihwaddperipheral -instancename timer11 -modelfile peripheral/timer/pse.pse
 
 ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router0 -busmasterport RREAD  -bus cpu0Bus
+ihwconnect -instancename router0 -busmasterport RWRITE -bus cpu0Bus
 ihwconnect -instancename ni0 -busslaveport DMAC -bus cpu0Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni0 -busmasterport MREAD  -bus cpu0Bus
 ihwconnect -instancename ni0 -busmasterport MWRITE -bus cpu0Bus
 ihwconnect -instancename timer0 -busslaveport TIMEREG -bus cpu0Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router1 -busmasterport RREAD  -bus cpu1Bus
+ihwconnect -instancename router1 -busmasterport RWRITE -bus cpu1Bus
 ihwconnect -instancename ni1 -busslaveport DMAC -bus cpu1Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni1 -busmasterport MREAD  -bus cpu1Bus
 ihwconnect -instancename ni1 -busmasterport MWRITE -bus cpu1Bus
 ihwconnect -instancename timer1 -busslaveport TIMEREG -bus cpu1Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router2 -busslaveport localPort -bus cpu2Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router2 -busmasterport RREAD  -bus cpu2Bus
+ihwconnect -instancename router2 -busmasterport RWRITE -bus cpu2Bus
 ihwconnect -instancename ni2 -busslaveport DMAC -bus cpu2Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni2 -busmasterport MREAD  -bus cpu2Bus
 ihwconnect -instancename ni2 -busmasterport MWRITE -bus cpu2Bus
 ihwconnect -instancename timer2 -busslaveport TIMEREG -bus cpu2Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router3 -busslaveport localPort -bus cpu3Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router3 -busmasterport RREAD  -bus cpu3Bus
+ihwconnect -instancename router3 -busmasterport RWRITE -bus cpu3Bus
 ihwconnect -instancename ni3 -busslaveport DMAC -bus cpu3Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni3 -busmasterport MREAD  -bus cpu3Bus
 ihwconnect -instancename ni3 -busmasterport MWRITE -bus cpu3Bus
 ihwconnect -instancename timer3 -busslaveport TIMEREG -bus cpu3Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router4 -busslaveport localPort -bus cpu4Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router4 -busmasterport RREAD  -bus cpu4Bus
+ihwconnect -instancename router4 -busmasterport RWRITE -bus cpu4Bus
 ihwconnect -instancename ni4 -busslaveport DMAC -bus cpu4Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni4 -busmasterport MREAD  -bus cpu4Bus
 ihwconnect -instancename ni4 -busmasterport MWRITE -bus cpu4Bus
 ihwconnect -instancename timer4 -busslaveport TIMEREG -bus cpu4Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router5 -busslaveport localPort -bus cpu5Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router5 -busmasterport RREAD  -bus cpu5Bus
+ihwconnect -instancename router5 -busmasterport RWRITE -bus cpu5Bus
 ihwconnect -instancename ni5 -busslaveport DMAC -bus cpu5Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni5 -busmasterport MREAD  -bus cpu5Bus
 ihwconnect -instancename ni5 -busmasterport MWRITE -bus cpu5Bus
 ihwconnect -instancename timer5 -busslaveport TIMEREG -bus cpu5Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router6 -busslaveport localPort -bus cpu6Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router6 -busmasterport RREAD  -bus cpu6Bus
+ihwconnect -instancename router6 -busmasterport RWRITE -bus cpu6Bus
 ihwconnect -instancename ni6 -busslaveport DMAC -bus cpu6Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni6 -busmasterport MREAD  -bus cpu6Bus
 ihwconnect -instancename ni6 -busmasterport MWRITE -bus cpu6Bus
 ihwconnect -instancename timer6 -busslaveport TIMEREG -bus cpu6Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router7 -busslaveport localPort -bus cpu7Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router7 -busmasterport RREAD  -bus cpu7Bus
+ihwconnect -instancename router7 -busmasterport RWRITE -bus cpu7Bus
 ihwconnect -instancename ni7 -busslaveport DMAC -bus cpu7Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni7 -busmasterport MREAD  -bus cpu7Bus
 ihwconnect -instancename ni7 -busmasterport MWRITE -bus cpu7Bus
 ihwconnect -instancename timer7 -busslaveport TIMEREG -bus cpu7Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router8 -busslaveport localPort -bus cpu8Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router8 -busmasterport RREAD  -bus cpu8Bus
+ihwconnect -instancename router8 -busmasterport RWRITE -bus cpu8Bus
 ihwconnect -instancename ni8 -busslaveport DMAC -bus cpu8Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni8 -busmasterport MREAD  -bus cpu8Bus
 ihwconnect -instancename ni8 -busmasterport MWRITE -bus cpu8Bus
 ihwconnect -instancename timer8 -busslaveport TIMEREG -bus cpu8Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router9 -busslaveport localPort -bus cpu9Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router9 -busmasterport RREAD  -bus cpu9Bus
+ihwconnect -instancename router9 -busmasterport RWRITE -bus cpu9Bus
 ihwconnect -instancename ni9 -busslaveport DMAC -bus cpu9Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni9 -busmasterport MREAD  -bus cpu9Bus
 ihwconnect -instancename ni9 -busmasterport MWRITE -bus cpu9Bus
 ihwconnect -instancename timer9 -busslaveport TIMEREG -bus cpu9Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router10 -busslaveport localPort -bus cpu10Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router10 -busmasterport RREAD  -bus cpu10Bus
+ihwconnect -instancename router10 -busmasterport RWRITE -bus cpu10Bus
 ihwconnect -instancename ni10 -busslaveport DMAC -bus cpu10Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni10 -busmasterport MREAD  -bus cpu10Bus
 ihwconnect -instancename ni10 -busmasterport MWRITE -bus cpu10Bus
 ihwconnect -instancename timer10 -busslaveport TIMEREG -bus cpu10Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 ihwconnect -instancename router11 -busslaveport localPort -bus cpu11Bus -loaddress 0x80000000 -hiaddress 0x80000003
+ihwconnect -instancename router11 -busmasterport RREAD  -bus cpu11Bus
+ihwconnect -instancename router11 -busmasterport RWRITE -bus cpu11Bus
 ihwconnect -instancename ni11 -busslaveport DMAC -bus cpu11Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni11 -busmasterport MREAD  -bus cpu11Bus
 ihwconnect -instancename ni11 -busmasterport MWRITE -bus cpu11Bus
