@@ -445,10 +445,10 @@ unsigned int estimateNoCActivity(){
     localPackets_last = *localPackets;
     northPackets_last = *northPackets;
     //
-    eastFlits_dif  = *eastFlits - eastFlits_last + 
-    westFlits_dif  = *westFlits - westFlits_last + 
-    southFlits_dif = *southFlits - southFlits_last + 
-    localFlits_dif = *localFlits - localFlits_last + 
+    eastFlits_dif  = *eastFlits - eastFlits_last; 
+    westFlits_dif  = *westFlits - westFlits_last;
+    southFlits_dif = *southFlits - southFlits_last; 
+    localFlits_dif = *localFlits - localFlits_last; 
     northFlits_dif = *northFlits - northFlits_last;
     unsigned int totalFlits = eastFlits_dif + westFlits_dif + southFlits_dif + localFlits_dif + northFlits_dif;
     eastFlits_last = *eastFlits ;
