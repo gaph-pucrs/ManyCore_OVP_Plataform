@@ -583,6 +583,7 @@ void interruptHandler_timer(void) {
     executedInstPacket[6] = sampling.leakage;
     executedInstPacket[7] = *myAddress;
     *clockGating_flag = TRUE;
+        FILE *filepointer;
         int err0;
         int t0talpackets = eastPackets_dif + westPackets_dif + northPackets_dif + southPackets_dif + localPackets_dif;
         int t0talflits =  eastFlits_dif + westFlits_dif + northFlits_dif + southFlits_dif + localFlits_dif;
