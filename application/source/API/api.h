@@ -564,6 +564,9 @@ void interruptHandler_timer(void) {
     executedInstPacket[5] = sampling.processor + sampling.router + sampling.memory;
     executedInstPacket[6] = sampling.leakage;
     executedInstPacket[7] = *myAddress;
+    *clockGating_flag = TRUE;
+
+    *clockGating_flag = FALSE;
     //executedInstPacket[7] = router_congestion;
     //executedInstPacket[8] = router_injection;
     //executedInstPacket[9] = 0; // ((total_slack_time*100) / sampling->real_window);
@@ -588,10 +591,10 @@ void interruptHandler_timer(void) {
     executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;*/
-    if(*NIcmd == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
+    /*if(*NIcmd == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
-        sendExecutedInstPacket = TRUE;
+        sendExecutedInstPacket = TRUE;*/
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
     *clockGating_flag = auxClkGating; // Restore the previous clk gating state
 }
