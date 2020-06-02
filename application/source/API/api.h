@@ -1000,6 +1000,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
 void SendRaw(unsigned int addr){
     *NIaddr = addr;
     *NIcmd = TX;
+    LOG("SENDING! %x\n", *myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
