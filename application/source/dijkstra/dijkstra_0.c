@@ -30,6 +30,7 @@ int main(int argc, char **argv)
 		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
 			ReceiveMessage(&theMessage, divider_addr);
+			LOG("RECEBIDO %x\n",*myAddress);
 			for (j=0; j<NUM_NODES; j++)
 				AdjMatrix[i][j] = theMessage.msg[j];
 		}
