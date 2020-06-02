@@ -914,7 +914,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 /* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination){
     unsigned int index;
-    do{index = getEmptyIndex(); /*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
+    do{index = getEmptyIndex(); LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
     buffer_packets[index][PI_DESTINATION] = destination;
