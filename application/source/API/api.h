@@ -244,14 +244,29 @@ volatile unsigned int *localFlits =   LOCAL_FLITS;
 volatile unsigned int *localPackets = LOCAL_PACKETS;
 unsigned int eastFlits_last = 0;
 unsigned int eastPackets_last = 0;
+unsigned int eastPackets_dif = 0;
+unsigned int eastFlits_dif = 0;
+//
 unsigned int westFlits_last = 0;
 unsigned int westPackets_last = 0;
+unsigned int westPackets_dif = 0;
+unsigned int westFlits_dif = 0;
+//
 unsigned int northFlits_last = 0;
 unsigned int northPackets_last = 0;
+unsigned int northPackets_dif = 0;
+unsigned int northFlits_dif = 0;
+//
 unsigned int southFlits_last = 0;
 unsigned int southPackets_last = 0;
+unsigned int southPackets_dif = 0;
+unsigned int southFlits_dif = 0;
+
+//
 unsigned int localFlits_last = 0;
 unsigned int localPackets_last = 0;
+unsigned int localPackets_dif = 0;
+unsigned int localFlits_dif = 0;
 /* Instructions stuff */
 typedef struct {
 	unsigned int arith;
@@ -418,21 +433,24 @@ void read_class_inst(){
 ///////////////////////////////////////////////////////////////////
 /* Activity estimation based in the amount of flits and packets crossing the router */
 unsigned int estimateNoCActivity(){
-    unsigned int totalPackets = *eastPackets - eastPackets_last +
-                                *westPackets - westPackets_last +
-                                *southPackets - southPackets_last +
-                                *localPackets - localPackets_last + 
-                                *northPackets - northPackets_last;
+    eastPackets_dif = *eastPackets - eastPackets_last;
+    westPackets_dif = *westPackets - westPackets_last;
+    southPackets_dif = *southPackets - southPackets_last;
+    localPackets_dif = *localPackets - localPackets_last;
+    northPackets_dif = *northPackets - northPackets_last;
+    unsigned int totalPackets = eastPackets_dif + westPackets_dif + southPackets_dif + localPackets_dif + northPackets_dif;                                
     eastPackets_last = *eastPackets;
     westPackets_last = *westPackets;
     southPackets_last = *southPackets;
     localPackets_last = *localPackets;
     northPackets_last = *northPackets;
-    unsigned int totalFlits = *eastFlits - eastFlits_last + 
-                              *westFlits - westFlits_last + 
-                              *southFlits - southFlits_last + 
-                              *localFlits - localFlits_last + 
-                              *northFlits - northFlits_last;
+    //
+    eastFlits_dif  = *eastFlits - eastFlits_last + 
+    westFlits_dif  = *westFlits - westFlits_last + 
+    southFlits_dif = *southFlits - southFlits_last + 
+    localFlits_dif = *localFlits - localFlits_last + 
+    northFlits_dif = *northFlits - northFlits_last;
+    unsigned int totalFlits = eastFlits_dif + westFlits_dif + southFlits_dif + localFlits_dif + northFlits_dif;
     eastFlits_last = *eastFlits ;
     westFlits_last = *westFlits ;
     southFlits_last = *southFlits;
@@ -565,7 +583,14 @@ void interruptHandler_timer(void) {
     executedInstPacket[6] = sampling.leakage;
     executedInstPacket[7] = *myAddress;
     *clockGating_flag = TRUE;
-
+        int err0;
+        int t0talpackets = eastPackets_dif + westPackets_dif + northPackets_dif + southPackets_dif + localPackets_dif;
+        int t0talflits =  eastFlits_dif + westFlits_dif + northFlits_dif + southFlits_dif + localFlits_dif;
+        char logFileName[26];
+        err0 = sprintf(logFileName, "simulation/log%dx%d.txt",getXpos(*myAddress),getYpos(*myAddress));
+        filepointer = fopen (logFileName,"a");
+        fprintf(filepointer,"Counters: %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",arith_inst, branch_inst, jump_inst, move_inst, load_inst, store_inst, shift_inst, nop_inst, logical_inst, mult_div_inst, t0talpackets, t0talflits, timeActiveNoC<<6, timeIdleNoC<<6);
+        fclose(filepointer);    
     *clockGating_flag = FALSE;
     //executedInstPacket[7] = router_congestion;
     //executedInstPacket[8] = router_injection;
