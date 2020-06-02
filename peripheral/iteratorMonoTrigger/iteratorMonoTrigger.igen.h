@@ -59,9 +59,6 @@ typedef struct handlesS {
     ppmPacketnetHandle    iterationPort6;
     ppmPacketnetHandle    iterationPort7;
     ppmPacketnetHandle    iterationPort8;
-    ppmPacketnetHandle    iterationPort9;
-    ppmPacketnetHandle    iterationPort10;
-    ppmPacketnetHandle    iterationPort11;
 } handlesT, *handlesTP;
 
 extern handlesT handles;
@@ -72,8 +69,6 @@ PPM_REG_READ_CB(iterateRead);
 PPM_REG_WRITE_CB(iterateWrite);
 PPM_PACKETNET_CB(iteration0);
 PPM_PACKETNET_CB(iteration1);
-PPM_PACKETNET_CB(iteration10);
-PPM_PACKETNET_CB(iteration11);
 PPM_PACKETNET_CB(iteration2);
 PPM_PACKETNET_CB(iteration3);
 PPM_PACKETNET_CB(iteration4);
@@ -81,7 +76,6 @@ PPM_PACKETNET_CB(iteration5);
 PPM_PACKETNET_CB(iteration6);
 PPM_PACKETNET_CB(iteration7);
 PPM_PACKETNET_CB(iteration8);
-PPM_PACKETNET_CB(iteration9);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
 PPM_CONSTRUCTOR_CB(constructor);

@@ -39,12 +39,6 @@ void runIterations(){
     ppmPacketnetWrite(handles.iterationPort7, &iteration, sizeof(iteration));
     iteration = iterationN;
     ppmPacketnetWrite(handles.iterationPort8, &iteration, sizeof(iteration));
-    iteration = iterationN;
-    ppmPacketnetWrite(handles.iterationPort9, &iteration, sizeof(iteration));
-    iteration = iterationN;
-    ppmPacketnetWrite(handles.iterationPort10, &iteration, sizeof(iteration));
-    iteration = iterationN;
-    ppmPacketnetWrite(handles.iterationPort11, &iteration, sizeof(iteration));
 }
 
 /////////////////////////////// Diagnostic level ///////////////////////////////
@@ -148,18 +142,6 @@ PPM_PACKETNET_CB(iteration7) {
 
 PPM_PACKETNET_CB(iteration8) {
     // YOUR CODE HERE (iteration8)
-}
-
-PPM_PACKETNET_CB(iteration9) {
-    // YOUR CODE HERE (iteration9)
-}
-
-PPM_PACKETNET_CB(iteration10) {
-    // YOUR CODE HERE (iteration10)
-}
-
-PPM_PACKETNET_CB(iteration11) {
-    // YOUR CODE HERE (iteration11)
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {

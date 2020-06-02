@@ -52,9 +52,6 @@ Uns8 iterationPort5_pnsd[8];
 Uns8 iterationPort6_pnsd[8];
 Uns8 iterationPort7_pnsd[8];
 Uns8 iterationPort8_pnsd[8];
-Uns8 iterationPort9_pnsd[8];
-Uns8 iterationPort10_pnsd[8];
-Uns8 iterationPort11_pnsd[8];
 
 static ppmPacketnetPort packetnetPorts[] = {
     {
@@ -145,36 +142,6 @@ static ppmPacketnetPort packetnetPorts[] = {
         .sharedDataBytes = 8,
         .handlePtr       = &handles.iterationPort8,
         .packetnetCB     = iteration8,
-        .userData        = (void*)0
-    },
-    {
-        .name            = "iterationPort9",
-        .mustBeConnected = 0,
-        .description     = 0,
-        .sharedData      = iterationPort9_pnsd,
-        .sharedDataBytes = 8,
-        .handlePtr       = &handles.iterationPort9,
-        .packetnetCB     = iteration9,
-        .userData        = (void*)0
-    },
-    {
-        .name            = "iterationPort10",
-        .mustBeConnected = 0,
-        .description     = 0,
-        .sharedData      = iterationPort10_pnsd,
-        .sharedDataBytes = 8,
-        .handlePtr       = &handles.iterationPort10,
-        .packetnetCB     = iteration10,
-        .userData        = (void*)0
-    },
-    {
-        .name            = "iterationPort11",
-        .mustBeConnected = 0,
-        .description     = 0,
-        .sharedData      = iterationPort11_pnsd,
-        .sharedDataBytes = 8,
-        .handlePtr       = &handles.iterationPort11,
-        .packetnetCB     = iteration11,
         .userData        = (void*)0
     },
     { 0 }
