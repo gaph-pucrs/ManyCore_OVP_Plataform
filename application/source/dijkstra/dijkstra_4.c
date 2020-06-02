@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 		for (i=0; i<NUM_NODES; i++) {
 			ReceiveMessage(&theMessage, divider_addr);
 			for (j=0; j<NUM_NODES; j++)
-				AdjMatrix[i][j] = msg.msg[j];
+				AdjMatrix[i][j] = theMessage.msg[j];
 		}
 		calc = AdjMatrix[0][0];
 		if (calc == KILL) break;
