@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
 	int k;
-	theMessage.length = NUM_NODES*2;
+	theMessage.size = NUM_NODES*2;
 	int result[NUM_NODES*2];
 
 	ReceiveMessage(&theMessage, dijkstra_0_addr);
