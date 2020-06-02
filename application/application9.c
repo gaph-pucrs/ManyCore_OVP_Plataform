@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 		theMessage.msg[i+NUM_NODES] = prev[i];
 
     SendMessage(&theMessage, print_dij_addr);
-    LOG("Dijkstra_3 finished.");
+    LOG("Dijkstra_1 finished.");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

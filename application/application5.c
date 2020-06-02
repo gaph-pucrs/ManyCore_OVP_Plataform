@@ -10,66 +10,73 @@
 message theMessage;
 
 int main(int argc, char **argv)
-{ 
+{
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    int fpTrix[NUM_NODES*NUM_NODES] = { 1,    6,    3,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										6,    1,    2,    5,    9999, 9999, 1,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										3,    2,    1,    3,    4,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 5,    3,    1,    2,    3,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 4,    2,    1,    5,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 3,    5,    1,    3,    2,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 1,    9999, 9999, 9999, 3,    1,    4,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 2,    4,    1,    7,    9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 7,    1,    5,    1,    9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 5,    1,    9999, 3,    9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 1,    9999, 1,    9999, 4,    9999, 9999, 8,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 3,    9999, 1,    9999, 2,    9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 4,    9999, 1,    1,    9999, 2,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 2,    1,    1,    6,    9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 6,    1,    3,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 8,    9999, 2,    9999, 3,    1 };
+    int i, j, v;
+	int source = 0;
+	int q[NUM_NODES];
+	int dist[NUM_NODES];
+	int prev[NUM_NODES];
+	int shortest, u;
+	int alt;
+	int calc = 0;
 
-    int AdjMatrix[NUM_NODES][NUM_NODES];
-	int i, j, k, iter;
+	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-	for (i=0;i<NUM_NODES;i++) {
-		for (j=0;j<NUM_NODES;j++) {
-			AdjMatrix[i][j]= fpTrix[k];
-			k++;
-		}
-	}
-
-    /* SEND AdjMatrix[NUM_NODES][NUM_NODES] */
-	theMessage.size = NUM_NODES;
-
-    for(iter=0; iter<CALCULATIONS; iter++){
+    while(1){
+		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
-			for (j=0; j<NUM_NODES; j++) {
-				theMessage.msg[j] = AdjMatrix[i][j];
+			LOG("AGUARDANDO %x\n",*myAddress);
+			ReceiveMessage(&theMessage, divider_addr);
+			LOG("RECEBIDO %x\n",*myAddress);
+			for (j=0; j<NUM_NODES; j++)
+				AdjMatrix[i][j] = theMessage.msg[j];
+		}
+		calc = AdjMatrix[0][0];
+		if (calc == KILL) break;
+
+		for (i=0;i<NUM_NODES;i++){
+			dist[i] = INFINITY;
+			prev[i] = INFINITY;
+			q[i] = i;
+		}
+		dist[source] = 0;
+		//u = 0;
+
+		for (i=0;i<NUM_NODES;i++) {
+			shortest = INFINITY;
+			for (j=0;j<NUM_NODES;j++){
+				if (dist[j] < shortest && q[j] != INFINITY){		
+					shortest = dist[j];
+					u = j;
+				}
 			}
-			SendMessage(&theMessage, dijkstra_0_addr);
-			SendMessage(&theMessage, dijkstra_1_addr);
-			SendMessage(&theMessage, dijkstra_2_addr);
-			SendMessage(&theMessage, dijkstra_3_addr);
-			SendMessage(&theMessage, dijkstra_4_addr);
+			q[u] = INFINITY;
+
+			for (v=0; v<NUM_NODES; v++){
+				if (q[v] != INFINITY && AdjMatrix[u][v] != INFINITY){
+					alt = dist[u] + AdjMatrix[u][v];
+					if (alt < dist[v]){
+						dist[v] = alt;
+						prev[v] = u;
+					}
+				}
+			}
 		}
 	}
 
-    AdjMatrix[0][0] = KILL;
-	for (i=0; i<NUM_NODES; i++) {
-		for (j=0; j<NUM_NODES; j++) {
-			theMessage.msg[j] = AdjMatrix[i][j];
-		}
-		SendMessage(&theMessage, dijkstra_0_addr);
-		SendMessage(&theMessage, dijkstra_1_addr);
-		SendMessage(&theMessage, dijkstra_2_addr);
-		SendMessage(&theMessage, dijkstra_3_addr);
-		SendMessage(&theMessage, dijkstra_4_addr);
-	}
+    theMessage.size = NUM_NODES*2;
+	for (i=0;i<NUM_NODES;i++)
+		theMessage.msg[i] = dist[i];
 
+	for (i=0;i<NUM_NODES;i++)
+		theMessage.msg[i+NUM_NODES] = prev[i];
+
+    SendMessage(&theMessage, print_dij_addr);
+    LOG("Dijkstra_2 finished.");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
