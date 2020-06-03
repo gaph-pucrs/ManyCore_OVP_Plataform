@@ -630,6 +630,7 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface */ 
 void interruptHandler_NI(void) {
     int requester;
+    LOG("a %x\n",*myAddress);
     if(interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
         /*IMPORTANTE: NO FUTURO O INCOMINGPACKET PRECISA SER DUPLICADO - CASO CHEGUE UM PACOTE E O PACOTE ANTERIOR AINDA NAO FOI LIDO */
@@ -674,7 +675,9 @@ void interruptHandler_NI(void) {
         while(1){}
     }
     // Reset the interruptionType
+    
     interruptionType = NI_INT_TYPE_CLEAR;
+    LOG("b %x\n",*myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
