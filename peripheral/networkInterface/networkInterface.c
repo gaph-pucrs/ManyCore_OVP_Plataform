@@ -153,7 +153,7 @@ void niIteration(){
             //bhmMessage("INFO", "NIITERATION", "Terminando envio!!!\n");
             control_TX = NI_STATUS_INTER; // Changes the TX status to INTERRUPTION
             writeMem(htonl(NI_INT_TYPE_TX), intTypeAddr); // Writes the interruption type to the processor
-            bhmMessage("INFO", "NI", "INT2\n");
+            //bhmMessage("INFO", "NI", "INT2\n");
             ppmWriteNet(handles.INT_NI, 1); // Turns the interruption on
         }
     }
@@ -164,7 +164,7 @@ void niIteration(){
         //bhmWaitDelay(QUANTUM_DELAY);
         control_RX = NI_STATUS_INTER;
         writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
-        bhmMessage("INFO", "NI", "INT1\n");
+        //bhmMessage("INFO", "NI", "INT1\n");
         ppmWriteNet(handles.INT_NI, 1); // Turns the interruption on
     }
 }
@@ -247,7 +247,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
         if(control_TX != NI_STATUS_INTER){
             control_RX = NI_STATUS_INTER;
             writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
-            bhmMessage("INFO", "NI", "INT3\n");
+            //bhmMessage("INFO", "NI", "INT3\n");
             ppmWriteNet(handles.INT_NI, 1); // Turns the interruption on
         }
     }
