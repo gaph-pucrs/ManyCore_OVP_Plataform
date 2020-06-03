@@ -755,7 +755,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
             }
         }
     }
-    LOG("~> found: %x\n",found);
+    LOG("~> found: %x - eu: %x \n",found, *myAddress);
     if(found != PIPE_WAIT){
         // Sends the packet
         if(*NIcmd == NI_STATUS_OFF){
@@ -763,7 +763,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
             SendSlot((unsigned int)&buffer_packets[found], found);
         }
         else{
-            LOG("~> else\n");
+            LOG("~> else - eu: %x\n",*myAddress);
             while(interruptionType != NI_INT_TYPE_TX){} // waiting it finish the TX
             LOG("~> passou while\n");
             if(transmittingActive < PIPE_SIZE){ // Message packet
