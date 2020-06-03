@@ -781,7 +781,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         return 1; // sent with success
     }
     else{
-        //LOG("~~~~> NAO! ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));   
+        LOG("~~~~> NAO! ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));   
         return 0; // packet is not in the buffer yet
     }
 }
