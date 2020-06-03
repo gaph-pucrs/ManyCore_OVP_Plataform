@@ -326,7 +326,7 @@ volatile unsigned int *clockGating_flag =   CLK_GATING;
 #define MESSAGE_DELIVERY    0x30
 #define INSTR_COUNT_PACKET  0x40
 // Buffer defines
-#define PIPE_SIZE           4
+#define PIPE_SIZE           50
 #define PIPE_OCCUPIED       1
 #define PIPE_FREE           0
 #define PIPE_WAIT           0xFFFFFFFF
