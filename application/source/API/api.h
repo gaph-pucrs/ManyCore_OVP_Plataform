@@ -755,6 +755,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
             }
         }
     }
+    LOG("~> found: %x\n",found);
     if(found != PIPE_WAIT){
         // Sends the packet
         if(*NIcmd == NI_STATUS_OFF){
