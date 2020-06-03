@@ -631,7 +631,7 @@ void interruptHandler_timer(void) {
 void interruptHandler_NI(void) {
     int requester;
     unsigned int stored_interruptionType = interruptionType;
-    //interruptionType = 0;
+    interruptionType = 0;
     //LOG("a %x\n",*myAddress);
     if(stored_interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
@@ -678,7 +678,7 @@ void interruptHandler_NI(void) {
     }
     // Reset the interruptionType
     
-    interruptionType = NI_INT_TYPE_CLEAR;
+    //interruptionType = NI_INT_TYPE_CLEAR;
     //LOG("b %x\n",*myAddress);
 }
 
