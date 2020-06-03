@@ -245,7 +245,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
     //bhmMessage("INFO", "RECEIVING", "==x=x=x=x=x=x=xx=x=x=x=: %x",receivingCount);
     //bhmMessage("INFO", "NIITERATION", "receivingCount %x - control_RX %x - control_TX %x\n",receivingCount, control_RX, control_TX);
     // Detects the receiving finale
-    if(receivingCount == EMPTY){
+    if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){
         setSTALL();
         bhmMessage("INFO", "RX UPDT", "Terminando envio!");
         if(control_TX != NI_STATUS_INTER){
