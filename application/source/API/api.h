@@ -319,14 +319,14 @@ unsigned int latency_DVS = 0;
 
 
 // Activate this flag to deactivate the instruction count - "clock gating the processor"
-volatile unsigned int *clockGating_flag =   CLK_GATING;
+volatile unsigned int *clockGating_flag = CLK_GATING;
 
 // Services
 #define MESSAGE_REQ         0x20
 #define MESSAGE_DELIVERY    0x30
 #define INSTR_COUNT_PACKET  0x40
 // Buffer defines
-#define PIPE_SIZE           4
+#define PIPE_SIZE           50
 #define PIPE_OCCUPIED       1
 #define PIPE_FREE           0
 #define PIPE_WAIT           0xFFFFFFFF
@@ -738,16 +738,20 @@ void OVP_init(){
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
 unsigned int sendFromMsgBuffer(unsigned int requester){
     int i;
-    //LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
+    LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
     unsigned int found = PIPE_WAIT;
-    unsigned int foundHist = PIPE_WAIT;
+    //unsigned int foundHist = PIPE_WAIT;
+    unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
         if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
             if(buffer_packets[i][PI_DESTINATION] == requester){ // and the destination is the same as the requester
-                if(foundHist >= buffer_history[i]){
-                    foundHist = buffer_history[i];
-                    found = i;
-                }
+                //if(foundHist >= buffer_history[i]){
+                    if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
+                        //foundHist = buffer_history[i];
+                        found = i;
+                        foundSent = buffer_packets[i][PI_SEND_TIME];
+                    }
+                //}
             }
         }
     }
