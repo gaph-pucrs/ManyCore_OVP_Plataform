@@ -630,8 +630,10 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface */ 
 void interruptHandler_NI(void) {
     int requester;
+    unsigned int int stored_interruptionType = interruptionType;
+    interruptionType = 0;
     LOG("a %x\n",*myAddress);
-    if(interruptionType == NI_INT_TYPE_RX){
+    if(stored_interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
         /*IMPORTANTE: NO FUTURO O INCOMINGPACKET PRECISA SER DUPLICADO - CASO CHEGUE UM PACOTE E O PACOTE ANTERIOR AINDA NAO FOI LIDO */
         if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -651,7 +653,7 @@ void interruptHandler_NI(void) {
             }
         }
     }
-    else if(interruptionType == NI_INT_TYPE_TX){
+    else if(stored_interruptionType == NI_INT_TYPE_TX){
         if(transmittingActive < PIPE_SIZE){ // Message packet
             // Releses the buffer
             bufferPop(transmittingActive);
@@ -671,12 +673,12 @@ void interruptHandler_NI(void) {
         }
     }
     else{
-        LOG("%x - ERROR! Unexpected interruption! IT(%x) - can not handle it! Call the SAC!\n",*myAddress,interruptionType);
+        LOG("%x - ERROR! Unexpected interruption! IT(%x) - can not handle it! Call the SAC!\n",*myAddress,stored_interruptionType);
         while(1){}
     }
     // Reset the interruptionType
     
-    interruptionType = NI_INT_TYPE_CLEAR;
+    //interruptionType = NI_INT_TYPE_CLEAR;
     LOG("b %x\n",*myAddress);
 }
 
