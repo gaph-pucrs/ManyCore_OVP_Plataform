@@ -678,6 +678,7 @@ void interruptHandler_NI(void) {
         LOG("%x - ERROR! Unexpected interruption! IT(%x) - can not handle it! Call the SAC!\n",*myAddress,stored_interruptionType);
         while(1){}
     }
+    LOG("FIM DA INTERRUPCAO %x\n",*myAddress);
     // Reset the interruptionType
     
     //interruptionType = NI_INT_TYPE_CLEAR;
