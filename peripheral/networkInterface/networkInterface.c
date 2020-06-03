@@ -285,6 +285,7 @@ PPM_REG_WRITE_CB(statusWrite) {
     else if(command == READING){
         if(control_RX == NI_STATUS_INTER){
             // Turn the interruption signal down
+            control_RX = NI_STATUS_HANDLING;
             ppmWriteNet(handles.INT_NI, 0);  
         }
         else{
@@ -293,7 +294,7 @@ PPM_REG_WRITE_CB(statusWrite) {
     }
     else if(command == DONE){
         bhmMessage("INFO", "portUpdt", "CTRL RX UPDT\n");
-        if(control_RX == NI_STATUS_INTER){
+        if(control_RX == NI_STATUS_INTER || control_RX == NI_STATUS_HANDLING){
             bhmMessage("INFO", "portUpdt", "CTRL RX OFF\n");
             control_RX = NI_STATUS_OFF;
             setGO();

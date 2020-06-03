@@ -62,6 +62,7 @@
 #define NI_STATUS_ON        0x0011
 #define NI_STATUS_OFF       0x00FF
 #define NI_STATUS_INTER     0x0F0F
+#define NI_STATUS_HANDLING  0x0EEE
 #define NI_INT_TYPE_CLEAR   0x0000
 #define NI_INT_TYPE_TX      0xF222
 #define NI_INT_TYPE_RX      0xF333
