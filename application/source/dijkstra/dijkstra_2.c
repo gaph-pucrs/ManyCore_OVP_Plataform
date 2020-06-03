@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 			q[i] = i;
 		}
 		dist[source] = 0;
-		//u = 0;
+		u = 0;
 
 		for (i=0;i<NUM_NODES;i++) {
 			shortest = INFINITY;
