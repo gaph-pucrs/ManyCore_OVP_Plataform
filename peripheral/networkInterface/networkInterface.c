@@ -216,7 +216,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(control_RX == NI_STATUS_OFF){
         //statusUpdate(RX);
-        bhmMessage("INFO", "RX UPDT", "COMEÇANDO NOVO PACOTE!");
+        //bhmMessage("INFO", "RX UPDT", "COMEÇANDO NOVO PACOTE!");
         control_RX = NI_STATUS_ON;
         resetAddress();
         receivingField = HEADER;
@@ -247,7 +247,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
     // Detects the receiving finale
     if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){
         setSTALL();
-        bhmMessage("INFO", "RX UPDT", "Terminando envio!");
+        //bhmMessage("INFO", "RX UPDT", "Terminando envio!");
         if(control_TX != NI_STATUS_INTER){
             control_RX = NI_STATUS_INTER;
             writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
@@ -293,9 +293,9 @@ PPM_REG_WRITE_CB(statusWrite) {
         }
     }
     else if(command == DONE){
-        bhmMessage("INFO", "portUpdt", "CTRL RX UPDT\n");
+        //bhmMessage("INFO", "portUpdt", "CTRL RX UPDT\n");
         if(control_RX == NI_STATUS_INTER || control_RX == NI_STATUS_HANDLING){
-            bhmMessage("INFO", "portUpdt", "CTRL RX OFF\n");
+            //bhmMessage("INFO", "portUpdt", "CTRL RX OFF\n");
             control_RX = NI_STATUS_OFF;
             setGO();
         }
