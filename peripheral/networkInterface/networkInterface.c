@@ -290,7 +290,9 @@ PPM_REG_WRITE_CB(statusWrite) {
         }
     }
     else if(command == DONE){
+        bhmMessage("INFO", "portUpdt", "CTRL RX UPDT\n");
         if(control_RX == NI_STATUS_INTER){
+            bhmMessage("INFO", "portUpdt", "CTRL RX OFF\n");
             control_RX = NI_STATUS_OFF;
             setGO();
         }
