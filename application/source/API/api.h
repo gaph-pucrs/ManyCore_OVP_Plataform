@@ -784,6 +784,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
                 while(1){}
             }
             SendSlot((unsigned int)&buffer_packets[found], found);
+            LOG("~> pacote enviado! %x\n",*myAddress);
         }
         LOG("~~~~> ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));
         return 1; // sent with success
