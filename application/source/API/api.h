@@ -647,6 +647,7 @@ void interruptHandler_NI(void) {
             *NIcmd = READING; // turn down the interruption
             incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
             *NIcmd = DONE; // releases the NI to return to the IDLE state
+            LOG("-- indo pra procura stored: %x - eu: %x", stored_interruptionType, *myAddress);
             if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
                 //LOG("Adicionando pending req\n");
                 pendingReq[getID(requester)] = MESSAGE_REQ;
