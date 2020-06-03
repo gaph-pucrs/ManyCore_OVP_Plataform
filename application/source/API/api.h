@@ -783,6 +783,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
                 LOG("%x - ERROR! Unexpected interruption! (NI_INT_TYPE_TX) - can not handle it! Call the SAC!\n",*myAddress);
                 while(1){}
             }
+            LOG("~> enviando! %x\n",*myAddress);
             SendSlot((unsigned int)&buffer_packets[found], found);
             LOG("~> pacote enviado! %x\n",*myAddress);
         }
