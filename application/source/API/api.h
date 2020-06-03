@@ -765,6 +765,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         else{
             LOG("~> else\n");
             while(interruptionType != NI_INT_TYPE_TX){} // waiting it finish the TX
+            LOG("~> passou while\n");
             if(transmittingActive < PIPE_SIZE){ // Message packet
                 // Releses the buffer
                 bufferPop(transmittingActive);
