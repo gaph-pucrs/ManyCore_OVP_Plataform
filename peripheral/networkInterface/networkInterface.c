@@ -149,11 +149,11 @@ void niIteration(){
             ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         }
         // If the packet transmittion is done, change the NI status to IDLE
-        bhmMessage("INFO", "NIITERATION", "transmittingCount %x - control_RX %x - control_TX %x\n",transmittingCount, control_RX, control_TX);
+        //bhmMessage("INFO", "NIITERATION", "transmittingCount %x - control_RX %x - control_TX %x\n",transmittingCount, control_RX, control_TX);
         if(transmittingCount == EMPTY && control_RX != NI_STATUS_INTER){
             //bhmMessage("INFO", "NIITERATION", "Terminando envio!!!\n");
             control_TX = NI_STATUS_INTER; // Changes the TX status to INTERRUPTION
-            bhmMessage("INFO", "TXINFO", "Mudando para NI_INT_TYPE_TX\n");
+            //bhmMessage("INFO", "TXINFO", "Mudando para NI_INT_TYPE_TX\n");
             writeMem(htonl(NI_INT_TYPE_TX), intTypeAddr); // Writes the interruption type to the processor
             //bhmMessage("INFO", "NI", "INT2\n");
             ppmWriteNet(handles.INT_NI, 1); // Turns the interruption on
