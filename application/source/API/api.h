@@ -972,7 +972,7 @@ unsigned int getEmptyIndex(){
     int tempIdx = PIPE_WAIT;
     unsigned int tempHist = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        LOG("i %d %d %d",i,buffer_map[i], buffer_history[i])
+        LOG("i %d %d %d\n",i,buffer_map[i], buffer_history[i])
         if(buffer_map[i] == PIPE_FREE && buffer_history[i]<=tempHist){
             tempIdx = i;
             tempHist = buffer_history[i];
