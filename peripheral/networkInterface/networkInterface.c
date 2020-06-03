@@ -247,6 +247,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
     // Detects the receiving finale
     if(receivingCount == EMPTY){
         setSTALL();
+        bhmMessage("INFO", "RX UPDT", "Terminando envio!");
         if(control_TX != NI_STATUS_INTER){
             control_RX = NI_STATUS_INTER;
             writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
