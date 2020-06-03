@@ -119,6 +119,7 @@ unsigned int readMem(unsigned int addr){
 }
 
 void niIteration(){
+    if(control_TX == NI_STATUS_ON) bhmMessage("INFO", "ITERATION", "Tentando enviar! transmittingCount: %d",transmittingCount);
     if(control_TX == NI_STATUS_ON && control_in_STALLGO == GO){
         // If the transmittion isn't finished yet...
         if(transmittingCount != EMPTY){
