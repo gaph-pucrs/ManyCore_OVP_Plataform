@@ -630,7 +630,7 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface */ 
 void interruptHandler_NI(void) {
     int requester;
-    unsigned int int stored_interruptionType = interruptionType;
+    unsigned int stored_interruptionType = interruptionType;
     interruptionType = 0;
     LOG("a %x\n",*myAddress);
     if(stored_interruptionType == NI_INT_TYPE_RX){
