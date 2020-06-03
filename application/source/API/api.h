@@ -759,9 +759,11 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     if(found != PIPE_WAIT){
         // Sends the packet
         if(*NIcmd == NI_STATUS_OFF){
+            LOG("~> if\n");
             SendSlot((unsigned int)&buffer_packets[found], found);
         }
         else{
+            LOG("~> else\n");
             while(interruptionType != NI_INT_TYPE_TX){} // waiting it finish the TX
             if(transmittingActive < PIPE_SIZE){ // Message packet
                 // Releses the buffer
