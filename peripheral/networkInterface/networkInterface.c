@@ -119,7 +119,7 @@ unsigned int readMem(unsigned int addr){
 }
 
 void niIteration(){
-    if(control_TX == NI_STATUS_ON) bhmMessage("INFO", "ITERATION", "Tentando enviar! transmittingCount: %d",transmittingCount);
+    //if(control_TX == NI_STATUS_ON) bhmMessage("INFO", "ITERATION", "Tentando enviar! transmittingCount: %d",transmittingCount);
     if(control_TX == NI_STATUS_ON && control_in_STALLGO == GO){
         // If the transmittion isn't finished yet...
         if(transmittingCount != EMPTY){
@@ -149,7 +149,7 @@ void niIteration(){
             ppmPacketnetWrite(handles.dataPort, &usFlit, sizeof(usFlit));
         }
         // If the packet transmittion is done, change the NI status to IDLE
-        //bhmMessage("INFO", "NIITERATION", "transmittingCount %x - control_RX %x - control_TX %x\n",transmittingCount, control_RX, control_TX);
+        bhmMessage("INFO", "NIITERATION", "transmittingCount %x - control_RX %x - control_TX %x\n",transmittingCount, control_RX, control_TX);
         if(transmittingCount == EMPTY && control_RX != NI_STATUS_INTER){
             //bhmMessage("INFO", "NIITERATION", "Terminando envio!!!\n");
             control_TX = NI_STATUS_INTER; // Changes the TX status to INTERRUPTION
