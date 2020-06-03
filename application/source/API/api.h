@@ -738,7 +738,7 @@ void OVP_init(){
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
 unsigned int sendFromMsgBuffer(unsigned int requester){
     int i;
-    LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
+    //LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
     unsigned int found = PIPE_WAIT;
     //unsigned int foundHist = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
@@ -781,7 +781,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         return 1; // sent with success
     }
     else{
-        LOG("~~~~> NAO! ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));   
+        //LOG("~~~~> NAO! ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));   
         return 0; // packet is not in the buffer yet
     }
 }
@@ -986,8 +986,8 @@ void bufferPop(unsigned int index){
 ///////////////////////////////////////////////////////////////////
 /* Calculate the ID for a given address */
 unsigned int getID(unsigned int address){
-    unsigned int x = (address & 0xF0) >> 4;
-    unsigned int y = address & 0xF;
+    unsigned int x = getXpos(address);
+    unsigned int y = getYpos(address);
     return (DIM_X*y)+x;
 }
 
