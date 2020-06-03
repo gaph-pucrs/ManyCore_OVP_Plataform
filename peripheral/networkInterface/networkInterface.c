@@ -161,6 +161,7 @@ void niIteration(){
     // This is needed to handle the interruption delivery when the packet arrived during another interruption
     if(control_RX == NI_STATUS_ON && receivingCount == EMPTY && control_TX != NI_STATUS_INTER){
         //bhmMessage("INFO", "NIITERATION", "-------------------------------___SPECIAL!!!!\n");
+        bhmWaitDelay(QUANTUM_DELAY);
         control_RX = NI_STATUS_INTER;
         writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
         bhmMessage("INFO", "NI", "INT1\n");
