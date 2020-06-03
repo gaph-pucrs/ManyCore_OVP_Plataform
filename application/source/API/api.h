@@ -632,7 +632,7 @@ void interruptHandler_NI(void) {
     int requester;
     unsigned int stored_interruptionType = interruptionType;
     interruptionType = 0;
-    //LOG("a %x\n",*myAddress);
+    LOG("NOVA INTERRUPCAO %x EM %x\n",stored_interruptionType,*myAddress);
     if(stored_interruptionType == NI_INT_TYPE_RX){
         //LOG("Chegou um pacote\n");
         /*IMPORTANTE: NO FUTURO O INCOMINGPACKET PRECISA SER DUPLICADO - CASO CHEGUE UM PACOTE E O PACOTE ANTERIOR AINDA NAO FOI LIDO */
