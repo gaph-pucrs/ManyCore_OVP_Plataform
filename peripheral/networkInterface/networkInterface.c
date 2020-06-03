@@ -216,6 +216,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(control_RX == NI_STATUS_OFF){
         //statusUpdate(RX);
+        bhmMessage("INFO", "RX UPDT", "COMEÇANDO NOVO PACOTE!");
         control_RX = NI_STATUS_ON;
         resetAddress();
         receivingField = HEADER;
