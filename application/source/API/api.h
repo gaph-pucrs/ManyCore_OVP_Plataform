@@ -651,7 +651,7 @@ void interruptHandler_NI(void) {
                 //LOG("Adicionando pending req\n");
                 pendingReq[getID(requester)] = MESSAGE_REQ;
             }
-            LOG("-------------------------------------------------------------------DONE eu: %x\n",*myAddress);
+            //LOG("-------------------------------------------------------------------DONE eu: %x\n",*myAddress);
             *NIcmd = DONE; // releases the NI to return to the IDLE state
         }
     }
