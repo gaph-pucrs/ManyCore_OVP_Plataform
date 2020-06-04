@@ -294,14 +294,16 @@ PPM_REG_WRITE_CB(statusWrite) {
     }
     else if(command == DONE){
         //bhmMessage("INFO", "portUpdt", "CTRL RX UPDT\n");
-        if(control_TX == NI_STATUS_INTER){
-            control_TX = NI_STATUS_OFF;
-            ppmWriteNet(handles.INT_NI, 0);  // Turn the interruption signal down
-        }
-        if(control_RX == NI_STATUS_INTER || control_RX == NI_STATUS_HANDLING){
-            //bhmMessage("INFO", "portUpdt", "CTRL RX OFF\n");
-            control_RX = NI_STATUS_OFF;
-            setGO();
+        if(control_TX == NI_STATUS_INTER || (control_RX == NI_STATUS_INTER || control_RX == NI_STATUS_HANDLING)){    
+            if(control_TX == NI_STATUS_INTER){
+                control_TX = NI_STATUS_OFF;
+                ppmWriteNet(handles.INT_NI, 0);  // Turn the interruption signal down
+            }
+            if(control_RX == NI_STATUS_INTER || control_RX == NI_STATUS_HANDLING){
+                //bhmMessage("INFO", "portUpdt", "CTRL RX OFF\n");
+                control_RX = NI_STATUS_OFF;
+                setGO();
+            }
         }
         else{
             bhmMessage("I", "statusWrite", "ERROR_DONE: UNEXPECTED STATE REACHED"); while(1){}
