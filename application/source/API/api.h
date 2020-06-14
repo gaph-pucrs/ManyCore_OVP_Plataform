@@ -216,8 +216,9 @@ volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
 volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 // Network Interface - mapped registers
-volatile unsigned int *NIaddr = NI_BASE + 0x1;
-volatile unsigned int *NIcmd = NI_BASE + 0x0;
+volatile unsigned int *NIaddr = NI_BASE + 0x0;
+volatile unsigned int *NIcmdTX = NI_BASE + 0x1;
+volatile unsigned int *NIcmdRX = NI_BASE + 0x2;
 // Executed Instructions 
 volatile unsigned int *instructionCounter = EXECUTED_INST;
 volatile unsigned int *branchCounter =      BRANCH_INST;
@@ -690,10 +691,12 @@ void interruptHandler_NI(void) {
 void OVP_init(){
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler_NI, NULL);
-    int_add(1, (void *)interruptHandler_timer, NULL);
+    int_add(0, (void *)interruptHandler_timer, NULL);
+    int_add(1, (void *)interruptHandler_NI_TX, NULL);
+    int_add(2, (void *)interruptHandler_NI_RX, NULL);
     int_enable(0);
     int_enable(1);
+    int_enable(2);
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
