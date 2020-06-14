@@ -38,10 +38,13 @@ extern Uns32 diagnosticLevel;
 typedef struct DMAC_ab8_dataS { 
     union { 
         Uns32 value;
-    } status;
+    } address;
     union { 
         Uns32 value;
-    } address;
+    } statusTX;
+    union { 
+        Uns32 value;
+    } statusRX;
 } DMAC_ab8_dataT, *DMAC_ab8_dataTP;
 
 /////////////////////////////// Port Declarations //////////////////////////////
@@ -55,7 +58,8 @@ typedef struct handlesS {
     ppmAddressSpaceHandle MREAD;
     ppmAddressSpaceHandle MWRITE;
     void                 *DMAC;
-    ppmNetHandle          INT_NI;
+    ppmNetHandle          INT_NI_TX;
+    ppmNetHandle          INT_NI_RX;
     ppmPacketnetHandle    dataPort;
     ppmPacketnetHandle    controlPort;
 } handlesT, *handlesTP;
@@ -68,8 +72,10 @@ PPM_REG_READ_CB(addressRead);
 PPM_REG_WRITE_CB(addressWrite);
 PPM_PACKETNET_CB(controlPortUpd);
 PPM_PACKETNET_CB(dataPortUpd);
-PPM_REG_READ_CB(statusRead);
-PPM_REG_WRITE_CB(statusWrite);
+PPM_REG_READ_CB(statusRXRead);
+PPM_REG_WRITE_CB(statusRXWrite);
+PPM_REG_READ_CB(statusTXRead);
+PPM_REG_WRITE_CB(statusTXWrite);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
 PPM_CONSTRUCTOR_CB(constructor);

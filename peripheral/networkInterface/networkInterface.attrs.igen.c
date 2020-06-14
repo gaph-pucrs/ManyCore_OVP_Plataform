@@ -23,7 +23,7 @@ static ppmBusPort busPorts[] = {
     {
         .name            = "DMAC",
         .type            = PPM_SLAVE_PORT,
-        .addrHi          = 0x7LL,
+        .addrHi          = 0xbLL,
         .mustBeConnected = 1,
         .remappable      = 0,
         .description     = 0,
@@ -56,10 +56,16 @@ static PPM_BUS_PORT_FN(nextBusPort) {
 
 static ppmNetPort netPorts[] = {
     {
-        .name            = "INT_NI",
+        .name            = "INT_NI_TX",
         .type            = PPM_OUTPUT_PORT,
         .mustBeConnected = 0,
-        .description     = "NI Interrupt Request"
+        .description     = "NI TX Interrupt Request"
+    },
+    {
+        .name            = "INT_NI_RX",
+        .type            = PPM_OUTPUT_PORT,
+        .mustBeConnected = 0,
+        .description     = "NI RX Interrupt Request"
     },
     { 0 }
 };

@@ -29,13 +29,14 @@ int main(int argc, char **argv)
     while(1){
 		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
-			LOG("AGUARDANDO %x\n",*myAddress);
+			LOG("========================AGUARDANDO %x\n",*myAddress);
 			ReceiveMessage(&theMessage, divider_addr);
-			LOG("RECEBIDO %x\n",*myAddress);
+			LOG("========================RECEBIDO %x\n",*myAddress);
+			//LOG("RECEBIDO %x\n",*myAddress);
 			for (j=0; j<NUM_NODES; j++)
 				AdjMatrix[i][j] = theMessage.msg[j];
 		}
-		LOG("PRONTO!!!\n");
+		LOG("PRONTO!!! 000000\n");
 		calc = AdjMatrix[0][0];
 		if (calc == KILL) break;
 
@@ -45,7 +46,7 @@ int main(int argc, char **argv)
 			q[i] = i;
 		}
 		dist[source] = 0;
-		//u = 0;
+		u = 0;
 
 		for (i=0;i<NUM_NODES;i++) {
 			shortest = INFINITY;
