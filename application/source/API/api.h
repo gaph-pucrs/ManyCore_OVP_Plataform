@@ -767,7 +767,6 @@ void OVP_init(){
 ///////////////////////////////////////////////////////////////////
 /* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
-    unsigned int i;
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
     
