@@ -651,6 +651,7 @@ void interruptHandler_NI_RX(void) {
         requester = incomingPacket[PI_REQUESTER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+            LOG("%x - REQUISICAO ADICIONADA NA FILA!\n",*myAddress);
             pendingReq[getID(requester)] = MESSAGE_REQ;
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
