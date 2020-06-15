@@ -222,6 +222,7 @@ PPM_REG_READ_CB(statusRXRead) {
 
 PPM_REG_WRITE_CB(statusRXWrite) {
     unsigned int command = htonl(data);
+    bhmMessage("I", "statusWrite", "RECEBENDO O COMANDO %x\n",command);
     if(command == DONE){
         if(control_RX == NI_STATUS_INTER){    
             control_TX = NI_STATUS_OFF;
@@ -313,7 +314,6 @@ PPM_PACKETNET_CB(dataPortUpd) {
 
     // Detects the receiving finale
     if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){
-        bhmMessage("I", "NIRX", "NI TERMIANDO DE RECEBER\n");
         setSTALL();
         control_RX = NI_STATUS_INTER;
         //writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
