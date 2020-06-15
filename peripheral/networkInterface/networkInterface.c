@@ -185,7 +185,7 @@ void niIteration(){
 }
 
 // Resets the receiving address to the first position of the array
-void resetAddress(){
+void resetReceivingAddress(){
     receivingAddress = addressStart;
 }
 
@@ -216,31 +216,109 @@ PPM_REG_WRITE_CB(addressWrite) {
 }
 
 PPM_REG_READ_CB(statusRXRead) {
-    // YOUR CODE HERE (statusRXRead)
+    DMAC_ab8_data.statusRX.value = htonl(control_RX);
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(statusRXWrite) {
-    // YOUR CODE HERE (statusRXWrite)
+    unsigned int command = htonl(data);
+    if(command == DONE){
+        if(control_RX == NI_STATUS_INTER){    
+            control_TX = NI_STATUS_OFF;
+            ppmWriteNet(handles.INT_NI_RX, 0);  // Turn the interruption signal down
+            setGO();
+        }
+        else{
+            bhmMessage("I", "statusWrite", "ERROR_DONE_RX: UNEXPECTED STATE REACHED"); while(1){}
+        }
+    }
     *(Uns32*)user = data;
 }
 
 PPM_REG_READ_CB(statusTXRead) {
-    // YOUR CODE HERE (statusTXRead)
+    DMAC_ab8_data.statusTX.value = htonl(control_TX);
+    //informIteration(); // Used only when operating at LOCAL ITERATIONS
     return *(Uns32*)user;
 }
 
 PPM_REG_WRITE_CB(statusTXWrite) {
-    // YOUR CODE HERE (statusTXWrite)
+    unsigned int command = htonl(data);
+    if(command == TX){
+        if(control_TX == NI_STATUS_OFF){
+            control_TX = NI_STATUS_ON;
+            transmittingAddress = auxAddress;
+            transmittingCount = HEADER;
+            niIteration();  // Send a flit to the ROUTER, this way it will inform the iterator that this PE is waiting for "iterations"
+        }
+        else{
+            bhmMessage("I", "statusWrite", "ERROR_TX: UNEXPECTED STATE REACHED"); while(1){}
+        }
+    }
+    else if(command == DONE){
+        if(control_TX == NI_STATUS_INTER){    
+            control_TX = NI_STATUS_OFF;
+            ppmWriteNet(handles.INT_NI_TX, 0);  // Turn the interruption signal down
+        }
+        else{
+            bhmMessage("I", "statusWrite", "ERROR_DONE_TX: UNEXPECTED STATE REACHED"); while(1){}
+        }
+    }
     *(Uns32*)user = data;
 }
 
+// Receiving a control information from the router...
 PPM_PACKETNET_CB(controlPortUpd) {
-    // YOUR CODE HERE (controlPortUpd)
+    // Input information with 4 bytes are about flow control
+    if(bytes == 4){
+        unsigned int ctrl = *(unsigned int *)data;
+        control_in_STALLGO = ctrl;
+    }
+    // Information with 8 bytes are about iterations
+    else if(bytes == 8) {
+        niIteration();
+    }
 }
 
+// Receiving a flit from the router...
 PPM_PACKETNET_CB(dataPortUpd) {
-    // YOUR CODE HERE (dataPortUpd)
+    unsigned int flit = *((unsigned int*)data);
+    
+    // This will happen if the NI is receiving a service packet when it is in a idle state
+    if(control_RX == NI_STATUS_OFF){
+        control_RX = NI_STATUS_ON;
+        resetReceivingAddress();
+        receivingField = HEADER;
+        receivingCount = 0xFF; // qqrcoisa diferente de ZERO
+    }
+
+    // Receiving process
+    if(control_RX == NI_STATUS_ON){
+        if(receivingField == HEADER){
+            receivingField = SIZE;
+            writeMem(flit, receivingAddress);
+            receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
+        }
+        else if(receivingField == SIZE){
+            receivingField = PAYLOAD;
+            receivingCount = htonl(flit);
+            writeMem(flit, receivingAddress);
+            receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
+        }
+        else{
+            receivingCount = receivingCount - 1;
+            writeMem(flit, receivingAddress);
+            receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
+        }
+    }
+
+    // Detects the receiving finale
+    if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){
+        setSTALL();
+        control_RX = NI_STATUS_INTER;
+        //writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
+        ppmWriteNet(handles.INT_NI_RX, 1); // Turns the interruption on
+        }
+    }
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {
