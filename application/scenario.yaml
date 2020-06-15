@@ -1,6 +1,15 @@
 apps:
- - name: pingpong
+ - name: dijkstra
    cluster: 0
    static_mapping:
-    ping: [0,0]
-    pong: [1,1]
+    dijkstra_0: [2,2]
+    dijkstra_1: [1,2]
+    dijkstra_2: [1,1]
+    dijkstra_3: [1,0]
+    dijkstra_4: [2,0]
+    divider: [2,1]
+    print_dij: [3,0]
+ - name: thermalManagement
+   cluster: 0
+   static_mapping:
+    thermalMaster: [0,0]
