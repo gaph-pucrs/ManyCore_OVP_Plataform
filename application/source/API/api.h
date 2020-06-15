@@ -921,6 +921,7 @@ void SendMessage(message *theMessage, unsigned int destination){
     bufferPush(index);
     // Once the packet is ready, check if the request has arrived
     if(checkPendingReq(getID(destination))){
+        LOG("ENVIANDO PENDING\n");
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[index], index);
         // Clear the pending request
