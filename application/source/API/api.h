@@ -632,7 +632,7 @@ void interruptHandler_timer(void) {
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
-    LOG("%x - RECEBI UM PACOTE!\n",*myAddress);
+    LOG("%x - RECEBENDO UM PACOTE!\n",*myAddress);
     int requester, i;
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
@@ -658,6 +658,7 @@ void interruptHandler_NI_RX(void) {
         LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);
         while(1){}
     }
+    LOG("%x - TERMINEI DE RECEBER UM PACOTE!\n",*myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -710,6 +711,7 @@ void interruptHandler_NI_TX(void) {
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
         sendExecutedInstPacket = FALSE;
     }
+    LOG("%x - TERMINEI INTERRUPÇÃO TX!\n",*myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
