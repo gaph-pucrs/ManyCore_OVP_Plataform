@@ -802,7 +802,7 @@ void ReceiveRaw(message *theMessage){
     }
     receivingActive = 0;
     // Inform the NI a packet was read
-    *NIcmd = DONE;
+    *NIcmdRX = DONE;
 }
 
 ///////////////////////////////////////////////////////////////////
