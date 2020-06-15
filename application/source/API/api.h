@@ -981,6 +981,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_disable(0);
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
     transmittingActive = slot;
+    LOG("=============ENVIANDO UM PACOTE SLOT %x\n", slot);
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
