@@ -133,28 +133,42 @@ PPM_PACKETNET_CB(controlWest) {
 
 PPM_PACKETNET_CB(dataEast) {
 
-unsigned int newFlit = *(unsigned int *)data;
-    incomingFlit.data = newFlit;
-    hasDataToSend = 1;
-    bufferPush(EAST);}
+if(bytes == 8){
+        incomingFlit.data = *(unsigned int *)data;
+    } else{
+        incomingFlit.source = *(unsigned int *)data;
+        hasDataToSend = 1;
+        bufferPush(EAST);
+    }
+}
 
 PPM_PACKETNET_CB(dataNorth) {
-    unsigned int newFlit = *(unsigned int *)data;
-    incomingFlit.data = newFlit;
-    hasDataToSend = 1;
-    bufferPush(NORTH);}
+    if(bytes == 8){
+        incomingFlit.data = *(unsigned int *)data;
+    } else{
+        incomingFlit.source = *(unsigned int *)data;
+        hasDataToSend = 1;
+        bufferPush(NORTH);
+    }
+}    
 
 PPM_PACKETNET_CB(dataSouth) {
-    unsigned int newFlit = *(unsigned int *)data;
-    incomingFlit.data = newFlit;
-    hasDataToSend = 1;
-    bufferPush(SOUTH);}
+   if(bytes == 8){
+        incomingFlit.data = *(unsigned int *)data;
+    } else{
+        incomingFlit.source = *(unsigned int *)data;
+        hasDataToSend = 1;
+        bufferPush(SOUTH);
+    }
 
 PPM_PACKETNET_CB(dataWest) {
-    unsigned int newFlit = *(unsigned int *)data;
-    incomingFlit.data = newFlit;
-    hasDataToSend = 1;
-    bufferPush(WEST);}
+   if(bytes == 8){
+        incomingFlit.data = *(unsigned int *)data;
+    } else{
+        incomingFlit.source = *(unsigned int *)data;
+        hasDataToSend = 1;
+        bufferPush(WEST);
+    }
 
 PPM_PACKETNET_CB(unsafeNoC) {
    // int testando1=0;

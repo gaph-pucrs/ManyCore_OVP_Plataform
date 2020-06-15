@@ -749,12 +749,10 @@ PPM_PACKETNET_CB(controlWest) {
 
 PPM_PACKETNET_CB(dataEast) {
 
-    if(bytes == 8){
-        incomingFlit.data = *(unsigned int *)data;
-    } else{
-        incomingFlit.source = *(unsigned int *)data;
-        bufferPush(EAST);
-    }
+     unsigned int newFlit = *(unsigned int *)data;
+    incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
+    bufferPush(EAST);
 }
 
 PPM_PACKETNET_CB(dataLocal) {
@@ -765,30 +763,25 @@ PPM_PACKETNET_CB(dataLocal) {
 }
 
 PPM_PACKETNET_CB(dataNorth) {
-    if(bytes == 8){
-        incomingFlit.data = *(unsigned int *)data;
-    } else{
-        incomingFlit.source = *(unsigned int *)data;
-        bufferPush(NORTH);
-    }
+     unsigned int newFlit = *(unsigned int *)data;
+    incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
+    bufferPush(NORTH);
+    
 }
 
 PPM_PACKETNET_CB(dataSouth) {
-    if(bytes == 8){
-        incomingFlit.data = *(unsigned int *)data;
-    } else{
-        incomingFlit.source = *(unsigned int *)data;
-        bufferPush(SOUTH);
-    }
+     unsigned int newFlit = *(unsigned int *)data;
+    incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
+    bufferPush(SOUTH);
 }
 
 PPM_PACKETNET_CB(dataWest) {
-    if(bytes == 8){
-        incomingFlit.data = *(unsigned int *)data;
-    } else{
-        incomingFlit.source = *(unsigned int *)data;
-        bufferPush(wEST);
-    }
+     unsigned int newFlit = *(unsigned int *)data;
+    incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
+    bufferPush(WEST);
 }
 
 PPM_PACKETNET_CB(iterationPort) {
