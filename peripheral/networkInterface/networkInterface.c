@@ -171,7 +171,7 @@ void niIteration(){
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
             // Changes the TX status to INTERRUPTION
-            bhmMessage("INFO", "NIITERATION", "-------------------------------INTERROMPENDO RX\n");
+            bhmMessage("INFO", "NIITERATION", "-------------------------------INTERROMPENDO TX\n");
             control_TX = NI_STATUS_INTER; 
             ppmWriteNet(handles.INT_NI_TX, 1); // Turns the interruption on
         }
