@@ -97,12 +97,14 @@ void usi2vec(){
 
 // Sets the local status to GO, allowing flits to be transmitted to the NI
 void setGO(){
+    bhmMessage("I", "CONTROL", "STALL!\n");
     myStatus = GO;
     ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
 }
 
 // Sets the local status to STALL, blocking the flits inside the local router
 void setSTALL(){
+    bhmMessage("I", "CONTROL", "STALL!\n");
     myStatus = STALL;
     ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
 }
