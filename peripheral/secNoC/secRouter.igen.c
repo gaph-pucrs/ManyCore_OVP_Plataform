@@ -178,10 +178,7 @@ unsigned int isEmpty(unsigned int port){
 flit bufferPop(unsigned int port){
    // unsigned int difX, difY;
 
-    flit message;
-    message.data = 0;
-    message.source = 0;
-    message = buffers[port][first[port];
+    flit message = buffers[port][first[port]];
         if(first[port] < BUFFER_SIZE-1){
             first[port]++;
         } else if(first[port] == BUFFER_SIZE-1){
@@ -267,7 +264,7 @@ void transmitt(){
     unsigned int port;
     flit message;
     message.source = 0;
-    message.data=0;
+    message.data = 0;
 
     // For each port...
     for(port = 0; port <= LOCAL; port++){
@@ -282,7 +279,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
                             message = bufferPop(port);
-                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to local port",flit.message, flit.source,myID);
+			    bhmMessage("I", "secNoC", "------------------------------------------------>Enviando flit  %d SOURCE = %d from %d to local port", message.data, message.source, myID);
                             // Send the flit transmission time followed by the data
                             //ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                         }
@@ -294,7 +291,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                             // Gets a flit from the buffer 
                             message = bufferPop(port);
-                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to EAST port",flit.message, flit.source,myID);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit = %d SOURCE = %d from %d to EAST port",message.data,message.source,myID);
                             ppmPacketnetWrite(handles.portDataEast, &message, sizeof(message));
                         }
                     }
@@ -305,7 +302,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                             // Gets a flit from the buffer 
                             message = bufferPop(port);
-                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to WEST port",flit.message, flit.source,myID);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit  = %d SOURCE = %d from %d to WEST port",message.data, message.source,myID);
 
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portDataWest, &message, sizeof(message));
@@ -318,7 +315,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                             // Gets a flit from the buffer
                             message = bufferPop(port);
-                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to NORTH port",flit.message, flit.source,myID);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit = %d SOURCE = %d from %d to NORTH port",message.data, message.source,myID);
 
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portDataNorth, &message, sizeof(message));
@@ -332,7 +329,7 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             message = bufferPop(port);
                             // Send the flit transmission time followed by the data
-                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to SOUTH port",flit.message, flit.source,myID);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit = %d SOURCE = %d from %d to SOUTH port",message.data, message.source,myID);
 
                             ppmPacketnetWrite(handles.portDataSouth, &message, sizeof(message));
                         }
