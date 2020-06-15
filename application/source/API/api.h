@@ -651,6 +651,7 @@ void interruptHandler_NI_RX(void) {
         requester = incomingPacket[PI_REQUESTER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+            LOG("%x - ADICIONANDO UM PENDING!\n",*myAddress);
             pendingReq[getID(requester)] = MESSAGE_REQ;
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
@@ -679,6 +680,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         }
     }
     if(found != PIPE_WAIT){
+        LOG("%x - ENCONTREI NO PIPE!\n",*myAddress);
         // Stay here waiting until the TX module is able to transmmit the package 
         while(*NIcmdTX != NI_STATUS_OFF){}
         // Sends the packet
