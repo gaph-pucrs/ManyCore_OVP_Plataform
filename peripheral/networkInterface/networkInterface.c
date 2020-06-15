@@ -222,7 +222,7 @@ PPM_REG_READ_CB(statusRXRead) {
 
 PPM_REG_WRITE_CB(statusRXWrite) {
     unsigned int command = htonl(data);
-    bhmMessage("I", "statusWrite", "RECEBENDO O COMANDO %x\n",command);
+    bhmMessage("I", "RX_STATUS_W", "RECEBENDO O COMANDO %x\n",command);
     if(command == DONE){
         if(control_RX == NI_STATUS_INTER){    
             control_TX = NI_STATUS_OFF;
@@ -244,6 +244,7 @@ PPM_REG_READ_CB(statusTXRead) {
 
 PPM_REG_WRITE_CB(statusTXWrite) {
     unsigned int command = htonl(data);
+    bhmMessage("I", "TX_STATUS_W", "RECEBENDO O COMANDO %x\n",command);
     if(command == TX){
         if(control_TX == NI_STATUS_OFF){
             control_TX = NI_STATUS_ON;
