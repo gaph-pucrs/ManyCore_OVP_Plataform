@@ -216,9 +216,9 @@ volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
 volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 // Network Interface - mapped registers
-volatile unsigned int *NIaddr = 0x80000004;// NI_BASE + 0x0;
-volatile unsigned int *NIcmdTX = 0x80000008;//NI_BASE + 0x1;
-volatile unsigned int *NIcmdRX = 0x8000000F;//NI_BASE + 0x2;
+volatile unsigned int *NIaddr = ((unsigned int *)0x80000004);// NI_BASE + 0x0;
+volatile unsigned int *NIcmdTX = ((unsigned int *)0x80000008);//NI_BASE + 0x1;
+volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000F);//NI_BASE + 0x2;
 // Executed Instructions 
 volatile unsigned int *instructionCounter = EXECUTED_INST;
 volatile unsigned int *branchCounter =      BRANCH_INST;
