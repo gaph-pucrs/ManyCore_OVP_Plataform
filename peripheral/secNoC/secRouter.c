@@ -132,6 +132,7 @@ PPM_PACKETNET_CB(controlWest) {
 }
 
 PPM_PACKETNET_CB(dataEast) {
+
 unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
     hasDataToSend = 1;
@@ -159,8 +160,9 @@ PPM_PACKETNET_CB(unsafeNoC) {
    // int testando1=0;
    
     if(myAddress == 0xFFFFFFFF){
-        myID = *(unsigned int *)data;
-        myID = htonl1((unsigned int)myID);
+        
+	myID = *(unsigned int *) data;
+	bhmMessage("I","secNoC", "myID3 = %d", myID); 
         int y = myID/DIM_X;
         int x = myID-(DIM_X*y);
         myAddress = xy2addr(x, y);
