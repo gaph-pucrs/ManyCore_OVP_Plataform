@@ -123,7 +123,7 @@ void writeMem(unsigned int flit, unsigned int addr){
         while(1){} // error handling
     }
     ppmWriteAddressSpace(h, addr, sizeof(chFlit), chFlit);
-    ppmCloseAddressSpace(h);,
+    ppmCloseAddressSpace(h);
     return;
 }
 
