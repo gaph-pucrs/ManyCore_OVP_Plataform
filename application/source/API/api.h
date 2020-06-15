@@ -361,7 +361,7 @@ typedef struct Message {
 
 // API Packets
 message *deliveredMessage;
-unsigned int sendAfterTX = PIPE_WAIT;
+unsigned int sendAfterTX[PIPE_SIZE];
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
 volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
 volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];
@@ -410,6 +410,8 @@ void interruptHandler_timer(void);
 unsigned int estimateNoCActivity();
 unsigned int getNumberOfPorts(unsigned int address);
 void read_class_inst();
+void addSendAfterTX(unsigned int slot);
+void popSendAfterTX();
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -686,12 +688,42 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         }
         else{
             // Set it to send after the next TX interruption
-            sendAfterTX = found;
+            addSendAfterTX(found);
         }
         return 1; // packet was sent with success
     }
     else{
         return 0; // packet is not in the buffer yet
+    }
+}
+
+///////////////////////////////////////////////////////////////////
+/* Adds to the end of the list an slot to send after the next TX interruption */
+void addSendAfterTX(unsigned int slot){
+    int i=0;
+    do{
+        if(sendAfterTX[i] == PIPE_WAIT){
+            sendAfterTX[i] = slot;
+            break;
+        }
+        i++;
+    }while(i<PIPE_SIZE);
+    return;
+}
+
+///////////////////////////////////////////////////////////////////
+/* Removes the first send slot in the list and shift others keeping the insertion orther  */
+void popSendAfterTX(){
+    int i;
+    for(i=0; i<PIPE_SIZE; i++){
+        // in the last one we put a blank value (pipe_wait)
+        if(i == PIPE_SIZE-1){ 
+            sendAfterTX[i] = PIPE_WAIT;
+        }
+        // others will be shifted
+        else{
+            sendAfterTX[i] = sendAfterTX[i+1];
+        }   
     }
 }
 
@@ -717,8 +749,9 @@ void interruptHandler_NI_TX(void) {
         sendExecutedInstPacket = FALSE;
     }
     // If there is some packet inside the PIPE waiting to be sent, send it!
-    else if(sendAfterTX <= PIPE_SIZE){
-        SendSlot((unsigned int)&buffer_packets[sendAfterTX], sendAfterTX);
+    else if(sendAfterTX[0] <= PIPE_SIZE){
+        SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
+        popSendAfterTX();
         sendAfterTX = PIPE_WAIT;
     }
 }
