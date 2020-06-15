@@ -682,9 +682,10 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     if(found != PIPE_WAIT){
         LOG("%x - ENCONTREI NO PIPE!\n",*myAddress);
         // Stay here waiting until the TX module is able to transmmit the package 
-        while(*NIcmdTX != NI_STATUS_OFF){}
+        while(*NIcmdTX != NI_STATUS_OFF){LOG("%x - ESPERANDO PRA ENVIAR!\n",*myAddress);}
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[found], found);
+        LOG("%x - ENVIADO!\n",*myAddress);
         return 1; // packet was sent with success
     }
     else{
