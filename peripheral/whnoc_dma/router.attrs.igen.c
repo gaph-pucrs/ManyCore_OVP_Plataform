@@ -48,7 +48,7 @@ Uns8 portDataWest_pnsd[4];
 Uns8 portDataNorth_pnsd[4];
 Uns8 portDataSouth_pnsd[4];
 Uns8 portDataLocal_pnsd[4];
-Uns8 portSecNoC_pnsd[4];
+Uns8 portSecNoC_pnsd[8];
 Uns8 iterationsPort_pnsd[8];
 Uns8 portControlEast_pnsd[8];
 Uns8 portControlWest_pnsd[8];
@@ -113,7 +113,7 @@ static ppmPacketnetPort packetnetPorts[] = {
         .mustBeConnected = 0,
         .description     = 0,
         .sharedData      = portSecNoC_pnsd,
-        .sharedDataBytes = 4,
+        .sharedDataBytes = 8,
         .handlePtr       = &handles.portSecNoC,
         .packetnetCB     = secNoC,
         .userData        = (void*)0

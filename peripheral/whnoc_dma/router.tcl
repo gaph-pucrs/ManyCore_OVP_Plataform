@@ -63,7 +63,7 @@ imodeladdpacketnetport \
 
 imodeladdpacketnetport \
     -name portSecNoC \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction secNoC \
     -updatefunctionargument 0x00
 

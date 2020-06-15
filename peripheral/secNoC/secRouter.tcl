@@ -15,25 +15,25 @@ iadddocumentation -name Description \
 #########################################
 imodeladdpacketnetport \
     -name portDataEast \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction dataEast \
     -updatefunctionargument 0x00
 
 imodeladdpacketnetport \
     -name portDataWest \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction dataWest \
     -updatefunctionargument 0x00
 
 imodeladdpacketnetport \
     -name portDataNorth \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction dataNorth \
     -updatefunctionargument 0x00
 
 imodeladdpacketnetport \
     -name portDataSouth \
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction dataSouth \
     -updatefunctionargument 0x00
 
@@ -44,7 +44,7 @@ imodeladdpacketnetport \
 
 imodeladdpacketnetport \
     -name portUnsafeNoC\
-    -maxbytes 4 \
+    -maxbytes 8 \
     -updatefunction unsafeNoC \
     -updatefunctionargument 0x00
 
