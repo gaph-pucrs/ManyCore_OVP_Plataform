@@ -97,14 +97,14 @@ void usi2vec(){
 
 // Sets the local status to GO, allowing flits to be transmitted to the NI
 void setGO(){
-    bhmMessage("I", "CONTROL", "GO!\n");
+    //bhmMessage("I", "CONTROL", "GO!\n");
     myStatus = GO;
     ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
 }
 
 // Sets the local status to STALL, blocking the flits inside the local router
 void setSTALL(){
-    bhmMessage("I", "CONTROL", "STALL!\n");
+    //bhmMessage("I", "CONTROL", "STALL!\n");
     myStatus = STALL;
     ppmPacketnetWrite(handles.controlPort, &myStatus, sizeof(myStatus));
 }
@@ -171,7 +171,6 @@ void niIteration(){
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
             // Changes the TX status to INTERRUPTION
-            bhmMessage("INFO", "NIITERATION", "-------------------------------INTERROMPENDO TX\n");
             control_TX = NI_STATUS_INTER; 
             ppmWriteNet(handles.INT_NI_TX, 1); // Turns the interruption on
         }
@@ -225,7 +224,6 @@ PPM_REG_READ_CB(statusRXRead) {
 
 PPM_REG_WRITE_CB(statusRXWrite) {
     unsigned int command = htonl(data);
-    bhmMessage("I", "RX_STATUS_W", "RECEBENDO O COMANDO %x\n",command);
     if(command == DONE){
         if(control_RX == NI_STATUS_INTER){    
             control_RX = NI_STATUS_OFF;
@@ -247,7 +245,6 @@ PPM_REG_READ_CB(statusTXRead) {
 
 PPM_REG_WRITE_CB(statusTXWrite) {
     unsigned int command = htonl(data);
-    bhmMessage("I", "TX_STATUS_W", "RECEBENDO O COMANDO %x\n",command);
     if(command == TX){
         if(control_TX == NI_STATUS_OFF){
             control_TX = NI_STATUS_ON;
@@ -316,7 +313,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
         }
     }
 
-    bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
+    //bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
     
     // Detects the receiving finale
     if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){

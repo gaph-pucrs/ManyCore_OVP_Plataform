@@ -633,7 +633,6 @@ void interruptHandler_timer(void) {
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
-    LOG("%x - RECEBENDO UM PACOTE!\n",*myAddress);
     int requester, i;
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
@@ -652,7 +651,6 @@ void interruptHandler_NI_RX(void) {
         requester = incomingPacket[PI_REQUESTER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
-            LOG("%x - ADICIONANDO UM PENDING!\n",*myAddress);
             pendingReq[getID(requester)] = MESSAGE_REQ;
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
@@ -661,7 +659,6 @@ void interruptHandler_NI_RX(void) {
         LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);
         while(1){}
     }
-    LOG("%x - TERMINEI DE RECEBER UM PACOTE!\n",*myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -681,7 +678,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         }
     }
     if(found != PIPE_WAIT){
-        LOG("%x - ENCONTREI NO PIPE!\n",*myAddress);
         // Stay here waiting until the TX module is able to transmmit the package 
         //while(*NIcmdTX == NI_STATUS_OFF){LOG("%x - ESPERANDO PRA ENVIAR!\n",*myAddress);}
         if(*NIcmdTX == NI_STATUS_OFF){
@@ -702,7 +698,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface TX module */ 
 void interruptHandler_NI_TX(void) {
-    LOG("%x - TRANSMITI UM PACOTE!\n",*myAddress);
     if(transmittingActive < PIPE_SIZE){ // Message packet
         // Releses the buffer
         bufferPop(transmittingActive);
@@ -726,7 +721,6 @@ void interruptHandler_NI_TX(void) {
         SendSlot((unsigned int)&buffer_packets[sendAfterTX], sendAfterTX);
         sendAfterTX = PIPE_WAIT;
     }
-    LOG("%x - TERMINEI INTERRUPÇÃO TX!\n",*myAddress);
 }
 
 ///////////////////////////////////////////////////////////////////
