@@ -654,7 +654,7 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else{
-        LOG("%x - ERROR! Unexpected interruption! IT(%x) - can not handle it! Call the SAC!\n",*myAddress,stored_interruptionType);
+        LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);
         while(1){}
     }
 }
@@ -699,7 +699,7 @@ void interruptHandler_NI_TX(void) {
         transmittingActive = PIPE_WAIT;
     }
     else{
-        while(1){LOG("%x - ERROR! Unexpected interruption! TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
+        while(1){LOG("%x - ERROR! Unexpected interruption! NI_TX TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
     }
     *NIcmdTX = DONE;
 
