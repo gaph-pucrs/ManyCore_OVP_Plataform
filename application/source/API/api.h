@@ -216,9 +216,9 @@ volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 volatile unsigned int *PEToSync = SYNC_BASE + 0x1;	    
 volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 // Network Interface - mapped registers
-volatile unsigned int *NIaddr = NI_BASE + 0x0;
-volatile unsigned int *NIcmdTX = NI_BASE + 0x1;
-volatile unsigned int *NIcmdRX = NI_BASE + 0x2;
+volatile unsigned int *NIaddr = 0x80000004;// NI_BASE + 0x0;
+volatile unsigned int *NIcmdTX = 0x80000008;//NI_BASE + 0x1;
+volatile unsigned int *NIcmdRX = 0x8000000F;//NI_BASE + 0x2;
 // Executed Instructions 
 volatile unsigned int *instructionCounter = EXECUTED_INST;
 volatile unsigned int *branchCounter =      BRANCH_INST;
@@ -360,6 +360,7 @@ typedef struct Message {
 }message;
 
 // API Packets
+message *deliveredMessage;
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
 volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
 volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];
@@ -402,7 +403,8 @@ void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
 unsigned int sendFromMsgBuffer(unsigned int requester);
-void interruptHandler_NI(void);
+void interruptHandler_NI_TX(void);
+void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
 unsigned int estimateNoCActivity();
 unsigned int getNumberOfPorts(unsigned int address);
@@ -628,62 +630,84 @@ void interruptHandler_timer(void) {
 }
 
 ///////////////////////////////////////////////////////////////////
-/* Interruption function for Network Interface */ 
-void interruptHandler_NI(void) {
+/* Interruption function for Network Interface RX module */ 
+void interruptHandler_NI_RX(void) {
     int requester;
-    unsigned int stored_interruptionType = interruptionType;
-    interruptionType = 0;
-    LOG("NOVA INTERRUPCAO %x EM %x\n",stored_interruptionType,*myAddress);
-    if(stored_interruptionType == NI_INT_TYPE_RX){
-        //LOG("Chegou um pacote\n");
-        /*IMPORTANTE: NO FUTURO O INCOMINGPACKET PRECISA SER DUPLICADO - CASO CHEGUE UM PACOTE E O PACOTE ANTERIOR AINDA NAO FOI LIDO */
-        if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
-            //LOG("De msg\n");
-            incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-            receivingActive = 1; // Inform the index where the received packet is stored
-            *NIcmd = READING; // turn down the interruption
-        }
-        else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-            requester = incomingPacket[PI_REQUESTER];
-            *NIcmd = READING; // turn down the interruption
-            incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-            LOG("-- indo pra procura stored: %x - eu: %x\n", stored_interruptionType, *myAddress);
-            if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
-                //LOG("Adicionando pending req\n");
-                pendingReq[getID(requester)] = MESSAGE_REQ;
-            }
-            //LOG("-------------------------------------------------------------------DONE eu: %x\n",*myAddress);
-            *NIcmd = DONE; // releases the NI to return to the IDLE state
+    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
+        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
+        receivingActive = 1; // Inform the index where the received packet is stored
+        
+        ///////////////////  Delivers the Message ///////////////////
+        // Alocate the packet message inside the structure
+        deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
+        // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
+        for(i=0;i<deliveredMessage->size;i++){
+            deliveredMessage->msg[i] = incomingPacket[i+4];
         }
     }
-    else if(stored_interruptionType == NI_INT_TYPE_TX){
-        if(transmittingActive < PIPE_SIZE){ // Message packet
-            // Releses the buffer
-            bufferPop(transmittingActive);
-            transmittingActive = PIPE_WAIT;
-            *NIcmd = DONE;
+    else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
+        requester = incomingPacket[PI_REQUESTER];
+        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
+        if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+            pendingReq[getID(requester)] = MESSAGE_REQ;
         }
-        else if(transmittingActive == 0xFFFFFFFE){ // Service packet
-            transmittingActive = PIPE_WAIT;
-            *NIcmd = DONE;
-        }
-        else{
-            while(1){LOG("%x - ERROR! Unexpected interruption! TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
-        }
-        if(sendExecutedInstPacket == TRUE){
-            SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-            sendExecutedInstPacket = FALSE;
-        }
+        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else{
         LOG("%x - ERROR! Unexpected interruption! IT(%x) - can not handle it! Call the SAC!\n",*myAddress,stored_interruptionType);
         while(1){}
     }
-    LOG("FIM DA INTERRUPCAO %x\n",*myAddress);
-    // Reset the interruptionType
-    
-    //interruptionType = NI_INT_TYPE_CLEAR;
-    //LOG("b %x\n",*myAddress);
+}
+
+///////////////////////////////////////////////////////////////////
+/* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
+unsigned int sendFromMsgBuffer(unsigned int requester){
+    int i;
+    unsigned int found = PIPE_WAIT;
+    unsigned int foundSent = PIPE_WAIT;
+    for(i=0;i<PIPE_SIZE;i++){
+        if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
+            if(buffer_packets[i][PI_DESTINATION] == requester){ // and the destination is the same as the requester
+                if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
+                    found = i;
+                    foundSent = buffer_packets[i][PI_SEND_TIME];
+                }
+            }
+        }
+    }
+    if(found != PIPE_WAIT){
+        // Stay here waiting until the TX module is able to transmmit the package 
+        while(*NIcmdTX != NI_STATUS_OFF){}
+        // Sends the packet
+        SendSlot((unsigned int)&buffer_packets[found], found);
+        return 1; // packet was sent with success
+    }
+    else{
+        return 0; // packet is not in the buffer yet
+    }
+}
+
+///////////////////////////////////////////////////////////////////
+/* Interruption function for Network Interface TX module */ 
+void interruptHandler_NI_TX(void) {
+    if(transmittingActive < PIPE_SIZE){ // Message packet
+        // Releses the buffer
+        bufferPop(transmittingActive);
+        transmittingActive = PIPE_WAIT;
+    }
+    else if(transmittingActive == 0xFFFFFFFE){ // Service packet
+        transmittingActive = PIPE_WAIT;
+    }
+    else{
+        while(1){LOG("%x - ERROR! Unexpected interruption! TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
+    }
+    *NIcmdTX = DONE;
+
+    // If there is a Executed Instructions Packet available to send, send it!
+    if(sendExecutedInstPacket == TRUE){
+        SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+        sendExecutedInstPacket = FALSE;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -741,83 +765,25 @@ void OVP_init(){
 }
 
 ///////////////////////////////////////////////////////////////////
-/* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
-unsigned int sendFromMsgBuffer(unsigned int requester){
-    int i;
-    LOG("~~~~> procurando pacote no pipe!! eu: %x, requester: %d\n", *myAddress,getID(requester));
-    unsigned int found = PIPE_WAIT;
-    //unsigned int foundHist = PIPE_WAIT;
-    unsigned int foundSent = PIPE_WAIT;
-    for(i=0;i<PIPE_SIZE;i++){
-        if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
-            if(buffer_packets[i][PI_DESTINATION] == requester){ // and the destination is the same as the requester
-                //if(foundHist >= buffer_history[i]){
-                    if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
-                        //foundHist = buffer_history[i];
-                        found = i;
-                        foundSent = buffer_packets[i][PI_SEND_TIME];
-                    }
-                //}
-            }
-        }
-    }
-    LOG("~> found: %x - eu: %x \n",found, *myAddress);
-    if(found != PIPE_WAIT){
-        // Sends the packet
-        if(*NIcmd == NI_STATUS_OFF){
-            LOG("~> if\n");
-            SendSlot((unsigned int)&buffer_packets[found], found);
-        }
-        else{
-            LOG("~> else - eu: %x\n",*myAddress);
-            while(interruptionType != NI_INT_TYPE_TX){} // waiting it finish the TX
-            LOG("~> passou while\n");
-            if(transmittingActive < PIPE_SIZE){ // Message packet
-                // Releses the buffer
-                bufferPop(transmittingActive);
-                transmittingActive = PIPE_WAIT;
-                *NIcmd = DONE;
-            }
-            else if(transmittingActive == 0xFFFFFFFE){ // Service packet
-                transmittingActive = PIPE_WAIT;
-                *NIcmd = DONE;
-            }
-            else{
-                LOG("%x - ERROR! Unexpected interruption! (NI_INT_TYPE_TX) - can not handle it! Call the SAC!\n",*myAddress);
-                while(1){}
-            }
-            LOG("~> enviando! %x\n",*myAddress);
-            SendSlot((unsigned int)&buffer_packets[found], found);
-            LOG("~> pacote enviado! %x\n",*myAddress);
-        }
-        LOG("~~~~> ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));
-        return 1; // sent with success
-    }
-    else{
-        LOG("~~~~> NAO! ENCONTRADO!! eu: %x, requester: %d\n", *myAddress,getID(requester));   
-        return 0; // packet is not in the buffer yet
-    }
-}
-
-///////////////////////////////////////////////////////////////////
 /* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
     unsigned int i;
-    // Sends the request to the transmitter
+    // Pass the pointer to the message structure to a global var, acessible inside the interruption
+    deliveredMessage = theMessage;
+    
+    // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
+    
+    // Sends the request to the transmitter
     requestMsg(from);
+
+    // Waits the response
     *clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
-    // Alocate the packet message inside the structure
-    theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
-    // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
-    for(i=0;i<theMessage->size;i++){
-        theMessage->msg[i] = incomingPacket[i+4];
-    }
-    receivingActive = 0;
+    
     // Inform the NI a packet was read
-    *NIcmd = DONE;
+    *NIcmdRX = DONE;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1008,22 +974,23 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
-    while(*NIcmd != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    int_disable(2);
     int_disable(1);
     int_disable(0);
-    while(*NIcmd != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
     transmittingActive = slot;
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
+    int_enable(2);
 }
 
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendRaw(unsigned int addr){
     *NIaddr = addr;
-    *NIcmd = TX;
-    //LOG("SENDING! %x\n", *myAddress);
+    *NIcmdTX = TX;
 }
 
 ///////////////////////////////////////////////////////////////////
