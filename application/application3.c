@@ -5,26 +5,41 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "pingpong_config.h"
+#include "dijkstra_config.h"
 
-message pongping;
+message theMessage;
 
 int main(int argc, char **argv)
-{ 
+{
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    
-    int i;
-    ReceiveMessage(&pongping, ping_addr);
-    for(i=0;i<N_PINGPONG;i++){
-        LOG("3-PONG: %d\n",pongping.msg[0]);
-        pongping.msg[0] = pongping.msg[0] + 1;
-        SendMessage(&pongping, ping_addr);
-        ReceiveMessage(&pongping, ping_addr);
-    }
-    LOG("Pong Finalizado!\n");
+	int k;
+	theMessage.size = NUM_NODES*2;
+	int result[NUM_NODES*2];
+
+	ReceiveMessage(&theMessage, dijkstra_0_addr);
+	for (k=0; k < NUM_NODES*2; k++)
+		result[k] = theMessage.msg[k];
+
+	ReceiveMessage(&theMessage, dijkstra_1_addr);
+	for (k=0; k < NUM_NODES*2; k++)
+		result[k] = theMessage.msg[k];
+
+	ReceiveMessage(&theMessage, dijkstra_2_addr);
+	for (k=0; k < NUM_NODES*2; k++)
+		result[k] = theMessage.msg[k];
+
+	ReceiveMessage(&theMessage, dijkstra_3_addr);
+	for (k=0; k < NUM_NODES*2; k++)
+		result[k] = theMessage.msg[k];
+
+	ReceiveMessage(&theMessage, dijkstra_4_addr);
+	for (k=0; k < NUM_NODES*2; k++)
+		result[k] = theMessage.msg[k];
+
+	LOG("DIJKSTRA FINISHED");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

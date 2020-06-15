@@ -32,10 +32,11 @@ int main(int argc, char **argv)
 			LOG("========================AGUARDANDO %x\n",*myAddress);
 			ReceiveMessage(&theMessage, divider_addr);
 			LOG("========================RECEBIDO %x\n",*myAddress);
+			//LOG("RECEBIDO %x\n",*myAddress);
 			for (j=0; j<NUM_NODES; j++)
 				AdjMatrix[i][j] = theMessage.msg[j];
 		}
-		LOG("PRONTO!!! 333333\n");
+		LOG("PRONTO!!! 000000\n");
 		calc = AdjMatrix[0][0];
 		if (calc == KILL) break;
 
@@ -77,7 +78,7 @@ int main(int argc, char **argv)
 		theMessage.msg[i+NUM_NODES] = prev[i];
 
     SendMessage(&theMessage, print_dij_addr);
-    LOG("Dijkstra_3 finished.");
+    LOG("Dijkstra_0 finished.");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
