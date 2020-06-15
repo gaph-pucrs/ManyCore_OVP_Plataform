@@ -632,6 +632,7 @@ void interruptHandler_timer(void) {
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
+    LOG("%x - RECEBI UM PACOTE!\n",*myAddress);
     int requester, i;
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
@@ -690,6 +691,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface TX module */ 
 void interruptHandler_NI_TX(void) {
+    LOG("%x - TRANSMITI UM PACOTE!\n",*myAddress);
     if(transmittingActive < PIPE_SIZE){ // Message packet
         // Releses the buffer
         bufferPop(transmittingActive);
@@ -746,7 +748,7 @@ void OVP_init(){
     }
 
     // Configure the timer to interrupt once every 1 ms (1000 us)
-    *timerConfig = 1000; // 0-> disabled ---- 1000-> 1ms; 
+    *timerConfig = 0;//1000; // 0-> disabled ---- 1000-> 1ms; 
 
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
