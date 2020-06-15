@@ -176,18 +176,18 @@ unsigned int isEmpty(unsigned int port){
 }
 
 flit bufferPop(unsigned int port){
-    unsigned long long int value;
    // unsigned int difX, difY;
 
-    flit message = buffers[port][first[port];
-
+    flit message;
+    message.data = 0;
+    message.source = 0;
+    message = buffers[port][first[port];
         if(first[port] < BUFFER_SIZE-1){
             first[port]++;
         } else if(first[port] == BUFFER_SIZE-1){
             first[port] = 0;
         }
     // Increments the "first" pointer
-   
 
     // Decreases the flitCountOut
     flitCountOut[port] = flitCountOut[port] - 1;
@@ -265,8 +265,9 @@ void searchAndAllocate(){
 
 void transmitt(){
     unsigned int port;
-    flit message.source = 0;
-    flit message.data=0; 
+    flit message;
+    message.source = 0;
+    message.data=0;
 
     // For each port...
     for(port = 0; port <= LOCAL; port++){
