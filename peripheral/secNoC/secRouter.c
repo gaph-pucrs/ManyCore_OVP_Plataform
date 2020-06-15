@@ -83,6 +83,7 @@ void bufferStatusUpdate1(unsigned int port){
 }
 void bufferPush(unsigned int port){
     // Write a new flit in the buffer
+
     buffers[port][last[port]] = incomingFlit;
     if(last[port] < BUFFER_SIZE-1){
         last[port]++;

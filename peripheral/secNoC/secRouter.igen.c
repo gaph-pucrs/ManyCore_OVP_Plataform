@@ -175,22 +175,19 @@ unsigned int isEmpty(unsigned int port){
     }
 }
 
-unsigned int bufferPop(unsigned int port){
+flit bufferPop(unsigned int port){
     unsigned long long int value;
    // unsigned int difX, difY;
 
-    // Read the first flit from the buffer
-    if(flitCountOut[port] == 2){
-        value = buffers[port][first[port]].source; 
-    }else{
-        value = buffers[port][first[port]].data;
-    }// Increments the "first" pointer
-    if(first[port] < BUFFER_SIZE-1){
-        first[port]++;
-    }
-    else if(first[port] == BUFFER_SIZE-1){
-        first[port] = 0;
-    }
+    flit message = buffers[port][first[port];
+
+        if(first[port] < BUFFER_SIZE-1){
+            first[port]++;
+        } else if(first[port] == BUFFER_SIZE-1){
+            first[port] = 0;
+        }
+    // Increments the "first" pointer
+   
 
     // Decreases the flitCountOut
     flitCountOut[port] = flitCountOut[port] - 1;
@@ -206,14 +203,12 @@ unsigned int bufferPop(unsigned int port){
         routingTable[port] = ND;
 
         // Inform that the next flit will be the source
-        flitCountOut[port] = 2;
-
-
+        flitCountOut[port] = 1;
     }
     // Update the buffer status
     bufferStatusUpdate2(port);
 
-    return value;
+    return message;
 }
 
 
@@ -269,7 +264,10 @@ void searchAndAllocate(){
 }
 
 void transmitt(){
-    unsigned int port, flit;
+    unsigned int port;
+    flit message.source = 0;
+    flit message.data=0; 
+
     // For each port...
     for(port = 0; port <= LOCAL; port++){
         // Verify if the local port is allowed to transmitt
@@ -282,10 +280,10 @@ void transmitt(){
                         /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
-                            flit = bufferPop(port);
-                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d flit = %d",myID, flit);
+                            message = bufferPop(port);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to local port",flit.message, flit.source,myID);
                             // Send the flit transmission time followed by the data
-                           // ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
+                            //ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                         }
                     }
 
@@ -294,9 +292,9 @@ void transmitt(){
                         /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == EAST){
                             // Gets a flit from the buffer 
-                            flit = bufferPop(port);
-                            // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
+                            message = bufferPop(port);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to EAST port",flit.message, flit.source,myID);
+                            ppmPacketnetWrite(handles.portDataEast, &message, sizeof(message));
                         }
                     }
 
@@ -305,9 +303,11 @@ void transmitt(){
                         /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == WEST){
                             // Gets a flit from the buffer 
-                            flit = bufferPop(port);
+                            message = bufferPop(port);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to WEST port",flit.message, flit.source,myID);
+
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
+                            ppmPacketnetWrite(handles.portDataWest, &message, sizeof(message));
                         }
                     }
 
@@ -316,9 +316,11 @@ void transmitt(){
                         /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == NORTH){
                             // Gets a flit from the buffer
-                            flit = bufferPop(port);
+                            message = bufferPop(port);
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to NORTH port",flit.message, flit.source,myID);
+
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
+                            ppmPacketnetWrite(handles.portDataNorth, &message, sizeof(message));
                         }
                     }
 
@@ -327,12 +329,11 @@ void transmitt(){
                         /*  If the receiver router has space AND there is flits to send AND still connected to the output port*/
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == SOUTH){
                             // Gets a flit from the buffer 
-                            flit = bufferPop(port);
-                            #if LOG_OUTPUTFLITS
-                            //contFlits[SOUTH]= contFlits[SOUTH]++;
-                            #endif
+                            message = bufferPop(port);
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
+                            bhmMessage("I", "secNoC", "--------------------------------------------->Enviando flit myID = %d SOURCE = %d from %d to SOUTH port",flit.message, flit.source,myID);
+
+                            ppmPacketnetWrite(handles.portDataSouth, &message, sizeof(message));
                         }
                     }
 
