@@ -317,9 +317,9 @@ PPM_PACKETNET_CB(dataPortUpd) {
         control_RX = NI_STATUS_INTER;
         //writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
         ppmWriteNet(handles.INT_NI_RX, 1); // Turns the interruption on
-        }
     }
 }
+
 
 PPM_CONSTRUCTOR_CB(constructor) {
     // YOUR CODE HERE (pre constructor)
