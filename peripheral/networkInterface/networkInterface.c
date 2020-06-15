@@ -228,7 +228,7 @@ PPM_REG_WRITE_CB(statusRXWrite) {
     bhmMessage("I", "RX_STATUS_W", "RECEBENDO O COMANDO %x\n",command);
     if(command == DONE){
         if(control_RX == NI_STATUS_INTER){    
-            control_TX = NI_STATUS_OFF;
+            control_RX = NI_STATUS_OFF;
             ppmWriteNet(handles.INT_NI_RX, 0);  // Turn the interruption signal down
             setGO();
         }
@@ -288,8 +288,6 @@ PPM_PACKETNET_CB(controlPortUpd) {
 PPM_PACKETNET_CB(dataPortUpd) {
     unsigned int flit = *((unsigned int*)data);
     
-    
-
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(control_RX == NI_STATUS_OFF){
         control_RX = NI_STATUS_ON;
