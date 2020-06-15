@@ -361,6 +361,7 @@ typedef struct Message {
 
 // API Packets
 message *deliveredMessage;
+unsigned int sendAfterTX = PIPE_WAIT;
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];
 volatile unsigned int myServicePacket[PACKET_MAX_SIZE];
 volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];
@@ -682,10 +683,15 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     if(found != PIPE_WAIT){
         LOG("%x - ENCONTREI NO PIPE!\n",*myAddress);
         // Stay here waiting until the TX module is able to transmmit the package 
-        while(*NIcmdTX != NI_STATUS_OFF){LOG("%x - ESPERANDO PRA ENVIAR!\n",*myAddress);}
-        // Sends the packet
-        SendSlot((unsigned int)&buffer_packets[found], found);
-        LOG("%x - ENVIADO!\n",*myAddress);
+        //while(*NIcmdTX == NI_STATUS_OFF){LOG("%x - ESPERANDO PRA ENVIAR!\n",*myAddress);}
+        if(*NIcmdTX == NI_STATUS_OFF){
+            // Sends the packet
+            SendSlot((unsigned int)&buffer_packets[found], found);
+        }
+        else{
+            // Set it to send after the next TX interruption
+            sendAfterTX = found;
+        }
         return 1; // packet was sent with success
     }
     else{
@@ -714,6 +720,11 @@ void interruptHandler_NI_TX(void) {
     if(sendExecutedInstPacket == TRUE){
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
         sendExecutedInstPacket = FALSE;
+    }
+    // If there is some packet inside the PIPE waiting to be sent, send it!
+    else if(sendAfterTX <= PIPE_SIZE){
+        SendSlot((unsigned int)&buffer_packets[sendAfterTX], sendAfterTX);
+        sendAfterTX = PIPE_WAIT;
     }
     LOG("%x - TERMINEI INTERRUPÇÃO TX!\n",*myAddress);
 }
