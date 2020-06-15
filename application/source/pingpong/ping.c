@@ -21,7 +21,6 @@ int main(int argc, char **argv)
         pingpong.msg[i] = i;
     }
     SendMessage(&pingpong, pong_addr);
-    LOG("PRIMEIRA MSG ENVIADA!\n");
     for(i=0;i<N_PINGPONG;i++){
         ReceiveMessage(&pingpong, pong_addr);
         LOG("0-PING: %d\n",pingpong.msg[0]);

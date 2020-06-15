@@ -645,6 +645,7 @@ void interruptHandler_NI_RX(void) {
         for(i=0;i<deliveredMessage->size;i++){
             deliveredMessage->msg[i] = incomingPacket[i+4];
         }
+        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
         LOG("%x - REQUISITANDO UMA MENSAGEM!\n",*myAddress);
@@ -791,27 +792,24 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     *clockGating_flag = FALSE;
     
     // Inform the NI a packet was read
-    *NIcmdRX = DONE;
+    //*NIcmdRX = DONE;
 }
 
 ///////////////////////////////////////////////////////////////////
 /* Receives a RAW message */
 void ReceiveRaw(message *theMessage){
-    unsigned int i;
-    // Sends the request to the transmitter
+    // Pass the pointer to the message structure to a global var, acessible inside the interruption
+    deliveredMessage = theMessage;
+
+    // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
+
     *clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
-    // Alocate the packet message inside the structure
-    theMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
-    // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
-    for(i=0;i<theMessage->size;i++){
-        theMessage->msg[i] = incomingPacket[i+4];
-    }
-    receivingActive = 0;
+    
     // Inform the NI a packet was read
-    *NIcmdRX = DONE;
+    /**NIcmdRX = DONE;*/
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -910,7 +908,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 /* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination){
     unsigned int index;
-    do{index = getEmptyIndex(); LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
+    do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
     buffer_packets[index][PI_DESTINATION] = destination;
