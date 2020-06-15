@@ -30,13 +30,10 @@ int main(int argc, char **argv)
     while(1){
 		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
-			LOG("========================AGUARDANDO %x\n",*myAddress);
 			ReceiveMessage(&theMessage, divider_addr);
-			LOG("========================RECEBIDO %x\n",*myAddress);
 			for (j=0; j<NUM_NODES; j++)
 				AdjMatrix[i][j] = theMessage.msg[j];
 		}		
-		LOG("PRONTO!!! 444444\n");
 
 		calc = AdjMatrix[0][0];
 		if (calc == KILL) break;

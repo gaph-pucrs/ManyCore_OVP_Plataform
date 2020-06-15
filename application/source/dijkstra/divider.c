@@ -46,9 +46,7 @@ int main(int argc, char **argv)
 	theMessage.size = NUM_NODES;
 
     for(iter=0; iter<CALCULATIONS; iter++){
-		LOG("AAAAAAAAAAAAAAAAAAAAAAAAA\n");
 		for (i=0; i<NUM_NODES; i++) {
-			LOG("BBBBBBBBBBBBBBBBBBBBBBBBB\n");
 			for (j=0; j<NUM_NODES; j++) {
 				theMessage.msg[j] = AdjMatrix[i][j];
 			}
