@@ -647,6 +647,7 @@ void interruptHandler_NI_RX(void) {
         }
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
+        LOG("%x - REQUISITANDO UMA MENSAGEM!\n",*myAddress);
         requester = incomingPacket[PI_REQUESTER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
@@ -678,13 +679,16 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         }
     }
     if(found != PIPE_WAIT){
+        LOG("%x - A MENSAGEM JÀ ESATAVA NO PIPE!\n",*myAddress);
         // Stay here waiting until the TX module is able to transmmit the package 
         while(*NIcmdTX != NI_STATUS_OFF){}
+        LOG("%x - TENTANDO ENVIAR!\n",*myAddress);
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[found], found);
         return 1; // packet was sent with success
     }
     else{
+        LOG("%x - A MENSAGEM NAO FOI ENCONTRADA NO PIPE!\n",*myAddress);
         return 0; // packet is not in the buffer yet
     }
 }
