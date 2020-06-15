@@ -22,7 +22,6 @@ int main(int argc, char **argv)
         LOG("3-PONG: %d\n",pongping.msg[0]);
         pongping.msg[0] = pongping.msg[0] + 1;
         SendMessage(&pongping, ping_addr);
-        LOG("MANDEI\n");
         ReceiveMessage(&pongping, ping_addr);
     }
     LOG("Pong Finalizado!\n");

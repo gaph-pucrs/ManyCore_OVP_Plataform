@@ -286,6 +286,8 @@ PPM_PACKETNET_CB(controlPortUpd) {
 PPM_PACKETNET_CB(dataPortUpd) {
     unsigned int flit = *((unsigned int*)data);
     
+    
+
     // This will happen if the NI is receiving a service packet when it is in a idle state
     if(control_RX == NI_STATUS_OFF){
         control_RX = NI_STATUS_ON;
@@ -314,6 +316,8 @@ PPM_PACKETNET_CB(dataPortUpd) {
         }
     }
 
+    bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
+    
     // Detects the receiving finale
     if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){
         setSTALL();
