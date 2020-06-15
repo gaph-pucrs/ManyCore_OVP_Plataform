@@ -752,7 +752,6 @@ void interruptHandler_NI_TX(void) {
     else if(sendAfterTX[0] <= PIPE_SIZE){
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
         popSendAfterTX();
-        sendAfterTX = PIPE_WAIT;
     }
 }
 
@@ -784,6 +783,7 @@ void OVP_init(){
     int i;
     for(i=0;i<PIPE_SIZE;i++){
         buffer_map[i] = PIPE_FREE;
+        sendAfterTX[i] = PIPE_WAIT;
     }
 
     // Initiate the message request queue
