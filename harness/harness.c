@@ -273,7 +273,7 @@ int main(int argc, const char *argv[]) {
         while ((proc = opProcessorNext(modNew, proc))) {
             if(firstRun){
                 // Add a fetch callback to each processor
-                opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
+                //opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
                 firstRun--;
             }
 
