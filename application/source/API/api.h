@@ -792,7 +792,7 @@ void OVP_init(){
     }
 
     // Configure the timer to interrupt once every 1 ms (1000 us)
-    *timerConfig = 1000; // 0-> disabled ---- 1000-> 1ms; 
+    *timerConfig = 0;//1000; // 0-> disabled ---- 1000-> 1ms; 
 
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
