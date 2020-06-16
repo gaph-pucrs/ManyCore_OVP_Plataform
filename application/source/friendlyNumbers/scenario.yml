@@ -1,0 +1,9 @@
+apps:
+ - name: friendlyNumbers
+   cluster: 0
+   static_mapping:
+    master: [1,1]
+    task_1: [0,0]
+    task_2: [2,2]
+    task_3: [1,2]
+    task_4: [2,1]
