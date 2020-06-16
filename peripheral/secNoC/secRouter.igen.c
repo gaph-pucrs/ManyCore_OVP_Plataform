@@ -352,7 +352,7 @@ void iterate(){
     
     // Search and allocate the packet which is waiting more time
     searchAndAllocate();
-    if(hasDataToSend){
+   // if(hasDataToSend){
     ////////////////////////////////////////////
 
     ////////////////////////////////////////////
@@ -361,7 +361,7 @@ void iterate(){
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
         bhmMessage("INFO", "SECNOC", "-------------------------------------------------------------------------------------------- CHAMANDO TRANSMMIT");
         transmitt();
-    } 
+    //} 
 }
 
 int main(int argc, char *argv[]) {
@@ -375,13 +375,18 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-    //int i = 0;
+    int i = 0;
     hasDataToSend = 0;
     while(1){
 
       // bhmWaitDelay(QUANTUM_DELAY);
-       if(hasDataToSend){
-           bhmMessage("INFO","SECROUTER","IF ITERATE WORKING ========================================================================================================================= ");
+    for(i=0;i<5;i++){
+	    if(!isEmpty(i)){
+		    hasDataToSend = 1;
+	    }
+    }
+     if(hasDataToSend){
+        //   bhmMessage("INFO","SECROUTER","IF ITERATE WORKING ========================================================================================================================= ");
        // if(i==10){
             iterate();
         }else{

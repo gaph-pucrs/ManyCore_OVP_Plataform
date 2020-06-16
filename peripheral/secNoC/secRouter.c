@@ -160,6 +160,7 @@ PPM_PACKETNET_CB(dataSouth) {
         hasDataToSend = 1;
         bufferPush(SOUTH);
     }
+}
 
 PPM_PACKETNET_CB(dataWest) {
    if(bytes == 8){
@@ -169,6 +170,7 @@ PPM_PACKETNET_CB(dataWest) {
         hasDataToSend = 1;
         bufferPush(WEST);
     }
+ }
 
 PPM_PACKETNET_CB(unsafeNoC) {
    // int testando1=0;
