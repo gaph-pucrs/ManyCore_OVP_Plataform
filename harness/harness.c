@@ -19,7 +19,7 @@
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 /* Quantum defines */
 #define INSTRUCTIONS_PER_SECOND       250000000 //250MHz -------- //1000000000 // 1GHz (assuming 1 instruction per cycle)
-#define QUANTUM_TIME_SLICE            0.00001   // 10us quantum time step       
+#define QUANTUM_TIME_SLICE            0.000001  // 1us // 10us quantum time step       
 #define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)  // 2500 //10000 instructions per quantum
 
 #define BRANCH  1
