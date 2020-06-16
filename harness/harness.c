@@ -195,16 +195,16 @@ int getProcessorID(optProcessorP processor){
 }
 
 // Fetch Callback
-static OP_MONITOR_FN(fetchCallBack) { 
-    /* get the processor id*/
+/*static OP_MONITOR_FN(fetchCallBack) { 
+    // get the processor id
     //int processorID = getProcessorID(processor);
 
-    /*get the waiting packet flag*/
+    //get the waiting packet flag
     char value[4];
     opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int intValue = htonl(vec2usi(value));
     
-    /*if the processor is not waiting a packet then run the disassemble*/
+    //if the processor is not waiting a packet then run the disassemble
     if(!intValue){
         char instruction[60];
         strcpy(instruction,opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
@@ -214,13 +214,13 @@ static OP_MONITOR_FN(fetchCallBack) {
         //                         BASE ADDRESS -  (INSTRUCTION TYPE OFFSET)
         unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction)*4);
 
-        /* Load the atual value and add one */
+        // Load the atual value and add one
         char read_EI[4];
         opProcessorRead(processor, countAddress, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
         unsigned int read_executedInstructions = vec2usi(read_EI);
         read_executedInstructions = htonl(read_executedInstructions) + 1;
 
-        /* Store the atual value */
+        // Store the atual value
         char EI[4];
         EI[3] = (htonl(read_executedInstructions) >> 24) & 0x000000FF;
         EI[2] = (htonl(read_executedInstructions) >> 16) & 0x000000FF;
@@ -228,7 +228,7 @@ static OP_MONITOR_FN(fetchCallBack) {
         EI[0] = htonl(read_executedInstructions) & 0x000000FF;
         opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
     }
-}
+}*/
 
 int main(int argc, const char *argv[]) {
     /*Required to init the simulation */
