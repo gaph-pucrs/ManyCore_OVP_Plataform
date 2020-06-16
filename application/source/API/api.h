@@ -823,9 +823,9 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     requestMsg(from);
 
     // Waits the response
-    //*clockGating_flag = TRUE;
+    *clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
-    //*clockGating_flag = FALSE;
+    *clockGating_flag = FALSE;
     
     // Inform the NI a packet was read
     //*NIcmdRX = DONE;
