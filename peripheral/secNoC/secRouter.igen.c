@@ -1,32 +1,3 @@
-/*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied.
- *
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-
-////////////////////////////////////////////////////////////////////////////////
-//
-//                W R I T T E N   B Y   I M P E R A S   I G E N
-//
-//                             Version 20170201.0
-//
-////////////////////////////////////////////////////////////////////////////////
-
-
 #include "secRouter.igen.h"
 #include "noc.h"
 
@@ -47,7 +18,7 @@ unsigned int htonl2(unsigned int x){
 unsigned int ntohl(unsigned int x){
     return __cswap_constant_32(x);
 }
-unsigned int flitCountOut[N_PORTS] = {2,2,2,2,2};
+unsigned int flitCountOut[N_PORTS] = {1,1,1,1,1};
 unsigned int routingTable[N_PORTS] = {ND,ND,ND,ND,ND};
 
 
@@ -228,6 +199,8 @@ unsigned int selLongestWaitingPortAvailable(){
     int selPort = ND;
     //Checks for each port if the port is waiting more than max and is not routed and the output port is available
     for(port=0;port<N_PORTS;port++){
+        bhmMessage("I","SecNoC","contPriority = %d ----------------,max = %d ------------------------------- routingTable[%d] = %d ------------------------------- port %d IsAvailable = %d",contPriority[port],max, port, routingTable[port],XYrouting(myAddress,buffers[port][first[port]].data), portIsAvailable(XYrouting(myAddress,buffers[port][first[port]].data)));
+
         if((contPriority[port]>max) && (routingTable[port]==ND) && (portIsAvailable(XYrouting(myAddress,buffers[port][first[port]].data)))){      
             max = contPriority[port];
             selPort = port;
@@ -245,18 +218,21 @@ void searchAndAllocate(){
     for(port=0;port<N_PORTS;port++){
         if((!isEmpty(port)) && (routingTable[port] == ND)){
             contPriority[port] ++; 
+            bhmMessage("I","SecNoC","Has Something to send in port %d priority = %d", port, contPriority[port]);
         }
     }
     /*Returns the port with the bigger priority */
     selectedPort = selLongestWaitingPortAvailable();
-
+        bhmMessage("I","SecNoC","Port %d was selected", selectedPort);
     // If some port was selected
     if(selectedPort!=ND){
         // Updates the routingTable and reset the port priority
         routingTable[selectedPort] = XYrouting(myAddress,SEC_PE);
+        bhmMessage("I","SecNoC","Updating routng table from %d --------------------------------- TO %d",selectedPort, routingTable[selectedPort]);
         contPriority[selectedPort] = 0;
     }else{
         hasDataToSend = 0;
+        bhmMessage("I","SecNoC","There is NO DATA");
     }
 }
 
@@ -383,7 +359,10 @@ int main(int argc, char *argv[]) {
     for(i=0;i<5;i++){
 	    if(!isEmpty(i)){
 		    hasDataToSend = 1;
+            break;
 	    }
+        hasDataToSend = 0;
+
     }
      if(hasDataToSend){
         //   bhmMessage("INFO","SECROUTER","IF ITERATE WORKING ========================================================================================================================= ");
@@ -414,4 +393,3 @@ int main(int argc, char *argv[]) {
     destructor();
     return 0;
 }
-
