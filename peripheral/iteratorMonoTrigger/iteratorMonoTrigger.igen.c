@@ -26,6 +26,7 @@ unsigned int activity;
 void runIterations(){
     do{
         activity = 0;
+        bhmMessage("I", "TICK1", "começando: %d", activity);
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
         iteration = iterationN;
@@ -58,6 +59,7 @@ void runIterations(){
         ppmPacketnetWrite(handles.iterationPort14, &iteration, sizeof(iteration));
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort15, &iteration, sizeof(iteration));
+        bhmMessage("I", "TICK1", "terminando: %d", activity);
     }while(activity != 0);
 }
 
