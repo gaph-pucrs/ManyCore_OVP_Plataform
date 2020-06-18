@@ -58,7 +58,7 @@ void runIterations(){
         ppmPacketnetWrite(handles.iterationPort14, &iteration, sizeof(iteration));
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort15, &iteration, sizeof(iteration));
-    while(activity != 0);
+    }while(activity != 0);
 }
 
 /////////////////////////////// Diagnostic level ///////////////////////////////
