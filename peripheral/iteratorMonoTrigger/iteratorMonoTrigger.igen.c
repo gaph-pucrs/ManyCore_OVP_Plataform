@@ -28,6 +28,7 @@ void runIterations(){
     unsigned int tryAgain = 0;
     do{
         activity = 0;
+        iterationN++;
         //bhmMessage("I", "TICK1", "%d começando: %d",i, activity);
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
