@@ -29,7 +29,7 @@ cd peripheral
     cd ..
 
     cd iteratorMonoTrigger
-        ./iteratorGenerator.sh $X $Y
+        #./iteratorGenerator.sh $X $Y
 cd ../..
 
 cd harness

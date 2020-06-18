@@ -38,6 +38,9 @@ int myID = 0xFFFFFFFF;
 // Number of packets delivered to the Local port
 unsigned int localDeliveredPckts = 0;
 
+// Activity
+unsigned int activity;
+
 // Countdown value per Packet, informing how many flits are left to be transmitted 
 unsigned int flitCountOut[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
 unsigned int flitCountIn = HEADER;
@@ -606,6 +609,7 @@ void transmitt(){
                             writeMem(htonl(countTotalFlits[LOCAL]), LOCAL_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -623,6 +627,7 @@ void transmitt(){
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -640,6 +645,7 @@ void transmitt(){
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -657,6 +663,7 @@ void transmitt(){
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -674,6 +681,7 @@ void transmitt(){
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
                 }
@@ -693,6 +701,7 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
 ////////////////////////////////////////////////////////////////////////////////
 
 void iterate(){
+    activity = 0;
     // Sends the iteration signal to the NI module
     iterateNI();
     //iteratePeriph();
@@ -722,7 +731,9 @@ void iterate(){
     ////////////////////////////////////////////
     ////////////////////////////////////////////
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-    transmitt(); 
+    transmitt();
+    //
+    ppmPacketnetWrite(handles.iterationsPort, &activity, sizeof(activity));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
