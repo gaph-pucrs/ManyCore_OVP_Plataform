@@ -24,9 +24,10 @@ unsigned int activity;
 ////////////////////////////// Functions ///////////////////////////////////////
 /* Make a callback to each router */
 void runIterations(){
+    unsigned int i=0;
     do{
         activity = 0;
-        bhmMessage("I", "TICK1", "começando: %d", activity);
+        bhmMessage("I", "TICK1", "%d começando: %d",i, activity);
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort0, &iteration, sizeof(iteration));
         iteration = iterationN;
@@ -59,7 +60,8 @@ void runIterations(){
         ppmPacketnetWrite(handles.iterationPort14, &iteration, sizeof(iteration));
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort15, &iteration, sizeof(iteration));
-        bhmMessage("I", "TICK1", "terminando: %d", activity);
+        bhmMessage("I", "TICK1", "%d terminando: %d",i, activity);
+        i++;
     }while(activity != 0);
 }
 
