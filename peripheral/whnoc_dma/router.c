@@ -427,7 +427,7 @@ unsigned int selectPort(){
     return selected;
 }
 
-// Allocates the output port to the givel selPort if it is available
+// Allocates the output port to the given selPort if it is available
 void allocate(unsigned int port){
     unsigned int header, to, checkport, allowed;
     // In the first place, verify if the port is not connected to any thing and has something to transmitt 
