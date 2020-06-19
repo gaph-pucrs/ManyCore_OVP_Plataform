@@ -156,7 +156,7 @@ optModuleAttr modelAttrs = {
     .releaseStatus       = OP_UNSET,
     .purpose             = OP_PP_BAREMETAL,
     .visibility          = OP_VISIBLE,
-   // .constructCB          = moduleConstruct,
+   //.constructCB          = moduleConstruct,
     .postSimulateCB       = modulePostSimulate,
     .destructCB           = moduleDestruct,
 };
