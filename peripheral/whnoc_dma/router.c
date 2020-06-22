@@ -590,7 +590,7 @@ void transmitt(){
             if((routingTable[port] < ND) && (!isEmpty(port))){
 
                 // Checks if at least one tick has passed since the flit arrived in this router
-                if ((currentTime > buffers[port][first[port]].inTime)||((port == LOCAL) && (lastTickLocal != currentTime))) { // MAYBE lastTickLocal IS LEGACY!
+              //  if ((currentTime > buffers[port][first[port]].inTime)||((port == LOCAL) && (lastTickLocal != currentTime))) { // MAYBE lastTickLocal IS LEGACY!
 
                     // Transmit it to the LOCAL router
                     if(routingTable[port] == LOCAL){
@@ -603,8 +603,11 @@ void transmitt(){
                             contFlits[LOCAL] = contFlits[LOCAL]+1;
                             #endif
                             countTotalFlits[LOCAL] = countTotalFlits[LOCAL]+1;
+                            //
                             writeMem(htonl(countTotalFlits[LOCAL]), LOCAL_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
+                            bhmMessage("I","router", "RouterID = %d ------------------------- Sending data to LOCAL", myID);
+
                             ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
                         }
                     }
@@ -621,7 +624,9 @@ void transmitt(){
                             countTotalFlits[EAST] = countTotalFlits[EAST]+1;
                             writeMem(htonl(countTotalFlits[EAST]), EAST_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
+                         //   ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
+                                                     bhmMessage("I","router", "RouterID = %d ------------------------- Sending data to EAST", myID);
+
                             ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
                         }
                     }
@@ -638,7 +643,9 @@ void transmitt(){
                             countTotalFlits[WEST] = countTotalFlits[WEST]+1;
                             writeMem(htonl(countTotalFlits[WEST]), WEST_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
+                       //     ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
+                                                   bhmMessage("I","router", "RouterID = %d ------------------------- Sending data to WEST", myID);
+
                             ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
                         }
                     }
@@ -655,7 +662,9 @@ void transmitt(){
                             countTotalFlits[NORTH] = countTotalFlits[NORTH]+1;
                             writeMem(htonl(countTotalFlits[NORTH]), NORTH_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
+                          //  ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
+                                                      bhmMessage("I","router", "RouterID = %d ------------------------- Sending data to NORTH", myID);
+
                             ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
                         }
                     }
@@ -672,12 +681,14 @@ void transmitt(){
                             countTotalFlits[SOUTH] = countTotalFlits[SOUTH]+1;
                             writeMem(htonl(countTotalFlits[SOUTH]), SOUTH_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
-                            ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
+                          //  ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
+                                                      bhmMessage("I","router", "RouterID = %d ------------------------- Sending data to SOUTH", myID);
+
                             ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
                         }
                     }
                 }
-            }
+           // }
         //}
     }
 }
@@ -814,6 +825,10 @@ PPM_PACKETNET_CB(dataEast) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
     bufferPush(EAST);
+    bhmMessage("I","router", "RouterID = %d ------------------------- bufferPushDataEast", myID);
+    iterate();
+    bhmMessage("I","router","Finishing Callback dataEast in routerID = %d",myID);
+
 }
 
 PPM_PACKETNET_CB(dataLocal) {
@@ -821,24 +836,44 @@ PPM_PACKETNET_CB(dataLocal) {
     incomingFlit.data = newFlit;
     incomingFlit.inTime = currentTime;
     bufferPush(LOCAL);
+    bhmMessage("I","router", "RouterID = %d ------------------------- bufferPushDataLocal", myID);
+
+    iterate();
+        bhmMessage("I","router","Finishing Callback dataLocal in routerID = %d",myID);
+
 }
 
 PPM_PACKETNET_CB(dataNorth) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
     bufferPush(NORTH);
+        bhmMessage("I","router", "RouterID = %d ------------------------- bufferPushDataNorth", myID);
+
+    iterate();
+            bhmMessage("I","router","Finishing Callback dataNorth in routerID = %d",myID);
+
 }
 
 PPM_PACKETNET_CB(dataSouth) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
     bufferPush(SOUTH);
+            bhmMessage("I","router", "RouterID = %d ------------------------- bufferPushDataSouth", myID);
+
+    iterate();
+                bhmMessage("I","router","Finishing Callback dataSouth in routerID = %d",myID);
+
 }
 
 PPM_PACKETNET_CB(dataWest) {
     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
     bufferPush(WEST);
+                bhmMessage("I","router", "RouterID = %d ------------------------- bufferPushDataWest", myID);
+
+    iterate();
+                    bhmMessage("I","router","Finishing Callback dataWest in routerID = %d",myID);
+
 }
 
 PPM_PACKETNET_CB(iterationPort) {
@@ -851,7 +886,9 @@ PPM_PACKETNET_CB(iterationPort) {
         currentTime = (unsigned long long int )(0x7FFFFFFFULL & currentTime);
     }*/
     //Runs iterate
-    iterate();
+    
+    
+    //iterate();
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {

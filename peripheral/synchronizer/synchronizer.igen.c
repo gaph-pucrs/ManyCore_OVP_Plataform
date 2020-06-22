@@ -76,7 +76,9 @@ PPM_REG_WRITE_CB(readyWrite) {
         bhmMessage("I", "readyWrite", "Numero de PEs prontos: %d\n",startedPEs);
         if(startedPEs == N_PES){
             bhmMessage("I", "readyWrite", "Numero total de PEs prontos: %d\n",startedPEs);
-            syncPort_regs_data.syncToPE.value = htonl(startedPEs);
+	    bhmTriggerEvent(goEvent);
+	    
+           // syncPort_regs_data.syncToPE.value = htonl(startedPEs);
             //bhmTriggerEvent(goEvent);
             status = N_PES; // Tasks are running now.
         }
@@ -85,6 +87,7 @@ PPM_REG_WRITE_CB(readyWrite) {
         startedPEs--;
         bhmMessage("I", "readyWrite", "Numero de PEs finalizados: %d\n",(N_PES-startedPEs));
         if(startedPEs == 1){
+
             syncPort_regs_data.syncToPE.value = htonl(startedPEs);
         }
         else if(startedPEs == 0){ 
@@ -188,14 +191,9 @@ int main(int argc, char *argv[]) {
     bhmInstallDiagCB(setDiagLevel);
     constructor();
     goEvent = bhmCreateNamedEvent("start","go");
-    //
-    //bhmWaitEvent(goEvent);
-    //bhmWaitDelay(QUANTUM_DELAY);
-    //syncPort_regs_data.syncToPE.value = htonl(N_PES);
-    //
     bhmWaitEvent(goEvent);
     bhmWaitDelay(QUANTUM_DELAY);
-    //syncPort_regs_data.syncToPE.value = htonl(0);
+    syncPort_regs_data.syncToPE.value = htonl(startedPEs);
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
     return 0;

@@ -97,7 +97,7 @@ typedef unsigned char Uns8;
  * ROUTER - Multipling power and period results in energy (pJ)
  * the energy is in pJ MULTIPLIED BY 100 (xxxx => xx.xx)
  * -------------------------------------------------------------------------------*/
-//mW*100 or uW/10
+//mW*100 or uW/
 #define DYN_BUFFER_ACTIVE_0 118
 #define DYN_BUFFER_ACTIVE_1 151
 #define DYN_BUFFER_ACTIVE_2 188
@@ -790,7 +790,7 @@ void OVP_init(){
     for(i=0;i<N_PES;i++){
         pendingReq[i] = 0; 
     }
-
+    //Deixar em 0, só mudar se usar app ThermalManagement	
     // Configure the timer to interrupt once every 1 ms (1000 us)
     *timerConfig = 0;//1000; // 0-> disabled ---- 1000-> 1ms; 
 
@@ -807,6 +807,8 @@ void OVP_init(){
 
     // Reset the amount of executed instructions
     ResetExecutedInstructions();
+
+    LOG("------------------------------------------------> SAINDO OVPINIT");
     return;
 }
 

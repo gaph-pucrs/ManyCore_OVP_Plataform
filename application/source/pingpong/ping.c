@@ -11,11 +11,15 @@ message pingpong;
 
 int main(int argc, char **argv)
 {
+
+
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
-    //////////////////////////////////////////////////////
-    int i;
+    //////////////////////////////////////////////////////,
+    LOG("-------------------------------------------------------------------------->Iniciando Ping");
+
+   /* int i;
     pingpong.size = 10;
     for(i=0;i<10;i++){
         pingpong.msg[i] = i;
@@ -26,7 +30,7 @@ int main(int argc, char **argv)
         LOG("0-PING: %d\n",pingpong.msg[0]);
         pingpong.msg[0] = pingpong.msg[0] + 1;
         SendMessage(&pingpong, pong_addr);
-    }
+    }*/
     LOG("Ping Finalizado!\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
