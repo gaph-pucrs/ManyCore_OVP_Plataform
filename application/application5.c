@@ -5,79 +5,26 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "dijkstra_config.h"
+#include "pingpong_config.h"
 
-message theMessage;
+message pongping;
 
 int main(int argc, char **argv)
-{
+{ 
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    int i, j, v;
-	int source = 0;
-	int q[NUM_NODES];
-	int dist[NUM_NODES];
-	int prev[NUM_NODES];
-	int shortest, u;
-	int alt;
-	int calc = 0;
-
-	int AdjMatrix[NUM_NODES][NUM_NODES];
-
-    while(1){
-		theMessage.size = NUM_NODES;
-		for (i=0; i<NUM_NODES; i++) {
-			LOG("========================AGUARDANDO %x\n",*myAddress);
-			ReceiveMessage(&theMessage, divider_addr);
-			LOG("========================RECEBIDO %x\n",*myAddress);
-			for (j=0; j<NUM_NODES; j++)
-				AdjMatrix[i][j] = theMessage.msg[j];
-		}
-		LOG("PRONTO!!! 2222222\n");
-		calc = AdjMatrix[0][0];
-		if (calc == KILL) break;
-
-		for (i=0;i<NUM_NODES;i++){
-			dist[i] = INFINITY;
-			prev[i] = INFINITY;
-			q[i] = i;
-		}
-		dist[source] = 0;
-		u = 0;
-
-		for (i=0;i<NUM_NODES;i++) {
-			shortest = INFINITY;
-			for (j=0;j<NUM_NODES;j++){
-				if (dist[j] < shortest && q[j] != INFINITY){		
-					shortest = dist[j];
-					u = j;
-				}
-			}
-			q[u] = INFINITY;
-
-			for (v=0; v<NUM_NODES; v++){
-				if (q[v] != INFINITY && AdjMatrix[u][v] != INFINITY){
-					alt = dist[u] + AdjMatrix[u][v];
-					if (alt < dist[v]){
-						dist[v] = alt;
-						prev[v] = u;
-					}
-				}
-			}
-		}
-	}
-
-    theMessage.size = NUM_NODES*2;
-	for (i=0;i<NUM_NODES;i++)
-		theMessage.msg[i] = dist[i];
-
-	for (i=0;i<NUM_NODES;i++)
-		theMessage.msg[i+NUM_NODES] = prev[i];
-
-    SendMessage(&theMessage, print_dij_addr);
-    LOG("Dijkstra_2 finished.");
+    LOG("INICIANDO! PONG Finalizado!\n");
+    /*int i;
+    ReceiveMessage(&pongping, ping_addr);
+    for(i=0;i<N_PINGPONG;i++){
+        LOG("3-PONG: %d\n",pongping.msg[0]);
+        pongping.msg[0] = pongping.msg[0] + 1;
+        SendMessage(&pongping, ping_addr);
+        ReceiveMessage(&pongping, ping_addr);
+    }*/
+    LOG("Pong Finalizado!\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

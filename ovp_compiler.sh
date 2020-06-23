@@ -2,6 +2,9 @@
 cd peripheral
 rm -rf pse.pse
 cd ..
+cd simulation
+rm -rf *.txt
+cd ..
 # Check Installation supports this example
 checkinstall.exe -p install.pkg --nobanner || exit
 CROSS=OR1K
