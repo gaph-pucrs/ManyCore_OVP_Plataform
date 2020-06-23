@@ -57,7 +57,7 @@ echo "//////////////////////////////////////////////////////////////////////////
 echo "//" >> iteratorMonoTrigger.igen.c
 echo "//                W R I T T E N   B Y   I M P E R A S   I G E N" >> iteratorMonoTrigger.igen.c
 echo "//" >> iteratorMonoTrigger.igen.c
-echo "//                             Version 20170201.0" >> iteratorMonoTrigger.igen.c
+echo "//                             Version 20191106.0" >> iteratorMonoTrigger.igen.c
 echo "//" >> iteratorMonoTrigger.igen.c
 echo "////////////////////////////////////////////////////////////////////////////////" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c

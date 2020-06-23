@@ -1,14 +1,14 @@
 #!/bin/sh
-
+#NOVO: 20191106 --- VELHO: 20170201
 X=$1
 Y=$2
 APP_NAME=$3
 N=$(($X*$Y))
 
 #source /soft64/source_gaph
-# module load ovp/20170201
-# source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
-# setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
+# module load ovp/20191106
+# source /soft64/imperas/ferramentas/64bits/Imperas.20191106/bin/setup.sh
+# setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20191106
 cd simulation
     rm -f flitFlow.csv
 cd ..
