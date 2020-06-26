@@ -962,10 +962,10 @@ void SendMessage(message *theMessage, unsigned int destination){
     bufferPush(index);
     // Once the packet is ready, check if the request has arrived
     if(checkPendingReq(getID(destination))){
-        // Sends the packet
-        SendSlot((unsigned int)&buffer_packets[index], index);
         // Clear the pending request
         pendingReq[getID(destination)] = 0;
+        // Sends the packet
+        SendSlot((unsigned int)&buffer_packets[index], index);
     }
 }
 
