@@ -70,10 +70,10 @@ char chFlit[4];
 unsigned int usFlit;
 
 // Tells to when the NI can interrupt the processor
-unsigned int RXallowed = 1;
+//unsigned int RXallowed = 1;
 
 // Tells to the NI control when a message is already ready to be delivered to the processor
-unsigned int RXwaiting = 0;
+//unsigned int RXwaiting = 0;
 
 ////////////////////////////// Auxiliar Funcions  /////////////////////////////
 
@@ -241,7 +241,7 @@ PPM_REG_WRITE_CB(statusRXWrite) {
         }
     }
     // When the processor is ready to receive a message
-    else if(command == READY){
+    /*else if(command == READY){
         // if the message is already in the auxiliar vector
         if(RXwaiting == 1){
             RXwaiting = 0;
@@ -251,7 +251,7 @@ PPM_REG_WRITE_CB(statusRXWrite) {
         else{
             RXallowed = 1;
         }
-    }
+    }*/
     *(Uns32*)user = data;
 }
 
@@ -339,14 +339,14 @@ PPM_PACKETNET_CB(dataPortUpd) {
         control_RX = NI_STATUS_INTER;
         //writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
         // if the processor is ready to receive the message
-        if(RXallowed == 1){
+        //if(RXallowed == 1){
             ppmWriteNet(handles.INT_NI_RX, 1); // Turns the interruption on
-            RXallowed = 0;
+        /*    RXallowed = 0;
         }
         // if the processor is not ready to receive the message
         else{
             RXwaiting = 1;
-        }
+        }*/
     }
 }
 
