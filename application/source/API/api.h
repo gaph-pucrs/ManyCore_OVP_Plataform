@@ -452,18 +452,21 @@ unsigned int estimateNoCActivity(){
     southPackets_last = *southPackets;
     localPackets_last = *localPackets;
     northPackets_last = *northPackets;
-    //
+    
+    // alculate the difference between the last interruption and the current one
     eastFlits_dif  = *eastFlits - eastFlits_last; 
     westFlits_dif  = *westFlits - westFlits_last;
     southFlits_dif = *southFlits - southFlits_last; 
     localFlits_dif = *localFlits - localFlits_last; 
     northFlits_dif = *northFlits - northFlits_last;
     unsigned int totalFlits = eastFlits_dif + westFlits_dif + southFlits_dif + localFlits_dif + northFlits_dif;
+
     eastFlits_last = *eastFlits ;
     westFlits_last = *westFlits ;
     southFlits_last = *southFlits;
     localFlits_last = *localFlits;
     northFlits_last = *northFlits;
+
     return ((totalPackets*5)+ totalFlits);
 }
 
@@ -594,8 +597,8 @@ void interruptHandler_timer(void) {
         LOG("FPRINTF %x\n",*myAddress);
         FILE *filepointer;
         int err0;
-        int t0talpackets = eastPackets_dif + westPackets_dif + northPackets_dif + southPackets_dif + localPackets_dif;
-        int t0talflits =  eastFlits_dif + westFlits_dif + northFlits_dif + southFlits_dif + localFlits_dif;
+        unsigned int t0talpackets = eastPackets_dif + westPackets_dif + northPackets_dif + southPackets_dif + localPackets_dif;
+        unsigned int t0talflits = eastFlits_dif + westFlits_dif + northFlits_dif + southFlits_dif + localFlits_dif;
         char logFileName[26];
         err0 = sprintf(logFileName, "simulation/log%dx%d.txt",getXpos(*myAddress),getYpos(*myAddress));
         filepointer = fopen (logFileName,"a");
