@@ -35,5 +35,5 @@ harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu13=application/application13.${CROSS}.elf $* \
      --program cpu14=application/application14.${CROSS}.elf $* \
      --program cpu15=application/application15.${CROSS}.elf $* \
-     --program cpuIterator=application/source/applicationIterator/applicationIterator.${CROSS}.elf --imperasintercepts $* \
+     --program cpuIterator=application/source/applicationIterator/applicationIterator.${CROSS}.elf --imperasintercepts --parallel --parallelmax $* \
 $*
