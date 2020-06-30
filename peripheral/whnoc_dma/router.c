@@ -445,8 +445,11 @@ void allocate(unsigned int port){
                 if(priority[port]>5) priority[port] = priority[port] - 5;
             }
         }
+        //If the requested output port is free
         if(allowed == 1){
+            // Connect the buffer to the output
             routingTable[port] = to;
+            // and compute a packet transmittion
             countTotalPackets[to] = countTotalPackets[to]+1;
             if(to==LOCAL)       writeMem(htonl(countTotalPackets[to]), LOCAL_PACKETS_ADDR);
             else if(to==EAST)   writeMem(htonl(countTotalPackets[to]), EAST_PACKETS_ADDR);

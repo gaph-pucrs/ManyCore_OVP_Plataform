@@ -439,12 +439,14 @@ void read_class_inst(){
 ///////////////////////////////////////////////////////////////////
 /* Activity estimation based in the amount of flits and packets crossing the router */
 unsigned int estimateNoCActivity(){
+    // calculate the difference between the last interruption and the current one
     eastPackets_dif = *eastPackets - eastPackets_last;
     westPackets_dif = *westPackets - westPackets_last;
     southPackets_dif = *southPackets - southPackets_last;
     localPackets_dif = *localPackets - localPackets_last;
     northPackets_dif = *northPackets - northPackets_last;
-    unsigned int totalPackets = eastPackets_dif + westPackets_dif + southPackets_dif + localPackets_dif + northPackets_dif;                                
+    unsigned int totalPackets = eastPackets_dif + westPackets_dif + southPackets_dif + localPackets_dif + northPackets_dif;
+
     eastPackets_last = *eastPackets;
     westPackets_last = *westPackets;
     southPackets_last = *southPackets;
