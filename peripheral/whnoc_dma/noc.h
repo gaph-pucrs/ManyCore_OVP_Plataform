@@ -57,7 +57,7 @@
 #define WAIT_PE             0x4444
 
 #define DONE                0x5555
-#define READING             0x6666
+#define READY             0x6666
 
 #define NI_STATUS_ON        0x0011
 #define NI_STATUS_OFF       0x00FF

@@ -822,6 +822,9 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     // Sends the request to the transmitter
     requestMsg(from);
 
+    // Tells to the NI that the processor is waiting a message
+    *NIcmdRX = READY;
+
     // Waits the response
     *clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
@@ -839,6 +842,9 @@ void ReceiveRaw(message *theMessage){
 
     // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
+
+    // Tells to the NI that the processor is waiting a message
+    *NIcmdRX = READY;
 
     *clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
