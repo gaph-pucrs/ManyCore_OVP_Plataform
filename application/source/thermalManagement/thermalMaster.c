@@ -53,7 +53,7 @@ int main(int argc, char **argv)
                 char logFileName[26];
                 err0 = sprintf(logFileName, "simulation/power_log.txt");
                 filepointer = fopen (logFileName,"a");
-                fprintf(filepointer,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
+                fprintf(filepointer,"%u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
                 fclose(filepointer);    
             *clockGating_flag = FALSE;
 
