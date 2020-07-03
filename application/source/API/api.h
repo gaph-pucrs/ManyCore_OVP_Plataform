@@ -849,11 +849,12 @@ void ReceiveRaw(message *theMessage){
     receivingActive = 0;
 
     *clockGating_flag = TRUE;
-    int_enable(2);
+    *NIcmdRX = UNBLOCKED;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
-    int_disable(2);
     *clockGating_flag = FALSE;
     
+    *NIcmdRX = BLOCKED;
+
     // Inform the NI a packet was read
     /**NIcmdRX = DONE;*/
 }
