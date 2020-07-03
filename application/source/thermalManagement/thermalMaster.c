@@ -35,6 +35,7 @@ int main(int argc, char **argv)
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
+            LOG("===========================================PEs EXECUTANDO: %d\n",*SyncToPE);
             // Aguarda os pacotes de energia dos PEs
             for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
