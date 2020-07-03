@@ -35,18 +35,28 @@ int main(int argc, char **argv)
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
-            LOG("===============================================>>>>>> %x\n",*SyncToPE);
             // Aguarda os pacotes de energia dos PEs
             for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
-                    LOG("==R>>\n");
+                    //LOG("==R>>\n");
                     ReceiveRaw(&theMsg);
                     energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
-                    LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
+                    //LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
                 }
             }
-            LOG("============================================================Todos os pacotes foram recebidos!!!\n");
-            
+            //LOG("Todos os pacotes foram recebidos!!!\n");
+            *clockGating_flag = TRUE;
+                LOG("FPRINTF - MASTER %x\n",*myAddress);
+                FILE *filepointer;
+                int err0;
+                char logFileName[26];
+                err0 = sprintf(logFileName, "simulation/power_log.txt");
+                filepointer = fopen (logFileName,"a");
+                fprintf(filepointer,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
+                fclose(filepointer);    
+            *clockGating_flag = FALSE;
+
+
             /*Mounts and send the packet to the peripheral*/
             executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
             executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
