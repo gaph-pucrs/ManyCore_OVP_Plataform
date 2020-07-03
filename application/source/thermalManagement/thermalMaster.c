@@ -42,7 +42,7 @@ int main(int argc, char **argv)
                     LOG("==R>>\n");
                     ReceiveRaw(&theMsg);
                     energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
-                    //LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
+                    LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
                 }
             }
             LOG("============================================================Todos os pacotes foram recebidos!!!\n");
