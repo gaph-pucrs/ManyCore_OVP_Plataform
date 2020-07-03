@@ -655,12 +655,11 @@ void interruptHandler_NI_RX(void) {
             deliveredMessage->msg[i] = incomingPacket[i+4];
         }
 
+        // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
         if(isRawReceive == 1){
             int_disable(2);
             isRawReceive = 0;
         }
-        //if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET) *NIcmdRX = BLOCKED;
-
         
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
@@ -839,6 +838,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 
     // Waits the response
     *clockGating_flag = TRUE;
+    int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
     
@@ -857,14 +857,13 @@ void ReceiveRaw(message *theMessage){
     // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
 
+    // Inform the the interruption that this is a RAW function
     isRawReceive = 1;
 
     *clockGating_flag = TRUE;
-    //*NIcmdRX = UNBLOCKED; LOG(" --- unblocked --- \n");
-    int_enable(2);
+    int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
-    
     
 
     // Inform the NI a packet was read
@@ -1040,7 +1039,7 @@ unsigned int getID(unsigned int address){
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
-    int_disable(2);
+    //int_disable(2);
     int_disable(1);
     int_disable(0);
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
@@ -1048,7 +1047,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
-    if(isRawReceive == 0) int_enable(2);
+    //if(isRawReceive == 0) int_enable(2);
 }
 
 ///////////////////////////////////////////////////////////////////
