@@ -641,6 +641,7 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
     int requester, i;
+    LOG("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> int %x\n",*myAddress);
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         receivingActive = 1; // Inform the index where the received packet is stored

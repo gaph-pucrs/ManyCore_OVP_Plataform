@@ -39,6 +39,7 @@ int main(int argc, char **argv)
             // Aguarda os pacotes de energia dos PEs
             for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
+                    LOG("==R>>\n");
                     ReceiveRaw(&theMsg);
                     energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
                     //LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
