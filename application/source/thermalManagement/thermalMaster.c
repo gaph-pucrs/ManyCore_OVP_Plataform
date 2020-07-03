@@ -44,7 +44,7 @@ int main(int argc, char **argv)
                     //LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
                 }
             }
-            LOG("Todos os pacotes foram recebidos!!!\n");
+            LOG("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Todos os pacotes foram recebidos!!!\n");
             
             /*Mounts and send the packet to the peripheral*/
             executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
