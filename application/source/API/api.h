@@ -1048,7 +1048,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
-    int_enable(2);
+    if(isRawReceive == 0) int_enable(2);
 }
 
 ///////////////////////////////////////////////////////////////////
