@@ -369,6 +369,7 @@ volatile unsigned int sendExecutedInstPacket = FALSE;
 volatile unsigned int receivingActive;
 volatile unsigned int transmittingActive = PIPE_WAIT;
 volatile unsigned int interruptionType = 0;
+volatile unsigned int isRawReceive = 0;
 
 // Message buffer
 unsigned int buffer_packets[PIPE_SIZE][PACKET_MAX_SIZE];
@@ -644,6 +645,7 @@ void interruptHandler_NI_RX(void) {
     LOG("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> int %x\n",*myAddress);
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         receivingActive = 1; // Inform the index where the received packet is stored
+        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         
         ///////////////////  Delivers the Message ///////////////////
         // Alocate the packet message inside the structure
@@ -653,9 +655,13 @@ void interruptHandler_NI_RX(void) {
             deliveredMessage->msg[i] = incomingPacket[i+4];
         }
 
-        if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET) *NIcmdRX = BLOCKED; LOG(" --- blocked --- \n");
+        if(isRawReceive == 1){
+            int_disable(2);
+            isRawReceive = 0;
+        }
+        //if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET) *NIcmdRX = BLOCKED;
+
         
-        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
@@ -851,8 +857,11 @@ void ReceiveRaw(message *theMessage){
     // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
 
+    isRawReceive = 1;
+
     *clockGating_flag = TRUE;
-    *NIcmdRX = UNBLOCKED; LOG(" --- unblocked --- \n");
+    //*NIcmdRX = UNBLOCKED; LOG(" --- unblocked --- \n");
+    int_enable(2);
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
     
