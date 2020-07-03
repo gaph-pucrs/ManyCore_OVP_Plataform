@@ -838,6 +838,8 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 
 ///////////////////////////////////////////////////////////////////
 /* Receives a RAW message */
+// ATTENTION! THIS FUNCTION DISABLES THE RX INTERRUPTION!
+// IF YOU ARE USING THIS FUNCTION IN YOUR SOFTWARE AND YOU WILL
 void ReceiveRaw(message *theMessage){
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
@@ -846,7 +848,9 @@ void ReceiveRaw(message *theMessage){
     receivingActive = 0;
 
     *clockGating_flag = TRUE;
+    int_enable(2);
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    int_disable(2);
     *clockGating_flag = FALSE;
     
     // Inform the NI a packet was read
