@@ -643,7 +643,6 @@ void interruptHandler_NI_RX(void) {
     int requester, i;
     LOG("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> int %x\n",*myAddress);
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
-        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         receivingActive = 1; // Inform the index where the received packet is stored
         
         ///////////////////  Delivers the Message ///////////////////
@@ -653,6 +652,10 @@ void interruptHandler_NI_RX(void) {
         for(i=0;i<deliveredMessage->size;i++){
             deliveredMessage->msg[i] = incomingPacket[i+4];
         }
+
+        if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET) *NIcmdRX = BLOCKED; LOG(" --- blocked --- \n");
+        
+        incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
@@ -853,7 +856,7 @@ void ReceiveRaw(message *theMessage){
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
     
-    *NIcmdRX = BLOCKED; LOG(" --- blocked --- \n");
+    
 
     // Inform the NI a packet was read
     /**NIcmdRX = DONE;*/
