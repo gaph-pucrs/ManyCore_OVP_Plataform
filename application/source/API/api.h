@@ -1038,6 +1038,7 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
+    *clockGating_flag = TRUE;
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
     //int_disable(2);
     int_disable(1);
@@ -1047,6 +1048,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
+    *clockGating_flag = FALSE;
     //if(isRawReceive == 0) int_enable(2);
 }
 
