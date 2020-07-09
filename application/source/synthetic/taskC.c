@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 
 		SendMessage(&theMessage, taskE_addr);
 		
-		LOG("taskC - %d\n",i);
+		//LOG("taskC - %d\n",i);
 	}
 
     LOG("synthetic task C finished.\n");
