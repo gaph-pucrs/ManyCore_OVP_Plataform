@@ -641,6 +641,8 @@ void interruptHandler_timer(void) {
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
+    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    *clockGating_flag = FALSE; // Turn the clkGating off
     int requester, i;
     //LOG("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> int %x\n",*myAddress);
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -675,6 +677,7 @@ void interruptHandler_NI_RX(void) {
         LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);
         while(1){}
     }
+    *clockGating_flag = auxClkGating; // Restore the previous clk gating state
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -744,6 +747,8 @@ void popSendAfterTX(){
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface TX module */ 
 void interruptHandler_NI_TX(void) {
+    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    *clockGating_flag = FALSE; // Turn the clkGating off
     if(transmittingActive < PIPE_SIZE){ // Message packet
         // Releses the buffer
         bufferPop(transmittingActive);
@@ -767,6 +772,7 @@ void interruptHandler_NI_TX(void) {
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
         popSendAfterTX();
     }
+    *clockGating_flag = auxClkGating; // Restore the previous clk gating state
 }
 
 ///////////////////////////////////////////////////////////////////
