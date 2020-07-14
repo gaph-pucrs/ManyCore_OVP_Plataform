@@ -199,11 +199,7 @@ int getProcessorID(optProcessorP processor){
 // Fetch Callback
 static OP_MONITOR_FN(fetchCallBack) { 
     // get the processor id
-    int processorID = getProcessorID(processor);
-    if(processorID == 1){
-        teste++;
-        printf("AQUI! %d \n",teste);
-    }
+    //int processorID = getProcessorID(processor);
     
     //get the clock gating
     char value[4];
