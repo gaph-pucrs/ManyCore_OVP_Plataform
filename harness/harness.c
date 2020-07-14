@@ -237,6 +237,8 @@ int main(int argc, const char *argv[]) {
     /*Required to init the simulation */
     opSessionInit(OP_VERSION);
 
+    double dez = 10.0;
+
     /* create the root module with reduced Quantum (in line with Custom Scheduler) */
     optParamP params = OP_PARAMS(OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
     //optParamP params = OP_PARAMS(OP_PARAM_BOOL_SET(OP_FP_GDBCONSOLE, 1));
@@ -288,7 +290,7 @@ int main(int argc, const char *argv[]) {
         }
 
         countQuantum++;
-        if((countQuantum*QUANTUM_TIME_SLICE*1000) % 10.0 == 0)
+        if((countQuantum*QUANTUM_TIME_SLICE*1000) % dez == 0)
         opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum*QUANTUM_TIME_SLICE),(countQuantum*QUANTUM_TIME_SLICE*1000));
 
         /* checks if all processors has exited */
