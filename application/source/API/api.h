@@ -495,7 +495,7 @@ void interruptHandler_timer(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
     //////////////////////////////////////////////////////////////
-    //*clockGating_flag = TRUE; // Turn the clkGating off
+    *clockGating_flag = TRUE; // Turn the clkGating off
     unsigned int timeActiveNoC, nPorts, actualTime, difTime, timeIdleNoC, energyActive, energyIdle, idleNoC, activeNoC, EnergyNoC, energyProcDif_dyn, energyMemoryDif_dyn, energyMemoryDif_leak;
     unsigned int avoidOverflow, energyProcDif_leak, energyLocalDif_dyn, energyLocalDif_leak;
 
@@ -645,7 +645,7 @@ void interruptHandler_timer(void) {
 void interruptHandler_NI_RX(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
-    //*clockGating_flag = TRUE;
+    *clockGating_flag = TRUE;
     int requester, i;
     //LOG("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> int %x\n",*myAddress);
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -752,7 +752,7 @@ void popSendAfterTX(){
 void interruptHandler_NI_TX(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
-    //*clockGating_flag = TRUE;
+    *clockGating_flag = TRUE;
     if(transmittingActive < PIPE_SIZE){ // Message packet
         // Releses the buffer
         bufferPop(transmittingActive);
@@ -837,7 +837,7 @@ void OVP_init(){
 ///////////////////////////////////////////////////////////////////
 /* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
-    //*clockGating_flag = TRUE;
+    *clockGating_flag = TRUE;
     ////////////////////////////////////////////////
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
@@ -864,7 +864,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 // ATTENTION! THIS FUNCTION DISABLES THE RX INTERRUPTION!
 // IF YOU ARE USING THIS FUNCTION IN YOUR SOFTWARE AND YOU WILL
 void ReceiveRaw(message *theMessage){
-    //*clockGating_flag = TRUE;
+    *clockGating_flag = TRUE;
     ////////////////////////////////////////////////
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
@@ -980,7 +980,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 ///////////////////////////////////////////////////////////////////
 /* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination){
-    //*clockGating_flag = TRUE;
+    *clockGating_flag = TRUE;
     unsigned int index;
     do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
     //////////////////////////////////////////
@@ -1005,7 +1005,7 @@ void SendMessage(message *theMessage, unsigned int destination){
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
-    //*clockGating_flag = FALSE;
+    *clockGating_flag = FALSE;
     return;
 }
 
