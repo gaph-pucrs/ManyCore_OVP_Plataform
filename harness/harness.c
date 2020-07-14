@@ -19,7 +19,7 @@
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 /* Quantum defines */
 #define INSTRUCTIONS_PER_SECOND       250000000 //250000000 // 250MHz (assuming 1 instruction per cycle)
-#define QUANTUM_TIME_SLICE            0.0000010 // 1us        
+#define QUANTUM_TIME_SLICE            0.0000010
 #define INSTRUCTIONS_PER_TIME_SLICE   (INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE) // 250 inst/quantum
 
 #define BRANCH  1
@@ -33,6 +33,8 @@
 #define LOGICAL 9
 #define MULTDIV 10
 #define WEIRD   11
+
+unsigned int teste = 0;
 
 // Instructions
 //char instructions [][12] = {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
@@ -197,8 +199,12 @@ int getProcessorID(optProcessorP processor){
 // Fetch Callback
 static OP_MONITOR_FN(fetchCallBack) { 
     // get the processor id
-    //int processorID = getProcessorID(processor);
-
+    int processorID = getProcessorID(processor);
+    if(processorID == 1){
+        teste++;
+        printf("AQUI! %d \n",teste);
+    }
+    
     //get the clock gating
     char value[4];
     opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
@@ -236,8 +242,6 @@ static OP_MONITOR_FN(fetchCallBack) {
 int main(int argc, const char *argv[]) {
     /*Required to init the simulation */
     opSessionInit(OP_VERSION);
-
-    double dez = 10.0;
 
     /* create the root module with reduced Quantum (in line with Custom Scheduler) */
     optParamP params = OP_PARAMS(OP_PARAM_DOUBLE_SET(OP_FP_QUANTUM, QUANTUM_TIME_SLICE));
@@ -290,7 +294,6 @@ int main(int argc, const char *argv[]) {
         }
 
         countQuantum++;
-        if((countQuantum*QUANTUM_TIME_SLICE*1000) % dez == 0)
         opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum*QUANTUM_TIME_SLICE),(countQuantum*QUANTUM_TIME_SLICE*1000));
 
         /* checks if all processors has exited */
