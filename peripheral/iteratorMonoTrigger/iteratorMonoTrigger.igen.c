@@ -287,7 +287,7 @@ int main(int argc, char *argv[]) {
 
     while(1){
         bhmWaitDelay(QUANTUM_DELAY);
-        //bhmMessage("I", "ITERATOR", "I'M ALIVE");
+        bhmMessage("I", "ITERATOR", "I'M ALIVE");
         runIterations();
     }
 
