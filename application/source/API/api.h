@@ -495,6 +495,7 @@ void interruptHandler_timer(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
     //////////////////////////////////////////////////////////////
+    *clockGating_flag = TRUE; // Turn the clkGating off
     unsigned int timeActiveNoC, nPorts, actualTime, difTime, timeIdleNoC, energyActive, energyIdle, idleNoC, activeNoC, EnergyNoC, energyProcDif_dyn, energyMemoryDif_dyn, energyMemoryDif_leak;
     unsigned int avoidOverflow, energyProcDif_leak, energyLocalDif_dyn, energyLocalDif_leak;
 
@@ -606,6 +607,7 @@ void interruptHandler_timer(void) {
         fprintf(filepointer,"Counters: %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",arith_inst, branch_inst, jump_inst, move_inst, load_inst, store_inst, shift_inst, nop_inst, logical_inst, mult_div_inst, t0talpackets, t0talflits, timeActiveNoC<<6, timeIdleNoC<<6);
         fclose(filepointer);    
     *clockGating_flag = FALSE;
+    *clockGating_flag = TRUE;
     //executedInstPacket[7] = router_congestion;
     //executedInstPacket[8] = router_injection;
     //executedInstPacket[9] = 0; // ((total_slack_time*100) / sampling->real_window);
@@ -643,6 +645,7 @@ void interruptHandler_timer(void) {
 void interruptHandler_NI_RX(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
+    *clockGating_flag = TRUE;
     int requester, i;
     //LOG("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~> int %x\n",*myAddress);
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -749,6 +752,7 @@ void popSendAfterTX(){
 void interruptHandler_NI_TX(void) {
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
+    *clockGating_flag = TRUE;
     if(transmittingActive < PIPE_SIZE){ // Message packet
         // Releses the buffer
         bufferPop(transmittingActive);
@@ -833,6 +837,8 @@ void OVP_init(){
 ///////////////////////////////////////////////////////////////////
 /* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
+    *clockGating_flag = TRUE;
+    ////////////////////////////////////////////////
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
     
@@ -846,8 +852,10 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     *clockGating_flag = TRUE;
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+
+    ////////////////////////////////////////////////
     *clockGating_flag = FALSE;
-    
+    return;
     // Inform the NI a packet was read
     //*NIcmdRX = DONE;
 }
@@ -857,6 +865,8 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 // ATTENTION! THIS FUNCTION DISABLES THE RX INTERRUPTION!
 // IF YOU ARE USING THIS FUNCTION IN YOUR SOFTWARE AND YOU WILL
 void ReceiveRaw(message *theMessage){
+    *clockGating_flag = TRUE;
+    ////////////////////////////////////////////////
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
 
@@ -869,9 +879,10 @@ void ReceiveRaw(message *theMessage){
     *clockGating_flag = TRUE;
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
-    *clockGating_flag = FALSE;
-    
 
+    ////////////////////////////////////////////////
+    *clockGating_flag = FALSE;
+    return;
     // Inform the NI a packet was read
     /**NIcmdRX = DONE;*/
 }
@@ -971,6 +982,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 ///////////////////////////////////////////////////////////////////
 /* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination){
+    *clockGating_flag = TRUE;
     unsigned int index;
     do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
     //////////////////////////////////////////
@@ -995,6 +1007,8 @@ void SendMessage(message *theMessage, unsigned int destination){
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
+    *clockGating_flag = FALSE;
+    return;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1044,9 +1058,10 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
-    *clockGating_flag = TRUE;
+    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    *clockGating_flag = FALSE; // Turn the clkGating 
+    ////////////////////////////////////////////////
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
-    //int_disable(2);
     int_disable(1);
     int_disable(0);
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
@@ -1054,7 +1069,9 @@ void SendSlot(unsigned int addr, unsigned int slot){
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
-    *clockGating_flag = FALSE;
+    ////////////////////////////////////////////////
+    *clockGating_flag = auxClkGating;
+    return;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1062,6 +1079,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
 void SendRaw(unsigned int addr){
     *NIaddr = addr;
     *NIcmdTX = TX;
+    return;
 }
 
 ///////////////////////////////////////////////////////////////////
