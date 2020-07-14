@@ -26,7 +26,7 @@ handlesT handles;
 
 /////////////////////////////// Global Variable ////////////////////////////////
 
-double timer_us = 0; // 1000; // interruption timer in us ~~ default is 1 ms!
+double timer_us = 0; // interruption timer in us ~~ default is off (zero)!
 
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
