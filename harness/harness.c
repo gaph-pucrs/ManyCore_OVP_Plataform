@@ -199,11 +199,14 @@ static OP_MONITOR_FN(fetchCallBack) {
     // get the processor id
     //int processorID = getProcessorID(processor);
 
-    //get the waiting packet flag
+    //get the clock gating
     char value[4];
     opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int intValue = htonl(vec2usi(value));
-    
+    //clkgating = 0 == CONTAR
+    //clkgating = 1 == NAO CONTAR
+    //kernelCount = 1 == CONTO NO KERNEL
+    //kernelCount = 0 == CONTO NA APP
     //if the processor is not waiting a packet then run the disassemble
     if(!intValue){
         char instruction[60];

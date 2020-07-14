@@ -1055,7 +1055,6 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_enable(0);
     int_enable(1);
     *clockGating_flag = FALSE;
-    //if(isRawReceive == 0) int_enable(2);
 }
 
 ///////////////////////////////////////////////////////////////////
