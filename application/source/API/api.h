@@ -389,7 +389,9 @@ void OVP_init(){
 	    init_start = *SyncToPE;
     }
     tinicio = clock();
+#if USE_THERMAL
     lastTimeInstructions = tinicio;
+#endif
     //tinicio = tignore - (tignore - tinicio);   // TODO: GEANINNE - Ver isso!
     
     // Reset the amount of executed instructions
