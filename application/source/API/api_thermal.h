@@ -544,3 +544,4 @@ void energyEstimation(){
 }
 
 #endif /*__THERMAL_H__*/
+

@@ -125,11 +125,6 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 //////////////////////////////
 //////////////////////////////
 
-// DEFINES THERMAL STUFF
-#ifndef __THERMAL_H__
-#include "api_thermal.h"
-#endif
-
 ////////////////////////////////////////////////////////////
 // OVP init!
 void OVP_init();
@@ -162,7 +157,10 @@ void interruptHandler_timer(void);
 void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
 
-
+// DEFINES THERMAL STUFF
+#ifndef __THERMAL_H__
+#include "api_thermal.h"
+#endif
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
