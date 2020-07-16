@@ -1,7 +1,6 @@
 #ifndef __THERMAL_H__
 #define __THERMAL_H__
 
-#include "api.h"
 /*--------------------------------------------------------------------------------
  * OVERHEAD FINE-GRAIN VOLTAGE SCALING - *DC_DC_CONVERTER_ENERGY_OVERHEAD/10 
  * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
