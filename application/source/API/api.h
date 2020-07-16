@@ -325,7 +325,7 @@ void interruptHandler_NI_TX(void) {
     *NIcmdTX = DONE;
 
     // If there is some packet inside the PIPE waiting to be sent, send it!
-    else if(sendAfterTX[0] <= PIPE_SIZE){ 
+    if(sendAfterTX[0] <= PIPE_SIZE){ 
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
         popSendAfterTX();
     }
