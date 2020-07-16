@@ -5,11 +5,6 @@
 
 #include "../../../peripheral/whnoc_dma/noc.h"
 
-// DEFINES THERMAL STUFF
-#ifndef __THERMAL_H__
-#include "api_thermal.h"
-#endif
-
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
 #define LOG(_FMT, ...) printf( "Info " _FMT,  ## __VA_ARGS__)
@@ -129,6 +124,11 @@ volatile unsigned int pendingReq[N_PES];                    // Inform about pend
 time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - Verificar sobre essas variaveis. Não sei o quão certas estão.
 //////////////////////////////
 //////////////////////////////
+
+// DEFINES THERMAL STUFF
+#ifndef __THERMAL_H__
+#include "api_thermal.h"
+#endif
 
 ////////////////////////////////////////////////////////////
 // OVP init!
