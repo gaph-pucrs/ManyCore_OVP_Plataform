@@ -614,7 +614,9 @@ void FinishApplication(){
     }while(done==0);
 
     // Activate the clock gating and waits until every other processor finish its task
+#if USE_THERMAL
     *clockGating_flag = TRUE; // Because the task has finished
+#endif
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     unsigned int init_end = *SyncToPE;
