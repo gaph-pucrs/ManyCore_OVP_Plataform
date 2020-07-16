@@ -307,6 +307,8 @@ unsigned int estimateNoCActivity();
 unsigned int getNumberOfPorts(unsigned int address);
 void energyEstimation();
 void ResetExecutedInstructions();
+void ReportExecutedInstructions();
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -542,6 +544,39 @@ void energyEstimation(){
         sendExecutedInstPacket = TRUE;
     
 }
+
+///////////////////////////////////////////////////////////////////
+//
+void ReportExecutedInstructions(){
+    *clockGating_flag = TRUE;
+    FILE *log;
+    char log_name[50];
+    sprintf(log_name, "simulation/exec_inst_PE%d.txt",*myAddress);
+    log = fopen(log_name, "w+");
+    if(log != NULL){
+        fprintf(log,"==========================================================\n");
+        fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
+        fprintf(log,"==========================================================\n");
+        fprintf(log,"== Total: %d - not implemented yet\n",*instructionCounter);
+        fprintf(log,"== Branch: %d\n",*branchCounter);
+        fprintf(log,"== Arithmetics: %d\n",*arithCounter);
+        fprintf(log,"== Jump: %d\n",*jumpCounter);
+        fprintf(log,"== Move: %d\n",*moveCounter);
+        fprintf(log,"== Load: %d\n",*loadCounter);
+        fprintf(log,"== Store: %d\n",*storeCounter);
+        fprintf(log,"== Shift: %d\n",*shiftCounter);
+        fprintf(log,"== Nop: %d\n",*nopCounter);
+        fprintf(log,"== Logial: %d\n",*logicalCounter);
+        fprintf(log,"== Multiplication and Division: %d\n",*multDivCounter);
+        fprintf(log,"== Weird Stuff: %d\n",*weirdCounter);
+        fprintf(log,"==========================================================\n");
+        fprintf(log,"==========================================================\n");
+        fclose(log);
+    }
+    *clockGating_flag = FALSE;
+    return;
+}
+
 
 #endif /*__THERMAL_H__*/
 

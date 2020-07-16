@@ -134,7 +134,6 @@ void SendMessage(message *theMessage, unsigned int destination);
 void SendSlot(unsigned int addr, unsigned int slot); // Use this as SendRaw (the NI protocol is only respected here - the SendRaw function will not fit in every situation) the put a "0xFFFFFFFE" in slot if using to transmitt a random packet
 void ReceiveMessage(message *theMessage, unsigned int from);
 void ReceiveRaw(message *theMessage);
-void ReportExecutedInstructions();
 void FinishApplication();
 //////////////////////////////
 // Internal API functions
@@ -158,8 +157,10 @@ void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
 
 // DEFINES THERMAL STUFF
+#if USE_THERMAL
 #ifndef __THERMAL_H__
 #include "api_thermal.h"
+#endif
 #endif
 
 ///////////////////////////////////////////////////////////////////
@@ -173,24 +174,32 @@ void popSendAfterTX();
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */
 void interruptHandler_timer(void) {
+#if USE_THERMAL
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
+#endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     // YOUR TIMER FUNCTION ENTERS HERE
+#if USE_THERMAL
     energyEstimation();
+#endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
+#if USE_THERMAL
     *clockGating_flag = auxClkGating; // Restore the previous clk gating state
+#endif
     return;
 }
 
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
+#if USE_THERMAL
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
+#endif
     //////////////////////////////////////////////////////////////
     int requester, i;
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -226,7 +235,9 @@ void interruptHandler_NI_RX(void) {
         while(1){}
     }
     //////////////////////////////////////////////////////////////
+#if USE_THERMAL
     *clockGating_flag = auxClkGating; // Restore the previous clk gating state
+#endif
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -295,8 +306,10 @@ void popSendAfterTX(){
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface TX module */ 
 void interruptHandler_NI_TX(void) {
+#if USE_THERMAL
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = FALSE; // Turn the clkGating off
+#endif
     //////////////////////////////////////////////////////////////
     if(transmittingActive < PIPE_SIZE){ // Message packet
         // Releses the buffer
@@ -322,7 +335,9 @@ void interruptHandler_NI_TX(void) {
         popSendAfterTX();
     }
     //////////////////////////////////////////////////////////////
+#if USE_THERMAL
     *clockGating_flag = auxClkGating; // Restore the previous clk gating state
+#endif
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -375,7 +390,9 @@ void OVP_init(){
     //tinicio = tignore - (tignore - tinicio);   // TODO: GEANINNE - Ver isso!
     
     // Reset the amount of executed instructions
+#if USE_THERMAL
     ResetExecutedInstructions();
+#endif
     return;
 }
 
@@ -392,10 +409,14 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     requestMsg(from);
 
     // Waits the response
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+#if USE_THERMAL
     *clockGating_flag = FALSE;
+#endif
     ////////////////////////////////////////////////
     return;
 }
@@ -413,43 +434,15 @@ void ReceiveRaw(message *theMessage){
     // Inform the the interruption that this is a RAW function
     isRawReceive = 1;
 
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+#if USE_THERMAL
     *clockGating_flag = FALSE;
+#endif
     ////////////////////////////////////////////////
-    return;
-}
-
-///////////////////////////////////////////////////////////////////
-//
-void ReportExecutedInstructions(){
-    *clockGating_flag = TRUE;
-    FILE *log;
-    char log_name[50];
-    sprintf(log_name, "simulation/exec_inst_PE%d.txt",*myAddress);
-    log = fopen(log_name, "w+");
-    if(log != NULL){
-        fprintf(log,"==========================================================\n");
-        fprintf(log,"========EXECUTED INSTRUCTIONS REPORT======================\n");
-        fprintf(log,"==========================================================\n");
-        fprintf(log,"== Total: %d - not implemented yet\n",*instructionCounter);
-        fprintf(log,"== Branch: %d\n",*branchCounter);
-        fprintf(log,"== Arithmetics: %d\n",*arithCounter);
-        fprintf(log,"== Jump: %d\n",*jumpCounter);
-        fprintf(log,"== Move: %d\n",*moveCounter);
-        fprintf(log,"== Load: %d\n",*loadCounter);
-        fprintf(log,"== Store: %d\n",*storeCounter);
-        fprintf(log,"== Shift: %d\n",*shiftCounter);
-        fprintf(log,"== Nop: %d\n",*nopCounter);
-        fprintf(log,"== Logial: %d\n",*logicalCounter);
-        fprintf(log,"== Multiplication and Division: %d\n",*multDivCounter);
-        fprintf(log,"== Weird Stuff: %d\n",*weirdCounter);
-        fprintf(log,"==========================================================\n");
-        fprintf(log,"==========================================================\n");
-        fclose(log);
-    }
-    *clockGating_flag = FALSE;
     return;
 }
 
@@ -496,7 +489,9 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 ///////////////////////////////////////////////////////////////////
 /* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination){
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif    
     unsigned int index;
     do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
     //////////////////////////////////////////
@@ -521,7 +516,9 @@ void SendMessage(message *theMessage, unsigned int destination){
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
+#if USE_THERMAL
     *clockGating_flag = FALSE;
+#endif
     return;
 }
 
@@ -539,7 +536,6 @@ unsigned int getEmptyIndex(){
     int tempIdx = PIPE_WAIT;
     unsigned int tempHist = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        //LOG("i %d %d %d\n",i,buffer_map[i], buffer_history[i]);
         if(buffer_map[i] == PIPE_FREE && buffer_history[i]<=tempHist){
             tempIdx = i;
             tempHist = buffer_history[i];
@@ -572,8 +568,10 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
+#if USE_THERMAL
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
     *clockGating_flag = TRUE; // Turn the clkGating 
+#endif    
     ////////////////////////////////////////////////
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
     int_disable(1);
@@ -584,7 +582,9 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_enable(0);
     int_enable(1);
     ////////////////////////////////////////////////
+#if USE_THERMAL    
     *clockGating_flag = auxClkGating;
+#endif
     return;
 }
 
@@ -616,8 +616,9 @@ void FinishApplication(){
     while(init_end != 0){
 	    init_end = *SyncToPE;
     }
-    
+#if USE_THERMAL
     ReportExecutedInstructions();
+#endif
     LOG("Application ROUTER %x done!\n\n",*myAddress);
     return;
 }

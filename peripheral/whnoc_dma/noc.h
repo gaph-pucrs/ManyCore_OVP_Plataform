@@ -92,6 +92,8 @@
 #define ARBITER_TTL     0
 // Debug logs
 #define LOG_OUTPUTFLITS 1
+// Thermal stuff
+#define USE_THERMAL     1
 
 #if LOG_OUTPUTFLITS
 extern int contFlits[N_PORTS];
