@@ -324,16 +324,19 @@ void interruptHandler_NI_TX(void) {
     }
     *NIcmdTX = DONE;
 
-    // If there is a Executed Instructions Packet available to send, send it!
-    if(sendExecutedInstPacket == TRUE){
-        SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-        sendExecutedInstPacket = FALSE;
-    }
     // If there is some packet inside the PIPE waiting to be sent, send it!
-    else if(sendAfterTX[0] <= PIPE_SIZE){
+    else if(sendAfterTX[0] <= PIPE_SIZE){ 
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
         popSendAfterTX();
     }
+#if USE_THERMAL
+    // If there is a Executed Instructions Packet available to send, send it!
+    else if(sendExecutedInstPacket == TRUE){
+        SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+        sendExecutedInstPacket = FALSE;
+    }
+#endif
+    
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
     *clockGating_flag = auxClkGating; // Restore the previous clk gating state
