@@ -306,6 +306,27 @@ void read_class_inst();
 unsigned int estimateNoCActivity();
 unsigned int getNumberOfPorts(unsigned int address);
 void energyEstimation();
+void ResetExecutedInstructions();
+
+///////////////////////////////////////////////////////////////////
+//
+void ResetExecutedInstructions(){
+    *clockGating_flag = TRUE;
+    *instructionCounter = 0;
+    *branchCounter = 0;
+    *arithCounter = 0;  
+    *jumpCounter = 0;   
+    *moveCounter = 0;    
+    *loadCounter = 0;    
+    *storeCounter = 0;    
+    *shiftCounter = 0;   
+    *nopCounter = 0;   
+    *logicalCounter = 0;    
+    *multDivCounter = 0;
+    *weirdCounter = 0;
+    *clockGating_flag = FALSE;
+    return;
+}
 
 
 void read_class_inst(){

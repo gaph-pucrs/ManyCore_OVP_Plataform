@@ -139,7 +139,6 @@ void SendMessage(message *theMessage, unsigned int destination);
 void SendSlot(unsigned int addr, unsigned int slot); // Use this as SendRaw (the NI protocol is only respected here - the SendRaw function will not fit in every situation) the put a "0xFFFFFFFE" in slot if using to transmitt a random packet
 void ReceiveMessage(message *theMessage, unsigned int from);
 void ReceiveRaw(message *theMessage);
-void ResetExecutedInstructions();
 void ReportExecutedInstructions();
 void FinishApplication();
 //////////////////////////////
@@ -421,26 +420,6 @@ void ReceiveRaw(message *theMessage){
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
     *clockGating_flag = FALSE;
     ////////////////////////////////////////////////
-    return;
-}
-
-///////////////////////////////////////////////////////////////////
-//
-void ResetExecutedInstructions(){
-    *clockGating_flag = TRUE;
-    *instructionCounter = 0;
-    *branchCounter = 0;
-    *arithCounter = 0;  
-    *jumpCounter = 0;   
-    *moveCounter = 0;    
-    *loadCounter = 0;    
-    *storeCounter = 0;    
-    *shiftCounter = 0;   
-    *nopCounter = 0;   
-    *logicalCounter = 0;    
-    *multDivCounter = 0;
-    *weirdCounter = 0;
-    *clockGating_flag = FALSE;
     return;
 }
 
