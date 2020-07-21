@@ -441,20 +441,21 @@ void energyEstimation(){
     ////////////////////////////////
     /* PE ENERGY */
 
-    energyProcDif_dyn = arithDyn[Voltage]*arith_inst + 
-						branchDyn[Voltage]*branch_inst + 
-						jumpDyn[Voltage]*jump_inst + 
-						moveDyn[Voltage]*move_inst + 
-						loadStoreDyn[Voltage]*(load_inst+store_inst) + 
-						shiftDyn[Voltage]*shift_inst + 
-						nopDyn[Voltage]*nop_inst + 
-						logicalDyn[Voltage]*logical_inst +
-						multDivDyn[Voltage]*mult_div_inst;
+    energyProcDif_dyn = arithDyn[Voltage]*inst_class.arith + 
+						branchDyn[Voltage]*inst_class.branch + 
+						jumpDyn[Voltage]*inst_class.jump + 
+						moveDyn[Voltage]*inst_class.move + 
+						loadStoreDyn[Voltage]*(inst_class.load+inst_class.store) + 
+						shiftDyn[Voltage]*inst_class.shift + 
+						nopDyn[Voltage]*inst_class.nop + 
+						logicalDyn[Voltage]*inst_class.logical +
+						multDivDyn[Voltage]*inst_class.mult_div;
 
-    LOG("DEBUG-%x: arith: %d-%d == branch: %d-%d == jump: %d-%d == load: %d-%d == store: %d-%d\n",*myAddress, arith_inst, arithDyn[Voltage],branch_inst,branchDyn[Voltage],jump_inst,jumpDyn[Voltage],load_inst,loadStoreDyn[Voltage],store_inst,loadStoreDyn[Voltage]);
-    LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
+    //LOG("DEBUG-%x: arith: %d-%d == branch: %d-%d == jump: %d-%d == load: %d-%d == store: %d-%d\n",*myAddress, inst_class.arith, arithDyn[Voltage],inst_class.branch,branchDyn[Voltage],inst_class.jump,jumpDyn[Voltage],load_inst,loadStoreDyn[Voltage],store_inst,loadStoreDyn[Voltage]);
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
+
+    LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
     /* MEMORY ENERGY */
     energyMemoryDif_dyn =	readEnergyMemory[Voltage]*load_inst +
