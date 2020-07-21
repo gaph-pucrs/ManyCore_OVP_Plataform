@@ -458,8 +458,8 @@ void energyEstimation(){
     LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
     /* MEMORY ENERGY */
-    energyMemoryDif_dyn =	readEnergyMemory[Voltage]*load_inst +
-                            writeEnergyMemory[Voltage]*store_inst;
+    energyMemoryDif_dyn =	readEnergyMemory[Voltage]*inst_class.load +
+                            writeEnergyMemory[Voltage]*inst_class.store;
 
 
     avoidOverflow = difTime>>6;
