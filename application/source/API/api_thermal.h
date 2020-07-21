@@ -450,12 +450,11 @@ void energyEstimation(){
 						nopDyn[Voltage]*nop_inst + 
 						logicalDyn[Voltage]*logical_inst +
 						multDivDyn[Voltage]*mult_div_inst;
+
+    LOG("DEBUG-%x: arith: %d-%d == branch: %d-%d == jump: %d-%d == load: %d-%d == store: %d-%d\n",*myAddress, arith_inst, arithDyn[Voltage],branch_inst,branchDyn[Voltage],jump_inst,jumpDyn[Voltage],load_inst,loadStoreDyn[Voltage],store_inst,loadStoreDyn[Voltage]);
     LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
+
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
-    LOG("DEBUG-%x: energyProcDif_dynOverhead: %d\n",*myAddress, energyProcDif_dyn);
-
-    
-
 
     /* MEMORY ENERGY */
     energyMemoryDif_dyn =	readEnergyMemory[Voltage]*load_inst +
