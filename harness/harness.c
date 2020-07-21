@@ -205,10 +205,8 @@ static OP_MONITOR_FN(fetchCallBack) {
     unsigned int intValue = htonl(vec2usi(value));
     //clkgating = 0 == CONTAR
     //clkgating = 1 == NAO CONTAR
-    //kernelCount = 1 == CONTO NO KERNEL
-    //kernelCount = 0 == CONTO NA APP
-    //if the processor is not waiting a packet then run the disassemble
-    if(!intValue){
+    //if the processor is not in clkgating then run the disassemble
+    //if(!intValue){
         char instruction[60];
         strcpy(instruction,opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
         sscanf(instruction,"%s %*s\n",instruction);
@@ -230,7 +228,7 @@ static OP_MONITOR_FN(fetchCallBack) {
         EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
         EI[0] = htonl(read_executedInstructions) & 0x000000FF;
         opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
-    }
+    //}
 }
 
 int main(int argc, const char *argv[]) {
