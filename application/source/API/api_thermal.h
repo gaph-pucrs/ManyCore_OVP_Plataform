@@ -421,6 +421,10 @@ void energyEstimation(){
 	inst_class.mult_div 	= mult_div_inst>>6;
 	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst;
 
+    if(*myAddress==0x0102 || *myAddress == 0x0200 )
+    LOG("%x TOTAL: %d",*myAddress inst_class.total);
+
+
     //Print router info
     //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
     ////////////////////////////////
