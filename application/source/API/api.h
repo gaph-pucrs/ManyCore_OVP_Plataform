@@ -404,6 +404,9 @@ void OVP_init(){
 ///////////////////////////////////////////////////////////////////
 /* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
+#if USE_THERMAL
+    *clockGating_flag = TRUE;
+#endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
     
@@ -414,9 +417,6 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     requestMsg(from);
 
     // Waits the response
-#if USE_THERMAL
-    *clockGating_flag = TRUE;
-#endif
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
@@ -430,6 +430,9 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 /* Receives a RAW message */
 // ATTENTION! THIS FUNCTION DISABLES THE RX INTERRUPTION!
 void ReceiveRaw(message *theMessage){
+#if USE_THERMAL
+    *clockGating_flag = TRUE;
+#endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
 
@@ -439,9 +442,6 @@ void ReceiveRaw(message *theMessage){
     // Inform the the interruption that this is a RAW function
     isRawReceive = 1;
 
-#if USE_THERMAL
-    *clockGating_flag = TRUE;
-#endif
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
