@@ -71,9 +71,6 @@
 #define DYN_JUMP_1 971
 #define DYN_JUMP_2 2113
 
-#define DYN_WEIRD_0 (DYN_ARITH_0 + DYN_LOGICAL_0 + DYN_SHIFT_0 + DYN_MOVE_0 + DYN_LOAD_0 + DYN_MULT_DIV_0 + DYN_NOP_0 + DYN_BRANCH_0 + DYN_JUMP_0)/9
-#define DYN_WEIRD_1 (DYN_ARITH_1 + DYN_LOGICAL_1 + DYN_SHIFT_1 + DYN_MOVE_1 + DYN_LOAD_1 + DYN_MULT_DIV_1 + DYN_NOP_1 + DYN_BRANCH_1 + DYN_JUMP_1)/9
-#define DYN_WEIRD_2 (DYN_ARITH_2 + DYN_LOGICAL_2 + DYN_SHIFT_2 + DYN_MOVE_2 + DYN_LOAD_2 + DYN_MULT_DIV_2 + DYN_NOP_2 + DYN_BRANCH_2 + DYN_JUMP_2)/9
 /*--------------------------------------------------------------------------------
  * MEMORY - Total dynamic read/write energy per access (pJ)
  * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
@@ -134,7 +131,6 @@ const int multDivDyn[3]={DYN_MULT_DIV_0, DYN_MULT_DIV_1, DYN_MULT_DIV_2};
 const int nopDyn[3]={DYN_NOP_0, DYN_NOP_1, DYN_NOP_2};
 const int branchDyn[3]={DYN_BRANCH_0, DYN_BRANCH_1, DYN_BRANCH_2};
 const int jumpDyn[3]={DYN_JUMP_0, DYN_JUMP_1, DYN_JUMP_2};
-const int weirdDyn[3]={DYN_WEIRD_0, DYN_WEIRD_1, DYN_WEIRD_2};
 
 /*--------------------------------------------------------------------------------
  * Total dynamic read/write energy per access (pJ)
@@ -258,7 +254,6 @@ typedef struct {
 	unsigned int shift;
 	unsigned int nop;
 	unsigned int mult_div;
-    unsigned int weird;
 	unsigned int total;
 } Instrucions_class;
 
@@ -423,8 +418,7 @@ void energyEstimation(){
 	inst_class.shift		= shift_inst>>6;
 	inst_class.nop			= nop_inst>>6;
 	inst_class.mult_div 	= mult_div_inst>>6;
-    inst_class.weird        = weird_inst>>6;
-	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst + weird_inst;
+	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst;
 
     //Print router info
     //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
@@ -456,8 +450,7 @@ void energyEstimation(){
 						shiftDyn[Voltage]*shift_inst + 
 						nopDyn[Voltage]*nop_inst + 
 						logicalDyn[Voltage]*logical_inst +
-						multDivDyn[Voltage]*mult_div_inst+
-                        weirdDyn[Voltage]*weird_inst;
+						multDivDyn[Voltage]*mult_div_inst;
     
     energyProcDif_dyn = energyProcDif_dyn *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
 
