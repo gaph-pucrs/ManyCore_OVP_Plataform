@@ -422,7 +422,7 @@ void energyEstimation(){
 	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst;
 
     if(*myAddress==0x0102 || *myAddress == 0x0200){
-        LOG("%x TOTAL: %d",*myAddress, inst_class.total);
+        LOG("%x TOTAL: %d\n",*myAddress, inst_class.total);
     }
 
     //Print router info
