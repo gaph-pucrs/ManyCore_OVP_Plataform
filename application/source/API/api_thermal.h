@@ -506,8 +506,8 @@ void energyEstimation(){
         filepointer = fopen (logFileName,"a");
         fprintf(filepointer,"Counters: %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",arith_inst, branch_inst, jump_inst, move_inst, load_inst, store_inst, shift_inst, nop_inst, logical_inst, mult_div_inst, t0talpackets, t0talflits, timeActiveNoC<<6, timeIdleNoC<<6);
         fclose(filepointer);    
-    *clockGating_flag = FALSE;
-    //*clockGating_flag = TRUE;
+    //*clockGating_flag = FALSE;
+    *clockGating_flag = TRUE;
     //executedInstPacket[7] = router_congestion;
     //executedInstPacket[8] = router_injection;
     //executedInstPacket[9] = 0; // ((total_slack_time*100) / sampling->real_window);
