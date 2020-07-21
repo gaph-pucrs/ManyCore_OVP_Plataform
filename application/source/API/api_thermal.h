@@ -395,6 +395,8 @@ unsigned int getNumberOfPorts(unsigned int address){
 	}
 }
 
+///////////////////////////////////////////////////////////////////
+/* Runs the energy estimation for a given time window*/
 void energyEstimation(){
     unsigned int timeActiveNoC, nPorts, actualTime, difTime, timeIdleNoC, energyActive, energyIdle, idleNoC, activeNoC, EnergyNoC, energyProcDif_dyn, energyMemoryDif_dyn, energyMemoryDif_leak;
     unsigned int avoidOverflow, energyProcDif_leak, energyLocalDif_dyn, energyLocalDif_leak;
