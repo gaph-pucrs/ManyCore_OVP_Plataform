@@ -325,7 +325,8 @@ void ResetExecutedInstructions(){
     return;
 }
 
-
+///////////////////////////////////////////////////////////////////
+//
 void read_class_inst(){
 	arith_inst =    *arithCounter;
     logical_inst =  *logicalCounter;
