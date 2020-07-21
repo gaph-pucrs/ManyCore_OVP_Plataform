@@ -44,7 +44,7 @@ echo "cd peripheral" >> ovp_compiler.sh
 echo "rm -rf pse.pse" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
 echo "cd simulation" >> ovp_compiler.sh
-echo "rm -rf *.txt" >> ovp_compiler.sh
+echo "rm -f *.txt" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
 echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
