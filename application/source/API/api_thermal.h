@@ -308,7 +308,6 @@ void ReportExecutedInstructions();
 ///////////////////////////////////////////////////////////////////
 //
 void ResetExecutedInstructions(){
-    *clockGating_flag = TRUE;
     *instructionCounter = 0;
     *branchCounter = 0;
     *arithCounter = 0;  
@@ -321,7 +320,6 @@ void ResetExecutedInstructions(){
     *logicalCounter = 0;    
     *multDivCounter = 0;
     *weirdCounter = 0;
-    *clockGating_flag = FALSE;
     return;
 }
 
@@ -421,10 +419,6 @@ void energyEstimation(){
 	inst_class.mult_div 	= mult_div_inst>>6;
 	inst_class.total 		= arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst;
 
-    if(*myAddress==0x0102 || *myAddress == 0x0200){
-        LOG("%x TOTAL: %d\n",*myAddress, inst_class.total);
-    }
-
     //Print router info
     //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
     ////////////////////////////////
@@ -456,8 +450,12 @@ void energyEstimation(){
 						nopDyn[Voltage]*nop_inst + 
 						logicalDyn[Voltage]*logical_inst +
 						multDivDyn[Voltage]*mult_div_inst;
+    LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
+    energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
+    LOG("DEBUG-%x: energyProcDif_dynOverhead: %d\n",*myAddress, energyProcDif_dyn);
+
     
-    energyProcDif_dyn = energyProcDif_dyn *DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
+
 
     /* MEMORY ENERGY */
     energyMemoryDif_dyn =	readEnergyMemory[Voltage]*load_inst +
