@@ -202,7 +202,7 @@ static OP_MONITOR_FN(fetchCallBack) {
     //get the clock gating
     char value[4];
     opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
-    unsigned int intValue = htonl(vec2usi(value));
+    //unsigned int intValue = htonl(vec2usi(value));
     //clkgating = 0 == CONTAR
     //clkgating = 1 == NAO CONTAR
     //if the processor is not in clkgating then run the disassemble
