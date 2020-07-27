@@ -198,7 +198,7 @@ void interruptHandler_timer(void) {
 void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
-    *clockGating_flag = FALSE; // Turn the clkGating off
+    *clockGating_flag = TRUE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
     int requester, i;
@@ -308,7 +308,7 @@ void popSendAfterTX(){
 void interruptHandler_NI_TX(void) {
 #if USE_THERMAL
     unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
-    *clockGating_flag = FALSE; // Turn the clkGating off
+    *clockGating_flag = TRUE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
     if(transmittingActive < PIPE_SIZE){ // Message packet
