@@ -409,6 +409,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 
     // Waits the response
     int_enable(2); // Enables the RX interruptions
+
     *clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 
@@ -568,17 +569,17 @@ void SendSlot(unsigned int addr, unsigned int slot){
     //*clockGating_flag = TRUE;
 #endif    
     ////////////////////////////////////////////////
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
-    *clockGating_flag = FALSE;
+    //*clockGating_flag = FALSE;
 
     int_disable(1);
     int_disable(0);
 
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
-    *clockGating_flag = FALSE;
-    
+    //*clockGating_flag = FALSE;
+
     transmittingActive = slot;
     SendRaw(addr);
     int_enable(0);
