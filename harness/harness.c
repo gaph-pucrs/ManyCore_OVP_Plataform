@@ -163,7 +163,7 @@ optModuleAttr modelAttrs = {
 unsigned int vec2usi(char *vec){
     unsigned int auxValue = 0x00000000;
     unsigned int aux;
-    aux = 0x000000FF & vec[3];
+    aux = 0x000000FF & vec[3]; 
     auxValue = ((aux << 24) & 0xFF000000);
     aux = 0x000000FF & vec[2];
     auxValue = auxValue | ((aux << 16) & 0x00FF0000);
@@ -212,7 +212,7 @@ static OP_MONITOR_FN(fetchCallBack) {
         //opMessage("I", "FETCH", "pos-Instrucao: %s",instruction);
 
         //                         BASE ADDRESS -  (INSTRUCTION TYPE OFFSET)
-        unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction)*4);
+        unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction)*4); // *4 porque é endereçado por palavra
 
         // Load the atual value and add one
         char read_EI[4];
