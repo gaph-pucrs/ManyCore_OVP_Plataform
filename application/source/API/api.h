@@ -605,13 +605,14 @@ void FinishApplication(){
 
     // Activate the clock gating and waits until every other processor finish its task
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+   
 #endif
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     unsigned int init_end = *SyncToPE;
     while(init_end != 0){
 	    init_end = *SyncToPE;
+        *clockGating_flag = TRUE;
     }
 #if USE_THERMAL
     ReportExecutedInstructions();
