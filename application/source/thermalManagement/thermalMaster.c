@@ -46,7 +46,7 @@ int main(int argc, char **argv)
                 }
             }
             //LOG("Todos os pacotes foram recebidos!!!\n");
-            *clockGating_flag = TRUE;
+            //*clockGating_flag = TRUE;
                 LOG("FPRINTF - MASTER %x\n",*myAddress);
                 FILE *filepointer;
                 int err0;
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
                 filepointer = fopen (logFileName,"a");
                 fprintf(filepointer,"%u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
                 fclose(filepointer);    
-            *clockGating_flag = FALSE;
+            //*clockGating_flag = FALSE;
 
 
             /*Mounts and send the packet to the peripheral*/
