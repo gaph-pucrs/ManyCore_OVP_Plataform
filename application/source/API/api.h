@@ -307,8 +307,8 @@ void popSendAfterTX(){
 /* Interruption function for Network Interface TX module */ 
 void interruptHandler_NI_TX(void) {
 #if USE_THERMAL
-    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
-    *clockGating_flag = TRUE; // Turn the clkGating off
+    //unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    //*clockGating_flag = FALSE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
     if(transmittingActive < PIPE_SIZE){ // Message packet
@@ -339,7 +339,8 @@ void interruptHandler_NI_TX(void) {
     
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
-    *clockGating_flag = auxClkGating; // Restore the previous clk gating state
+    //*clockGating_flag = TRUE;
+    //*clockGating_flag = auxClkGating; // Restore the previous clk gating state
 #endif
 }
 
