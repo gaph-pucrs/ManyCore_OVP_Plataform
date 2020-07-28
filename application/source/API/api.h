@@ -569,16 +569,16 @@ void SendSlot(unsigned int addr, unsigned int slot){
     //*clockGating_flag = TRUE;
 #endif    
     ////////////////////////////////////////////////
-    //*clockGating_flag = TRUE;
-    while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
-    //*clockGating_flag = FALSE;
+    //
+    while(*NIcmdTX != NI_STATUS_OFF){*clockGating_flag = TRUE;/*waits until NI is ready to execute an operation*/}
+    *clockGating_flag = FALSE;
 
     int_disable(1);
     int_disable(0);
 
-    //*clockGating_flag = TRUE;
-    while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
-    //*clockGating_flag = FALSE;
+    //
+    while(*NIcmdTX != NI_STATUS_OFF){*clockGating_flag = TRUE;/*waits until NI is ready to execute an operation*/}
+    *clockGating_flag = FALSE;
 
     transmittingActive = slot;
     SendRaw(addr);
