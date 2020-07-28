@@ -205,7 +205,7 @@ static OP_MONITOR_FN(fetchCallBack) {
     //clkgating = 0 == CONTAR
     //clkgating = 1 == NAO CONTAR
     //if the processor is not in clkgating then run the disassemble
-    if(!intValue){
+    //if(!intValue){
         char instruction[60];
         strcpy(instruction,opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
         sscanf(instruction,"%s %*s\n",instruction);
@@ -227,7 +227,7 @@ static OP_MONITOR_FN(fetchCallBack) {
         EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
         EI[0] = htonl(read_executedInstructions) & 0x000000FF;
         opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
-    }
+    //}
 }
 
 int main(int argc, const char *argv[]) {

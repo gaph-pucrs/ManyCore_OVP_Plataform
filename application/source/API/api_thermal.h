@@ -291,7 +291,7 @@ unsigned int latency_DVS = 0;
 /////////////////////////////////////////////////////////////////////////
 
 // Activate this flag to deactivate the instruction count - "clock gating the processor"
-volatile unsigned int *clockGating_flag = CLK_GATING;
+//volatile unsigned int *clockGating_flag = CLK_GATING;
 volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];  // Used by the API_thermal to create the energy packet
 volatile unsigned int sendExecutedInstPacket = FALSE;       // Used by the API_thermal to inform if the energy packet must be sent after the TX interruption
 
@@ -496,7 +496,7 @@ void energyEstimation(){
     executedInstPacket[5] = sampling.processor + sampling.router + sampling.memory;
     executedInstPacket[6] = sampling.leakage;
     executedInstPacket[7] = *myAddress;
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
         LOG("FPRINTF %x\n",*myAddress);
         FILE *filepointer;
         int err0;
@@ -508,7 +508,7 @@ void energyEstimation(){
         fprintf(filepointer,"Counters: %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",arith_inst, branch_inst, jump_inst, move_inst, load_inst, store_inst, shift_inst, nop_inst, logical_inst, mult_div_inst, t0talpackets, t0talflits, timeActiveNoC<<6, timeIdleNoC<<6);
         fclose(filepointer);    
     //*clockGating_flag = FALSE;
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
     //executedInstPacket[7] = router_congestion;
     //executedInstPacket[8] = router_injection;
     //executedInstPacket[9] = 0; // ((total_slack_time*100) / sampling->real_window);
@@ -543,7 +543,7 @@ void energyEstimation(){
 ///////////////////////////////////////////////////////////////////
 //
 void ReportExecutedInstructions(){
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
     FILE *log;
     char log_name[50];
     sprintf(log_name, "simulation/exec_inst_PE%d.txt",*myAddress);
@@ -568,7 +568,7 @@ void ReportExecutedInstructions(){
         fprintf(log,"==========================================================\n");
         fclose(log);
     }
-    *clockGating_flag = FALSE;
+    //*clockGating_flag = FALSE;
     return;
 }
 

@@ -175,8 +175,8 @@ void popSendAfterTX();
 /* Interruption function for Timer */
 void interruptHandler_timer(void) {
 #if USE_THERMAL
-    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
-    *clockGating_flag = TRUE; // Turn the clkGating off
+    //unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    //*clockGating_flag = TRUE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
@@ -188,7 +188,7 @@ void interruptHandler_timer(void) {
     //////////////////////////////////////////////////////////////
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
 #if USE_THERMAL
-    *clockGating_flag = auxClkGating; // Restore the previous clk gating state
+    //*clockGating_flag = auxClkGating; // Restore the previous clk gating state
 #endif
     return;
 }
@@ -198,7 +198,7 @@ void interruptHandler_timer(void) {
 void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
     //unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
-    *clockGating_flag = FALSE; // Turn the clkGating off
+    //*clockGating_flag = FALSE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
     int requester, i;
@@ -235,7 +235,7 @@ void interruptHandler_NI_RX(void) {
     }
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
     //*clockGating_flag = auxClkGating; // Restore the previous clk gating state
 #endif
 }
@@ -406,7 +406,7 @@ void OVP_init(){
 /* Receives a message and alocates it in the application structure */
 void ReceiveMessage(message *theMessage, unsigned int from){
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
 #endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
@@ -421,7 +421,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
-    *clockGating_flag = FALSE;
+    //*clockGating_flag = FALSE;
 #endif
     ////////////////////////////////////////////////
     return;
@@ -432,7 +432,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 // ATTENTION! THIS FUNCTION DISABLES THE RX INTERRUPTION!
 void ReceiveRaw(message *theMessage){
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
 #endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
@@ -446,7 +446,7 @@ void ReceiveRaw(message *theMessage){
     int_enable(2); // Enables the RX interruptions
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
-    *clockGating_flag = FALSE;
+    //*clockGating_flag = FALSE;
 #endif
     ////////////////////////////////////////////////
     return;
@@ -496,7 +496,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 /* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination){
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
 #endif    
     unsigned int index;
     do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
@@ -523,7 +523,7 @@ void SendMessage(message *theMessage, unsigned int destination){
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
 #if USE_THERMAL
-    *clockGating_flag = FALSE;
+    //*clockGating_flag = FALSE;
 #endif
     return;
 }
@@ -575,8 +575,8 @@ unsigned int getID(unsigned int address){
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
 #if USE_THERMAL
-    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
-    *clockGating_flag = TRUE; // Turn the clkGating 
+    //unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    //*clockGating_flag = TRUE; // Turn the clkGating 
 #endif    
     ////////////////////////////////////////////////
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
@@ -589,7 +589,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_enable(1);
     ////////////////////////////////////////////////
 #if USE_THERMAL    
-    *clockGating_flag = auxClkGating;
+    //*clockGating_flag = auxClkGating;
 #endif
     return;
 }
@@ -616,7 +616,7 @@ void FinishApplication(){
 
     // Activate the clock gating and waits until every other processor finish its task
 #if USE_THERMAL
-    *clockGating_flag = TRUE; // Because the task has finished
+    //*clockGating_flag = TRUE; // Because the task has finished
 #endif
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
