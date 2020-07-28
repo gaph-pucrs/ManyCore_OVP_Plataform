@@ -616,3 +616,15 @@ void FinishApplication(){
     LOG("Application ROUTER %x done!\n\n",*myAddress);
     return;
 }
+
+void LOG_F(char* text){
+    FILE *filepointer;
+    int err0;
+    char logFileName[26];
+    err0 = sprintf(logFileName, "simulation/log_file_%dx%d.txt",getXpos(*myAddress),getYpos(*myAddress));
+    filepointer = fopen(logFileName,"a");
+    strcat(text, "\n");
+    fprintf(filepointer,text);
+    fclose(logFileName);
+    return;
+}
