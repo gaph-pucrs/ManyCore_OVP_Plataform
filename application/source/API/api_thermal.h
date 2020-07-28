@@ -454,7 +454,7 @@ void energyEstimation(){
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
 
-    LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
+    //LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
     /* MEMORY ENERGY */
     energyMemoryDif_dyn = readEnergyMemory[Voltage]*inst_class.load +
@@ -497,7 +497,7 @@ void energyEstimation(){
     executedInstPacket[6] = sampling.leakage;
     executedInstPacket[7] = *myAddress;
     //*clockGating_flag = TRUE;
-        LOG("FPRINTF %x\n",*myAddress);
+    /*  LOG("FPRINTF %x\n",*myAddress);
         FILE *filepointer;
         int err0;
         unsigned int t0talpackets = eastPackets_dif + westPackets_dif + northPackets_dif + southPackets_dif + localPackets_dif;
@@ -506,7 +506,7 @@ void energyEstimation(){
         err0 = sprintf(logFileName, "simulation/log%dx%d.txt",getXpos(*myAddress),getYpos(*myAddress));
         filepointer = fopen (logFileName,"a");
         fprintf(filepointer,"Counters: %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",arith_inst, branch_inst, jump_inst, move_inst, load_inst, store_inst, shift_inst, nop_inst, logical_inst, mult_div_inst, t0talpackets, t0talflits, timeActiveNoC<<6, timeIdleNoC<<6);
-        fclose(filepointer);    
+        fclose(filepointer);*/    
     //*clockGating_flag = FALSE;
     //executedInstPacket[7] = router_congestion;
     //executedInstPacket[8] = router_injection;
