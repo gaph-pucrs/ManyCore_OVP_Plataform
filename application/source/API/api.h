@@ -625,6 +625,7 @@ void LOG_F(char* text){
     filepointer = fopen(logFileName,"a");
     strcat(text, "\n");
     fprintf(filepointer,text);
-    fclose(logFileName);
+    fclose(filepointer);
     return;
 }
+
