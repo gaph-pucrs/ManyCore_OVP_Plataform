@@ -197,8 +197,8 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
-    unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
-    *clockGating_flag = TRUE; // Turn the clkGating off
+    //unsigned int auxClkGating = *clockGating_flag; // Save the current clk gating state
+    *clockGating_flag = FALSE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
     int requester, i;
@@ -235,7 +235,8 @@ void interruptHandler_NI_RX(void) {
     }
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
-    *clockGating_flag = auxClkGating; // Restore the previous clk gating state
+    *clockGating_flag = TRUE;
+    //*clockGating_flag = auxClkGating; // Restore the previous clk gating state
 #endif
 }
 
