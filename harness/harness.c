@@ -126,8 +126,7 @@ unsigned int getInstructionType(char *instruction){
         }
         i++;
     }
-    opMessage("I", "FETCH", "Instrucao nao encontrada! %s",instruction);
-    while(1){}
+    while(1){opMessage("I", "FETCH", "Instrucao nao encontrada! %s",instruction);}
 }
 
 unsigned int htonl(unsigned int x){
