@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	int alt;
 	int calc = 0;
 	int iteration = 0;
+	char buffer[70];
 
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
@@ -35,7 +36,8 @@ int main(int argc, char **argv)
 			for (j=0; j<NUM_NODES; j++)
 				AdjMatrix[i][j] = theMessage.msg[j];
 		}
-		LOG_F("recebeu 16 pacotes do divider -iteration %d - %d",iteration,clock());
+		sprintf(buffer, "recebeu 16 pacotes do divider -iteration %d - %d",iteration,clock());
+		LOG_F(buffer);
 		iteration++;
 
 		calc = AdjMatrix[0][0];

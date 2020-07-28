@@ -34,6 +34,7 @@ int main(int argc, char **argv)
 
     int AdjMatrix[NUM_NODES][NUM_NODES];
 	int i, j, k, iter;
+	char buffer[70];
 
 	for (i=0;i<NUM_NODES;i++) {
 		for (j=0;j<NUM_NODES;j++) {
@@ -50,15 +51,30 @@ int main(int argc, char **argv)
 			for (j=0; j<NUM_NODES; j++) {
 				theMessage.msg[j] = AdjMatrix[i][j];
 			}
-			if(i==NUM_NODES-1) LOG_F("enviando pacote para 0-%d - %d",iter,clock());
+			if(i==NUM_NODES-1){
+				sprintf(buffer, "enviando pacote para 0-%d - %d",iter,clock());
+				LOG_F(buffer);
+			} 
 			SendMessage(&theMessage, dijkstra_0_addr);
-			if(i==NUM_NODES-1) LOG_F("enviando pacote para 1-%d - %d",iter,clock());
+			if(i==NUM_NODES-1){
+				sprintf(buffer, "enviando pacote para 1-%d - %d",iter,clock());
+				LOG_F(buffer);
+			} 
 			SendMessage(&theMessage, dijkstra_1_addr);
-			if(i==NUM_NODES-1) LOG_F("enviando pacote para 2-%d - %d",iter,clock());
+			if(i==NUM_NODES-1){
+				sprintf(buffer, "enviando pacote para 2-%d - %d",iter,clock());
+				LOG_F(buffer);
+			} 
 			SendMessage(&theMessage, dijkstra_2_addr);
-			if(i==NUM_NODES-1) LOG_F("enviando pacote para 3-%d - %d",iter,clock());
+			if(i==NUM_NODES-1){
+				sprintf(buffer, "enviando pacote para 3-%d - %d",iter,clock());
+				LOG_F(buffer);
+			} 
 			SendMessage(&theMessage, dijkstra_3_addr);
-			if(i==NUM_NODES-1) LOG_F("enviando pacote para 4-%d - %d",iter,clock());
+			if(i==NUM_NODES-1){
+				sprintf(buffer, "enviando pacote para 4-%d - %d",iter,clock());
+				LOG_F(buffer);
+			} 
 			SendMessage(&theMessage, dijkstra_4_addr);
 		}
 	}
