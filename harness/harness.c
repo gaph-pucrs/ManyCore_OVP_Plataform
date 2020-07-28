@@ -37,7 +37,7 @@
 // Instructions
 //char instructions [][12] = {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
 char branchInstructions[][12]   = {"l.bf","l.bnf","EndList@"};
-char arithInstructions[][12]    = {"l.add","l.addc","l.addi","l.addic","l.sub","l.adrp","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","EndList@"};
+char arithInstructions[][12]    = {"l.addc","l.addi","l.addic","l.sub","l.adrp","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","EndList@"};
 char jumpInstructions[][12]     = {"l.j","l.jal","l.jalr","l.jr","EndList@"};
 char moveInstructions[][12]     = {"l.cmov","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.mfspr","l.movhi","l.mtspr","EndList@"};
 char loadInstructions[][12]     = {"l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","EndList@"};
@@ -47,7 +47,7 @@ char nopInstructions[][12]      = {"l.nop","EndList@"};
 char logicalInstructions[][12]  = {"l.and","l.andi","l.ff1","l.fl1","l.or","l.ori","l.xor","l.xori","EndList@"};
 char multDivInstructions[][12]  = {"l.div","l.divu","l.mac","l.maci","l.macrc","l.macu","l.msb","l.msbu","l.mul","l.muld","l.muldu","l.muli","l.mulu","EndList@"};
 char weirdInstructions[][12]    = {"l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.msync","l.psync","l.rfe","l.sys","l.trap","EndList@"};
-
+//"l.add",
 unsigned int getInstructionType(char *instruction){
     int i = 0;
     while(strcmp(branchInstructions[i],"EndList@") != 0) { // Branch type
