@@ -565,20 +565,27 @@ unsigned int getID(unsigned int address){
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
 #endif    
     ////////////////////////////////////////////////
+    *clockGating_flag = TRUE;
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    *clockGating_flag = FALSE;
+
     int_disable(1);
     int_disable(0);
+
+    *clockGating_flag = TRUE;
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    *clockGating_flag = FALSE;
+    
     transmittingActive = slot;
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
     ////////////////////////////////////////////////
 #if USE_THERMAL    
-    *clockGating_flag = FALSE;
+    //*clockGating_flag = FALSE;
 #endif
     return;
 }
