@@ -270,6 +270,7 @@ PPM_REG_WRITE_CB(statusRXWrite) {
 PPM_REG_READ_CB(statusTXRead) {
     DMAC_ab8_data.statusTX.value = htonl(control_TX);
     //informIteration(); // Used only when operating at LOCAL ITERATIONS
+    bhmMessage("INFO", "reading NIcmdTXC", "Lendo!");
     return *(Uns32*)user;
 }
 
