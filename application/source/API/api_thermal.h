@@ -454,11 +454,11 @@ void energyEstimation(){
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
 
-    //LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
+    LOG("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
     /* MEMORY ENERGY */
-    energyMemoryDif_dyn =	readEnergyMemory[Voltage]*inst_class.load +
-                            writeEnergyMemory[Voltage]*inst_class.store;
+    energyMemoryDif_dyn = readEnergyMemory[Voltage]*inst_class.load +
+                          writeEnergyMemory[Voltage]*inst_class.store;
 
 
     avoidOverflow = difTime>>6;
