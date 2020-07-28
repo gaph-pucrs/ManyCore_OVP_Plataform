@@ -194,7 +194,7 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
-    *clockGating_flag = FALSE; // Turn the clkGating off
+    //*clockGating_flag = FALSE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
     int requester, i;
@@ -409,7 +409,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 
     // Waits the response
     int_enable(2); // Enables the RX interruptions
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 
 #if USE_THERMAL
@@ -434,7 +434,7 @@ void ReceiveRaw(message *theMessage){
     isRawReceive = 1;
 
     int_enable(2); // Enables the RX interruptions
-    *clockGating_flag = TRUE;
+    //*clockGating_flag = TRUE;
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
 #endif
@@ -488,7 +488,9 @@ void SendMessage(message *theMessage, unsigned int destination){
 #if USE_THERMAL
 #endif    
     unsigned int index;
+    *clockGating_flag = TRUE;
     do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
+    *clockGating_flag = FALSE;
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
     buffer_packets[index][PI_DESTINATION] = destination;
