@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 				AdjMatrix[i][j] = theMessage.msg[j];
 		}
 		//sprintf(buffer, "recebeu 16 pacotes do divider -iteration %d - %d",iteration,clock());
-		//LOG_F(buffer);
+		LOG_F("TESTE HEHEHEHEHAH UASHUAH \n");
 		//iteration++;
 
 		calc = AdjMatrix[0][0];

@@ -15,6 +15,7 @@ typedef unsigned char Uns8;
 #define SYNC_BASE      ((unsigned int *) 0x80000014)
 #define NI_BASE        ((unsigned int *) 0x80000004)
 #define TIMER_BASE     ((unsigned int *) 0x8000001C)
+#define PRINTER_BASE   ((unsigned int *) 0x80000020)
 //////////////////////////////
 //////////////////////////////
 
@@ -27,6 +28,12 @@ volatile unsigned int *myAddress = ROUTER_BASE + 0x0;
 ////////////////////////////////////////////////////////////
 // Timer - mapped register to configure the Timer
 volatile unsigned int *timerConfig = TIMER_BASE;
+//////////////////////////////
+//////////////////////////////
+
+////////////////////////////////////////////////////////////
+// Printer - mapped register to send a value to print
+volatile unsigned int *printChar = PRINTER_BASE;
 //////////////////////////////
 //////////////////////////////
 
@@ -155,6 +162,8 @@ void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
 void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
+void printLog(const char *fmt, ...);
+
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -370,6 +379,10 @@ void OVP_init(){
     for(i=0;i<N_PES;i++){
         pendingReq[i] = 0; 
     }
+
+    // Configure the Printer
+    *printChar = getXpos(*myAddress);
+    *printChar = getYpos(*myAddress);
 
     // Configure the timer to interrupt once every 1 ms (1000 us)
     *timerConfig = 1000; // 0-> disabled ---- 1000-> 1ms; 
@@ -630,14 +643,10 @@ void FinishApplication(){
 }
 
 void LOG_F(char* text){
-    FILE *filepointer;
-    int err0;
-    char logFileName[26];
-    err0 = sprintf(logFileName, "simulation/log_file_%dx%d.txt",getXpos(*myAddress),getYpos(*myAddress));
-    filepointer = fopen(logFileName,"a");
-    strcat(text, "\n");
-    fprintf(filepointer,text);
-    fclose(filepointer);
+    int i = 0;
+    do{
+        *printChar = text[i];
+        i++;
+    }while(text[i-1] != '\n');
     return;
 }
-
