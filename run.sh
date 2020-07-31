@@ -57,6 +57,7 @@ echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/iteratorMonoTrigger NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/networkInterface NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/timer NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/printer NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/tea NOVLNV=1" >> ovp_compiler.sh
 echo "make -C harness" >> ovp_compiler.sh
 # --------- Sem HARNESS modificado
