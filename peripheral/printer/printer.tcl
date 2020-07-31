@@ -14,7 +14,7 @@ iadddocumentation -name Description \
 imodeladdbusslaveport -name PRINTREG -size 4 -mustbeconnected
 
 # Address block for 8 bit control registers
-imodeladdaddressblock -name ab8 -port TIMEREG -offset 0x0 -width 32 -size 4
+imodeladdaddressblock -name ab8 -port PRINTREG -offset 0x0 -width 32 -size 4
 
 # 8 bit control registers
-imodeladdmmregister -addressblock TIMEREG/ab8 -name printValue -readfunction readValue -writefunction writeValue -offset 0
+imodeladdmmregister -addressblock PRINTREG/ab8 -name printValue -readfunction readValue -writefunction writeValue -offset 0
