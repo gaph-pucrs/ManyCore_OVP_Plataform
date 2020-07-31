@@ -43,16 +43,20 @@ PPM_REG_WRITE_CB(writeValue) {
     //////////////////////////
     if(myX == 0xFFFFFFF){
         myX = newValue;
+        bhmMessage("INFO", "PRINTER", "RECEBI O X %d", myX);
     }
     else if(myY == 0xFFFFFFF){
         myY = newValue;
+        bhmMessage("INFO", "PRINTER", "RECEBI O Y %d", myX);
         err0 = sprintf(logFileName, "simulation/log_file_%dx%d.txt",myX, myY);
+        bhmMessage("INFO", "PRINTER", logFileName);
     }
     //////////////////////////
     // PRINTER BEHAVIORAL
     //////////////////////////
     else{
         buffer[pointer] = newValue;
+        bhmMessage("INFO", "PRINTER", "Recebendo valor: %c",buffer[pointer]);
         pointer++;
         if(newValue == '\n'){
             FILE *filepointer;
