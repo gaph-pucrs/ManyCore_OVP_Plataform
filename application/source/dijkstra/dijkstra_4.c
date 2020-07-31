@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	int calc = 0;
 	//int iteration = 0;
 	//char buffer[70];
-
+	LOF_F("ESTAMOS COMEÇando a brincadeira!!! \n");
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
     while(1){
