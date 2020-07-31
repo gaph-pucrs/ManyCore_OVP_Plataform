@@ -105,8 +105,8 @@ do
 	echo "ihwconnect -instancename ni"$i" -busslaveport DMAC -bus cpu"$i"Bus -loaddress 0x80000004 -hiaddress 0x8000000F" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MREAD  -bus cpu"$i"Bus" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MWRITE -bus cpu"$i"Bus" >> module.op.tcl
+	echo "ihwconnect -instancename printer"$i" -busslaveport PRINTREG -bus cpu"$i"Bus -loaddress 0x80000020 -hiaddress 0x80000023" >> module.op.tcl
 	echo "ihwconnect -instancename timer"$i" -busslaveport TIMEREG -bus cpu"$i"Bus -loaddress 0x8000001C -hiaddress 0x8000001F" >> module.op.tcl
-	echo "ihwconnect -instancename printer"$i" -busslaveport PRINTREG -bus cpu"$i"Bus -loaddress 0x80000018 -hiaddress 0x8000001B" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
