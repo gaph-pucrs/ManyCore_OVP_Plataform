@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     int i, j, t;
 	
 	LOG("synthetic task A started.\n");
-    apiPrint("ESTAMOS COMEÇando a brincadeira!!! \n");
+    print("ESTAMOS COMEÇando a brincadeira!!! \n");
 	for(i=0;i<SYNTHETIC_ITERATIONS;i++){
 		for(t=0;t<1000;t++){
 		}
