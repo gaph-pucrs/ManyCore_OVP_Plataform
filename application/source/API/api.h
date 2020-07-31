@@ -162,8 +162,7 @@ void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
 void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
-void printLog(const char *fmt, ...);
-
+void LOG_F(char* text);
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
