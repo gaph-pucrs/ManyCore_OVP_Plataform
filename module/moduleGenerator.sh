@@ -92,6 +92,7 @@ do
 	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/whnoc_dma/pse.pse" >> module.op.tcl
 	echo "ihwaddperipheral -instancename ni"$i" -modelfile peripheral/networkInterface/pse.pse" >> module.op.tcl
 	echo "ihwaddperipheral -instancename timer"$i" -modelfile peripheral/timer/pse.pse" >> module.op.tcl
+	echo "ihwaddperipheral -instancename printer"$i" -modelfile peripheral/printer/pse.pse" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
@@ -105,6 +106,7 @@ do
 	echo "ihwconnect -instancename ni"$i" -busmasterport MREAD  -bus cpu"$i"Bus" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MWRITE -bus cpu"$i"Bus" >> module.op.tcl
 	echo "ihwconnect -instancename timer"$i" -busslaveport TIMEREG -bus cpu"$i"Bus -loaddress 0x8000001C -hiaddress 0x8000001F" >> module.op.tcl
+	echo "ihwconnect -instancename printer"$i" -busslaveport PRINTREG -bus cpu"$i"Bus -loaddress 0x80000018 -hiaddress 0x8000001B" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
