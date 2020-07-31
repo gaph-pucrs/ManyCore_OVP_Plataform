@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BUFFER_SIZE;
+#define BUFFER_SIZE 4096
 
 char buffer[BUFFER_SIZE];
 int pointer;
