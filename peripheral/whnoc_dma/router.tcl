@@ -117,4 +117,11 @@ imodeladdpacketnetport \
     -updatefunction controlSecNoc \
     -updatefunctionargument 0x00
 
+#########################################
+## Processor interrupt line
+#########################################
+imodeladdnetport -name INT_ROUTER -type output
+
+imodeladdbusmasterport -name "SEC_APP"   -addresswidth 64
+
 iadddocumentation -name Description -text "Interrupt Request"

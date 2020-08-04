@@ -109,6 +109,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     optNetP intTIMER7_n = opNetNew(mi, "intTIMER7", 0, 0);
     optNetP intNI8_n = opNetNew(mi, "intNI8", 0, 0);
     optNetP intTIMER8_n = opNetNew(mi, "intTIMER8", 0, 0);
+    optNetP intSecNoC_n = opNetNew(mi, "intSecNoC", 0, 0);
 
     optPacketnetP data_0_0_TEA_pkn = opPacketnetNew(mi, "data_0_0_TEA", 0, 0);
 
@@ -387,7 +388,8 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             ),
             OP_NET_CONNECTIONS(
                 OP_NET_CONNECT(intNI0_n, "intr0"),
-                OP_NET_CONNECT(intTIMER0_n, "intr1")
+                OP_NET_CONNECT(intTIMER0_n, "intr1"),
+                OP_NET_CONNECT(intSecNoC_n, "intr2")
             )
         ),
         OP_PARAMS(
@@ -1300,7 +1302,11 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router0",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
+                OP_BUS_CONNECT(cpu0Bus_b, "SEC_APP", .addrLo=0x8000002fULL, .addrHi=0xffffffffULL),
                 OP_BUS_CONNECT(cpu0Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
+            ),
+            OP_NET_CONNECTIONS(
+                OP_NET_CONNECT(intSecNoC_n, "INT_ROUTER")
             ),
             OP_PACKETNET_CONNECTIONS(
                 OP_PACKETNET_CONNECT(data_0_0_safeNoC_pkn, "portSecNoC"),

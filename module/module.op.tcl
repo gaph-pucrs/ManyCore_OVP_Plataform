@@ -30,6 +30,9 @@ ihwaddnet -instancename intTIMER7
 ihwaddnet -instancename intNI8
 ihwaddnet -instancename intTIMER8
 
+ihwaddnet -instancename intSecNoC
+
+
 ihwaddprocessor -instancename cpu0 -id 0 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
                 -variant generic \
@@ -84,6 +87,7 @@ ihwconnect -bus cpu0Bus -instancename cpu0 -busmasterport INSTRUCTION
 ihwconnect -bus cpu0Bus -instancename cpu0 -busmasterport DATA
 ihwconnect -instancename cpu0 -netport       intr0       -net intNI0
 ihwconnect -instancename cpu0 -netport       intr1       -net intTIMER0
+ihwconnect -instancename cpu0 -netport       intr2       -net intSecNoC
 
 ihwconnect -bus cpu1Bus -instancename cpu1 -busmasterport INSTRUCTION
 ihwconnect -bus cpu1Bus -instancename cpu1 -busmasterport DATA
@@ -250,6 +254,9 @@ ihwconnect -instancename ni0 -busslaveport DMAC -bus cpu0Bus -loaddress 0x800000
 ihwconnect -instancename ni0 -busmasterport MREAD  -bus cpu0Bus
 ihwconnect -instancename ni0 -busmasterport MWRITE -bus cpu0Bus
 ihwconnect -instancename timer0 -busslaveport TIMEREG -bus cpu0Bus -loaddress 0x8000001C -hiaddress 0x8000001F
+ihwconnect -instancename router0 -busmasterport SEC_APP -bus cpu0Bus  -loaddress 0x8000002F -hiaddress 0xFFFFFFFF
+
+
 ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni1 -busslaveport DMAC -bus cpu1Bus -loaddress 0x80000004 -hiaddress 0x8000000B
 ihwconnect -instancename ni1 -busmasterport MREAD  -bus cpu1Bus
@@ -618,6 +625,9 @@ ihwconnect -instancename ni7 -netport       INT_NI  -net intNI7
 ihwconnect -instancename timer7 -netport       INT_TIMER  -net intTIMER7
 ihwconnect -instancename ni8 -netport       INT_NI  -net intNI8
 ihwconnect -instancename timer8 -netport       INT_TIMER  -net intTIMER8
+
+ihwconnect -instancename router0 -netport INT_ROUTER -net intSecNoC
+
 ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse
 
 ihwaddbus -instancename syncBus -addresswidth 32

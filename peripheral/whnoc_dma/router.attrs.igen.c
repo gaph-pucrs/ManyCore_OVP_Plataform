@@ -28,6 +28,13 @@ static ppmBusPort busPorts[] = {
         .remappable      = 0,
         .description     = 0,
     },
+    {
+        .name            = "SEC_APP",
+        .type            = PPM_MASTER_PORT,
+        .addrBits        = 64,
+        .mustBeConnected = 0,
+        .description     = "Interrupt Request",
+    },
     { 0 }
 };
 
@@ -38,6 +45,25 @@ static PPM_BUS_PORT_FN(nextBusPort) {
         busPort++;
     }
     return busPort->name ? busPort : 0;
+}
+
+static ppmNetPort netPorts[] = {
+    {
+        .name            = "INT_ROUTER",
+        .type            = PPM_OUTPUT_PORT,
+        .mustBeConnected = 0,
+        .description     = 0
+    },
+    { 0 }
+};
+
+static PPM_NET_PORT_FN(nextNetPort) {
+    if(!netPort) {
+         netPort = netPorts;
+    } else {
+        netPort++;
+    }
+    return netPort->name ? netPort : 0;
 }
 
 
@@ -181,7 +207,7 @@ static ppmPacketnetPort packetnetPorts[] = {
     {
         .name            = "portControlSecNoc",
         .mustBeConnected = 0,
-        .description     = "Interrupt Request",
+        .description     = 0,
         .sharedData      = portControlSecNoc_pnsd,
         .sharedDataBytes = 8,
         .handlePtr       = &handles.portControlSecNoc,
@@ -206,6 +232,7 @@ ppmModelAttr modelAttrs = {
     .type             = PPM_MT_PERIPHERAL,
 
     .busPortsCB       = nextBusPort,  
+    .netPortsCB       = nextNetPort,  
     .packetnetPortsCB = nextPacketnetPort,
 
     .saveCB        = peripheralSaveState,

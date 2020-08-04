@@ -199,7 +199,7 @@ unsigned int selLongestWaitingPortAvailable(){
     int selPort = ND;
     //Checks for each port if the port is waiting more than max and is not routed and the output port is available
     for(port=0;port<N_PORTS;port++){
-        bhmMessage("I","SecNoC","contPriority = %d ----------------,max = %d ------------------------------- routingTable[%d] = %d ------------------------------- port %d IsAvailable = %d",contPriority[port],max, port, routingTable[port],XYrouting(myAddress,buffers[port][first[port]].data), portIsAvailable(XYrouting(myAddress,buffers[port][first[port]].data)));
+        //bhmMessage("I","SecNoC","contPriority = %d ----------------,max = %d ------------------------------- routingTable[%d] = %d ------------------------------- port %d IsAvailable = %d",contPriority[port],max, port, routingTable[port],XYrouting(myAddress,buffers[port][first[port]].data), portIsAvailable(XYrouting(myAddress,buffers[port][first[port]].data)));
 
         if((contPriority[port]>max) && (routingTable[port]==ND) && (portIsAvailable(XYrouting(myAddress,buffers[port][first[port]].data)))){      
             max = contPriority[port];
@@ -218,21 +218,21 @@ void searchAndAllocate(){
     for(port=0;port<N_PORTS;port++){
         if((!isEmpty(port)) && (routingTable[port] == ND)){
             contPriority[port] ++; 
-            bhmMessage("I","SecNoC","Has Something to send in port %d priority = %d", port, contPriority[port]);
+           // bhmMessage("I","SecNoC","Has Something to send in port %d priority = %d", port, contPriority[port]);
         }
     }
     /*Returns the port with the bigger priority */
     selectedPort = selLongestWaitingPortAvailable();
-        bhmMessage("I","SecNoC","Port %d was selected", selectedPort);
+       // bhmMessage("I","SecNoC","Port %d was selected", selectedPort);
     // If some port was selected
     if(selectedPort!=ND){
         // Updates the routingTable and reset the port priority
         routingTable[selectedPort] = XYrouting(myAddress,SEC_PE);
-        bhmMessage("I","SecNoC","Updating routng table from %d --------------------------------- TO %d",selectedPort, routingTable[selectedPort]);
+       // bhmMessage("I","SecNoC","Updating routng table from %d --------------------------------- TO %d",selectedPort, routingTable[selectedPort]);
         contPriority[selectedPort] = 0;
     }else{
         hasDataToSend = 0;
-        bhmMessage("I","SecNoC","There is NO DATA");
+       // bhmMessage("I","SecNoC","There is NO DATA");
     }
 }
 
@@ -257,7 +257,9 @@ void transmitt(){
                             message = bufferPop(port);
 			    bhmMessage("I", "secNoC", "------------------------------------------------>Enviando flit  %d SOURCE = %d from %d to local port", message.data, message.source, myID);
                             // Send the flit transmission time followed by the data
-                            //ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
+                            ppmPacketnetWrite(handles.portUnsafeNoC, &message.data, sizeof(message));
+                            ppmPacketnetWrite(handles.portUnsafeNoC, &message.source,sizeof(message.source));
+                        
                         }
                     }
 
@@ -318,25 +320,13 @@ void transmitt(){
     }
 }
 void iterate(){
-    // Sends the iteration signal to the NI module
-    //iteratePeriph();
-    // Verify if the LOCAL buffer has something to send
-    //verifyLocalBuffer();
-    ////////////////////////////////////////////
-    // Arbitration Process - defined in noc.h //
-    ////////////////////////////////////////////
+    
     
     // Search and allocate the packet which is waiting more time
     searchAndAllocate();
-   // if(hasDataToSend){
-    ////////////////////////////////////////////
-
-    ////////////////////////////////////////////
-    ////////////////////////////////////////////
-    ////////////////////////////////////////////
-    // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-        bhmMessage("INFO", "SECNOC", "-------------------------------------------------------------------------------------------- CHAMANDO TRANSMMIT");
-        transmitt();
+  
+    //bhmMessage("INFO", "SECNOC", "-------------------------------------------------------------------------------------------- CHAMANDO TRANSMMIT");
+    transmitt();
     //} 
 }
 
@@ -372,21 +362,6 @@ int main(int argc, char *argv[]) {
             bhmWaitDelay(QUANTUM_DELAY);
             //esperar evento
         }
-        //i++;
-       // bhmMessage("INFO","SECROUTER","WHILE1 ========================================================================================================================= %d", i);
-       // if(i==10){
-        //    i=0;
-       // }
-        //ppmPacketnetWrite(handles.portUnsafeNoC, &i, sizeof(i)); // OK!!
-
-
-        //CHECAR SE portDatAEAST MESMO PROBLEMA DO MODULE ??
-
-        //iterate();
-
-        //if(tem alguma coisa em alguma porta??){
-            //transmitir (COMO???)
-        //}
     }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));

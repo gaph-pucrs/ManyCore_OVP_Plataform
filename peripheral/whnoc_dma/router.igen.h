@@ -49,7 +49,9 @@ extern localPort_regs_dataT localPort_regs_data;
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
+    ppmAddressSpaceHandle SEC_APP;
     void                 *localPort;
+    ppmNetHandle          INT_ROUTER;
     ppmPacketnetHandle    portDataEast;
     ppmPacketnetHandle    portDataWest;
     ppmPacketnetHandle    portDataNorth;

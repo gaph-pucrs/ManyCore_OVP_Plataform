@@ -571,6 +571,8 @@ void platformConstructor(void) {
         0        // unused
     );
 
+    icmConnectPSEBus( handles.router0_p, handles.cpu0Bus_b, "SEC_APP", 1, 0x8000002f, 0xffffffff);
+
     icmConnectPSEBus( handles.router0_p, handles.cpu0Bus_b, "localPort", 0, 0x80000000, 0x80000003);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1706,6 +1708,13 @@ void platformConstructor(void) {
     icmConnectProcessorNet( handles.cpu8_c, handles.intTIMER8_n, "intr1", 0);
 
     icmConnectPSENet( handles.timer8_p, handles.intTIMER8_n, "INT_TIMER", 0);
+
+////////////////////////////////////////////////////////////////////////////////
+    handles.intSecNoC_n = icmNewNet("intSecNoC" );
+
+    icmConnectProcessorNet( handles.cpu0_c, handles.intSecNoC_n, "intr2", 0);
+
+    icmConnectPSENet( handles.router0_p, handles.intSecNoC_n, "INT_ROUTER", 0);
 
 ////////////////////////////////////////////////////////////////////////////////
     handles.data_0_0_TEA_pktn = icmNewPacketnet("data_0_0_TEA");

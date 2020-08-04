@@ -813,15 +813,14 @@ PPM_PACKETNET_CB(iterationPort) {
 
 ppmAddressSpaceHandle h;
 int testando = 0;
-unsigned int SecAddr = 0x8000002F;
-                       
+unsigned int SecAddr = 0xFFFFFFFF;
 
 PPM_PACKETNET_CB(secNoC) {
     if(bytes == 8){
-       flitSec.data = *(Uns8*)data;
+       flitSec.data = *(unsigned int *)data;
        bhmMessage("I", "ROUTER secNoC","*****************************************************data = %d",flitSec.data);
     } else{
-       flitSec.source = *(Uns8*)data;
+       flitSec.source = *(unsigned int *)data;
        bhmMessage("I", "ROUTER secNoC","*****************************************************source = %d",flitSec.source);
         //hasDataToSend = 1;
     }
@@ -832,10 +831,9 @@ PPM_PACKETNET_CB(secNoC) {
         bhmMessage("I", "ROUTER secNoC", "ERROR_WRITE h handling!");
         while(1){} // error handling
     }
+	
 
-   //ppmWriteAddressSpace (handles.MPORT, (Uns64)(Uns32)&, 4, &reset);
-
-    ppmWriteAddressSpace(h, SecAddr, sizeof(*(Uns8*)data), &*(Uns8*)data);
+    ppmWriteAddressSpace(h, SecAddr, sizeof(*(Uns32*)data), &*(Uns32*)data);
     ppmCloseAddressSpace(h);
 
     //uint32_t u = *(uint32_t*)&x;
@@ -844,6 +842,7 @@ PPM_PACKETNET_CB(secNoC) {
     //*myAddress = secNoCData; 
   
 }
+
 
 PPM_PACKETNET_CB(controlSecNoc) {
 

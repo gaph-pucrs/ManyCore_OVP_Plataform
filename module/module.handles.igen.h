@@ -110,6 +110,7 @@ struct handlesS {
     icmNetP              intTIMER7_n;
     icmNetP              intNI8_n;
     icmNetP              intTIMER8_n;
+    icmNetP              intSecNoC_n;
     icmPacketnetP        data_0_0_TEA_pktn;
     icmPacketnetP        ctrl_0_0_TEA_pktn;
     icmPacketnetP        data_0_0_L_pktn;
