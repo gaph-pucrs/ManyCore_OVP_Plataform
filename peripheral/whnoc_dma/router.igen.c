@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
             fprintf(fp,"Routers ; LOCAL ; EAST ; WEST ; NORTH ; SOUTH \n");
             fclose(fp);       
         } 
-        if(i>0){
+        if(i>0 && myID != -1){
             fp = fopen ("simulation/flitFlow.csv","a");
             fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
             fclose(fp);
