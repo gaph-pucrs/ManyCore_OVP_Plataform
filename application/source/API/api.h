@@ -421,8 +421,9 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 
     // Waits the response
     int_enable(2); // Enables the RX interruptions
-
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 
 #if USE_THERMAL
@@ -447,7 +448,9 @@ void ReceiveRaw(message *theMessage){
     isRawReceive = 1;
 
     int_enable(2); // Enables the RX interruptions
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
 #endif
@@ -501,9 +504,13 @@ void SendMessage(message *theMessage, unsigned int destination){
 #if USE_THERMAL
 #endif    
     unsigned int index;
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif
     do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
+#if USE_THERMAL
     *clockGating_flag = FALSE;
+#endif    
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
     buffer_packets[index][PI_DESTINATION] = destination;
@@ -581,16 +588,24 @@ void SendSlot(unsigned int addr, unsigned int slot){
     //*clockGating_flag = TRUE;
 #endif    
     ////////////////////////////////////////////////
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+#if USE_THERMAL
     *clockGating_flag = FALSE;
+#endif
 
     int_disable(1);
     int_disable(0);
 
+#if USE_THERMAL
     *clockGating_flag = TRUE;
+#endif
     while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+#if USE_THERMAL
     *clockGating_flag = FALSE;
+#endif
 
     transmittingActive = slot;
     SendRaw(addr);
@@ -632,7 +647,9 @@ void FinishApplication(){
     unsigned int init_end = *SyncToPE;
     while(init_end != 0){
 	    init_end = *SyncToPE;
+#if USE_THERMAL
         *clockGating_flag = TRUE;
+#endif
     }
 #if USE_THERMAL
     ReportExecutedInstructions();
