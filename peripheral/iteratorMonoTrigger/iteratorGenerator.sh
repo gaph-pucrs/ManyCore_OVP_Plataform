@@ -194,14 +194,16 @@ echo "PPM_RESTORE_STATE_FN(peripheralRestoreState) {" >> iteratorMonoTrigger.ige
 echo "    bhmMessage(\"E\", \"PPM_RSNI\", \"Model does not implement save/restore\");" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
-echo "///////////////////////////////////// Main /////////////////////////////////////" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "int main(int argc, char *argv[]) {" >> iteratorMonoTrigger.igen.c
+echo "PPM_DOC_FN(installDocs){" >> iteratorMonoTrigger.igen.c
 echo "    ppmDocNodeP Root1_node = ppmDocAddSection(0, \"Root\");" >> iteratorMonoTrigger.igen.c
 echo "    {" >> iteratorMonoTrigger.igen.c
 echo "        ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, \"Description\");" >> iteratorMonoTrigger.igen.c
 echo "        ppmDocAddText(doc2_node, \"The NoC iteratorMonoTrigger\");" >> iteratorMonoTrigger.igen.c
 echo "    }" >> iteratorMonoTrigger.igen.c
+echo "}" >> iteratorMonoTrigger.igen.c
+echo "///////////////////////////////////// Main /////////////////////////////////////" >> iteratorMonoTrigger.igen.c
+echo "" >> iteratorMonoTrigger.igen.c
+echo "int main(int argc, char *argv[]) {" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "    diagnosticLevel = 0;" >> iteratorMonoTrigger.igen.c
 echo "    bhmInstallDiagCB(setDiagLevel);" >> iteratorMonoTrigger.igen.c
