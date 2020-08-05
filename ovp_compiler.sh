@@ -16,6 +16,7 @@ make -C peripheral/synchronizer NOVLNV=1
 make -C peripheral/iteratorMonoTrigger NOVLNV=1
 make -C peripheral/networkInterface NOVLNV=1
 make -C peripheral/timer NOVLNV=1
+make -C peripheral/printer NOVLNV=1
 make -C peripheral/tea NOVLNV=1
 make -C harness
 harness/harness.${IMPERAS_ARCH}.exe \
@@ -35,5 +36,25 @@ harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu13=application/application13.${CROSS}.elf $* \
      --program cpu14=application/application14.${CROSS}.elf $* \
      --program cpu15=application/application15.${CROSS}.elf $* \
+     --program cpu16=application/application16.${CROSS}.elf $* \
+     --program cpu17=application/application17.${CROSS}.elf $* \
+     --program cpu18=application/application18.${CROSS}.elf $* \
+     --program cpu19=application/application19.${CROSS}.elf $* \
+     --program cpu20=application/application20.${CROSS}.elf $* \
+     --program cpu21=application/application21.${CROSS}.elf $* \
+     --program cpu22=application/application22.${CROSS}.elf $* \
+     --program cpu23=application/application23.${CROSS}.elf $* \
+     --program cpu24=application/application24.${CROSS}.elf $* \
+     --program cpu25=application/application25.${CROSS}.elf $* \
+     --program cpu26=application/application26.${CROSS}.elf $* \
+     --program cpu27=application/application27.${CROSS}.elf $* \
+     --program cpu28=application/application28.${CROSS}.elf $* \
+     --program cpu29=application/application29.${CROSS}.elf $* \
+     --program cpu30=application/application30.${CROSS}.elf $* \
+     --program cpu31=application/application31.${CROSS}.elf $* \
+     --program cpu32=application/application32.${CROSS}.elf $* \
+     --program cpu33=application/application33.${CROSS}.elf $* \
+     --program cpu34=application/application34.${CROSS}.elf $* \
+     --program cpu35=application/application35.${CROSS}.elf $* \
      --program cpuIterator=application/source/applicationIterator/applicationIterator.${CROSS}.elf --imperasintercepts  $* \
 $*
