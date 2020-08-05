@@ -84,8 +84,8 @@ echo "        activity = 0;" >> iteratorMonoTrigger.igen.c
 echo "        iterationN++;" >> iteratorMonoTrigger.igen.c
 for i in $(seq 0 $N)
 do
-    echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
-    echo "    ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
+    echo "        iteration = iterationN;" >> iteratorMonoTrigger.igen.c
+    echo "        ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
 done
 echo "        i++;" >> iteratorMonoTrigger.igen.c
 echo "        if(tryAgain == 0 && activity == 0){" >> iteratorMonoTrigger.igen.c
@@ -172,7 +172,8 @@ echo "    unsigned int act = *(unsigned int *)data;" >> iteratorMonoTrigger.igen
 echo "    if(act > 0){" >> iteratorMonoTrigger.igen.c
 echo "        activity++;" >> iteratorMonoTrigger.igen.c
 echo "    }" >> iteratorMonoTrigger.igen.c
-    echo "" >> iteratorMonoTrigger.igen.c
+echo " }" >> iteratorMonoTrigger.igen.c
+echo "" >> iteratorMonoTrigger.igen.c
 done
 echo "PPM_CONSTRUCTOR_CB(constructor) {" >> iteratorMonoTrigger.igen.c
 echo "    // YOUR CODE HERE (pre constructor)" >> iteratorMonoTrigger.igen.c
