@@ -72,15 +72,30 @@ echo "" >> iteratorMonoTrigger.igen.c
 echo "// Iteration counter" >> iteratorMonoTrigger.igen.c
 echo "unsigned long long int iterationN = 0;" >> iteratorMonoTrigger.igen.c
 echo "unsigned long long int iteration;" >> iteratorMonoTrigger.igen.c
+echo "unsigned int activity;" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "////////////////////////////// Functions ///////////////////////////////////////" >> iteratorMonoTrigger.igen.c
 echo "/* Make a callback to each router */" >> iteratorMonoTrigger.igen.c
 echo "void runIterations(){  " >> iteratorMonoTrigger.igen.c
+echo "    unsigned int i=0;" >> iteratorMonoTrigger.igen.c
+echo "    unsigned int tryAgain = 0;" >> iteratorMonoTrigger.igen.c
+echo "    do{" >> iteratorMonoTrigger.igen.c
+echo "        activity = 0;" >> iteratorMonoTrigger.igen.c
+echo "        iterationN++;" >> iteratorMonoTrigger.igen.c
 for i in $(seq 0 $N)
 do
     echo "    iteration = iterationN;" >> iteratorMonoTrigger.igen.c
     echo "    ppmPacketnetWrite(handles.iterationPort"$i", &iteration, sizeof(iteration));" >> iteratorMonoTrigger.igen.c
 done
+echo "        i++;" >> iteratorMonoTrigger.igen.c
+echo "        if(tryAgain == 0 && activity == 0){" >> iteratorMonoTrigger.igen.c
+echo "            activity++; " >> iteratorMonoTrigger.igen.c
+echo "            tryAgain++;// segunda chance" >> iteratorMonoTrigger.igen.c
+echo "        }" >> iteratorMonoTrigger.igen.c
+echo "        else{" >> iteratorMonoTrigger.igen.c
+echo "            tryAgain = 0;" >> iteratorMonoTrigger.igen.c
+echo "        }" >> iteratorMonoTrigger.igen.c
+echo "    }while(activity != 0);" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "/////////////////////////////// Diagnostic level ///////////////////////////////" >> iteratorMonoTrigger.igen.c
@@ -153,8 +168,10 @@ echo "" >> iteratorMonoTrigger.igen.c
 for i in $(seq 0 $N)
 do
     echo "PPM_PACKETNET_CB(iteration"$i") {" >> iteratorMonoTrigger.igen.c
-    echo "    // YOUR CODE HERE (iteration"$i")" >> iteratorMonoTrigger.igen.c
-    echo "}" >> iteratorMonoTrigger.igen.c
+echo "    unsigned int act = *(unsigned int *)data;" >> iteratorMonoTrigger.igen.c
+echo "    if(act > 0){" >> iteratorMonoTrigger.igen.c
+echo "        activity++;" >> iteratorMonoTrigger.igen.c
+echo "    }" >> iteratorMonoTrigger.igen.c
     echo "" >> iteratorMonoTrigger.igen.c
 done
 echo "PPM_CONSTRUCTOR_CB(constructor) {" >> iteratorMonoTrigger.igen.c
@@ -188,6 +205,12 @@ echo "" >> iteratorMonoTrigger.igen.c
 echo "    diagnosticLevel = 0;" >> iteratorMonoTrigger.igen.c
 echo "    bhmInstallDiagCB(setDiagLevel);" >> iteratorMonoTrigger.igen.c
 echo "    constructor();" >> iteratorMonoTrigger.igen.c
+echo "" >> iteratorMonoTrigger.igen.c
+echo "    while(1){" >> iteratorMonoTrigger.igen.c
+echo "        bhmWaitDelay(QUANTUM_DELAY);" >> iteratorMonoTrigger.igen.c
+echo "        runIterations();" >> iteratorMonoTrigger.igen.c
+echo "    }" >> iteratorMonoTrigger.igen.c
+echo "" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "    bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));" >> iteratorMonoTrigger.igen.c
 echo "    destructor();" >> iteratorMonoTrigger.igen.c
