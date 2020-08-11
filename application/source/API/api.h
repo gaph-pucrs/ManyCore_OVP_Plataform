@@ -15,7 +15,8 @@ typedef unsigned char Uns8;
 #define SYNC_BASE      ((unsigned int *) 0x80000014)
 #define NI_BASE        ((unsigned int *) 0x80000004)
 #define TIMER_BASE     ((unsigned int *) 0x8000001C)
-#define PRINTER_BASE   ((unsigned int *) 0x80000020)
+#define PRINTER_CHAR   ((unsigned int *) 0x80000020)
+#define PRINTER_INT    ((unsigned int *) 0x80000024)
 //////////////////////////////
 //////////////////////////////
 
@@ -33,7 +34,8 @@ volatile unsigned int *timerConfig = TIMER_BASE;
 
 ////////////////////////////////////////////////////////////
 // Printer - mapped register to send a value to print
-volatile unsigned int *printChar = PRINTER_BASE;
+volatile unsigned int *printChar = PRINTER_CHAR;
+volatile unsigned int *printInt = PRINTER_INT;
 //////////////////////////////
 //////////////////////////////
 
@@ -666,6 +668,12 @@ void print(char* text){
         *printChar = text[i];
         i++; // i = 2
     }while(text[i-1] != '\0');
+    return;
+}
+
+
+void puti(int value){
+    *printInt = value;
     return;
 }
 
