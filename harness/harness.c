@@ -296,7 +296,7 @@ int main(int argc, const char *argv[]) {
             opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum*QUANTUM_TIME_SLICE),(countQuantum*QUANTUM_TIME_SLICE*1000));
             int i;
             for(i=0;i<N_PES;i++){
-                opMessage("I", "HARNESS INFO", "PE %d - percent: %f\n",i,(activeFetch[i]/fetch[i])*100);
+                opMessage("I", "HARNESS INFO", "PE %d - percent: %f\n",i,((float)activeFetch[i]/(float)fetch[i])*100);
                 activeFetch[i] = 0;
                 fetch[i] = 0;
             }
