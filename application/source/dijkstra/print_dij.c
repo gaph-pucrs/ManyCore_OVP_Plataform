@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 	for (k=0; k < NUM_NODES*2; k++)
 		result[k] = theMessage.msg[k];
 
-	LOG("DIJKSTRA FINISHED");
+	puts("DIJKSTRA FINISHED\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

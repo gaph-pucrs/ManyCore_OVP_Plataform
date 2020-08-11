@@ -658,7 +658,9 @@ void FinishApplication(){
     return;
 }
 
-void print(char* text){
+///////////////////////////////////////////////////////////////////
+/* REMEMBER TO USE THE \n AT THE END OF THE STRING */
+void puts(char* text){
     int i = 0;
     do{
         *printChar = text[i];
