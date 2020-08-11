@@ -205,6 +205,7 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
+    unsigned int savedClkGatingStatus = *clockGating_flag;
     *clockGating_flag = FALSE; // Turn the clkGating off
 #endif
     //////////////////////////////////////////////////////////////
@@ -242,7 +243,7 @@ void interruptHandler_NI_RX(void) {
     }
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
-    
+    *clockGating_flag = savedClkGatingStatus;
 #endif
 }
 
@@ -428,8 +429,8 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     *clockGating_flag = TRUE;
 #endif
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
-
 #if USE_THERMAL
+    *clockGating_flag = FALSE;
 #endif
     ////////////////////////////////////////////////
     return;
@@ -456,6 +457,7 @@ void ReceiveRaw(message *theMessage){
 #endif
     while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
+    *clockGating_flag = FALSE;
 #endif
     ////////////////////////////////////////////////
     return;
