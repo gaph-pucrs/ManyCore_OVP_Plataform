@@ -662,10 +662,15 @@ void FinishApplication(){
 /* REMEMBER TO USE THE \n AT THE END OF THE STRING */
 void print(char* text){
     int i = 0;
-    do{
-        *printChar = text[i];
-        i++;
-    }while(text[i-1] != 0);
+    *printChar = text[i]; // i = 0
+    i++; // i = 1
+    if(text[i] != 0){   // i = 1
+        do{
+            *printChar = text[i];
+            i++;
+            text[i-2] = 0;
+        }while(text[i-1] != 0);
+    }
     return;
 }
 
