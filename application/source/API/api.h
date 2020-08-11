@@ -164,7 +164,8 @@ void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
 void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
-void print(char* text);
+void prints(char* text);
+void printi(int value);
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -662,17 +663,17 @@ void FinishApplication(){
 
 ///////////////////////////////////////////////////////////////////
 /* REMEMBER TO USE THE \n AT THE END OF THE STRING */
-void print(char* text){
+void prints(char* text){
     int i = 0;
     do{
         *printChar = text[i];
-        i++; // i = 2
+        i++;
     }while(text[i-1] != '\0');
     return;
 }
 
 
-void puti(int value){
+void printi(int value){
     *printInt = value;
     return;
 }

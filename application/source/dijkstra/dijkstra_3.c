@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-	print("STARTING 3\n");
+	prints("STARTING 3\n");
 
     while(1){
 		theMessage.size = NUM_NODES;
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 		theMessage.msg[i+NUM_NODES] = prev[i];
 
     SendMessage(&theMessage, print_dij_addr);
-    print("Dijkstra_3 finished.\n");
+    prints("Dijkstra_3 finished.\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

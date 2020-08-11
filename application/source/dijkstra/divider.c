@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 	int i, j, k, iter;
 	char buffer[70];
 
-	print("STARTING DIVIDER\n"); 
+	prints("STARTING DIVIDER\n"); 
 
 	for (i=0;i<NUM_NODES;i++) {
 		for (j=0;j<NUM_NODES;j++) {
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
 		SendMessage(&theMessage, dijkstra_3_addr);
 		SendMessage(&theMessage, dijkstra_4_addr);
 	}
-	print("Divider Finished\n"); 
+	prints("Divider Finished\n"); 
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
