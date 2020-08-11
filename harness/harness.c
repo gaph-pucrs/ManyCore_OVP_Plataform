@@ -198,14 +198,15 @@ static OP_MONITOR_FN(fetchCallBack) {
     // get the processor id
     //int processorID = getProcessorID(processor);
     
-    //get the clock gating
-    char value[4];
+    char value[4]; // aux var
+    // reads the clock gating flag in the processor memory
     opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
-    unsigned int clkgating = htonl(vec2usi(value));
+    unsigned int clkGating_flag = htonl(vec2usi(value));
+    
     //clkgating = 0 == CONTAR
     //clkgating = 1 == NAO CONTAR
     //if the processor is not in clkgating then run the disassemble
-    if(!clkgating){
+    if(!clkGating_flag){
         char instruction[60];
         strcpy(instruction,opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
         sscanf(instruction,"%s %*s\n",instruction);
