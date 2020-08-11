@@ -26,12 +26,7 @@ int main(int argc, char **argv)
 
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-	print("STARTIRaRNG 0\n");
-	print(" 123\n");
-	print("asjkfhlsjkdh");
-	print(" ");
-	print("aaa");
-	print("\n");
+	print("STARTING 0\n");
 
     while(1){
 		theMessage.size = NUM_NODES;

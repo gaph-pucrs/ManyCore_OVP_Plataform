@@ -65,7 +65,7 @@ PPM_REG_WRITE_CB(writeValue) {
         else if(pointer == BUFFER_SIZE-1){ 
             FILE *filepointer;
             filepointer = fopen(logFileName,"a");
-            buffer[BUFFER_SIZE-1] = '\n';
+            buffer[BUFFER_SIZE-1] = '\0';
             fprintf(filepointer,buffer);
             bhmMessage("INFO", "Printing...", buffer);
             fclose(filepointer);
