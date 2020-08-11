@@ -454,7 +454,21 @@ void energyEstimation(){
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
 
-    
+   /* puts("Counters: ");
+    puti(inst_class->arith); puts(" ");
+    puti(inst_class->branch); puts(" ");
+    puti(inst_class->jump); puts(" ");
+    puti(inst_class->move); puts(" ");
+    puti(inst_class->load); puts(" ");
+    puti(inst_class->store); puts(" ");
+    puti(inst_class->shift); puts(" ");
+    puti(inst_class->nop); puts(" ");
+    puti(inst_class->logical); puts(" ");
+    puti(inst_class->mult_div); puts(" ");
+    puti(MemoryRead(NUM_PACKETS_ROUTER)); puts(" ");
+    puti(MemoryRead(TOTAL_FLITS_ROUTER)); puts(" ");
+    puti(timeActiveNoC); puts(" ");
+    puti(timeIdleNoC); puts("\n");*/
     
     //puts("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 

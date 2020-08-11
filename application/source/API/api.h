@@ -665,7 +665,7 @@ void puts(char* text){
     do{
         *printChar = text[i];
         i++;
-    }while(text[i-1] != '\n');
+    }while(text[i-1] != 0);
     return;
 }
 

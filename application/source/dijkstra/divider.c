@@ -36,6 +36,8 @@ int main(int argc, char **argv)
 	int i, j, k, iter;
 	char buffer[70];
 
+	puts("STARTING DIVIDER\n"); 
+
 	for (i=0;i<NUM_NODES;i++) {
 		for (j=0;j<NUM_NODES;j++) {
 			AdjMatrix[i][j]= fpTrix[k];
@@ -90,7 +92,7 @@ int main(int argc, char **argv)
 		SendMessage(&theMessage, dijkstra_3_addr);
 		SendMessage(&theMessage, dijkstra_4_addr);
 	}
-
+	puts("Divider Finished\n"); 
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
