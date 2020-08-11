@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-	prints("STARTING 0 "); printi(12345678); prints("\n"); 
+	prints("STARTING 0 ");
+	
     while(1){
 		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
