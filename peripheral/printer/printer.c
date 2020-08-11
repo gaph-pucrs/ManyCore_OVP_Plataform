@@ -54,7 +54,7 @@ PPM_REG_WRITE_CB(writeValue) {
     else{
         buffer[pointer] = newValue;
         pointer++;
-        if(newValue == '\n'){
+        if(newValue == '\0'){
             FILE *filepointer;
             filepointer = fopen(logFileName,"a");
             fprintf(filepointer,buffer);
