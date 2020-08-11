@@ -242,6 +242,10 @@ unsigned int localPackets_last = 0;
 unsigned int localPackets_dif = 0;
 unsigned int localFlits_dif = 0;
 
+// Total in the interval
+unsigned int totalPackets = 0;
+unsigned int totalFlits = 0;
+
 /* Instructions stuff */
 typedef struct {
 	unsigned int arith;
@@ -350,7 +354,7 @@ unsigned int estimateNoCActivity(){
     southPackets_dif = *southPackets - southPackets_last;
     localPackets_dif = *localPackets - localPackets_last;
     northPackets_dif = *northPackets - northPackets_last;
-    unsigned int totalPackets = eastPackets_dif + westPackets_dif + southPackets_dif + localPackets_dif + northPackets_dif;
+    totalPackets = eastPackets_dif + westPackets_dif + southPackets_dif + localPackets_dif + northPackets_dif;
 
     eastPackets_last = *eastPackets;
     westPackets_last = *westPackets;
@@ -364,7 +368,7 @@ unsigned int estimateNoCActivity(){
     southFlits_dif = *southFlits - southFlits_last; 
     localFlits_dif = *localFlits - localFlits_last; 
     northFlits_dif = *northFlits - northFlits_last;
-    unsigned int totalFlits = eastFlits_dif + westFlits_dif + southFlits_dif + localFlits_dif + northFlits_dif;
+    totalFlits = eastFlits_dif + westFlits_dif + southFlits_dif + localFlits_dif + northFlits_dif;
 
     eastFlits_last = *eastFlits ;
     westFlits_last = *westFlits ;
@@ -454,21 +458,21 @@ void energyEstimation(){
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
 
-   /* prints("Counters: ");
-    printi(inst_class->arith); prints(" ");
-    printi(inst_class->branch); prints(" ");
-    printi(inst_class->jump); prints(" ");
-    printi(inst_class->move); prints(" ");
-    printi(inst_class->load); prints(" ");
-    printi(inst_class->store); prints(" ");
-    printi(inst_class->shift); prints(" ");
-    printi(inst_class->nop); prints(" ");
-    printi(inst_class->logical); prints(" ");
-    printi(inst_class->mult_div); prints(" ");
-    printi(MemoryRead(NUM_PACKETS_ROUTER)); prints(" ");
-    printi(MemoryRead(TOTAL_FLITS_ROUTER)); prints(" ");
+    prints("Counters: ");
+    printi(inst_class.arith); prints(" ");
+    printi(inst_class.branch); prints(" ");
+    printi(inst_class.jump); prints(" ");
+    printi(inst_class.move); prints(" ");
+    printi(inst_class.load); prints(" ");
+    printi(inst_class.store); prints(" ");
+    printi(inst_class.shift); prints(" ");
+    printi(inst_class.nop); prints(" ");
+    printi(inst_class.logical); prints(" ");
+    printi(inst_class.mult_div); prints(" ");
+    printi(totalPackets); prints(" ");
+    printi(totalFlits); prints(" ");
     printi(timeActiveNoC); prints(" ");
-    printi(timeIdleNoC); prints("\n");*/
+    printi(timeIdleNoC); prints("\n");
     
     //prints("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
