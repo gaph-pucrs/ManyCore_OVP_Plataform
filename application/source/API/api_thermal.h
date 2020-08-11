@@ -454,23 +454,23 @@ void energyEstimation(){
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
 
-   /* puts("Counters: ");
-    puti(inst_class->arith); puts(" ");
-    puti(inst_class->branch); puts(" ");
-    puti(inst_class->jump); puts(" ");
-    puti(inst_class->move); puts(" ");
-    puti(inst_class->load); puts(" ");
-    puti(inst_class->store); puts(" ");
-    puti(inst_class->shift); puts(" ");
-    puti(inst_class->nop); puts(" ");
-    puti(inst_class->logical); puts(" ");
-    puti(inst_class->mult_div); puts(" ");
-    puti(MemoryRead(NUM_PACKETS_ROUTER)); puts(" ");
-    puti(MemoryRead(TOTAL_FLITS_ROUTER)); puts(" ");
-    puti(timeActiveNoC); puts(" ");
-    puti(timeIdleNoC); puts("\n");*/
+   /* print("Counters: ");
+    puti(inst_class->arith); print(" ");
+    puti(inst_class->branch); print(" ");
+    puti(inst_class->jump); print(" ");
+    puti(inst_class->move); print(" ");
+    puti(inst_class->load); print(" ");
+    puti(inst_class->store); print(" ");
+    puti(inst_class->shift); print(" ");
+    puti(inst_class->nop); print(" ");
+    puti(inst_class->logical); print(" ");
+    puti(inst_class->mult_div); print(" ");
+    puti(MemoryRead(NUM_PACKETS_ROUTER)); print(" ");
+    puti(MemoryRead(TOTAL_FLITS_ROUTER)); print(" ");
+    puti(timeActiveNoC); print(" ");
+    puti(timeIdleNoC); print("\n");*/
     
-    //puts("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
+    //print("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
     /* MEMORY ENERGY */
     energyMemoryDif_dyn = readEnergyMemory[Voltage]*inst_class.load +
