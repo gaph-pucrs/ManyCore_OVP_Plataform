@@ -83,7 +83,7 @@ PPM_REG_WRITE_CB(writeValue_int) {
     unsigned int newValue = htonl(data);
     FILE *filepointer;
     filepointer = fopen(logFileName,"a");
-    fprintf(filepointer,"%d \0",newValue);
+    fprintf(filepointer,"%d ",newValue);
     bhmMessage("INFO", "Printing...", "%d",newValue);
     fclose(filepointer);
 }
