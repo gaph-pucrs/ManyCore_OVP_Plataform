@@ -15,7 +15,7 @@
 #define BUFFER_SIZE 4096
 
 char buffer[BUFFER_SIZE];
-int pointer;
+int pointer = 0;
 unsigned int myX = 0xFFFFFFF;
 unsigned int myY = 0xFFFFFFF;
 char logFileName[256];
