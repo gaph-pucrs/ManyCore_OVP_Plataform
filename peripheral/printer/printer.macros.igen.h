@@ -11,11 +11,13 @@
 #define PRINTER_MACROS_IGEN_H
 // Before including this file in the application, define the indicated macros
 // to fix the base address of each slave port.
-// Set the macro 'PRINTREG' to the base of port 'PRINTREG'
-#ifndef PRINTREG
-    #error PRINTREG is undefined.It needs to be set to the port base address
+// Set the macro 'PRINTREGS' to the base of port 'PRINTREGS'
+#ifndef PRINTREGS
+    #error PRINTREGS is undefined.It needs to be set to the port base address
 #endif
-#define PRINTREG_AB8_PRINTVALUE    (PRINTREG + 0x0)
+#define PRINTREGS_AB8_PRINTVALUE_CHAR    (PRINTREGS + 0x0)
+
+#define PRINTREGS_AB8_PRINTVALUE_INT    (PRINTREGS + 0x4)
 
 
 

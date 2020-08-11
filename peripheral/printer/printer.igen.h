@@ -37,29 +37,34 @@ extern Uns32 diagnosticLevel;
 #endif
 /////////////////////////// Register data declaration //////////////////////////
 
-typedef struct PRINTREG_ab8_dataS { 
+typedef struct PRINTREGS_ab8_dataS { 
     union { 
         Uns32 value;
-    } printValue;
-} PRINTREG_ab8_dataT, *PRINTREG_ab8_dataTP;
+    } printValue_char;
+    union { 
+        Uns32 value;
+    } printValue_int;
+} PRINTREGS_ab8_dataT, *PRINTREGS_ab8_dataTP;
 
 #ifdef _PSE_
 /////////////////////////////// Port Declarations //////////////////////////////
 
-extern PRINTREG_ab8_dataT PRINTREG_ab8_data;
+extern PRINTREGS_ab8_dataT PRINTREGS_ab8_data;
 
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
-    void                 *PRINTREG;
+    void                 *PRINTREGS;
 } handlesT, *handlesTP;
 
 extern handlesT handles;
 
 ////////////////////////////// Callback prototypes /////////////////////////////
 
-PPM_REG_READ_CB(readValue);
-PPM_REG_WRITE_CB(writeValue);
+PPM_REG_READ_CB(readValue_char);
+PPM_REG_READ_CB(readValue_int);
+PPM_REG_WRITE_CB(writeValue_char);
+PPM_REG_WRITE_CB(writeValue_int);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
 PPM_DOC_FN(installDocs);

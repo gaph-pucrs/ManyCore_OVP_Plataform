@@ -21,9 +21,9 @@
 
 static ppmBusPort busPorts[] = {
     {
-        .name            = "PRINTREG",
+        .name            = "PRINTREGS",
         .type            = PPM_SLAVE_PORT,
-        .addrHi          = 0x3LL,
+        .addrHi          = 0x7LL,
         .mustBeConnected = 1,
         .remappable      = 0,
         .description     = 0,

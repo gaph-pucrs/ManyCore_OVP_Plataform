@@ -2,13 +2,10 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define SYNTHETIC_ITERATIONS	2000
+//#define DIM_X 3
+//#define DIM_Y 4
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define taskA_addr 0x0201
-#define taskB_addr 0x0202
-#define taskC_addr 0x0102
-#define taskD_addr 0x0101
-#define taskE_addr 0x0100
-#define taskF_addr 0x0200
+
+#define thermalMaster_addr 0x0000

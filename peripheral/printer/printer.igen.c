@@ -11,7 +11,7 @@
 #include "printer.igen.h"
 /////////////////////////////// Port Declarations //////////////////////////////
 
-PRINTREG_ab8_dataT PRINTREG_ab8_data;
+PRINTREGS_ab8_dataT PRINTREGS_ab8_data;
 
 handlesT handles;
 
@@ -35,9 +35,9 @@ static PPM_VIEW_CB(view32) {  *(Uns32*)data = *(Uns32*)user; }
 //////////////////////////////// Bus Slave Ports ///////////////////////////////
 
 static void installSlavePorts(void) {
-    handles.PRINTREG = ppmCreateSlaveBusPort("PRINTREG", 4);
-    if (!handles.PRINTREG) {
-        bhmMessage("E", "PPM_SPNC", "Could not connect port 'PRINTREG'");
+    handles.PRINTREGS = ppmCreateSlaveBusPort("PRINTREGS", 8);
+    if (!handles.PRINTREGS) {
+        bhmMessage("E", "PPM_SPNC", "Could not connect port 'PRINTREGS'");
     }
 
 }
@@ -48,15 +48,29 @@ static void installRegisters(void) {
 
     {
         ppmCreateRegister(
-            "ab8_printValue",
+            "ab8_printValue_char",
             0,
-            handles.PRINTREG,
+            handles.PRINTREGS,
             0,
             4,
-            readValue,
-            writeValue,
+            readValue_char,
+            writeValue_char,
             view32,
-            &(PRINTREG_ab8_data.printValue.value),
+            &(PRINTREGS_ab8_data.printValue_char.value),
+            True
+        );
+    }
+    {
+        ppmCreateRegister(
+            "ab8_printValue_int",
+            0,
+            handles.PRINTREGS,
+            4,
+            4,
+            readValue_int,
+            writeValue_int,
+            view32,
+            &(PRINTREGS_ab8_data.printValue_int.value),
             True
         );
     }
