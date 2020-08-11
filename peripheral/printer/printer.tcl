@@ -11,10 +11,11 @@ iadddocumentation -name Description \
 #########################################
 ## A slave port on the processor bus
 #########################################
-imodeladdbusslaveport -name PRINTREG -size 4 -mustbeconnected
+imodeladdbusslaveport -name PRINTREGS -size 8 -mustbeconnected
 
 # Address block for 8 bit control registers
-imodeladdaddressblock -name ab8 -port PRINTREG -offset 0x0 -width 32 -size 4
+imodeladdaddressblock -name ab8 -port PRINTREGS -offset 0x0 -width 32 -size 8
 
 # 8 bit control registers
-imodeladdmmregister -addressblock PRINTREG/ab8 -name printValue -readfunction readValue -writefunction writeValue -offset 0
+imodeladdmmregister -addressblock PRINTREGS/ab8 -name printValue_char -readfunction readValue_char -writefunction writeValue_char -offset 0
+imodeladdmmregister -addressblock PRINTREGS/ab8 -name printValue_int -readfunction readValue_int -writefunction writeValue_int -offset 4
