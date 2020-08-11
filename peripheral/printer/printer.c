@@ -63,7 +63,7 @@ PPM_REG_WRITE_CB(writeValue_char) {
             FILE *filepointer;
             filepointer = fopen(logFileName,"a");
             fprintf(filepointer,buffer);
-            bhmMessage("INFO", "Printing...", buffer);
+            //bhmMessage("INFO", "Printing...", buffer);
             fclose(filepointer);
             pointer = 0;
         }
@@ -72,7 +72,7 @@ PPM_REG_WRITE_CB(writeValue_char) {
             filepointer = fopen(logFileName,"a");
             buffer[BUFFER_SIZE-1] = '\0';
             fprintf(filepointer,buffer);
-            bhmMessage("INFO", "Printing...", buffer);
+            //bhmMessage("INFO", "Printing...", buffer);
             fclose(filepointer);
             pointer = 0;
         }
@@ -84,7 +84,7 @@ PPM_REG_WRITE_CB(writeValue_int) {
     FILE *filepointer;
     filepointer = fopen(logFileName,"a");
     fprintf(filepointer,"%d ",newValue);
-    bhmMessage("INFO", "Printing...", "%d",newValue);
+    //bhmMessage("INFO", "Printing...", "%d",newValue);
     fclose(filepointer);
 }
 
