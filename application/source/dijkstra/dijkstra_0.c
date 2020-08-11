@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
 	print("STARTIRRNG 0\n");
-	print(" \n");
+	print(" 123\n");
 	print("asjkfhlsjkdh");
 	print(" ");
 	print("aaa");

@@ -667,7 +667,7 @@ void print(char* text){
     if(text[i] != 0){   // i = 1
         do{
             *printChar = text[i];
-            i++;
+            i++; // i = 2
             text[i-2] = 0;
         }while(text[i-1] != 0);
     }
