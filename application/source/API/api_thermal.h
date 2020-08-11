@@ -458,7 +458,6 @@ void energyEstimation(){
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
     int aritimetica = inst_class.arith;
-    printi(energyProcDif_dyn);
     prints("Counters: ");
     printi(arith_inst); prints(" ");
     printi(branch_inst); prints(" ");
