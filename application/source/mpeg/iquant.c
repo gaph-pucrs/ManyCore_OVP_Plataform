@@ -69,14 +69,14 @@ int main(int argc, char **argv)
     {
        ReceiveMessage(&theMessage,ivlc_addr);
 
-       for(i=0;i<msg1.length;i++)
-            block[i] = msg1.msg[i];
+       for(i=0;i<theMessage.size;i++)
+            block[i] = theMessage.msg[i];
 
         iquant_func(block, 8, 0, 1);  // 8x8 Blocks, DC precision value = 0, Quantization coefficient (mquant) = 64
 
-        msg1.length = 64;
-        for(i=0; i<msg1.length; i++)
-            msg1.msg[i] = block[i];
+        theMessage.size = 64;
+        for(i=0; i<theMessage.size; i++)
+            theMessage.msg[i] = block[i];
 
         SendMessage(&theMessage,idct_addr);
 

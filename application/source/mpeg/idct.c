@@ -207,8 +207,8 @@ int main(int argc, char **argv)
     {
         ReceiveMessage(&theMessage,iquant_addr);
 
-        for(i=0;i<msg1.length;i++)
-            block[i] = msg1.msg[i];
+        for(i=0;i<theMessage.size;i++)
+            block[i] = theMessage.msg[i];
 
         idct_func(block, 8);  // 8x8 Blocks
 
