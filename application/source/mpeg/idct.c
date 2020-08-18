@@ -212,8 +212,8 @@ int main(int argc, char **argv)
 
         idct_func(block, 8);  // 8x8 Blocks
 
-        theMessage.length = 64;
-        for(i=0; i<theMessage.length; i++)
+        theMessage.size = 64;
+        for(i=0; i<theMessage.size; i++)
             theMessage.msg[i] = block[i];
 
 

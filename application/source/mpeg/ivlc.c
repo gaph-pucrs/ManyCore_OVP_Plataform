@@ -451,7 +451,7 @@ int main(int argc, char **argv)
 
 		ReceiveMessage(&theMessage,start_addr);
 
-		for(i=0; i<theMessage.length; i++)
+		for(i=0; i<theMessage.size; i++)
 			vlc_array[i] = theMessage.msg[i];
 
 		for(i=0; i<64; i++)
@@ -459,8 +459,8 @@ int main(int argc, char **argv)
 
 		ivlc_func(block, 0, 8, vlc_array);	    // codifica RLE-VLC (returns the number of bits in the produced stream)
 
-		theMessage.length = 64;
-		for(i=0; i<theMessage.length; i++)
+		theMessage.size = 64;
+		for(i=0; i<theMessage.size; i++)
 		   theMessage.msg[i] = block[i];
 
         SendMessage(&theMessage,iquant_addr);

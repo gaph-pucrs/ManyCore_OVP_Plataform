@@ -39,7 +39,7 @@ int main(int argc, char **argv)
         theMessage.msg[i] = vlc_array[i];
 
 
-    theMessage.length = 128;
+    theMessage.size = 128;
 
     for(i=0;i<MPEG_FRAMES;i++)                          // send 8 times the array to task 2
     {
