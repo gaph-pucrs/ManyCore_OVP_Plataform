@@ -1,14 +1,12 @@
 apps:
- - name: dijkstra
+ - name: mpeg
    cluster: 0
    static_mapping:
-    dijkstra_0: [2,2]
-    dijkstra_1: [1,2]
-    dijkstra_2: [1,1]
-    dijkstra_3: [1,0]
-    dijkstra_4: [2,0]
-    divider: [2,1]
-    print_dij: [3,0]
+    print: [2,2]
+    idct: [1,2]
+    start: [1,1]
+    ivlc: [1,0]
+    iquant: [2,1]
  - name: thermalManagement
    cluster: 0
    static_mapping:
