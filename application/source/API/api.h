@@ -186,6 +186,7 @@ void printi(int value);
 /* Interruption function for Timer */
 void interruptHandler_timer(void) {
 #if USE_THERMAL
+    unsigned int savedClkGating = *clockGating_flag;
 #endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
@@ -197,6 +198,7 @@ void interruptHandler_timer(void) {
     //////////////////////////////////////////////////////////////
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
 #if USE_THERMAL
+    *clockGating_flag = savedClkGating;
 #endif
     return;
 }

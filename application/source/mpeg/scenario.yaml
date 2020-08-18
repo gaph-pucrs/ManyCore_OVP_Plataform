@@ -1,0 +1,12 @@
+apps:
+ - name: mpeg
+   cluster: 0
+   static_mapping:
+    print: [2,2]
+    idct: [1,2]
+    start: [1,1]
+    ilvlc: [1,0]
+ - name: thermalManagement
+   cluster: 0
+   static_mapping:
+    thermalMaster: [0,0]
