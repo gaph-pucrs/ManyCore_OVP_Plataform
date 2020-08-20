@@ -36,13 +36,13 @@ void printMatrix(){
     for (i = 0; i < ROW_SIZE; i++){
         for (j = 0; j < COL_SIZE; j++){
             if (matrix[i][j] == 1){
-                printf("■ ");
+                prints("■ ");
             }
             else{
-                printf("□ ");
+                prints("□ ");
             }
         }
-        printf("\n");
+        prints("\n");
     }
 }
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int iteration;
 
-    prints("Starting Divider");
+    prints("Starting Printer ");
     printi(clock());
     prints("\n");
 
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 
 
     printi(clock());
-    prints("Finishing Divider.\n");
+    prints("Finishing Printer.\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int iteration;
 
-    prints("Starting Divider");
+    prints("Starting Divider ");
     printi(clock());
     prints("\n");
 
