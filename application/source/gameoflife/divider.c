@@ -28,7 +28,7 @@ void sendMatrixToPrint(){
             theMessage.msg[theMessage.size] = matrix[i][j];
             theMessage.size++;
             if(theMessage.size == MESSAGE_MAX_SIZE || ((i == ROW_SIZE-1) && (j == COL_SIZE-1))){
-                SendMessage(&theMessage, print_addr);
+                SendMessage(&theMessage, printer_addr);
                 theMessage.size = 0;
             }
         }
