@@ -32,9 +32,10 @@ void receiveFullMatrix(){
 }
 
 void printMatrix(){
+    int i, j;
     for (i = 0; i < ROW_SIZE; i++){
         for (j = 0; j < COL_SIZE; j++){
-            if (matrixAux[i][j] == 1){
+            if (matrix[i][j] == 1){
                 printf("■ ");
             }
             else{
