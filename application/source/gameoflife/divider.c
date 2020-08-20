@@ -21,6 +21,7 @@ void initMatrix(){
 }
 
 void sendMatrixToPrint(){
+    int i, j;
     theMessage.size = 0;
     for(i=0;i<ROW_SIZE;i++){
         for(j=0;j<COL_SIZE;j++){
@@ -51,7 +52,7 @@ int main(int argc, char **argv)
     sendMatrixToPrint();
 
     for(iteration=0; iteration<ITERATIONS; iteration++){
-        
+
     }
 
 
