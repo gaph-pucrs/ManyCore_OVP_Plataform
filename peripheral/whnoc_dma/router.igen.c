@@ -127,6 +127,12 @@ int main(int argc, char *argv[]) {
             fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
             fclose(fp);
         }
+
+        FILE *fp;
+        fp = fopen("simulation/flitsLog.csv","a");
+        fprintf(fp,"%d, %d, %d, %d, %d, %d\n",myID,contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+        fclose(fp);
+
         contFlits[LOCAL] = 0;
         contFlits[WEST] = 0;
         contFlits[EAST] = 0;
