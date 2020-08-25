@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
         if(myID >= 0){
             FILE *fp;
             fp = fopen("simulation/flitsLog.txt","a");
-            fprintf(fp,"%d, %d, %d, %d, %d, %d\n",myID,contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
+            fprintf(fp,"%d, %d, %d, %d, %d, %d, %d\n",i, myID,contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
             fclose(fp);
         }
         
