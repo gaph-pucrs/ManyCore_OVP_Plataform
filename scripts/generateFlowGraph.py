@@ -61,6 +61,7 @@ if __name__ == '__main__':
 
     with open('../simulation/flitsLog.txt') as csv_file:
         spamreader = csv.reader(csv_file, delimiter=',')
+        #TODO: pegar automaticamente o numero de quantuns
         numQuantuns = 1695
         quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
         for graph in range(NUM_OF_GRAPHS):
@@ -84,5 +85,18 @@ if __name__ == '__main__':
                 westFlow[i]  = 0
                 northFlow[i] = 0
                 southFlow[i] = 0
+
+            filename = "myGraphs/graph"+str(graph)+".dat"
+            with open(filename,newline='') as csvfile:
+                spamreader2 = csv.DictReader(csvfile, delimiter=" ")
+                sortedlist = sorted(spamreader2, key=lambda row:(row['column_1'],row['column_2']), reverse=False)
+
+            filename = "myGraphs/graph"+str(graph)+"_sort.dat"
+            with open(filename, 'w') as f:
+                fieldnames = ['column_1', 'column_2', column_3, column_4]
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer.writeheader()
+                for row in sortedlist:
+                    writer.writerow(row)
     
     print(maxValue)
