@@ -96,6 +96,7 @@ chmod +x ovp_compiler.sh
 # Generates data for traffic comparison
 cd scripts
 python3 generateFlowGraph.py
+cd ..
 
 cd application
 # for i in $(seq 0 $N);
