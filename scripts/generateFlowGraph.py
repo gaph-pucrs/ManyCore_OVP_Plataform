@@ -1,6 +1,8 @@
 import csv
 import numpy as np
 import os
+import operator
+
 
 DIM_X = 4
 DIM_Y = 4
