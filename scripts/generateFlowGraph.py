@@ -32,7 +32,7 @@ def printToGraph(id, graph, quantunsPerGraph, local, east, west, north, south):
     myX = id-(DIM_X*myY)
     centralX = (myX*3) + 1
     centralY = (myY*3) + 1
-    filename = "/myGraphs/graph"+str(graph)+".dat"
+    filename = "myGraphs/graph"+str(graph)+".dat"
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     with open(filename,"a+") as gfile:
         # canto esquerdo inferior (nada)
