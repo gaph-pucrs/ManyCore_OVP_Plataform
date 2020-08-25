@@ -48,7 +48,7 @@ echo "rm -f *.txt" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
 echo "cd sripts" >> ovp_compiler.sh
 echo "rm -rf *.dat" >> ovp_compiler.sh
-echo "cd ../.." >> ovp_compiler.sh
+echo "cd .." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
 echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
 echo "CROSS=OR1K" >> ovp_compiler.sh
