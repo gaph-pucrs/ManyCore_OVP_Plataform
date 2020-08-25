@@ -5,6 +5,9 @@ cd ..
 cd simulation
 rm -f *.txt
 cd ..
+cd sripts/myScripts
+rm -f *.dat
+cd ../..
 # Check Installation supports this example
 checkinstall.exe -p install.pkg --nobanner || exit
 CROSS=OR1K
