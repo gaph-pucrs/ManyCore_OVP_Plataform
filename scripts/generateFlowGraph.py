@@ -28,8 +28,8 @@ def getMaxValue(local,east,west,north,south,max):
     return max
 
 def printToGraph(id, graph, quantunsPerGraph, local, east, west, north, south):
-    myY = id/DIM_X
-    myX = id-(DIM_X*myY)
+    myY = int(id/DIM_X)
+    myX = int(id-(DIM_X*myY))
     centralX = (myX*3) + 1
     centralY = (myY*3) + 1
     filename = "myGraphs/graph"+str(graph)+".dat"
