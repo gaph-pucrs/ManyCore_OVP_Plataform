@@ -28,4 +28,4 @@ if __name__ == '__main__':
                     northFlow[i] += int(theLine[5])
                     southFlow[i] += int(theLine[6])
             for i in range(N_PES):
-                print(i+" "+((i+1)*quantunsPerGraph)+" "+localFlow[i]+" "+eastFlow[i]+" "+westFlow[i]+" "+northFlow[i]+" "+southFlow[i]+"\n")
+                print(str(i)+" "+srt((i+1)*quantunsPerGraph)+" "+str(localFlow[i])+" "+str(eastFlow[i])+" "+str(westFlow[i])+" "+str(northFlow[i])+" "+str(southFlow[i])+"\n")
