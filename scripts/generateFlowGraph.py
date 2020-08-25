@@ -89,11 +89,11 @@ if __name__ == '__main__':
             filename = "myGraphs/graph"+str(graph)+".dat"
             with open(filename,newline='') as csvfile:
                 spamreader2 = csv.DictReader(csvfile, delimiter=" ")
-                sortedlist = sorted(spamreader2, key=lambda row:(row['column_1'],row['column_2']), reverse=False)
+                sortedlist = sorted(spamreader2, key=lambda row:(row[1],row[0]), reverse=False)
 
             filename = "myGraphs/graph"+str(graph)+"_sort.dat"
             with open(filename, 'w') as f:
-                fieldnames = ['column_1', 'column_2', column_3, column_4]
+                fieldnames = ['column_1', 'column_2', 'column_3', 'column_4']
                 writer = csv.DictWriter(f, fieldnames=fieldnames)
                 writer.writeheader()
                 for row in sortedlist:
