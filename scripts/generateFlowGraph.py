@@ -10,5 +10,7 @@ if __name__ == '__main__':
 
     with open('../simulation/flitsLog.txt') as csv_file:
         spamreader = csv.reader(csv_file, delimiter=',')
-        last_line = spamreader[-1]
-        print(last_line)
+        numQuantuns = 1695
+        quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
+
+    print quantunsPerGraph
