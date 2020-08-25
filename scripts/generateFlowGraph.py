@@ -11,6 +11,20 @@ eastFlow = [0 for i in range(N_PES)]
 westFlow = [0 for i in range(N_PES)]
 northFlow = [0 for i in range(N_PES)]
 southFlow = [0 for i in range(N_PES)]
+maxValue = 0
+
+def getMaxValue(local,east,west,north,south,max):
+    if local > max:
+        max = local
+    if east > max:
+        max = east
+    if west > max:
+        max = west
+    if north > max:
+        max = north
+    if south > max:
+        max = south
+    return max
 
 if __name__ == '__main__':
 
@@ -28,9 +42,12 @@ if __name__ == '__main__':
                     northFlow[i] += int(theLine[5])
                     southFlow[i] += int(theLine[6])
             for i in range(N_PES):
+                maxValue = getMaxValue(localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i], maxValue)
                 print(str(i)+" "+str((graph+1)*quantunsPerGraph)+" "+str(localFlow[i])+" "+str(eastFlow[i])+" "+str(westFlow[i])+" "+str(northFlow[i])+" "+str(southFlow[i]))
                 localFlow[i] = 0
                 eastFlow[i]  = 0
                 westFlow[i]  = 0
                 northFlow[i] = 0
                 southFlow[i] = 0
+    
+    print(maxValue)
