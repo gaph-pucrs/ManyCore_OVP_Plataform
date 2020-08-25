@@ -67,7 +67,6 @@ int main(int argc, char **argv)
         
     }
 
-
     printi(clock());
     prints("Finishing Printer.\n");
     //////////////////////////////////////////////////////

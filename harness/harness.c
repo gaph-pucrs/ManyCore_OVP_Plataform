@@ -22,6 +22,8 @@
 #define INSTRUCTIONS_PER_TIME_SLICE   250.0 //(INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
 #define QUANTUM_TIME_SLICE            (INSTRUCTIONS_PER_TIME_SLICE/INSTRUCTIONS_PER_SECOND)// 0.0000010 // 
 
+#define QUANTUNS_TO_LOG 100
+
 #define BRANCH  1
 #define ARITH   2
 #define JUMP    3
@@ -36,6 +38,12 @@
 
 unsigned int activeFetch[N_PES];
 unsigned int fetch[N_PES];
+unsigned int logCount[N_PES];
+unsigned int eastFlits_past[N_PES];
+unsigned int westFlits_past[N_PES];
+unsigned int northFlits_past[N_PES];
+unsigned int southFlits_past[N_PES];
+unsigned int localFlits_past[N_PES];
 
 // Instructions
 //char instructions [][12] = {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
@@ -236,7 +244,47 @@ static OP_MONITOR_FN(fetchCallBack) {
     }
 }
 
+void logNoCTraffic(optProcessorP proc){
+    int processorID = getProcessorID(proc);
+
+    //logCounter
+    logCount[processorID]++;
+
+    // read EAST flits
+    opProcessorRead(processor, 0x0FFFFFC8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    unsigned int eastFlits = htonl(vec2usi(value)) - eastFlits_past[processorID];
+    eastFlits_past[processorID] = htonl(vec2usi(value));
+
+    // read WEST flits
+    opProcessorRead(processor, 0x0FFFFFC0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    unsigned int westFlits = htonl(vec2usi(value)) - westFlits_past[processorID];
+    westFlits_past[processorID] = htonl(vec2usi(value));
+
+    // read NORTH flits
+    opProcessorRead(processor, 0x0FFFFFB8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    unsigned int northFlits = htonl(vec2usi(value)) - northFlits_past[processorID];
+    northFlits_past[processorID] = htonl(vec2usi(value));
+
+    // read SOUTH flits
+    opProcessorRead(processor, 0x0FFFFFB0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    unsigned int southFlits = htonl(vec2usi(value)) - southFlits_past[processorID];
+    southFlits_past[processorID] = htonl(vec2usi(value));
+
+    // read LOCAL flits
+    opProcessorRead(processor, 0x0FFFFFA8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    unsigned int localFlits = htonl(vec2usi(value)) - localFlits_past[processorID];
+    localFlits_past[processorID] = htonl(vec2usi(value));
+
+    // store in a file
+    FILE *fp;
+    fp = fopen("simulation/flitsLog.csv","a");
+    fprintf(fp,"%d, %d, %d, %d, %d, %d\n",(logCount*QUANTUNS_TO_LOG),eastFlits,westFlits,northFlits,southFlits,localFlits);
+    fclose(fp);
+
+}
+
 int main(int argc, const char *argv[]) {
+    int i;
     /*Required to init the simulation */
     opSessionInit(OP_VERSION);
 
@@ -260,6 +308,16 @@ int main(int argc, const char *argv[]) {
     optTime       myTime     = QUANTUM_TIME_SLICE;
     optStopReason stopReason = OP_SR_SCHED;   
     optProcessorP proc;
+
+    // clear flits information
+    for(i = 0; i<N_PES; i++){
+        logCount[i] = 0;
+        eastFlits_past[i] = 0;
+        westFlits_past[i] = 0;
+        northFlits_past[i] = 0;
+        southFlits_past[i] = 0;
+        localFlits_past[i] = 0;
+    }
 
     // must advance to next phase for the API calls that follow
     opRootModulePreSimulate(mi);
@@ -285,15 +343,18 @@ int main(int argc, const char *argv[]) {
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
             stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+            if(countQuantum % QUANTUNS_TO_LOG == 0){ 
+                logNoCTraffic(proc); 
+            }
             if(stopReason == OP_SR_EXIT){
                 finishedProcessors++;
             }
+            
         }
 
         countQuantum++;
-        if(countQuantum % 100 == 0){
+        if(countQuantum % QUANTUNS_TO_LOG == 0){
             opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum*QUANTUM_TIME_SLICE),(countQuantum*QUANTUM_TIME_SLICE*1000));
-            int i;
             for(i=0;i<N_PES;i++){
                 opMessage("I", "HARNESS INFO", "PE %d - percent: %f\n",i,((float)activeFetch[i]/(float)fetch[i])*100);
                 activeFetch[i] = 0;
