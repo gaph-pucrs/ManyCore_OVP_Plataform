@@ -344,11 +344,12 @@ int main(int argc, const char *argv[]) {
                 firstRun--;
             }
 
-            /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
-            stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
             if(countQuantum % QUANTUNS_TO_LOG == 0){ 
                 logNoCTraffic(proc); 
             }
+
+            /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
+            stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
             if(stopReason == OP_SR_EXIT){
                 finishedProcessors++;
             }
