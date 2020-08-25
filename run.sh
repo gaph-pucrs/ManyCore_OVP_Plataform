@@ -46,7 +46,7 @@ echo "cd .." >> ovp_compiler.sh
 echo "cd simulation" >> ovp_compiler.sh
 echo "rm -f *.txt" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
-echo "cd sripts" >> ovp_compiler.sh
+echo "cd scripts" >> ovp_compiler.sh
 echo "rm -rf *.dat" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
