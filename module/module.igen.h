@@ -2078,7 +2078,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer0",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu0Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu0Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2164,7 +2164,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer1",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu1Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu1Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2250,7 +2250,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer2",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu2Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu2Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2334,7 +2334,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer3",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu3Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu3Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2420,7 +2420,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer4",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu4Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu4Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2508,7 +2508,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer5",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu5Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu5Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2596,7 +2596,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer6",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu6Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu6Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2682,7 +2682,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer7",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu7Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu7Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2768,7 +2768,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer8",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu8Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu8Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2856,7 +2856,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer9",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu9Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu9Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -2944,7 +2944,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer10",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu10Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu10Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -3030,7 +3030,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer11",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu11Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu11Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -3114,7 +3114,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer12",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu12Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu12Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -3200,7 +3200,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer13",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu13Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu13Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -3286,7 +3286,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer14",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu14Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu14Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0
@@ -3370,7 +3370,7 @@ static OP_CONSTRUCT_FN(instantiateComponents) {
         "printer15",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu15Bus_b, "PRINTREG", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000023ULL)
+                OP_BUS_CONNECT(cpu15Bus_b, "PRINTREGS", .slave=1, .addrLo=0x80000020ULL, .addrHi=0x80000027ULL)
             )
         ),
         0

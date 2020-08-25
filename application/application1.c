@@ -5,9 +5,36 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "dijkstra_config.h"
+#include "gameoflife_config.h"
+
+int matrix[ROW_SIZE][COL_SIZE];
 
 message theMessage;
+
+void initMatrix(){
+    int i, j;
+    for (i = 0; i < ROW_SIZE; i++){
+        for (j = 0; j < COL_SIZE; j++){
+            matrix[i][j] = rand() % 2;
+        }
+    }
+}
+
+void sendMatrixToPrint(){
+    int i, j;
+    theMessage.size = 0;
+    for(i=0;i<ROW_SIZE;i++){
+        for(j=0;j<COL_SIZE;j++){
+            theMessage.msg[theMessage.size] = matrix[i][j];
+            theMessage.size++;
+            if(theMessage.size == MESSAGE_MAX_SIZE || ((i == ROW_SIZE-1) && (j == COL_SIZE-1))){
+                SendMessage(&theMessage, printer_addr);
+                theMessage.size = 0;
+            }
+        }
+    }
+}
+
 
 int main(int argc, char **argv)
 {
@@ -15,68 +42,21 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    int i, j, v;
-	int source = 0;
-	int q[NUM_NODES];
-	int dist[NUM_NODES];
-	int prev[NUM_NODES];
-	int shortest, u;
-	int alt;
-	int calc = 0;
+    int iteration;
 
-	int AdjMatrix[NUM_NODES][NUM_NODES];
+    prints("Starting Divider ");
+    printi(clock());
+    prints("\n");
 
-	prints("STARTING 3\n");
+    initMatrix();
+    sendMatrixToPrint();
 
-    while(1){
-		theMessage.size = NUM_NODES;
-		for (i=0; i<NUM_NODES; i++) {
-			ReceiveMessage(&theMessage, divider_addr);
-			for (j=0; j<NUM_NODES; j++)
-				AdjMatrix[i][j] = theMessage.msg[j];
-		}
-		calc = AdjMatrix[0][0];
-		if (calc == KILL) break;
+    for(iteration=0; iteration<ITERATIONS; iteration++){
 
-		for (i=0;i<NUM_NODES;i++){
-			dist[i] = INFINITY;
-			prev[i] = INFINITY;
-			q[i] = i;
-		}
-		dist[source] = 0;
-		u = 0;
+    }
 
-		for (i=0;i<NUM_NODES;i++) {
-			shortest = INFINITY;
-			for (j=0;j<NUM_NODES;j++){
-				if (dist[j] < shortest && q[j] != INFINITY){		
-					shortest = dist[j];
-					u = j;
-				}
-			}
-			q[u] = INFINITY;
-
-			for (v=0; v<NUM_NODES; v++){
-				if (q[v] != INFINITY && AdjMatrix[u][v] != INFINITY){
-					alt = dist[u] + AdjMatrix[u][v];
-					if (alt < dist[v]){
-						dist[v] = alt;
-						prev[v] = u;
-					}
-				}
-			}
-		}
-	}
-
-    theMessage.size = NUM_NODES*2;
-	for (i=0;i<NUM_NODES;i++)
-		theMessage.msg[i] = dist[i];
-
-	for (i=0;i<NUM_NODES;i++)
-		theMessage.msg[i+NUM_NODES] = prev[i];
-
-    SendMessage(&theMessage, print_dij_addr);
-    prints("Dijkstra_3 finished.\n");
+    printi(clock());
+    prints("Finishing Divider.\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
