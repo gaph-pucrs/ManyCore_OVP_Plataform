@@ -22,10 +22,10 @@ if __name__ == '__main__':
             for _ in range(int(quantunsPerGraph)):
                 for i in range(N_PES):
                     theLine = next(spamreader)
-                    localFlow[i] += theLine[2]
-                    eastFlow[i]  += theLine[3]
-                    westFlow[i]  += theLine[4]
-                    northFlow[i] += theLine[5]
-                    southFlow[i] += theLine[6]
+                    localFlow[i] += int(theLine[2])
+                    eastFlow[i]  += int(theLine[3])
+                    westFlow[i]  += int(theLine[4])
+                    northFlow[i] += int(theLine[5])
+                    southFlow[i] += int(theLine[6])
             for i in range(N_PES):
                 print(i+" "+((i+1)*quantunsPerGraph)+" "+localFlow[i]+" "+eastFlow[i]+" "+westFlow[i]+" "+northFlow[i]+" "+southFlow[i]+"\n")
