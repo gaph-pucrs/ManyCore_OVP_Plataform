@@ -196,6 +196,8 @@ int getProcessorID(optProcessorP processor){
         processorID = ((int)processorName[3] - 48)*10 + ((int)processorName[4] - 48);
     }
     else processorID = ((int)processorName[3] - 48);
+    opMessage("I", "FETCH CALLBACK", "~~~~> %d\n",processorID);
+    
     /*ERROR CATCHER!*/
     if(processorID < 0 || processorID > N_PES){
         opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d",processorID);
