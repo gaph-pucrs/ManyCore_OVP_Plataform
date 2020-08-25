@@ -38,12 +38,12 @@
 
 unsigned int activeFetch[N_PES];
 unsigned int fetch[N_PES];
-unsigned int logCount[N_PES];
+/*unsigned int logCount[N_PES];
 unsigned int eastFlits_past[N_PES];
 unsigned int westFlits_past[N_PES];
 unsigned int northFlits_past[N_PES];
 unsigned int southFlits_past[N_PES];
-unsigned int localFlits_past[N_PES];
+unsigned int localFlits_past[N_PES];*/
 
 // Instructions
 //char instructions [][12] = {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
@@ -196,7 +196,7 @@ int getProcessorID(optProcessorP processor){
         processorID = ((int)processorName[3] - 48)*10 + ((int)processorName[4] - 48);
     }
     else processorID = ((int)processorName[3] - 48);
-    opMessage("I", "FETCH CALLBACK", "~~~~> %d\n",processorID);
+    //opMessage("I", "FETCH CALLBACK", "~~~~> %d\n",processorID);
     
     /*ERROR CATCHER!*/
     if(processorID < 0 || processorID > N_PES){
@@ -246,7 +246,7 @@ static OP_MONITOR_FN(fetchCallBack) {
     }
 }
 
-void logNoCTraffic(optProcessorP proc){
+/*void logNoCTraffic(optProcessorP proc){
     int processorID = getProcessorID(proc);
 
     //logCounter
@@ -286,7 +286,7 @@ void logNoCTraffic(optProcessorP proc){
     fprintf(fp,"%d, %d, %d, %d, %d, %d\n",(logCount[processorID]*QUANTUNS_TO_LOG),eastFlits,westFlits,northFlits,southFlits,localFlits);
     fclose(fp);
 
-}
+}*/
 
 int main(int argc, const char *argv[]) {
     int i;
@@ -315,14 +315,14 @@ int main(int argc, const char *argv[]) {
     optProcessorP proc;
 
     // clear flits information
-    for(i = 0; i<N_PES; i++){
+    /*for(i = 0; i<N_PES; i++){
         logCount[i] = 0;
         eastFlits_past[i] = 0;
         westFlits_past[i] = 0;
         northFlits_past[i] = 0;
         southFlits_past[i] = 0;
         localFlits_past[i] = 0;
-    }
+    }*/
 
     // must advance to next phase for the API calls that follow
     opRootModulePreSimulate(mi);
@@ -346,9 +346,9 @@ int main(int argc, const char *argv[]) {
                 firstRun--;
             }
 
-            if(countQuantum % QUANTUNS_TO_LOG == 0){ 
+            /*if(countQuantum % QUANTUNS_TO_LOG == 0){ 
                 logNoCTraffic(proc); 
-            }
+            }*/
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
             stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
