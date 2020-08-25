@@ -250,6 +250,9 @@ void logNoCTraffic(optProcessorP proc){
     //logCounter
     logCount[processorID]++;
 
+    // aux var
+    char value[4];
+
     // read EAST flits
     opProcessorRead(proc, 0x0FFFFFC8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int eastFlits = htonl(vec2usi(value)) - eastFlits_past[processorID];
