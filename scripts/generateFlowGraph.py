@@ -13,4 +13,4 @@ if __name__ == '__main__':
         numQuantuns = 1695
         quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
 
-    print quantunsPerGraph
+    print(quantunsPerGraph)
