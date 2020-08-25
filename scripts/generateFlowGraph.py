@@ -35,7 +35,10 @@ if __name__ == '__main__':
         for graph in range(NUM_OF_GRAPHS):
             for _ in range(int(quantunsPerGraph)):
                 for i in range(N_PES):
-                    theLine = next(spamreader)
+                    try:
+                        theLine = next(spamreader)
+                    except:
+                        break;
                     localFlow[i] += int(theLine[2])
                     eastFlow[i]  += int(theLine[3])
                     westFlow[i]  += int(theLine[4])
