@@ -5,7 +5,7 @@ cd ..
 cd simulation
 rm -f *.txt
 cd ..
-cd sripts/myScripts
+cd scripts/myGraphs
 rm -f *.dat
 cd ../..
 # Check Installation supports this example
