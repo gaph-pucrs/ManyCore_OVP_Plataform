@@ -281,7 +281,7 @@ void logNoCTraffic(optProcessorP proc){
     // store in a file
     FILE *fp;
     fp = fopen("simulation/flitsLog.csv","a");
-    fprintf(fp,"%d, %d, %d, %d, %d, %d\n",(logCount*QUANTUNS_TO_LOG),eastFlits,westFlits,northFlits,southFlits,localFlits);
+    fprintf(fp,"%d, %d, %d, %d, %d, %d\n",(logCount[processorID]*QUANTUNS_TO_LOG),eastFlits,westFlits,northFlits,southFlits,localFlits);
     fclose(fp);
 
 }
