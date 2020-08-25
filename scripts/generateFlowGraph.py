@@ -31,7 +31,7 @@ def printToGraph(id, graph, quantunsPerGraph, local, east, west, north, south):
     myX = id-(DIM_X*myY)
     centralX = (myX*3) + 1
     centralY = (myY*3) + 1
-    with open('/myGraphs/graph'+str(graph)+'.dat',"a") as gfile:
+    with open('/myGraphs/graph'+str(graph)+'.dat',"a+") as gfile:
         # canto esquerdo inferior (nada)
         print(str((centralX-1))+" "+str((centralY-1))+" "+str((graph+1)*quantunsPerGraph)+" "+str(0), file=gfile)
         # meio inferior (south)
