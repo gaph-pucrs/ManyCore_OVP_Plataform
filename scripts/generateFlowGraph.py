@@ -91,7 +91,7 @@ if __name__ == '__main__':
             filename = "myGraphs/graph"+str(graph)+".dat"
             with open(filename,newline='') as csvfile:
                 spamreader2 = csv.DictReader(csvfile, delimiter=" ")
-                sortedlist = sorted(spamreader2, key=lambda row: row[3], reverse=True)
+                sortedlist = sorted(spamreader2, key=lambda row:row[2], reverse=True)
 
             filename = "myGraphs/graph"+str(graph)+"_sort.dat"
             with open(filename, 'w') as f:
