@@ -251,27 +251,27 @@ void logNoCTraffic(optProcessorP proc){
     logCount[processorID]++;
 
     // read EAST flits
-    opProcessorRead(processor, 0x0FFFFFC8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    opProcessorRead(proc, 0x0FFFFFC8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int eastFlits = htonl(vec2usi(value)) - eastFlits_past[processorID];
     eastFlits_past[processorID] = htonl(vec2usi(value));
 
     // read WEST flits
-    opProcessorRead(processor, 0x0FFFFFC0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    opProcessorRead(proc, 0x0FFFFFC0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int westFlits = htonl(vec2usi(value)) - westFlits_past[processorID];
     westFlits_past[processorID] = htonl(vec2usi(value));
 
     // read NORTH flits
-    opProcessorRead(processor, 0x0FFFFFB8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    opProcessorRead(proc, 0x0FFFFFB8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int northFlits = htonl(vec2usi(value)) - northFlits_past[processorID];
     northFlits_past[processorID] = htonl(vec2usi(value));
 
     // read SOUTH flits
-    opProcessorRead(processor, 0x0FFFFFB0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    opProcessorRead(proc, 0x0FFFFFB0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int southFlits = htonl(vec2usi(value)) - southFlits_past[processorID];
     southFlits_past[processorID] = htonl(vec2usi(value));
 
     // read LOCAL flits
-    opProcessorRead(processor, 0x0FFFFFA8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    opProcessorRead(proc, 0x0FFFFFA8, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
     unsigned int localFlits = htonl(vec2usi(value)) - localFlits_past[processorID];
     localFlits_past[processorID] = htonl(vec2usi(value));
 
