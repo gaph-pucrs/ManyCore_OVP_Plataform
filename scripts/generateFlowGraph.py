@@ -19,7 +19,7 @@ if __name__ == '__main__':
         numQuantuns = 1695
         quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
         for graph in range(NUM_OF_GRAPHS):
-            for _ in range(quantunsPerGraph):
+            for _ in range(int(quantunsPerGraph)):
                 for i in range(N_PES):
                     theLine = next(spamreader)
                     localFlow[i] += theLine[2]
