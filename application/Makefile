@@ -12,7 +12,7 @@ ifeq ($($(CROSS)_CC),)
 endif
 
 #OPTIMISATION=-O0
-OPTIMISATION=-O2
+OPTIMISATION?=-O2
 
 SRC = $(sort $(wildcard *.c))
 EXE = $(patsubst %.c,%.$(CROSS).elf,$(SRC))
@@ -21,11 +21,11 @@ all: $(EXE)
 
 %.$(CROSS).elf: %.o
 	$(V)  echo "# Linking $@"
-	$(V)  $(IMPERAS_LINK) -Wall -o $@ $< $(IMPERAS_LDFLAGS) -lm
+	$(V)  $(IMPERAS_LINK) -Wall -o2 $@ $< $(IMPERAS_LDFLAGS) -lm
 
 %.o: %.c
 	$(V)  echo "# Compiling $<"
-	$(V)  $(IMPERAS_CC) -g  -c -Wall -o $@ $< $(OPTIMISATION)
+	$(V)  $(IMPERAS_CC) -g  -c -Wall -o2 $@ $< $(OPTIMISATION)
 
 clean:
 	-rm -f *.elf *.o 
