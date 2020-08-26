@@ -12,7 +12,7 @@ ifeq ($($(CROSS)_CC),)
 endif
 
 #OPTIMISATION=-O0
-OPTIMISATION?=-O2
+OPTIMISATION=-O2
 
 SRC = $(sort $(wildcard *.c))
 EXE = $(patsubst %.c,%.$(CROSS).elf,$(SRC))
