@@ -1,9 +1,14 @@
 apps:
- - name: gameoflife
+ - name: dijkstra
    cluster: 0
    static_mapping:
-    divider: [1,0]
-    printer: [2,1]
+    dijkstra_0: [2,2]
+    dijkstra_1: [1,2]
+    dijkstra_2: [1,1]
+    dijkstra_3: [1,0]
+    dijkstra_4: [2,0]
+    divider: [2,1]
+    print_dij: [3,0]
  - name: thermalManagement
    cluster: 0
    static_mapping:
