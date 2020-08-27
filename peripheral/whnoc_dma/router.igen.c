@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
     int i=0;
     
     while(1){
-        bhmWaitDelay(QUANTUM_DELAY);
+        bhmWaitDelay(100*QUANTUM_DELAY);
         if(myID==0){
             fp = fopen ("simulation/flitFlow.csv","a");
             fprintf(fp,"Quantum %d\n",i);
