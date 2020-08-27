@@ -129,7 +129,7 @@ if __name__ == '__main__':
                 westFlow[i]  = 0
                 northFlow[i] = 0
                 southFlow[i] = 0
-            
+            print(graph)
             printGraphFile(graph, quantunsPerGraph, graphMatrix)
     
     print(maxValue)
