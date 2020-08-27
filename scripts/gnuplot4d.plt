@@ -5,7 +5,7 @@
 #
 
 #set terminal pdf #size 19200, 10800
-set terminal postscript eps size 6.5,2 enhanced font 'Verdana,10'
+set terminal postscript eps size 3.5,2 enhanced font 'Verdana,10'
 set output "heatmaps.eps"
 
 
@@ -17,7 +17,7 @@ set ticslevel 0
 set format cb "%2.0f"
 set colorbox user size .01, .45 origin 0.97, 0.45
 set palette defined (0 'green', 1 'yellow', 2 'red')
-set cbrange [ 0 : 1010 ] noreverse nowriteback
+set cbrange [ 0 : 22935 ] noreverse nowriteback
 
 set tics font "Helvetica,8"
 set xlabel "" offset 1, 0, 0 
@@ -25,11 +25,11 @@ set ylabel "" offset 1, 0, 0
 
 
 set view 75, 40, 1, 1.2
-set multiplot layout 1,5
+set multiplot layout 1,2
 
 set zlabel "time" ."\n(ms)" offset 2, 1, 0 font "Helvetica,8"
 set label 1 at 4.0, -2.0 font "Helvetica,10"
-set label 1 "Traffic"
+set label 1 "OVP"
 splot 'myGraphs/graph0.dat' using 1:2:3:4 with image title "", \
 	  'myGraphs/graph1.dat' using 1:2:3:4 with image title "", \
 	  'myGraphs/graph2.dat' using 1:2:3:4 with image title "", \
@@ -38,33 +38,7 @@ splot 'myGraphs/graph0.dat' using 1:2:3:4 with image title "", \
 
 
 set label 1 at 4.0, -2.0 font "Helvetica,10"
-set label 1 "(b) Patterning"
-splot 'myGraphs/graph0.dat' using 2:1:3:4 with image title "", \
-	  'myGraphs/graph1.dat' using 2:1:3:4 with image title "", \
-	  'myGraphs/graph2.dat' using 2:1:3:4 with image title "", \
-	  'myGraphs/graph3.dat' using 2:1:3:4 with image title "", \
-	  'myGraphs/graph4.dat' using 2:1:3:4 with image title ""
-
-set label 1 at 4.0, -2.0 font "Helvetica,10"
-set label 1 "(c) TPESM"
-splot 'myGraphs/graph0.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph1.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph2.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph3.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph4.dat' using 1:2:3:4 with image title ""
-
-set label 1 at 4.0, -2.0 font "Helvetica,10"
-set label 1 "(d) PIDTM"
-splot 'myGraphs/graph0.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph1.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph2.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph3.dat' using 1:2:3:4 with image title "", \
-	  'myGraphs/graph4.dat' using 1:2:3:4 with image title ""
-
-
-#set origin 0.5, 0.0
-set label 1 at 4.0, -2.0 font "Helvetica,10"
-set label 1 "(c) TMEC"
+set label 1 "RTL"
 splot 'myGraphs/graph0.dat' using 1:2:3:4 with image title "", \
 	  'myGraphs/graph1.dat' using 1:2:3:4 with image title "", \
 	  'myGraphs/graph2.dat' using 1:2:3:4 with image title "", \

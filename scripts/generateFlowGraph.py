@@ -2,7 +2,9 @@ import csv
 import numpy as np
 import os
 import operator
-
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
 
 DIM_X = 4
 DIM_Y = 4
@@ -129,7 +131,19 @@ if __name__ == '__main__':
                 westFlow[i]  = 0
                 northFlow[i] = 0
                 southFlow[i] = 0
-            print(graph)
             printGraphFile(graph, quantunsPerGraph, graphMatrix)
-    
+            x = np.arange(0,3*DIM_X,1) 
+            y = np.arange(0,3*DIM_Y,1)
+            X, Y = np.meshgrid(x, y)
+            V = np.sin(Y)
+
+            # create the figure, add a 3d axis, set the viewing angle
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.view_init(45,60)
+
+            # here we create the surface plot, but pass V through a colormap
+            # to create a different color for each patch
+            ax.plot_surface(X, Y, graphMatrix, facecolors=cm.Oranges(V))
+
     print(maxValue)
