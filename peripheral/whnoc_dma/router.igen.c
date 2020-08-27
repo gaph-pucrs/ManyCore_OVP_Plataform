@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
     int i=0;
     
     while(1){
-        bhmMessage("I", "ROUTER", "%d QUANTUM DELAY", QUANTUM_DELAY);
+        bhmMessage("I", "ROUTER", "%f QUANTUM DELAY", QUANTUM_DELAY);
         bhmWaitDelay(QUANTUM_DELAY);
         if(myID==0){
             fp = fopen ("simulation/flitFlow.csv","a");
