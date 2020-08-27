@@ -120,7 +120,7 @@ if __name__ == '__main__':
             # Depois que leu tudo, printa o gráfico no formato especifico
             for i in range(N_PES):
                 maxValue = getMaxValue(localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i], maxValue)
-                graphMatrix = toGraph(graphMatrix, i, quantunsPerGraph, localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i])
+                graphMatrix = toGraph(graphMatrix, i, localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i])
                 #printToGraph(i, graph, quantunsPerGraph, localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i])
                 #print(str(i)+" "+str((graph+1)*quantunsPerGraph)+" "+str(localFlow[i])+" "+str(eastFlow[i])+" "+str(westFlow[i])+" "+str(northFlow[i])+" "+str(southFlow[i]))
                 localFlow[i] = 0
