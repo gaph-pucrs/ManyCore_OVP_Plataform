@@ -57,16 +57,54 @@ def printToGraph(id, graph, quantunsPerGraph, local, east, west, north, south):
         print(str((centralX))+" "+str((centralY+1))+" "+str((graph+1)*quantunsPerGraph)+" "+str(north), file=gfile)
         # canto direito superior (nada)
         print(str((centralX+1))+" "+str((centralY+1))+" "+str((graph+1)*quantunsPerGraph)+" "+str(999999), file=gfile)
-        
+
+def printGraphFile(graph, quantunsPerGraph, graphMatrix):
+    with open(filename, "a+") as gfile:
+        for i in range(int(3*DIM_X)):
+            for j in range(int(3*DIM_Y)):
+                print(str(i)+" "+str(j)+" "+str((graph+1)*quantunsPerGraph)+" "+str(graphMatrix[i][j]), file=gfile)
+
+def toGraph(graphMatrix, id, local, east, west, north, south):
+    myY = int(id/DIM_X)
+    myX = int(id-(DIM_X*myY))
+    centralX = (myX*3) + 1
+    centralY = (myY*3) + 1
+
+    # canto esquerdo inferior (nada)
+    graphMatrix[centralX-1][centralY-1] = -1
+    # meio inferior (south)
+    graphMatrix[centralX][centralY-1] = south
+    # canto direito inferior (nada)
+    graphMatrix[centralX+1][centralY-1] = -1
+
+    # borda esquerda (west)
+    graphMatrix[centralX-1][centralY] = west
+    # central (south)
+    graphMatrix[centralX][centralY] = -2
+    # borda direita (east)
+    graphMatrix[centralX+1][centralY] = east
+
+    # canto esquerdo superior (nada)
+    graphMatrix[centralX-1][centralY+1] = -1
+    # meio superior (north)
+    graphMatrix[centralX][centralY+1] = north
+    # canto direito superior (nada)
+    graphMatrix[centralX+1][centralY+1] = -1
+
+    return graphMatrix
 
 if __name__ == '__main__':
 
     with open('../simulation/flitsLog.txt') as csv_file:
         spamreader = csv.reader(csv_file, delimiter=',')
         #TODO: pegar automaticamente o numero de quantuns
-        numQuantuns = 1695
+        numQuantuns = 976
         quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
+        # Criar um grafico pra cada camada
         for graph in range(NUM_OF_GRAPHS):
+            graphMatrix = np.zeros((int(3*DIM_X),int(3*DIM_Y)))
+
+            # Pega as linhas necessárias pra cada gráfico
             for _ in range(int(quantunsPerGraph)):
                 for i in range(N_PES):
                     try:
@@ -78,27 +116,19 @@ if __name__ == '__main__':
                     westFlow[i]  += int(theLine[4])
                     northFlow[i] += int(theLine[5])
                     southFlow[i] += int(theLine[6])
+            
+            # Depois que leu tudo, printa o gráfico no formato especifico
             for i in range(N_PES):
                 maxValue = getMaxValue(localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i], maxValue)
-                printToGraph(i, graph, quantunsPerGraph, localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i])
+                graphMatrix = toGraph(graphMatrix, i, quantunsPerGraph, localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i])
+                #printToGraph(i, graph, quantunsPerGraph, localFlow[i], eastFlow[i], westFlow[i], northFlow[i], southFlow[i])
                 #print(str(i)+" "+str((graph+1)*quantunsPerGraph)+" "+str(localFlow[i])+" "+str(eastFlow[i])+" "+str(westFlow[i])+" "+str(northFlow[i])+" "+str(southFlow[i]))
                 localFlow[i] = 0
                 eastFlow[i]  = 0
                 westFlow[i]  = 0
                 northFlow[i] = 0
                 southFlow[i] = 0
-
-            filename = "myGraphs/graph"+str(graph)+".dat"
-            with open(filename,newline='') as csvfile:
-                spamreader2 = csv.DictReader(csvfile, delimiter=" ")
-                sortedlist = sorted(spamreader2, key=lambda row:row[2], reverse=True)
-
-            filename = "myGraphs/graph"+str(graph)+"_sort.dat"
-            with open(filename, 'w') as f:
-                fieldnames = ['column_1', 'column_2', 'column_3', 'column_4']
-                writer = csv.DictWriter(f, fieldnames=fieldnames)
-                writer.writeheader()
-                for row in sortedlist:
-                    writer.writerow(row)
+            
+            printGraphFile(graph, quantunsPerGraph, graphMatrix)
     
     print(maxValue)
