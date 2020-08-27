@@ -11,7 +11,7 @@ set output "heatmaps.eps"
 
 set xrange [ -0.5 : 11.5 ] noreverse nowriteback
 set yrange [ -0.5 : 11.5 ] noreverse nowriteback
-set zrange [ 300 : 1800 ] noreverse nowriteback
+set zrange [ 200 : 1000 ] noreverse nowriteback
 
 set ticslevel 0
 set format cb "%2.0f"
