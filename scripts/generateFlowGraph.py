@@ -60,7 +60,7 @@ def printToGraph(id, graph, quantunsPerGraph, local, east, west, north, south):
 
 def printGraphFile(graph, quantunsPerGraph, graphMatrix):
     filename = "myGraphs/graph"+str(graph)+".dat"
-    with open(filename, "a+") as gfile:
+    with open(filename, "w+") as gfile:
         for i in range(int(3*DIM_X)):
             for j in range(int(3*DIM_Y)):
                 print(str(i)+" "+str(j)+" "+str((graph+1)*quantunsPerGraph)+" "+str(graphMatrix[i][j]), file=gfile)
