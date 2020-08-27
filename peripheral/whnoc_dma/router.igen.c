@@ -113,10 +113,15 @@ int main(int argc, char *argv[]) {
     /*Contadores de flits por QUANTUM*/
     FILE *fp;
     int i=0;
+    int free = 0;
     
     while(1){
-        bhmMessage("I", "ROUTER", "%f QUANTUM DELAY", QUANTUM_DELAY);
-        bhmWaitDelay(QUANTUM_DELAY);
+        while(free!=100){
+            free++;
+            bhmWaitDelay(QUANTUM_DELAY);
+        }
+        free = 0;
+        
         if(myID==0){
             fp = fopen ("simulation/flitFlow.csv","a");
             fprintf(fp,"Quantum %d\n",i);
