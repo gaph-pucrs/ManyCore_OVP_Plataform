@@ -668,7 +668,7 @@ void FinishApplication(){
 }
 
 ///////////////////////////////////////////////////////////////////
-/* REMEMBER TO USE THE \n AT THE END OF THE STRING */
+//
 void prints(char* text){
     int i = 0;
     do{
@@ -678,12 +678,15 @@ void prints(char* text){
     return;
 }
 
-
+///////////////////////////////////////////////////////////////////
+//
 void printi(int value){
     *printInt = value;
     return;
 }
 
+///////////////////////////////////////////////////////////////////
+//
 unsigned int random(){
     unsigned int lfsr = 0xACE1ACE1A;
     unsigned bit;
