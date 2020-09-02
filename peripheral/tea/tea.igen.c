@@ -29,36 +29,81 @@
 
 #include "tea.igen.h"
 #include "../whnoc_dma/noc.h"
+
+#define INT_CONVE 1048576   //1048576
+#define INT_CONVB 8192      //8192
+#define INT_CONVC 128       //128    //CONVE\CONVB
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 //////////////////////////////// Callback stubs ////////////////////////////////
 
 #define CLUSTER_SIZE        (DIM_X*DIM_Y)  
 #define SYSTEM_SIZE         (DIM_X*DIM_Y)  
-#define MONITOR_WINDOW      1000                // measured in us
+#define MONITOR_WINDOW      250000
+#define WINDOW_TIME         0.25                //ns - required to calculate power related to energy
+#define SCALING_FACTOR      20                  //simulating McPat results with 2 GHz frequency
 #define MASTER_ADDR         0x0000              // x=0 y=0 
 #define HEADER_SIZE         2                   // sendTime, service
 #define THERMAL_NODES       (SYSTEM_SIZE*4)+12  // 4 thermal nodes for each PE plus 12 from the environment
-#define TAMB                
+#define TAMB                31815
 #define TAM_FLIT            32
 #define CLUSTER_X		    DIM_X
 #define CLUSTER_Y		    DIM_Y
 #define SYSTEM_X		    DIM_X
 #define SYSTEM_Y		    DIM_Y
 
-unsigned int t_steady[THERMAL_NODES];
-unsigned int temp_trace_end[THERMAL_NODES];
-
-unsigned int matrix_b[DIM_X*DIM_Y][THERMAL_NODES];
-unsigned int matrix_c[THERMAL_NODES][THERMAL_NODES];
+double Binv[THERMAL_NODES][SYSTEM_SIZE];
+double Cexp[THERMAL_NODES][THERMAL_NODES];
 
 unsigned long int mac_accumulator;
 
 unsigned int power[DIM_Y][DIM_X];
+double power_trace[SYSTEM_SIZE];
+double t_steady[THERMAL_NODES];
+double TempTraceEnd[THERMAL_NODES];
+
 
 unsigned int flit_in_counter = 0;
 unsigned int msg_size = 0;
 unsigned int source_pe = 0;
 unsigned int x_data_counter = 0;
 unsigned int y_data_counter = 0;
+
+void load_matrices(double Binv[THERMAL_NODES][SYSTEM_SIZE], double Cexp[THERMAL_NODES][THERMAL_NODES]){
+    FILE *binvpointer;
+    binvpointer = fopen("peripheral/tea/binv.txt","r");
+    FILE *cexppointer;
+    cexppointer = fopen("peripheral/tea/cexp.txt","r");
+
+    char line[4000];
+    char *number;
+    int column, row;
+
+    for (row = 0; row < THERMAL_NODES; row++){
+        fgets(line, sizeof(line), binvpointer);
+        number = strtok(line, " ");
+        for(column = 0; column < SYSTEM_SIZE; column++){
+            Binv[row][column] = strtod(number, NULL);
+            //printf("%f ", Binv[row][column]); 
+            number = strtok(NULL, " ");      
+        }
+    }
+
+    for (row = 0; row < THERMAL_NODES; row++){
+        fgets(line, sizeof(line), cexppointer);
+        number = strtok(line, " ");
+        for(column = 0; column < THERMAL_NODES; column++){
+            Cexp[row][column] = strtod(number, NULL);
+            //printf("%f ", Cexp[row][column]); 
+            number = strtok(NULL, " ");      
+        }
+    }
+
+    fclose(binvpointer);
+    fclose(cexppointer);
+}
 
 #define __bswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
@@ -89,6 +134,66 @@ unsigned int mac_unit(unsigned int clear, unsigned int calc, unsigned int data_i
         mac_accumulator = mac_accumulator + (unsigned long int)data_in_a * (unsigned long int)data_in_b;
     } 
     return (unsigned int)mac_accumulator;
+}
+
+void computeSteadyStateTemp(double Tsteady[THERMAL_NODES], double power_trace[SYSTEM_SIZE]){
+    int i, j;
+    double heatContributionPower;
+
+    for(i = 0; i < THERMAL_NODES; i++){
+
+        heatContributionPower = 0;
+        for(j = 0; j < SYSTEM_SIZE; j++){
+            heatContributionPower += Binv[i][j]*power_trace[j];
+        }
+        Tsteady[i] = heatContributionPower + (double)TAMB/100; //+
+        //cout << "Tsteady[i] = heatContributionPower + (double)TAMB/100 -> " << Tsteady[i] << " = " << heatContributionPower << " + " << (double)TAMB/100 << endl;
+    }
+}
+
+void temp_matex(double TempTraceEnd[THERMAL_NODES], double power_trace[SYSTEM_SIZE]) {
+    int i, j, k;
+    double sumExponentials;
+
+    double Tsteady[THERMAL_NODES];
+    double Tdifference[THERMAL_NODES];
+
+    FILE *filepointer;
+    filepointer = fopen("simulation/matex.txt","a");
+
+    computeSteadyStateTemp(Tsteady, power_trace);
+
+    for(k = 0; k < THERMAL_NODES; k++)
+        Tdifference[k] = TempTraceEnd[k] - Tsteady[k];
+
+    fprintf(filepointer,"Power: "); 
+    for(i = 0; i < SYSTEM_SIZE; i++)
+        fprintf(filepointer,"%f ", power_trace[i]);
+    fprintf(filepointer,"\n");
+
+    fprintf(filepointer,"Tsteady: "); 
+    for(i = 0; i < SYSTEM_SIZE; i++)
+        fprintf(filepointer,"%f ", Tsteady[i]);
+    fprintf(filepointer,"\n");
+
+    for(k = 0; k < THERMAL_NODES; k++){
+        sumExponentials = 0;
+        //if (k <= 36) cout << k << ": " << Tdifference[k] << endl;
+        for(j = 0; j < THERMAL_NODES; j++){
+            sumExponentials += Cexp[k][j] * Tdifference[j];
+        }
+        TempTraceEnd[k] = Tsteady[k] + sumExponentials;
+    }
+
+
+    fprintf(filepointer,"Temperatures: "); 
+    for(i = 0; i < SYSTEM_SIZE; i++)
+        fprintf(filepointer,"%f ", TempTraceEnd[i]);
+    fprintf(filepointer,"\n");
+    
+    //bhmMessage("I", "Input", "temp[%d]: %f\n",i, TempTraceEnd[i]);
+
+    fclose(filepointer);
 }
 
 /////////////////////////////// Port Declarations //////////////////////////////
@@ -147,75 +252,26 @@ PPM_PACKETNET_CB(dataUpdate) {
         }
     }
     else if(flit_in_counter == msg_size+2){ // Acabar a mensagem
-        unsigned int mat_b_line = 0;
-        unsigned int mat_b_column = 0;
-        unsigned int mat_c_line = 0;
-        unsigned int mat_c_column = 0;
-        unsigned int x_power_counter = 0;
-        unsigned int y_power_counter = 0;
-        unsigned int aux, clear;
         
         ////////////////////////////////////////////////////////////////////////
         /*CALCULAR STEADY*/
         /*Avança os ponteiros da matriz B*/
         bhmMessage("I", "Input", "Calculando STEADY!\n");
-        for(mat_b_line=0;mat_b_line<THERMAL_NODES;mat_b_line++){
-            for(mat_b_column=0;mat_b_column<DIM_X*DIM_Y;mat_b_column++){
-                
-                if(mat_b_column == 0)
-                    clear = 1;
-                else
-                    clear = 0;
+        int index = 0;
+        int yi, xi;
+        for (yi = 0; yi < DIM_X; yi++)
+            for(xi = 0; xi < DIM_Y; xi++)
+                power_trace[index++] = (double)(power[yi][xi]*SCALING_FACTOR)/(1280000*WINDOW_TIME);
 
-                /* Faz operação de MAC */
-                aux = mac_unit(clear, 1, matrix_b[mat_b_column][mat_b_line], power[x_power_counter][y_power_counter]);
+        computeSteadyStateTemp(t_steady, power_trace);
 
-                
-                if(mat_b_line != 0 && clear == 1){
-                    t_steady[mat_b_line-1] = (aux>>20)+31815;
-                }
-
-                /*Avança os ponteiros da matriz POWER*/
-                if(x_power_counter == DIM_X-1 && y_power_counter == DIM_Y-1){
-                    x_power_counter = 0;
-                    y_power_counter = 0;
-                }
-                else if(x_power_counter == DIM_X-1){
-                    x_power_counter = 0;
-                    y_power_counter++;
-                }
-                else{
-                    x_power_counter++;
-                }
-
-            }
-        }
         ////////////////////////////////////////////////////////////////////////
         /*CALCULAR TRANSIENT*/
         bhmMessage("I", "Input", "Calculando TRANSIENT!\n");
 
-        for(mat_c_line=0;mat_c_line<THERMAL_NODES;mat_c_line++){
-            for(mat_c_column=0;mat_c_column<THERMAL_NODES;mat_c_column++){
-                
-                if(mat_c_column == 0)
-                    clear = 1;
-                else
-                    clear = 0;
+        temp_matex(TempTraceEnd, power_trace);
 
-                aux = mac_unit(clear, 1, matrix_c[mat_c_column][mat_c_line], (temp_trace_end[mat_c_column]-t_steady[mat_c_column]));
-
-                if(mat_c_line != 0 && clear == 1){
-                    if((0x80000000 & aux)>>31 == 1)
-                        aux = 0xFFFFF & (aux>>20);
-                    else
-                        aux = 0x00000 & (aux>>20);
-                    temp_trace_end[mat_c_line-1] = t_steady[mat_c_line-1] + aux;
-                }
-
-            }
-        }
-
-        bhmMessage("I", "Input", "TUDO CALCULADO!!! IhÀ!\n");
+        bhmMessage("I", "Input", "TUDO CALCULADO!!! cool!\n");
 
         flit_in_counter = 0;
         source_pe =  0;
@@ -258,13 +314,15 @@ int main(int argc, char *argv[]) {
     bhmInstallDiagCB(setDiagLevel);
     constructor();
 
+    load_matrices(Binv, Cexp);
+
     for(i=0;i<DIM_X;i++){
         for(j=0;j<DIM_Y;j++){
             power[i][j] = 0;
         }
     }
     for(i=0;i<THERMAL_NODES;i++){
-        temp_trace_end[i] = 31815;
+        TempTraceEnd[i] = 318.15;
     }
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));

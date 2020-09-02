@@ -1,0 +1,100 @@
+
+set terminal pdf #size 640px, 400px
+set output "temp.pdf"
+
+set multiplot layout 2,2
+
+#set yrange [ 44 : 75 ]
+
+#set view 75, 40, 1, 0.5
+set tics font "Helvetica,8"
+
+set ylabel "temperature" offset 2.5, 0, 0 font "Helvetica,8"
+set xlabel "time (ms)" offset 0, 0.5, 0 font "Helvetica,8"
+
+
+#####################################################################
+
+set key off
+
+#set label 1 at graph 0.27, -0.35 font "Helvetica,12"
+#set label 1 "(a) Castilhos et al."
+
+plot "Temperatures" using 2 with lines, \
+     "Temperatures" using 3 with lines, \
+     "Temperatures" using 4 with lines, \
+     "Temperatures" using 5 with lines, \
+     "Temperatures" using 10 with lines, \
+     "Temperatures" using 11 with lines, \
+     "Temperatures" using 12 with lines, \
+     "Temperatures" using 13 with lines, \
+     "Temperatures" using 18 with lines, \
+     "Temperatures" using 19 with lines, \
+     "Temperatures" using 20 with lines, \
+     "Temperatures" using 21 with lines, \
+     "Temperatures" using 26 with lines, \
+     "Temperatures" using 27 with lines, \
+     "Temperatures" using 28 with lines, \
+     "Temperatures" using 29 with lines
+
+
+###########################################################################
+
+set key samplen 2 spacing .8 font ",8" right bottom
+
+#set label 1 at graph 0.35, -0.35 font "Helvetica,12"
+#set label 1 "(b) HotSpot"
+
+plot "Temperatures" using 6 title "0x0" with lines, \
+     "Temperatures" using 7 title "1x0" with lines, \
+     "Temperatures" using 8 title "2x0" with lines, \
+     "Temperatures" using 9 title "3x0" with lines, \
+     "Temperatures" using 14 title "0x1" with lines, \
+     "Temperatures" using 15 title "1x1" with lines, \
+     "Temperatures" using 16 title "2x1" with lines, \
+     "Temperatures" using 17 title "3x1" with lines, \
+     "Temperatures" using 22 title "0x2" with lines, \
+     "Temperatures" using 23 title "1x2" with lines, \
+     "Temperatures" using 24 title "2x2" with lines, \
+     "Temperatures" using 25 title "3x2" with lines, \
+     "Temperatures" using 30 title "0x3" with lines, \
+     "Temperatures" using 31 title "1x3" with lines, \
+     "Temperatures" using 32 title "2x3" with lines, \
+     "Temperatures" using 33 title "3x3" with lines, \
+
+set key off
+
+plot "Temperatures" using 34 with lines, \
+     "Temperatures" using 35 with lines, \
+     "Temperatures" using 36 with lines, \
+     "Temperatures" using 37 with lines, \
+     "Temperatures" using 42 with lines, \
+     "Temperatures" using 43 with lines, \
+     "Temperatures" using 44 with lines, \
+     "Temperatures" using 45 with lines, \
+     "Temperatures" using 50 with lines, \
+     "Temperatures" using 51 with lines, \
+     "Temperatures" using 52 with lines, \
+     "Temperatures" using 53 with lines, \
+     "Temperatures" using 58 with lines, \
+     "Temperatures" using 59 with lines, \
+     "Temperatures" using 60 with lines, \
+     "Temperatures" using 61 with lines
+
+
+plot "Temperatures" using 38 with lines, \
+     "Temperatures" using 39 with lines, \
+     "Temperatures" using 40 with lines, \
+     "Temperatures" using 41 with lines, \
+     "Temperatures" using 46 with lines, \
+     "Temperatures" using 47 with lines, \
+     "Temperatures" using 48 with lines, \
+     "Temperatures" using 49 with lines, \
+     "Temperatures" using 54 with lines, \
+     "Temperatures" using 55 with lines, \
+     "Temperatures" using 56 with lines, \
+     "Temperatures" using 57 with lines, \
+     "Temperatures" using 62 with lines, \
+     "Temperatures" using 63 with lines, \
+     "Temperatures" using 64 with lines, \
+     "Temperatures" using 65 with lines

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../../peripheral/whnoc_dma/noc.h"
+#include "../../../peripheral/whnoc_dma/noc.h" 
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
@@ -207,8 +207,8 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
-    //unsigned int savedClkGatingStatus = *clockGating_flag;
     *clockGating_flag = FALSE; // Turn the clkGating off
+    prints("Clk gate off - interruptHandler_NI_RX\n");
 #endif
     //////////////////////////////////////////////////////////////
     int requester, i;
@@ -245,7 +245,7 @@ void interruptHandler_NI_RX(void) {
     }
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
-    //*clockGating_flag = savedClkGatingStatus;
+
 #endif
 }
 
@@ -427,10 +427,12 @@ void ReceiveMessage(message *theMessage, unsigned int from){
 
     // Waits the response
     int_enable(2); // Enables the RX interruptions
+
 #if USE_THERMAL
     *clockGating_flag = TRUE;
 #endif
-    while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    while(receivingActive==0){
+        /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
     *clockGating_flag = FALSE;
 #endif
@@ -454,10 +456,12 @@ void ReceiveRaw(message *theMessage){
     isRawReceive = 1;
 
     int_enable(2); // Enables the RX interruptions
+
 #if USE_THERMAL
     *clockGating_flag = TRUE;
 #endif
-    while(receivingActive==0){/* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    while(receivingActive==0){
+    /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
     *clockGating_flag = FALSE;
 #endif
@@ -591,14 +595,15 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
+
 #if USE_THERMAL
-    //*clockGating_flag = TRUE;
 #endif    
     ////////////////////////////////////////////////
+    while(*NIcmdTX != NI_STATUS_OFF){
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+        *clockGating_flag = TRUE;
 #endif
-    while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+        /* waits until NI is ready to execute an operation */}
 #if USE_THERMAL
     *clockGating_flag = FALSE;
 #endif
@@ -607,11 +612,10 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_disable(0);
 
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
 #endif
-    while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
+    while(*NIcmdTX != NI_STATUS_OFF){
+        /* waits until NI is ready to execute an operation */}
 #if USE_THERMAL
-    *clockGating_flag = FALSE;
 #endif
 
     transmittingActive = slot;
@@ -620,7 +624,6 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_enable(1);
     ////////////////////////////////////////////////
 #if USE_THERMAL    
-    //*clockGating_flag = FALSE;
 #endif
     return;
 }
@@ -647,16 +650,15 @@ void FinishApplication(){
 
     // Activate the clock gating and waits until every other processor finish its task
 #if USE_THERMAL
-   
+    *clockGating_flag = TRUE;
+    prints("Clk gate on - FinishApplication\n"); 
 #endif
+    prints("Finalizando "); printi(*myAddress); prints("\n");
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     unsigned int init_end = *SyncToPE;
     while(init_end != 0){
 	    init_end = *SyncToPE;
-#if USE_THERMAL
-        *clockGating_flag = TRUE;
-#endif
     }
 #if USE_THERMAL
     ReportExecutedInstructions();
@@ -687,5 +689,5 @@ unsigned int random(){
     unsigned bit;
     bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
     return lfsr =  (lfsr >> 1) | (bit << 15);
-  }
+}
 

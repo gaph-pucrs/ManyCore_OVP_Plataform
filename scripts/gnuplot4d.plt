@@ -16,8 +16,15 @@ set zrange [ 200 : 1000 ] noreverse nowriteback
 set ticslevel 0
 set format cb "%2.0f"
 set colorbox user size .01, .45 origin 0.97, 0.45
-set palette defined (0 'green', 1 'yellow', 2 'red')
-set cbrange [ 0 : 22935 ] noreverse nowriteback
+#set palette defined (0 'green', 1 'yellow', 2 'red')
+set palette maxcolors 13 model RGB defined \
+( 0 '#ffffff', 1 '#ffba08',   2 '#faa307', \
+  3 '#f48c06', 4 '#e85d04',   5 '#dc2f02', \
+  6 '#d00000', 7 '#9d0208',   8 '#6a040f', \
+  9 '#370617', 10 '#000000')
+set cbtics autofreq
+#set cbtics add ("inf" 6.5)
+#set cbrange [ 0 : 22935 ] noreverse nowriteback
 
 set tics font "Helvetica,8"
 set xlabel "" offset 1, 0, 0 

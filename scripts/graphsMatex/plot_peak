@@ -1,0 +1,11 @@
+
+set terminal pdf #size 640px, 400px
+set output "temp_peak.pdf"
+
+#set yrange [ 44 : 75 ]
+
+set ylabel "Temperature (℃)" #offset 2.5, 0, 0 #font "Helvetica,8"
+set xlabel "time (ms)" #offset 0, 0.5, 0 #font "Helvetica,8"
+
+plot "PeakTemp" using 2 title 'average' with lines, \
+     "PeakTemp" using 3 title 'peak' with lines
