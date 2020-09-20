@@ -167,7 +167,7 @@ int main(int argc, char **argv)
                     p_idx++;
                 }
             }
-            prints("Enviando pacote para o TEA!\n");
+            //prints("Enviando pacote para o TEA!\n");
             if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
                 SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
             else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
@@ -175,16 +175,16 @@ int main(int argc, char **argv)
 
 
             theMsg2.msg[0] = 12345678;
-            prints("Recebendo pacote do TEA!\n");
+            //prints("Recebendo pacote do TEA!\n");
             if(tempPacket == 1){
-                prints("1.Já tinha recebido o pacote\n");
+                //prints("1.Já tinha recebido o pacote\n");
                 prints("Pacote Recebido: \n");
                 for(i = 0; i < DIM_X*DIM_Y; i++)
                     printi(deliveredMessage->msg[i]);
             }
             else{
-                prints("2.Não tinha recebido o pacote\n");
-                ReceiveRaw(&theMsg2);
+                //prints("2.Não tinha recebido o pacote\n");
+                //ReceiveRaw(&theMsg2);
                 prints("Pacote Recebido: \n");
                 for(i = 0; i < DIM_X*DIM_Y; i++)
                     printi(theMsg2.msg[i]);

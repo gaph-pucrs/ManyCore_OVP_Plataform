@@ -452,7 +452,7 @@ void ReceiveRaw(message *theMessage){
 #endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
-    prints("ReceiveRaw\n");
+    //prints("ReceiveRaw\n");
     printi(deliveredMessage);
 
     // Set a flag to zero that will only gets a one when the interruption is done
