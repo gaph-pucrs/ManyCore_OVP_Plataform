@@ -184,7 +184,7 @@ int main(int argc, char **argv)
             }
             else{
                 //prints("2.Não tinha recebido o pacote\n");
-                //ReceiveRaw(&theMsg2);
+                ReceiveRaw(&theMsg2);
                 prints("2Pacote Recebido: \n");
                 for(i = 0; i < DIM_X*DIM_Y; i++)
                     printi(theMsg2.msg[i]);
