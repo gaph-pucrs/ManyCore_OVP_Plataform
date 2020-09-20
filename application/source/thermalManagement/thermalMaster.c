@@ -140,7 +140,7 @@ int main(int argc, char **argv)
                     //LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
                 }
             }
-            prints("Todos os pacotes de energia foram recebidos!\n");
+            //prints("Todos os pacotes de energia foram recebidos!\n");
             //LOG("Todos os pacotes foram recebidos!!!\n");
             //*clockGating_flag = TRUE;
             // LOG("FPRINTF - MASTER %x\n",*myAddress);
