@@ -28,7 +28,8 @@ int main(int argc, char **argv)
 
 		ReceiveMessage(&theMessage, taskD_addr);
 		
-		//LOG("taskF - %d\n",i);
+		printi(clock()); prints("taskF\n");
+		printi(clock()); printi(i); prints("\n");
 	}
 
     LOG("synthetic task F finished.\n");

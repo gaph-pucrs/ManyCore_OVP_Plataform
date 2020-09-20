@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     int i, j, t;
 	
 	LOG("synthetic task A started.\n");
-    prints("ESTAMOS COMEÇando a brincadeira!!! \n");
+
 	for(i=0;i<SYNTHETIC_ITERATIONS;i++){
 		for(t=0;t<1000;t++){
 		}
@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 		for(j=0;j<30;j++) theMessage.msg[j]=i;
 		
 		SendMessage(&theMessage, taskC_addr);
-		//LOG("taskA - %d\n",i);
+		printi(clock()); prints("taskA\n");
+		printi(clock()); printi(i); prints("\n");
 	}
 
     LOG("synthetic task A finished.\n");

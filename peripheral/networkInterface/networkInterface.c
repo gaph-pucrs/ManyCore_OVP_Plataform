@@ -344,7 +344,7 @@ PPM_PACKETNET_CB(dataPortUpd) {
         }
     }
 
-    //bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
+    // bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
     
     // Detects the receiving finale
     if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){

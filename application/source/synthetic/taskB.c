@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 		for(j=0;j<30;j++) theMessage.msg[j]=i;
 		
 		SendMessage(&theMessage, taskC_addr);
-		//LOG("taskB - %d\n",i);
+		printi(clock()); prints("taskB\n");
+		printi(clock()); printi(i); prints("\n");
 	}
 
     LOG("synthetic task B finished.\n");

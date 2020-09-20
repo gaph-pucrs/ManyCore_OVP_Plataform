@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../../../peripheral/whnoc_dma/noc.h" 
+#include "../../../peripheral/whnoc_dma/noc.h"
 
 typedef unsigned int  Uns32;
 typedef unsigned char Uns8;
@@ -59,7 +59,6 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define MESSAGE_REQ         0x20
 #define MESSAGE_DELIVERY    0x30
 #define INSTR_COUNT_PACKET  0x40
-#define TEMPERATURE_PACKET  0x50
 //////////////////////////////
 //////////////////////////////
 
@@ -185,6 +184,26 @@ void printi(int value);
 
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */
+// void interruptHandler_timer(void) {
+// #if USE_THERMAL
+// #endif
+//     //////////////////////////////////////////////////////////////
+//     //////////////////////////////////////////////////////////////
+//     // YOUR TIMER FUNCTION ENTERS HERE
+// #if USE_THERMAL
+//     energyEstimation();
+// #endif
+//     //////////////////////////////////////////////////////////////
+//     //////////////////////////////////////////////////////////////
+//     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
+// #if USE_THERMAL
+// #endif
+//     return;
+// }
+
+
+///////////////////////////////////////////////////////////////////
+/* Interruption function for Timer */
 void interruptHandler_timer(void) {
 #if USE_THERMAL
     unsigned int savedClkGating = *clockGating_flag;
@@ -210,13 +229,11 @@ void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
     *clockGating_flag = FALSE; // Turn the clkGating off
     prints("Clk gate off - interruptHandler_NI_RX\n");
+
 #endif
     //////////////////////////////////////////////////////////////
     int requester, i;
-    if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
-        tempPacket = 1;
-    }
-    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
+    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         
@@ -249,7 +266,7 @@ void interruptHandler_NI_RX(void) {
     }
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
-
+    
 #endif
 }
 
@@ -433,10 +450,10 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     int_enable(2); // Enables the RX interruptions
 
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+        *clockGating_flag = TRUE;
 #endif
     while(receivingActive==0){
-        /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
+    /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
 #if USE_THERMAL
     *clockGating_flag = FALSE;
 #endif
@@ -452,8 +469,6 @@ void ReceiveRaw(message *theMessage){
 #endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
-    prints("ReceiveRaw\n");
-    printi(deliveredMessage);
 
     // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
@@ -464,7 +479,7 @@ void ReceiveRaw(message *theMessage){
     int_enable(2); // Enables the RX interruptions
 
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
+        *clockGating_flag = TRUE;
 #endif
     while(receivingActive==0){
     /* waits until the NI has received the hole packet, generating iterations to the peripheral */}
@@ -603,13 +618,12 @@ unsigned int getID(unsigned int address){
 void SendSlot(unsigned int addr, unsigned int slot){
 
 #if USE_THERMAL
-#endif    
-    ////////////////////////////////////////////////
-    while(*NIcmdTX != NI_STATUS_OFF){
-#if USE_THERMAL
-        *clockGating_flag = TRUE;
+    // *clockGating_flag = TRUE;
+    // prints("Clk gate on - SendSlot 1\n");
 #endif
-        /* waits until NI is ready to execute an operation */}
+    while(*NIcmdTX != NI_STATUS_OFF){
+        *clockGating_flag = TRUE;
+    /*waits until NI is ready to execute an operation*/}
 #if USE_THERMAL
     *clockGating_flag = FALSE;
 #endif
@@ -618,10 +632,13 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_disable(0);
 
 #if USE_THERMAL
+    // *clockGating_flag = TRUE;
+    // prints("Clk gate on - SendSlot 2\n");
 #endif
-    while(*NIcmdTX != NI_STATUS_OFF){
-        /* waits until NI is ready to execute an operation */}
+    while(*NIcmdTX != NI_STATUS_OFF){/*waits until NI is ready to execute an operation*/}
 #if USE_THERMAL
+    // *clockGating_flag = FALSE;
+    // prints("Clk gate off - SendSlot 2\n");
 #endif
 
     transmittingActive = slot;
@@ -630,6 +647,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_enable(1);
     ////////////////////////////////////////////////
 #if USE_THERMAL    
+    
 #endif
     return;
 }
@@ -656,10 +674,10 @@ void FinishApplication(){
 
     // Activate the clock gating and waits until every other processor finish its task
 #if USE_THERMAL
-    *clockGating_flag = TRUE;
-    prints("Clk gate on - FinishApplication\n"); 
+        *clockGating_flag = TRUE;
+        prints("Clk gate on - FinishApplication\n"); 
 #endif
-    prints("Finalizando "); printi(*myAddress); prints("\n");
+    prints("Finalizando "); printi(*myAddress);prints("\n");
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     unsigned int init_end = *SyncToPE;
@@ -674,7 +692,7 @@ void FinishApplication(){
 }
 
 ///////////////////////////////////////////////////////////////////
-//
+/* REMEMBER TO USE THE \n AT THE END OF THE STRING */
 void prints(char* text){
     int i = 0;
     do{
@@ -684,19 +702,9 @@ void prints(char* text){
     return;
 }
 
-///////////////////////////////////////////////////////////////////
-//
+
 void printi(int value){
     *printInt = value;
     return;
-}
-
-///////////////////////////////////////////////////////////////////
-//
-unsigned int random(){
-    unsigned int lfsr = 0xACE1ACE1A;
-    unsigned bit;
-    bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
-    return lfsr =  (lfsr >> 1) | (bit << 15);
 }
 

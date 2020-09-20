@@ -46,9 +46,6 @@ echo "cd .." >> ovp_compiler.sh
 echo "cd simulation" >> ovp_compiler.sh
 echo "rm -f *.txt" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
-echo "cd scripts/myGraphs" >> ovp_compiler.sh
-echo "rm -f *.dat" >> ovp_compiler.sh
-echo "cd ../.." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
 echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
 echo "CROSS=OR1K" >> ovp_compiler.sh
@@ -93,15 +90,10 @@ done
 chmod +x ovp_compiler.sh
 ./ovp_compiler.sh
 
-# Generates data for traffic comparison
-cd scripts
-python3 generateFlowGraph.py
-cd ..
-
 cd application
-# for i in $(seq 0 $N);
-# do
-#     ./assemblyExtractor.sh application"$i".OR1K.elf
-# done
-rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
-rm -rf *.elf
+for i in $(seq 0 $N);
+do
+    ./assemblyExtractor.sh application"$i".OR1K.elf
+done
+#rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
+#rm -rf *.elf
