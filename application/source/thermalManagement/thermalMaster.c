@@ -178,14 +178,14 @@ int main(int argc, char **argv)
             //prints("Recebendo pacote do TEA!\n");
             if(tempPacket == 1){
                 //prints("1.Já tinha recebido o pacote\n");
-                prints("Pacote Recebido: \n");
+                prints("1Pacote Recebido: \n");
                 for(i = 0; i < DIM_X*DIM_Y; i++)
                     printi(deliveredMessage->msg[i]);
             }
             else{
                 //prints("2.Não tinha recebido o pacote\n");
                 //ReceiveRaw(&theMsg2);
-                prints("Pacote Recebido: \n");
+                prints("2Pacote Recebido: \n");
                 for(i = 0; i < DIM_X*DIM_Y; i++)
                     printi(theMsg2.msg[i]);
             }
