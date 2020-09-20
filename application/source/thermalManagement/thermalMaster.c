@@ -132,7 +132,7 @@ int main(int argc, char **argv)
             for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
                     ReceiveRaw(&theMsg);
-                    prits("Pacote recebido de "); printi(getXpos(theMsg.msg[3]); printi(getYpos(theMsg.msg[3]); prints("\n");
+                    prints("Pacote recebido de "); printi(getXpos(theMsg.msg[3]); printi(getYpos(theMsg.msg[3]); prints("\n");
                     energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
                     //LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
                 }
