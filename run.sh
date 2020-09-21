@@ -107,6 +107,6 @@ rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and
 rm -rf *.elf
 cd ..
 
-cd simulation
-rm -rf *.csv
-cd ..
+#cd simulation
+#rm -rf *.csv
+#cd ..
