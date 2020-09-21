@@ -13,7 +13,7 @@
 #define MODULE_NAME     "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
-#define N_PES 16
+#define N_PES 25
 #define __bswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))

@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-	int i, j, v;
+    int i, j, v;
 	int source = 0;
 	int q[NUM_NODES];
 	int dist[NUM_NODES];
@@ -23,11 +23,10 @@ int main(int argc, char **argv)
 	int shortest, u;
 	int alt;
 	int calc = 0;
-	//int iteration = 0;
-	//char buffer[70];
+
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-	prints("STARTING 4\n"); 
+	prints("STARTING 2\n");
 
     while(1){
 		theMessage.size = NUM_NODES;
@@ -36,7 +35,6 @@ int main(int argc, char **argv)
 			for (j=0; j<NUM_NODES; j++)
 				AdjMatrix[i][j] = theMessage.msg[j];
 		}
-
 		calc = AdjMatrix[0][0];
 		if (calc == KILL) break;
 
@@ -78,7 +76,7 @@ int main(int argc, char **argv)
 		theMessage.msg[i+NUM_NODES] = prev[i];
 
     SendMessage(&theMessage, print_dij_addr);
-    prints("Dijkstra_4 finished.\n");
+    prints("Dijkstra_2 finished.\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
