@@ -127,8 +127,10 @@ int main(int argc, char **argv)
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
-            LOG("===========================================PEs EXECUTANDO: %d\n",*SyncToPE);
-            // Aguarda os pacotes de energia dos PEs
+            
+            //////////////////////////////////////////////////////
+            // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
+            //////////////////////////////////////////////////////
             for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
                     ReceiveRaw(&theMsg);
@@ -137,10 +139,12 @@ int main(int argc, char **argv)
                     printi(getYpos(theMsg.msg[3])); 
                     prints("\n");
                     energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
-                    //LOG("%x - window: %u -- energy: %u -- leak: %u\n",theMsg.msg[3],theMsg.msg[0],theMsg.msg[1],theMsg.msg[2]);
                 }
             }
-            prints("Todos os pacotes de energia foram recebidos!\n");
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
+            //prints("Todos os pacotes de energia foram recebidos!\n");
             //LOG("Todos os pacotes foram recebidos!!!\n");
             //*clockGating_flag = TRUE;
             // LOG("FPRINTF - MASTER %x\n",*myAddress);
@@ -152,8 +156,9 @@ int main(int argc, char **argv)
             // fprintf(filepointer,"%u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
             // fclose(filepointer);    
             //*clockGating_flag = FALSE;
-
-            /*Mounts and send the packet to the peripheral*/
+            //////////////////////////////////////////////////////
+            // SEND THE TEMPERATURE PACKET TO THE TEA ////////////
+            //////////////////////////////////////////////////////
             executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
             executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
             tsend = clock();
@@ -167,12 +172,16 @@ int main(int argc, char **argv)
                     p_idx++;
                 }
             }
-            //prints("Enviando pacote para o TEA!\n");
             if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
                 SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
             else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
                 sendExecutedInstPacket = TRUE;
-
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
+            // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
+            //////////////////////////////////////////////////////
             if(tempPacket == 1){
                 prints("1Pacote Recebido: ");
                 for(i = 0; i < DIM_X*DIM_Y; i++)
@@ -184,10 +193,11 @@ int main(int argc, char **argv)
                 for(i = 0; i < DIM_X*DIM_Y; i++)
                     printi(theMsg2.msg[i]);
             }
-            tempPacket = 0;
-            
-
             prints("\n");
+            tempPacket = 0;
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////
         }
     }
     //////////////////////////////////////////////////////
