@@ -182,7 +182,7 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
-            if(tempPacket == 1){
+            if(tempPacket){
                 prints("1Pacote Recebido: ");
                 for(i = 0; i < DIM_X*DIM_Y; i++)
                     printi(deliveredMessage->msg[i]);
@@ -194,7 +194,7 @@ int main(int argc, char **argv)
                     printi(theMsg2.msg[i]);
             }
             prints("\n");
-            tempPacket = 0;
+            tempPacket = FALSE;
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////

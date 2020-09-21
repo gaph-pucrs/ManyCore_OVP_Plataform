@@ -214,7 +214,7 @@ void interruptHandler_NI_RX(void) {
     //////////////////////////////////////////////////////////////
     int requester, i;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
-        tempPacket = 1;
+        tempPacket = TRUE;
     }
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         receivingActive = 1; // Inform the index where the received packet is stored
