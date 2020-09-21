@@ -103,7 +103,8 @@ def toGraph(graphMatrix, id, local, east, west, north, south):
 if __name__ == '__main__':
 
     #with open(r"D:\\GitRepo\\OVP_NoC\\simulation\\flitsLog.txt") as csv_file:
-    with open('../simulation/flitsLog.txt') as csv_file:
+    #with open('../simulation/flitsLog.txt') as csv_file:
+    with open('trafficMemphis.txt') as csv_file:
         spamreader = csv.reader(csv_file, delimiter=',')
         while(1):
             try:
@@ -116,7 +117,8 @@ if __name__ == '__main__':
 
 
     #with open(r"D:\\GitRepo\\OVP_NoC\\simulation\\flitsLog.txt") as csv_file:
-    with open('../simulation/flitsLog.txt') as csv_file:
+    #with open('../simulation/flitsLog.txt') as csv_file:
+    with open('trafficMemphis.txt') as csv_file:
         spamreader = csv.reader(csv_file, delimiter=',')
         quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
 
@@ -185,4 +187,4 @@ if __name__ == '__main__':
         #sm.set_array([])
         #plt.colorbar(sm)   
         #plt.show()
-        plt.savefig('traffic.png', dpi=475, transparent=True, bbox_inches='tight') 
+        plt.savefig('trafficMemphis.png', dpi=475, transparent=True, bbox_inches='tight') 
