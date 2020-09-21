@@ -5,97 +5,178 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "dijkstra_config.h"
+#include "synthetic_config.h"
+#include "thermalManagement_config.h"
 
 message theMessage;
 
-int main(int argc, char **argv)
-{ 
-    OVP_init();
-    //////////////////////////////////////////////////////
-    /////////////// YOUR CODE START HERE /////////////////
-    //////////////////////////////////////////////////////
-    int fpTrix[NUM_NODES*NUM_NODES] = { 1,    6,    3,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										6,    1,    2,    5,    9999, 9999, 1,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										3,    2,    1,    3,    4,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 5,    3,    1,    2,    3,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 4,    2,    1,    5,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 3,    5,    1,    3,    2,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 1,    9999, 9999, 9999, 3,    1,    4,    9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 2,    4,    1,    7,    9999, 9999, 9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 7,    1,    5,    1,    9999, 9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 5,    1,    9999, 3,    9999, 9999, 9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 1,    9999, 1,    9999, 4,    9999, 9999, 8,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 3,    9999, 1,    9999, 2,    9999, 9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 4,    9999, 1,    1,    9999, 2,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 2,    1,    1,    6,    9999,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 6,    1,    3,
-										9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 8,    9999, 2,    9999, 3,    1 };
+#define NUM_TASK	6
+int task_addr[NUM_TASK];
 
-    int AdjMatrix[NUM_NODES][NUM_NODES];
-	int i, j, k, iter;
-	char buffer[70];
 
-	prints("STARTING DIVIDER\n"); 
+int synthetic(int task)
+{
+	int i, j, t;
 
-	for (i=0;i<NUM_NODES;i++) {
-		for (j=0;j<NUM_NODES;j++) {
-			AdjMatrix[i][j]= fpTrix[k];
-			k++;
-		}
-	}
+	switch (task){
 
-    /* SEND AdjMatrix[NUM_NODES][NUM_NODES] */
-	theMessage.size = NUM_NODES;
+	case taskA:		
+		LOG("synthetic task A started.\n");
 
-    for(iter=0; iter<CALCULATIONS; iter++){
-		for (i=0; i<NUM_NODES; i++) {
-			for (j=0; j<NUM_NODES; j++) {
-				theMessage.msg[j] = AdjMatrix[i][j];
+		for(i=0;i<SYNTHETIC_ITERATIONS;i++){
+			for(t=0;t<1000;t++){
 			}
-			//if(i==NUM_NODES-1){
-				//sprintf(buffer, "enviando pacote para 0-%d,%d - %d",iter,i,clock());
-				//LOG_F(buffer);
-			//} 
-			SendMessage(&theMessage, dijkstra_0_addr);
-			//if(i==NUM_NODES-1){
-				//sprintf(buffer, "enviando pacote para 1-%d,%d - %d",iter,i,clock());
-				//LOG_F(buffer);
-			//} 
-			SendMessage(&theMessage, dijkstra_1_addr);
-			//if(i==NUM_NODES-1){
-				//sprintf(buffer, "enviando pacote para 2-%d,%d - %d",iter,i,clock());
-				//LOG_F(buffer);
-			//} 
-			SendMessage(&theMessage, dijkstra_2_addr);
-			//if(i==NUM_NODES-1){
-				//sprintf(buffer, "enviando pacote para 3-%d,%d - %d",iter,i,clock());
-				//LOG_F(buffer);
-			//} 
-			SendMessage(&theMessage, dijkstra_3_addr);
-			//if(i==NUM_NODES-1){
-				//sprintf(buffer, "enviando pacote para 4-%d,%d - %d",iter,i,clock());
-				//LOG_F(buffer);
-			//} 
-			SendMessage(&theMessage, dijkstra_4_addr);
+			theMessage.size = 30;
+			for(j=0;j<30;j++) theMessage.msg[j]=i;
+			
+			SendMessage(&theMessage, task_addr[taskC]);
+			printi(clock()); prints("taskA\n");
+			printi(clock()); printi(i); prints("\n");
 		}
-	}
 
-    AdjMatrix[0][0] = KILL;
-	for (i=0; i<NUM_NODES; i++) {
-		for (j=0; j<NUM_NODES; j++) {
-			theMessage.msg[j] = AdjMatrix[i][j];
+	    LOG("synthetic task A finished.\n");
+
+	    return 1;
+
+	case taskB:		
+		LOG("synthetic task B started.\n");
+
+		for(i=0;i<SYNTHETIC_ITERATIONS;i++){
+			for(t=0;t<1000;t++){
+			}
+			theMessage.size = 30;
+			for(j=0;j<30;j++) theMessage.msg[j]=i;
+			
+			SendMessage(&theMessage, task_addr[taskC]);
+			printi(clock()); prints("taskB\n");
+			printi(clock()); printi(i); prints("\n");
 		}
-		SendMessage(&theMessage, dijkstra_0_addr);
-		SendMessage(&theMessage, dijkstra_1_addr);
-		SendMessage(&theMessage, dijkstra_2_addr);
-		SendMessage(&theMessage, dijkstra_3_addr);
-		SendMessage(&theMessage, dijkstra_4_addr);
+
+	    LOG("synthetic task B finished.\n");
+
+	    return 1;
+
+	case taskC:
+		LOG("synthetic task C started.\n");
+
+		for(i=0;i<SYNTHETIC_ITERATIONS;i++){
+		
+			theMessage.size = 30;
+			for(j=0;j<30;j++) theMessage.msg[j]=i;
+
+			ReceiveMessage(&theMessage, task_addr[taskA]);
+
+			for(t=0;t<1000;t++){
+			}
+
+			SendMessage(&theMessage, task_addr[taskD]);
+
+			ReceiveMessage(&theMessage, task_addr[taskB]);
+
+			for(t=0;t<1000;t++){
+			}
+
+			SendMessage(&theMessage, task_addr[taskE]);
+			
+			printi(clock()); prints("taskC\n");
+			printi(clock()); printi(i); prints("\n");
+		}
+
+	    LOG("synthetic task C finished.\n");
+
+	    return 1;
+
+	case taskD:
+		LOG("synthetic task D started.\n");
+
+		for(i=0;i<SYNTHETIC_ITERATIONS;i++){
+		
+			theMessage.size = 30;
+			for(j=0;j<30;j++) theMessage.msg[j]=i;
+
+			ReceiveMessage(&theMessage, task_addr[taskC]);
+
+			for(t=0;t<1000;t++){
+			}
+
+			SendMessage(&theMessage, task_addr[taskF]);
+			
+			printi(clock()); prints("taskD\n");
+			printi(clock()); printi(i); prints("\n");
+		}
+
+		LOG("synthetic task D finished.\n");
+
+		return 1;
+
+
+	case taskE:
+		LOG("synthetic task E started.\n");
+
+		for(i=0;i<SYNTHETIC_ITERATIONS;i++){
+		
+			theMessage.size = 30;
+			for(j=0;j<30;j++) theMessage.msg[j]=i;
+
+			ReceiveMessage(&theMessage, task_addr[taskC]);
+
+			for(t=0;t<1000;t++){
+			}
+
+			SendMessage(&theMessage, task_addr[taskF]);
+			
+			printi(clock()); prints("taskE\n");
+			printi(clock()); printi(i); prints("\n");
+		}
+
+	    LOG("synthetic task E finished.\n");
+
+	    return 1;
+
+	case taskF:
+		LOG("synthetic task F started.\n");
+
+		for(i=0;i<SYNTHETIC_ITERATIONS;i++){
+		
+			ReceiveMessage(&theMessage, task_addr[taskE]);
+
+			for(t=0;t<1000;t++){
+			}
+
+			ReceiveMessage(&theMessage, task_addr[taskD]);
+			
+			printi(clock()); prints("taskF\n");
+			printi(clock()); printi(i); prints("\n");
+		}
+
+	    LOG("synthetic task F finished.\n");
+
+	    return 1;
 	}
-	prints("Divider Finished\n"); 
-    //////////////////////////////////////////////////////
-    //////////////// YOUR CODE ENDS HERE /////////////////
-    //////////////////////////////////////////////////////
-    FinishApplication();
-    return 1;
+}
+
+int main(int argc, char **argv)
+{
+	OVP_init();
+	//////////////////////////////////////////////////////
+	/////////////// YOUR CODE START HERE /////////////////
+	//////////////////////////////////////////////////////
+	int i;
+
+	/* receives and mount mapping table */
+	ReceiveMessage(&theMessage, thermalMaster_addr);
+	for (i = 0; i < NUM_TASK; i++)
+		task_addr[i] = theMessage.msg[i];
+
+	// Get its own task to run
+	for (i = 0; i < NUM_TASK; i++)
+		if (task_addr[i] == *myAddress)
+			synthetic(i);
+
+
+	//////////////////////////////////////////////////////
+	//////////////// YOUR CODE ENDS HERE /////////////////
+	//////////////////////////////////////////////////////
+	FinishApplication();
+	return 1;
 }
