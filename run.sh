@@ -105,3 +105,8 @@ cd application
 # done
 rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
 rm -rf *.elf
+cd ..
+
+cd simulation
+rm -rf *.csv
+cd ..
