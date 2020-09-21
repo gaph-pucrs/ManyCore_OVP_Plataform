@@ -10,8 +10,8 @@ from matplotlib.ticker import LinearLocator
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 
-DIM_X = 4
-DIM_Y = 4
+DIM_X = 5
+DIM_Y = 5
 N_PES = DIM_X*DIM_Y
 NUM_OF_GRAPHS = 4
 
