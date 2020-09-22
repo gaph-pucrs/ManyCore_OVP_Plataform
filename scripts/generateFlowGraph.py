@@ -6,6 +6,7 @@ import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import matplotlib.pylab as pylab
 import seaborn as sns
+import sys
 from matplotlib.ticker import LinearLocator
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
@@ -100,11 +101,11 @@ def toGraph(graphMatrix, id, local, east, west, north, south):
 
     return graphMatrix
 
-if __name__ == '__main__':
-
+def generateGraph(file):
+    with open(file,'r') as csv_file:
     #with open(r"D:\\GitRepo\\OVP_NoC\\simulation\\flitsLog.txt") as csv_file:
     #with open('../simulation/flitsLog.txt') as csv_file:
-    with open('trafficMemphis.txt') as csv_file:
+    #with open('trafficMemphis.txt') as csv_file:
         spamreader = csv.reader(csv_file, delimiter=',')
         while(1):
             try:
@@ -112,28 +113,24 @@ if __name__ == '__main__':
                 numQuantuns = int(theLine[0])
             except:
                 break;
-        print("Numero de quantus: ")
-        print(numQuantuns)
+        print("Numero de quantus: "+str(numQuantuns))
 
 
+    with open(file, 'r') as csv_file:
     #with open(r"D:\\GitRepo\\OVP_NoC\\simulation\\flitsLog.txt") as csv_file:
     #with open('../simulation/flitsLog.txt') as csv_file:
-    with open('trafficMemphis.txt') as csv_file:
+    #with open('trafficMemphis.txt') as csv_file:
         spamreader = csv.reader(csv_file, delimiter=',')
         quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
-
+        maxValue = 0
         # create the figure, add a 3d axis, set the viewing angle
         #fig = plt.figure()
         #ax = fig.add_subplot(1,1,1, projection='3d')
         #ax.view_init(45,60)
         #ax.pbaspect = np.array([1.0, 1.0, 3.0])
-
-        
+       
         pes_total = np.zeros(N_PES)
         MyGraphs = []
-        fig, axes = plt.subplots(1, 4, figsize=(20, 5),
-                         subplot_kw={'xticks': [], 'yticks': []})
-        fig.subplots_adjust(hspace=0.3, wspace=0.05)
 
         # Criar um grafico pra cada camada
         for graph in range(NUM_OF_GRAPHS):
@@ -170,21 +167,62 @@ if __name__ == '__main__':
                 if(contx == DIM_X):
                     conty += 1
                     contx = 0
-            print("Mais um grafico:")
-            print(graph_simples)
+            print("generating data "+str(graph))
+            #print(graph_simples)
             MyGraphs.append(graph_simples)
-
-
-
+        return [MyGraphs, maxValue]
+            
+def generateImage(MyGraphs, maximumTraffic, figName):
+        fig, axes = plt.subplots(1, 4, figsize=(20, 5),
+                         subplot_kw={'xticks': [], 'yticks': []})
+        fig.subplots_adjust(hspace=0.3, wspace=0.05)
         for graph in range(NUM_OF_GRAPHS):
-            MyGraphs[graph] = MyGraphs[graph] / maxValue
-            print("Grafico "+str(graph)+":")
-            print(MyGraphs[graph])
-            axes[graph].imshow(MyGraphs[graph], interpolation='hanning', cmap='rainbow') # see https://matplotlib.org/examples/color/colormaps_reference.html for more cmaps
-            axes[graph].set_title(graph)
+            print("generating graph "+str(graph))
+            MyGraphs[graph] = MyGraphs[graph] / maximumTraffic
+            #print("Grafico "+str(graph)+":")
+            #print(MyGraphs[graph])
+            extent = (0, DIM_X, DIM_Y, 0)
+            axes[graph].imshow(MyGraphs[graph], interpolation='hanning', cmap='Oranges', origin='lower', extent=extent)# see https://matplotlib.org/examples/color/colormaps_reference.html for more cmaps
+            axes[graph].set_title("Snapshot "+str(graph+1))
+            axes[graph].set_xticks(np.arange(0.5, DIM_X+.5, 1))
+            axes[graph].set_yticks(np.arange(0.5, DIM_Y+.5, 1))
+            axes[graph].set_xticklabels(np.arange(0, DIM_X, 1))
+            axes[graph].set_yticklabels(np.arange(0, DIM_Y, 1))
+            axes[graph].set_xticks(np.arange(0, DIM_X, 1), minor=True);
+            axes[graph].set_yticks(np.arange(0, DIM_Y, 1), minor=True);
+            axes[graph].grid(which='minor', color='black', linestyle='-', linewidth=1)
+            axes[graph].set_frame_on(False)
 
-        #sm = plt.cm.ScalarMappable(cmap='rainbow')
-        #sm.set_array([])
-        #plt.colorbar(sm)   
-        #plt.show()
-        plt.savefig('trafficMemphis.png', dpi=475, transparent=True, bbox_inches='tight') 
+        plt.savefig(figName, dpi=475, transparent=True, bbox_inches='tight') 
+
+def main(args):
+    ## Memphis 
+    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario1\\data\\trafficMemphis.txt" ###### WINDOWS ######
+    #dir = '../simulation/saved/'+str(arg[1])+'/trafficMemphis.txt' ###### LINUX #####
+    resultMemphis = generateGraph(dir)
+
+    ## OVP
+    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario1\\data\\trafficOVP.txt" ###### WINDOWS ######
+    #dir = '../simulation/saved/'+str(arg[1])+'/trafficOVP.txt' ###### LINUX #####
+    resultOVP = generateGraph(dir)
+
+    ## Defines the maximum value to normalize
+    if(resultMemphis[1] > resultOVP[1]):
+        maximumTraffic = resultMemphis[1]
+    else:
+        maximumTraffic = resultOVP[1]
+    print("maximumTraffic: "+str(maximumTraffic))
+
+    ## Plot Memphis 
+    name = "trafficMemphis.png"
+    generateImage(resultMemphis[0], maximumTraffic, name)
+    ## Plot OVP
+    name = "trafficOVP.png"
+    generateImage(resultOVP[0], maximumTraffic, name)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
+    
+
+    
