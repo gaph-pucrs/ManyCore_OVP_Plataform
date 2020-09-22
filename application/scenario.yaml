@@ -35,3 +35,11 @@ apps:
     taskD: [2,2]
     taskE: [1,3]
     taskF: [1,4]
+ - name: mpeg
+   cluster: 0
+   static_mapping:
+    print: [1,0]
+    idct: [1,1]
+    start: [0,1]
+    ivlc: [0,2]
+    iquant: [1,2]

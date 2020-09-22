@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "synthetic_config.h"
+#include "synthetic_1_config.h"
 
 message theMessage;
 

@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "thermalManagement_config.h"
+#include "thermalManagement_1_config.h"
 
 message theMsg;
 

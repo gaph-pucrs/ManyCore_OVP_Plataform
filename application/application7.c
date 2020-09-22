@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "mpeg_config.h"
+#include "mpeg_1_config.h"
 
 typedef int type_DATA; //unsigned
 

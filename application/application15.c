@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "mpeg_config.h"
+#include "mpeg_1_config.h"
 
 unsigned int vlc_array[128] = { // array containing the compressed data stream
                                  // It must be specified as an input

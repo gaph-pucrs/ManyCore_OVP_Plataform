@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "dijkstra_config.h"
+#include "dijkstra_1_config.h"
 
 message theMessage;
 
