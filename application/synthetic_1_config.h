@@ -6,9 +6,9 @@
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define taskA_addr 0x0403
-#define taskB_addr 0x0303
-#define taskC_addr 0x0203
-#define taskD_addr 0x0202
-#define taskE_addr 0x0103
-#define taskF_addr 0x0104
+#define taskA_addr 0x0505
+#define taskB_addr 0x0606
+#define taskC_addr 0x0706
+#define taskD_addr 0x0806
+#define taskE_addr 0x0707
+#define taskF_addr 0x0607

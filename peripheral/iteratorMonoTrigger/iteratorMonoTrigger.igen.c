@@ -77,6 +77,118 @@ void runIterations(){
         ppmPacketnetWrite(handles.iterationPort23, &iteration, sizeof(iteration));
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort24, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort25, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort26, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort27, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort28, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort29, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort30, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort31, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort32, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort33, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort34, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort35, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort36, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort37, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort38, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort39, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort40, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort41, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort42, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort43, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort44, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort45, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort46, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort47, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort48, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort49, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort50, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort51, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort52, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort53, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort54, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort55, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort56, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort57, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort58, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort59, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort60, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort61, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort62, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort63, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort64, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort65, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort66, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort67, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort68, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort69, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort70, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort71, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort72, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort73, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort74, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort75, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort76, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort77, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort78, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort79, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort80, &iteration, sizeof(iteration));
         i++;
         if(tryAgain == 0 && activity == 0){
             activity++; 
@@ -324,6 +436,398 @@ PPM_PACKETNET_CB(iteration23) {
  }
 
 PPM_PACKETNET_CB(iteration24) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration25) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration26) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration27) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration28) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration29) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration30) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration31) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration32) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration33) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration34) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration35) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration36) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration37) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration38) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration39) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration40) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration41) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration42) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration43) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration44) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration45) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration46) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration47) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration48) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration49) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration50) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration51) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration52) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration53) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration54) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration55) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration56) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration57) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration58) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration59) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration60) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration61) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration62) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration63) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration64) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration65) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration66) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration67) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration68) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration69) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration70) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration71) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration72) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration73) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration74) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration75) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration76) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration77) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration78) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration79) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration80) {
     unsigned int act = *(unsigned int *)data;
     if(act > 0){
         activity++;

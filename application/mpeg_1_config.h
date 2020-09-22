@@ -8,8 +8,8 @@
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define print_addr 0x0001
-#define idct_addr 0x0002
-#define start_addr 0x0003
-#define ivlc_addr 0x0101
-#define iquant_addr 0x0201
+#define print_addr 0x0100
+#define idct_addr 0x0101
+#define start_addr 0x0001
+#define ivlc_addr 0x0002
+#define iquant_addr 0x0102

@@ -10,10 +10,10 @@
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define dijkstra_0_addr 0x0304
-#define dijkstra_1_addr 0x0302
-#define dijkstra_2_addr 0x0200
-#define dijkstra_3_addr 0x0204
-#define dijkstra_4_addr 0x0004
-#define divider_addr 0x0100
-#define print_dij_addr 0x0102
+#define dijkstra_0_addr 0x0501
+#define dijkstra_1_addr 0x0502
+#define dijkstra_2_addr 0x0602
+#define dijkstra_3_addr 0x0601
+#define dijkstra_4_addr 0x0701
+#define divider_addr 0x0702
+#define print_dij_addr 0x0802

@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "prodcons_1_config.h"
+#include "prodcons_3_config.h"
 
 message theMessage;
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
         theMessage.msg[0] = (i+1) * 10;
         SendMessage(&theMessage, cons_addr);
     }
-    LOG("PROD FINISH THE MESSAGE GENERATION!");
+    prints("PROD FINISH THE MESSAGE GENERATION!");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

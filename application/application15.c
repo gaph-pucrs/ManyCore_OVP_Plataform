@@ -5,20 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "mpeg_1_config.h"
-
-unsigned int vlc_array[128] = { // array containing the compressed data stream
-                                 // It must be specified as an input
-                                 0xfa,0xb8,0x20,0x05,0x20,0x20,0x02,0x38,
-                                 0x20,0x7e,0x7f,0xf0,0x10,0x3f,0x54,0x8a,
-                                 0x08,0x1f,0xa8,0x00,0x42,0x00,0xd2,0x80,
-                                 0x3e,0xf6,0xa0,0x0e,0x3e,0x45,0x80,0x3e,
-                                 0xc0,0x07,0xbc,0x79,0x00,0x3f,0xc2,0x28,
-                                 0xb2,0x3f,0x0e,0x78,0xbe,0x88,0x9c,0x82,
-                                 0x17,0xfc,0x11,0xbc,0x85,0x74,0x27,0xa7,
-                                 0xf2,0x24,0x02,0xce,0x5f,0xc7,0xce,0x4e,
-                                 0xa7,0x3c,0x73,0xb6,0x31,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-                                 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+#include "dijkstra_1_config.h"
 
 message theMessage;
 
@@ -28,34 +15,68 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    unsigned int exec_time=0;
-    int i;
+    int i, j, v;
+	int source = 0;
+	int q[NUM_NODES];
+	int dist[NUM_NODES];
+	int prev[NUM_NODES];
+	int shortest, u;
+	int alt;
+	int calc = 0;
 
-    prints("MPEG Task A start:  ");
-    printi(clock());
-    prints("\n");
+	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-    for(i=0; i<128; i++)
-        theMessage.msg[i] = vlc_array[i];
+	prints("STARTING 3\n");
 
+    while(1){
+		theMessage.size = NUM_NODES;
+		for (i=0; i<NUM_NODES; i++) {
+			ReceiveMessage(&theMessage, divider_addr);
+			for (j=0; j<NUM_NODES; j++)
+				AdjMatrix[i][j] = theMessage.msg[j];
+		}
+		calc = AdjMatrix[0][0];
+		if (calc == KILL) break;
 
-    theMessage.size = 128;
+		for (i=0;i<NUM_NODES;i++){
+			dist[i] = INFINITY;
+			prev[i] = INFINITY;
+			q[i] = i;
+		}
+		dist[source] = 0;
+		u = 0;
 
-    for(i=0;i<MPEG_FRAMES;i++)                          // send 8 times the array to task 2
-    {
-        exec_time = clock();
+		for (i=0;i<NUM_NODES;i++) {
+			shortest = INFINITY;
+			for (j=0;j<NUM_NODES;j++){
+				if (dist[j] < shortest && q[j] != INFINITY){		
+					shortest = dist[j];
+					u = j;
+				}
+			}
+			q[u] = INFINITY;
 
-        SendMessage(&theMessage,ivlc_addr);
+			for (v=0; v<NUM_NODES; v++){
+				if (q[v] != INFINITY && AdjMatrix[u][v] != INFINITY){
+					alt = dist[u] + AdjMatrix[u][v];
+					if (alt < dist[v]){
+						dist[v] = alt;
+						prev[v] = u;
+					}
+				}
+			}
+		}
+	}
 
-        exec_time = clock() - exec_time;
+    theMessage.size = NUM_NODES*2;
+	for (i=0;i<NUM_NODES;i++)
+		theMessage.msg[i] = dist[i];
 
-        prints("START-Exec time: ");
-        printi(exec_time);
-        prints("\n");
-    }
+	for (i=0;i<NUM_NODES;i++)
+		theMessage.msg[i+NUM_NODES] = prev[i];
 
-    printi(clock());
-    prints("End Task A - MPEG\n");
+    SendMessage(&theMessage, print_dij_addr);
+    prints("Dijkstra_3 finished.\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

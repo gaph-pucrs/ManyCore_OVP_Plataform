@@ -7,5 +7,5 @@
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define prod_addr 0x0400
-#define cons_addr 0x0401
+#define prod_addr 0x0200
+#define cons_addr 0x0708

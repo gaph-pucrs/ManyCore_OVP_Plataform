@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "dijkstra_1_config.h"
+#include "dijkstra_3_config.h"
 
 message theMessage;
 
@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-	prints("STARTING 3\n");
+	prints("STARTING 2\n");
 
     while(1){
 		theMessage.size = NUM_NODES;
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
 		theMessage.msg[i+NUM_NODES] = prev[i];
 
     SendMessage(&theMessage, print_dij_addr);
-    prints("Dijkstra_3 finished.\n");
+    prints("Dijkstra_2 finished.\n");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
