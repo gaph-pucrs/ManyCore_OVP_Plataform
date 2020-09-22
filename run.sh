@@ -5,6 +5,9 @@ Y=$2
 APP_NAME=$3
 N=$(($X*$Y))
 
+# To get the runtime
+start=`date +%s`
+
 #source /soft64/source_gaph
 # module load ovp/20191106
 # source /soft64/imperas/ferramentas/64bits/Imperas.20191106/bin/setup.sh
@@ -106,6 +109,11 @@ cd application
 rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
 rm -rf *.elf
 cd ..
+
+# Report the total execution time
+end=`date +%s`
+runtime=$((end-start))
+echo "Execution time: '$runtime'"
 
 #cd simulation
 #rm -rf *.csv
