@@ -312,7 +312,10 @@ int main(int argc, char *argv[]) {
 
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
+    bhmMessage("INFO", "TEA", "TEA inicializando...");
     constructor();
+
+    
 
     load_matrices(Binv, Cexp);
 
@@ -324,6 +327,8 @@ int main(int argc, char *argv[]) {
     for(i=0;i<THERMAL_NODES;i++){
         TempTraceEnd[i] = 318.15;
     }
+
+    bhmMessage("INFO", "TEA", "TEA inicializado com sucesso!");
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();
