@@ -21,9 +21,10 @@ int main(int argc, char **argv)
         ReceiveMessage(&newMessage, prod_addr);
         order[i] = newMessage.msg[0];
     }
-    LOG("3-PRINT FINAL DA ORDEM:\n");
+    prints("PRINT FINAL DA ORDEM:\n");
     for(i=0;i<N_MESSAGES;i++){
-        LOG("%d-- %d\n",i,order[i]);
+        printi(i); prints("--"); printi(order[i]); prints("\n");
+        //LOG("%d-- %d\n",i,order[i]);
     }
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////

@@ -24,7 +24,7 @@ int main(int argc, char **argv)
         theMessage.msg[0] = (i+1) * 10;
         SendMessage(&theMessage, cons_addr);
     }
-    LOG("PROD FINISH THE MESSAGE GENERATION!");
+    prints("PROD FINISH THE MESSAGE GENERATION!");
     //////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

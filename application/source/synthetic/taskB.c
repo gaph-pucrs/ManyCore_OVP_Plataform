@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int i, j, t;
 	
-	LOG("synthetic task B started.\n");
+	prints("synthetic task B started.\n");
 
 	for(i=0;i<SYNTHETIC_ITERATIONS;i++){
 		for(t=0;t<1000;t++){
@@ -26,10 +26,9 @@ int main(int argc, char **argv)
 		for(j=0;j<30;j++) theMessage.msg[j]=i;
 		
 		SendMessage(&theMessage, taskC_addr);
-		//LOG("taskB - %d\n",i);
 	}
 
-    LOG("synthetic task B finished.\n");
+    prints("synthetic task B finished.\n");
 	//////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////
