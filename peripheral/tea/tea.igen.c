@@ -315,9 +315,7 @@ int main(int argc, char *argv[]) {
     bhmMessage("INFO", "TEA", "TEA inicializando...");
     constructor();
 
-    
-
-    load_matrices(Binv, Cexp);
+    //load_matrices(Binv, Cexp);
 
     for(i=0;i<DIM_X;i++){
         for(j=0;j<DIM_Y;j++){
