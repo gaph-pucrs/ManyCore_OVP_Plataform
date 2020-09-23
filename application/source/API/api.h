@@ -654,6 +654,7 @@ void FinishApplication(){
     prints("Clk gate on - FinishApplication\n"); 
 #endif
     prints("Finalizando "); printi(*myAddress); prints("\n");
+    prints("Tempo: "); printi(clock()); prints("\n");
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     unsigned int init_end = *SyncToPE;

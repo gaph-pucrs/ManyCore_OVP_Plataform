@@ -141,7 +141,7 @@ if __name__ == '__main__':
     resultMemphis = generateGraph(dir)
 
     ## OVP
-    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario2\\data\\trafficOVP.txt" ###### WINDOWS ######
+    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficOVP.txt" ###### WINDOWS ######
     #dir = '../simulation/saved/'+str(arg[1])+'/trafficOVP.txt' ###### LINUX #####
     resultOVP = generateGraph(dir)
 
