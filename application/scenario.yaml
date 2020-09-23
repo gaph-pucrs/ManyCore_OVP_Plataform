@@ -65,56 +65,55 @@ apps:
     start: [7,5]
     ivlc: [8,5]
     iquant: [8,4]
- - name: synthetic
+ - name: mpeg
    cluster: 0
    static_mapping:
-    taskA: [5,5]
-    taskB: [6,6]
-    taskC: [7,6]
-    taskD: [8,6]
-    taskE: [7,7]
-    taskF: [6,7]
- - name: prodcons
+    print: [5,5]
+    idct: [6,6]
+    start: [7,6]
+    ivlc: [8,6]
+    iquant: [7,7]
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [2,0]
     cons: [7,8]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [3,0]
     cons: [6,8]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [4,0]
     cons: [3,8]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [5,0]
     cons: [4,8]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [6,0]
     cons: [2,8]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [8,3]
     cons: [0,4]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [8,7]
     cons: [2,1]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [8,0]
     cons: [8,1]
- - name: prodcons
+ - name: prod_cons
    cluster: 0
    static_mapping:
     prod: [7,0]
