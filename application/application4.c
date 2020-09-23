@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "prodcons_3_config.h"
+#include "prod_cons_3_config.h"
 
 message theMessage;
 

@@ -2,10 +2,14 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define N_MESSAGES 3000
-#define MESSAGE_SIZE 100
+
+#define MPEG_FRAMES				375//160
+
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define prod_addr 0x0400
-#define cons_addr 0x0308
+#define print_addr 0x0505
+#define idct_addr 0x0606
+#define start_addr 0x0706
+#define ivlc_addr 0x0806
+#define iquant_addr 0x0707

@@ -3,9 +3,9 @@
 //////////////////////////////////////
 // Task defines //////////////////////
 #define N_MESSAGES 3000
-#define MESSAGE_SIZE 100
+#define MESSAGE_SIZE 125
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define prod_addr 0x0600
-#define cons_addr 0x0208
+#define prod_addr 0x0300
+#define cons_addr 0x0608

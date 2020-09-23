@@ -2,13 +2,10 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define SYNTHETIC_ITERATIONS	2000
+#define N_MESSAGES 3000
+#define MESSAGE_SIZE 125
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define taskA_addr 0x0505
-#define taskB_addr 0x0606
-#define taskC_addr 0x0706
-#define taskD_addr 0x0806
-#define taskE_addr 0x0707
-#define taskF_addr 0x0607
+#define prod_addr 0x0500
+#define cons_addr 0x0408
