@@ -15,7 +15,7 @@ DIM_X = 9
 DIM_Y = 9
 N_PES = DIM_X*DIM_Y
 N_ROW_GRAPH = 1
-N_COL_GRAPH = 3
+N_COL_GRAPH = 4
 NUM_OF_GRAPHS = N_ROW_GRAPH*N_COL_GRAPH
 
 localFlow = [0 for i in range(N_PES)]
@@ -98,7 +98,7 @@ def generateImage(MyGraphs, maximumTraffic, figName):
                     #print("Grafico "+str(graph)+":")
                     #print(MyGraphs[graph])
                     extent = (0, DIM_X, 0, DIM_Y)
-                    pos = axes[graph_r][graph_c].imshow(MyGraphs[indx], interpolation='hanning', cmap='Oranges', origin='lower', extent=extent, vmax=1.0, vmin=0)# see https://matplotlib.org/examples/color/colormaps_reference.html for more cmaps
+                    pos = axes[graph_r][graph_c].imshow(MyGraphs[indx], interpolation='hanning', cmap='Reds', origin='lower', extent=extent, vmax=1.0, vmin=0)# see https://matplotlib.org/examples/color/colormaps_reference.html for more cmaps
                     axes[graph_r][graph_c].set_title("Accumulated "+str(indx+1))
                     axes[graph_r][graph_c].set_xticks(np.arange(0.5, DIM_X+.5, 1))
                     axes[graph_r][graph_c].set_yticks(np.arange(0.5, DIM_Y+.5, 1))
@@ -115,8 +115,8 @@ def generateImage(MyGraphs, maximumTraffic, figName):
                 #print("Grafico "+str(graph)+":")
                 #print(MyGraphs[graph])
                 extent = (0, DIM_X, 0, DIM_Y)
-                pos = axes[graph_c].imshow(MyGraphs[graph_c], interpolation='hanning', cmap='Oranges', origin='lower', extent=extent, vmax=1.0, vmin=0)# see https://matplotlib.org/examples/color/colormaps_reference.html for more cmaps
-                axes[graph_c].set_title("Accumulated "+str(graph_c+1))
+                pos = axes[graph_c].imshow(MyGraphs[graph_c], interpolation='hanning', cmap='rainbow', origin='lower', extent=extent, vmax=1.0, vmin=0)# see https://matplotlib.org/examples/color/colormaps_reference.html for more cmaps
+                axes[graph_c].set_title("Accumulated "+str(graph_c+1), fontsize=20)
                 axes[graph_c].set_xticks(np.arange(0.5, DIM_X+.5, 1))
                 axes[graph_c].set_yticks(np.arange(0.5, DIM_Y+.5, 1))
                 axes[graph_c].set_xticklabels(np.arange(0, DIM_X, 1))
@@ -125,6 +125,11 @@ def generateImage(MyGraphs, maximumTraffic, figName):
                 axes[graph_c].set_yticks(np.arange(0, DIM_Y, 1), minor=True);
                 axes[graph_c].grid(which='minor', color='black', linestyle='-', linewidth=1)
                 axes[graph_c].set_frame_on(False)
+            fig.subplots_adjust(left=0.125, right=0.9, bottom=0.1, top=0.9, wspace=0.2, hspace=0.2)
+            cbar_ax = fig.add_axes([0.128, 0.05, 0.77, 0.05])
+            fig.colorbar(pos, cax=cbar_ax, orientation='horizontal')
+
+
 
         #cb_ax = fig.add_axes([0.83, 0.1, 0.02, 0.8])
         #cbar = fig.colorbar(mesh, cax=cb_ax)
@@ -136,7 +141,7 @@ def generateImage(MyGraphs, maximumTraffic, figName):
 #def main(args):
 if __name__ == '__main__':
     ## Memphis 
-    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario2\\data\\trafficMemphis.txt" ###### WINDOWS ######
+    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficMemphis.txt" ###### WINDOWS ######
     #dir = '../simulation/saved/'+str(arg[1])+'/trafficMemphis.txt' ###### LINUX #####
     resultMemphis = generateGraph(dir)
 
@@ -154,12 +159,12 @@ if __name__ == '__main__':
 
     ## Plot Memphis 
     name = "trafficMemphis.png"
-    #generateImage(resultMemphis[0], maximumTraffic, name)
-    generateImage(resultMemphis[0], resultMemphis[1], name)
+    generateImage(resultMemphis[0], maximumTraffic, name)
+    #generateImage(resultMemphis[0], resultMemphis[1], name)
     ## Plot OVP
     name = "trafficOVP.png"
-    #generateImage(resultOVP[0], maximumTraffic, name)
-    generateImage(resultOVP[0], resultOVP[1], name)
+    generateImage(resultOVP[0], maximumTraffic, name)
+    #generateImage(resultOVP[0], resultOVP[1], name)
 
 #if __name__ == '__main__':
 #    sys.exit(main(sys.argv))

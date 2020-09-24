@@ -1,120 +1,13 @@
 apps:
- - name: thermalManagement
-   cluster: 0
-   static_mapping:
-    thermalMaster: [0,0]
- - name: dijkstra
-   cluster: 0
-   static_mapping:
-    dijkstra_0: [5,1]
-    dijkstra_1: [5,2]
-    dijkstra_2: [6,2]
-    dijkstra_3: [6,1]
-    dijkstra_4: [7,1]
-    divider: [7,2]
-    print_dij: [8,2]
- - name: dijkstra
-   cluster: 0
-   static_mapping:
-    dijkstra_0: [1,4]
-    dijkstra_1: [1,5]
-    dijkstra_2: [1,6]
-    dijkstra_3: [1,7]
-    dijkstra_4: [0,5]
-    divider: [0,6]
-    print_dij: [0,7]
- - name: dijkstra
-   cluster: 0
-   static_mapping:
-    dijkstra_0: [3,4]
-    dijkstra_1: [4,1]
-    dijkstra_2: [4,2]
-    dijkstra_3: [3,2]
-    dijkstra_4: [4,3]
-    divider: [4,4]
-    print_dij: [5,4]
  - name: mpeg
    cluster: 0
    static_mapping:
     print: [1,0]
     idct: [1,1]
-    start: [0,1]
-    ivlc: [0,2]
+    start: [2,1]
+    ivlc: [2,2]
     iquant: [1,2]
- - name: mpeg
+ - name: thermalManagement
    cluster: 0
    static_mapping:
-    print: [2,3]
-    idct: [2,4]
-    start: [2,5]
-    ivlc: [3,5]
-    iquant: [3,3]
- - name: mpeg
-   cluster: 0
-   static_mapping:
-    print: [4,6]
-    idct: [5,6]
-    start: [5,7]
-    ivlc: [4,7]
-    iquant: [5,8]
- - name: mpeg
-   cluster: 0
-   static_mapping:
-    print: [6,4]
-    idct: [6,5]
-    start: [7,5]
-    ivlc: [8,5]
-    iquant: [8,4]
- - name: mpeg
-   cluster: 0
-   static_mapping:
-    print: [5,5]
-    idct: [6,6]
-    start: [7,6]
-    ivlc: [8,6]
-    iquant: [7,7]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [2,0]
-    cons: [7,8]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [3,0]
-    cons: [6,8]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [4,0]
-    cons: [3,8]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [5,0]
-    cons: [4,8]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [6,0]
-    cons: [2,8]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [8,3]
-    cons: [0,4]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [8,7]
-    cons: [2,1]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [8,0]
-    cons: [8,1]
- - name: prod_cons
-   cluster: 0
-   static_mapping:
-    prod: [7,0]
-    cons: [8,8]
+    thermalMaster: [0,0]
