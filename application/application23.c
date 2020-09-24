@@ -5,7 +5,7 @@
 #include "spr_defs.h"
 #include "source/API/api.h"
 
-#include "dijkstra_late_1_config.h"
+#include "dijkstra_1_config.h"
 
 message theMessage;
 
@@ -25,9 +25,6 @@ int main(int argc, char **argv)
 	int calc = 0;
 
 	int AdjMatrix[NUM_NODES][NUM_NODES];
-
-	while(clock()<(30116517/3)){
-	}
 
 	prints("STARTING 1\n");
 
