@@ -116,7 +116,7 @@ def generateImage(MyGraphs, maximumTraffic, figName):
                 #print(MyGraphs[graph])
                 extent = (0, DIM_X, 0, DIM_Y)
                 pos = axes[graph_c].imshow(MyGraphs[graph_c], interpolation='hanning', cmap='rainbow', origin='lower', extent=extent, vmax=1.0, vmin=0)# see https://matplotlib.org/examples/color/colormaps_reference.html for more cmaps
-                axes[graph_c].set_title("Accumulated "+str(graph_c+1), fontsize=20)
+                axes[graph_c].set_title("Snapshot "+str(graph_c+1), fontsize=24)
                 axes[graph_c].set_xticks(np.arange(0.5, DIM_X+.5, 1))
                 axes[graph_c].set_yticks(np.arange(0.5, DIM_Y+.5, 1))
                 axes[graph_c].set_xticklabels(np.arange(0, DIM_X, 1))
