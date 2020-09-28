@@ -7,6 +7,7 @@ import os.path
 from os import path
 from shutil import copy
 import yaml
+import subprocess
 
 def printChronosHeader():
     print("======================================================================")
@@ -47,7 +48,11 @@ if __name__ == '__main__':
         sys.exit(1)
     # VERIFY THE SCENARIO FILE
     if(os.path.isfile('sandbox/'+str(SCENARIO_FILE)+'.yaml')):
-        print("ACHOU!")
+        subprocess.call("run.sh "+str(X)+" "+str(Y)+" "+SCENARIO_FILE)
     else:
         print("ERRO 2: You need to call a valid SCENARIO.")
         sys.exit(1)
+
+
+    #COMANDO PARA ABRIR O OVP EM OUTRA JANELA
+    # gnome-terminal -e "bash -c \".\run.sh 9 9 scenario; exec bash \""
