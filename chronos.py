@@ -1,4 +1,11 @@
+#!/usr/bin/python
+
 import sys
+import math
+import os
+import os.path
+from os import path
+from shutil import copy
 import yaml
 
 if __name__ == '__main__':
