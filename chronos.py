@@ -12,6 +12,7 @@ if __name__ == '__main__':
     # Read Arguments    
     try:
         TESTCASE_FILE = sys.argv[1]
+        print(TESTCASE_FILE)
         with open('sandbox/'+str(TESTCASE_FILE)+'.yaml') as file:
 	        scenario = yaml.load(file, Loader=yaml.SafeLoader)
             DIMENSIONS = scenario['hw'][0]['mpsoc_dimension']
