@@ -35,9 +35,9 @@
 #define OUT_TIME    0x00000000
 
 // NoC Dimensions
-#define DIM_X 9
+#define DIM_X 7
 #define DIM_Y 9
-#define N_PES 81
+#define N_PES 63
 
 //Ticks
 #define ITERATION                0x5555

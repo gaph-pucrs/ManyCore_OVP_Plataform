@@ -13,13 +13,13 @@
 #define MODULE_NAME     "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
-#define N_PES 81
+#define N_PES 63
 #define __bswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 /* Quantum defines */
 #define INSTRUCTIONS_PER_SECOND       250000000.0 // 1GHz (assuming 1 instruction per cycle)
-#define INSTRUCTIONS_PER_TIME_SLICE   100.0 //(INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
+#define INSTRUCTIONS_PER_TIME_SLICE   1500.0 //(INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
 #define QUANTUM_TIME_SLICE            (INSTRUCTIONS_PER_TIME_SLICE/INSTRUCTIONS_PER_SECOND)// 0.0000010 // 
 
 #define QUANTUNS_TO_LOG 10000

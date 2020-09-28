@@ -63,24 +63,6 @@ ihwaddbus -instancename cpu59Bus -addresswidth 32
 ihwaddbus -instancename cpu60Bus -addresswidth 32
 ihwaddbus -instancename cpu61Bus -addresswidth 32
 ihwaddbus -instancename cpu62Bus -addresswidth 32
-ihwaddbus -instancename cpu63Bus -addresswidth 32
-ihwaddbus -instancename cpu64Bus -addresswidth 32
-ihwaddbus -instancename cpu65Bus -addresswidth 32
-ihwaddbus -instancename cpu66Bus -addresswidth 32
-ihwaddbus -instancename cpu67Bus -addresswidth 32
-ihwaddbus -instancename cpu68Bus -addresswidth 32
-ihwaddbus -instancename cpu69Bus -addresswidth 32
-ihwaddbus -instancename cpu70Bus -addresswidth 32
-ihwaddbus -instancename cpu71Bus -addresswidth 32
-ihwaddbus -instancename cpu72Bus -addresswidth 32
-ihwaddbus -instancename cpu73Bus -addresswidth 32
-ihwaddbus -instancename cpu74Bus -addresswidth 32
-ihwaddbus -instancename cpu75Bus -addresswidth 32
-ihwaddbus -instancename cpu76Bus -addresswidth 32
-ihwaddbus -instancename cpu77Bus -addresswidth 32
-ihwaddbus -instancename cpu78Bus -addresswidth 32
-ihwaddbus -instancename cpu79Bus -addresswidth 32
-ihwaddbus -instancename cpu80Bus -addresswidth 32
 ihwaddbus -instancename cpuIteratorBus -addresswidth 32
 
 ihwaddnet -instancename intNI_TX0
@@ -272,60 +254,6 @@ ihwaddnet -instancename intTIMER61
 ihwaddnet -instancename intNI_TX62
 ihwaddnet -instancename intNI_RX62
 ihwaddnet -instancename intTIMER62
-ihwaddnet -instancename intNI_TX63
-ihwaddnet -instancename intNI_RX63
-ihwaddnet -instancename intTIMER63
-ihwaddnet -instancename intNI_TX64
-ihwaddnet -instancename intNI_RX64
-ihwaddnet -instancename intTIMER64
-ihwaddnet -instancename intNI_TX65
-ihwaddnet -instancename intNI_RX65
-ihwaddnet -instancename intTIMER65
-ihwaddnet -instancename intNI_TX66
-ihwaddnet -instancename intNI_RX66
-ihwaddnet -instancename intTIMER66
-ihwaddnet -instancename intNI_TX67
-ihwaddnet -instancename intNI_RX67
-ihwaddnet -instancename intTIMER67
-ihwaddnet -instancename intNI_TX68
-ihwaddnet -instancename intNI_RX68
-ihwaddnet -instancename intTIMER68
-ihwaddnet -instancename intNI_TX69
-ihwaddnet -instancename intNI_RX69
-ihwaddnet -instancename intTIMER69
-ihwaddnet -instancename intNI_TX70
-ihwaddnet -instancename intNI_RX70
-ihwaddnet -instancename intTIMER70
-ihwaddnet -instancename intNI_TX71
-ihwaddnet -instancename intNI_RX71
-ihwaddnet -instancename intTIMER71
-ihwaddnet -instancename intNI_TX72
-ihwaddnet -instancename intNI_RX72
-ihwaddnet -instancename intTIMER72
-ihwaddnet -instancename intNI_TX73
-ihwaddnet -instancename intNI_RX73
-ihwaddnet -instancename intTIMER73
-ihwaddnet -instancename intNI_TX74
-ihwaddnet -instancename intNI_RX74
-ihwaddnet -instancename intTIMER74
-ihwaddnet -instancename intNI_TX75
-ihwaddnet -instancename intNI_RX75
-ihwaddnet -instancename intTIMER75
-ihwaddnet -instancename intNI_TX76
-ihwaddnet -instancename intNI_RX76
-ihwaddnet -instancename intTIMER76
-ihwaddnet -instancename intNI_TX77
-ihwaddnet -instancename intNI_RX77
-ihwaddnet -instancename intTIMER77
-ihwaddnet -instancename intNI_TX78
-ihwaddnet -instancename intNI_RX78
-ihwaddnet -instancename intTIMER78
-ihwaddnet -instancename intNI_TX79
-ihwaddnet -instancename intNI_RX79
-ihwaddnet -instancename intTIMER79
-ihwaddnet -instancename intNI_TX80
-ihwaddnet -instancename intNI_RX80
-ihwaddnet -instancename intTIMER80
 
 ihwaddprocessor -instancename cpu0 -id 0 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
@@ -642,97 +570,7 @@ ihwaddprocessor -instancename cpu62 -id 62 \
                 -variant generic \
                 -semihostname or1kNewlib
 
-ihwaddprocessor -instancename cpu63 -id 63 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu64 -id 64 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu65 -id 65 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu66 -id 66 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu67 -id 67 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu68 -id 68 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu69 -id 69 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu70 -id 70 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu71 -id 71 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu72 -id 72 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu73 -id 73 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu74 -id 74 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu75 -id 75 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu76 -id 76 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu77 -id 77 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu78 -id 78 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu79 -id 79 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpu80 -id 80 \
-                -vendor ovpworld.org -library processor -type or1k -version 1.0 \
-                -variant generic \
-                -semihostname or1kNewlib
-
-ihwaddprocessor -instancename cpuIterator -id 81 \
+ihwaddprocessor -instancename cpuIterator -id 63 \
                 -vendor ovpworld.org -library processor -type or1k -version 1.0 \
                 -variant generic \
                 -semihostname or1kNewlib
@@ -1114,114 +952,6 @@ ihwconnect -bus cpu62Bus -instancename cpu62 -busmasterport DATA
 ihwconnect -instancename cpu62 -netport       intr0       -net intTIMER62
 ihwconnect -instancename cpu62 -netport       intr1       -net intNI_TX62
 ihwconnect -instancename cpu62 -netport       intr2       -net intNI_RX62
-
-ihwconnect -bus cpu63Bus -instancename cpu63 -busmasterport INSTRUCTION
-ihwconnect -bus cpu63Bus -instancename cpu63 -busmasterport DATA
-ihwconnect -instancename cpu63 -netport       intr0       -net intTIMER63
-ihwconnect -instancename cpu63 -netport       intr1       -net intNI_TX63
-ihwconnect -instancename cpu63 -netport       intr2       -net intNI_RX63
-
-ihwconnect -bus cpu64Bus -instancename cpu64 -busmasterport INSTRUCTION
-ihwconnect -bus cpu64Bus -instancename cpu64 -busmasterport DATA
-ihwconnect -instancename cpu64 -netport       intr0       -net intTIMER64
-ihwconnect -instancename cpu64 -netport       intr1       -net intNI_TX64
-ihwconnect -instancename cpu64 -netport       intr2       -net intNI_RX64
-
-ihwconnect -bus cpu65Bus -instancename cpu65 -busmasterport INSTRUCTION
-ihwconnect -bus cpu65Bus -instancename cpu65 -busmasterport DATA
-ihwconnect -instancename cpu65 -netport       intr0       -net intTIMER65
-ihwconnect -instancename cpu65 -netport       intr1       -net intNI_TX65
-ihwconnect -instancename cpu65 -netport       intr2       -net intNI_RX65
-
-ihwconnect -bus cpu66Bus -instancename cpu66 -busmasterport INSTRUCTION
-ihwconnect -bus cpu66Bus -instancename cpu66 -busmasterport DATA
-ihwconnect -instancename cpu66 -netport       intr0       -net intTIMER66
-ihwconnect -instancename cpu66 -netport       intr1       -net intNI_TX66
-ihwconnect -instancename cpu66 -netport       intr2       -net intNI_RX66
-
-ihwconnect -bus cpu67Bus -instancename cpu67 -busmasterport INSTRUCTION
-ihwconnect -bus cpu67Bus -instancename cpu67 -busmasterport DATA
-ihwconnect -instancename cpu67 -netport       intr0       -net intTIMER67
-ihwconnect -instancename cpu67 -netport       intr1       -net intNI_TX67
-ihwconnect -instancename cpu67 -netport       intr2       -net intNI_RX67
-
-ihwconnect -bus cpu68Bus -instancename cpu68 -busmasterport INSTRUCTION
-ihwconnect -bus cpu68Bus -instancename cpu68 -busmasterport DATA
-ihwconnect -instancename cpu68 -netport       intr0       -net intTIMER68
-ihwconnect -instancename cpu68 -netport       intr1       -net intNI_TX68
-ihwconnect -instancename cpu68 -netport       intr2       -net intNI_RX68
-
-ihwconnect -bus cpu69Bus -instancename cpu69 -busmasterport INSTRUCTION
-ihwconnect -bus cpu69Bus -instancename cpu69 -busmasterport DATA
-ihwconnect -instancename cpu69 -netport       intr0       -net intTIMER69
-ihwconnect -instancename cpu69 -netport       intr1       -net intNI_TX69
-ihwconnect -instancename cpu69 -netport       intr2       -net intNI_RX69
-
-ihwconnect -bus cpu70Bus -instancename cpu70 -busmasterport INSTRUCTION
-ihwconnect -bus cpu70Bus -instancename cpu70 -busmasterport DATA
-ihwconnect -instancename cpu70 -netport       intr0       -net intTIMER70
-ihwconnect -instancename cpu70 -netport       intr1       -net intNI_TX70
-ihwconnect -instancename cpu70 -netport       intr2       -net intNI_RX70
-
-ihwconnect -bus cpu71Bus -instancename cpu71 -busmasterport INSTRUCTION
-ihwconnect -bus cpu71Bus -instancename cpu71 -busmasterport DATA
-ihwconnect -instancename cpu71 -netport       intr0       -net intTIMER71
-ihwconnect -instancename cpu71 -netport       intr1       -net intNI_TX71
-ihwconnect -instancename cpu71 -netport       intr2       -net intNI_RX71
-
-ihwconnect -bus cpu72Bus -instancename cpu72 -busmasterport INSTRUCTION
-ihwconnect -bus cpu72Bus -instancename cpu72 -busmasterport DATA
-ihwconnect -instancename cpu72 -netport       intr0       -net intTIMER72
-ihwconnect -instancename cpu72 -netport       intr1       -net intNI_TX72
-ihwconnect -instancename cpu72 -netport       intr2       -net intNI_RX72
-
-ihwconnect -bus cpu73Bus -instancename cpu73 -busmasterport INSTRUCTION
-ihwconnect -bus cpu73Bus -instancename cpu73 -busmasterport DATA
-ihwconnect -instancename cpu73 -netport       intr0       -net intTIMER73
-ihwconnect -instancename cpu73 -netport       intr1       -net intNI_TX73
-ihwconnect -instancename cpu73 -netport       intr2       -net intNI_RX73
-
-ihwconnect -bus cpu74Bus -instancename cpu74 -busmasterport INSTRUCTION
-ihwconnect -bus cpu74Bus -instancename cpu74 -busmasterport DATA
-ihwconnect -instancename cpu74 -netport       intr0       -net intTIMER74
-ihwconnect -instancename cpu74 -netport       intr1       -net intNI_TX74
-ihwconnect -instancename cpu74 -netport       intr2       -net intNI_RX74
-
-ihwconnect -bus cpu75Bus -instancename cpu75 -busmasterport INSTRUCTION
-ihwconnect -bus cpu75Bus -instancename cpu75 -busmasterport DATA
-ihwconnect -instancename cpu75 -netport       intr0       -net intTIMER75
-ihwconnect -instancename cpu75 -netport       intr1       -net intNI_TX75
-ihwconnect -instancename cpu75 -netport       intr2       -net intNI_RX75
-
-ihwconnect -bus cpu76Bus -instancename cpu76 -busmasterport INSTRUCTION
-ihwconnect -bus cpu76Bus -instancename cpu76 -busmasterport DATA
-ihwconnect -instancename cpu76 -netport       intr0       -net intTIMER76
-ihwconnect -instancename cpu76 -netport       intr1       -net intNI_TX76
-ihwconnect -instancename cpu76 -netport       intr2       -net intNI_RX76
-
-ihwconnect -bus cpu77Bus -instancename cpu77 -busmasterport INSTRUCTION
-ihwconnect -bus cpu77Bus -instancename cpu77 -busmasterport DATA
-ihwconnect -instancename cpu77 -netport       intr0       -net intTIMER77
-ihwconnect -instancename cpu77 -netport       intr1       -net intNI_TX77
-ihwconnect -instancename cpu77 -netport       intr2       -net intNI_RX77
-
-ihwconnect -bus cpu78Bus -instancename cpu78 -busmasterport INSTRUCTION
-ihwconnect -bus cpu78Bus -instancename cpu78 -busmasterport DATA
-ihwconnect -instancename cpu78 -netport       intr0       -net intTIMER78
-ihwconnect -instancename cpu78 -netport       intr1       -net intNI_TX78
-ihwconnect -instancename cpu78 -netport       intr2       -net intNI_RX78
-
-ihwconnect -bus cpu79Bus -instancename cpu79 -busmasterport INSTRUCTION
-ihwconnect -bus cpu79Bus -instancename cpu79 -busmasterport DATA
-ihwconnect -instancename cpu79 -netport       intr0       -net intTIMER79
-ihwconnect -instancename cpu79 -netport       intr1       -net intNI_TX79
-ihwconnect -instancename cpu79 -netport       intr2       -net intNI_RX79
-
-ihwconnect -bus cpu80Bus -instancename cpu80 -busmasterport INSTRUCTION
-ihwconnect -bus cpu80Bus -instancename cpu80 -busmasterport DATA
-ihwconnect -instancename cpu80 -netport       intr0       -net intTIMER80
-ihwconnect -instancename cpu80 -netport       intr1       -net intNI_TX80
-ihwconnect -instancename cpu80 -netport       intr2       -net intNI_RX80
 
 ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport INSTRUCTION
 ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport DATA
@@ -1667,137 +1397,11 @@ ihwaddmemory -instancename ram125 -type ram
 ihwconnect -bus cpu62Bus -instancename ram125 -busslaveport sp62 -loaddress 0xf0000000 -hiaddress 0xffffffff
 
 
-ihwaddmemory -instancename ram126 -type ram
-ihwconnect -bus cpu63Bus -instancename ram126 -busslaveport sp63 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram127 -type ram
-ihwconnect -bus cpu63Bus -instancename ram127 -busslaveport sp63 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram128 -type ram
-ihwconnect -bus cpu64Bus -instancename ram128 -busslaveport sp64 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram129 -type ram
-ihwconnect -bus cpu64Bus -instancename ram129 -busslaveport sp64 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram130 -type ram
-ihwconnect -bus cpu65Bus -instancename ram130 -busslaveport sp65 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram131 -type ram
-ihwconnect -bus cpu65Bus -instancename ram131 -busslaveport sp65 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram132 -type ram
-ihwconnect -bus cpu66Bus -instancename ram132 -busslaveport sp66 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram133 -type ram
-ihwconnect -bus cpu66Bus -instancename ram133 -busslaveport sp66 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram134 -type ram
-ihwconnect -bus cpu67Bus -instancename ram134 -busslaveport sp67 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram135 -type ram
-ihwconnect -bus cpu67Bus -instancename ram135 -busslaveport sp67 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram136 -type ram
-ihwconnect -bus cpu68Bus -instancename ram136 -busslaveport sp68 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram137 -type ram
-ihwconnect -bus cpu68Bus -instancename ram137 -busslaveport sp68 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram138 -type ram
-ihwconnect -bus cpu69Bus -instancename ram138 -busslaveport sp69 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram139 -type ram
-ihwconnect -bus cpu69Bus -instancename ram139 -busslaveport sp69 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram140 -type ram
-ihwconnect -bus cpu70Bus -instancename ram140 -busslaveport sp70 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram141 -type ram
-ihwconnect -bus cpu70Bus -instancename ram141 -busslaveport sp70 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram142 -type ram
-ihwconnect -bus cpu71Bus -instancename ram142 -busslaveport sp71 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram143 -type ram
-ihwconnect -bus cpu71Bus -instancename ram143 -busslaveport sp71 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram144 -type ram
-ihwconnect -bus cpu72Bus -instancename ram144 -busslaveport sp72 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram145 -type ram
-ihwconnect -bus cpu72Bus -instancename ram145 -busslaveport sp72 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram146 -type ram
-ihwconnect -bus cpu73Bus -instancename ram146 -busslaveport sp73 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram147 -type ram
-ihwconnect -bus cpu73Bus -instancename ram147 -busslaveport sp73 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram148 -type ram
-ihwconnect -bus cpu74Bus -instancename ram148 -busslaveport sp74 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram149 -type ram
-ihwconnect -bus cpu74Bus -instancename ram149 -busslaveport sp74 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram150 -type ram
-ihwconnect -bus cpu75Bus -instancename ram150 -busslaveport sp75 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram151 -type ram
-ihwconnect -bus cpu75Bus -instancename ram151 -busslaveport sp75 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram152 -type ram
-ihwconnect -bus cpu76Bus -instancename ram152 -busslaveport sp76 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram153 -type ram
-ihwconnect -bus cpu76Bus -instancename ram153 -busslaveport sp76 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram154 -type ram
-ihwconnect -bus cpu77Bus -instancename ram154 -busslaveport sp77 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram155 -type ram
-ihwconnect -bus cpu77Bus -instancename ram155 -busslaveport sp77 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram156 -type ram
-ihwconnect -bus cpu78Bus -instancename ram156 -busslaveport sp78 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram157 -type ram
-ihwconnect -bus cpu78Bus -instancename ram157 -busslaveport sp78 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram158 -type ram
-ihwconnect -bus cpu79Bus -instancename ram158 -busslaveport sp79 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram159 -type ram
-ihwconnect -bus cpu79Bus -instancename ram159 -busslaveport sp79 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
-ihwaddmemory -instancename ram160 -type ram
-ihwconnect -bus cpu80Bus -instancename ram160 -busslaveport sp80 -loaddress 0x0 -hiaddress 0x0fffffff
-
-ihwaddmemory -instancename ram161 -type ram
-ihwconnect -bus cpu80Bus -instancename ram161 -busslaveport sp80 -loaddress 0xf0000000 -hiaddress 0xffffffff
-
-
 ihwaddmemory -instancename ramIterator -type ram
-ihwconnect -bus cpuIteratorBus -instancename ramIterator -busslaveport sp81 -loaddress 0x0 -hiaddress 0x0fffffff
+ihwconnect -bus cpuIteratorBus -instancename ramIterator -busslaveport sp63 -loaddress 0x0 -hiaddress 0x0fffffff
 
 ihwaddmemory -instancename ramIterator2 -type ram
-ihwconnect -bus cpuIteratorBus -instancename ramIterator2 -busslaveport sp81 -loaddress 0xf0000000 -hiaddress 0xffffffff
+ihwconnect -bus cpuIteratorBus -instancename ramIterator2 -busslaveport sp63 -loaddress 0xf0000000 -hiaddress 0xffffffff
 
 
 ihwaddperipheral -instancename tea -modelfile peripheral/tea/pse.pse
@@ -2053,78 +1657,6 @@ ihwaddperipheral -instancename router62 -modelfile peripheral/whnoc_dma/pse.pse
 ihwaddperipheral -instancename ni62 -modelfile peripheral/networkInterface/pse.pse
 ihwaddperipheral -instancename timer62 -modelfile peripheral/timer/pse.pse
 ihwaddperipheral -instancename printer62 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router63 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni63 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer63 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer63 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router64 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni64 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer64 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer64 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router65 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni65 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer65 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer65 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router66 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni66 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer66 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer66 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router67 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni67 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer67 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer67 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router68 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni68 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer68 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer68 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router69 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni69 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer69 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer69 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router70 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni70 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer70 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer70 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router71 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni71 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer71 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer71 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router72 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni72 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer72 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer72 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router73 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni73 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer73 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer73 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router74 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni74 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer74 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer74 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router75 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni75 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer75 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer75 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router76 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni76 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer76 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer76 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router77 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni77 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer77 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer77 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router78 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni78 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer78 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer78 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router79 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni79 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer79 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer79 -modelfile peripheral/printer/pse.pse
-ihwaddperipheral -instancename router80 -modelfile peripheral/whnoc_dma/pse.pse
-ihwaddperipheral -instancename ni80 -modelfile peripheral/networkInterface/pse.pse
-ihwaddperipheral -instancename timer80 -modelfile peripheral/timer/pse.pse
-ihwaddperipheral -instancename printer80 -modelfile peripheral/printer/pse.pse
 
 ihwconnect -instancename router0 -busslaveport localPort -bus cpu0Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename router0 -busmasterport RREAD  -bus cpu0Bus
@@ -2630,150 +2162,6 @@ ihwconnect -instancename ni62 -busmasterport MREAD  -bus cpu62Bus
 ihwconnect -instancename ni62 -busmasterport MWRITE -bus cpu62Bus
 ihwconnect -instancename printer62 -busslaveport PRINTREGS -bus cpu62Bus -loaddress 0x80000020 -hiaddress 0x80000027
 ihwconnect -instancename timer62 -busslaveport TIMEREG -bus cpu62Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router63 -busslaveport localPort -bus cpu63Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router63 -busmasterport RREAD  -bus cpu63Bus
-ihwconnect -instancename router63 -busmasterport RWRITE -bus cpu63Bus
-ihwconnect -instancename ni63 -busslaveport DMAC -bus cpu63Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni63 -busmasterport MREAD  -bus cpu63Bus
-ihwconnect -instancename ni63 -busmasterport MWRITE -bus cpu63Bus
-ihwconnect -instancename printer63 -busslaveport PRINTREGS -bus cpu63Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer63 -busslaveport TIMEREG -bus cpu63Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router64 -busslaveport localPort -bus cpu64Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router64 -busmasterport RREAD  -bus cpu64Bus
-ihwconnect -instancename router64 -busmasterport RWRITE -bus cpu64Bus
-ihwconnect -instancename ni64 -busslaveport DMAC -bus cpu64Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni64 -busmasterport MREAD  -bus cpu64Bus
-ihwconnect -instancename ni64 -busmasterport MWRITE -bus cpu64Bus
-ihwconnect -instancename printer64 -busslaveport PRINTREGS -bus cpu64Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer64 -busslaveport TIMEREG -bus cpu64Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router65 -busslaveport localPort -bus cpu65Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router65 -busmasterport RREAD  -bus cpu65Bus
-ihwconnect -instancename router65 -busmasterport RWRITE -bus cpu65Bus
-ihwconnect -instancename ni65 -busslaveport DMAC -bus cpu65Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni65 -busmasterport MREAD  -bus cpu65Bus
-ihwconnect -instancename ni65 -busmasterport MWRITE -bus cpu65Bus
-ihwconnect -instancename printer65 -busslaveport PRINTREGS -bus cpu65Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer65 -busslaveport TIMEREG -bus cpu65Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router66 -busslaveport localPort -bus cpu66Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router66 -busmasterport RREAD  -bus cpu66Bus
-ihwconnect -instancename router66 -busmasterport RWRITE -bus cpu66Bus
-ihwconnect -instancename ni66 -busslaveport DMAC -bus cpu66Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni66 -busmasterport MREAD  -bus cpu66Bus
-ihwconnect -instancename ni66 -busmasterport MWRITE -bus cpu66Bus
-ihwconnect -instancename printer66 -busslaveport PRINTREGS -bus cpu66Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer66 -busslaveport TIMEREG -bus cpu66Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router67 -busslaveport localPort -bus cpu67Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router67 -busmasterport RREAD  -bus cpu67Bus
-ihwconnect -instancename router67 -busmasterport RWRITE -bus cpu67Bus
-ihwconnect -instancename ni67 -busslaveport DMAC -bus cpu67Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni67 -busmasterport MREAD  -bus cpu67Bus
-ihwconnect -instancename ni67 -busmasterport MWRITE -bus cpu67Bus
-ihwconnect -instancename printer67 -busslaveport PRINTREGS -bus cpu67Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer67 -busslaveport TIMEREG -bus cpu67Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router68 -busslaveport localPort -bus cpu68Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router68 -busmasterport RREAD  -bus cpu68Bus
-ihwconnect -instancename router68 -busmasterport RWRITE -bus cpu68Bus
-ihwconnect -instancename ni68 -busslaveport DMAC -bus cpu68Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni68 -busmasterport MREAD  -bus cpu68Bus
-ihwconnect -instancename ni68 -busmasterport MWRITE -bus cpu68Bus
-ihwconnect -instancename printer68 -busslaveport PRINTREGS -bus cpu68Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer68 -busslaveport TIMEREG -bus cpu68Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router69 -busslaveport localPort -bus cpu69Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router69 -busmasterport RREAD  -bus cpu69Bus
-ihwconnect -instancename router69 -busmasterport RWRITE -bus cpu69Bus
-ihwconnect -instancename ni69 -busslaveport DMAC -bus cpu69Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni69 -busmasterport MREAD  -bus cpu69Bus
-ihwconnect -instancename ni69 -busmasterport MWRITE -bus cpu69Bus
-ihwconnect -instancename printer69 -busslaveport PRINTREGS -bus cpu69Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer69 -busslaveport TIMEREG -bus cpu69Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router70 -busslaveport localPort -bus cpu70Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router70 -busmasterport RREAD  -bus cpu70Bus
-ihwconnect -instancename router70 -busmasterport RWRITE -bus cpu70Bus
-ihwconnect -instancename ni70 -busslaveport DMAC -bus cpu70Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni70 -busmasterport MREAD  -bus cpu70Bus
-ihwconnect -instancename ni70 -busmasterport MWRITE -bus cpu70Bus
-ihwconnect -instancename printer70 -busslaveport PRINTREGS -bus cpu70Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer70 -busslaveport TIMEREG -bus cpu70Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router71 -busslaveport localPort -bus cpu71Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router71 -busmasterport RREAD  -bus cpu71Bus
-ihwconnect -instancename router71 -busmasterport RWRITE -bus cpu71Bus
-ihwconnect -instancename ni71 -busslaveport DMAC -bus cpu71Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni71 -busmasterport MREAD  -bus cpu71Bus
-ihwconnect -instancename ni71 -busmasterport MWRITE -bus cpu71Bus
-ihwconnect -instancename printer71 -busslaveport PRINTREGS -bus cpu71Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer71 -busslaveport TIMEREG -bus cpu71Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router72 -busslaveport localPort -bus cpu72Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router72 -busmasterport RREAD  -bus cpu72Bus
-ihwconnect -instancename router72 -busmasterport RWRITE -bus cpu72Bus
-ihwconnect -instancename ni72 -busslaveport DMAC -bus cpu72Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni72 -busmasterport MREAD  -bus cpu72Bus
-ihwconnect -instancename ni72 -busmasterport MWRITE -bus cpu72Bus
-ihwconnect -instancename printer72 -busslaveport PRINTREGS -bus cpu72Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer72 -busslaveport TIMEREG -bus cpu72Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router73 -busslaveport localPort -bus cpu73Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router73 -busmasterport RREAD  -bus cpu73Bus
-ihwconnect -instancename router73 -busmasterport RWRITE -bus cpu73Bus
-ihwconnect -instancename ni73 -busslaveport DMAC -bus cpu73Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni73 -busmasterport MREAD  -bus cpu73Bus
-ihwconnect -instancename ni73 -busmasterport MWRITE -bus cpu73Bus
-ihwconnect -instancename printer73 -busslaveport PRINTREGS -bus cpu73Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer73 -busslaveport TIMEREG -bus cpu73Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router74 -busslaveport localPort -bus cpu74Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router74 -busmasterport RREAD  -bus cpu74Bus
-ihwconnect -instancename router74 -busmasterport RWRITE -bus cpu74Bus
-ihwconnect -instancename ni74 -busslaveport DMAC -bus cpu74Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni74 -busmasterport MREAD  -bus cpu74Bus
-ihwconnect -instancename ni74 -busmasterport MWRITE -bus cpu74Bus
-ihwconnect -instancename printer74 -busslaveport PRINTREGS -bus cpu74Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer74 -busslaveport TIMEREG -bus cpu74Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router75 -busslaveport localPort -bus cpu75Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router75 -busmasterport RREAD  -bus cpu75Bus
-ihwconnect -instancename router75 -busmasterport RWRITE -bus cpu75Bus
-ihwconnect -instancename ni75 -busslaveport DMAC -bus cpu75Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni75 -busmasterport MREAD  -bus cpu75Bus
-ihwconnect -instancename ni75 -busmasterport MWRITE -bus cpu75Bus
-ihwconnect -instancename printer75 -busslaveport PRINTREGS -bus cpu75Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer75 -busslaveport TIMEREG -bus cpu75Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router76 -busslaveport localPort -bus cpu76Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router76 -busmasterport RREAD  -bus cpu76Bus
-ihwconnect -instancename router76 -busmasterport RWRITE -bus cpu76Bus
-ihwconnect -instancename ni76 -busslaveport DMAC -bus cpu76Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni76 -busmasterport MREAD  -bus cpu76Bus
-ihwconnect -instancename ni76 -busmasterport MWRITE -bus cpu76Bus
-ihwconnect -instancename printer76 -busslaveport PRINTREGS -bus cpu76Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer76 -busslaveport TIMEREG -bus cpu76Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router77 -busslaveport localPort -bus cpu77Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router77 -busmasterport RREAD  -bus cpu77Bus
-ihwconnect -instancename router77 -busmasterport RWRITE -bus cpu77Bus
-ihwconnect -instancename ni77 -busslaveport DMAC -bus cpu77Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni77 -busmasterport MREAD  -bus cpu77Bus
-ihwconnect -instancename ni77 -busmasterport MWRITE -bus cpu77Bus
-ihwconnect -instancename printer77 -busslaveport PRINTREGS -bus cpu77Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer77 -busslaveport TIMEREG -bus cpu77Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router78 -busslaveport localPort -bus cpu78Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router78 -busmasterport RREAD  -bus cpu78Bus
-ihwconnect -instancename router78 -busmasterport RWRITE -bus cpu78Bus
-ihwconnect -instancename ni78 -busslaveport DMAC -bus cpu78Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni78 -busmasterport MREAD  -bus cpu78Bus
-ihwconnect -instancename ni78 -busmasterport MWRITE -bus cpu78Bus
-ihwconnect -instancename printer78 -busslaveport PRINTREGS -bus cpu78Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer78 -busslaveport TIMEREG -bus cpu78Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router79 -busslaveport localPort -bus cpu79Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router79 -busmasterport RREAD  -bus cpu79Bus
-ihwconnect -instancename router79 -busmasterport RWRITE -bus cpu79Bus
-ihwconnect -instancename ni79 -busslaveport DMAC -bus cpu79Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni79 -busmasterport MREAD  -bus cpu79Bus
-ihwconnect -instancename ni79 -busmasterport MWRITE -bus cpu79Bus
-ihwconnect -instancename printer79 -busslaveport PRINTREGS -bus cpu79Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer79 -busslaveport TIMEREG -bus cpu79Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router80 -busslaveport localPort -bus cpu80Bus -loaddress 0x80000000 -hiaddress 0x80000003
-ihwconnect -instancename router80 -busmasterport RREAD  -bus cpu80Bus
-ihwconnect -instancename router80 -busmasterport RWRITE -bus cpu80Bus
-ihwconnect -instancename ni80 -busslaveport DMAC -bus cpu80Bus -loaddress 0x80000004 -hiaddress 0x8000000F
-ihwconnect -instancename ni80 -busmasterport MREAD  -bus cpu80Bus
-ihwconnect -instancename ni80 -busmasterport MWRITE -bus cpu80Bus
-ihwconnect -instancename printer80 -busslaveport PRINTREGS -bus cpu80Bus -loaddress 0x80000020 -hiaddress 0x80000027
-ihwconnect -instancename timer80 -busslaveport TIMEREG -bus cpu80Bus -loaddress 0x8000001C -hiaddress 0x8000001F
 
 ihwaddpacketnet -instancename data_0_0_TEA
 ihwaddpacketnet -instancename ctrl_0_0_TEA
@@ -2823,18 +2211,6 @@ ihwaddpacketnet -instancename ctrl_0_6_E
 ihwaddpacketnet -instancename ctrl_0_6_W
 ihwaddpacketnet -instancename ctrl_0_6_N
 ihwaddpacketnet -instancename ctrl_0_6_S
-ihwaddpacketnet -instancename data_0_7_L
-ihwaddpacketnet -instancename ctrl_0_7_L
-ihwaddpacketnet -instancename data_0_8_L
-ihwaddpacketnet -instancename ctrl_0_8_L
-ihwaddpacketnet -instancename data_0_8_E
-ihwaddpacketnet -instancename data_0_8_W
-ihwaddpacketnet -instancename data_0_8_N
-ihwaddpacketnet -instancename data_0_8_S
-ihwaddpacketnet -instancename ctrl_0_8_E
-ihwaddpacketnet -instancename ctrl_0_8_W
-ihwaddpacketnet -instancename ctrl_0_8_N
-ihwaddpacketnet -instancename ctrl_0_8_S
 ihwaddpacketnet -instancename data_1_0_L
 ihwaddpacketnet -instancename ctrl_1_0_L
 ihwaddpacketnet -instancename data_1_1_L
@@ -2873,18 +2249,6 @@ ihwaddpacketnet -instancename ctrl_1_5_N
 ihwaddpacketnet -instancename ctrl_1_5_S
 ihwaddpacketnet -instancename data_1_6_L
 ihwaddpacketnet -instancename ctrl_1_6_L
-ihwaddpacketnet -instancename data_1_7_L
-ihwaddpacketnet -instancename ctrl_1_7_L
-ihwaddpacketnet -instancename data_1_7_E
-ihwaddpacketnet -instancename data_1_7_W
-ihwaddpacketnet -instancename data_1_7_N
-ihwaddpacketnet -instancename data_1_7_S
-ihwaddpacketnet -instancename ctrl_1_7_E
-ihwaddpacketnet -instancename ctrl_1_7_W
-ihwaddpacketnet -instancename ctrl_1_7_N
-ihwaddpacketnet -instancename ctrl_1_7_S
-ihwaddpacketnet -instancename data_1_8_L
-ihwaddpacketnet -instancename ctrl_1_8_L
 ihwaddpacketnet -instancename data_2_0_L
 ihwaddpacketnet -instancename ctrl_2_0_L
 ihwaddpacketnet -instancename data_2_0_E
@@ -2931,18 +2295,6 @@ ihwaddpacketnet -instancename ctrl_2_6_E
 ihwaddpacketnet -instancename ctrl_2_6_W
 ihwaddpacketnet -instancename ctrl_2_6_N
 ihwaddpacketnet -instancename ctrl_2_6_S
-ihwaddpacketnet -instancename data_2_7_L
-ihwaddpacketnet -instancename ctrl_2_7_L
-ihwaddpacketnet -instancename data_2_8_L
-ihwaddpacketnet -instancename ctrl_2_8_L
-ihwaddpacketnet -instancename data_2_8_E
-ihwaddpacketnet -instancename data_2_8_W
-ihwaddpacketnet -instancename data_2_8_N
-ihwaddpacketnet -instancename data_2_8_S
-ihwaddpacketnet -instancename ctrl_2_8_E
-ihwaddpacketnet -instancename ctrl_2_8_W
-ihwaddpacketnet -instancename ctrl_2_8_N
-ihwaddpacketnet -instancename ctrl_2_8_S
 ihwaddpacketnet -instancename data_3_0_L
 ihwaddpacketnet -instancename ctrl_3_0_L
 ihwaddpacketnet -instancename data_3_1_L
@@ -2981,18 +2333,6 @@ ihwaddpacketnet -instancename ctrl_3_5_N
 ihwaddpacketnet -instancename ctrl_3_5_S
 ihwaddpacketnet -instancename data_3_6_L
 ihwaddpacketnet -instancename ctrl_3_6_L
-ihwaddpacketnet -instancename data_3_7_L
-ihwaddpacketnet -instancename ctrl_3_7_L
-ihwaddpacketnet -instancename data_3_7_E
-ihwaddpacketnet -instancename data_3_7_W
-ihwaddpacketnet -instancename data_3_7_N
-ihwaddpacketnet -instancename data_3_7_S
-ihwaddpacketnet -instancename ctrl_3_7_E
-ihwaddpacketnet -instancename ctrl_3_7_W
-ihwaddpacketnet -instancename ctrl_3_7_N
-ihwaddpacketnet -instancename ctrl_3_7_S
-ihwaddpacketnet -instancename data_3_8_L
-ihwaddpacketnet -instancename ctrl_3_8_L
 ihwaddpacketnet -instancename data_4_0_L
 ihwaddpacketnet -instancename ctrl_4_0_L
 ihwaddpacketnet -instancename data_4_0_E
@@ -3039,18 +2379,6 @@ ihwaddpacketnet -instancename ctrl_4_6_E
 ihwaddpacketnet -instancename ctrl_4_6_W
 ihwaddpacketnet -instancename ctrl_4_6_N
 ihwaddpacketnet -instancename ctrl_4_6_S
-ihwaddpacketnet -instancename data_4_7_L
-ihwaddpacketnet -instancename ctrl_4_7_L
-ihwaddpacketnet -instancename data_4_8_L
-ihwaddpacketnet -instancename ctrl_4_8_L
-ihwaddpacketnet -instancename data_4_8_E
-ihwaddpacketnet -instancename data_4_8_W
-ihwaddpacketnet -instancename data_4_8_N
-ihwaddpacketnet -instancename data_4_8_S
-ihwaddpacketnet -instancename ctrl_4_8_E
-ihwaddpacketnet -instancename ctrl_4_8_W
-ihwaddpacketnet -instancename ctrl_4_8_N
-ihwaddpacketnet -instancename ctrl_4_8_S
 ihwaddpacketnet -instancename data_5_0_L
 ihwaddpacketnet -instancename ctrl_5_0_L
 ihwaddpacketnet -instancename data_5_1_L
@@ -3089,18 +2417,6 @@ ihwaddpacketnet -instancename ctrl_5_5_N
 ihwaddpacketnet -instancename ctrl_5_5_S
 ihwaddpacketnet -instancename data_5_6_L
 ihwaddpacketnet -instancename ctrl_5_6_L
-ihwaddpacketnet -instancename data_5_7_L
-ihwaddpacketnet -instancename ctrl_5_7_L
-ihwaddpacketnet -instancename data_5_7_E
-ihwaddpacketnet -instancename data_5_7_W
-ihwaddpacketnet -instancename data_5_7_N
-ihwaddpacketnet -instancename data_5_7_S
-ihwaddpacketnet -instancename ctrl_5_7_E
-ihwaddpacketnet -instancename ctrl_5_7_W
-ihwaddpacketnet -instancename ctrl_5_7_N
-ihwaddpacketnet -instancename ctrl_5_7_S
-ihwaddpacketnet -instancename data_5_8_L
-ihwaddpacketnet -instancename ctrl_5_8_L
 ihwaddpacketnet -instancename data_6_0_L
 ihwaddpacketnet -instancename ctrl_6_0_L
 ihwaddpacketnet -instancename data_6_0_E
@@ -3147,18 +2463,6 @@ ihwaddpacketnet -instancename ctrl_6_6_E
 ihwaddpacketnet -instancename ctrl_6_6_W
 ihwaddpacketnet -instancename ctrl_6_6_N
 ihwaddpacketnet -instancename ctrl_6_6_S
-ihwaddpacketnet -instancename data_6_7_L
-ihwaddpacketnet -instancename ctrl_6_7_L
-ihwaddpacketnet -instancename data_6_8_L
-ihwaddpacketnet -instancename ctrl_6_8_L
-ihwaddpacketnet -instancename data_6_8_E
-ihwaddpacketnet -instancename data_6_8_W
-ihwaddpacketnet -instancename data_6_8_N
-ihwaddpacketnet -instancename data_6_8_S
-ihwaddpacketnet -instancename ctrl_6_8_E
-ihwaddpacketnet -instancename ctrl_6_8_W
-ihwaddpacketnet -instancename ctrl_6_8_N
-ihwaddpacketnet -instancename ctrl_6_8_S
 ihwaddpacketnet -instancename data_7_0_L
 ihwaddpacketnet -instancename ctrl_7_0_L
 ihwaddpacketnet -instancename data_7_1_L
@@ -3197,18 +2501,6 @@ ihwaddpacketnet -instancename ctrl_7_5_N
 ihwaddpacketnet -instancename ctrl_7_5_S
 ihwaddpacketnet -instancename data_7_6_L
 ihwaddpacketnet -instancename ctrl_7_6_L
-ihwaddpacketnet -instancename data_7_7_L
-ihwaddpacketnet -instancename ctrl_7_7_L
-ihwaddpacketnet -instancename data_7_7_E
-ihwaddpacketnet -instancename data_7_7_W
-ihwaddpacketnet -instancename data_7_7_N
-ihwaddpacketnet -instancename data_7_7_S
-ihwaddpacketnet -instancename ctrl_7_7_E
-ihwaddpacketnet -instancename ctrl_7_7_W
-ihwaddpacketnet -instancename ctrl_7_7_N
-ihwaddpacketnet -instancename ctrl_7_7_S
-ihwaddpacketnet -instancename data_7_8_L
-ihwaddpacketnet -instancename ctrl_7_8_L
 ihwaddpacketnet -instancename data_8_0_L
 ihwaddpacketnet -instancename ctrl_8_0_L
 ihwaddpacketnet -instancename data_8_0_E
@@ -3255,18 +2547,6 @@ ihwaddpacketnet -instancename ctrl_8_6_E
 ihwaddpacketnet -instancename ctrl_8_6_W
 ihwaddpacketnet -instancename ctrl_8_6_N
 ihwaddpacketnet -instancename ctrl_8_6_S
-ihwaddpacketnet -instancename data_8_7_L
-ihwaddpacketnet -instancename ctrl_8_7_L
-ihwaddpacketnet -instancename data_8_8_L
-ihwaddpacketnet -instancename ctrl_8_8_L
-ihwaddpacketnet -instancename data_8_8_E
-ihwaddpacketnet -instancename data_8_8_W
-ihwaddpacketnet -instancename data_8_8_N
-ihwaddpacketnet -instancename data_8_8_S
-ihwaddpacketnet -instancename ctrl_8_8_E
-ihwaddpacketnet -instancename ctrl_8_8_W
-ihwaddpacketnet -instancename ctrl_8_8_N
-ihwaddpacketnet -instancename ctrl_8_8_S
 
 ihwconnect -instancename router0 -packetnetport portDataWest -packetnet data_0_0_TEA
 ihwconnect -instancename router0 -packetnetport portControlWest -packetnet ctrl_0_0_TEA
@@ -3281,9 +2561,9 @@ ihwconnect -instancename router1 -packetnetport portDataWest -packetnet data_0_0
 ihwconnect -instancename router0 -packetnetport portControlEast -packetnet ctrl_0_0_E
 ihwconnect -instancename router1 -packetnetport portControlWest -packetnet ctrl_0_0_E
 ihwconnect -instancename router0 -packetnetport portDataNorth -packetnet data_0_0_N
-ihwconnect -instancename router9 -packetnetport portDataSouth -packetnet data_0_0_N
+ihwconnect -instancename router7 -packetnetport portDataSouth -packetnet data_0_0_N
 ihwconnect -instancename router0 -packetnetport portControlNorth -packetnet ctrl_0_0_N
-ihwconnect -instancename router9 -packetnetport portControlSouth -packetnet ctrl_0_0_N
+ihwconnect -instancename router7 -packetnetport portControlSouth -packetnet ctrl_0_0_N
 ihwconnect -instancename router1 -packetnetport portDataLocal -packetnet data_0_1_L
 ihwconnect -instancename ni1 -packetnetport dataPort -packetnet data_0_1_L
 ihwconnect -instancename router1 -packetnetport portControlLocal -packetnet ctrl_0_1_L
@@ -3301,9 +2581,9 @@ ihwconnect -instancename router1 -packetnetport portDataEast -packetnet data_0_2
 ihwconnect -instancename router2 -packetnetport portControlWest -packetnet ctrl_0_2_W
 ihwconnect -instancename router1 -packetnetport portControlEast -packetnet ctrl_0_2_W
 ihwconnect -instancename router2 -packetnetport portDataNorth -packetnet data_0_2_N
-ihwconnect -instancename router11 -packetnetport portDataSouth -packetnet data_0_2_N
+ihwconnect -instancename router9 -packetnetport portDataSouth -packetnet data_0_2_N
 ihwconnect -instancename router2 -packetnetport portControlNorth -packetnet ctrl_0_2_N
-ihwconnect -instancename router11 -packetnetport portControlSouth -packetnet ctrl_0_2_N
+ihwconnect -instancename router9 -packetnetport portControlSouth -packetnet ctrl_0_2_N
 ihwconnect -instancename router3 -packetnetport portDataLocal -packetnet data_0_3_L
 ihwconnect -instancename ni3 -packetnetport dataPort -packetnet data_0_3_L
 ihwconnect -instancename router3 -packetnetport portControlLocal -packetnet ctrl_0_3_L
@@ -3321,9 +2601,9 @@ ihwconnect -instancename router3 -packetnetport portDataEast -packetnet data_0_4
 ihwconnect -instancename router4 -packetnetport portControlWest -packetnet ctrl_0_4_W
 ihwconnect -instancename router3 -packetnetport portControlEast -packetnet ctrl_0_4_W
 ihwconnect -instancename router4 -packetnetport portDataNorth -packetnet data_0_4_N
-ihwconnect -instancename router13 -packetnetport portDataSouth -packetnet data_0_4_N
+ihwconnect -instancename router11 -packetnetport portDataSouth -packetnet data_0_4_N
 ihwconnect -instancename router4 -packetnetport portControlNorth -packetnet ctrl_0_4_N
-ihwconnect -instancename router13 -packetnetport portControlSouth -packetnet ctrl_0_4_N
+ihwconnect -instancename router11 -packetnetport portControlSouth -packetnet ctrl_0_4_N
 ihwconnect -instancename router5 -packetnetport portDataLocal -packetnet data_0_5_L
 ihwconnect -instancename ni5 -packetnetport dataPort -packetnet data_0_5_L
 ihwconnect -instancename router5 -packetnetport portControlLocal -packetnet ctrl_0_5_L
@@ -3332,846 +2612,638 @@ ihwconnect -instancename router6 -packetnetport portDataLocal -packetnet data_0_
 ihwconnect -instancename ni6 -packetnetport dataPort -packetnet data_0_6_L
 ihwconnect -instancename router6 -packetnetport portControlLocal -packetnet ctrl_0_6_L
 ihwconnect -instancename ni6 -packetnetport controlPort -packetnet ctrl_0_6_L
-ihwconnect -instancename router6 -packetnetport portDataEast -packetnet data_0_6_E
-ihwconnect -instancename router7 -packetnetport portDataWest -packetnet data_0_6_E
-ihwconnect -instancename router6 -packetnetport portControlEast -packetnet ctrl_0_6_E
-ihwconnect -instancename router7 -packetnetport portControlWest -packetnet ctrl_0_6_E
 ihwconnect -instancename router6 -packetnetport portDataWest -packetnet data_0_6_W
 ihwconnect -instancename router5 -packetnetport portDataEast -packetnet data_0_6_W
 ihwconnect -instancename router6 -packetnetport portControlWest -packetnet ctrl_0_6_W
 ihwconnect -instancename router5 -packetnetport portControlEast -packetnet ctrl_0_6_W
 ihwconnect -instancename router6 -packetnetport portDataNorth -packetnet data_0_6_N
-ihwconnect -instancename router15 -packetnetport portDataSouth -packetnet data_0_6_N
+ihwconnect -instancename router13 -packetnetport portDataSouth -packetnet data_0_6_N
 ihwconnect -instancename router6 -packetnetport portControlNorth -packetnet ctrl_0_6_N
-ihwconnect -instancename router15 -packetnetport portControlSouth -packetnet ctrl_0_6_N
-ihwconnect -instancename router7 -packetnetport portDataLocal -packetnet data_0_7_L
-ihwconnect -instancename ni7 -packetnetport dataPort -packetnet data_0_7_L
-ihwconnect -instancename router7 -packetnetport portControlLocal -packetnet ctrl_0_7_L
-ihwconnect -instancename ni7 -packetnetport controlPort -packetnet ctrl_0_7_L
-ihwconnect -instancename router8 -packetnetport portDataLocal -packetnet data_0_8_L
-ihwconnect -instancename ni8 -packetnetport dataPort -packetnet data_0_8_L
-ihwconnect -instancename router8 -packetnetport portControlLocal -packetnet ctrl_0_8_L
-ihwconnect -instancename ni8 -packetnetport controlPort -packetnet ctrl_0_8_L
-ihwconnect -instancename router8 -packetnetport portDataWest -packetnet data_0_8_W
-ihwconnect -instancename router7 -packetnetport portDataEast -packetnet data_0_8_W
-ihwconnect -instancename router8 -packetnetport portControlWest -packetnet ctrl_0_8_W
-ihwconnect -instancename router7 -packetnetport portControlEast -packetnet ctrl_0_8_W
-ihwconnect -instancename router8 -packetnetport portDataNorth -packetnet data_0_8_N
-ihwconnect -instancename router17 -packetnetport portDataSouth -packetnet data_0_8_N
-ihwconnect -instancename router8 -packetnetport portControlNorth -packetnet ctrl_0_8_N
-ihwconnect -instancename router17 -packetnetport portControlSouth -packetnet ctrl_0_8_N
-ihwconnect -instancename router9 -packetnetport portDataLocal -packetnet data_1_0_L
-ihwconnect -instancename ni9 -packetnetport dataPort -packetnet data_1_0_L
-ihwconnect -instancename router9 -packetnetport portControlLocal -packetnet ctrl_1_0_L
-ihwconnect -instancename ni9 -packetnetport controlPort -packetnet ctrl_1_0_L
-ihwconnect -instancename router10 -packetnetport portDataLocal -packetnet data_1_1_L
-ihwconnect -instancename ni10 -packetnetport dataPort -packetnet data_1_1_L
-ihwconnect -instancename router10 -packetnetport portControlLocal -packetnet ctrl_1_1_L
-ihwconnect -instancename ni10 -packetnetport controlPort -packetnet ctrl_1_1_L
-ihwconnect -instancename router10 -packetnetport portDataEast -packetnet data_1_1_E
-ihwconnect -instancename router11 -packetnetport portDataWest -packetnet data_1_1_E
-ihwconnect -instancename router10 -packetnetport portControlEast -packetnet ctrl_1_1_E
-ihwconnect -instancename router11 -packetnetport portControlWest -packetnet ctrl_1_1_E
-ihwconnect -instancename router10 -packetnetport portDataWest -packetnet data_1_1_W
-ihwconnect -instancename router9 -packetnetport portDataEast -packetnet data_1_1_W
-ihwconnect -instancename router10 -packetnetport portControlWest -packetnet ctrl_1_1_W
-ihwconnect -instancename router9 -packetnetport portControlEast -packetnet ctrl_1_1_W
-ihwconnect -instancename router10 -packetnetport portDataNorth -packetnet data_1_1_N
-ihwconnect -instancename router19 -packetnetport portDataSouth -packetnet data_1_1_N
-ihwconnect -instancename router10 -packetnetport portControlNorth -packetnet ctrl_1_1_N
-ihwconnect -instancename router19 -packetnetport portControlSouth -packetnet ctrl_1_1_N
-ihwconnect -instancename router10 -packetnetport portDataSouth -packetnet data_1_1_S
+ihwconnect -instancename router13 -packetnetport portControlSouth -packetnet ctrl_0_6_N
+ihwconnect -instancename router7 -packetnetport portDataLocal -packetnet data_1_0_L
+ihwconnect -instancename ni7 -packetnetport dataPort -packetnet data_1_0_L
+ihwconnect -instancename router7 -packetnetport portControlLocal -packetnet ctrl_1_0_L
+ihwconnect -instancename ni7 -packetnetport controlPort -packetnet ctrl_1_0_L
+ihwconnect -instancename router8 -packetnetport portDataLocal -packetnet data_1_1_L
+ihwconnect -instancename ni8 -packetnetport dataPort -packetnet data_1_1_L
+ihwconnect -instancename router8 -packetnetport portControlLocal -packetnet ctrl_1_1_L
+ihwconnect -instancename ni8 -packetnetport controlPort -packetnet ctrl_1_1_L
+ihwconnect -instancename router8 -packetnetport portDataEast -packetnet data_1_1_E
+ihwconnect -instancename router9 -packetnetport portDataWest -packetnet data_1_1_E
+ihwconnect -instancename router8 -packetnetport portControlEast -packetnet ctrl_1_1_E
+ihwconnect -instancename router9 -packetnetport portControlWest -packetnet ctrl_1_1_E
+ihwconnect -instancename router8 -packetnetport portDataWest -packetnet data_1_1_W
+ihwconnect -instancename router7 -packetnetport portDataEast -packetnet data_1_1_W
+ihwconnect -instancename router8 -packetnetport portControlWest -packetnet ctrl_1_1_W
+ihwconnect -instancename router7 -packetnetport portControlEast -packetnet ctrl_1_1_W
+ihwconnect -instancename router8 -packetnetport portDataNorth -packetnet data_1_1_N
+ihwconnect -instancename router15 -packetnetport portDataSouth -packetnet data_1_1_N
+ihwconnect -instancename router8 -packetnetport portControlNorth -packetnet ctrl_1_1_N
+ihwconnect -instancename router15 -packetnetport portControlSouth -packetnet ctrl_1_1_N
+ihwconnect -instancename router8 -packetnetport portDataSouth -packetnet data_1_1_S
 ihwconnect -instancename router1 -packetnetport portDataNorth -packetnet data_1_1_S
-ihwconnect -instancename router10 -packetnetport portControlSouth -packetnet ctrl_1_1_S
+ihwconnect -instancename router8 -packetnetport portControlSouth -packetnet ctrl_1_1_S
 ihwconnect -instancename router1 -packetnetport portControlNorth -packetnet ctrl_1_1_S
-ihwconnect -instancename router11 -packetnetport portDataLocal -packetnet data_1_2_L
-ihwconnect -instancename ni11 -packetnetport dataPort -packetnet data_1_2_L
-ihwconnect -instancename router11 -packetnetport portControlLocal -packetnet ctrl_1_2_L
-ihwconnect -instancename ni11 -packetnetport controlPort -packetnet ctrl_1_2_L
-ihwconnect -instancename router12 -packetnetport portDataLocal -packetnet data_1_3_L
-ihwconnect -instancename ni12 -packetnetport dataPort -packetnet data_1_3_L
-ihwconnect -instancename router12 -packetnetport portControlLocal -packetnet ctrl_1_3_L
-ihwconnect -instancename ni12 -packetnetport controlPort -packetnet ctrl_1_3_L
-ihwconnect -instancename router12 -packetnetport portDataEast -packetnet data_1_3_E
-ihwconnect -instancename router13 -packetnetport portDataWest -packetnet data_1_3_E
-ihwconnect -instancename router12 -packetnetport portControlEast -packetnet ctrl_1_3_E
-ihwconnect -instancename router13 -packetnetport portControlWest -packetnet ctrl_1_3_E
-ihwconnect -instancename router12 -packetnetport portDataWest -packetnet data_1_3_W
-ihwconnect -instancename router11 -packetnetport portDataEast -packetnet data_1_3_W
-ihwconnect -instancename router12 -packetnetport portControlWest -packetnet ctrl_1_3_W
-ihwconnect -instancename router11 -packetnetport portControlEast -packetnet ctrl_1_3_W
-ihwconnect -instancename router12 -packetnetport portDataNorth -packetnet data_1_3_N
-ihwconnect -instancename router21 -packetnetport portDataSouth -packetnet data_1_3_N
-ihwconnect -instancename router12 -packetnetport portControlNorth -packetnet ctrl_1_3_N
-ihwconnect -instancename router21 -packetnetport portControlSouth -packetnet ctrl_1_3_N
-ihwconnect -instancename router12 -packetnetport portDataSouth -packetnet data_1_3_S
+ihwconnect -instancename router9 -packetnetport portDataLocal -packetnet data_1_2_L
+ihwconnect -instancename ni9 -packetnetport dataPort -packetnet data_1_2_L
+ihwconnect -instancename router9 -packetnetport portControlLocal -packetnet ctrl_1_2_L
+ihwconnect -instancename ni9 -packetnetport controlPort -packetnet ctrl_1_2_L
+ihwconnect -instancename router10 -packetnetport portDataLocal -packetnet data_1_3_L
+ihwconnect -instancename ni10 -packetnetport dataPort -packetnet data_1_3_L
+ihwconnect -instancename router10 -packetnetport portControlLocal -packetnet ctrl_1_3_L
+ihwconnect -instancename ni10 -packetnetport controlPort -packetnet ctrl_1_3_L
+ihwconnect -instancename router10 -packetnetport portDataEast -packetnet data_1_3_E
+ihwconnect -instancename router11 -packetnetport portDataWest -packetnet data_1_3_E
+ihwconnect -instancename router10 -packetnetport portControlEast -packetnet ctrl_1_3_E
+ihwconnect -instancename router11 -packetnetport portControlWest -packetnet ctrl_1_3_E
+ihwconnect -instancename router10 -packetnetport portDataWest -packetnet data_1_3_W
+ihwconnect -instancename router9 -packetnetport portDataEast -packetnet data_1_3_W
+ihwconnect -instancename router10 -packetnetport portControlWest -packetnet ctrl_1_3_W
+ihwconnect -instancename router9 -packetnetport portControlEast -packetnet ctrl_1_3_W
+ihwconnect -instancename router10 -packetnetport portDataNorth -packetnet data_1_3_N
+ihwconnect -instancename router17 -packetnetport portDataSouth -packetnet data_1_3_N
+ihwconnect -instancename router10 -packetnetport portControlNorth -packetnet ctrl_1_3_N
+ihwconnect -instancename router17 -packetnetport portControlSouth -packetnet ctrl_1_3_N
+ihwconnect -instancename router10 -packetnetport portDataSouth -packetnet data_1_3_S
 ihwconnect -instancename router3 -packetnetport portDataNorth -packetnet data_1_3_S
-ihwconnect -instancename router12 -packetnetport portControlSouth -packetnet ctrl_1_3_S
+ihwconnect -instancename router10 -packetnetport portControlSouth -packetnet ctrl_1_3_S
 ihwconnect -instancename router3 -packetnetport portControlNorth -packetnet ctrl_1_3_S
-ihwconnect -instancename router13 -packetnetport portDataLocal -packetnet data_1_4_L
-ihwconnect -instancename ni13 -packetnetport dataPort -packetnet data_1_4_L
-ihwconnect -instancename router13 -packetnetport portControlLocal -packetnet ctrl_1_4_L
-ihwconnect -instancename ni13 -packetnetport controlPort -packetnet ctrl_1_4_L
-ihwconnect -instancename router14 -packetnetport portDataLocal -packetnet data_1_5_L
-ihwconnect -instancename ni14 -packetnetport dataPort -packetnet data_1_5_L
-ihwconnect -instancename router14 -packetnetport portControlLocal -packetnet ctrl_1_5_L
-ihwconnect -instancename ni14 -packetnetport controlPort -packetnet ctrl_1_5_L
-ihwconnect -instancename router14 -packetnetport portDataEast -packetnet data_1_5_E
-ihwconnect -instancename router15 -packetnetport portDataWest -packetnet data_1_5_E
-ihwconnect -instancename router14 -packetnetport portControlEast -packetnet ctrl_1_5_E
-ihwconnect -instancename router15 -packetnetport portControlWest -packetnet ctrl_1_5_E
-ihwconnect -instancename router14 -packetnetport portDataWest -packetnet data_1_5_W
-ihwconnect -instancename router13 -packetnetport portDataEast -packetnet data_1_5_W
-ihwconnect -instancename router14 -packetnetport portControlWest -packetnet ctrl_1_5_W
-ihwconnect -instancename router13 -packetnetport portControlEast -packetnet ctrl_1_5_W
-ihwconnect -instancename router14 -packetnetport portDataNorth -packetnet data_1_5_N
-ihwconnect -instancename router23 -packetnetport portDataSouth -packetnet data_1_5_N
-ihwconnect -instancename router14 -packetnetport portControlNorth -packetnet ctrl_1_5_N
-ihwconnect -instancename router23 -packetnetport portControlSouth -packetnet ctrl_1_5_N
-ihwconnect -instancename router14 -packetnetport portDataSouth -packetnet data_1_5_S
+ihwconnect -instancename router11 -packetnetport portDataLocal -packetnet data_1_4_L
+ihwconnect -instancename ni11 -packetnetport dataPort -packetnet data_1_4_L
+ihwconnect -instancename router11 -packetnetport portControlLocal -packetnet ctrl_1_4_L
+ihwconnect -instancename ni11 -packetnetport controlPort -packetnet ctrl_1_4_L
+ihwconnect -instancename router12 -packetnetport portDataLocal -packetnet data_1_5_L
+ihwconnect -instancename ni12 -packetnetport dataPort -packetnet data_1_5_L
+ihwconnect -instancename router12 -packetnetport portControlLocal -packetnet ctrl_1_5_L
+ihwconnect -instancename ni12 -packetnetport controlPort -packetnet ctrl_1_5_L
+ihwconnect -instancename router12 -packetnetport portDataEast -packetnet data_1_5_E
+ihwconnect -instancename router13 -packetnetport portDataWest -packetnet data_1_5_E
+ihwconnect -instancename router12 -packetnetport portControlEast -packetnet ctrl_1_5_E
+ihwconnect -instancename router13 -packetnetport portControlWest -packetnet ctrl_1_5_E
+ihwconnect -instancename router12 -packetnetport portDataWest -packetnet data_1_5_W
+ihwconnect -instancename router11 -packetnetport portDataEast -packetnet data_1_5_W
+ihwconnect -instancename router12 -packetnetport portControlWest -packetnet ctrl_1_5_W
+ihwconnect -instancename router11 -packetnetport portControlEast -packetnet ctrl_1_5_W
+ihwconnect -instancename router12 -packetnetport portDataNorth -packetnet data_1_5_N
+ihwconnect -instancename router19 -packetnetport portDataSouth -packetnet data_1_5_N
+ihwconnect -instancename router12 -packetnetport portControlNorth -packetnet ctrl_1_5_N
+ihwconnect -instancename router19 -packetnetport portControlSouth -packetnet ctrl_1_5_N
+ihwconnect -instancename router12 -packetnetport portDataSouth -packetnet data_1_5_S
 ihwconnect -instancename router5 -packetnetport portDataNorth -packetnet data_1_5_S
-ihwconnect -instancename router14 -packetnetport portControlSouth -packetnet ctrl_1_5_S
+ihwconnect -instancename router12 -packetnetport portControlSouth -packetnet ctrl_1_5_S
 ihwconnect -instancename router5 -packetnetport portControlNorth -packetnet ctrl_1_5_S
-ihwconnect -instancename router15 -packetnetport portDataLocal -packetnet data_1_6_L
-ihwconnect -instancename ni15 -packetnetport dataPort -packetnet data_1_6_L
-ihwconnect -instancename router15 -packetnetport portControlLocal -packetnet ctrl_1_6_L
-ihwconnect -instancename ni15 -packetnetport controlPort -packetnet ctrl_1_6_L
-ihwconnect -instancename router16 -packetnetport portDataLocal -packetnet data_1_7_L
-ihwconnect -instancename ni16 -packetnetport dataPort -packetnet data_1_7_L
-ihwconnect -instancename router16 -packetnetport portControlLocal -packetnet ctrl_1_7_L
-ihwconnect -instancename ni16 -packetnetport controlPort -packetnet ctrl_1_7_L
-ihwconnect -instancename router16 -packetnetport portDataEast -packetnet data_1_7_E
-ihwconnect -instancename router17 -packetnetport portDataWest -packetnet data_1_7_E
-ihwconnect -instancename router16 -packetnetport portControlEast -packetnet ctrl_1_7_E
-ihwconnect -instancename router17 -packetnetport portControlWest -packetnet ctrl_1_7_E
-ihwconnect -instancename router16 -packetnetport portDataWest -packetnet data_1_7_W
-ihwconnect -instancename router15 -packetnetport portDataEast -packetnet data_1_7_W
-ihwconnect -instancename router16 -packetnetport portControlWest -packetnet ctrl_1_7_W
-ihwconnect -instancename router15 -packetnetport portControlEast -packetnet ctrl_1_7_W
-ihwconnect -instancename router16 -packetnetport portDataNorth -packetnet data_1_7_N
-ihwconnect -instancename router25 -packetnetport portDataSouth -packetnet data_1_7_N
-ihwconnect -instancename router16 -packetnetport portControlNorth -packetnet ctrl_1_7_N
-ihwconnect -instancename router25 -packetnetport portControlSouth -packetnet ctrl_1_7_N
-ihwconnect -instancename router16 -packetnetport portDataSouth -packetnet data_1_7_S
-ihwconnect -instancename router7 -packetnetport portDataNorth -packetnet data_1_7_S
-ihwconnect -instancename router16 -packetnetport portControlSouth -packetnet ctrl_1_7_S
-ihwconnect -instancename router7 -packetnetport portControlNorth -packetnet ctrl_1_7_S
-ihwconnect -instancename router17 -packetnetport portDataLocal -packetnet data_1_8_L
-ihwconnect -instancename ni17 -packetnetport dataPort -packetnet data_1_8_L
-ihwconnect -instancename router17 -packetnetport portControlLocal -packetnet ctrl_1_8_L
-ihwconnect -instancename ni17 -packetnetport controlPort -packetnet ctrl_1_8_L
-ihwconnect -instancename router18 -packetnetport portDataLocal -packetnet data_2_0_L
-ihwconnect -instancename ni18 -packetnetport dataPort -packetnet data_2_0_L
-ihwconnect -instancename router18 -packetnetport portControlLocal -packetnet ctrl_2_0_L
-ihwconnect -instancename ni18 -packetnetport controlPort -packetnet ctrl_2_0_L
-ihwconnect -instancename router18 -packetnetport portDataEast -packetnet data_2_0_E
-ihwconnect -instancename router19 -packetnetport portDataWest -packetnet data_2_0_E
-ihwconnect -instancename router18 -packetnetport portControlEast -packetnet ctrl_2_0_E
-ihwconnect -instancename router19 -packetnetport portControlWest -packetnet ctrl_2_0_E
-ihwconnect -instancename router18 -packetnetport portDataNorth -packetnet data_2_0_N
-ihwconnect -instancename router27 -packetnetport portDataSouth -packetnet data_2_0_N
-ihwconnect -instancename router18 -packetnetport portControlNorth -packetnet ctrl_2_0_N
-ihwconnect -instancename router27 -packetnetport portControlSouth -packetnet ctrl_2_0_N
-ihwconnect -instancename router18 -packetnetport portDataSouth -packetnet data_2_0_S
-ihwconnect -instancename router9 -packetnetport portDataNorth -packetnet data_2_0_S
-ihwconnect -instancename router18 -packetnetport portControlSouth -packetnet ctrl_2_0_S
-ihwconnect -instancename router9 -packetnetport portControlNorth -packetnet ctrl_2_0_S
-ihwconnect -instancename router19 -packetnetport portDataLocal -packetnet data_2_1_L
-ihwconnect -instancename ni19 -packetnetport dataPort -packetnet data_2_1_L
-ihwconnect -instancename router19 -packetnetport portControlLocal -packetnet ctrl_2_1_L
-ihwconnect -instancename ni19 -packetnetport controlPort -packetnet ctrl_2_1_L
-ihwconnect -instancename router20 -packetnetport portDataLocal -packetnet data_2_2_L
-ihwconnect -instancename ni20 -packetnetport dataPort -packetnet data_2_2_L
-ihwconnect -instancename router20 -packetnetport portControlLocal -packetnet ctrl_2_2_L
-ihwconnect -instancename ni20 -packetnetport controlPort -packetnet ctrl_2_2_L
-ihwconnect -instancename router20 -packetnetport portDataEast -packetnet data_2_2_E
-ihwconnect -instancename router21 -packetnetport portDataWest -packetnet data_2_2_E
-ihwconnect -instancename router20 -packetnetport portControlEast -packetnet ctrl_2_2_E
-ihwconnect -instancename router21 -packetnetport portControlWest -packetnet ctrl_2_2_E
-ihwconnect -instancename router20 -packetnetport portDataWest -packetnet data_2_2_W
-ihwconnect -instancename router19 -packetnetport portDataEast -packetnet data_2_2_W
-ihwconnect -instancename router20 -packetnetport portControlWest -packetnet ctrl_2_2_W
-ihwconnect -instancename router19 -packetnetport portControlEast -packetnet ctrl_2_2_W
-ihwconnect -instancename router20 -packetnetport portDataNorth -packetnet data_2_2_N
-ihwconnect -instancename router29 -packetnetport portDataSouth -packetnet data_2_2_N
-ihwconnect -instancename router20 -packetnetport portControlNorth -packetnet ctrl_2_2_N
-ihwconnect -instancename router29 -packetnetport portControlSouth -packetnet ctrl_2_2_N
-ihwconnect -instancename router20 -packetnetport portDataSouth -packetnet data_2_2_S
-ihwconnect -instancename router11 -packetnetport portDataNorth -packetnet data_2_2_S
-ihwconnect -instancename router20 -packetnetport portControlSouth -packetnet ctrl_2_2_S
-ihwconnect -instancename router11 -packetnetport portControlNorth -packetnet ctrl_2_2_S
-ihwconnect -instancename router21 -packetnetport portDataLocal -packetnet data_2_3_L
-ihwconnect -instancename ni21 -packetnetport dataPort -packetnet data_2_3_L
-ihwconnect -instancename router21 -packetnetport portControlLocal -packetnet ctrl_2_3_L
-ihwconnect -instancename ni21 -packetnetport controlPort -packetnet ctrl_2_3_L
-ihwconnect -instancename router22 -packetnetport portDataLocal -packetnet data_2_4_L
-ihwconnect -instancename ni22 -packetnetport dataPort -packetnet data_2_4_L
-ihwconnect -instancename router22 -packetnetport portControlLocal -packetnet ctrl_2_4_L
-ihwconnect -instancename ni22 -packetnetport controlPort -packetnet ctrl_2_4_L
-ihwconnect -instancename router22 -packetnetport portDataEast -packetnet data_2_4_E
-ihwconnect -instancename router23 -packetnetport portDataWest -packetnet data_2_4_E
-ihwconnect -instancename router22 -packetnetport portControlEast -packetnet ctrl_2_4_E
-ihwconnect -instancename router23 -packetnetport portControlWest -packetnet ctrl_2_4_E
-ihwconnect -instancename router22 -packetnetport portDataWest -packetnet data_2_4_W
-ihwconnect -instancename router21 -packetnetport portDataEast -packetnet data_2_4_W
-ihwconnect -instancename router22 -packetnetport portControlWest -packetnet ctrl_2_4_W
-ihwconnect -instancename router21 -packetnetport portControlEast -packetnet ctrl_2_4_W
-ihwconnect -instancename router22 -packetnetport portDataNorth -packetnet data_2_4_N
-ihwconnect -instancename router31 -packetnetport portDataSouth -packetnet data_2_4_N
-ihwconnect -instancename router22 -packetnetport portControlNorth -packetnet ctrl_2_4_N
-ihwconnect -instancename router31 -packetnetport portControlSouth -packetnet ctrl_2_4_N
-ihwconnect -instancename router22 -packetnetport portDataSouth -packetnet data_2_4_S
-ihwconnect -instancename router13 -packetnetport portDataNorth -packetnet data_2_4_S
-ihwconnect -instancename router22 -packetnetport portControlSouth -packetnet ctrl_2_4_S
-ihwconnect -instancename router13 -packetnetport portControlNorth -packetnet ctrl_2_4_S
-ihwconnect -instancename router23 -packetnetport portDataLocal -packetnet data_2_5_L
-ihwconnect -instancename ni23 -packetnetport dataPort -packetnet data_2_5_L
-ihwconnect -instancename router23 -packetnetport portControlLocal -packetnet ctrl_2_5_L
-ihwconnect -instancename ni23 -packetnetport controlPort -packetnet ctrl_2_5_L
-ihwconnect -instancename router24 -packetnetport portDataLocal -packetnet data_2_6_L
-ihwconnect -instancename ni24 -packetnetport dataPort -packetnet data_2_6_L
-ihwconnect -instancename router24 -packetnetport portControlLocal -packetnet ctrl_2_6_L
-ihwconnect -instancename ni24 -packetnetport controlPort -packetnet ctrl_2_6_L
-ihwconnect -instancename router24 -packetnetport portDataEast -packetnet data_2_6_E
-ihwconnect -instancename router25 -packetnetport portDataWest -packetnet data_2_6_E
-ihwconnect -instancename router24 -packetnetport portControlEast -packetnet ctrl_2_6_E
-ihwconnect -instancename router25 -packetnetport portControlWest -packetnet ctrl_2_6_E
-ihwconnect -instancename router24 -packetnetport portDataWest -packetnet data_2_6_W
-ihwconnect -instancename router23 -packetnetport portDataEast -packetnet data_2_6_W
-ihwconnect -instancename router24 -packetnetport portControlWest -packetnet ctrl_2_6_W
-ihwconnect -instancename router23 -packetnetport portControlEast -packetnet ctrl_2_6_W
-ihwconnect -instancename router24 -packetnetport portDataNorth -packetnet data_2_6_N
-ihwconnect -instancename router33 -packetnetport portDataSouth -packetnet data_2_6_N
-ihwconnect -instancename router24 -packetnetport portControlNorth -packetnet ctrl_2_6_N
-ihwconnect -instancename router33 -packetnetport portControlSouth -packetnet ctrl_2_6_N
-ihwconnect -instancename router24 -packetnetport portDataSouth -packetnet data_2_6_S
-ihwconnect -instancename router15 -packetnetport portDataNorth -packetnet data_2_6_S
-ihwconnect -instancename router24 -packetnetport portControlSouth -packetnet ctrl_2_6_S
-ihwconnect -instancename router15 -packetnetport portControlNorth -packetnet ctrl_2_6_S
-ihwconnect -instancename router25 -packetnetport portDataLocal -packetnet data_2_7_L
-ihwconnect -instancename ni25 -packetnetport dataPort -packetnet data_2_7_L
-ihwconnect -instancename router25 -packetnetport portControlLocal -packetnet ctrl_2_7_L
-ihwconnect -instancename ni25 -packetnetport controlPort -packetnet ctrl_2_7_L
-ihwconnect -instancename router26 -packetnetport portDataLocal -packetnet data_2_8_L
-ihwconnect -instancename ni26 -packetnetport dataPort -packetnet data_2_8_L
-ihwconnect -instancename router26 -packetnetport portControlLocal -packetnet ctrl_2_8_L
-ihwconnect -instancename ni26 -packetnetport controlPort -packetnet ctrl_2_8_L
-ihwconnect -instancename router26 -packetnetport portDataWest -packetnet data_2_8_W
-ihwconnect -instancename router25 -packetnetport portDataEast -packetnet data_2_8_W
-ihwconnect -instancename router26 -packetnetport portControlWest -packetnet ctrl_2_8_W
-ihwconnect -instancename router25 -packetnetport portControlEast -packetnet ctrl_2_8_W
-ihwconnect -instancename router26 -packetnetport portDataNorth -packetnet data_2_8_N
-ihwconnect -instancename router35 -packetnetport portDataSouth -packetnet data_2_8_N
-ihwconnect -instancename router26 -packetnetport portControlNorth -packetnet ctrl_2_8_N
-ihwconnect -instancename router35 -packetnetport portControlSouth -packetnet ctrl_2_8_N
-ihwconnect -instancename router26 -packetnetport portDataSouth -packetnet data_2_8_S
-ihwconnect -instancename router17 -packetnetport portDataNorth -packetnet data_2_8_S
-ihwconnect -instancename router26 -packetnetport portControlSouth -packetnet ctrl_2_8_S
-ihwconnect -instancename router17 -packetnetport portControlNorth -packetnet ctrl_2_8_S
-ihwconnect -instancename router27 -packetnetport portDataLocal -packetnet data_3_0_L
-ihwconnect -instancename ni27 -packetnetport dataPort -packetnet data_3_0_L
-ihwconnect -instancename router27 -packetnetport portControlLocal -packetnet ctrl_3_0_L
-ihwconnect -instancename ni27 -packetnetport controlPort -packetnet ctrl_3_0_L
-ihwconnect -instancename router28 -packetnetport portDataLocal -packetnet data_3_1_L
-ihwconnect -instancename ni28 -packetnetport dataPort -packetnet data_3_1_L
-ihwconnect -instancename router28 -packetnetport portControlLocal -packetnet ctrl_3_1_L
-ihwconnect -instancename ni28 -packetnetport controlPort -packetnet ctrl_3_1_L
-ihwconnect -instancename router28 -packetnetport portDataEast -packetnet data_3_1_E
-ihwconnect -instancename router29 -packetnetport portDataWest -packetnet data_3_1_E
-ihwconnect -instancename router28 -packetnetport portControlEast -packetnet ctrl_3_1_E
-ihwconnect -instancename router29 -packetnetport portControlWest -packetnet ctrl_3_1_E
-ihwconnect -instancename router28 -packetnetport portDataWest -packetnet data_3_1_W
-ihwconnect -instancename router27 -packetnetport portDataEast -packetnet data_3_1_W
-ihwconnect -instancename router28 -packetnetport portControlWest -packetnet ctrl_3_1_W
-ihwconnect -instancename router27 -packetnetport portControlEast -packetnet ctrl_3_1_W
-ihwconnect -instancename router28 -packetnetport portDataNorth -packetnet data_3_1_N
-ihwconnect -instancename router37 -packetnetport portDataSouth -packetnet data_3_1_N
-ihwconnect -instancename router28 -packetnetport portControlNorth -packetnet ctrl_3_1_N
-ihwconnect -instancename router37 -packetnetport portControlSouth -packetnet ctrl_3_1_N
-ihwconnect -instancename router28 -packetnetport portDataSouth -packetnet data_3_1_S
-ihwconnect -instancename router19 -packetnetport portDataNorth -packetnet data_3_1_S
-ihwconnect -instancename router28 -packetnetport portControlSouth -packetnet ctrl_3_1_S
-ihwconnect -instancename router19 -packetnetport portControlNorth -packetnet ctrl_3_1_S
-ihwconnect -instancename router29 -packetnetport portDataLocal -packetnet data_3_2_L
-ihwconnect -instancename ni29 -packetnetport dataPort -packetnet data_3_2_L
-ihwconnect -instancename router29 -packetnetport portControlLocal -packetnet ctrl_3_2_L
-ihwconnect -instancename ni29 -packetnetport controlPort -packetnet ctrl_3_2_L
-ihwconnect -instancename router30 -packetnetport portDataLocal -packetnet data_3_3_L
-ihwconnect -instancename ni30 -packetnetport dataPort -packetnet data_3_3_L
-ihwconnect -instancename router30 -packetnetport portControlLocal -packetnet ctrl_3_3_L
-ihwconnect -instancename ni30 -packetnetport controlPort -packetnet ctrl_3_3_L
-ihwconnect -instancename router30 -packetnetport portDataEast -packetnet data_3_3_E
-ihwconnect -instancename router31 -packetnetport portDataWest -packetnet data_3_3_E
-ihwconnect -instancename router30 -packetnetport portControlEast -packetnet ctrl_3_3_E
-ihwconnect -instancename router31 -packetnetport portControlWest -packetnet ctrl_3_3_E
-ihwconnect -instancename router30 -packetnetport portDataWest -packetnet data_3_3_W
-ihwconnect -instancename router29 -packetnetport portDataEast -packetnet data_3_3_W
-ihwconnect -instancename router30 -packetnetport portControlWest -packetnet ctrl_3_3_W
-ihwconnect -instancename router29 -packetnetport portControlEast -packetnet ctrl_3_3_W
-ihwconnect -instancename router30 -packetnetport portDataNorth -packetnet data_3_3_N
-ihwconnect -instancename router39 -packetnetport portDataSouth -packetnet data_3_3_N
-ihwconnect -instancename router30 -packetnetport portControlNorth -packetnet ctrl_3_3_N
-ihwconnect -instancename router39 -packetnetport portControlSouth -packetnet ctrl_3_3_N
-ihwconnect -instancename router30 -packetnetport portDataSouth -packetnet data_3_3_S
-ihwconnect -instancename router21 -packetnetport portDataNorth -packetnet data_3_3_S
-ihwconnect -instancename router30 -packetnetport portControlSouth -packetnet ctrl_3_3_S
-ihwconnect -instancename router21 -packetnetport portControlNorth -packetnet ctrl_3_3_S
-ihwconnect -instancename router31 -packetnetport portDataLocal -packetnet data_3_4_L
-ihwconnect -instancename ni31 -packetnetport dataPort -packetnet data_3_4_L
-ihwconnect -instancename router31 -packetnetport portControlLocal -packetnet ctrl_3_4_L
-ihwconnect -instancename ni31 -packetnetport controlPort -packetnet ctrl_3_4_L
-ihwconnect -instancename router32 -packetnetport portDataLocal -packetnet data_3_5_L
-ihwconnect -instancename ni32 -packetnetport dataPort -packetnet data_3_5_L
-ihwconnect -instancename router32 -packetnetport portControlLocal -packetnet ctrl_3_5_L
-ihwconnect -instancename ni32 -packetnetport controlPort -packetnet ctrl_3_5_L
-ihwconnect -instancename router32 -packetnetport portDataEast -packetnet data_3_5_E
-ihwconnect -instancename router33 -packetnetport portDataWest -packetnet data_3_5_E
-ihwconnect -instancename router32 -packetnetport portControlEast -packetnet ctrl_3_5_E
-ihwconnect -instancename router33 -packetnetport portControlWest -packetnet ctrl_3_5_E
-ihwconnect -instancename router32 -packetnetport portDataWest -packetnet data_3_5_W
-ihwconnect -instancename router31 -packetnetport portDataEast -packetnet data_3_5_W
-ihwconnect -instancename router32 -packetnetport portControlWest -packetnet ctrl_3_5_W
-ihwconnect -instancename router31 -packetnetport portControlEast -packetnet ctrl_3_5_W
-ihwconnect -instancename router32 -packetnetport portDataNorth -packetnet data_3_5_N
-ihwconnect -instancename router41 -packetnetport portDataSouth -packetnet data_3_5_N
-ihwconnect -instancename router32 -packetnetport portControlNorth -packetnet ctrl_3_5_N
-ihwconnect -instancename router41 -packetnetport portControlSouth -packetnet ctrl_3_5_N
-ihwconnect -instancename router32 -packetnetport portDataSouth -packetnet data_3_5_S
-ihwconnect -instancename router23 -packetnetport portDataNorth -packetnet data_3_5_S
-ihwconnect -instancename router32 -packetnetport portControlSouth -packetnet ctrl_3_5_S
-ihwconnect -instancename router23 -packetnetport portControlNorth -packetnet ctrl_3_5_S
-ihwconnect -instancename router33 -packetnetport portDataLocal -packetnet data_3_6_L
-ihwconnect -instancename ni33 -packetnetport dataPort -packetnet data_3_6_L
-ihwconnect -instancename router33 -packetnetport portControlLocal -packetnet ctrl_3_6_L
-ihwconnect -instancename ni33 -packetnetport controlPort -packetnet ctrl_3_6_L
-ihwconnect -instancename router34 -packetnetport portDataLocal -packetnet data_3_7_L
-ihwconnect -instancename ni34 -packetnetport dataPort -packetnet data_3_7_L
-ihwconnect -instancename router34 -packetnetport portControlLocal -packetnet ctrl_3_7_L
-ihwconnect -instancename ni34 -packetnetport controlPort -packetnet ctrl_3_7_L
-ihwconnect -instancename router34 -packetnetport portDataEast -packetnet data_3_7_E
-ihwconnect -instancename router35 -packetnetport portDataWest -packetnet data_3_7_E
-ihwconnect -instancename router34 -packetnetport portControlEast -packetnet ctrl_3_7_E
-ihwconnect -instancename router35 -packetnetport portControlWest -packetnet ctrl_3_7_E
-ihwconnect -instancename router34 -packetnetport portDataWest -packetnet data_3_7_W
-ihwconnect -instancename router33 -packetnetport portDataEast -packetnet data_3_7_W
-ihwconnect -instancename router34 -packetnetport portControlWest -packetnet ctrl_3_7_W
-ihwconnect -instancename router33 -packetnetport portControlEast -packetnet ctrl_3_7_W
-ihwconnect -instancename router34 -packetnetport portDataNorth -packetnet data_3_7_N
-ihwconnect -instancename router43 -packetnetport portDataSouth -packetnet data_3_7_N
-ihwconnect -instancename router34 -packetnetport portControlNorth -packetnet ctrl_3_7_N
-ihwconnect -instancename router43 -packetnetport portControlSouth -packetnet ctrl_3_7_N
-ihwconnect -instancename router34 -packetnetport portDataSouth -packetnet data_3_7_S
-ihwconnect -instancename router25 -packetnetport portDataNorth -packetnet data_3_7_S
-ihwconnect -instancename router34 -packetnetport portControlSouth -packetnet ctrl_3_7_S
-ihwconnect -instancename router25 -packetnetport portControlNorth -packetnet ctrl_3_7_S
-ihwconnect -instancename router35 -packetnetport portDataLocal -packetnet data_3_8_L
-ihwconnect -instancename ni35 -packetnetport dataPort -packetnet data_3_8_L
-ihwconnect -instancename router35 -packetnetport portControlLocal -packetnet ctrl_3_8_L
-ihwconnect -instancename ni35 -packetnetport controlPort -packetnet ctrl_3_8_L
-ihwconnect -instancename router36 -packetnetport portDataLocal -packetnet data_4_0_L
-ihwconnect -instancename ni36 -packetnetport dataPort -packetnet data_4_0_L
-ihwconnect -instancename router36 -packetnetport portControlLocal -packetnet ctrl_4_0_L
-ihwconnect -instancename ni36 -packetnetport controlPort -packetnet ctrl_4_0_L
-ihwconnect -instancename router36 -packetnetport portDataEast -packetnet data_4_0_E
-ihwconnect -instancename router37 -packetnetport portDataWest -packetnet data_4_0_E
-ihwconnect -instancename router36 -packetnetport portControlEast -packetnet ctrl_4_0_E
-ihwconnect -instancename router37 -packetnetport portControlWest -packetnet ctrl_4_0_E
-ihwconnect -instancename router36 -packetnetport portDataNorth -packetnet data_4_0_N
-ihwconnect -instancename router45 -packetnetport portDataSouth -packetnet data_4_0_N
-ihwconnect -instancename router36 -packetnetport portControlNorth -packetnet ctrl_4_0_N
-ihwconnect -instancename router45 -packetnetport portControlSouth -packetnet ctrl_4_0_N
-ihwconnect -instancename router36 -packetnetport portDataSouth -packetnet data_4_0_S
-ihwconnect -instancename router27 -packetnetport portDataNorth -packetnet data_4_0_S
-ihwconnect -instancename router36 -packetnetport portControlSouth -packetnet ctrl_4_0_S
-ihwconnect -instancename router27 -packetnetport portControlNorth -packetnet ctrl_4_0_S
-ihwconnect -instancename router37 -packetnetport portDataLocal -packetnet data_4_1_L
-ihwconnect -instancename ni37 -packetnetport dataPort -packetnet data_4_1_L
-ihwconnect -instancename router37 -packetnetport portControlLocal -packetnet ctrl_4_1_L
-ihwconnect -instancename ni37 -packetnetport controlPort -packetnet ctrl_4_1_L
-ihwconnect -instancename router38 -packetnetport portDataLocal -packetnet data_4_2_L
-ihwconnect -instancename ni38 -packetnetport dataPort -packetnet data_4_2_L
-ihwconnect -instancename router38 -packetnetport portControlLocal -packetnet ctrl_4_2_L
-ihwconnect -instancename ni38 -packetnetport controlPort -packetnet ctrl_4_2_L
-ihwconnect -instancename router38 -packetnetport portDataEast -packetnet data_4_2_E
-ihwconnect -instancename router39 -packetnetport portDataWest -packetnet data_4_2_E
-ihwconnect -instancename router38 -packetnetport portControlEast -packetnet ctrl_4_2_E
-ihwconnect -instancename router39 -packetnetport portControlWest -packetnet ctrl_4_2_E
-ihwconnect -instancename router38 -packetnetport portDataWest -packetnet data_4_2_W
-ihwconnect -instancename router37 -packetnetport portDataEast -packetnet data_4_2_W
-ihwconnect -instancename router38 -packetnetport portControlWest -packetnet ctrl_4_2_W
-ihwconnect -instancename router37 -packetnetport portControlEast -packetnet ctrl_4_2_W
-ihwconnect -instancename router38 -packetnetport portDataNorth -packetnet data_4_2_N
-ihwconnect -instancename router47 -packetnetport portDataSouth -packetnet data_4_2_N
-ihwconnect -instancename router38 -packetnetport portControlNorth -packetnet ctrl_4_2_N
-ihwconnect -instancename router47 -packetnetport portControlSouth -packetnet ctrl_4_2_N
-ihwconnect -instancename router38 -packetnetport portDataSouth -packetnet data_4_2_S
-ihwconnect -instancename router29 -packetnetport portDataNorth -packetnet data_4_2_S
-ihwconnect -instancename router38 -packetnetport portControlSouth -packetnet ctrl_4_2_S
-ihwconnect -instancename router29 -packetnetport portControlNorth -packetnet ctrl_4_2_S
-ihwconnect -instancename router39 -packetnetport portDataLocal -packetnet data_4_3_L
-ihwconnect -instancename ni39 -packetnetport dataPort -packetnet data_4_3_L
-ihwconnect -instancename router39 -packetnetport portControlLocal -packetnet ctrl_4_3_L
-ihwconnect -instancename ni39 -packetnetport controlPort -packetnet ctrl_4_3_L
-ihwconnect -instancename router40 -packetnetport portDataLocal -packetnet data_4_4_L
-ihwconnect -instancename ni40 -packetnetport dataPort -packetnet data_4_4_L
-ihwconnect -instancename router40 -packetnetport portControlLocal -packetnet ctrl_4_4_L
-ihwconnect -instancename ni40 -packetnetport controlPort -packetnet ctrl_4_4_L
-ihwconnect -instancename router40 -packetnetport portDataEast -packetnet data_4_4_E
-ihwconnect -instancename router41 -packetnetport portDataWest -packetnet data_4_4_E
-ihwconnect -instancename router40 -packetnetport portControlEast -packetnet ctrl_4_4_E
-ihwconnect -instancename router41 -packetnetport portControlWest -packetnet ctrl_4_4_E
-ihwconnect -instancename router40 -packetnetport portDataWest -packetnet data_4_4_W
-ihwconnect -instancename router39 -packetnetport portDataEast -packetnet data_4_4_W
-ihwconnect -instancename router40 -packetnetport portControlWest -packetnet ctrl_4_4_W
-ihwconnect -instancename router39 -packetnetport portControlEast -packetnet ctrl_4_4_W
-ihwconnect -instancename router40 -packetnetport portDataNorth -packetnet data_4_4_N
-ihwconnect -instancename router49 -packetnetport portDataSouth -packetnet data_4_4_N
-ihwconnect -instancename router40 -packetnetport portControlNorth -packetnet ctrl_4_4_N
-ihwconnect -instancename router49 -packetnetport portControlSouth -packetnet ctrl_4_4_N
-ihwconnect -instancename router40 -packetnetport portDataSouth -packetnet data_4_4_S
-ihwconnect -instancename router31 -packetnetport portDataNorth -packetnet data_4_4_S
-ihwconnect -instancename router40 -packetnetport portControlSouth -packetnet ctrl_4_4_S
-ihwconnect -instancename router31 -packetnetport portControlNorth -packetnet ctrl_4_4_S
-ihwconnect -instancename router41 -packetnetport portDataLocal -packetnet data_4_5_L
-ihwconnect -instancename ni41 -packetnetport dataPort -packetnet data_4_5_L
-ihwconnect -instancename router41 -packetnetport portControlLocal -packetnet ctrl_4_5_L
-ihwconnect -instancename ni41 -packetnetport controlPort -packetnet ctrl_4_5_L
-ihwconnect -instancename router42 -packetnetport portDataLocal -packetnet data_4_6_L
-ihwconnect -instancename ni42 -packetnetport dataPort -packetnet data_4_6_L
-ihwconnect -instancename router42 -packetnetport portControlLocal -packetnet ctrl_4_6_L
-ihwconnect -instancename ni42 -packetnetport controlPort -packetnet ctrl_4_6_L
-ihwconnect -instancename router42 -packetnetport portDataEast -packetnet data_4_6_E
-ihwconnect -instancename router43 -packetnetport portDataWest -packetnet data_4_6_E
-ihwconnect -instancename router42 -packetnetport portControlEast -packetnet ctrl_4_6_E
-ihwconnect -instancename router43 -packetnetport portControlWest -packetnet ctrl_4_6_E
-ihwconnect -instancename router42 -packetnetport portDataWest -packetnet data_4_6_W
-ihwconnect -instancename router41 -packetnetport portDataEast -packetnet data_4_6_W
-ihwconnect -instancename router42 -packetnetport portControlWest -packetnet ctrl_4_6_W
-ihwconnect -instancename router41 -packetnetport portControlEast -packetnet ctrl_4_6_W
-ihwconnect -instancename router42 -packetnetport portDataNorth -packetnet data_4_6_N
-ihwconnect -instancename router51 -packetnetport portDataSouth -packetnet data_4_6_N
-ihwconnect -instancename router42 -packetnetport portControlNorth -packetnet ctrl_4_6_N
-ihwconnect -instancename router51 -packetnetport portControlSouth -packetnet ctrl_4_6_N
-ihwconnect -instancename router42 -packetnetport portDataSouth -packetnet data_4_6_S
-ihwconnect -instancename router33 -packetnetport portDataNorth -packetnet data_4_6_S
-ihwconnect -instancename router42 -packetnetport portControlSouth -packetnet ctrl_4_6_S
-ihwconnect -instancename router33 -packetnetport portControlNorth -packetnet ctrl_4_6_S
-ihwconnect -instancename router43 -packetnetport portDataLocal -packetnet data_4_7_L
-ihwconnect -instancename ni43 -packetnetport dataPort -packetnet data_4_7_L
-ihwconnect -instancename router43 -packetnetport portControlLocal -packetnet ctrl_4_7_L
-ihwconnect -instancename ni43 -packetnetport controlPort -packetnet ctrl_4_7_L
-ihwconnect -instancename router44 -packetnetport portDataLocal -packetnet data_4_8_L
-ihwconnect -instancename ni44 -packetnetport dataPort -packetnet data_4_8_L
-ihwconnect -instancename router44 -packetnetport portControlLocal -packetnet ctrl_4_8_L
-ihwconnect -instancename ni44 -packetnetport controlPort -packetnet ctrl_4_8_L
-ihwconnect -instancename router44 -packetnetport portDataWest -packetnet data_4_8_W
-ihwconnect -instancename router43 -packetnetport portDataEast -packetnet data_4_8_W
-ihwconnect -instancename router44 -packetnetport portControlWest -packetnet ctrl_4_8_W
-ihwconnect -instancename router43 -packetnetport portControlEast -packetnet ctrl_4_8_W
-ihwconnect -instancename router44 -packetnetport portDataNorth -packetnet data_4_8_N
-ihwconnect -instancename router53 -packetnetport portDataSouth -packetnet data_4_8_N
-ihwconnect -instancename router44 -packetnetport portControlNorth -packetnet ctrl_4_8_N
-ihwconnect -instancename router53 -packetnetport portControlSouth -packetnet ctrl_4_8_N
-ihwconnect -instancename router44 -packetnetport portDataSouth -packetnet data_4_8_S
-ihwconnect -instancename router35 -packetnetport portDataNorth -packetnet data_4_8_S
-ihwconnect -instancename router44 -packetnetport portControlSouth -packetnet ctrl_4_8_S
-ihwconnect -instancename router35 -packetnetport portControlNorth -packetnet ctrl_4_8_S
-ihwconnect -instancename router45 -packetnetport portDataLocal -packetnet data_5_0_L
-ihwconnect -instancename ni45 -packetnetport dataPort -packetnet data_5_0_L
-ihwconnect -instancename router45 -packetnetport portControlLocal -packetnet ctrl_5_0_L
-ihwconnect -instancename ni45 -packetnetport controlPort -packetnet ctrl_5_0_L
-ihwconnect -instancename router46 -packetnetport portDataLocal -packetnet data_5_1_L
-ihwconnect -instancename ni46 -packetnetport dataPort -packetnet data_5_1_L
-ihwconnect -instancename router46 -packetnetport portControlLocal -packetnet ctrl_5_1_L
-ihwconnect -instancename ni46 -packetnetport controlPort -packetnet ctrl_5_1_L
-ihwconnect -instancename router46 -packetnetport portDataEast -packetnet data_5_1_E
-ihwconnect -instancename router47 -packetnetport portDataWest -packetnet data_5_1_E
-ihwconnect -instancename router46 -packetnetport portControlEast -packetnet ctrl_5_1_E
-ihwconnect -instancename router47 -packetnetport portControlWest -packetnet ctrl_5_1_E
-ihwconnect -instancename router46 -packetnetport portDataWest -packetnet data_5_1_W
-ihwconnect -instancename router45 -packetnetport portDataEast -packetnet data_5_1_W
-ihwconnect -instancename router46 -packetnetport portControlWest -packetnet ctrl_5_1_W
-ihwconnect -instancename router45 -packetnetport portControlEast -packetnet ctrl_5_1_W
-ihwconnect -instancename router46 -packetnetport portDataNorth -packetnet data_5_1_N
-ihwconnect -instancename router55 -packetnetport portDataSouth -packetnet data_5_1_N
-ihwconnect -instancename router46 -packetnetport portControlNorth -packetnet ctrl_5_1_N
-ihwconnect -instancename router55 -packetnetport portControlSouth -packetnet ctrl_5_1_N
-ihwconnect -instancename router46 -packetnetport portDataSouth -packetnet data_5_1_S
-ihwconnect -instancename router37 -packetnetport portDataNorth -packetnet data_5_1_S
-ihwconnect -instancename router46 -packetnetport portControlSouth -packetnet ctrl_5_1_S
-ihwconnect -instancename router37 -packetnetport portControlNorth -packetnet ctrl_5_1_S
-ihwconnect -instancename router47 -packetnetport portDataLocal -packetnet data_5_2_L
-ihwconnect -instancename ni47 -packetnetport dataPort -packetnet data_5_2_L
-ihwconnect -instancename router47 -packetnetport portControlLocal -packetnet ctrl_5_2_L
-ihwconnect -instancename ni47 -packetnetport controlPort -packetnet ctrl_5_2_L
-ihwconnect -instancename router48 -packetnetport portDataLocal -packetnet data_5_3_L
-ihwconnect -instancename ni48 -packetnetport dataPort -packetnet data_5_3_L
-ihwconnect -instancename router48 -packetnetport portControlLocal -packetnet ctrl_5_3_L
-ihwconnect -instancename ni48 -packetnetport controlPort -packetnet ctrl_5_3_L
-ihwconnect -instancename router48 -packetnetport portDataEast -packetnet data_5_3_E
-ihwconnect -instancename router49 -packetnetport portDataWest -packetnet data_5_3_E
-ihwconnect -instancename router48 -packetnetport portControlEast -packetnet ctrl_5_3_E
-ihwconnect -instancename router49 -packetnetport portControlWest -packetnet ctrl_5_3_E
-ihwconnect -instancename router48 -packetnetport portDataWest -packetnet data_5_3_W
-ihwconnect -instancename router47 -packetnetport portDataEast -packetnet data_5_3_W
-ihwconnect -instancename router48 -packetnetport portControlWest -packetnet ctrl_5_3_W
-ihwconnect -instancename router47 -packetnetport portControlEast -packetnet ctrl_5_3_W
-ihwconnect -instancename router48 -packetnetport portDataNorth -packetnet data_5_3_N
-ihwconnect -instancename router57 -packetnetport portDataSouth -packetnet data_5_3_N
-ihwconnect -instancename router48 -packetnetport portControlNorth -packetnet ctrl_5_3_N
-ihwconnect -instancename router57 -packetnetport portControlSouth -packetnet ctrl_5_3_N
-ihwconnect -instancename router48 -packetnetport portDataSouth -packetnet data_5_3_S
-ihwconnect -instancename router39 -packetnetport portDataNorth -packetnet data_5_3_S
-ihwconnect -instancename router48 -packetnetport portControlSouth -packetnet ctrl_5_3_S
-ihwconnect -instancename router39 -packetnetport portControlNorth -packetnet ctrl_5_3_S
-ihwconnect -instancename router49 -packetnetport portDataLocal -packetnet data_5_4_L
-ihwconnect -instancename ni49 -packetnetport dataPort -packetnet data_5_4_L
-ihwconnect -instancename router49 -packetnetport portControlLocal -packetnet ctrl_5_4_L
-ihwconnect -instancename ni49 -packetnetport controlPort -packetnet ctrl_5_4_L
-ihwconnect -instancename router50 -packetnetport portDataLocal -packetnet data_5_5_L
-ihwconnect -instancename ni50 -packetnetport dataPort -packetnet data_5_5_L
-ihwconnect -instancename router50 -packetnetport portControlLocal -packetnet ctrl_5_5_L
-ihwconnect -instancename ni50 -packetnetport controlPort -packetnet ctrl_5_5_L
-ihwconnect -instancename router50 -packetnetport portDataEast -packetnet data_5_5_E
-ihwconnect -instancename router51 -packetnetport portDataWest -packetnet data_5_5_E
-ihwconnect -instancename router50 -packetnetport portControlEast -packetnet ctrl_5_5_E
-ihwconnect -instancename router51 -packetnetport portControlWest -packetnet ctrl_5_5_E
-ihwconnect -instancename router50 -packetnetport portDataWest -packetnet data_5_5_W
-ihwconnect -instancename router49 -packetnetport portDataEast -packetnet data_5_5_W
-ihwconnect -instancename router50 -packetnetport portControlWest -packetnet ctrl_5_5_W
-ihwconnect -instancename router49 -packetnetport portControlEast -packetnet ctrl_5_5_W
-ihwconnect -instancename router50 -packetnetport portDataNorth -packetnet data_5_5_N
-ihwconnect -instancename router59 -packetnetport portDataSouth -packetnet data_5_5_N
-ihwconnect -instancename router50 -packetnetport portControlNorth -packetnet ctrl_5_5_N
-ihwconnect -instancename router59 -packetnetport portControlSouth -packetnet ctrl_5_5_N
-ihwconnect -instancename router50 -packetnetport portDataSouth -packetnet data_5_5_S
-ihwconnect -instancename router41 -packetnetport portDataNorth -packetnet data_5_5_S
-ihwconnect -instancename router50 -packetnetport portControlSouth -packetnet ctrl_5_5_S
-ihwconnect -instancename router41 -packetnetport portControlNorth -packetnet ctrl_5_5_S
-ihwconnect -instancename router51 -packetnetport portDataLocal -packetnet data_5_6_L
-ihwconnect -instancename ni51 -packetnetport dataPort -packetnet data_5_6_L
-ihwconnect -instancename router51 -packetnetport portControlLocal -packetnet ctrl_5_6_L
-ihwconnect -instancename ni51 -packetnetport controlPort -packetnet ctrl_5_6_L
-ihwconnect -instancename router52 -packetnetport portDataLocal -packetnet data_5_7_L
-ihwconnect -instancename ni52 -packetnetport dataPort -packetnet data_5_7_L
-ihwconnect -instancename router52 -packetnetport portControlLocal -packetnet ctrl_5_7_L
-ihwconnect -instancename ni52 -packetnetport controlPort -packetnet ctrl_5_7_L
-ihwconnect -instancename router52 -packetnetport portDataEast -packetnet data_5_7_E
-ihwconnect -instancename router53 -packetnetport portDataWest -packetnet data_5_7_E
-ihwconnect -instancename router52 -packetnetport portControlEast -packetnet ctrl_5_7_E
-ihwconnect -instancename router53 -packetnetport portControlWest -packetnet ctrl_5_7_E
-ihwconnect -instancename router52 -packetnetport portDataWest -packetnet data_5_7_W
-ihwconnect -instancename router51 -packetnetport portDataEast -packetnet data_5_7_W
-ihwconnect -instancename router52 -packetnetport portControlWest -packetnet ctrl_5_7_W
-ihwconnect -instancename router51 -packetnetport portControlEast -packetnet ctrl_5_7_W
-ihwconnect -instancename router52 -packetnetport portDataNorth -packetnet data_5_7_N
-ihwconnect -instancename router61 -packetnetport portDataSouth -packetnet data_5_7_N
-ihwconnect -instancename router52 -packetnetport portControlNorth -packetnet ctrl_5_7_N
-ihwconnect -instancename router61 -packetnetport portControlSouth -packetnet ctrl_5_7_N
-ihwconnect -instancename router52 -packetnetport portDataSouth -packetnet data_5_7_S
-ihwconnect -instancename router43 -packetnetport portDataNorth -packetnet data_5_7_S
-ihwconnect -instancename router52 -packetnetport portControlSouth -packetnet ctrl_5_7_S
-ihwconnect -instancename router43 -packetnetport portControlNorth -packetnet ctrl_5_7_S
-ihwconnect -instancename router53 -packetnetport portDataLocal -packetnet data_5_8_L
-ihwconnect -instancename ni53 -packetnetport dataPort -packetnet data_5_8_L
-ihwconnect -instancename router53 -packetnetport portControlLocal -packetnet ctrl_5_8_L
-ihwconnect -instancename ni53 -packetnetport controlPort -packetnet ctrl_5_8_L
-ihwconnect -instancename router54 -packetnetport portDataLocal -packetnet data_6_0_L
-ihwconnect -instancename ni54 -packetnetport dataPort -packetnet data_6_0_L
-ihwconnect -instancename router54 -packetnetport portControlLocal -packetnet ctrl_6_0_L
-ihwconnect -instancename ni54 -packetnetport controlPort -packetnet ctrl_6_0_L
-ihwconnect -instancename router54 -packetnetport portDataEast -packetnet data_6_0_E
-ihwconnect -instancename router55 -packetnetport portDataWest -packetnet data_6_0_E
-ihwconnect -instancename router54 -packetnetport portControlEast -packetnet ctrl_6_0_E
-ihwconnect -instancename router55 -packetnetport portControlWest -packetnet ctrl_6_0_E
-ihwconnect -instancename router54 -packetnetport portDataNorth -packetnet data_6_0_N
-ihwconnect -instancename router63 -packetnetport portDataSouth -packetnet data_6_0_N
-ihwconnect -instancename router54 -packetnetport portControlNorth -packetnet ctrl_6_0_N
-ihwconnect -instancename router63 -packetnetport portControlSouth -packetnet ctrl_6_0_N
-ihwconnect -instancename router54 -packetnetport portDataSouth -packetnet data_6_0_S
-ihwconnect -instancename router45 -packetnetport portDataNorth -packetnet data_6_0_S
-ihwconnect -instancename router54 -packetnetport portControlSouth -packetnet ctrl_6_0_S
-ihwconnect -instancename router45 -packetnetport portControlNorth -packetnet ctrl_6_0_S
-ihwconnect -instancename router55 -packetnetport portDataLocal -packetnet data_6_1_L
-ihwconnect -instancename ni55 -packetnetport dataPort -packetnet data_6_1_L
-ihwconnect -instancename router55 -packetnetport portControlLocal -packetnet ctrl_6_1_L
-ihwconnect -instancename ni55 -packetnetport controlPort -packetnet ctrl_6_1_L
-ihwconnect -instancename router56 -packetnetport portDataLocal -packetnet data_6_2_L
-ihwconnect -instancename ni56 -packetnetport dataPort -packetnet data_6_2_L
-ihwconnect -instancename router56 -packetnetport portControlLocal -packetnet ctrl_6_2_L
-ihwconnect -instancename ni56 -packetnetport controlPort -packetnet ctrl_6_2_L
-ihwconnect -instancename router56 -packetnetport portDataEast -packetnet data_6_2_E
-ihwconnect -instancename router57 -packetnetport portDataWest -packetnet data_6_2_E
-ihwconnect -instancename router56 -packetnetport portControlEast -packetnet ctrl_6_2_E
-ihwconnect -instancename router57 -packetnetport portControlWest -packetnet ctrl_6_2_E
-ihwconnect -instancename router56 -packetnetport portDataWest -packetnet data_6_2_W
-ihwconnect -instancename router55 -packetnetport portDataEast -packetnet data_6_2_W
-ihwconnect -instancename router56 -packetnetport portControlWest -packetnet ctrl_6_2_W
-ihwconnect -instancename router55 -packetnetport portControlEast -packetnet ctrl_6_2_W
-ihwconnect -instancename router56 -packetnetport portDataNorth -packetnet data_6_2_N
-ihwconnect -instancename router65 -packetnetport portDataSouth -packetnet data_6_2_N
-ihwconnect -instancename router56 -packetnetport portControlNorth -packetnet ctrl_6_2_N
-ihwconnect -instancename router65 -packetnetport portControlSouth -packetnet ctrl_6_2_N
-ihwconnect -instancename router56 -packetnetport portDataSouth -packetnet data_6_2_S
-ihwconnect -instancename router47 -packetnetport portDataNorth -packetnet data_6_2_S
-ihwconnect -instancename router56 -packetnetport portControlSouth -packetnet ctrl_6_2_S
-ihwconnect -instancename router47 -packetnetport portControlNorth -packetnet ctrl_6_2_S
-ihwconnect -instancename router57 -packetnetport portDataLocal -packetnet data_6_3_L
-ihwconnect -instancename ni57 -packetnetport dataPort -packetnet data_6_3_L
-ihwconnect -instancename router57 -packetnetport portControlLocal -packetnet ctrl_6_3_L
-ihwconnect -instancename ni57 -packetnetport controlPort -packetnet ctrl_6_3_L
-ihwconnect -instancename router58 -packetnetport portDataLocal -packetnet data_6_4_L
-ihwconnect -instancename ni58 -packetnetport dataPort -packetnet data_6_4_L
-ihwconnect -instancename router58 -packetnetport portControlLocal -packetnet ctrl_6_4_L
-ihwconnect -instancename ni58 -packetnetport controlPort -packetnet ctrl_6_4_L
-ihwconnect -instancename router58 -packetnetport portDataEast -packetnet data_6_4_E
-ihwconnect -instancename router59 -packetnetport portDataWest -packetnet data_6_4_E
-ihwconnect -instancename router58 -packetnetport portControlEast -packetnet ctrl_6_4_E
-ihwconnect -instancename router59 -packetnetport portControlWest -packetnet ctrl_6_4_E
-ihwconnect -instancename router58 -packetnetport portDataWest -packetnet data_6_4_W
-ihwconnect -instancename router57 -packetnetport portDataEast -packetnet data_6_4_W
-ihwconnect -instancename router58 -packetnetport portControlWest -packetnet ctrl_6_4_W
-ihwconnect -instancename router57 -packetnetport portControlEast -packetnet ctrl_6_4_W
-ihwconnect -instancename router58 -packetnetport portDataNorth -packetnet data_6_4_N
-ihwconnect -instancename router67 -packetnetport portDataSouth -packetnet data_6_4_N
-ihwconnect -instancename router58 -packetnetport portControlNorth -packetnet ctrl_6_4_N
-ihwconnect -instancename router67 -packetnetport portControlSouth -packetnet ctrl_6_4_N
-ihwconnect -instancename router58 -packetnetport portDataSouth -packetnet data_6_4_S
-ihwconnect -instancename router49 -packetnetport portDataNorth -packetnet data_6_4_S
-ihwconnect -instancename router58 -packetnetport portControlSouth -packetnet ctrl_6_4_S
-ihwconnect -instancename router49 -packetnetport portControlNorth -packetnet ctrl_6_4_S
-ihwconnect -instancename router59 -packetnetport portDataLocal -packetnet data_6_5_L
-ihwconnect -instancename ni59 -packetnetport dataPort -packetnet data_6_5_L
-ihwconnect -instancename router59 -packetnetport portControlLocal -packetnet ctrl_6_5_L
-ihwconnect -instancename ni59 -packetnetport controlPort -packetnet ctrl_6_5_L
-ihwconnect -instancename router60 -packetnetport portDataLocal -packetnet data_6_6_L
-ihwconnect -instancename ni60 -packetnetport dataPort -packetnet data_6_6_L
-ihwconnect -instancename router60 -packetnetport portControlLocal -packetnet ctrl_6_6_L
-ihwconnect -instancename ni60 -packetnetport controlPort -packetnet ctrl_6_6_L
-ihwconnect -instancename router60 -packetnetport portDataEast -packetnet data_6_6_E
-ihwconnect -instancename router61 -packetnetport portDataWest -packetnet data_6_6_E
-ihwconnect -instancename router60 -packetnetport portControlEast -packetnet ctrl_6_6_E
-ihwconnect -instancename router61 -packetnetport portControlWest -packetnet ctrl_6_6_E
-ihwconnect -instancename router60 -packetnetport portDataWest -packetnet data_6_6_W
-ihwconnect -instancename router59 -packetnetport portDataEast -packetnet data_6_6_W
-ihwconnect -instancename router60 -packetnetport portControlWest -packetnet ctrl_6_6_W
-ihwconnect -instancename router59 -packetnetport portControlEast -packetnet ctrl_6_6_W
-ihwconnect -instancename router60 -packetnetport portDataNorth -packetnet data_6_6_N
-ihwconnect -instancename router69 -packetnetport portDataSouth -packetnet data_6_6_N
-ihwconnect -instancename router60 -packetnetport portControlNorth -packetnet ctrl_6_6_N
-ihwconnect -instancename router69 -packetnetport portControlSouth -packetnet ctrl_6_6_N
-ihwconnect -instancename router60 -packetnetport portDataSouth -packetnet data_6_6_S
-ihwconnect -instancename router51 -packetnetport portDataNorth -packetnet data_6_6_S
-ihwconnect -instancename router60 -packetnetport portControlSouth -packetnet ctrl_6_6_S
-ihwconnect -instancename router51 -packetnetport portControlNorth -packetnet ctrl_6_6_S
-ihwconnect -instancename router61 -packetnetport portDataLocal -packetnet data_6_7_L
-ihwconnect -instancename ni61 -packetnetport dataPort -packetnet data_6_7_L
-ihwconnect -instancename router61 -packetnetport portControlLocal -packetnet ctrl_6_7_L
-ihwconnect -instancename ni61 -packetnetport controlPort -packetnet ctrl_6_7_L
-ihwconnect -instancename router62 -packetnetport portDataLocal -packetnet data_6_8_L
-ihwconnect -instancename ni62 -packetnetport dataPort -packetnet data_6_8_L
-ihwconnect -instancename router62 -packetnetport portControlLocal -packetnet ctrl_6_8_L
-ihwconnect -instancename ni62 -packetnetport controlPort -packetnet ctrl_6_8_L
-ihwconnect -instancename router62 -packetnetport portDataWest -packetnet data_6_8_W
-ihwconnect -instancename router61 -packetnetport portDataEast -packetnet data_6_8_W
-ihwconnect -instancename router62 -packetnetport portControlWest -packetnet ctrl_6_8_W
-ihwconnect -instancename router61 -packetnetport portControlEast -packetnet ctrl_6_8_W
-ihwconnect -instancename router62 -packetnetport portDataNorth -packetnet data_6_8_N
-ihwconnect -instancename router71 -packetnetport portDataSouth -packetnet data_6_8_N
-ihwconnect -instancename router62 -packetnetport portControlNorth -packetnet ctrl_6_8_N
-ihwconnect -instancename router71 -packetnetport portControlSouth -packetnet ctrl_6_8_N
-ihwconnect -instancename router62 -packetnetport portDataSouth -packetnet data_6_8_S
-ihwconnect -instancename router53 -packetnetport portDataNorth -packetnet data_6_8_S
-ihwconnect -instancename router62 -packetnetport portControlSouth -packetnet ctrl_6_8_S
-ihwconnect -instancename router53 -packetnetport portControlNorth -packetnet ctrl_6_8_S
-ihwconnect -instancename router63 -packetnetport portDataLocal -packetnet data_7_0_L
-ihwconnect -instancename ni63 -packetnetport dataPort -packetnet data_7_0_L
-ihwconnect -instancename router63 -packetnetport portControlLocal -packetnet ctrl_7_0_L
-ihwconnect -instancename ni63 -packetnetport controlPort -packetnet ctrl_7_0_L
-ihwconnect -instancename router64 -packetnetport portDataLocal -packetnet data_7_1_L
-ihwconnect -instancename ni64 -packetnetport dataPort -packetnet data_7_1_L
-ihwconnect -instancename router64 -packetnetport portControlLocal -packetnet ctrl_7_1_L
-ihwconnect -instancename ni64 -packetnetport controlPort -packetnet ctrl_7_1_L
-ihwconnect -instancename router64 -packetnetport portDataEast -packetnet data_7_1_E
-ihwconnect -instancename router65 -packetnetport portDataWest -packetnet data_7_1_E
-ihwconnect -instancename router64 -packetnetport portControlEast -packetnet ctrl_7_1_E
-ihwconnect -instancename router65 -packetnetport portControlWest -packetnet ctrl_7_1_E
-ihwconnect -instancename router64 -packetnetport portDataWest -packetnet data_7_1_W
-ihwconnect -instancename router63 -packetnetport portDataEast -packetnet data_7_1_W
-ihwconnect -instancename router64 -packetnetport portControlWest -packetnet ctrl_7_1_W
-ihwconnect -instancename router63 -packetnetport portControlEast -packetnet ctrl_7_1_W
-ihwconnect -instancename router64 -packetnetport portDataNorth -packetnet data_7_1_N
-ihwconnect -instancename router73 -packetnetport portDataSouth -packetnet data_7_1_N
-ihwconnect -instancename router64 -packetnetport portControlNorth -packetnet ctrl_7_1_N
-ihwconnect -instancename router73 -packetnetport portControlSouth -packetnet ctrl_7_1_N
-ihwconnect -instancename router64 -packetnetport portDataSouth -packetnet data_7_1_S
-ihwconnect -instancename router55 -packetnetport portDataNorth -packetnet data_7_1_S
-ihwconnect -instancename router64 -packetnetport portControlSouth -packetnet ctrl_7_1_S
-ihwconnect -instancename router55 -packetnetport portControlNorth -packetnet ctrl_7_1_S
-ihwconnect -instancename router65 -packetnetport portDataLocal -packetnet data_7_2_L
-ihwconnect -instancename ni65 -packetnetport dataPort -packetnet data_7_2_L
-ihwconnect -instancename router65 -packetnetport portControlLocal -packetnet ctrl_7_2_L
-ihwconnect -instancename ni65 -packetnetport controlPort -packetnet ctrl_7_2_L
-ihwconnect -instancename router66 -packetnetport portDataLocal -packetnet data_7_3_L
-ihwconnect -instancename ni66 -packetnetport dataPort -packetnet data_7_3_L
-ihwconnect -instancename router66 -packetnetport portControlLocal -packetnet ctrl_7_3_L
-ihwconnect -instancename ni66 -packetnetport controlPort -packetnet ctrl_7_3_L
-ihwconnect -instancename router66 -packetnetport portDataEast -packetnet data_7_3_E
-ihwconnect -instancename router67 -packetnetport portDataWest -packetnet data_7_3_E
-ihwconnect -instancename router66 -packetnetport portControlEast -packetnet ctrl_7_3_E
-ihwconnect -instancename router67 -packetnetport portControlWest -packetnet ctrl_7_3_E
-ihwconnect -instancename router66 -packetnetport portDataWest -packetnet data_7_3_W
-ihwconnect -instancename router65 -packetnetport portDataEast -packetnet data_7_3_W
-ihwconnect -instancename router66 -packetnetport portControlWest -packetnet ctrl_7_3_W
-ihwconnect -instancename router65 -packetnetport portControlEast -packetnet ctrl_7_3_W
-ihwconnect -instancename router66 -packetnetport portDataNorth -packetnet data_7_3_N
-ihwconnect -instancename router75 -packetnetport portDataSouth -packetnet data_7_3_N
-ihwconnect -instancename router66 -packetnetport portControlNorth -packetnet ctrl_7_3_N
-ihwconnect -instancename router75 -packetnetport portControlSouth -packetnet ctrl_7_3_N
-ihwconnect -instancename router66 -packetnetport portDataSouth -packetnet data_7_3_S
-ihwconnect -instancename router57 -packetnetport portDataNorth -packetnet data_7_3_S
-ihwconnect -instancename router66 -packetnetport portControlSouth -packetnet ctrl_7_3_S
-ihwconnect -instancename router57 -packetnetport portControlNorth -packetnet ctrl_7_3_S
-ihwconnect -instancename router67 -packetnetport portDataLocal -packetnet data_7_4_L
-ihwconnect -instancename ni67 -packetnetport dataPort -packetnet data_7_4_L
-ihwconnect -instancename router67 -packetnetport portControlLocal -packetnet ctrl_7_4_L
-ihwconnect -instancename ni67 -packetnetport controlPort -packetnet ctrl_7_4_L
-ihwconnect -instancename router68 -packetnetport portDataLocal -packetnet data_7_5_L
-ihwconnect -instancename ni68 -packetnetport dataPort -packetnet data_7_5_L
-ihwconnect -instancename router68 -packetnetport portControlLocal -packetnet ctrl_7_5_L
-ihwconnect -instancename ni68 -packetnetport controlPort -packetnet ctrl_7_5_L
-ihwconnect -instancename router68 -packetnetport portDataEast -packetnet data_7_5_E
-ihwconnect -instancename router69 -packetnetport portDataWest -packetnet data_7_5_E
-ihwconnect -instancename router68 -packetnetport portControlEast -packetnet ctrl_7_5_E
-ihwconnect -instancename router69 -packetnetport portControlWest -packetnet ctrl_7_5_E
-ihwconnect -instancename router68 -packetnetport portDataWest -packetnet data_7_5_W
-ihwconnect -instancename router67 -packetnetport portDataEast -packetnet data_7_5_W
-ihwconnect -instancename router68 -packetnetport portControlWest -packetnet ctrl_7_5_W
-ihwconnect -instancename router67 -packetnetport portControlEast -packetnet ctrl_7_5_W
-ihwconnect -instancename router68 -packetnetport portDataNorth -packetnet data_7_5_N
-ihwconnect -instancename router77 -packetnetport portDataSouth -packetnet data_7_5_N
-ihwconnect -instancename router68 -packetnetport portControlNorth -packetnet ctrl_7_5_N
-ihwconnect -instancename router77 -packetnetport portControlSouth -packetnet ctrl_7_5_N
-ihwconnect -instancename router68 -packetnetport portDataSouth -packetnet data_7_5_S
-ihwconnect -instancename router59 -packetnetport portDataNorth -packetnet data_7_5_S
-ihwconnect -instancename router68 -packetnetport portControlSouth -packetnet ctrl_7_5_S
-ihwconnect -instancename router59 -packetnetport portControlNorth -packetnet ctrl_7_5_S
-ihwconnect -instancename router69 -packetnetport portDataLocal -packetnet data_7_6_L
-ihwconnect -instancename ni69 -packetnetport dataPort -packetnet data_7_6_L
-ihwconnect -instancename router69 -packetnetport portControlLocal -packetnet ctrl_7_6_L
-ihwconnect -instancename ni69 -packetnetport controlPort -packetnet ctrl_7_6_L
-ihwconnect -instancename router70 -packetnetport portDataLocal -packetnet data_7_7_L
-ihwconnect -instancename ni70 -packetnetport dataPort -packetnet data_7_7_L
-ihwconnect -instancename router70 -packetnetport portControlLocal -packetnet ctrl_7_7_L
-ihwconnect -instancename ni70 -packetnetport controlPort -packetnet ctrl_7_7_L
-ihwconnect -instancename router70 -packetnetport portDataEast -packetnet data_7_7_E
-ihwconnect -instancename router71 -packetnetport portDataWest -packetnet data_7_7_E
-ihwconnect -instancename router70 -packetnetport portControlEast -packetnet ctrl_7_7_E
-ihwconnect -instancename router71 -packetnetport portControlWest -packetnet ctrl_7_7_E
-ihwconnect -instancename router70 -packetnetport portDataWest -packetnet data_7_7_W
-ihwconnect -instancename router69 -packetnetport portDataEast -packetnet data_7_7_W
-ihwconnect -instancename router70 -packetnetport portControlWest -packetnet ctrl_7_7_W
-ihwconnect -instancename router69 -packetnetport portControlEast -packetnet ctrl_7_7_W
-ihwconnect -instancename router70 -packetnetport portDataNorth -packetnet data_7_7_N
-ihwconnect -instancename router79 -packetnetport portDataSouth -packetnet data_7_7_N
-ihwconnect -instancename router70 -packetnetport portControlNorth -packetnet ctrl_7_7_N
-ihwconnect -instancename router79 -packetnetport portControlSouth -packetnet ctrl_7_7_N
-ihwconnect -instancename router70 -packetnetport portDataSouth -packetnet data_7_7_S
-ihwconnect -instancename router61 -packetnetport portDataNorth -packetnet data_7_7_S
-ihwconnect -instancename router70 -packetnetport portControlSouth -packetnet ctrl_7_7_S
-ihwconnect -instancename router61 -packetnetport portControlNorth -packetnet ctrl_7_7_S
-ihwconnect -instancename router71 -packetnetport portDataLocal -packetnet data_7_8_L
-ihwconnect -instancename ni71 -packetnetport dataPort -packetnet data_7_8_L
-ihwconnect -instancename router71 -packetnetport portControlLocal -packetnet ctrl_7_8_L
-ihwconnect -instancename ni71 -packetnetport controlPort -packetnet ctrl_7_8_L
-ihwconnect -instancename router72 -packetnetport portDataLocal -packetnet data_8_0_L
-ihwconnect -instancename ni72 -packetnetport dataPort -packetnet data_8_0_L
-ihwconnect -instancename router72 -packetnetport portControlLocal -packetnet ctrl_8_0_L
-ihwconnect -instancename ni72 -packetnetport controlPort -packetnet ctrl_8_0_L
-ihwconnect -instancename router72 -packetnetport portDataEast -packetnet data_8_0_E
-ihwconnect -instancename router73 -packetnetport portDataWest -packetnet data_8_0_E
-ihwconnect -instancename router72 -packetnetport portControlEast -packetnet ctrl_8_0_E
-ihwconnect -instancename router73 -packetnetport portControlWest -packetnet ctrl_8_0_E
-ihwconnect -instancename router72 -packetnetport portDataSouth -packetnet data_8_0_S
-ihwconnect -instancename router63 -packetnetport portDataNorth -packetnet data_8_0_S
-ihwconnect -instancename router72 -packetnetport portControlSouth -packetnet ctrl_8_0_S
-ihwconnect -instancename router63 -packetnetport portControlNorth -packetnet ctrl_8_0_S
-ihwconnect -instancename router73 -packetnetport portDataLocal -packetnet data_8_1_L
-ihwconnect -instancename ni73 -packetnetport dataPort -packetnet data_8_1_L
-ihwconnect -instancename router73 -packetnetport portControlLocal -packetnet ctrl_8_1_L
-ihwconnect -instancename ni73 -packetnetport controlPort -packetnet ctrl_8_1_L
-ihwconnect -instancename router74 -packetnetport portDataLocal -packetnet data_8_2_L
-ihwconnect -instancename ni74 -packetnetport dataPort -packetnet data_8_2_L
-ihwconnect -instancename router74 -packetnetport portControlLocal -packetnet ctrl_8_2_L
-ihwconnect -instancename ni74 -packetnetport controlPort -packetnet ctrl_8_2_L
-ihwconnect -instancename router74 -packetnetport portDataEast -packetnet data_8_2_E
-ihwconnect -instancename router75 -packetnetport portDataWest -packetnet data_8_2_E
-ihwconnect -instancename router74 -packetnetport portControlEast -packetnet ctrl_8_2_E
-ihwconnect -instancename router75 -packetnetport portControlWest -packetnet ctrl_8_2_E
-ihwconnect -instancename router74 -packetnetport portDataWest -packetnet data_8_2_W
-ihwconnect -instancename router73 -packetnetport portDataEast -packetnet data_8_2_W
-ihwconnect -instancename router74 -packetnetport portControlWest -packetnet ctrl_8_2_W
-ihwconnect -instancename router73 -packetnetport portControlEast -packetnet ctrl_8_2_W
-ihwconnect -instancename router74 -packetnetport portDataSouth -packetnet data_8_2_S
-ihwconnect -instancename router65 -packetnetport portDataNorth -packetnet data_8_2_S
-ihwconnect -instancename router74 -packetnetport portControlSouth -packetnet ctrl_8_2_S
-ihwconnect -instancename router65 -packetnetport portControlNorth -packetnet ctrl_8_2_S
-ihwconnect -instancename router75 -packetnetport portDataLocal -packetnet data_8_3_L
-ihwconnect -instancename ni75 -packetnetport dataPort -packetnet data_8_3_L
-ihwconnect -instancename router75 -packetnetport portControlLocal -packetnet ctrl_8_3_L
-ihwconnect -instancename ni75 -packetnetport controlPort -packetnet ctrl_8_3_L
-ihwconnect -instancename router76 -packetnetport portDataLocal -packetnet data_8_4_L
-ihwconnect -instancename ni76 -packetnetport dataPort -packetnet data_8_4_L
-ihwconnect -instancename router76 -packetnetport portControlLocal -packetnet ctrl_8_4_L
-ihwconnect -instancename ni76 -packetnetport controlPort -packetnet ctrl_8_4_L
-ihwconnect -instancename router76 -packetnetport portDataEast -packetnet data_8_4_E
-ihwconnect -instancename router77 -packetnetport portDataWest -packetnet data_8_4_E
-ihwconnect -instancename router76 -packetnetport portControlEast -packetnet ctrl_8_4_E
-ihwconnect -instancename router77 -packetnetport portControlWest -packetnet ctrl_8_4_E
-ihwconnect -instancename router76 -packetnetport portDataWest -packetnet data_8_4_W
-ihwconnect -instancename router75 -packetnetport portDataEast -packetnet data_8_4_W
-ihwconnect -instancename router76 -packetnetport portControlWest -packetnet ctrl_8_4_W
-ihwconnect -instancename router75 -packetnetport portControlEast -packetnet ctrl_8_4_W
-ihwconnect -instancename router76 -packetnetport portDataSouth -packetnet data_8_4_S
-ihwconnect -instancename router67 -packetnetport portDataNorth -packetnet data_8_4_S
-ihwconnect -instancename router76 -packetnetport portControlSouth -packetnet ctrl_8_4_S
-ihwconnect -instancename router67 -packetnetport portControlNorth -packetnet ctrl_8_4_S
-ihwconnect -instancename router77 -packetnetport portDataLocal -packetnet data_8_5_L
-ihwconnect -instancename ni77 -packetnetport dataPort -packetnet data_8_5_L
-ihwconnect -instancename router77 -packetnetport portControlLocal -packetnet ctrl_8_5_L
-ihwconnect -instancename ni77 -packetnetport controlPort -packetnet ctrl_8_5_L
-ihwconnect -instancename router78 -packetnetport portDataLocal -packetnet data_8_6_L
-ihwconnect -instancename ni78 -packetnetport dataPort -packetnet data_8_6_L
-ihwconnect -instancename router78 -packetnetport portControlLocal -packetnet ctrl_8_6_L
-ihwconnect -instancename ni78 -packetnetport controlPort -packetnet ctrl_8_6_L
-ihwconnect -instancename router78 -packetnetport portDataEast -packetnet data_8_6_E
-ihwconnect -instancename router79 -packetnetport portDataWest -packetnet data_8_6_E
-ihwconnect -instancename router78 -packetnetport portControlEast -packetnet ctrl_8_6_E
-ihwconnect -instancename router79 -packetnetport portControlWest -packetnet ctrl_8_6_E
-ihwconnect -instancename router78 -packetnetport portDataWest -packetnet data_8_6_W
-ihwconnect -instancename router77 -packetnetport portDataEast -packetnet data_8_6_W
-ihwconnect -instancename router78 -packetnetport portControlWest -packetnet ctrl_8_6_W
-ihwconnect -instancename router77 -packetnetport portControlEast -packetnet ctrl_8_6_W
-ihwconnect -instancename router78 -packetnetport portDataSouth -packetnet data_8_6_S
-ihwconnect -instancename router69 -packetnetport portDataNorth -packetnet data_8_6_S
-ihwconnect -instancename router78 -packetnetport portControlSouth -packetnet ctrl_8_6_S
-ihwconnect -instancename router69 -packetnetport portControlNorth -packetnet ctrl_8_6_S
-ihwconnect -instancename router79 -packetnetport portDataLocal -packetnet data_8_7_L
-ihwconnect -instancename ni79 -packetnetport dataPort -packetnet data_8_7_L
-ihwconnect -instancename router79 -packetnetport portControlLocal -packetnet ctrl_8_7_L
-ihwconnect -instancename ni79 -packetnetport controlPort -packetnet ctrl_8_7_L
-ihwconnect -instancename router80 -packetnetport portDataLocal -packetnet data_8_8_L
-ihwconnect -instancename ni80 -packetnetport dataPort -packetnet data_8_8_L
-ihwconnect -instancename router80 -packetnetport portControlLocal -packetnet ctrl_8_8_L
-ihwconnect -instancename ni80 -packetnetport controlPort -packetnet ctrl_8_8_L
-ihwconnect -instancename router80 -packetnetport portDataWest -packetnet data_8_8_W
-ihwconnect -instancename router79 -packetnetport portDataEast -packetnet data_8_8_W
-ihwconnect -instancename router80 -packetnetport portControlWest -packetnet ctrl_8_8_W
-ihwconnect -instancename router79 -packetnetport portControlEast -packetnet ctrl_8_8_W
-ihwconnect -instancename router80 -packetnetport portDataSouth -packetnet data_8_8_S
-ihwconnect -instancename router71 -packetnetport portDataNorth -packetnet data_8_8_S
-ihwconnect -instancename router80 -packetnetport portControlSouth -packetnet ctrl_8_8_S
-ihwconnect -instancename router71 -packetnetport portControlNorth -packetnet ctrl_8_8_S
+ihwconnect -instancename router13 -packetnetport portDataLocal -packetnet data_1_6_L
+ihwconnect -instancename ni13 -packetnetport dataPort -packetnet data_1_6_L
+ihwconnect -instancename router13 -packetnetport portControlLocal -packetnet ctrl_1_6_L
+ihwconnect -instancename ni13 -packetnetport controlPort -packetnet ctrl_1_6_L
+ihwconnect -instancename router14 -packetnetport portDataLocal -packetnet data_2_0_L
+ihwconnect -instancename ni14 -packetnetport dataPort -packetnet data_2_0_L
+ihwconnect -instancename router14 -packetnetport portControlLocal -packetnet ctrl_2_0_L
+ihwconnect -instancename ni14 -packetnetport controlPort -packetnet ctrl_2_0_L
+ihwconnect -instancename router14 -packetnetport portDataEast -packetnet data_2_0_E
+ihwconnect -instancename router15 -packetnetport portDataWest -packetnet data_2_0_E
+ihwconnect -instancename router14 -packetnetport portControlEast -packetnet ctrl_2_0_E
+ihwconnect -instancename router15 -packetnetport portControlWest -packetnet ctrl_2_0_E
+ihwconnect -instancename router14 -packetnetport portDataNorth -packetnet data_2_0_N
+ihwconnect -instancename router21 -packetnetport portDataSouth -packetnet data_2_0_N
+ihwconnect -instancename router14 -packetnetport portControlNorth -packetnet ctrl_2_0_N
+ihwconnect -instancename router21 -packetnetport portControlSouth -packetnet ctrl_2_0_N
+ihwconnect -instancename router14 -packetnetport portDataSouth -packetnet data_2_0_S
+ihwconnect -instancename router7 -packetnetport portDataNorth -packetnet data_2_0_S
+ihwconnect -instancename router14 -packetnetport portControlSouth -packetnet ctrl_2_0_S
+ihwconnect -instancename router7 -packetnetport portControlNorth -packetnet ctrl_2_0_S
+ihwconnect -instancename router15 -packetnetport portDataLocal -packetnet data_2_1_L
+ihwconnect -instancename ni15 -packetnetport dataPort -packetnet data_2_1_L
+ihwconnect -instancename router15 -packetnetport portControlLocal -packetnet ctrl_2_1_L
+ihwconnect -instancename ni15 -packetnetport controlPort -packetnet ctrl_2_1_L
+ihwconnect -instancename router16 -packetnetport portDataLocal -packetnet data_2_2_L
+ihwconnect -instancename ni16 -packetnetport dataPort -packetnet data_2_2_L
+ihwconnect -instancename router16 -packetnetport portControlLocal -packetnet ctrl_2_2_L
+ihwconnect -instancename ni16 -packetnetport controlPort -packetnet ctrl_2_2_L
+ihwconnect -instancename router16 -packetnetport portDataEast -packetnet data_2_2_E
+ihwconnect -instancename router17 -packetnetport portDataWest -packetnet data_2_2_E
+ihwconnect -instancename router16 -packetnetport portControlEast -packetnet ctrl_2_2_E
+ihwconnect -instancename router17 -packetnetport portControlWest -packetnet ctrl_2_2_E
+ihwconnect -instancename router16 -packetnetport portDataWest -packetnet data_2_2_W
+ihwconnect -instancename router15 -packetnetport portDataEast -packetnet data_2_2_W
+ihwconnect -instancename router16 -packetnetport portControlWest -packetnet ctrl_2_2_W
+ihwconnect -instancename router15 -packetnetport portControlEast -packetnet ctrl_2_2_W
+ihwconnect -instancename router16 -packetnetport portDataNorth -packetnet data_2_2_N
+ihwconnect -instancename router23 -packetnetport portDataSouth -packetnet data_2_2_N
+ihwconnect -instancename router16 -packetnetport portControlNorth -packetnet ctrl_2_2_N
+ihwconnect -instancename router23 -packetnetport portControlSouth -packetnet ctrl_2_2_N
+ihwconnect -instancename router16 -packetnetport portDataSouth -packetnet data_2_2_S
+ihwconnect -instancename router9 -packetnetport portDataNorth -packetnet data_2_2_S
+ihwconnect -instancename router16 -packetnetport portControlSouth -packetnet ctrl_2_2_S
+ihwconnect -instancename router9 -packetnetport portControlNorth -packetnet ctrl_2_2_S
+ihwconnect -instancename router17 -packetnetport portDataLocal -packetnet data_2_3_L
+ihwconnect -instancename ni17 -packetnetport dataPort -packetnet data_2_3_L
+ihwconnect -instancename router17 -packetnetport portControlLocal -packetnet ctrl_2_3_L
+ihwconnect -instancename ni17 -packetnetport controlPort -packetnet ctrl_2_3_L
+ihwconnect -instancename router18 -packetnetport portDataLocal -packetnet data_2_4_L
+ihwconnect -instancename ni18 -packetnetport dataPort -packetnet data_2_4_L
+ihwconnect -instancename router18 -packetnetport portControlLocal -packetnet ctrl_2_4_L
+ihwconnect -instancename ni18 -packetnetport controlPort -packetnet ctrl_2_4_L
+ihwconnect -instancename router18 -packetnetport portDataEast -packetnet data_2_4_E
+ihwconnect -instancename router19 -packetnetport portDataWest -packetnet data_2_4_E
+ihwconnect -instancename router18 -packetnetport portControlEast -packetnet ctrl_2_4_E
+ihwconnect -instancename router19 -packetnetport portControlWest -packetnet ctrl_2_4_E
+ihwconnect -instancename router18 -packetnetport portDataWest -packetnet data_2_4_W
+ihwconnect -instancename router17 -packetnetport portDataEast -packetnet data_2_4_W
+ihwconnect -instancename router18 -packetnetport portControlWest -packetnet ctrl_2_4_W
+ihwconnect -instancename router17 -packetnetport portControlEast -packetnet ctrl_2_4_W
+ihwconnect -instancename router18 -packetnetport portDataNorth -packetnet data_2_4_N
+ihwconnect -instancename router25 -packetnetport portDataSouth -packetnet data_2_4_N
+ihwconnect -instancename router18 -packetnetport portControlNorth -packetnet ctrl_2_4_N
+ihwconnect -instancename router25 -packetnetport portControlSouth -packetnet ctrl_2_4_N
+ihwconnect -instancename router18 -packetnetport portDataSouth -packetnet data_2_4_S
+ihwconnect -instancename router11 -packetnetport portDataNorth -packetnet data_2_4_S
+ihwconnect -instancename router18 -packetnetport portControlSouth -packetnet ctrl_2_4_S
+ihwconnect -instancename router11 -packetnetport portControlNorth -packetnet ctrl_2_4_S
+ihwconnect -instancename router19 -packetnetport portDataLocal -packetnet data_2_5_L
+ihwconnect -instancename ni19 -packetnetport dataPort -packetnet data_2_5_L
+ihwconnect -instancename router19 -packetnetport portControlLocal -packetnet ctrl_2_5_L
+ihwconnect -instancename ni19 -packetnetport controlPort -packetnet ctrl_2_5_L
+ihwconnect -instancename router20 -packetnetport portDataLocal -packetnet data_2_6_L
+ihwconnect -instancename ni20 -packetnetport dataPort -packetnet data_2_6_L
+ihwconnect -instancename router20 -packetnetport portControlLocal -packetnet ctrl_2_6_L
+ihwconnect -instancename ni20 -packetnetport controlPort -packetnet ctrl_2_6_L
+ihwconnect -instancename router20 -packetnetport portDataWest -packetnet data_2_6_W
+ihwconnect -instancename router19 -packetnetport portDataEast -packetnet data_2_6_W
+ihwconnect -instancename router20 -packetnetport portControlWest -packetnet ctrl_2_6_W
+ihwconnect -instancename router19 -packetnetport portControlEast -packetnet ctrl_2_6_W
+ihwconnect -instancename router20 -packetnetport portDataNorth -packetnet data_2_6_N
+ihwconnect -instancename router27 -packetnetport portDataSouth -packetnet data_2_6_N
+ihwconnect -instancename router20 -packetnetport portControlNorth -packetnet ctrl_2_6_N
+ihwconnect -instancename router27 -packetnetport portControlSouth -packetnet ctrl_2_6_N
+ihwconnect -instancename router20 -packetnetport portDataSouth -packetnet data_2_6_S
+ihwconnect -instancename router13 -packetnetport portDataNorth -packetnet data_2_6_S
+ihwconnect -instancename router20 -packetnetport portControlSouth -packetnet ctrl_2_6_S
+ihwconnect -instancename router13 -packetnetport portControlNorth -packetnet ctrl_2_6_S
+ihwconnect -instancename router21 -packetnetport portDataLocal -packetnet data_3_0_L
+ihwconnect -instancename ni21 -packetnetport dataPort -packetnet data_3_0_L
+ihwconnect -instancename router21 -packetnetport portControlLocal -packetnet ctrl_3_0_L
+ihwconnect -instancename ni21 -packetnetport controlPort -packetnet ctrl_3_0_L
+ihwconnect -instancename router22 -packetnetport portDataLocal -packetnet data_3_1_L
+ihwconnect -instancename ni22 -packetnetport dataPort -packetnet data_3_1_L
+ihwconnect -instancename router22 -packetnetport portControlLocal -packetnet ctrl_3_1_L
+ihwconnect -instancename ni22 -packetnetport controlPort -packetnet ctrl_3_1_L
+ihwconnect -instancename router22 -packetnetport portDataEast -packetnet data_3_1_E
+ihwconnect -instancename router23 -packetnetport portDataWest -packetnet data_3_1_E
+ihwconnect -instancename router22 -packetnetport portControlEast -packetnet ctrl_3_1_E
+ihwconnect -instancename router23 -packetnetport portControlWest -packetnet ctrl_3_1_E
+ihwconnect -instancename router22 -packetnetport portDataWest -packetnet data_3_1_W
+ihwconnect -instancename router21 -packetnetport portDataEast -packetnet data_3_1_W
+ihwconnect -instancename router22 -packetnetport portControlWest -packetnet ctrl_3_1_W
+ihwconnect -instancename router21 -packetnetport portControlEast -packetnet ctrl_3_1_W
+ihwconnect -instancename router22 -packetnetport portDataNorth -packetnet data_3_1_N
+ihwconnect -instancename router29 -packetnetport portDataSouth -packetnet data_3_1_N
+ihwconnect -instancename router22 -packetnetport portControlNorth -packetnet ctrl_3_1_N
+ihwconnect -instancename router29 -packetnetport portControlSouth -packetnet ctrl_3_1_N
+ihwconnect -instancename router22 -packetnetport portDataSouth -packetnet data_3_1_S
+ihwconnect -instancename router15 -packetnetport portDataNorth -packetnet data_3_1_S
+ihwconnect -instancename router22 -packetnetport portControlSouth -packetnet ctrl_3_1_S
+ihwconnect -instancename router15 -packetnetport portControlNorth -packetnet ctrl_3_1_S
+ihwconnect -instancename router23 -packetnetport portDataLocal -packetnet data_3_2_L
+ihwconnect -instancename ni23 -packetnetport dataPort -packetnet data_3_2_L
+ihwconnect -instancename router23 -packetnetport portControlLocal -packetnet ctrl_3_2_L
+ihwconnect -instancename ni23 -packetnetport controlPort -packetnet ctrl_3_2_L
+ihwconnect -instancename router24 -packetnetport portDataLocal -packetnet data_3_3_L
+ihwconnect -instancename ni24 -packetnetport dataPort -packetnet data_3_3_L
+ihwconnect -instancename router24 -packetnetport portControlLocal -packetnet ctrl_3_3_L
+ihwconnect -instancename ni24 -packetnetport controlPort -packetnet ctrl_3_3_L
+ihwconnect -instancename router24 -packetnetport portDataEast -packetnet data_3_3_E
+ihwconnect -instancename router25 -packetnetport portDataWest -packetnet data_3_3_E
+ihwconnect -instancename router24 -packetnetport portControlEast -packetnet ctrl_3_3_E
+ihwconnect -instancename router25 -packetnetport portControlWest -packetnet ctrl_3_3_E
+ihwconnect -instancename router24 -packetnetport portDataWest -packetnet data_3_3_W
+ihwconnect -instancename router23 -packetnetport portDataEast -packetnet data_3_3_W
+ihwconnect -instancename router24 -packetnetport portControlWest -packetnet ctrl_3_3_W
+ihwconnect -instancename router23 -packetnetport portControlEast -packetnet ctrl_3_3_W
+ihwconnect -instancename router24 -packetnetport portDataNorth -packetnet data_3_3_N
+ihwconnect -instancename router31 -packetnetport portDataSouth -packetnet data_3_3_N
+ihwconnect -instancename router24 -packetnetport portControlNorth -packetnet ctrl_3_3_N
+ihwconnect -instancename router31 -packetnetport portControlSouth -packetnet ctrl_3_3_N
+ihwconnect -instancename router24 -packetnetport portDataSouth -packetnet data_3_3_S
+ihwconnect -instancename router17 -packetnetport portDataNorth -packetnet data_3_3_S
+ihwconnect -instancename router24 -packetnetport portControlSouth -packetnet ctrl_3_3_S
+ihwconnect -instancename router17 -packetnetport portControlNorth -packetnet ctrl_3_3_S
+ihwconnect -instancename router25 -packetnetport portDataLocal -packetnet data_3_4_L
+ihwconnect -instancename ni25 -packetnetport dataPort -packetnet data_3_4_L
+ihwconnect -instancename router25 -packetnetport portControlLocal -packetnet ctrl_3_4_L
+ihwconnect -instancename ni25 -packetnetport controlPort -packetnet ctrl_3_4_L
+ihwconnect -instancename router26 -packetnetport portDataLocal -packetnet data_3_5_L
+ihwconnect -instancename ni26 -packetnetport dataPort -packetnet data_3_5_L
+ihwconnect -instancename router26 -packetnetport portControlLocal -packetnet ctrl_3_5_L
+ihwconnect -instancename ni26 -packetnetport controlPort -packetnet ctrl_3_5_L
+ihwconnect -instancename router26 -packetnetport portDataEast -packetnet data_3_5_E
+ihwconnect -instancename router27 -packetnetport portDataWest -packetnet data_3_5_E
+ihwconnect -instancename router26 -packetnetport portControlEast -packetnet ctrl_3_5_E
+ihwconnect -instancename router27 -packetnetport portControlWest -packetnet ctrl_3_5_E
+ihwconnect -instancename router26 -packetnetport portDataWest -packetnet data_3_5_W
+ihwconnect -instancename router25 -packetnetport portDataEast -packetnet data_3_5_W
+ihwconnect -instancename router26 -packetnetport portControlWest -packetnet ctrl_3_5_W
+ihwconnect -instancename router25 -packetnetport portControlEast -packetnet ctrl_3_5_W
+ihwconnect -instancename router26 -packetnetport portDataNorth -packetnet data_3_5_N
+ihwconnect -instancename router33 -packetnetport portDataSouth -packetnet data_3_5_N
+ihwconnect -instancename router26 -packetnetport portControlNorth -packetnet ctrl_3_5_N
+ihwconnect -instancename router33 -packetnetport portControlSouth -packetnet ctrl_3_5_N
+ihwconnect -instancename router26 -packetnetport portDataSouth -packetnet data_3_5_S
+ihwconnect -instancename router19 -packetnetport portDataNorth -packetnet data_3_5_S
+ihwconnect -instancename router26 -packetnetport portControlSouth -packetnet ctrl_3_5_S
+ihwconnect -instancename router19 -packetnetport portControlNorth -packetnet ctrl_3_5_S
+ihwconnect -instancename router27 -packetnetport portDataLocal -packetnet data_3_6_L
+ihwconnect -instancename ni27 -packetnetport dataPort -packetnet data_3_6_L
+ihwconnect -instancename router27 -packetnetport portControlLocal -packetnet ctrl_3_6_L
+ihwconnect -instancename ni27 -packetnetport controlPort -packetnet ctrl_3_6_L
+ihwconnect -instancename router28 -packetnetport portDataLocal -packetnet data_4_0_L
+ihwconnect -instancename ni28 -packetnetport dataPort -packetnet data_4_0_L
+ihwconnect -instancename router28 -packetnetport portControlLocal -packetnet ctrl_4_0_L
+ihwconnect -instancename ni28 -packetnetport controlPort -packetnet ctrl_4_0_L
+ihwconnect -instancename router28 -packetnetport portDataEast -packetnet data_4_0_E
+ihwconnect -instancename router29 -packetnetport portDataWest -packetnet data_4_0_E
+ihwconnect -instancename router28 -packetnetport portControlEast -packetnet ctrl_4_0_E
+ihwconnect -instancename router29 -packetnetport portControlWest -packetnet ctrl_4_0_E
+ihwconnect -instancename router28 -packetnetport portDataNorth -packetnet data_4_0_N
+ihwconnect -instancename router35 -packetnetport portDataSouth -packetnet data_4_0_N
+ihwconnect -instancename router28 -packetnetport portControlNorth -packetnet ctrl_4_0_N
+ihwconnect -instancename router35 -packetnetport portControlSouth -packetnet ctrl_4_0_N
+ihwconnect -instancename router28 -packetnetport portDataSouth -packetnet data_4_0_S
+ihwconnect -instancename router21 -packetnetport portDataNorth -packetnet data_4_0_S
+ihwconnect -instancename router28 -packetnetport portControlSouth -packetnet ctrl_4_0_S
+ihwconnect -instancename router21 -packetnetport portControlNorth -packetnet ctrl_4_0_S
+ihwconnect -instancename router29 -packetnetport portDataLocal -packetnet data_4_1_L
+ihwconnect -instancename ni29 -packetnetport dataPort -packetnet data_4_1_L
+ihwconnect -instancename router29 -packetnetport portControlLocal -packetnet ctrl_4_1_L
+ihwconnect -instancename ni29 -packetnetport controlPort -packetnet ctrl_4_1_L
+ihwconnect -instancename router30 -packetnetport portDataLocal -packetnet data_4_2_L
+ihwconnect -instancename ni30 -packetnetport dataPort -packetnet data_4_2_L
+ihwconnect -instancename router30 -packetnetport portControlLocal -packetnet ctrl_4_2_L
+ihwconnect -instancename ni30 -packetnetport controlPort -packetnet ctrl_4_2_L
+ihwconnect -instancename router30 -packetnetport portDataEast -packetnet data_4_2_E
+ihwconnect -instancename router31 -packetnetport portDataWest -packetnet data_4_2_E
+ihwconnect -instancename router30 -packetnetport portControlEast -packetnet ctrl_4_2_E
+ihwconnect -instancename router31 -packetnetport portControlWest -packetnet ctrl_4_2_E
+ihwconnect -instancename router30 -packetnetport portDataWest -packetnet data_4_2_W
+ihwconnect -instancename router29 -packetnetport portDataEast -packetnet data_4_2_W
+ihwconnect -instancename router30 -packetnetport portControlWest -packetnet ctrl_4_2_W
+ihwconnect -instancename router29 -packetnetport portControlEast -packetnet ctrl_4_2_W
+ihwconnect -instancename router30 -packetnetport portDataNorth -packetnet data_4_2_N
+ihwconnect -instancename router37 -packetnetport portDataSouth -packetnet data_4_2_N
+ihwconnect -instancename router30 -packetnetport portControlNorth -packetnet ctrl_4_2_N
+ihwconnect -instancename router37 -packetnetport portControlSouth -packetnet ctrl_4_2_N
+ihwconnect -instancename router30 -packetnetport portDataSouth -packetnet data_4_2_S
+ihwconnect -instancename router23 -packetnetport portDataNorth -packetnet data_4_2_S
+ihwconnect -instancename router30 -packetnetport portControlSouth -packetnet ctrl_4_2_S
+ihwconnect -instancename router23 -packetnetport portControlNorth -packetnet ctrl_4_2_S
+ihwconnect -instancename router31 -packetnetport portDataLocal -packetnet data_4_3_L
+ihwconnect -instancename ni31 -packetnetport dataPort -packetnet data_4_3_L
+ihwconnect -instancename router31 -packetnetport portControlLocal -packetnet ctrl_4_3_L
+ihwconnect -instancename ni31 -packetnetport controlPort -packetnet ctrl_4_3_L
+ihwconnect -instancename router32 -packetnetport portDataLocal -packetnet data_4_4_L
+ihwconnect -instancename ni32 -packetnetport dataPort -packetnet data_4_4_L
+ihwconnect -instancename router32 -packetnetport portControlLocal -packetnet ctrl_4_4_L
+ihwconnect -instancename ni32 -packetnetport controlPort -packetnet ctrl_4_4_L
+ihwconnect -instancename router32 -packetnetport portDataEast -packetnet data_4_4_E
+ihwconnect -instancename router33 -packetnetport portDataWest -packetnet data_4_4_E
+ihwconnect -instancename router32 -packetnetport portControlEast -packetnet ctrl_4_4_E
+ihwconnect -instancename router33 -packetnetport portControlWest -packetnet ctrl_4_4_E
+ihwconnect -instancename router32 -packetnetport portDataWest -packetnet data_4_4_W
+ihwconnect -instancename router31 -packetnetport portDataEast -packetnet data_4_4_W
+ihwconnect -instancename router32 -packetnetport portControlWest -packetnet ctrl_4_4_W
+ihwconnect -instancename router31 -packetnetport portControlEast -packetnet ctrl_4_4_W
+ihwconnect -instancename router32 -packetnetport portDataNorth -packetnet data_4_4_N
+ihwconnect -instancename router39 -packetnetport portDataSouth -packetnet data_4_4_N
+ihwconnect -instancename router32 -packetnetport portControlNorth -packetnet ctrl_4_4_N
+ihwconnect -instancename router39 -packetnetport portControlSouth -packetnet ctrl_4_4_N
+ihwconnect -instancename router32 -packetnetport portDataSouth -packetnet data_4_4_S
+ihwconnect -instancename router25 -packetnetport portDataNorth -packetnet data_4_4_S
+ihwconnect -instancename router32 -packetnetport portControlSouth -packetnet ctrl_4_4_S
+ihwconnect -instancename router25 -packetnetport portControlNorth -packetnet ctrl_4_4_S
+ihwconnect -instancename router33 -packetnetport portDataLocal -packetnet data_4_5_L
+ihwconnect -instancename ni33 -packetnetport dataPort -packetnet data_4_5_L
+ihwconnect -instancename router33 -packetnetport portControlLocal -packetnet ctrl_4_5_L
+ihwconnect -instancename ni33 -packetnetport controlPort -packetnet ctrl_4_5_L
+ihwconnect -instancename router34 -packetnetport portDataLocal -packetnet data_4_6_L
+ihwconnect -instancename ni34 -packetnetport dataPort -packetnet data_4_6_L
+ihwconnect -instancename router34 -packetnetport portControlLocal -packetnet ctrl_4_6_L
+ihwconnect -instancename ni34 -packetnetport controlPort -packetnet ctrl_4_6_L
+ihwconnect -instancename router34 -packetnetport portDataWest -packetnet data_4_6_W
+ihwconnect -instancename router33 -packetnetport portDataEast -packetnet data_4_6_W
+ihwconnect -instancename router34 -packetnetport portControlWest -packetnet ctrl_4_6_W
+ihwconnect -instancename router33 -packetnetport portControlEast -packetnet ctrl_4_6_W
+ihwconnect -instancename router34 -packetnetport portDataNorth -packetnet data_4_6_N
+ihwconnect -instancename router41 -packetnetport portDataSouth -packetnet data_4_6_N
+ihwconnect -instancename router34 -packetnetport portControlNorth -packetnet ctrl_4_6_N
+ihwconnect -instancename router41 -packetnetport portControlSouth -packetnet ctrl_4_6_N
+ihwconnect -instancename router34 -packetnetport portDataSouth -packetnet data_4_6_S
+ihwconnect -instancename router27 -packetnetport portDataNorth -packetnet data_4_6_S
+ihwconnect -instancename router34 -packetnetport portControlSouth -packetnet ctrl_4_6_S
+ihwconnect -instancename router27 -packetnetport portControlNorth -packetnet ctrl_4_6_S
+ihwconnect -instancename router35 -packetnetport portDataLocal -packetnet data_5_0_L
+ihwconnect -instancename ni35 -packetnetport dataPort -packetnet data_5_0_L
+ihwconnect -instancename router35 -packetnetport portControlLocal -packetnet ctrl_5_0_L
+ihwconnect -instancename ni35 -packetnetport controlPort -packetnet ctrl_5_0_L
+ihwconnect -instancename router36 -packetnetport portDataLocal -packetnet data_5_1_L
+ihwconnect -instancename ni36 -packetnetport dataPort -packetnet data_5_1_L
+ihwconnect -instancename router36 -packetnetport portControlLocal -packetnet ctrl_5_1_L
+ihwconnect -instancename ni36 -packetnetport controlPort -packetnet ctrl_5_1_L
+ihwconnect -instancename router36 -packetnetport portDataEast -packetnet data_5_1_E
+ihwconnect -instancename router37 -packetnetport portDataWest -packetnet data_5_1_E
+ihwconnect -instancename router36 -packetnetport portControlEast -packetnet ctrl_5_1_E
+ihwconnect -instancename router37 -packetnetport portControlWest -packetnet ctrl_5_1_E
+ihwconnect -instancename router36 -packetnetport portDataWest -packetnet data_5_1_W
+ihwconnect -instancename router35 -packetnetport portDataEast -packetnet data_5_1_W
+ihwconnect -instancename router36 -packetnetport portControlWest -packetnet ctrl_5_1_W
+ihwconnect -instancename router35 -packetnetport portControlEast -packetnet ctrl_5_1_W
+ihwconnect -instancename router36 -packetnetport portDataNorth -packetnet data_5_1_N
+ihwconnect -instancename router43 -packetnetport portDataSouth -packetnet data_5_1_N
+ihwconnect -instancename router36 -packetnetport portControlNorth -packetnet ctrl_5_1_N
+ihwconnect -instancename router43 -packetnetport portControlSouth -packetnet ctrl_5_1_N
+ihwconnect -instancename router36 -packetnetport portDataSouth -packetnet data_5_1_S
+ihwconnect -instancename router29 -packetnetport portDataNorth -packetnet data_5_1_S
+ihwconnect -instancename router36 -packetnetport portControlSouth -packetnet ctrl_5_1_S
+ihwconnect -instancename router29 -packetnetport portControlNorth -packetnet ctrl_5_1_S
+ihwconnect -instancename router37 -packetnetport portDataLocal -packetnet data_5_2_L
+ihwconnect -instancename ni37 -packetnetport dataPort -packetnet data_5_2_L
+ihwconnect -instancename router37 -packetnetport portControlLocal -packetnet ctrl_5_2_L
+ihwconnect -instancename ni37 -packetnetport controlPort -packetnet ctrl_5_2_L
+ihwconnect -instancename router38 -packetnetport portDataLocal -packetnet data_5_3_L
+ihwconnect -instancename ni38 -packetnetport dataPort -packetnet data_5_3_L
+ihwconnect -instancename router38 -packetnetport portControlLocal -packetnet ctrl_5_3_L
+ihwconnect -instancename ni38 -packetnetport controlPort -packetnet ctrl_5_3_L
+ihwconnect -instancename router38 -packetnetport portDataEast -packetnet data_5_3_E
+ihwconnect -instancename router39 -packetnetport portDataWest -packetnet data_5_3_E
+ihwconnect -instancename router38 -packetnetport portControlEast -packetnet ctrl_5_3_E
+ihwconnect -instancename router39 -packetnetport portControlWest -packetnet ctrl_5_3_E
+ihwconnect -instancename router38 -packetnetport portDataWest -packetnet data_5_3_W
+ihwconnect -instancename router37 -packetnetport portDataEast -packetnet data_5_3_W
+ihwconnect -instancename router38 -packetnetport portControlWest -packetnet ctrl_5_3_W
+ihwconnect -instancename router37 -packetnetport portControlEast -packetnet ctrl_5_3_W
+ihwconnect -instancename router38 -packetnetport portDataNorth -packetnet data_5_3_N
+ihwconnect -instancename router45 -packetnetport portDataSouth -packetnet data_5_3_N
+ihwconnect -instancename router38 -packetnetport portControlNorth -packetnet ctrl_5_3_N
+ihwconnect -instancename router45 -packetnetport portControlSouth -packetnet ctrl_5_3_N
+ihwconnect -instancename router38 -packetnetport portDataSouth -packetnet data_5_3_S
+ihwconnect -instancename router31 -packetnetport portDataNorth -packetnet data_5_3_S
+ihwconnect -instancename router38 -packetnetport portControlSouth -packetnet ctrl_5_3_S
+ihwconnect -instancename router31 -packetnetport portControlNorth -packetnet ctrl_5_3_S
+ihwconnect -instancename router39 -packetnetport portDataLocal -packetnet data_5_4_L
+ihwconnect -instancename ni39 -packetnetport dataPort -packetnet data_5_4_L
+ihwconnect -instancename router39 -packetnetport portControlLocal -packetnet ctrl_5_4_L
+ihwconnect -instancename ni39 -packetnetport controlPort -packetnet ctrl_5_4_L
+ihwconnect -instancename router40 -packetnetport portDataLocal -packetnet data_5_5_L
+ihwconnect -instancename ni40 -packetnetport dataPort -packetnet data_5_5_L
+ihwconnect -instancename router40 -packetnetport portControlLocal -packetnet ctrl_5_5_L
+ihwconnect -instancename ni40 -packetnetport controlPort -packetnet ctrl_5_5_L
+ihwconnect -instancename router40 -packetnetport portDataEast -packetnet data_5_5_E
+ihwconnect -instancename router41 -packetnetport portDataWest -packetnet data_5_5_E
+ihwconnect -instancename router40 -packetnetport portControlEast -packetnet ctrl_5_5_E
+ihwconnect -instancename router41 -packetnetport portControlWest -packetnet ctrl_5_5_E
+ihwconnect -instancename router40 -packetnetport portDataWest -packetnet data_5_5_W
+ihwconnect -instancename router39 -packetnetport portDataEast -packetnet data_5_5_W
+ihwconnect -instancename router40 -packetnetport portControlWest -packetnet ctrl_5_5_W
+ihwconnect -instancename router39 -packetnetport portControlEast -packetnet ctrl_5_5_W
+ihwconnect -instancename router40 -packetnetport portDataNorth -packetnet data_5_5_N
+ihwconnect -instancename router47 -packetnetport portDataSouth -packetnet data_5_5_N
+ihwconnect -instancename router40 -packetnetport portControlNorth -packetnet ctrl_5_5_N
+ihwconnect -instancename router47 -packetnetport portControlSouth -packetnet ctrl_5_5_N
+ihwconnect -instancename router40 -packetnetport portDataSouth -packetnet data_5_5_S
+ihwconnect -instancename router33 -packetnetport portDataNorth -packetnet data_5_5_S
+ihwconnect -instancename router40 -packetnetport portControlSouth -packetnet ctrl_5_5_S
+ihwconnect -instancename router33 -packetnetport portControlNorth -packetnet ctrl_5_5_S
+ihwconnect -instancename router41 -packetnetport portDataLocal -packetnet data_5_6_L
+ihwconnect -instancename ni41 -packetnetport dataPort -packetnet data_5_6_L
+ihwconnect -instancename router41 -packetnetport portControlLocal -packetnet ctrl_5_6_L
+ihwconnect -instancename ni41 -packetnetport controlPort -packetnet ctrl_5_6_L
+ihwconnect -instancename router42 -packetnetport portDataLocal -packetnet data_6_0_L
+ihwconnect -instancename ni42 -packetnetport dataPort -packetnet data_6_0_L
+ihwconnect -instancename router42 -packetnetport portControlLocal -packetnet ctrl_6_0_L
+ihwconnect -instancename ni42 -packetnetport controlPort -packetnet ctrl_6_0_L
+ihwconnect -instancename router42 -packetnetport portDataEast -packetnet data_6_0_E
+ihwconnect -instancename router43 -packetnetport portDataWest -packetnet data_6_0_E
+ihwconnect -instancename router42 -packetnetport portControlEast -packetnet ctrl_6_0_E
+ihwconnect -instancename router43 -packetnetport portControlWest -packetnet ctrl_6_0_E
+ihwconnect -instancename router42 -packetnetport portDataNorth -packetnet data_6_0_N
+ihwconnect -instancename router49 -packetnetport portDataSouth -packetnet data_6_0_N
+ihwconnect -instancename router42 -packetnetport portControlNorth -packetnet ctrl_6_0_N
+ihwconnect -instancename router49 -packetnetport portControlSouth -packetnet ctrl_6_0_N
+ihwconnect -instancename router42 -packetnetport portDataSouth -packetnet data_6_0_S
+ihwconnect -instancename router35 -packetnetport portDataNorth -packetnet data_6_0_S
+ihwconnect -instancename router42 -packetnetport portControlSouth -packetnet ctrl_6_0_S
+ihwconnect -instancename router35 -packetnetport portControlNorth -packetnet ctrl_6_0_S
+ihwconnect -instancename router43 -packetnetport portDataLocal -packetnet data_6_1_L
+ihwconnect -instancename ni43 -packetnetport dataPort -packetnet data_6_1_L
+ihwconnect -instancename router43 -packetnetport portControlLocal -packetnet ctrl_6_1_L
+ihwconnect -instancename ni43 -packetnetport controlPort -packetnet ctrl_6_1_L
+ihwconnect -instancename router44 -packetnetport portDataLocal -packetnet data_6_2_L
+ihwconnect -instancename ni44 -packetnetport dataPort -packetnet data_6_2_L
+ihwconnect -instancename router44 -packetnetport portControlLocal -packetnet ctrl_6_2_L
+ihwconnect -instancename ni44 -packetnetport controlPort -packetnet ctrl_6_2_L
+ihwconnect -instancename router44 -packetnetport portDataEast -packetnet data_6_2_E
+ihwconnect -instancename router45 -packetnetport portDataWest -packetnet data_6_2_E
+ihwconnect -instancename router44 -packetnetport portControlEast -packetnet ctrl_6_2_E
+ihwconnect -instancename router45 -packetnetport portControlWest -packetnet ctrl_6_2_E
+ihwconnect -instancename router44 -packetnetport portDataWest -packetnet data_6_2_W
+ihwconnect -instancename router43 -packetnetport portDataEast -packetnet data_6_2_W
+ihwconnect -instancename router44 -packetnetport portControlWest -packetnet ctrl_6_2_W
+ihwconnect -instancename router43 -packetnetport portControlEast -packetnet ctrl_6_2_W
+ihwconnect -instancename router44 -packetnetport portDataNorth -packetnet data_6_2_N
+ihwconnect -instancename router51 -packetnetport portDataSouth -packetnet data_6_2_N
+ihwconnect -instancename router44 -packetnetport portControlNorth -packetnet ctrl_6_2_N
+ihwconnect -instancename router51 -packetnetport portControlSouth -packetnet ctrl_6_2_N
+ihwconnect -instancename router44 -packetnetport portDataSouth -packetnet data_6_2_S
+ihwconnect -instancename router37 -packetnetport portDataNorth -packetnet data_6_2_S
+ihwconnect -instancename router44 -packetnetport portControlSouth -packetnet ctrl_6_2_S
+ihwconnect -instancename router37 -packetnetport portControlNorth -packetnet ctrl_6_2_S
+ihwconnect -instancename router45 -packetnetport portDataLocal -packetnet data_6_3_L
+ihwconnect -instancename ni45 -packetnetport dataPort -packetnet data_6_3_L
+ihwconnect -instancename router45 -packetnetport portControlLocal -packetnet ctrl_6_3_L
+ihwconnect -instancename ni45 -packetnetport controlPort -packetnet ctrl_6_3_L
+ihwconnect -instancename router46 -packetnetport portDataLocal -packetnet data_6_4_L
+ihwconnect -instancename ni46 -packetnetport dataPort -packetnet data_6_4_L
+ihwconnect -instancename router46 -packetnetport portControlLocal -packetnet ctrl_6_4_L
+ihwconnect -instancename ni46 -packetnetport controlPort -packetnet ctrl_6_4_L
+ihwconnect -instancename router46 -packetnetport portDataEast -packetnet data_6_4_E
+ihwconnect -instancename router47 -packetnetport portDataWest -packetnet data_6_4_E
+ihwconnect -instancename router46 -packetnetport portControlEast -packetnet ctrl_6_4_E
+ihwconnect -instancename router47 -packetnetport portControlWest -packetnet ctrl_6_4_E
+ihwconnect -instancename router46 -packetnetport portDataWest -packetnet data_6_4_W
+ihwconnect -instancename router45 -packetnetport portDataEast -packetnet data_6_4_W
+ihwconnect -instancename router46 -packetnetport portControlWest -packetnet ctrl_6_4_W
+ihwconnect -instancename router45 -packetnetport portControlEast -packetnet ctrl_6_4_W
+ihwconnect -instancename router46 -packetnetport portDataNorth -packetnet data_6_4_N
+ihwconnect -instancename router53 -packetnetport portDataSouth -packetnet data_6_4_N
+ihwconnect -instancename router46 -packetnetport portControlNorth -packetnet ctrl_6_4_N
+ihwconnect -instancename router53 -packetnetport portControlSouth -packetnet ctrl_6_4_N
+ihwconnect -instancename router46 -packetnetport portDataSouth -packetnet data_6_4_S
+ihwconnect -instancename router39 -packetnetport portDataNorth -packetnet data_6_4_S
+ihwconnect -instancename router46 -packetnetport portControlSouth -packetnet ctrl_6_4_S
+ihwconnect -instancename router39 -packetnetport portControlNorth -packetnet ctrl_6_4_S
+ihwconnect -instancename router47 -packetnetport portDataLocal -packetnet data_6_5_L
+ihwconnect -instancename ni47 -packetnetport dataPort -packetnet data_6_5_L
+ihwconnect -instancename router47 -packetnetport portControlLocal -packetnet ctrl_6_5_L
+ihwconnect -instancename ni47 -packetnetport controlPort -packetnet ctrl_6_5_L
+ihwconnect -instancename router48 -packetnetport portDataLocal -packetnet data_6_6_L
+ihwconnect -instancename ni48 -packetnetport dataPort -packetnet data_6_6_L
+ihwconnect -instancename router48 -packetnetport portControlLocal -packetnet ctrl_6_6_L
+ihwconnect -instancename ni48 -packetnetport controlPort -packetnet ctrl_6_6_L
+ihwconnect -instancename router48 -packetnetport portDataWest -packetnet data_6_6_W
+ihwconnect -instancename router47 -packetnetport portDataEast -packetnet data_6_6_W
+ihwconnect -instancename router48 -packetnetport portControlWest -packetnet ctrl_6_6_W
+ihwconnect -instancename router47 -packetnetport portControlEast -packetnet ctrl_6_6_W
+ihwconnect -instancename router48 -packetnetport portDataNorth -packetnet data_6_6_N
+ihwconnect -instancename router55 -packetnetport portDataSouth -packetnet data_6_6_N
+ihwconnect -instancename router48 -packetnetport portControlNorth -packetnet ctrl_6_6_N
+ihwconnect -instancename router55 -packetnetport portControlSouth -packetnet ctrl_6_6_N
+ihwconnect -instancename router48 -packetnetport portDataSouth -packetnet data_6_6_S
+ihwconnect -instancename router41 -packetnetport portDataNorth -packetnet data_6_6_S
+ihwconnect -instancename router48 -packetnetport portControlSouth -packetnet ctrl_6_6_S
+ihwconnect -instancename router41 -packetnetport portControlNorth -packetnet ctrl_6_6_S
+ihwconnect -instancename router49 -packetnetport portDataLocal -packetnet data_7_0_L
+ihwconnect -instancename ni49 -packetnetport dataPort -packetnet data_7_0_L
+ihwconnect -instancename router49 -packetnetport portControlLocal -packetnet ctrl_7_0_L
+ihwconnect -instancename ni49 -packetnetport controlPort -packetnet ctrl_7_0_L
+ihwconnect -instancename router50 -packetnetport portDataLocal -packetnet data_7_1_L
+ihwconnect -instancename ni50 -packetnetport dataPort -packetnet data_7_1_L
+ihwconnect -instancename router50 -packetnetport portControlLocal -packetnet ctrl_7_1_L
+ihwconnect -instancename ni50 -packetnetport controlPort -packetnet ctrl_7_1_L
+ihwconnect -instancename router50 -packetnetport portDataEast -packetnet data_7_1_E
+ihwconnect -instancename router51 -packetnetport portDataWest -packetnet data_7_1_E
+ihwconnect -instancename router50 -packetnetport portControlEast -packetnet ctrl_7_1_E
+ihwconnect -instancename router51 -packetnetport portControlWest -packetnet ctrl_7_1_E
+ihwconnect -instancename router50 -packetnetport portDataWest -packetnet data_7_1_W
+ihwconnect -instancename router49 -packetnetport portDataEast -packetnet data_7_1_W
+ihwconnect -instancename router50 -packetnetport portControlWest -packetnet ctrl_7_1_W
+ihwconnect -instancename router49 -packetnetport portControlEast -packetnet ctrl_7_1_W
+ihwconnect -instancename router50 -packetnetport portDataNorth -packetnet data_7_1_N
+ihwconnect -instancename router57 -packetnetport portDataSouth -packetnet data_7_1_N
+ihwconnect -instancename router50 -packetnetport portControlNorth -packetnet ctrl_7_1_N
+ihwconnect -instancename router57 -packetnetport portControlSouth -packetnet ctrl_7_1_N
+ihwconnect -instancename router50 -packetnetport portDataSouth -packetnet data_7_1_S
+ihwconnect -instancename router43 -packetnetport portDataNorth -packetnet data_7_1_S
+ihwconnect -instancename router50 -packetnetport portControlSouth -packetnet ctrl_7_1_S
+ihwconnect -instancename router43 -packetnetport portControlNorth -packetnet ctrl_7_1_S
+ihwconnect -instancename router51 -packetnetport portDataLocal -packetnet data_7_2_L
+ihwconnect -instancename ni51 -packetnetport dataPort -packetnet data_7_2_L
+ihwconnect -instancename router51 -packetnetport portControlLocal -packetnet ctrl_7_2_L
+ihwconnect -instancename ni51 -packetnetport controlPort -packetnet ctrl_7_2_L
+ihwconnect -instancename router52 -packetnetport portDataLocal -packetnet data_7_3_L
+ihwconnect -instancename ni52 -packetnetport dataPort -packetnet data_7_3_L
+ihwconnect -instancename router52 -packetnetport portControlLocal -packetnet ctrl_7_3_L
+ihwconnect -instancename ni52 -packetnetport controlPort -packetnet ctrl_7_3_L
+ihwconnect -instancename router52 -packetnetport portDataEast -packetnet data_7_3_E
+ihwconnect -instancename router53 -packetnetport portDataWest -packetnet data_7_3_E
+ihwconnect -instancename router52 -packetnetport portControlEast -packetnet ctrl_7_3_E
+ihwconnect -instancename router53 -packetnetport portControlWest -packetnet ctrl_7_3_E
+ihwconnect -instancename router52 -packetnetport portDataWest -packetnet data_7_3_W
+ihwconnect -instancename router51 -packetnetport portDataEast -packetnet data_7_3_W
+ihwconnect -instancename router52 -packetnetport portControlWest -packetnet ctrl_7_3_W
+ihwconnect -instancename router51 -packetnetport portControlEast -packetnet ctrl_7_3_W
+ihwconnect -instancename router52 -packetnetport portDataNorth -packetnet data_7_3_N
+ihwconnect -instancename router59 -packetnetport portDataSouth -packetnet data_7_3_N
+ihwconnect -instancename router52 -packetnetport portControlNorth -packetnet ctrl_7_3_N
+ihwconnect -instancename router59 -packetnetport portControlSouth -packetnet ctrl_7_3_N
+ihwconnect -instancename router52 -packetnetport portDataSouth -packetnet data_7_3_S
+ihwconnect -instancename router45 -packetnetport portDataNorth -packetnet data_7_3_S
+ihwconnect -instancename router52 -packetnetport portControlSouth -packetnet ctrl_7_3_S
+ihwconnect -instancename router45 -packetnetport portControlNorth -packetnet ctrl_7_3_S
+ihwconnect -instancename router53 -packetnetport portDataLocal -packetnet data_7_4_L
+ihwconnect -instancename ni53 -packetnetport dataPort -packetnet data_7_4_L
+ihwconnect -instancename router53 -packetnetport portControlLocal -packetnet ctrl_7_4_L
+ihwconnect -instancename ni53 -packetnetport controlPort -packetnet ctrl_7_4_L
+ihwconnect -instancename router54 -packetnetport portDataLocal -packetnet data_7_5_L
+ihwconnect -instancename ni54 -packetnetport dataPort -packetnet data_7_5_L
+ihwconnect -instancename router54 -packetnetport portControlLocal -packetnet ctrl_7_5_L
+ihwconnect -instancename ni54 -packetnetport controlPort -packetnet ctrl_7_5_L
+ihwconnect -instancename router54 -packetnetport portDataEast -packetnet data_7_5_E
+ihwconnect -instancename router55 -packetnetport portDataWest -packetnet data_7_5_E
+ihwconnect -instancename router54 -packetnetport portControlEast -packetnet ctrl_7_5_E
+ihwconnect -instancename router55 -packetnetport portControlWest -packetnet ctrl_7_5_E
+ihwconnect -instancename router54 -packetnetport portDataWest -packetnet data_7_5_W
+ihwconnect -instancename router53 -packetnetport portDataEast -packetnet data_7_5_W
+ihwconnect -instancename router54 -packetnetport portControlWest -packetnet ctrl_7_5_W
+ihwconnect -instancename router53 -packetnetport portControlEast -packetnet ctrl_7_5_W
+ihwconnect -instancename router54 -packetnetport portDataNorth -packetnet data_7_5_N
+ihwconnect -instancename router61 -packetnetport portDataSouth -packetnet data_7_5_N
+ihwconnect -instancename router54 -packetnetport portControlNorth -packetnet ctrl_7_5_N
+ihwconnect -instancename router61 -packetnetport portControlSouth -packetnet ctrl_7_5_N
+ihwconnect -instancename router54 -packetnetport portDataSouth -packetnet data_7_5_S
+ihwconnect -instancename router47 -packetnetport portDataNorth -packetnet data_7_5_S
+ihwconnect -instancename router54 -packetnetport portControlSouth -packetnet ctrl_7_5_S
+ihwconnect -instancename router47 -packetnetport portControlNorth -packetnet ctrl_7_5_S
+ihwconnect -instancename router55 -packetnetport portDataLocal -packetnet data_7_6_L
+ihwconnect -instancename ni55 -packetnetport dataPort -packetnet data_7_6_L
+ihwconnect -instancename router55 -packetnetport portControlLocal -packetnet ctrl_7_6_L
+ihwconnect -instancename ni55 -packetnetport controlPort -packetnet ctrl_7_6_L
+ihwconnect -instancename router56 -packetnetport portDataLocal -packetnet data_8_0_L
+ihwconnect -instancename ni56 -packetnetport dataPort -packetnet data_8_0_L
+ihwconnect -instancename router56 -packetnetport portControlLocal -packetnet ctrl_8_0_L
+ihwconnect -instancename ni56 -packetnetport controlPort -packetnet ctrl_8_0_L
+ihwconnect -instancename router56 -packetnetport portDataEast -packetnet data_8_0_E
+ihwconnect -instancename router57 -packetnetport portDataWest -packetnet data_8_0_E
+ihwconnect -instancename router56 -packetnetport portControlEast -packetnet ctrl_8_0_E
+ihwconnect -instancename router57 -packetnetport portControlWest -packetnet ctrl_8_0_E
+ihwconnect -instancename router56 -packetnetport portDataSouth -packetnet data_8_0_S
+ihwconnect -instancename router49 -packetnetport portDataNorth -packetnet data_8_0_S
+ihwconnect -instancename router56 -packetnetport portControlSouth -packetnet ctrl_8_0_S
+ihwconnect -instancename router49 -packetnetport portControlNorth -packetnet ctrl_8_0_S
+ihwconnect -instancename router57 -packetnetport portDataLocal -packetnet data_8_1_L
+ihwconnect -instancename ni57 -packetnetport dataPort -packetnet data_8_1_L
+ihwconnect -instancename router57 -packetnetport portControlLocal -packetnet ctrl_8_1_L
+ihwconnect -instancename ni57 -packetnetport controlPort -packetnet ctrl_8_1_L
+ihwconnect -instancename router58 -packetnetport portDataLocal -packetnet data_8_2_L
+ihwconnect -instancename ni58 -packetnetport dataPort -packetnet data_8_2_L
+ihwconnect -instancename router58 -packetnetport portControlLocal -packetnet ctrl_8_2_L
+ihwconnect -instancename ni58 -packetnetport controlPort -packetnet ctrl_8_2_L
+ihwconnect -instancename router58 -packetnetport portDataEast -packetnet data_8_2_E
+ihwconnect -instancename router59 -packetnetport portDataWest -packetnet data_8_2_E
+ihwconnect -instancename router58 -packetnetport portControlEast -packetnet ctrl_8_2_E
+ihwconnect -instancename router59 -packetnetport portControlWest -packetnet ctrl_8_2_E
+ihwconnect -instancename router58 -packetnetport portDataWest -packetnet data_8_2_W
+ihwconnect -instancename router57 -packetnetport portDataEast -packetnet data_8_2_W
+ihwconnect -instancename router58 -packetnetport portControlWest -packetnet ctrl_8_2_W
+ihwconnect -instancename router57 -packetnetport portControlEast -packetnet ctrl_8_2_W
+ihwconnect -instancename router58 -packetnetport portDataSouth -packetnet data_8_2_S
+ihwconnect -instancename router51 -packetnetport portDataNorth -packetnet data_8_2_S
+ihwconnect -instancename router58 -packetnetport portControlSouth -packetnet ctrl_8_2_S
+ihwconnect -instancename router51 -packetnetport portControlNorth -packetnet ctrl_8_2_S
+ihwconnect -instancename router59 -packetnetport portDataLocal -packetnet data_8_3_L
+ihwconnect -instancename ni59 -packetnetport dataPort -packetnet data_8_3_L
+ihwconnect -instancename router59 -packetnetport portControlLocal -packetnet ctrl_8_3_L
+ihwconnect -instancename ni59 -packetnetport controlPort -packetnet ctrl_8_3_L
+ihwconnect -instancename router60 -packetnetport portDataLocal -packetnet data_8_4_L
+ihwconnect -instancename ni60 -packetnetport dataPort -packetnet data_8_4_L
+ihwconnect -instancename router60 -packetnetport portControlLocal -packetnet ctrl_8_4_L
+ihwconnect -instancename ni60 -packetnetport controlPort -packetnet ctrl_8_4_L
+ihwconnect -instancename router60 -packetnetport portDataEast -packetnet data_8_4_E
+ihwconnect -instancename router61 -packetnetport portDataWest -packetnet data_8_4_E
+ihwconnect -instancename router60 -packetnetport portControlEast -packetnet ctrl_8_4_E
+ihwconnect -instancename router61 -packetnetport portControlWest -packetnet ctrl_8_4_E
+ihwconnect -instancename router60 -packetnetport portDataWest -packetnet data_8_4_W
+ihwconnect -instancename router59 -packetnetport portDataEast -packetnet data_8_4_W
+ihwconnect -instancename router60 -packetnetport portControlWest -packetnet ctrl_8_4_W
+ihwconnect -instancename router59 -packetnetport portControlEast -packetnet ctrl_8_4_W
+ihwconnect -instancename router60 -packetnetport portDataSouth -packetnet data_8_4_S
+ihwconnect -instancename router53 -packetnetport portDataNorth -packetnet data_8_4_S
+ihwconnect -instancename router60 -packetnetport portControlSouth -packetnet ctrl_8_4_S
+ihwconnect -instancename router53 -packetnetport portControlNorth -packetnet ctrl_8_4_S
+ihwconnect -instancename router61 -packetnetport portDataLocal -packetnet data_8_5_L
+ihwconnect -instancename ni61 -packetnetport dataPort -packetnet data_8_5_L
+ihwconnect -instancename router61 -packetnetport portControlLocal -packetnet ctrl_8_5_L
+ihwconnect -instancename ni61 -packetnetport controlPort -packetnet ctrl_8_5_L
+ihwconnect -instancename router62 -packetnetport portDataLocal -packetnet data_8_6_L
+ihwconnect -instancename ni62 -packetnetport dataPort -packetnet data_8_6_L
+ihwconnect -instancename router62 -packetnetport portControlLocal -packetnet ctrl_8_6_L
+ihwconnect -instancename ni62 -packetnetport controlPort -packetnet ctrl_8_6_L
+ihwconnect -instancename router62 -packetnetport portDataWest -packetnet data_8_6_W
+ihwconnect -instancename router61 -packetnetport portDataEast -packetnet data_8_6_W
+ihwconnect -instancename router62 -packetnetport portControlWest -packetnet ctrl_8_6_W
+ihwconnect -instancename router61 -packetnetport portControlEast -packetnet ctrl_8_6_W
+ihwconnect -instancename router62 -packetnetport portDataSouth -packetnet data_8_6_S
+ihwconnect -instancename router55 -packetnetport portDataNorth -packetnet data_8_6_S
+ihwconnect -instancename router62 -packetnetport portControlSouth -packetnet ctrl_8_6_S
+ihwconnect -instancename router55 -packetnetport portControlNorth -packetnet ctrl_8_6_S
 
 ihwconnect -instancename ni0 -netport       INT_NI_TX  -net intNI_TX0
 ihwconnect -instancename ni0 -netport       INT_NI_RX  -net intNI_RX0
@@ -4362,60 +3434,6 @@ ihwconnect -instancename timer61 -netport       INT_TIMER  -net intTIMER61
 ihwconnect -instancename ni62 -netport       INT_NI_TX  -net intNI_TX62
 ihwconnect -instancename ni62 -netport       INT_NI_RX  -net intNI_RX62
 ihwconnect -instancename timer62 -netport       INT_TIMER  -net intTIMER62
-ihwconnect -instancename ni63 -netport       INT_NI_TX  -net intNI_TX63
-ihwconnect -instancename ni63 -netport       INT_NI_RX  -net intNI_RX63
-ihwconnect -instancename timer63 -netport       INT_TIMER  -net intTIMER63
-ihwconnect -instancename ni64 -netport       INT_NI_TX  -net intNI_TX64
-ihwconnect -instancename ni64 -netport       INT_NI_RX  -net intNI_RX64
-ihwconnect -instancename timer64 -netport       INT_TIMER  -net intTIMER64
-ihwconnect -instancename ni65 -netport       INT_NI_TX  -net intNI_TX65
-ihwconnect -instancename ni65 -netport       INT_NI_RX  -net intNI_RX65
-ihwconnect -instancename timer65 -netport       INT_TIMER  -net intTIMER65
-ihwconnect -instancename ni66 -netport       INT_NI_TX  -net intNI_TX66
-ihwconnect -instancename ni66 -netport       INT_NI_RX  -net intNI_RX66
-ihwconnect -instancename timer66 -netport       INT_TIMER  -net intTIMER66
-ihwconnect -instancename ni67 -netport       INT_NI_TX  -net intNI_TX67
-ihwconnect -instancename ni67 -netport       INT_NI_RX  -net intNI_RX67
-ihwconnect -instancename timer67 -netport       INT_TIMER  -net intTIMER67
-ihwconnect -instancename ni68 -netport       INT_NI_TX  -net intNI_TX68
-ihwconnect -instancename ni68 -netport       INT_NI_RX  -net intNI_RX68
-ihwconnect -instancename timer68 -netport       INT_TIMER  -net intTIMER68
-ihwconnect -instancename ni69 -netport       INT_NI_TX  -net intNI_TX69
-ihwconnect -instancename ni69 -netport       INT_NI_RX  -net intNI_RX69
-ihwconnect -instancename timer69 -netport       INT_TIMER  -net intTIMER69
-ihwconnect -instancename ni70 -netport       INT_NI_TX  -net intNI_TX70
-ihwconnect -instancename ni70 -netport       INT_NI_RX  -net intNI_RX70
-ihwconnect -instancename timer70 -netport       INT_TIMER  -net intTIMER70
-ihwconnect -instancename ni71 -netport       INT_NI_TX  -net intNI_TX71
-ihwconnect -instancename ni71 -netport       INT_NI_RX  -net intNI_RX71
-ihwconnect -instancename timer71 -netport       INT_TIMER  -net intTIMER71
-ihwconnect -instancename ni72 -netport       INT_NI_TX  -net intNI_TX72
-ihwconnect -instancename ni72 -netport       INT_NI_RX  -net intNI_RX72
-ihwconnect -instancename timer72 -netport       INT_TIMER  -net intTIMER72
-ihwconnect -instancename ni73 -netport       INT_NI_TX  -net intNI_TX73
-ihwconnect -instancename ni73 -netport       INT_NI_RX  -net intNI_RX73
-ihwconnect -instancename timer73 -netport       INT_TIMER  -net intTIMER73
-ihwconnect -instancename ni74 -netport       INT_NI_TX  -net intNI_TX74
-ihwconnect -instancename ni74 -netport       INT_NI_RX  -net intNI_RX74
-ihwconnect -instancename timer74 -netport       INT_TIMER  -net intTIMER74
-ihwconnect -instancename ni75 -netport       INT_NI_TX  -net intNI_TX75
-ihwconnect -instancename ni75 -netport       INT_NI_RX  -net intNI_RX75
-ihwconnect -instancename timer75 -netport       INT_TIMER  -net intTIMER75
-ihwconnect -instancename ni76 -netport       INT_NI_TX  -net intNI_TX76
-ihwconnect -instancename ni76 -netport       INT_NI_RX  -net intNI_RX76
-ihwconnect -instancename timer76 -netport       INT_TIMER  -net intTIMER76
-ihwconnect -instancename ni77 -netport       INT_NI_TX  -net intNI_TX77
-ihwconnect -instancename ni77 -netport       INT_NI_RX  -net intNI_RX77
-ihwconnect -instancename timer77 -netport       INT_TIMER  -net intTIMER77
-ihwconnect -instancename ni78 -netport       INT_NI_TX  -net intNI_TX78
-ihwconnect -instancename ni78 -netport       INT_NI_RX  -net intNI_RX78
-ihwconnect -instancename timer78 -netport       INT_TIMER  -net intTIMER78
-ihwconnect -instancename ni79 -netport       INT_NI_TX  -net intNI_TX79
-ihwconnect -instancename ni79 -netport       INT_NI_RX  -net intNI_RX79
-ihwconnect -instancename timer79 -netport       INT_TIMER  -net intTIMER79
-ihwconnect -instancename ni80 -netport       INT_NI_TX  -net intNI_TX80
-ihwconnect -instancename ni80 -netport       INT_NI_RX  -net intNI_RX80
-ihwconnect -instancename timer80 -netport       INT_TIMER  -net intTIMER80
 ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse
 
 ihwaddbus -instancename syncBus -addresswidth 32
@@ -4484,24 +3502,6 @@ ihwaddbridge -instancename bridge59
 ihwaddbridge -instancename bridge60
 ihwaddbridge -instancename bridge61
 ihwaddbridge -instancename bridge62
-ihwaddbridge -instancename bridge63
-ihwaddbridge -instancename bridge64
-ihwaddbridge -instancename bridge65
-ihwaddbridge -instancename bridge66
-ihwaddbridge -instancename bridge67
-ihwaddbridge -instancename bridge68
-ihwaddbridge -instancename bridge69
-ihwaddbridge -instancename bridge70
-ihwaddbridge -instancename bridge71
-ihwaddbridge -instancename bridge72
-ihwaddbridge -instancename bridge73
-ihwaddbridge -instancename bridge74
-ihwaddbridge -instancename bridge75
-ihwaddbridge -instancename bridge76
-ihwaddbridge -instancename bridge77
-ihwaddbridge -instancename bridge78
-ihwaddbridge -instancename bridge79
-ihwaddbridge -instancename bridge80
 
 ihwconnect -bus cpu0Bus -busslaveport ps -instancename bridge0 -loaddress 0x80000014 -hiaddress 0x8000001B
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge0 -loaddress 0x00000000 -hiaddress 0x00000007
@@ -4629,42 +3629,6 @@ ihwconnect -bus cpu61Bus -busslaveport ps -instancename bridge61 -loaddress 0x80
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge61 -loaddress 0x00000000 -hiaddress 0x00000007
 ihwconnect -bus cpu62Bus -busslaveport ps -instancename bridge62 -loaddress 0x80000014 -hiaddress 0x8000001B
 ihwconnect -bus syncBus -busmasterport pm -instancename bridge62 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu63Bus -busslaveport ps -instancename bridge63 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge63 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu64Bus -busslaveport ps -instancename bridge64 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge64 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu65Bus -busslaveport ps -instancename bridge65 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge65 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu66Bus -busslaveport ps -instancename bridge66 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge66 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu67Bus -busslaveport ps -instancename bridge67 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge67 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu68Bus -busslaveport ps -instancename bridge68 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge68 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu69Bus -busslaveport ps -instancename bridge69 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge69 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu70Bus -busslaveport ps -instancename bridge70 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge70 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu71Bus -busslaveport ps -instancename bridge71 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge71 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu72Bus -busslaveport ps -instancename bridge72 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge72 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu73Bus -busslaveport ps -instancename bridge73 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge73 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu74Bus -busslaveport ps -instancename bridge74 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge74 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu75Bus -busslaveport ps -instancename bridge75 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge75 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu76Bus -busslaveport ps -instancename bridge76 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge76 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu77Bus -busslaveport ps -instancename bridge77 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge77 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu78Bus -busslaveport ps -instancename bridge78 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge78 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu79Bus -busslaveport ps -instancename bridge79 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge79 -loaddress 0x00000000 -hiaddress 0x00000007
-ihwconnect -bus cpu80Bus -busslaveport ps -instancename bridge80 -loaddress 0x80000014 -hiaddress 0x8000001B
-ihwconnect -bus syncBus -busmasterport pm -instancename bridge80 -loaddress 0x00000000 -hiaddress 0x00000007
 
 ihwaddperipheral -instancename iterator -modelfile peripheral/iteratorMonoTrigger/pse.pse
 ihwconnect -instancename iterator -busslaveport iteratorReg -bus cpuIteratorBus -loaddress 0x90000000 -hiaddress 0x90000003
@@ -4858,58 +3822,4 @@ ihwconnect -instancename iterator -packetnetport iterationPort61 -packetnet iter
 ihwaddpacketnet -instancename iteration_62
 ihwconnect -instancename router62 -packetnetport iterationsPort -packetnet iteration_62
 ihwconnect -instancename iterator -packetnetport iterationPort62 -packetnet iteration_62
-ihwaddpacketnet -instancename iteration_63
-ihwconnect -instancename router63 -packetnetport iterationsPort -packetnet iteration_63
-ihwconnect -instancename iterator -packetnetport iterationPort63 -packetnet iteration_63
-ihwaddpacketnet -instancename iteration_64
-ihwconnect -instancename router64 -packetnetport iterationsPort -packetnet iteration_64
-ihwconnect -instancename iterator -packetnetport iterationPort64 -packetnet iteration_64
-ihwaddpacketnet -instancename iteration_65
-ihwconnect -instancename router65 -packetnetport iterationsPort -packetnet iteration_65
-ihwconnect -instancename iterator -packetnetport iterationPort65 -packetnet iteration_65
-ihwaddpacketnet -instancename iteration_66
-ihwconnect -instancename router66 -packetnetport iterationsPort -packetnet iteration_66
-ihwconnect -instancename iterator -packetnetport iterationPort66 -packetnet iteration_66
-ihwaddpacketnet -instancename iteration_67
-ihwconnect -instancename router67 -packetnetport iterationsPort -packetnet iteration_67
-ihwconnect -instancename iterator -packetnetport iterationPort67 -packetnet iteration_67
-ihwaddpacketnet -instancename iteration_68
-ihwconnect -instancename router68 -packetnetport iterationsPort -packetnet iteration_68
-ihwconnect -instancename iterator -packetnetport iterationPort68 -packetnet iteration_68
-ihwaddpacketnet -instancename iteration_69
-ihwconnect -instancename router69 -packetnetport iterationsPort -packetnet iteration_69
-ihwconnect -instancename iterator -packetnetport iterationPort69 -packetnet iteration_69
-ihwaddpacketnet -instancename iteration_70
-ihwconnect -instancename router70 -packetnetport iterationsPort -packetnet iteration_70
-ihwconnect -instancename iterator -packetnetport iterationPort70 -packetnet iteration_70
-ihwaddpacketnet -instancename iteration_71
-ihwconnect -instancename router71 -packetnetport iterationsPort -packetnet iteration_71
-ihwconnect -instancename iterator -packetnetport iterationPort71 -packetnet iteration_71
-ihwaddpacketnet -instancename iteration_72
-ihwconnect -instancename router72 -packetnetport iterationsPort -packetnet iteration_72
-ihwconnect -instancename iterator -packetnetport iterationPort72 -packetnet iteration_72
-ihwaddpacketnet -instancename iteration_73
-ihwconnect -instancename router73 -packetnetport iterationsPort -packetnet iteration_73
-ihwconnect -instancename iterator -packetnetport iterationPort73 -packetnet iteration_73
-ihwaddpacketnet -instancename iteration_74
-ihwconnect -instancename router74 -packetnetport iterationsPort -packetnet iteration_74
-ihwconnect -instancename iterator -packetnetport iterationPort74 -packetnet iteration_74
-ihwaddpacketnet -instancename iteration_75
-ihwconnect -instancename router75 -packetnetport iterationsPort -packetnet iteration_75
-ihwconnect -instancename iterator -packetnetport iterationPort75 -packetnet iteration_75
-ihwaddpacketnet -instancename iteration_76
-ihwconnect -instancename router76 -packetnetport iterationsPort -packetnet iteration_76
-ihwconnect -instancename iterator -packetnetport iterationPort76 -packetnet iteration_76
-ihwaddpacketnet -instancename iteration_77
-ihwconnect -instancename router77 -packetnetport iterationsPort -packetnet iteration_77
-ihwconnect -instancename iterator -packetnetport iterationPort77 -packetnet iteration_77
-ihwaddpacketnet -instancename iteration_78
-ihwconnect -instancename router78 -packetnetport iterationsPort -packetnet iteration_78
-ihwconnect -instancename iterator -packetnetport iterationPort78 -packetnet iteration_78
-ihwaddpacketnet -instancename iteration_79
-ihwconnect -instancename router79 -packetnetport iterationsPort -packetnet iteration_79
-ihwconnect -instancename iterator -packetnetport iterationPort79 -packetnet iteration_79
-ihwaddpacketnet -instancename iteration_80
-ihwconnect -instancename router80 -packetnetport iterationsPort -packetnet iteration_80
-ihwconnect -instancename iterator -packetnetport iterationPort80 -packetnet iteration_80
 
