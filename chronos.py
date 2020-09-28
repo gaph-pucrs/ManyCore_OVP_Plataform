@@ -9,6 +9,7 @@ from shutil import copy
 import yaml
 
 if __name__ == '__main__':
+    printChronos()
     # Read Arguments    
     TESTCASE_FILE = sys.argv[1]
     try:
@@ -17,7 +18,18 @@ if __name__ == '__main__':
             DIMENSIONS = testcase['hw']['mpsoc_dimension']
             X = DIMENSIONS[0]
             Y = DIMENSIONS[1]
-            print("RUNNING X="+str(X)+"  Y="+str(Y))
+            print("SYSTEM DIMENSION: X="+str(X)+"  Y="+str(Y))
     except:
         print("ERRO1: You need to call a valid TESTCASE")
 
+def printChronos():
+    print("======================================================================")
+    print("== _______________________                                          ==")
+    print("== ___________  ____/__  /___________________________________       ==")
+    print("== __________  /    __  __ \_  ___/  __ \_  __ \  __ \_  ___/       ==")
+    print("==          / /___  _  / / /  /   / /_/ /  / / / /_/ /(__  )        ==")
+    print("==          \____/  /_/ /_//_/    \____//_/ /_/\____//____/         ==")
+    print("==__________________________________________________________________==")
+    print("==                                                                  ==")
+    print("==               Contact: fernando.moraes@pucrs.br                  ==")
+    print("======================================================================")
