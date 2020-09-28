@@ -14,8 +14,8 @@ if __name__ == '__main__':
     print(TESTCASE_FILE)
     with open('sandbox/'+str(TESTCASE_FILE)+'.yaml') as file:
         testcase = yaml.load(file, Loader=yaml.SafeLoader)
-        print(testcase)
-        DIMENSIONS = testcase['hw'][0]['mpsoc_dimension']
+        DIMENSIONS = testcase['hw'][0]
+        print(DIMENSIONS)
         X = DIMENSIONS[0]
         Y = DIMENSIONS[1]
         print("RUNNING X="+str(X)+"  Y="+str(Y))
