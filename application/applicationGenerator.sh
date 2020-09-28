@@ -13,6 +13,8 @@ rm *.h
 cd ..
 cd sandbox
 mkdir -p $SCENARIO_FILE/applications
+mkdir -p $SCENARIO_FILE/logs
+mkdir -p $SCENARIO_FILE/graphs
 cd $SCENARIO_FILE/applications
 
 for i in $(seq 0 $N);

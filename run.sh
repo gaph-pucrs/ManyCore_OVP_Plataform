@@ -83,7 +83,7 @@ echo "harness/harness.\${IMPERAS_ARCH}.exe \\" >> ovp_compiler.sh
 for i in $(seq 0 $N);
 do
 
-    echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
+    echo "     --program cpu"$i"=sandbox/$SCENARIO_FILE/applications/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
 
 done
 echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts  \$* \\" >> ovp_compiler.sh
