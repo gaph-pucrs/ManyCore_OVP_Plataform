@@ -10,9 +10,14 @@ N=$(($N-1))
 rm *.c
 rm *.h
 
+cd ..
+cd sandbox
+mkdir -p $SCENARIO_FILE
+cd $SCENARIO_FILE
+
 for i in $(seq 0 $N);
 do
-		cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
+		cp -u -v ../application/source/applicationGeneric/applicationGeneric.c application$i.c
 done
 
 for i in $(seq 0 $N);
