@@ -17,7 +17,7 @@ cd $SCENARIO_FILE/applications
 
 for i in $(seq 0 $N);
 do
-		cp -u -v ../../application/source/applicationGeneric/applicationGeneric.c application$i.c
+		cp -u -v ../../../application/source/applicationGeneric/applicationGeneric.c application$i.c
 done
 
 for i in $(seq 0 $N);
