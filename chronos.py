@@ -37,6 +37,6 @@ if __name__ == '__main__':
             print("TASKS PER PE = "+str(TASKS_PER_PE))
     except:
         print("ERRO1: You need to call a valid TESTCASE")
-        break
+        sys.exit(1)
     # VERIFY THE SCENARIO FILE
     print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
