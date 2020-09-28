@@ -1,6 +1,6 @@
 #include "source/dtw/dtw_stdlib.h"
 #include "dtw_config.h"
-#include "source/API/api.h"
+#include "../../../application/source/API/api.h"
 
 /*int pattern[MATX_SIZE][MATX_SIZE] = {
 	{0,1,2,3,4,5,6,7,8,9,0},
