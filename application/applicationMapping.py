@@ -86,6 +86,6 @@ with open('../sandbox/'+SCENARIO_FILE+'.yaml') as file:
 						numberOfLines = numberOfLines + 1
 					configLines.insert(numberOfLines, newLine)
 					configFile.writelines(configLines)
-		newName = os.getcwd() + '/' + appDir + "_" + str(appAmount[appTracker.index(appDir)]) + "_config.h"
+		newName = '../sandbox/' + SCENARIO_FILE + '/applications' + '/' + appDir + "_" + str(appAmount[appTracker.index(appDir)]) + "_config.h"
 		os.rename(updatedConfigPath, newName)
 
