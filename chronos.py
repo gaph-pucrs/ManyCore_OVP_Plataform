@@ -48,7 +48,7 @@ if __name__ == '__main__':
         sys.exit(1)
     # VERIFY THE SCENARIO FILE
     if(os.path.isfile('sandbox/'+str(SCENARIO_FILE)+'.yaml')):
-        subprocess.call("./run.sh "+str(X)+" "+str(Y)+" "+SCENARIO_FILE)
+        subprocess.call("./run.sh "+str(X)+" "+str(Y)+" "+SCENARIO_FILE, shell=True)
     else:
         print("ERRO 2: You need to call a valid SCENARIO.")
         sys.exit(1)
