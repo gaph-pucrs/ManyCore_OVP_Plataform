@@ -22,8 +22,9 @@ def printChronos():
 
 if __name__ == '__main__':
     printChronos()
-    # READ THE TESTCASE FILE  
     TESTCASE_FILE = sys.argv[1]
+    SCENARIO_FILE = sys.argv[2]
+    # READ THE TESTCASE FILE  
     try:
         with open('sandbox/'+str(TESTCASE_FILE)+'.yaml') as file:
             testcase = yaml.load(file, Loader=yaml.SafeLoader)
@@ -39,4 +40,7 @@ if __name__ == '__main__':
         print("ERRO1: You need to call a valid TESTCASE")
         sys.exit(1)
     # VERIFY THE SCENARIO FILE
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    if(os.path.isfile('sandbox/'+str(SCENARIO_FILE)+'.yaml')):
+        print("ACHOU!")
+    else:
+        print("NÂO ACHEOU!")
