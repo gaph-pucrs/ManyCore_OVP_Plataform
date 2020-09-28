@@ -20,10 +20,9 @@ def printChronos():
     print("==               Contact: fernando.moraes@pucrs.br                  ==")
     print("======================================================================")
 
-
 if __name__ == '__main__':
     printChronos()
-    # Read Arguments    
+    # READ THE TESTCASE FILE  
     TESTCASE_FILE = sys.argv[1]
     try:
         with open('sandbox/'+str(TESTCASE_FILE)+'.yaml') as file:
@@ -31,7 +30,12 @@ if __name__ == '__main__':
             DIMENSIONS = testcase['hw']['mpsoc_dimension']
             X = DIMENSIONS[0]
             Y = DIMENSIONS[1]
-            print("SYSTEM DIMENSION: X="+str(X)+"  Y="+str(Y))
+            print("SYSTEM DIMENSIONS X = "+str(X)+"     Y = "+str(Y))
+            NOC_BUFFER_SIZE = testcase['hw']['noc_buffer_size']
+            print("NOC BUFFER SIZE = "+str(NOC_BUFFER_SIZE))
+            TASKS_PER_PE = testcase['hw']['tasks_per_PE']
+            print("TASKS PER PE = "+str(TASKS_PER_PE))
     except:
         print("ERRO1: You need to call a valid TESTCASE")
-
+    # VERIFY THE SCENARIO FILE
+    
