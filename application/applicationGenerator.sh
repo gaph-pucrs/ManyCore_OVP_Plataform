@@ -17,6 +17,7 @@ mkdir -p $SCENARIO_FILE/logs
 mkdir -p $SCENARIO_FILE/graphs
 cd $SCENARIO_FILE/applications
 
+cp -f ../../../application/Makefile Makefile
 for i in $(seq 0 $N);
 do
 		cp -u -v ../../../application/source/applicationGeneric/applicationGeneric.c application$i.c

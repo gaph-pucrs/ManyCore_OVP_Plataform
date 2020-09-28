@@ -55,7 +55,7 @@ echo "cd ../.." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
 echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
 echo "CROSS=OR1K" >> ovp_compiler.sh
-echo "make -C application CROSS=\${CROSS}" >> ovp_compiler.sh
+echo "make -C sandbox/"$SCENARIO_FILE"/applications CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C application/source/applicationIterator CROSS=\${CROSS}" >> ovp_compiler.sh
 echo "make -C module" >> ovp_compiler.sh
 echo "make -C peripheral/whnoc_dma NOVLNV=1" >> ovp_compiler.sh
@@ -83,7 +83,7 @@ echo "harness/harness.\${IMPERAS_ARCH}.exe \\" >> ovp_compiler.sh
 for i in $(seq 0 $N);
 do
 
-    echo "     --program cpu"$i"=sandbox/$SCENARIO_FILE/applications/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
+    echo "     --program cpu"$i"=sandbox/"$SCENARIO_FILE"/applications/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
 
 done
 echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts  \$* \\" >> ovp_compiler.sh
