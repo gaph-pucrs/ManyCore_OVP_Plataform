@@ -44,7 +44,7 @@ with open('../sandbox/'+SCENARIO_FILE+'.yaml') as file:
 		configPath = os.getcwd() + '/source/' + appDir + '/' + appDir + '_config'  + '.h'
 
 		#Copy the '.h' to the simulation area
-		copy(configPath, '../sandbox/' + SCENARIO_FILE + '/applications'#os.getcwd())
+		copy(configPath, '../sandbox/' + SCENARIO_FILE + '/applications')#os.getcwd())
 
 		#Set the path to config file now inside the simulation area
 		updatedConfigPath = '../sandbox/' + SCENARIO_FILE + '/applications' + '/' + appDir + '_config.h'
