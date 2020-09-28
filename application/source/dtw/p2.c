@@ -1,6 +1,6 @@
 #include "source/dtw/dtw_stdlib.h"
 #include "dtw_config.h"
-#include "../../../application/source/API/api.h"
+#include "api.h"
 
 message msg;
 

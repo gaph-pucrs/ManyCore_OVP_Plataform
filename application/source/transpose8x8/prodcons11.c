@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "interrupt.h"
 #include "spr_defs.h"
-#include "../../../application/source/API/api.h"
+#include "api.h"
 
 #include "transpose8x8_config.h"
 

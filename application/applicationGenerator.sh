@@ -17,6 +17,8 @@ mkdir -p $SCENARIO_FILE/logs
 mkdir -p $SCENARIO_FILE/graphs
 cd $SCENARIO_FILE/applications
 
+cp -f ../../../application/source/API/api.h api.h 
+cp -f ../../../application/source/API/api_thermal.h api_thermal.h 
 cp -f ../../../application/Makefile Makefile
 for i in $(seq 0 $N);
 do
