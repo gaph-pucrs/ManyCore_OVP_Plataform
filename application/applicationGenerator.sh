@@ -9,6 +9,7 @@ N=$(($N-1))
 
 rm *.c
 rm *.h
+rm *.o
 
 cd ..
 cd sandbox
