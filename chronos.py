@@ -8,7 +8,7 @@ from os import path
 from shutil import copy
 import yaml
 
-def printChronos():
+def printChronosHeader():
     print("======================================================================")
     print("== _______________________                                          ==")
     print("== ___________  ____/__  /___________________________________       ==")
@@ -18,10 +18,12 @@ def printChronos():
     print("==__________________________________________________________________==")
     print("==                                                                  ==")
     print("==               Contact: fernando.moraes@pucrs.br                  ==")
+    print("==                        iacana.weber@edu.pucrs.br                 ==")
+    print("==                        geaninne.marchezan@edu.pucrs.br           ==")
     print("======================================================================")
 
 if __name__ == '__main__':
-    printChronos()
+    printChronosHeader()
     try:
         TESTCASE_FILE = sys.argv[1]
         SCENARIO_FILE = sys.argv[2]
@@ -47,4 +49,5 @@ if __name__ == '__main__':
     if(os.path.isfile('sandbox/'+str(SCENARIO_FILE)+'.yaml')):
         print("ACHOU!")
     else:
-        print("NÂO ACHEOU!")
+        print("ERRO 2: You need to call a valid SCENARIO.")
+        sys.exit(1)

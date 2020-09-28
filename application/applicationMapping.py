@@ -10,13 +10,14 @@ import yaml
 
 X = int(sys.argv[1])
 Y = int(sys.argv[2])
+SCENARIO_FILE = sys.argv[3]
 
 #Stores a list of applications already mapped
 appTracker = []
 appAmount = []
 
 #Reads the .yaml and store in a variable
-with open('scenario.yaml') as file:
+with open('../sandbox/'+SCENARIO_FILE+'.yaml') as file:
 	scenario = yaml.load(file, Loader=yaml.SafeLoader)
 	for i in range(len(scenario['apps'])):
 		appDir = scenario['apps'][i]['name']

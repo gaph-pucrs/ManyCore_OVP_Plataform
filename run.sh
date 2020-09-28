@@ -1,19 +1,8 @@
 #!/bin/sh
 X=$1
 Y=$2
-APP_NAME=$3
+SCENARIO_FILE=$3
 N=$(($X*$Y))
-
-echo "======================================================================"
-echo "== _______________________                                          =="
-echo "== ___________  ____/__  /___________________________________       =="
-echo "== __________  /    __  __ \_  ___/  __ \_  __ \  __ \_  ___/       =="
-echo "==          / /___  _  / / /  /   / /_/ /  / / / /_/ /(__  )        =="
-echo "==          \____/  /_/ /_//_/    \____//_/ /_/\____//____/         =="
-echo "==               Contact: fernando.moraes@pucrs.br                  =="
-echo "======================================================================"
-
-
 
 # To get the runtime
 start=`date +%s`
@@ -25,7 +14,7 @@ cd ..
 
 # Generate Applications
 cd application
-    ./applicationGenerator.sh $X $Y $APP_NAME
+    ./applicationGenerator.sh $X $Y $SCENARIO_FILE
 cd ..
 
 # Generate the module
