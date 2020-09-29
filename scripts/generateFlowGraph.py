@@ -37,7 +37,7 @@ def generateGraph(file):
                     numQuantuns = int(theLine[0])
                 except:
                     break;
-            print("Numero de quantus: "+str(numQuantuns))
+            print("Numero de amostras: "+str(numQuantuns))
 
 
         with open(file, 'r') as csv_file:
