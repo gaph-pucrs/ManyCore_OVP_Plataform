@@ -54,6 +54,7 @@ if __name__ == '__main__':
         print("ERRO 2: You need to call a valid SCENARIO.")
         sys.exit(1)
 
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
 
 
