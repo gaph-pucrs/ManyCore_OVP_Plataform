@@ -50,13 +50,11 @@ if __name__ == '__main__':
     if(os.path.isfile('sandbox/'+str(SCENARIO_FILE)+'.yaml')):
         # CALL THE RUN SCRIPT TO START THE SIMULATION
         subprocess.call("./run.sh "+str(X)+" "+str(Y)+" "+SCENARIO_FILE, shell=True)
+        #TODO: COMANDO PARA ABRIR O OVP EM OUTRA JANELA
+        # gnome-terminal -e "bash -c \".\run.sh 9 9 scenario; exec bash \""
     else:
         print("ERRO 2: You need to call a valid SCENARIO.")
         sys.exit(1)
 
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    
 
-
-
-    #COMANDO PARA ABRIR O OVP EM OUTRA JANELA
-    # gnome-terminal -e "bash -c \".\run.sh 9 9 scenario; exec bash \""

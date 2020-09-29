@@ -92,19 +92,18 @@ echo "\$*" >> ovp_compiler.sh
 chmod +x ovp_compiler.sh
 ./ovp_compiler.sh
 
-# Generates data for traffic comparison
-#cd scripts
-#python3 generateFlowGraph.py
-#cd ..
-
+mkdir -p sandbox/$SCENARIO_FILE/applications/assembly
 cd application
-# for i in $(seq 0 $N);
-# do
-#     ./assemblyExtractor.sh application"$i".OR1K.elf
-# done
+for i in $(seq 0 $N);
+do
+    ./assemblyExtractor.sh ../sandbox/$SCENARIO_FILE/applications/application"$i".OR1K.elf $SCENARIO_FILE
+done
 rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
 rm -rf *.elf
 cd ..
+
+
+
 
 # Report the total execution time
 end=`date +%s`

@@ -18,7 +18,7 @@ rm -f *.c
 rm -f *.h
 rm -f *.elf
 rm -f *.o
-rm -f *.S
+rm -rf *.S
 
 cp -f ../../../application/source/API/api.h api.h 
 cp -f ../../../application/source/API/api_thermal.h api_thermal.h 
