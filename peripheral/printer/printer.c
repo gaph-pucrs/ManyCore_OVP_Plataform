@@ -51,7 +51,7 @@ PPM_REG_WRITE_CB(writeValue_char) {
     }
     else if(myY == 0xFFFFFFF){
         myY = newValue;
-        err0 = sprintf(logFileName, "simulation/log_%dx%d.txt",myX, myY);
+        err0 = sprintf(logFileName, "simulation/pe_%dx%d.log",myX, myY);
     }
     //////////////////////////
     // PRINTER BEHAVIORAL

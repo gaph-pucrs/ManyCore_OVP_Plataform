@@ -18,6 +18,8 @@ N_ROW_GRAPH = 1
 N_COL_GRAPH = 4
 NUM_OF_GRAPHS = N_ROW_GRAPH*N_COL_GRAPH
 
+SCENARIO_NAME = sys.argv[1]
+
 localFlow = [0 for i in range(N_PES)]
 eastFlow = [0 for i in range(N_PES)]
 westFlow = [0 for i in range(N_PES)]
@@ -26,64 +28,67 @@ southFlow = [0 for i in range(N_PES)]
 maxValue = 0
 
 def generateGraph(file):
-    with open(file,'r') as csv_file:
-        spamreader = csv.reader(csv_file, delimiter=',')
-        while(1):
-            try:
-                theLine = next(spamreader)
-                numQuantuns = int(theLine[0])
-            except:
-                break;
-        print("Numero de quantus: "+str(numQuantuns))
+    try:
+        with open(file,'r') as csv_file:
+            spamreader = csv.reader(csv_file, delimiter=',')
+            while(1):
+                try:
+                    theLine = next(spamreader)
+                    numQuantuns = int(theLine[0])
+                except:
+                    break;
+            print("Numero de quantus: "+str(numQuantuns))
 
 
-    with open(file, 'r') as csv_file:
-        spamreader = csv.reader(csv_file, delimiter=',')
-        quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
-        maxValue = 0
+        with open(file, 'r') as csv_file:
+            spamreader = csv.reader(csv_file, delimiter=',')
+            quantunsPerGraph = numQuantuns/NUM_OF_GRAPHS
+            maxValue = 0
 
-        pes_total = np.zeros(N_PES)
-        MyGraphs = []
+            pes_total = np.zeros(N_PES)
+            MyGraphs = []
 
-        # Criar um grafico pra cada camada
-        for graph in range(NUM_OF_GRAPHS):
-            graph_simples = np.zeros((int(1*DIM_X),int(1*DIM_Y)))
-            #graphMatrix = np.zeros((int(3*DIM_X),int(3*DIM_Y)))
-            for i in range(N_PES):
-                localFlow[i] = 0
-                eastFlow[i]  = 0
-                westFlow[i]  = 0
-                northFlow[i] = 0
-                southFlow[i] = 0
-
-            # Pega as linhas necessárias pra cada gráfico
-            for _ in range(int(quantunsPerGraph)):
+            # Criar um grafico pra cada camada
+            for graph in range(NUM_OF_GRAPHS):
+                graph_simples = np.zeros((int(1*DIM_X),int(1*DIM_Y)))
+                #graphMatrix = np.zeros((int(3*DIM_X),int(3*DIM_Y)))
                 for i in range(N_PES):
-                    try:
-                        theLine = next(spamreader)
-                    except:
-                        break;
-                    localFlow[i] += int(theLine[2])
-                    eastFlow[i]  += int(theLine[3])
-                    westFlow[i]  += int(theLine[4])
-                    northFlow[i] += int(theLine[5])
-                    southFlow[i] += int(theLine[6])
+                    localFlow[i] = 0
+                    eastFlow[i]  = 0
+                    westFlow[i]  = 0
+                    northFlow[i] = 0
+                    southFlow[i] = 0
 
-            contx = 0
-            conty = 0
-            for i in range(N_PES):
-                #print(str(graph)+";"+str(i)+";"+str(localFlow[i])+";"+str(eastFlow[i])+";"+str(westFlow[i])+";"+str(northFlow[i])+";"+str(southFlow[i]))
-                graph_simples[contx][conty] = localFlow[i] + eastFlow[i] + westFlow[i] + northFlow[i] + southFlow[i]
-                if(graph_simples[contx][conty] > maxValue):
-                    maxValue = graph_simples[contx][conty]
-                contx += 1
-                if(contx == DIM_X):
-                    conty += 1
-                    contx = 0
-            print("generating data "+str(graph))
-            #print(graph_simples)
-            MyGraphs.append(graph_simples)
-        return [MyGraphs, maxValue]
+                # Pega as linhas necessárias pra cada gráfico
+                for _ in range(int(quantunsPerGraph)):
+                    for i in range(N_PES):
+                        try:
+                            theLine = next(spamreader)
+                        except:
+                            break;
+                        localFlow[i] += int(theLine[2])
+                        eastFlow[i]  += int(theLine[3])
+                        westFlow[i]  += int(theLine[4])
+                        northFlow[i] += int(theLine[5])
+                        southFlow[i] += int(theLine[6])
+
+                contx = 0
+                conty = 0
+                for i in range(N_PES):
+                    #print(str(graph)+";"+str(i)+";"+str(localFlow[i])+";"+str(eastFlow[i])+";"+str(westFlow[i])+";"+str(northFlow[i])+";"+str(southFlow[i]))
+                    graph_simples[contx][conty] = localFlow[i] + eastFlow[i] + westFlow[i] + northFlow[i] + southFlow[i]
+                    if(graph_simples[contx][conty] > maxValue):
+                        maxValue = graph_simples[contx][conty]
+                    contx += 1
+                    if(contx == DIM_X):
+                        conty += 1
+                        contx = 0
+                print("generating data "+str(graph))
+                #print(graph_simples)
+                MyGraphs.append(graph_simples)
+            return [MyGraphs, maxValue]
+    except:
+        return [0, 0]
             
 def generateImage(MyGraphs, maximumTraffic, figName):
         fig, axes = plt.subplots(N_ROW_GRAPH, N_COL_GRAPH, figsize=(int(5*N_COL_GRAPH), int(5*N_ROW_GRAPH)),
@@ -140,13 +145,15 @@ def generateImage(MyGraphs, maximumTraffic, figName):
 
 #def main(args):
 if __name__ == '__main__':
-    ## Memphis 
-    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficMemphis.txt" ###### WINDOWS ######
+    ## Memphis
+    dir = '../sandbox/' + SCENARIO_NAME + '/logs/nocFlow_MEMPHIS.report'
+    #dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficMemphis.txt" ###### WINDOWS ######
     #dir = '../simulation/saved/'+str(arg[1])+'/trafficMemphis.txt' ###### LINUX #####
     resultMemphis = generateGraph(dir)
 
     ## OVP
-    dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficOVP.txt" ###### WINDOWS ######
+    dir = '../sandbox/' + SCENARIO_NAME + '/logs/nocFlow_OVP.report'
+    #dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficOVP.txt" ###### WINDOWS ######
     #dir = '../simulation/saved/'+str(arg[1])+'/trafficOVP.txt' ###### LINUX #####
     resultOVP = generateGraph(dir)
 
@@ -155,14 +162,15 @@ if __name__ == '__main__':
         maximumTraffic = resultMemphis[1]
     else:
         maximumTraffic = resultOVP[1]
-    print("maximumTraffic: "+str(maximumTraffic))
+    #print("maximumTraffic: "+str(maximumTraffic))
 
-    ## Plot Memphis 
-    name = "trafficMemphis.png"
-    generateImage(resultMemphis[0], maximumTraffic, name)
+    ## Plot Memphis
+    if(resultMemphis[1] > 0):
+        name = "../sandbox/" + SCENARIO_NAME + "/graphs/trafficMemphis.png"
+        generateImage(resultMemphis[0], maximumTraffic, name)
     #generateImage(resultMemphis[0], resultMemphis[1], name)
     ## Plot OVP
-    name = "trafficOVP.png"
+    name = "../sandbox/" + SCENARIO_NAME + "/graphs/trafficMemphis.png"
     generateImage(resultOVP[0], maximumTraffic, name)
     #generateImage(resultOVP[0], resultOVP[1], name)
 

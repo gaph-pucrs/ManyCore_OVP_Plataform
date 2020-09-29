@@ -116,7 +116,7 @@ int main(int argc, char *argv[]) {
     int free = 0;
     
     while(1){
-        while(free!=100){
+        while(free!=10){
             free++;
             bhmWaitDelay(QUANTUM_DELAY);
         }
@@ -134,9 +134,10 @@ int main(int argc, char *argv[]) {
             fclose(fp);
         }
 
+        // TO GENERATE THE THERMAL FLOW GRAPH
         if(myID >= 0){
             FILE *fp;
-            fp = fopen("simulation/flitsLog.txt","a");
+            fp = fopen("simulation/nocFlow_OVP.report","a");
             fprintf(fp,"%d, %d, %d, %d, %d, %d, %d\n",i, myID,contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
             fclose(fp);
         }

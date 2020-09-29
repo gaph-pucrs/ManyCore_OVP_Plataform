@@ -4,9 +4,6 @@ Y=$2
 SCENARIO_FILE=$3
 N=$(($X*$Y))
 
-# To get the runtime
-start=`date +%s`
-
 # Remove old .csv files from simulation folder
 cd simulation
     rm -f flitFlow.csv
@@ -89,25 +86,41 @@ done
 echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts  \$* \\" >> ovp_compiler.sh
 echo "\$*" >> ovp_compiler.sh
 
+# To get the runtime
+start=`date +%s`
+
 chmod +x ovp_compiler.sh
 ./ovp_compiler.sh
 
+# Report the total execution time
+end=`date +%s`
+runtime=$((end-start))
+echo "Execution time: '$runtime'"
+
+echo ">>>>> Starting post running tools..."
+echo ">> Generating assembly files..."
 mkdir -p sandbox/$SCENARIO_FILE/applications/assembly
 cd application
 for i in $(seq 0 $N);
 do
     ./assemblyExtractor.sh ../sandbox/$SCENARIO_FILE/applications/application"$i".OR1K.elf "$SCENARIO_FILE" $i
 done
-rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
-rm -rf *.elf
+rm -rf ../sandbox/$SCENARIO_FILE/applications/*.elf
 cd ..
 
+echo ">> Moving logs to the scenario folder..."
+cd simulation
+cp *.log ../sandbox/$SCENARIO_FILE/logs
+cp nocFlow_OVP.report ../sandbox/$SCENARIO_FILE/logs
+rm -f *.log
+rm -f nocFlow_OVP.report
+cd ..
+
+echo ">> Creating the flow visualization graph"
+cd scripts
 
 
 
-# Report the total execution time
-end=`date +%s`
-runtime=$((end-start))
-echo "Execution time: '$runtime'"
+
 
 
