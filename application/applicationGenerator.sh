@@ -7,10 +7,6 @@ SCENARIO_FILE=$3
 N=$(($X*$Y))
 N=$(($N-1))
 
-rm *.c
-rm *.h
-rm *.o
-
 cd ..
 cd sandbox
 mkdir -p $SCENARIO_FILE/applications
