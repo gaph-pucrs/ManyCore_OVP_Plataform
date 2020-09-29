@@ -97,7 +97,7 @@ end=`date +%s`
 runtime=$((end-start))
 echo "Execution time: '$runtime'"
 
-echo ">>>>> Starting post running tools..."
+echo ">>>>> Post-running process..."
 echo ">> Generating assembly files..."
 mkdir -p sandbox/$SCENARIO_FILE/applications/assembly
 cd application
