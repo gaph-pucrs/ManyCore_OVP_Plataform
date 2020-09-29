@@ -96,7 +96,7 @@ mkdir -p sandbox/$SCENARIO_FILE/applications/assembly
 cd application
 for i in $(seq 0 $N);
 do
-    ./assemblyExtractor.sh ../sandbox/$SCENARIO_FILE/applications/application"$i".OR1K.elf $SCENARIO_FILE
+    ./assemblyExtractor.sh ../sandbox/$SCENARIO_FILE/applications/application"$i".OR1K.elf "$SCENARIO_FILE"
 done
 rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
 rm -rf *.elf
