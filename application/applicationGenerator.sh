@@ -50,6 +50,8 @@ do
     done
 done
 
-cd ..
+cd .. # exit applications
+cd .. # exit SCENARIO
+cd .. # exit sandbox
 cd application
 python3 applicationMapping.py $X $Y $SCENARIO_FILE
