@@ -83,7 +83,7 @@ def generateGraph(file):
                     if(contx == DIM_X):
                         conty += 1
                         contx = 0
-                print("generating data "+str(graph))
+                #print("generating data "+str(graph))
                 #print(graph_simples)
                 MyGraphs.append(graph_simples)
             return [MyGraphs, maxValue]
@@ -147,14 +147,10 @@ def generateImage(MyGraphs, maximumTraffic, figName):
 if __name__ == '__main__':
     ## Memphis
     dir = '../sandbox/' + SCENARIO_NAME + '/logs/nocFlow_MEMPHIS.report'
-    #dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficMemphis.txt" ###### WINDOWS ######
-    #dir = '../simulation/saved/'+str(arg[1])+'/trafficMemphis.txt' ###### LINUX #####
-    resultMemphis = generateGraph(dir)
+    resultMemphis = generateGraph(dir) # This will return zero is the Memphis report is not present inside the directory
 
     ## OVP
     dir = '../sandbox/' + SCENARIO_NAME + '/logs/nocFlow_OVP.report'
-    #dir = "D:\\GitRepo\\OVP_NoC\\simulation\\saved\\scenario3\\data\\trafficOVP.txt" ###### WINDOWS ######
-    #dir = '../simulation/saved/'+str(arg[1])+'/trafficOVP.txt' ###### LINUX #####
     resultOVP = generateGraph(dir)
 
     ## Defines the maximum value to normalize
@@ -162,20 +158,15 @@ if __name__ == '__main__':
         maximumTraffic = resultMemphis[1]
     else:
         maximumTraffic = resultOVP[1]
-    #print("maximumTraffic: "+str(maximumTraffic))
 
     ## Plot Memphis
     if(resultMemphis[1] > 0):
         name = "../sandbox/" + SCENARIO_NAME + "/graphs/trafficMemphis.png"
         generateImage(resultMemphis[0], maximumTraffic, name)
-    #generateImage(resultMemphis[0], resultMemphis[1], name)
     ## Plot OVP
     name = "../sandbox/" + SCENARIO_NAME + "/graphs/trafficMemphis.png"
     generateImage(resultOVP[0], maximumTraffic, name)
-    #generateImage(resultOVP[0], resultOVP[1], name)
 
-#if __name__ == '__main__':
-#    sys.exit(main(sys.argv))
     
 
     
