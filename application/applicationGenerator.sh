@@ -15,6 +15,7 @@ mkdir -p $SCENARIO_FILE/graphs
 cd $SCENARIO_FILE/applications
 
 rm -f *.c
+rm -f *.h
 rm -f *.elf
 rm -f *.o
 rm -f *.S
