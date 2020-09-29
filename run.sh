@@ -116,7 +116,7 @@ rm -f *.log
 rm -f nocFlow_OVP.report
 cd ..
 
-echo ">> Creating the flow visualization graph"
+echo ">> Generating the flow visualization graph"
 cd scripts
 python3 generateFlowGraph.py $SCENARIO_FILE $X $Y 1 4
 

@@ -12,11 +12,11 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 
 SCENARIO_NAME = sys.argv[1]
-DIM_X = sys.argv[2] #9
-DIM_Y = sys.argv[3] #9
+DIM_X = int(sys.argv[2]) #9
+DIM_Y = int(sys.argv[3]) #9
 N_PES = DIM_X*DIM_Y
-N_ROW_GRAPH = sys.argv[4]#1
-N_COL_GRAPH = sys.argv[5]#4
+N_ROW_GRAPH = int(sys.argv[4])#1
+N_COL_GRAPH = int(sys.argv[5])#4
 NUM_OF_GRAPHS = N_ROW_GRAPH*N_COL_GRAPH
 
 
