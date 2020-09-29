@@ -44,4 +44,6 @@ do
     done
 done
 
+cd ..
+cd application
 python3 applicationMapping.py $X $Y $SCENARIO_FILE
