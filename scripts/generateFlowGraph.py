@@ -11,14 +11,14 @@ from matplotlib.ticker import LinearLocator
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 
-DIM_X = 9
-DIM_Y = 9
+SCENARIO_NAME = sys.argv[1]
+DIM_X = sys.argv[2] #9
+DIM_Y = sys.argv[3] #9
 N_PES = DIM_X*DIM_Y
-N_ROW_GRAPH = 1
-N_COL_GRAPH = 4
+N_ROW_GRAPH = sys.argv[4]#1
+N_COL_GRAPH = sys.argv[5]#4
 NUM_OF_GRAPHS = N_ROW_GRAPH*N_COL_GRAPH
 
-SCENARIO_NAME = sys.argv[1]
 
 localFlow = [0 for i in range(N_PES)]
 eastFlow = [0 for i in range(N_PES)]
