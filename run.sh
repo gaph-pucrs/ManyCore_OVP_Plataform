@@ -118,8 +118,7 @@ cd ..
 
 echo ">> Creating the flow visualization graph"
 cd scripts
-
-
+python3 generateFlowGraph.py $SCENARIO_FILE
 
 
 
