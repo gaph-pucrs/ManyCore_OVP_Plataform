@@ -56,7 +56,7 @@ with open('../sandbox/'+SCENARIO_FILE+'.yaml') as file:
 			appNumber = X * progY + progX
 	
 			progPath = os.getcwd() + '/source/' + appDir + '/' + p + '.c'
-			appPath = os.getcwd() + '/application' + str(appNumber) + '.c'
+			appPath = '../sandbox/' + SCENARIO_FILE + '/applications' + '/application' + str(appNumber) + '.c'
 	
 			#Check if program exists
 			if(path.exists(progPath)):
