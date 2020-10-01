@@ -638,13 +638,14 @@ void requestMsg(unsigned int from){
 
 void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size){
     int i;
-
     myServicePacket[PI_DESTINATION] = dest;
     myServicePacket[PI_SIZE] = size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[PI_TASK_ID] = running_task;
     myServicePacket[PI_SERVICE] = service;
-    for (i = 0; i < size; i++)
+    for (i = 0; i < size; i++){
         myServicePacket[PI_PAYLOAD+i] = payload[i];
+        putsvsv("Payload+", i, " valor: ", myServicePacket[PI_PAYLOAD+i]);
+    }
     SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
 }
 
