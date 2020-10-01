@@ -287,11 +287,13 @@ int main(int argc, char **argv)
 		
 		sendPipe(destination);
 
+		// NOT WORKING THIS SHIT!!!
 		int_disable(2); // Acho que esse disable tem q ser feito quando receber o pacote de migração!
-		prints("INT2 DISABLED");
-		// Coloquei ele aqui porque enquanto estava ocorrendo os passos abaixo, chegou um request e embananou todo o programa
+						// Coloquei ele aqui porque enquanto estava ocorrendo os passos abaixo, chegou um request e embananou todo o programa
+		//prints("INT2 DISABLED\n");
+		
 		sendPendingReq(destination);
-		prints("INT2 ENABLED");
+		//prints("INT2 ENABLED\n");
 		int_enable(2);
 		
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
