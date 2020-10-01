@@ -261,8 +261,10 @@ unsigned int get_new_state(){
 
 void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
     int i;
-    for(i=0; i<DIM_X*DIM_Y; i++)
+    for(i=0; i<DIM_X*DIM_Y; i++){
         task_addr[i] = mapping_table[i];
+        putsvsv("task_addr[", i, "] = ", task_addr[i]);
+    }
 }
 
 
