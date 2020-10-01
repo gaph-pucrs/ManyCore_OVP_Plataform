@@ -268,9 +268,9 @@ int main(int argc, char **argv)
 		if(state == 0)
 			break;
 
-		
 		get_mapping_table(new_task_addr);
 		destination = new_task_addr[running_task];
+		putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
 		taskMigrated = destination; // save the new destination of this 
 		sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 		sendPipe(destination);
