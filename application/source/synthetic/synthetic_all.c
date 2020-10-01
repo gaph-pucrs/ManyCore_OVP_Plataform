@@ -277,17 +277,23 @@ int main(int argc, char **argv)
 		if(state == 0)
 			break;
 
-		int_disable(2); // Acho que esse disable tem q ser feito quando receber o pacote de migração!
-		// Coloquei ele aqui porque enquanto estava ocorrendo os passos abaixo, chegou um request e embananou todo o programa
+		
 		get_mapping_table(new_task_addr);
 		destination = new_task_addr[running_task];
 		putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
 		taskMigrated = destination; // save the new destination of this 
+		
 		sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
+		
 		sendPipe(destination);
+
+		int_disable(2); // Acho que esse disable tem q ser feito quando receber o pacote de migração!
+		// Coloquei ele aqui porque enquanto estava ocorrendo os passos abaixo, chegou um request e embananou todo o programa
 		sendPendingReq(destination);
-		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 		int_enable(2);
+
+		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
+		
 		// for (i = 0; i < NUM_TASK; i++)
 		// 	sendTaskService(TASK_MIGRATION_UPDT, task_addr[i], new_task_addr, NUM_TASK);
 	}
