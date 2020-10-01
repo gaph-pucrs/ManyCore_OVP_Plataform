@@ -344,8 +344,10 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_SRC){
         prints("Task migration received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++)
+        for(i=0; i<num_tasks; i++){
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+            putsvsv("Mapping_table[", i, "] = ", mapping_table[i]);
+        }
         migration_src = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
