@@ -637,6 +637,7 @@ void ReceiveRaw(message *theMessage){
 /* Creates the request message and send it to the transmitter */
 void requestMsg(unsigned int from){
     myServicePacket[PI_DESTINATION] = mapping_table[from];
+    putsv("Pedindo mesnagem de: ", mapping_table[from])
     myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
