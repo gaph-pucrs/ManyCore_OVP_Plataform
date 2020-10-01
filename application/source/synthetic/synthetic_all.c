@@ -227,6 +227,7 @@ int main(int argc, char **argv)
 		/* waits for mapping or migrating tasks and receives mapping table */
 		*clockGating_flag = TRUE;
 		while(!get_mapping() && !get_migration_dst()){ }
+		taskMigrated = -1; // resets this, because it's running a new task here
 		*clockGating_flag = FALSE;
 		get_mapping_table(task_addr);
 
@@ -276,7 +277,8 @@ int main(int argc, char **argv)
 		if(state == 0)
 			break;
 
-		int_disable(2);
+		int_disable(2); // Acho que esse disable tem q ser feito quando receber o pacote de migração!
+		// Coloquei ele aqui porque enquanto estava ocorrendo os passos abaixo, chegou um request e embananou todo o programa
 		get_mapping_table(new_task_addr);
 		destination = new_task_addr[running_task];
 		putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
