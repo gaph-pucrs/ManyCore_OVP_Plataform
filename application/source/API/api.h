@@ -391,8 +391,8 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ADDR_UPDT){
         printi(incomingPacket[PI_PAYLOAD]);
-        taskID = incomingPacket[PI_PAYLOAD] & 0x00001111;
-        newAddr = (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16;
+        taskID = incomingPacket[PI_PAYLOAD] & 0x0000FFFF;
+        newAddr = (incomingPacket[PI_PAYLOAD] & 0xFFFF0000) >> 16;
         mapping_table[taskID] = newAddr;
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
