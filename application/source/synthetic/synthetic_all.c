@@ -220,6 +220,7 @@ int main(int argc, char **argv)
 	int state = 0;
 	int destination;
 	int i;
+	int aux[1];
 
 	while(1){
 
@@ -237,7 +238,8 @@ int main(int argc, char **argv)
 
 		// Send the updt addr msg to every PE
 		for(i=1; i<NUM_TASK; i++){
-			sendTaskService(TASK_ADDR_UPDT, getAddress(i), ((*myAddress << 16) | running_task), 1);
+			aux[0] =  ((*myAddress << 16) | running_task);
+			sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
 		}
 		
 		if(get_mapping()){
