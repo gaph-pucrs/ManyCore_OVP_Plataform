@@ -119,9 +119,8 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
 
                 tgtProc = spiralMatrix[k];
                 task_ID = getSomeTaskID(srcProc, task_addr);
-                //putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
+                putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
                 LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
-
 
                 if (how_many_tasks_PE_is_running(tgtProc, task_addr)==0 && tgtProc != srcProc){
                     prints("send_task_migration\n");
