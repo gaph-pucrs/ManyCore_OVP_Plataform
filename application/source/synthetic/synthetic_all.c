@@ -235,7 +235,7 @@ int main(int argc, char **argv)
 		for (i = 0; i < NUM_TASK; i++){
 			if (task_addr[i] == *myAddress)
 				running_task = i;
-		}q
+		}
 
 		// Send the updt addr msg to every PE
 		for(i=1; i<N_PES; i++){
