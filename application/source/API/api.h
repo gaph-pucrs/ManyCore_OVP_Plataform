@@ -305,8 +305,6 @@ void interruptHandler_NI_RX(void) {
     if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        
-        mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
 
         ///////////////////  Delivers the Message ///////////////////
         // Alocate the packet message inside the structure
