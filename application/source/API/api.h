@@ -391,7 +391,7 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ADDR_UPDT){
         mapping_table[incomingPacket[PI_PAYLOAD] & 0x00001111] = (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16;
-        putsv("Updating mapping_table[", incomingPacket[PI_PAYLOAD] & 0x00001111, "] = ", (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16);
+        putsvsv("Updating mapping_table[", incomingPacket[PI_PAYLOAD] & 0x00001111, "] = ", (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16);
         *NIcmdRX = DONE;
     }
     else{
