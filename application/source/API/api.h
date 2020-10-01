@@ -150,6 +150,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 //////////////////////////////////////
 // Migration control                //
 //////////////////////////////////////
+volatile int taskMigrated;
 volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
@@ -207,6 +208,7 @@ void prints(char* text);
 void printi(int value);
 void putsv(char* text1, int value1);
 void putsvsv(char* text1, int value1, char* text2, int value2);
+void forwardMsgRequest(unsigned int requester, unsigned int origin);
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -402,7 +404,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         }
     }
     if(found != PIPE_WAIT){
-        // Stay here waiting until the TX module is able to transmmit the package 
+        // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
             // Sends the packet
             SendSlot((unsigned int)&buffer_packets[found], found);
@@ -412,6 +414,10 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
             addSendAfterTX(found);
         }
         return 1; // packet was sent with success
+    }
+    else if(taskMigrated != -1){
+        forwardMsgRequest(requester, taskMigrated);
+        return 1;
     }
     else{
         return 0; // packet is not in the buffer yet
@@ -520,6 +526,9 @@ void OVP_init(){
     for(i=0;i<N_PES;i++){
         pendingReq[i] = 0; 
     }
+
+    // Initiate the taskMigrated to -1
+    taskMigrated = -1;
 
     // Configure the Printer
     *printChar = getXpos(*myAddress);
@@ -632,7 +641,6 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
 
 void sendPipe(unsigned int dest){
     int i, j;
-
     putsv("sendPipe() ", dest);
     myServicePacket[PI_DESTINATION] = dest;
     myServicePacket[PI_SIZE] = PACKET_MAX_SIZE;
@@ -640,13 +648,23 @@ void sendPipe(unsigned int dest){
     myServicePacket[PI_SERVICE] = TASK_MIGRATION_PIPE;
     for (j = 0; j < PIPE_SIZE; j++){
         if (buffer_map[j] == PIPE_OCCUPIED){
-            prints("enviando pipe\n");
+            bufferPop(j);
+            prints("enviando\n");
             for (i = 0; i < MESSAGE_MAX_SIZE; i++)
                 myServicePacket[PI_PAYLOAD+i] = buffer_packets[j][i];
             SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
-            bufferPop(j);
         }
     }
+}
+
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
+    putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin);
+    myServicePacket[PI_DESTINATION] = origin_addr;
+    myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[PI_TASK_ID] = requester; //task id do requester
+    myServicePacket[PI_SERVICE] = MESSAGE_REQ;
+    myServicePacket[PI_REQUESTER] = mapping_table[requester];
+    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
 }
 
 ///////////////////////////////////////////////////////////////////

@@ -272,6 +272,7 @@ int main(int argc, char **argv)
 		sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 		sendPipe(destination);
 		// pending requests
+		taskMigrated = destination; // save the new destination of this 
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 		// for (i = 0; i < NUM_TASK; i++)
 		// 	sendTaskService(TASK_MIGRATION_UPDT, task_addr[i], new_task_addr, NUM_TASK);
