@@ -208,7 +208,7 @@ void prints(char* text);
 void printi(int value);
 void putsv(char* text1, int value1);
 void putsvsv(char* text1, int value1, char* text2, int value2);
-void forwardMsgRequest(unsigned int requester, unsigned int origin);
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -658,7 +658,7 @@ void sendPipe(unsigned int dest){
 }
 
 void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
-    putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin);
+    putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin_addr);
     myServicePacket[PI_DESTINATION] = origin_addr;
     myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[PI_TASK_ID] = requester; //task id do requester
