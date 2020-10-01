@@ -377,6 +377,14 @@ void interruptHandler_NI_RX(void) {
         bufferPush(index);
         *NIcmdRX = DONE;
     }
+    else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PEND){
+        putsv("Task pendingReq received ", new_state);
+        for(i=0; i<N_PES; i++){            
+            pendingReq[i] = incomingPacket[PI_PAYLOAD+i];
+            putsv(" > > pendReq: ", pendingReq[i]);
+        }
+        *NIcmdRX = DONE;
+    }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
     }
