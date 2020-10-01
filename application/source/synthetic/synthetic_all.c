@@ -237,7 +237,7 @@ int main(int argc, char **argv)
 		}
 
 		// Send the updt addr msg to every PE
-		for(i=1; i<NUM_TASK; i++){
+		for(i=1; i<N_PES; i++){
 			aux[0] =  ((*myAddress << 16) | running_task);
 			sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
 		}
