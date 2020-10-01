@@ -641,7 +641,7 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
 
 void sendPipe(unsigned int dest){
     int i, j;
-    putsv("sendPipe() ", dest);
+    putsv("sendPipe()", dest);
     myServicePacket[PI_DESTINATION] = dest;
     myServicePacket[PI_SIZE] = PACKET_MAX_SIZE;
     myServicePacket[PI_TASK_ID] = running_task;
@@ -649,12 +649,27 @@ void sendPipe(unsigned int dest){
     for (j = 0; j < PIPE_SIZE; j++){
         if (buffer_map[j] == PIPE_OCCUPIED){
             bufferPop(j);
-            prints("enviando\n");
+            prints("> enviando\n");
             for (i = 0; i < MESSAGE_MAX_SIZE; i++)
                 myServicePacket[PI_PAYLOAD+i] = buffer_packets[j][i];
             SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
         }
     }
+}
+
+void sendPendingReq(unsigned int dest){
+    int j;
+    putsv("sendPendingReq()", dest);
+    myServicePacket[PI_DESTINATION] = dest;
+    myServicePacket[PI_SIZE] = N_PES + 2 + 3;
+    myServicePacket[PI_TASK_ID] = running_task;
+    myServicePacket[PI_SERVICE] = TASK_MIGRATION_PEND;
+    for (j = 0; j < N_PES; j++){
+        putsv(" > > pendReq: ", pendingReq[j]);
+        myServicePacket[PI_PAYLOAD+j] = pendingReq[j];
+    }
+    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE);
+    prints("> pendReq enviado\n");
 }
 
 void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
