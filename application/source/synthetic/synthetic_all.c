@@ -226,12 +226,18 @@ int main(int argc, char **argv)
 		/* waits for mapping or migrating tasks and receives mapping table */
 		*clockGating_flag = TRUE;
 		while(!get_mapping() && !get_migration_dst()){ }
-
+		*clockGating_flag = FALSE;
 		get_mapping_table(task_addr);
+
 		// Get its task to run
 		for (i = 0; i < NUM_TASK; i++){
 			if (task_addr[i] == *myAddress)
 				running_task = i;
+		}
+
+		// Send the updt addr msg to every PE
+		for(i=1; i<NUM_TASK; i++){
+			sendTaskService(TASK_ADDR_UPDT, getAddress(i), ((*myAddress << 16) | running_task), 1);
 		}
 		
 		if(get_mapping()){

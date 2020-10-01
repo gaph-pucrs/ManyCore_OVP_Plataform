@@ -67,6 +67,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_MIGRATION_PIPE  0x64
 #define TASK_MIGRATION_STATE 0x65
 #define TASK_MIGRATION_PEND  0x66
+#define TASK_ADDR_UPDT       0x67
 
 
 //////////////////////////////
@@ -386,6 +387,11 @@ void interruptHandler_NI_RX(void) {
             pendingReq[i] = incomingPacket[PI_PAYLOAD+i];
             putsv(" > > pendReq: ", pendingReq[i]);
         }
+        *NIcmdRX = DONE;
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_ADDR_UPDT){
+        mapping_table[incomingPacket[PI_PAYLOAD] & 0x00001111] = (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16;
+        putsv("Updating mapping_table[", incomingPacket[PI_PAYLOAD] & 0x00001111, "] = ", (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16);
         *NIcmdRX = DONE;
     }
     else{
