@@ -299,7 +299,7 @@ void interruptHandler_NI_RX(void) {
     prints("Clk gate off - interruptHandler_NI_RX\n");
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, index;
+    int requester, i, index, taskID, newAddr;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
     }
@@ -391,8 +391,10 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ADDR_UPDT){
         printi(incomingPacket[PI_PAYLOAD]);
-        mapping_table[incomingPacket[PI_PAYLOAD] & 0x00001111] = (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16;
-        putsvsv("Updating mapping_table[", incomingPacket[PI_PAYLOAD] & 0x00001111, "] = ", (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16);
+        taskID = incomingPacket[PI_PAYLOAD] & 0x00001111;
+        newAddr = (incomingPacket[PI_PAYLOAD] & 0x11110000) >> 16;
+        mapping_table[taskID] = newAddr;
+        putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
     }
     else{
