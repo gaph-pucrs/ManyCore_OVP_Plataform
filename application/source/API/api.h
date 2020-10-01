@@ -261,7 +261,6 @@ unsigned int get_new_state(){
 
 void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
     int i;
-
     for(i=0; i<DIM_X*DIM_Y; i++)
         task_addr[i] = mapping_table[i];
 }
@@ -305,6 +304,8 @@ void interruptHandler_NI_RX(void) {
         receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         
+        mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
+
         ///////////////////  Delivers the Message ///////////////////
         // Alocate the packet message inside the structure
         deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)

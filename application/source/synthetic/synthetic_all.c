@@ -229,9 +229,10 @@ int main(int argc, char **argv)
 
 		get_mapping_table(task_addr);
 		// Get its task to run
-		for (i = 0; i < NUM_TASK; i++)
+		for (i = 0; i < NUM_TASK; i++){
 			if (task_addr[i] == *myAddress)
 				running_task = i;
+		}
 		
 		if(get_mapping()){
 			prints("Task "); printi(running_task); prints("mapped\n");
@@ -267,12 +268,13 @@ int main(int argc, char **argv)
 		if(state == 0)
 			break;
 
+		
 		get_mapping_table(new_task_addr);
 		destination = new_task_addr[running_task];
+		taskMigrated = destination; // save the new destination of this 
 		sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 		sendPipe(destination);
 		sendPendingReq(destination);
-		taskMigrated = destination; // save the new destination of this 
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 		// for (i = 0; i < NUM_TASK; i++)
 		// 	sendTaskService(TASK_MIGRATION_UPDT, task_addr[i], new_task_addr, NUM_TASK);
