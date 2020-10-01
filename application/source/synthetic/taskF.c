@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     int i, t;
 	
-	prints("synthetic task F started.\n");
+	LOG("synthetic task F started.\n");
 
 	for(i=0;i<SYNTHETIC_ITERATIONS;i++){
 	
@@ -28,9 +28,11 @@ int main(int argc, char **argv)
 
 		ReceiveMessage(&theMessage, taskD_addr);
 		
+		printi(clock()); prints("taskF\n");
+		printi(clock()); printi(i); prints("\n");
 	}
 
-    prints("synthetic task F finished.\n");
+    LOG("synthetic task F finished.\n");
 	//////////////////////////////////////////////////////
     //////////////// YOUR CODE ENDS HERE /////////////////
     //////////////////////////////////////////////////////

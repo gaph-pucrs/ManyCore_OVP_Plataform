@@ -139,6 +139,13 @@ void iterateNI(){
     ppmPacketnetWrite(handles.portControlLocal, &iterate, sizeof(iterate));
 }
 
+void iteratePeriph(){
+    unsigned long long int iterate = 0xFFFFFFFFFFFFFFFFULL;
+    // TODO: Descobrir quais são as portas periféricas
+    ppmPacketnetWrite(handles.portControlWest, &iterate, sizeof(iterate));
+    ppmPacketnetWrite(handles.portControlSouth, &iterate, sizeof(iterate));
+}
+
 // Extract the Y position for a given address
 unsigned int positionY(unsigned int address){
     unsigned int mask =  0xFF;
@@ -328,10 +335,11 @@ unsigned int bufferPop(unsigned int port){
         if (routingTable[port] == LOCAL){
             value = ntohl(currentTime); // Register the out-iteration in the last flit
             localDeliveredPckts++;
-            bhmMessage("I", "Router", "Packet delivered at %d-(%d,%d) - total delivered: %d\n",myID, positionX(myAddress), positionY(myAddress), localDeliveredPckts);
+            // bhmMessage("I", "Router", "Packet delivered at %d-(%d,%d) - total delivered: %d\n",myID, positionX(myAddress), positionY(myAddress), localDeliveredPckts);
         }
 
         // Updates the routing table, releasing the output port
+        // bhmMessage("INFO", "ROUTER", ">>>>> %x - Porta de saída %d ficou livre\n", myAddress, port);
         routingTable[port] = ND;
 
         // Inform that the next flit will be a header
@@ -448,6 +456,7 @@ void allocate(unsigned int port){
         //If the requested output port is free
         if(allowed == 1){
             // Connect the buffer to the output
+            // bhmMessage("INFO", "ROUTER", ">>>>> %x - Porta %d saindo pela porta %d\n", myAddress, port, to);
             routingTable[port] = to;
             // and compute a packet transmittion
             countTotalPackets[to] = countTotalPackets[to]+1;
@@ -707,7 +716,7 @@ void iterate(){
     activity = 0;
     // Sends the iteration signal to the NI module
     iterateNI();
-    //iteratePeriph();
+    if(myAddress == 0x00) iteratePeriph();
     // Verify if the LOCAL buffer has something to send
     //verifyLocalBuffer();
     ////////////////////////////////////////////

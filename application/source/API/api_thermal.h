@@ -132,6 +132,7 @@ const int nopDyn[3]={DYN_NOP_0, DYN_NOP_1, DYN_NOP_2};
 const int branchDyn[3]={DYN_BRANCH_0, DYN_BRANCH_1, DYN_BRANCH_2};
 const int jumpDyn[3]={DYN_JUMP_0, DYN_JUMP_1, DYN_JUMP_2};
 
+int tempPacket = 0;
 /*--------------------------------------------------------------------------------
  * Total dynamic read/write energy per access (pJ)
  * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
@@ -430,6 +431,22 @@ void energyEstimation(){
     timeActiveNoC = estimateNoCActivity();
     timeIdleNoC = difTime-timeActiveNoC;
 
+    prints("Counters: ");
+    printi(arith_inst); prints(" ");
+    printi(branch_inst); prints(" ");
+    printi(jump_inst); prints(" ");
+    printi(move_inst); prints(" ");
+    printi(load_inst); prints(" ");
+    printi(store_inst); prints(" ");
+    printi(shift_inst); prints(" ");
+    printi(nop_inst); prints(" ");
+    printi(logical_inst); prints(" ");
+    printi(mult_div_inst); prints(" ");
+    printi(totalPackets); prints(" ");
+    printi(totalFlits); prints(" ");
+    printi(timeActiveNoC); prints(" ");
+    printi(timeIdleNoC); prints("\n");
+
     nPorts = getNumberOfPorts(*myAddress);
 
     energyActive = PERIOD_NS/10 * ((nPorts-1) * powerAvgBufferIdle[Voltage] + powerAvgBufferActive[Voltage] + powerSwitchControlActive[Voltage]);
@@ -457,22 +474,6 @@ void energyEstimation(){
 
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD/10;
-    int aritimetica = inst_class.arith;
-    prints("Counters: ");
-    printi(arith_inst); prints(" ");
-    printi(branch_inst); prints(" ");
-    printi(jump_inst); prints(" ");
-    printi(move_inst); prints(" ");
-    printi(load_inst); prints(" ");
-    printi(store_inst); prints(" ");
-    printi(shift_inst); prints(" ");
-    printi(nop_inst); prints(" ");
-    printi(logical_inst); prints(" ");
-    printi(mult_div_inst); prints(" ");
-    printi(totalPackets); prints(" ");
-    printi(totalFlits); prints(" ");
-    printi(timeActiveNoC); prints(" ");
-    printi(timeIdleNoC); prints("\n");
     
     //prints("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
@@ -552,11 +553,11 @@ void energyEstimation(){
     executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;*/
-    /*if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
+    if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
         sendExecutedInstPacket = TRUE;
-    */
+    
 }
 
 ///////////////////////////////////////////////////////////////////

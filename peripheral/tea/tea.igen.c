@@ -65,6 +65,11 @@ double t_steady[THERMAL_NODES];
 double TempTraceEnd[THERMAL_NODES];
 
 
+unsigned int thePacket[SYSTEM_SIZE+1+2+3];
+unsigned int sendPacketToMaster = 0;
+unsigned int packetPointer = 0;
+
+
 unsigned int flit_in_counter = 0;
 unsigned int msg_size = 0;
 unsigned int source_pe = 0;
@@ -220,9 +225,34 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
 
 ////////////////////////////////// Callbacks //////////////////////////////////
 
+unsigned int routerCredit = 0;
 
 PPM_PACKETNET_CB(controlUpdate) {
-    // YOUR CODE HERE (controlUpdate)
+    // Input information with 4 bytes are about flow control
+    if(bytes == 4){
+        unsigned int ctrl = *(unsigned int *)data;
+        routerCredit = ctrl;
+    }
+    // Information with 8 bytes are about iterations
+    else if(bytes == 8) {   
+        // When an iteration arrives
+        if(sendPacketToMaster){
+            if(routerCredit == 0){
+                // send one flit to the router
+                //bhmMessage("I", "Input", "send %d flit to the router\n", packetPointer);
+                ppmPacketnetWrite(handles.portData, &thePacket[packetPointer], sizeof(thePacket[packetPointer]));
+                
+                // Updates packet pointer
+                if(packetPointer < SYSTEM_SIZE+3+2+1){
+                    packetPointer++;
+                }
+                else{
+                    packetPointer = 0;
+                    sendPacketToMaster = 0;
+                }
+            }
+        }
+    }
 }
 
 PPM_PACKETNET_CB(dataUpdate) {
@@ -277,7 +307,22 @@ PPM_PACKETNET_CB(dataUpdate) {
         source_pe =  0;
         x_data_counter = 0;
         y_data_counter = 0;
+
+        // Packet to master
+        int i;
+        int tempi;
+        thePacket[0] = htonl(0x00); // Header (destine address)
+        thePacket[1] = htonl(DIM_X*DIM_Y + 5); 
+        thePacket[2] = htonl(0);    // sendTime 
+        thePacket[3] = htonl(0x50); // #define TEMPERATURE_PACKET  0x50 (api.h)
+        for(i=0; i<DIM_Y*DIM_X; i++){
+            tempi = TempTraceEnd[i]*100;
+            bhmMessage("I", "Input", "tempi %d %d\n", i, tempi);
+            thePacket[i+4] = htonl(tempi);
+        }
+        sendPacketToMaster = 1;
     }
+    ///////
 }
 
 PPM_CONSTRUCTOR_CB(constructor) {
@@ -312,10 +357,9 @@ int main(int argc, char *argv[]) {
 
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
-    bhmMessage("INFO", "TEA", "TEA inicializando...");
     constructor();
 
-    //load_matrices(Binv, Cexp);
+    load_matrices(Binv, Cexp);
 
     for(i=0;i<DIM_X;i++){
         for(j=0;j<DIM_Y;j++){
@@ -325,8 +369,6 @@ int main(int argc, char *argv[]) {
     for(i=0;i<THERMAL_NODES;i++){
         TempTraceEnd[i] = 318.15;
     }
-
-    bhmMessage("INFO", "TEA", "TEA inicializado com sucesso!");
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();

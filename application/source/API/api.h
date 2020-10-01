@@ -56,9 +56,19 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 
 ////////////////////////////////////////////////////////////
 // Services --TODO: CHANGE THE PACKET TO MATCH HEMPS STANDART?
-#define MESSAGE_REQ         0x20
-#define MESSAGE_DELIVERY    0x30
-#define INSTR_COUNT_PACKET  0x40
+#define MESSAGE_REQ          0x20
+#define MESSAGE_DELIVERY     0x30
+#define INSTR_COUNT_PACKET   0x40
+#define TEMPERATURE_PACKET   0x50
+#define TASK_MAPPING         0x60
+#define TASK_MIGRATION_SRC   0x61
+#define TASK_MIGRATION_DEST  0x62
+#define TASK_MIGRATION_UPDT  0x63
+#define TASK_MIGRATION_PIPE  0x64
+#define TASK_MIGRATION_STATE 0x65
+#define TASK_MIGRATION_PEND  0x66
+
+
 //////////////////////////////
 //////////////////////////////
 
@@ -80,8 +90,10 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PI_DESTINATION      0
 #define PI_SIZE             1
 #define PI_SEND_TIME        2
+#define PI_TASK_ID          2
 #define PI_SERVICE          3
 #define PI_REQUESTER        4
+#define PI_PAYLOAD          4
 #define PI_I_MYADDR         4
 #define PI_I_BRANCH         5
 #define PI_I_ARITH          6
@@ -121,7 +133,7 @@ volatile unsigned int isRawReceive = 0;                     // Used by the API w
 
 ////////////////////////////////////////////////////////////
 // PIPE Message buffer
-unsigned int buffer_packets[PIPE_SIZE][PACKET_MAX_SIZE];    // The PIPE!
+unsigned int buffer_packets[PIPE_SIZE][MESSAGE_MAX_SIZE];   // The PIPE!
 unsigned int buffer_map[PIPE_SIZE];                         // The PIPE map, informing occupied and empty slots
 unsigned int buffer_history[PIPE_SIZE];                     // The PIPE history, to keep every slot in use, preserving sent packets longer for restauration propouse (not implemented! just an idea) 
 volatile unsigned int pendingReq[N_PES];                    // Inform about pending requests
@@ -133,6 +145,32 @@ volatile unsigned int pendingReq[N_PES];                    // Inform about pend
 time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - Verificar sobre essas variaveis. Não sei o quão certas estão.
 //////////////////////////////
 //////////////////////////////
+
+
+//////////////////////////////////////
+// Migration control                //
+//////////////////////////////////////
+volatile int running_task = -1;
+volatile unsigned int migration_src = 0;
+volatile unsigned int migration_dst = 0;
+volatile unsigned int mapping_en = 0;
+volatile unsigned int migration_upd = 0;
+volatile unsigned int num_tasks;
+volatile unsigned int new_state;
+volatile unsigned int mapping_table[DIM_X*DIM_Y];
+void clear_migration_src();
+void clear_migration_dst();
+void clear_mapping();
+void clear_update();
+unsigned int get_migration_src();
+unsigned int get_migration_dst();
+unsigned int get_mapping();
+unsigned int get_update();
+unsigned int get_new_state();
+
+
+void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]);
+//////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
 // OVP init!
@@ -148,6 +186,7 @@ void FinishApplication();
 // Internal API functions
 void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
+void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int task_addr[DIM_X*DIM_Y], unsigned int size);
 unsigned int getAddress(unsigned int id);
 unsigned int getID(unsigned int addr);
 unsigned int getXpos(unsigned int addr);
@@ -166,6 +205,8 @@ void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
 void prints(char* text);
 void printi(int value);
+void putsv(char* text1, int value1);
+void putsvsv(char* text1, int value1, char* text2, int value2);
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -180,6 +221,48 @@ void printi(int value);
 // Functions implementation ///////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
+void clear_migration_src(){
+    migration_src = 0;
+}
+
+void clear_migration_dst(){
+    migration_dst = 0;
+}
+
+void clear_mapping(){
+    mapping_en = 0;
+}
+
+void clear_update(){
+    migration_upd = 0;
+}
+
+unsigned int get_migration_src(){
+    return migration_src;
+}
+
+unsigned int get_migration_dst(){
+    return migration_dst;
+}
+
+unsigned int get_mapping(){
+    return mapping_en;
+}
+
+unsigned int get_update(){
+    return migration_upd;
+}
+
+unsigned int get_new_state(){
+    return new_state;
+}
+
+void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
+    int i;
+
+    for(i=0; i<DIM_X*DIM_Y; i++)
+        task_addr[i] = mapping_table[i];
+}
 
 
 ///////////////////////////////////////////////////////////////////
@@ -207,12 +290,16 @@ void interruptHandler_timer(void) {
 /* Interruption function for Network Interface RX module */ 
 void interruptHandler_NI_RX(void) {
 #if USE_THERMAL
+    unsigned int savedClkGating = *clockGating_flag;
     *clockGating_flag = FALSE; // Turn the clkGating off
     prints("Clk gate off - interruptHandler_NI_RX\n");
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i;
-    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
+    int requester, i, index;
+    if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
+        tempPacket = TRUE;
+    }
+    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         
@@ -233,19 +320,67 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        requester = incomingPacket[PI_REQUESTER];
+        //verificar se houve migracao
+            //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
+        requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
+        mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
-            pendingReq[getID(requester)] = MESSAGE_REQ;
+            pendingReq[requester] = MESSAGE_REQ;
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
+        mapping_en = 1;
+        num_tasks = incomingPacket[PI_SIZE]-3 -2;
+        for(i=0; i<num_tasks; i++)
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        mapping_en = 1;
+        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_SRC){
+        prints("Task migration received\n");
+        num_tasks = incomingPacket[PI_SIZE]-3 -2;
+        for(i=0; i<num_tasks; i++)
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        migration_src = 1;
+        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_DEST){
+        prints("Task destination received\n");
+        num_tasks = incomingPacket[PI_SIZE]-3 -2;
+        for(i=0; i<num_tasks; i++)
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        migration_dst = 1;
+        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_UPDT){
+        prints("Task update received\n");
+        num_tasks = incomingPacket[PI_SIZE]-3 -2;
+        for(i=0; i<num_tasks; i++)
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        migration_upd = 1;
+        *NIcmdRX = DONE; 
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE){
+        new_state = incomingPacket[PI_PAYLOAD];
+        putsv("Task state received ", new_state);
+        *NIcmdRX = DONE; 
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
+        putsv("Task pipe received ", new_state);
+        index = getEmptyIndex();
+        for(i=0; i<MESSAGE_MAX_SIZE; i++)
+            buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
+        bufferPush(index);
+        *NIcmdRX = DONE;
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
     }
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
-
+    *clockGating_flag = savedClkGating;
 #endif
 }
 
@@ -257,11 +392,12 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
         if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
-            if(buffer_packets[i][PI_DESTINATION] == requester){ // and the destination is the same as the requester
-                if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
+            if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
+                buffer_packets[i][PI_DESTINATION] = mapping_table[requester];
+                //if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
                     found = i;
                     foundSent = buffer_packets[i][PI_SEND_TIME];
-                }
+                //}
             }
         }
     }
@@ -448,6 +584,8 @@ void ReceiveRaw(message *theMessage){
 #endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
+    //prints("ReceiveRaw\n");
+    printi(deliveredMessage);
 
     // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
@@ -472,14 +610,43 @@ void ReceiveRaw(message *theMessage){
 ///////////////////////////////////////////////////////////////////
 /* Creates the request message and send it to the transmitter */
 void requestMsg(unsigned int from){
-    myServicePacket[PI_DESTINATION] = from;
+    myServicePacket[PI_DESTINATION] = mapping_table[from];
     myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
-    tsend = clock();
-	tsend = tsend - tinicio;
-    myServicePacket[PI_SEND_TIME] = tsend;
+    myServicePacket[PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[PI_REQUESTER] = *myAddress;
     SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+}
+
+void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size){
+    int i;
+
+    myServicePacket[PI_DESTINATION] = dest;
+    myServicePacket[PI_SIZE] = size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[PI_TASK_ID] = running_task;
+    myServicePacket[PI_SERVICE] = service;
+    for (i = 0; i < size; i++)
+        myServicePacket[PI_PAYLOAD+i] = payload[i];
+    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+}
+
+void sendPipe(unsigned int dest){
+    int i, j;
+
+    putsv("sendPipe() ", dest);
+    myServicePacket[PI_DESTINATION] = dest;
+    myServicePacket[PI_SIZE] = PACKET_MAX_SIZE;
+    myServicePacket[PI_TASK_ID] = running_task;
+    myServicePacket[PI_SERVICE] = TASK_MIGRATION_PIPE;
+    for (j = 0; j < PIPE_SIZE; j++){
+        if (buffer_map[j] == PIPE_OCCUPIED){
+            prints("enviando pipe\n");
+            for (i = 0; i < MESSAGE_MAX_SIZE; i++)
+                myServicePacket[PI_PAYLOAD+i] = buffer_packets[j][i];
+            SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+            bufferPop(j);
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -511,7 +678,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 
 ///////////////////////////////////////////////////////////////////
 /* Sends a message to a given destination */
-void SendMessage(message *theMessage, unsigned int destination){
+void SendMessage(message *theMessage, unsigned int destination_id){
 #if USE_THERMAL
 #endif    
     unsigned int index;
@@ -524,11 +691,9 @@ void SendMessage(message *theMessage, unsigned int destination){
 #endif    
     //////////////////////////////////////////
     // Mounts the packet in the packets buffer 
-    buffer_packets[index][PI_DESTINATION] = destination;
+    buffer_packets[index][PI_DESTINATION] = mapping_table[destination_id];
     buffer_packets[index][PI_SIZE] = theMessage->size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
-    tsend = clock();
-	tsend = tsend - tinicio;
-    buffer_packets[index][PI_SEND_TIME] = tsend;
+    buffer_packets[index][PI_TASK_ID] = destination_id;
     buffer_packets[index][PI_SERVICE] = MESSAGE_DELIVERY;
     int a;
     for(a=0;a<theMessage->size;a++){
@@ -538,9 +703,9 @@ void SendMessage(message *theMessage, unsigned int destination){
     // Change the selected buffer position to occupied
     bufferPush(index);
     // Once the packet is ready, check if the request has arrived
-    if(checkPendingReq(getID(destination))){
+    if(checkPendingReq(destination_id)){
         // Clear the pending request
-        pendingReq[getID(destination)] = 0;
+        pendingReq[destination_id] = 0;
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
@@ -654,7 +819,6 @@ void FinishApplication(){
     prints("Clk gate on - FinishApplication\n"); 
 #endif
     prints("Finalizando "); printi(*myAddress); prints("\n");
-    prints("Tempo: "); printi(clock()); prints("\n");
     LOG("Finalizando %x!\n", *myAddress);
     *PEToSync = 0xFF;
     unsigned int init_end = *SyncToPE;
@@ -684,6 +848,20 @@ void prints(char* text){
 void printi(int value){
     *printInt = value;
     return;
+}
+
+void putsv(char* text1, int value1){
+    prints(text1);
+    printi(value1);
+    prints("\n");
+}
+
+void putsvsv(char* text1, int value1, char* text2, int value2){
+    prints(text1);
+    printi(value1);
+    prints(text2);
+    printi(value2);
+    prints("\n");
 }
 
 ///////////////////////////////////////////////////////////////////

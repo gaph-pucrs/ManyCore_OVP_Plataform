@@ -1,39 +1,26 @@
 #!/bin/sh
+#NOVO: 20191106 --- VELHO: 20170201
 X=$1
 Y=$2
 APP_NAME=$3
 N=$(($X*$Y))
 
-echo "======================================================================"
-echo "== _______________________                                          =="
-echo "== ___________  ____/__  /___________________________________       =="
-echo "== __________  /    __  __ \_  ___/  __ \_  __ \  __ \_  ___/       =="
-echo "==          / /___  _  / / /  /   / /_/ /  / / / /_/ /(__  )        =="
-echo "==          \____/  /_/ /_//_/    \____//_/ /_/\____//____/         =="
-echo "==               Contact: fernando.moraes@pucrs.br                  =="
-echo "======================================================================"
-
-
-
-# To get the runtime
-start=`date +%s`
-
-# Remove old .csv files from simulation folder
+#source /soft64/source_gaph
+# module load ovp/20191106
+# source /soft64/imperas/ferramentas/64bits/Imperas.20191106/bin/setup.sh
+# setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20191106
 cd simulation
     rm -f flitFlow.csv
 cd ..
 
-# Generate Applications
 cd application
     ./applicationGenerator.sh $X $Y $APP_NAME
 cd ..
 
-# Generate the module
 cd module
     ./moduleGenerator.sh $X $Y
 cd ..
 
-# Create the peripherals
 cd peripheral
     cd whnoc_dma
         sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
@@ -45,7 +32,6 @@ cd peripheral
         ./iteratorGenerator.sh $X $Y
 cd ../..
 
-# Generates the Harness
 cd harness
     sed -i 's/#define N_PE.*/#define N_PES '$N'/' harness.c
 cd ..
@@ -60,9 +46,6 @@ echo "cd .." >> ovp_compiler.sh
 echo "cd simulation" >> ovp_compiler.sh
 echo "rm -f *.txt" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
-echo "cd scripts/myGraphs" >> ovp_compiler.sh
-echo "rm -f *.dat" >> ovp_compiler.sh
-echo "cd ../.." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
 echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
 echo "CROSS=OR1K" >> ovp_compiler.sh
@@ -93,33 +76,24 @@ echo "harness/harness.\${IMPERAS_ARCH}.exe \\" >> ovp_compiler.sh
 # -------------------------------
 for i in $(seq 0 $N);
 do
-
-    echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
-
+    #if [ $i != $N ];
+    #then
+        echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf \$* \\" >> ovp_compiler.sh
+    #else
+    #    echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf --imperasintercepts \$* \\" >> ovp_compiler.sh
+    #fi
 done
-echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts  \$* \\" >> ovp_compiler.sh
-echo "\$*" >> ovp_compiler.sh
+    echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts  \$* \\" >> ovp_compiler.sh
+	echo "\$*" >> ovp_compiler.sh
+        #echo "     --verbose " >> ovp_compiler.sh
 
 chmod +x ovp_compiler.sh
 ./ovp_compiler.sh
 
-# Generates data for traffic comparison
-#cd scripts
-#python3 generateFlowGraph.py
-#cd ..
-
 cd application
-# for i in $(seq 0 $N);
-# do
-#     ./assemblyExtractor.sh application"$i".OR1K.elf
-# done
-rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
-rm -rf *.elf
-cd ..
-
-# Report the total execution time
-end=`date +%s`
-runtime=$((end-start))
-echo "Execution time: '$runtime'"
-
-
+for i in $(seq 0 $N);
+do
+    ./assemblyExtractor.sh application"$i".OR1K.elf
+done
+#rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
+#rm -rf *.elf
