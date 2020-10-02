@@ -297,7 +297,7 @@ void interruptHandler_NI_RX(void) {
     unsigned int savedClkGating = *clockGating_flag;
     *clockGating_flag = FALSE; // Turn the clkGating off
     prints("Clk gate off - interruptHandler_NI_RX\n");
-    putsv("Servico: ", incomingPacket[PI_SERVICE])
+    putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
     int requester, i, index, taskID, newAddr;
