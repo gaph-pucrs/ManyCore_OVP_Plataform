@@ -318,7 +318,7 @@ void interruptHandler_NI_RX(void) {
 
         // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
         if(isRawReceive == 1){
-            int_disable(2);
+            int_disable(0x100);
             isRawReceive = 0;
         }
         
@@ -517,12 +517,12 @@ void interruptHandler_NI_TX(void) {
 void OVP_init(){
     // Attach the external interrupt handler for 'intr0'
     int_init();
-    int_add(0, (void *)interruptHandler_timer, NULL);
-    int_add(1, (void *)interruptHandler_NI_TX, NULL);
-    int_add(2, (void *)interruptHandler_NI_RX, NULL);
-    int_enable(0);
-    int_enable(1);
-    int_enable(2);
+    int_add(0x001, (void *)interruptHandler_timer, NULL);
+    int_add(0x010, (void *)interruptHandler_NI_TX, NULL);
+    int_add(0x100, (void *)interruptHandler_NI_RX, NULL);
+    int_enable(0x001);
+    int_enable(0x010);
+    int_enable(0x100);
     // Enable external interrupts
     Uns32 spr = MFSPR(17);
     spr |= 0x4;
@@ -592,7 +592,7 @@ void ReceiveMessage(message *theMessage, unsigned int from){
     requestMsg(from);
 
     // Waits the response
-    int_enable(2); // Enables the RX interruptions
+    int_enable(0x100); // Enables the RX interruptions
 
 #if USE_THERMAL
     *clockGating_flag = TRUE;
@@ -623,7 +623,7 @@ void ReceiveRaw(message *theMessage){
     // Inform the the interruption that this is a RAW function
     isRawReceive = 1;
 
-    int_enable(2); // Enables the RX interruptions
+    int_enable(0x100); // Enables the RX interruptions
 
 #if USE_THERMAL
     *clockGating_flag = TRUE;
@@ -829,8 +829,8 @@ void SendSlot(unsigned int addr, unsigned int slot){
     *clockGating_flag = FALSE;
 #endif
 
-    int_disable(1);
-    int_disable(0);
+    int_disable(0x010);
+    int_disable(0x001);
 
 #if USE_THERMAL
 #endif
@@ -841,8 +841,8 @@ void SendSlot(unsigned int addr, unsigned int slot){
 
     transmittingActive = slot;
     SendRaw(addr);
-    int_enable(0);
-    int_enable(1);
+    int_enable(0x001);
+    int_enable(0x010);
     ////////////////////////////////////////////////
 #if USE_THERMAL    
 #endif
