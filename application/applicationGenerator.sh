@@ -7,8 +7,8 @@ APP_NAME=$3
 N=$(($X*$Y))
 N=$(($N-1))
 
-rm *.c
-rm *.h
+rm -f *.c
+rm -f *.h
 
 for i in $(seq 0 $N);
 do
