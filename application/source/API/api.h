@@ -947,7 +947,8 @@ void disable_interruptions(){
 }
 
 void disable_interruption(unsigned int n){
-    Uns32 mask_bit = !(1 << n); 
+    Uns32 mask_bit = !(1 << n);
+    putsv("Mask: ", mask_bit);
     Uns32 picmr = MFSPR(SPR_PICMR);
     putsv("Interruptions: ", picmr);
     picmr &= mask_bit;
