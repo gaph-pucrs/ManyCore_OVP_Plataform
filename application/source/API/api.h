@@ -524,9 +524,9 @@ void OVP_init(){
     int_enable(1);
     int_enable(2);
     // Enable external interrupts
-    /*Uns32 spr = MFSPR(17);
+    Uns32 spr = MFSPR(17);
     spr |= 0x4;
-    MTSPR(17, spr);*/
+    MTSPR(17, spr);
 
     // Inform the processor ID to the router
     *myAddress = impProcessorId();
