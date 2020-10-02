@@ -948,15 +948,16 @@ void disable_interruptions(){
 
 void disable_interruption(unsigned int n){
     Uns32 mask_bit = ~(1 << n);
-    putsv("Mask: ", mask_bit);
     Uns32 picmr = MFSPR(SPR_PICMR);
-    putsv("Interruptions: ", picmr);
     picmr &= mask_bit;
-    putsv("Interruptions2: ", picmr);
     MTSPR(SPR_PICMR, picmr);
     return;
 }
 
 void enable_interruption(unsigned int n){
+    Uns32 mask_bit = 1 << n;
+    Uns32 picmr = MFSPR(SPR_PICMR);
+    picmr |= mask_bit;
+    MTSPR(SPR_PICMR, picmr);
     return;
 }
