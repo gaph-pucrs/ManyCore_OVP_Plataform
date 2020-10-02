@@ -17,7 +17,7 @@ int new_task_addr[NUM_TASK];
 int synthetic_taskA(int state){
 	int i, j, t;
 
-	LOG("synthetic task A started.\n");
+	prints("synthetic task A started.\n");
 
 	for(i=state;i<SYNTHETIC_ITERATIONS;i++){
 		for(t=0;t<1000;t++){
@@ -31,18 +31,18 @@ int synthetic_taskA(int state){
 
 		//Migration breakpoint
 		if(get_migration_src()){
-			LOG("synthetic task A migrating.\n");
+			prints("synthetic task A migrating.\n");
 			clear_migration_src();
 			return i+1;
 		}
 		// if(get_update()){
-		// 	LOG("synthetic task A udpate.\n");
+		// 	prints("synthetic task A udpate.\n");
 		// 	get_mapping_table(task_addr);
 		// 	clear_update();
 		// }
 	}
 
-    LOG("synthetic task A finished.\n");
+    prints("synthetic task A finished.\n");
 
     return 0;	
 }
@@ -50,7 +50,7 @@ int synthetic_taskA(int state){
 int synthetic_taskB(int state){
 	int i, j, t;
 
-	LOG("synthetic task B started.\n");
+	prints("synthetic task B started.\n");
 
 	for(i=state;i<SYNTHETIC_ITERATIONS;i++){
 		for(t=0;t<1000;t++){
@@ -64,13 +64,13 @@ int synthetic_taskB(int state){
 
 		//Migration breakpoint
 		if(get_migration_src()){
-			LOG("synthetic task B migrating.\n");
+			prints("synthetic task B migrating.\n");
 			clear_migration_src();
 			return i+1;
 		}
 	}
 
-	LOG("synthetic task B finished.\n");
+	prints("synthetic task B finished.\n");
 
 	return 0;
 }
@@ -78,7 +78,7 @@ int synthetic_taskB(int state){
 int synthetic_taskC(int state){
 	int i, j, t;
 	
-	LOG("synthetic task C started.\n");
+	prints("synthetic task C started.\n");
 
 	for(i=state;i<SYNTHETIC_ITERATIONS;i++){
 	
@@ -104,13 +104,13 @@ int synthetic_taskC(int state){
 
 		//Migration breakpoint
 		if(get_migration_src()){
-			LOG("synthetic task C migrating.\n");
+			prints("synthetic task C migrating.\n");
 			clear_migration_src();
 			return i+1;
 		}
 	}
 
-	LOG("synthetic task C finished.\n");
+	prints("synthetic task C finished.\n");
 
 	return 0;
 }
@@ -118,7 +118,7 @@ int synthetic_taskC(int state){
 int synthetic_taskD(int state){
 	int i, j, t;
 
-	LOG("synthetic task D started.\n");
+	prints("synthetic task D started.\n");
 
 	for(i=state;i<SYNTHETIC_ITERATIONS;i++){
 	
@@ -137,13 +137,13 @@ int synthetic_taskD(int state){
 
 		//Migration breakpoint
 		if(get_migration_src()){
-			LOG("synthetic task D migrating.\n");
+			prints("synthetic task D migrating.\n");
 			clear_migration_src();
 			return i+1;
 		}
 	}
 
-	LOG("synthetic task D finished.\n");
+	prints("synthetic task D finished.\n");
 
 	return 0;
 }
@@ -151,7 +151,7 @@ int synthetic_taskD(int state){
 int synthetic_taskE(int state){
 	int i, j, t;
 
-	LOG("synthetic task E started.\n");
+	prints("synthetic task E started.\n");
 
 	for(i=state;i<SYNTHETIC_ITERATIONS;i++){
 	
@@ -170,13 +170,13 @@ int synthetic_taskE(int state){
 
 		//Migration breakpoint
 		if(get_migration_src()){
-			LOG("synthetic task E migrating.\n");
+			prints("synthetic task E migrating.\n");
 			clear_migration_src();
 			return i+1;
 		}
 	}
 
-	LOG("synthetic task E finished.\n");
+	prints("synthetic task E finished.\n");
 
 	return 0;
 }
@@ -184,7 +184,7 @@ int synthetic_taskE(int state){
 int synthetic_taskF(int state){
 	int i, j, t;
 
-	LOG("synthetic task F started.\n");
+	prints("synthetic task F started.\n");
 
 	for(i=state;i<SYNTHETIC_ITERATIONS;i++){
 	
@@ -200,13 +200,13 @@ int synthetic_taskF(int state){
 
 		//Migration breakpoint
 		if(get_migration_src()){
-			LOG("synthetic task F migrating.\n");
+			prints("synthetic task F migrating.\n");
 			clear_migration_src();
 			return i+1;
 		}
 	}
 
-    LOG("synthetic task F finished.\n");
+    prints("synthetic task F finished.\n");
 
     return 0;
 }
@@ -220,18 +220,28 @@ int main(int argc, char **argv)
 	int state = 0;
 	int destination;
 	int i;
+	int aux[1];
 
 	while(1){
 
 		/* waits for mapping or migrating tasks and receives mapping table */
 		*clockGating_flag = TRUE;
 		while(!get_mapping() && !get_migration_dst()){ }
-
+		taskMigrated = -1; // resets this, because it's running a new task here
+		*clockGating_flag = FALSE;
 		get_mapping_table(task_addr);
+
 		// Get its task to run
-		for (i = 0; i < NUM_TASK; i++)
+		for (i = 0; i < NUM_TASK; i++){
 			if (task_addr[i] == *myAddress)
 				running_task = i;
+		}
+
+		// Send the updt addr msg to every PE
+		for(i=1; i<N_PES; i++){
+			aux[0] =  ((*myAddress << 16) | running_task);
+			sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
+		}
 		
 		if(get_mapping()){
 			prints("Task "); printi(running_task); prints("mapped\n");
@@ -267,13 +277,21 @@ int main(int argc, char **argv)
 		if(state == 0)
 			break;
 
+		
 		get_mapping_table(new_task_addr);
 		destination = new_task_addr[running_task];
+		putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
+		taskMigrated = destination; // save the new destination of this 
+		
 		sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
+		
 		sendPipe(destination);
+		
+		disable_interruptions();
+		sendPendingReq(destination);
+		enable_interruptions();		
+		
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-		// for (i = 0; i < NUM_TASK; i++)
-		// 	sendTaskService(TASK_MIGRATION_UPDT, task_addr[i], new_task_addr, NUM_TASK);
 	}
 
 
