@@ -286,28 +286,12 @@ int main(int argc, char **argv)
 		sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 		
 		sendPipe(destination);
-
-		// NOT WORKING THIS SHIT!!!
-		//int_disable(2); // Acho que esse disable tem q ser feito quando receber o pacote de migração!
-						// Coloquei ele aqui porque enquanto estava ocorrendo os passos abaixo, chegou um request e embananou todo o programa
-		//prints("INT2 DISABLED\n");
 		
-		Uns32 aux1 = MFSPR(17);
-   		aux1 &= 0xFFFB;
-    	MTSPR(17, aux1);
-
+		disable_interruptions();
 		sendPendingReq(destination);
-		//prints("INT2 ENABLED\n");
-		//int_enable(2);
-
-		aux1 = MFSPR(17);
-    	aux1 |= 0x4;
-    	MTSPR(17, aux1);
+		enable_interruptions();		
 		
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-		
-		// for (i = 0; i < NUM_TASK; i++)
-		// 	sendTaskService(TASK_MIGRATION_UPDT, task_addr[i], new_task_addr, NUM_TASK);
 	}
 
 

@@ -210,6 +210,8 @@ void printi(int value);
 void putsv(char* text1, int value1);
 void putsvsv(char* text1, int value1, char* text2, int value2);
 void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
+void enable_interruptions();
+void disable_interruptions();
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -524,9 +526,7 @@ void OVP_init(){
     int_enable(1);
     int_enable(2);
     // Enable external interrupts
-    Uns32 spr = MFSPR(17);
-    spr |= 0x4;
-    MTSPR(17, spr);
+    enable_interruptions();
 
     // Inform the processor ID to the router
     *myAddress = impProcessorId();
@@ -927,5 +927,19 @@ unsigned int random(){
     unsigned bit;
     bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
     return lfsr =  (lfsr >> 1) | (bit << 15);
+}
+
+void enable_interruptions(){
+    // Supervision Register (SR) - bit 2 - IEEE - Disabling interruptions -> https://openrisc.io/or1k.html#__RefHeading__504741_595890882 
+    Uns32 aux1 = MFSPR(17);
+    aux1 |= 0x4;
+    MTSPR(17, aux1);
+}
+
+void disable_interruptions(){
+    // Supervision Register (SR) - bit 2 - IEEE - Disabling interruptions -> https://openrisc.io/or1k.html#__RefHeading__504741_595890882 
+    Uns32 aux1 = MFSPR(17);
+    aux1 &= 0xFFFB;
+    MTSPR(17, aux1);
 }
 
