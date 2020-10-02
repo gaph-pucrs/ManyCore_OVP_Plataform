@@ -38,6 +38,7 @@ cd ..
 
 N=$(($N-1))
 
+rm -rf *.csv
 rm -rf ovp_compiler.sh
 echo "#!/bin/sh" >> ovp_compiler.sh
 echo "cd peripheral" >> ovp_compiler.sh
