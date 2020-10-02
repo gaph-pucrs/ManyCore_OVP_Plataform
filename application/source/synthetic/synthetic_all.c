@@ -292,17 +292,17 @@ int main(int argc, char **argv)
 						// Coloquei ele aqui porque enquanto estava ocorrendo os passos abaixo, chegou um request e embananou todo o programa
 		//prints("INT2 DISABLED\n");
 		
-		spr = MFSPR(17);
-   		spr &= 0xFFFB;
-    	MTSPR(17, spr);
+		Uns32 aux1 = MFSPR(17);
+   		aux1 &= 0xFFFB;
+    	MTSPR(17, aux1);
 
 		sendPendingReq(destination);
 		//prints("INT2 ENABLED\n");
 		//int_enable(2);
 
-		spr = MFSPR(17);
-    	spr |= 0x4;
-    	MTSPR(17, spr);
+		aux1 = MFSPR(17);
+    	aux1 |= 0x4;
+    	MTSPR(17, aux1);
 		
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 		
