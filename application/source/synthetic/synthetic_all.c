@@ -287,9 +287,10 @@ int main(int argc, char **argv)
 		
 		sendPipe(destination);
 		
-		disable_interruptions();
+		//disable_interruptions();
+		disable_interruption(destination);
 		sendPendingReq(destination);
-		enable_interruptions();		
+		//enable_interruptions();		
 		
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 	}

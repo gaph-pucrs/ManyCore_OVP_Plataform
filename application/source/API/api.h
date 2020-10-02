@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "spr_defs.h"
 
 #include "../../../peripheral/whnoc_dma/noc.h" 
 
@@ -934,6 +935,7 @@ void enable_interruptions(){
     Uns32 aux1 = MFSPR(17);
     aux1 |= 0x4;
     MTSPR(17, aux1);
+    return;
 }
 
 void disable_interruptions(){
@@ -941,5 +943,11 @@ void disable_interruptions(){
     Uns32 aux1 = MFSPR(17);
     aux1 &= 0xFFFB;
     MTSPR(17, aux1);
+    return;
 }
 
+void disable_interruption(unsigned int n){
+    Uns32 aux1 = MFSPR(SPR_PICMR);
+    putsv("Interruptions", aux1);
+    return;
+}
