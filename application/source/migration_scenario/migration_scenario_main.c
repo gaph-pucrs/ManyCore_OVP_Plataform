@@ -93,19 +93,19 @@ int main(int argc, char **argv)
 				state = dijkstra_divider(state);
 				break;
 			case dijkstra_0:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case dijkstra_1:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case dijkstra_2:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case dijkstra_3:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case print:
-				dijkstra_print();
+				state = dijkstra_print();
 		}
 		if(state == 0)
 			break;

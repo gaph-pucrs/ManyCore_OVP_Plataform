@@ -84,7 +84,7 @@ int dijkstra_divider(int state)
 		//SendMessage(&theMessage, dijkstra_4);
 	}
 	prints("Divider Finished\n"); 
-    return 1;
+    return 0;
 }
 
 int dijkstra_slave()
@@ -157,7 +157,7 @@ int dijkstra_slave()
 
     SendMessage(&theMessage, print);
     prints("Dijkstra slave finished.\n");
-    return 1;
+    return 0;
 }
 
 int dijkstra_print()
@@ -191,5 +191,5 @@ int dijkstra_print()
 	// 	result[k] = theMessage.msg[k];
 
 	prints("PRINT FINISHED\n");
-    return 1;
+    return 0;
 }
