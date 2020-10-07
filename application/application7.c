@@ -433,9 +433,10 @@ int dijkstra_slave()
 
 	int AdjMatrix[NUM_NODES][NUM_NODES];
 
-	prints("STARTING 0 ");
+	putsv("STARTING ", running_task);
 	
     while(1){
+		prints("running again...\n");
 		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
 			ReceiveMessage(&theMessage, divider);
@@ -488,7 +489,7 @@ int dijkstra_slave()
 		theMessage.msg[i+NUM_NODES] = prev[i];
 
     SendMessage(&theMessage, print);
-    prints("Dijkstra_0 finished.");
+    prints("Dijkstra slave finished.\n");
     return 1;
 }
 
