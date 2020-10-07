@@ -492,7 +492,6 @@ int dijkstra_slave()
 
 int dijkstra_print()
 {
-    OVP_init();
 	prints("STARTING PRINT\n"); 
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
