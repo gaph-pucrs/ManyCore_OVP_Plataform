@@ -153,7 +153,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 //////////////////////////////////////
 // Migration control                //
 //////////////////////////////////////
-volatile int taskMigrated;
+volatile int taskMigrated = -1;
 volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
@@ -427,7 +427,8 @@ void interruptHandler_NI_RX(void) {
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
-        mapping_up = 1;
+        if(running_task = -1)
+            mapping_up = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else{

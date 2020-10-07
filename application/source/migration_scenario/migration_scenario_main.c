@@ -129,6 +129,7 @@ int main(int argc, char **argv)
 		//enable_interruptions();		
 		
 		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
+		running_task = -1;
 	}
 
 
