@@ -111,6 +111,9 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     int i, j;
     int src_vec[DIM_X*DIM_Y];// = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+    int srcProcs[DIM_X*DIM_Y];
+
+
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
         LOG("task_addr[%d] = %x\n", i, task_addr[i]);
@@ -135,7 +138,10 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
 
                         task_addr[task_ID] = tgtProc;
                         src_vec[task_ID] = srcProc;
-                        sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
+
+                        //Save to send later
+                        srcProcs[contNumberOfMigrations] = srcProc;
+                        //sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
                         
                         contNumberOfMigrations++;
                         //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
@@ -146,9 +152,10 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
             }
         }
     }
-    /*if(contNumberOfMigrations>0)
-        for(i = 1; i <= DIM_X*DIM_Y; i++)
-            sendTaskService(TASK_MAPPING_UPDATE, getAddress(i), task_addr, tasks_to_map);*/
+    if(contNumberOfMigrations>0){
+        for(i = 0; i < contNumberOfMigrations; i++)
+            sendTaskService(TASK_MIGRATION_SRC, srcProcs[i], task_addr, tasks_to_map);
+    }
     return contNumberOfMigrations;
 }
 
