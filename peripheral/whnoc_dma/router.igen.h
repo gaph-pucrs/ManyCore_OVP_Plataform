@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@
 #    include "hostapi/impTypes.h"
 #endif
 
+#ifdef _PSE_
 //////////////////////////////////// Externs ///////////////////////////////////
 
 extern Uns32 diagnosticLevel;
@@ -52,6 +53,7 @@ extern Uns32 diagnosticLevel;
 // Next two bits of word used for PSE semihost/intercept library diagnostics
 #define PSE_DIAG_SEMIHOST (BHM_DIAG_MASK_SEMIHOST(diagnosticLevel))
 
+#endif
 /////////////////////////// Register data declaration //////////////////////////
 
 typedef struct localPort_regs_dataS { 
@@ -60,11 +62,11 @@ typedef struct localPort_regs_dataS {
     } myAddress;
 } localPort_regs_dataT, *localPort_regs_dataTP;
 
+#ifdef _PSE_
 /////////////////////////////// Port Declarations //////////////////////////////
 
 extern localPort_regs_dataT localPort_regs_data;
 
-#ifdef _PSE_
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
@@ -103,10 +105,12 @@ PPM_PACKETNET_CB(dataWest);
 PPM_PACKETNET_CB(iterationPort);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
+PPM_DOC_FN(installDocs);
 PPM_CONSTRUCTOR_CB(constructor);
 PPM_DESTRUCTOR_CB(destructor);
 PPM_SAVE_STATE_FN(peripheralSaveState);
 PPM_RESTORE_STATE_FN(peripheralRestoreState);
+
 
 #endif
 

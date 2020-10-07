@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,6 @@
 
 
 #include "router.igen.h"
-#include "noc.h"
-#include <stdio.h>
 /////////////////////////////// Port Declarations //////////////////////////////
 
 localPort_regs_dataT localPort_regs_data;
@@ -67,17 +65,20 @@ static void installSlavePorts(void) {
 
 static void installRegisters(void) {
 
-    ppmCreateRegister("regs_myAddress",
-        0,
-        handles.localPort,
-        0,
-        4,
-        addressRead,
-        addressWrite,
-        view32,
-        &(localPort_regs_data.myAddress.value),
-        True
-    );
+    {
+        ppmCreateRegister(
+            "regs_myAddress",
+            0,
+            handles.localPort,
+            0,
+            4,
+            addressRead,
+            addressWrite,
+            view32,
+            &(localPort_regs_data.myAddress.value),
+            True
+        );
+    }
 
 }
 
@@ -88,6 +89,14 @@ static void installMasterPorts(void) {
     handles.RWRITE = ppmOpenAddressSpace("RWRITE");
 }
 
+PPM_DOC_FN(installDocs){
+
+    ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
+    {
+        ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
+        ppmDocAddText(doc2_node, "A OVP Wormhole Router");
+    }
+}
 ////////////////////////////////// Constructor /////////////////////////////////
 
 PPM_CONSTRUCTOR_CB(periphConstructor) {
@@ -100,42 +109,9 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
 
 int main(int argc, char *argv[]) {
 
-    ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
-    {
-        ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
-        ppmDocAddText(doc2_node, "A OVP Wormhole Router");
-    }
-
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-
-    /*Contadores de flits por QUANTUM*/
-    FILE *fp;
-    int i=0;
-    
-    while(1){
-        bhmWaitDelay(QUANTUM_DELAY);
-        if(myID==0){
-            fp = fopen ("simulation/flitFlow.csv","a");
-            fprintf(fp,"Quantum %d\n",i);
-            fprintf(fp,"Routers ; LOCAL ; EAST ; WEST ; NORTH ; SOUTH \n");
-            fclose(fp);       
-        } 
-        if(i>0 && myID != -1){
-            fp = fopen ("simulation/flitFlow.csv","a");
-            fprintf(fp,"Router %d ; %d ; %d ; %d; %d; %d \n",myID, contFlits[LOCAL],contFlits[EAST],contFlits[WEST],contFlits[NORTH],contFlits[SOUTH]);
-            fclose(fp);
-        }
-        contFlits[LOCAL] = 0;
-        contFlits[WEST] = 0;
-        contFlits[EAST] = 0;
-        contFlits[NORTH] = 0;
-        contFlits[SOUTH] = 0;
-
-        i++;
-    }
-    /**/
 
     bhmWaitEvent(bhmGetSystemEvent(BHM_SE_END_OF_SIMULATION));
     destructor();

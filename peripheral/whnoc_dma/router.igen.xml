@@ -2,10 +2,12 @@
 
  <peripheral constructor="constructor"
     destructor="destructor"
+    formalValues="F"
     httpvis="F"
     imagefile="pse.pse"
     library="peripheral"
     name="router"
+    nbyte="F"
     releasestatus="0"
     saveRestore="F"
     vendor="gaph"
@@ -17,8 +19,12 @@
             text="A OVP Wormhole Router"/>
     </docsection>
     <busmasterport addresswidth="32"
+        addresswidthmax="0"
+        addresswidthmin="32"
         name="RREAD"/>
     <busmasterport addresswidth="32"
+        addresswidthmax="0"
+        addresswidthmin="32"
         name="RWRITE"/>
     <busslaveport addresswidth="32"
         mustbeconnected="T"
@@ -30,6 +36,7 @@
             <memorymappedregister access="rw"
                 isvolatile="T"
                 name="myAddress"
+                nbyte="F"
                 offset="0x0"
                 readfunction="addressRead"
                 width="32"

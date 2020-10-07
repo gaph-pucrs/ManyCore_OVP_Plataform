@@ -85,9 +85,10 @@ void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
 int how_many_tasks_PE_is_running(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
     int i;
 
-    for(i=0; i<DIM_X*DIM_Y; i++)
+    for(i=0; i<DIM_X*DIM_Y; i++){
         if (task_addr[i] == srcProc)
             return 1;
+    }
 
     return 0;
 }
@@ -107,7 +108,8 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     unsigned int tgtProc, srcProc;
     int k=DIM_X*DIM_Y-1;
     unsigned int contNumberOfMigrations=0;
-    int i;
+    int i, j;
+    int src_vec[DIM_X*DIM_Y] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
         if (temp[i] > 33300){
@@ -116,21 +118,25 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
             srcProc = x << 8 | y;
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
             if (how_many_tasks_PE_is_running(srcProc, task_addr)>0){
+                while (k>0){
+                    tgtProc = spiralMatrix[k];
+                    task_ID = getSomeTaskID(srcProc, task_addr);
+                    putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
+                    LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
 
-                tgtProc = spiralMatrix[k];
-                task_ID = getSomeTaskID(srcProc, task_addr);
-                putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
-                LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
+                    if (how_many_tasks_PE_is_running(tgtProc, task_addr)==0 && tgtProc != srcProc && how_many_tasks_PE_is_running(tgtProc, src_vec)==0){
+                        LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
+                        prints("send_task_migration\n");
 
-                if (how_many_tasks_PE_is_running(tgtProc, task_addr)==0 && tgtProc != srcProc){
-                    prints("send_task_migration\n");
-                    
-                    task_addr[task_ID] = tgtProc;
-                    sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
-                    
+                        task_addr[task_ID] = tgtProc;
+                        src_vec[task_ID] = srcProc;
+                        sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
+                        
+                        contNumberOfMigrations++;
+                        //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
+                        break;
+                    }
                     k--;
-                    contNumberOfMigrations++;
-                    //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
                 }
             }
         }

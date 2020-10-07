@@ -14,6 +14,7 @@ Y = int(sys.argv[2])
 #Reads the .yaml and store in a variable
 with open('scenario.yaml') as file:
 	scenario = yaml.load(file, Loader=yaml.SafeLoader)
+	dynamic_task_id = 0
 	for i in range(len(scenario['apps'])):
 		appName = scenario['apps'][i]['name']
 
@@ -35,20 +36,20 @@ with open('scenario.yaml') as file:
 
 			progPath = os.getcwd() + '/source/' + appName + '/' + appName + '_all.c'
 
-			#slave processors eligible for dinamic maping
+			#slave processors eligible for dynamic maping
 			appPath = []
-			for app in range(1, 16):
+			for app in range(1, X*Y):
 				appPath.append(os.getcwd() + '/application' + str(app) + '.c')
 
 			#Check if program exists
 			if(path.exists(progPath)):
 				#Clean app file
 				for app in appPath:
-					with open(app, 'r+') as file:
-						appLines = file.readlines()
-						file.truncate(0) 
+					# with open(app, 'r+') as file:
+					# 	appLines = file.readlines()
+					# 	file.truncate(0) 
 
-					with open(app, 'w') as appw:
+					with open(app, 'a') as appw:
 						with open(progPath, 'r') as prog:
 							for line in prog.readlines():
 								appw.write(line)
@@ -60,7 +61,8 @@ with open('scenario.yaml') as file:
 
 				for task in tasks:
 					with open(updatedConfigPath, 'w') as configFile:
-						newLine = "#define " + task + " " + str(scenario['apps'][i]['dynamic_mapping'][task]) + "\n" 
+						newLine = "#define " + task + " " + str(dynamic_task_id) + "\n"
+						dynamic_task_id = dynamic_task_id + 1
 						if(configLines[numberOfLines-1].find("/")!=-1):
 							configLines.insert(numberOfLines, '\n')
 							numberOfLines = numberOfLines + 1

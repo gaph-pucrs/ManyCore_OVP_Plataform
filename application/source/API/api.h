@@ -61,14 +61,14 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define MESSAGE_DELIVERY     0x30
 #define INSTR_COUNT_PACKET   0x40
 #define TEMPERATURE_PACKET   0x50
-#define TASK_MAPPING         0x60
+#define TASK_MAPPING         0x60  //96
 #define TASK_MIGRATION_SRC   0x61
 #define TASK_MIGRATION_DEST  0x62
 #define TASK_MIGRATION_UPDT  0x63
 #define TASK_MIGRATION_PIPE  0x64
 #define TASK_MIGRATION_STATE 0x65
-#define TASK_MIGRATION_PEND  0x66
-#define TASK_ADDR_UPDT       0x67
+#define TASK_MIGRATION_PEND  0x66  //102
+#define TASK_ADDR_UPDT       0x67  //103
 
 
 //////////////////////////////
@@ -170,6 +170,7 @@ unsigned int get_migration_dst();
 unsigned int get_mapping();
 unsigned int get_update();
 unsigned int get_new_state();
+void set_taskMigrated(int destination);
 
 
 void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]);
@@ -271,6 +272,10 @@ void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
     }
 }
 
+void set_taskMigrated(int destination){
+    taskMigrated = destination;
+}
+
 
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */
@@ -330,6 +335,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
         //verificar se houve migracao
             //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
+        putsv("Messafe request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
@@ -375,6 +381,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE){
         new_state = incomingPacket[PI_PAYLOAD];
         putsv("Task state received ", new_state);
+        taskMigrated = -1;
         *NIcmdRX = DONE; 
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
@@ -387,8 +394,9 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PEND){
         putsv("Task pendingReq received ", new_state);
-        for(i=0; i<N_PES; i++){            
-            pendingReq[i] = incomingPacket[PI_PAYLOAD+i];
+
+        for(i=0; i<N_PES; i++){
+            pendingReq[i] = incomingPacket[PI_PAYLOAD+i] | pendingReq[i];
             putsv(" > > pendReq: ", pendingReq[i]);
         }
         *NIcmdRX = DONE;
@@ -691,6 +699,7 @@ void sendPendingReq(unsigned int dest){
     for (j = 0; j < N_PES; j++){
         putsv(" > > pendReq: ", pendingReq[j]);
         myServicePacket[PI_PAYLOAD+j] = pendingReq[j];
+        pendingReq[j] = 0;
     }
     SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE);
     prints("> pendReq enviado\n");

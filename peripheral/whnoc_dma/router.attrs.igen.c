@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,8 @@ static ppmBusPort busPorts[] = {
         .name            = "RREAD",
         .type            = PPM_MASTER_PORT,
         .addrBits        = 32,
+        .addrBitsMin     = 32,
+        .addrBitsMax     = 0,
         .mustBeConnected = 0,
         .description     = 0,
     },
@@ -58,6 +60,8 @@ static ppmBusPort busPorts[] = {
         .name            = "RWRITE",
         .type            = PPM_MASTER_PORT,
         .addrBits        = 32,
+        .addrBitsMin     = 32,
+        .addrBitsMax     = 0,
         .mustBeConnected = 0,
         .description     = 0,
     },
@@ -221,6 +225,8 @@ ppmModelAttr modelAttrs = {
 
     .saveCB        = peripheralSaveState,
     .restoreCB     = peripheralRestoreState,
+
+    .docCB         = installDocs,
 
     .vlnv          = {
         .vendor  = "gaph",
