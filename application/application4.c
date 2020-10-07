@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 			break;
 
 		
-		get_mapping_table(new_task_addr);
+		get_migration_mapping_table(new_task_addr);
 		destination = new_task_addr[running_task];
 		putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
 		
