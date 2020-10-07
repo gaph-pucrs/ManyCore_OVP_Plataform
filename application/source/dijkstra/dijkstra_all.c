@@ -103,6 +103,7 @@ int dijkstra_slave()
 	putsv("STARTING ", running_task);
 	
     while(1){
+		prints("running again...\n");
 		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
 			ReceiveMessage(&theMessage, divider);
