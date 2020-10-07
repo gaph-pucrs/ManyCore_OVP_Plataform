@@ -13,13 +13,13 @@ task_addr[0 ] = 513
 task_addr[1 ] = 514 
 task_addr[2 ] = 258 
 task_addr[3 ] = 257 
-tasClk gate off - interruptHandler_NI_RX
+task_Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16842755 Updating mapping_table[3 ] = 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16777220 Updating mapping_table[4 ] = 256 
-k_addr[4 ] = 256 
+addr[4 ] = 256 
 task_addr[5 ] = 512 
 task_addr[6 ] = 768 
 task_addr[7 ] = 769 
@@ -37,13 +37,13 @@ Servico: 103
 33554437 Updating mapping_table[5 ] = 512 
 Payload+0  valor: 50331654 
 Payload+0  valor: 50331654 
-Clk gate off - interruptHandler_NI_RX
+PaClk gate off - interruptHandler_NI_RX
 Servico: 103 
 50331654 Updating mapping_table[6 ] = 768 
-Payload+0 Clk gate off - interruptHandler_NI_RX
+Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50397191 Updating mapping_table[7 ] = 769 
- valor: 50331654 
+yload+0  valor: 50331654 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50462728 Updating mapping_table[8 ] = 770 
@@ -56,10 +56,10 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 33751050 Updating mapping_table[10 ] = 515 
+Payload+0  valor: 50331654 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16973835 Updating mapping_table[11 ] = 259 
-Payload+0  valor: 50331654 
 Payload+0  valor: 50331654 
 Payload+0  valor: 50331654 
 Payload+0  valor: 50331654 
@@ -108,7 +108,7 @@ Messafe request received from 10
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
-Counters: 19622  5815  2525  1582  23401  16834  1258  6220  3243  0  60  674  974  251730 
+Counters: 19634  5815  2531  1585  23471  16901  1253  6225  3248  0  60  674  974  251473 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
@@ -292,7 +292,7 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 42068  13478  5817  3663  60247  44136  3681  15083  7218  0  121  1871  2476  247476 
+Counters: 42101  13498  5825  3611  60171  44111  3623  15085  7172  0  121  1871  2476  247505 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
@@ -470,7 +470,7 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 43185  13868  6069  3830  62644  46005  4152  15501  7764  14  124  1917  2537  248310 
+Counters: 43495  14051  6175  3804  63906  47023  4200  15806  7824  14  124  1917  2537  247503 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
@@ -648,7 +648,7 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 42567  13788  6073  3747  63628  46872  3972  15697  7531  0  118  1855  2445  246554 
+Counters: 42041  13483  5871  3635  60865  44733  3705  15091  7256  0  118  1855  2445  247515 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
@@ -835,7 +835,7 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 43164  13864  5948  3777  61400  44881  4026  15444  7621  14  121  1841  2446  247480 
+Counters: 42665  13731  5912  3701  60737  44427  3925  15352  7501  14  122  1864  2474  247526 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
@@ -1016,7 +1016,7 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 42895  13772  5986  3786  61710  45214  4069  15377  7658  14  122  1894  2504  248320 
+Counters: 43335  13978  6112  3792  63070  46338  4127  15695  7745  14  123  1902  2517  247807 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
@@ -1197,10 +1197,10 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 42475  13707  5974  3690  62358  45797  3856  15488  7396  0  121  1871  2476  246774 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
+Counters: 43023  13808  5971  3750  61345  44942  3981  15377  7592  14  122  1879  2489  247206 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
@@ -1378,13 +1378,13 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 42342  13604  5928  3709  61597  45251  3795  15303  7353  0  122  1894  2504  248496 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
+Counters: 42491  13560  5816  3696  59477  43490  3834  14966  7419  14  121  1871  2476  247505 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
@@ -1559,13 +1559,13 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 42418  13570  5865  3753  60265  44115  3959  15068  7524  14  122  1879  2489  246511 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
+Counters: 43371  13989  6114  3799  63082  46363  4129  15699  7756  14  122  1894  2504  247852 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
@@ -1743,10 +1743,10 @@ Messafe request received from 8
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
-Counters: 42938  13741  5929  3794  60994  44634  4004  15272  7606  14  122  1879  2489  247713 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
+Counters: 43707  14127  6187  3807  64019  47041  4198  15895  7836  14  122  1894  2504  248214 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
@@ -1927,10 +1927,10 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 43076  13806  5963  3804  61468  45007  4038  15369  7648  14  121  1871  2476  247726 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
+Counters: 42278  13606  5882  3605  61017  44729  3688  15278  7229  0  122  1879  2489  248456 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
@@ -2108,10 +2108,10 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 42971  13788  5985  3803  61723  45258  4072  15377  7672  14  121  1871  2476  247046 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
+Counters: 43706  14255  6294  3776  66109  48801  4099  16323  7720  0  122  1879  2489  246261 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
@@ -2289,13 +2289,13 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 43222  13907  6064  3816  62660  45955  4145  15586  7747  14  122  1894  2504  248320 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
+Counters: 43576  14066  6108  3774  63176  46327  4120  15774  7745  14  121  1871  2476  247219 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
@@ -2470,13 +2470,13 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 41714  13374  5785  3622  59982  43942  3674  14979  7174  0  121  1871  2476  246774 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
+Counters: 43152  13996  6141  3704  64267  47329  3947  15902  7541  0  122  1894  2504  248106 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
@@ -2651,13 +2651,13 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 41417  13203  5697  3625  58736  43024  3575  14689  7085  0  122  1894  2504  248499 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
+Counters: 42559  13736  5994  3668  62344  45857  3807  15505  7371  0  121  1871  2476  246450 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
@@ -2832,13 +2832,13 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 42224  13494  5819  3713  59730  43654  3917  14956  7461  14  122  1879  2489  246758 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
+Counters: 43048  13852  6039  3770  62135  45615  4055  15496  7662  14  123  1902  2517  247807 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
@@ -3016,13 +3016,13 @@ Messafe request received from 10
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
-Counters: 42328  13603  5880  3663  61138  44790  3747  15274  7288  0  122  1879  2489  247713 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
+Counters: 43293  13937  6047  3777  62289  45678  4055  15583  7680  14  122  1879  2489  247206 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
@@ -3200,13 +3200,13 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 42679  13742  5967  3719  62157  45630  3826  15487  7400  0  121  1871  2476  247726 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
+Counters: 43431  13966  6052  3787  62326  45715  4058  15588  7692  14  121  1871  2476  247505 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
@@ -3381,13 +3381,13 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
-Counters: 43427  13991  6102  3844  63145  46358  4184  15691  7800  14  121  1871  2476  246796 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 9 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
+Counters: 42609  13653  5920  3725  60712  44512  3943  15182  7530  14  122  1894  2504  247880 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
@@ -3559,7 +3559,6 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Counters: 43099  13851  6063  3824  62600  45975  4150  15500  7753  14  124  1917  2537  247788 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
@@ -3569,6 +3568,7 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
+Counters: 43246  13926  6073  3765  62593  45928  4088  15588  7702  14  122  1894  2504  248186 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
@@ -3623,6 +3623,36 @@ Messafe request received from 7
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 10 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 7 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 8 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 10 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 7 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 8 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Messafe request received from 10 
 Clk gate off - interruptHandler_NI_RX
 Servico: 97 
 Task migration received
@@ -3640,12 +3670,6 @@ Mapping_table[10 ] = 515
 Mapping_table[11 ] = 259 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Messafe request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
 Messafe request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -3728,40 +3752,16 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-Clk gate off - interruptHandler_NI_RX
+DijkstClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 10 
-Counters: 43651  14099  6188  3812  64286  47165  3958  16039  7710  0  117  1828  2413  248086 
-Dijkstra divider migrating.
+ra divider migrating.
 task_addr[0 ] = 513 
 task_addr[1 ] = 514 
 task_addr[2 ] = 258 
+Counters: 42383  13587  5972  3671  61116  44814  3678  15334  7396  0  117  1820  2405  246521 
 task_addr[3 ] = 257 
 task_addr[4 ] = 256 
-task_aClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 8 
@@ -3771,7 +3771,7 @@ Messafe request received from 9
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 10 
-ddr[5 ] = 512 
+task_addr[5 ] = 512 
 task_addr[6 ] = 3 
 task_addr[7 ] = 769 
 task_addr[8 ] = 770 
@@ -3819,7 +3819,7 @@ Payload+11  valor: 259
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 196614 Updating mapping_table[6 ] = 3 
-Counters: 8192  2389  1164  795  8810  6025  677  2572  1772  14  11  147  202  248974 
+Counters: 7086  2086  1014  680  7629  5189  616  2260  1563  14  8  93  133  249867 
 Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
 Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
 Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
@@ -3842,20 +3842,17 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 131076 Updating mapping_table[4 ] = 2 
 Clk gate off - interruptHandler_NI_RX
-Servico: 101 
-Task state received 398 
-Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 65541 Updating mapping_table[5 ] = 1 
 Clk gate off - interruptHandler_NI_RX
-Servico: 100 
-Task pipe received 398 
+Servico: 101 
+Task state received 400 
 Clk gate off - interruptHandler_NI_RX
 Servico: 100 
-Task pipe received 398 
+Task pipe received 400 
 Clk gate off - interruptHandler_NI_RX
 Servico: 102 
-Task pendingReq received 398 
+Task pendingReq received 400 
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
@@ -3872,9 +3869,6 @@ Task pendingReq received 398
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
 Clk gate off - interruptHandler_NI_RX
 Servico: 98 
 Task destination received
@@ -3900,26 +3894,21 @@ Payload+0  valor: 50331650
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50331650 Updating mapping_table[2 ] = 768 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
 Payload+0  valor: 50331650 
+Counters: 11268  3324  1534  954  13135  9677  702  3342  1998  0  22  718  828  249476 
 Task 2 migrated
-State: 398 
+State: 400 
 synthetic task C started.
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
@@ -3930,2985 +3919,31 @@ Servico: 48
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Messafe request received from 3 
-10238200 taskC
-10239642 398 
+10283922 taskC
+10284040 400 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 26899  9401  2386  1503  22219  16491  1185  7036  3048  0  41  1644  1849  248151 
-10265256 taskC
-10265374 399 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10295650 taskC
-10297092 400 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10319702 taskC
-10321145 401 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10341496 taskC
-10345140 402 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10367702 taskC
-10369145 403 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10389496 taskC
-10393140 404 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10415702 taskC
-10417145 405 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10437496 taskC
-10441140 406 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10463702 taskC
-10465145 407 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10485496 taskC
-10489140 408 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70665  29615  4049  2627  40659  30346  2646  20003  5210  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10516968 taskC
-10517086 409 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-10545652 taskC
-10547094 410 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10569703 taskC
-10571145 411 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10591496 taskC
-10595140 412 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10617702 taskC
-10619145 413 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10639496 taskC
-10643140 414 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10665702 taskC
-10667145 415 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10687496 taskC
-10691140 416 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10713702 taskC
-10715145 417 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10735496 taskC
-10739140 418 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70868  29690  4160  2666  42084  31459  2756  20182  5344  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10766970 taskC
-10767088 419 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10795650 taskC
-10797092 420 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10819702 taskC
-10821145 421 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10841496 taskC
-10845140 422 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10867702 taskC
-10869145 423 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10889496 taskC
-10893140 424 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10915702 taskC
-10917145 425 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10937496 taskC
-10941140 426 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10963702 taskC
-10965145 427 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-10985496 taskC
-10989140 428 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11016970 taskC
-11017088 429 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11045650 taskC
-11047092 430 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11069702 taskC
-11071145 431 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11091496 taskC
-11095140 432 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11117702 taskC
-11119145 433 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11139496 taskC
-11143140 434 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11165702 taskC
-11167145 435 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11187496 taskC
-11191140 436 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11213702 taskC
-11215145 437 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11235496 taskC
-11239140 438 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11266970 taskC
-11267088 439 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11295650 taskC
-11297092 440 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11319702 taskC
-11321145 441 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11341496 taskC
-11345140 442 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11367702 taskC
-11369145 443 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11389496 taskC
-11393140 444 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11415702 taskC
-11417145 445 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11437496 taskC
-11441140 446 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11463702 taskC
-11465145 447 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11485496 taskC
-11489140 448 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11516970 taskC
-11517088 449 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11545650 taskC
-11547092 450 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11569702 taskC
-11571145 451 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11591496 taskC
-11595140 452 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11617702 taskC
-11619145 453 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11639496 taskC
-11643140 454 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11665702 taskC
-11667145 455 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11687496 taskC
-11691140 456 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11713702 taskC
-11715145 457 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11735496 taskC
-11739140 458 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11766970 taskC
-11767088 459 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11795650 taskC
-11797092 460 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11819702 taskC
-11821145 461 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11841496 taskC
-11845140 462 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11867702 taskC
-11869145 463 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11889496 taskC
-11893140 464 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11915702 taskC
-11917145 465 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11937496 taskC
-11941140 466 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11963702 taskC
-11965145 467 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-11985496 taskC
-11989140 468 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12016970 taskC
-12017088 469 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12045650 taskC
-12047092 470 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12069702 taskC
-12071145 471 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12091496 taskC
-12095140 472 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12117702 taskC
-12119145 473 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12139496 taskC
-12143140 474 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12165702 taskC
-12167145 475 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12187496 taskC
-12191140 476 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12213702 taskC
-12215145 477 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12235496 taskC
-12239140 478 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12266970 taskC
-12267088 479 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12295650 taskC
-12297092 480 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12319702 taskC
-12321145 481 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12341496 taskC
-12345140 482 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12367702 taskC
-12369145 483 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12389496 taskC
-12393140 484 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12415702 taskC
-12417145 485 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12437496 taskC
-12441140 486 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12463702 taskC
-12465145 487 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12485496 taskC
-12489140 488 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12516970 taskC
-12517088 489 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12545650 taskC
-12547092 490 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12569702 taskC
-12571145 491 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12591496 taskC
-12595140 492 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12617702 taskC
-12619145 493 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12639496 taskC
-12643140 494 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12665702 taskC
-12667145 495 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12687496 taskC
-12691140 496 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12713702 taskC
-12715145 497 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12735496 taskC
-12739140 498 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12766970 taskC
-12767088 499 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12795650 taskC
-12797092 500 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12819702 taskC
-12821145 501 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12841496 taskC
-12845140 502 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12867702 taskC
-12869145 503 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12889496 taskC
-12893140 504 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12915702 taskC
-12917145 505 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12937496 taskC
-12941140 506 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12963702 taskC
-12965145 507 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-12985496 taskC
-12989140 508 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70725  29628  4123  2654  41608  31085  2721  20083  5300  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13016970 taskC
-13017088 509 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13045650 taskC
-13047092 510 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13069702 taskC
-13071145 511 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13091496 taskC
-13095140 512 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13117702 taskC
-13119145 513 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13139496 taskC
-13143140 514 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13165702 taskC
-13167145 515 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13187496 taskC
-13191140 516 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13213702 taskC
-13215145 517 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13235496 taskC
-13239140 518 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13266970 taskC
-13267088 519 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13295650 taskC
-13297092 520 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13319702 taskC
-13321145 521 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13341496 taskC
-13345140 522 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13367702 taskC
-13369145 523 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13389496 taskC
-13393140 524 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13415702 taskC
-13417145 525 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13437496 taskC
-13441140 526 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13463702 taskC
-13465145 527 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13485496 taskC
-13489140 528 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13516970 taskC
-13517088 529 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13545650 taskC
-13547092 530 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13569702 taskC
-13571145 531 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13591496 taskC
-13595140 532 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13617702 taskC
-13619145 533 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13639496 taskC
-13643140 534 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13665702 taskC
-13667145 535 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13687496 taskC
-13691140 536 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13713702 taskC
-13715145 537 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13735496 taskC
-13739140 538 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13766970 taskC
-13767088 539 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13795650 taskC
-13797092 540 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13819702 taskC
-13821145 541 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13841496 taskC
-13845140 542 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13867702 taskC
-13869145 543 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13889496 taskC
-13893140 544 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13915702 taskC
-13917145 545 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13937496 taskC
-13941140 546 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13963702 taskC
-13965145 547 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-13985496 taskC
-13989140 548 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14016970 taskC
-14017088 549 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14045650 taskC
-14047092 550 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14069702 taskC
-14071145 551 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14091496 taskC
-14095140 552 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14117702 taskC
-14119145 553 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14139496 taskC
-14143140 554 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14165702 taskC
-14167145 555 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14187496 taskC
-14191140 556 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14213702 taskC
-14215145 557 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14235496 taskC
-14239140 558 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14266970 taskC
-14267088 559 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14295650 taskC
-14297092 560 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14319702 taskC
-14321145 561 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14341496 taskC
-14345140 562 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14367702 taskC
-14369145 563 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14389496 taskC
-14393140 564 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14415702 taskC
-14417145 565 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14437496 taskC
-14441140 566 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14463702 taskC
-14465145 567 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14485496 taskC
-14489140 568 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14516970 taskC
-14517088 569 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14545650 taskC
-14547092 570 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14569702 taskC
-14571145 571 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14591496 taskC
-14595140 572 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14617702 taskC
-14619145 573 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14639496 taskC
-14643140 574 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14665702 taskC
-14667145 575 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14687496 taskC
-14691140 576 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14713702 taskC
-14715145 577 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14735496 taskC
-14739140 578 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14766970 taskC
-14767088 579 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14795650 taskC
-14797092 580 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14819702 taskC
-14821145 581 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14841496 taskC
-14845140 582 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14867702 taskC
-14869145 583 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14889496 taskC
-14893140 584 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14915702 taskC
-14917145 585 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14937496 taskC
-14941140 586 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14963702 taskC
-14965145 587 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-14985496 taskC
-14989140 588 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 70570  29558  4086  2640  41134  30717  2684  19980  5256  14  81  1811  2216  247784 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-15016970 taskC
-15017088 589 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Messafe request received from 4 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
 Messafe request received from 3 
-15045650 taskC
-15047092 590 
+10303922 taskC
+10304040 401 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-15069702 taskC
-15071145 591 
+10321713 taskC
+10321831 402 
 Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 97 
-Task migration received
-Mapping_table[0 ] = 513 
-Mapping_table[1 ] = 514 
-Mapping_table[2 ] = 258 
-Mapping_table[3 ] = 257 
-Mapping_table[4 ] = 2 
-Mapping_table[5 ] = 1 
-Mapping_table[6 ] = 3 
-Mapping_table[7 ] = 769 
-Mapping_table[8 ] = 770 
-Mapping_table[9 ] = 771 
-Mapping_table[10 ] = 515 
-Mapping_table[11 ] = 259 
-15091496 taskC
-15100443 592 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 4 
-synthetic task C migrating.
-task_addr[0 ] = 513 
-task_addr[1 ] = 514 
-task_addr[2 ] = 258 
-task_addr[3 ] = 257 
-task_addr[4 ] = 2 
-task_addr[5 ] = 1 
-task_addr[6 ] = 3 
-task_addr[7 ] = 769 
-task_addr[8 ] = 770 
-task_addr[9 ] = 771 
-task_addr[10 ] = 515 
-task_addr[11 ] = 259 
-task_addr[12 ] = 0 
-task_addr[13 ] = 0 
-task_addr[14 ] = 0 
-task_addr[15 ] = 0 
-Tarefa: 2  migrando para: 258 
-Payload+0  valor: 593 
-sendPipe()258 
-save the new destination of this 258 
-sendPendingReq()258 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 32 
- > > pendReq: 32 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
-> pendReq enviado
-Payload+0  valor: 513 
-Payload+1  valor: 514 
-Payload+2  valor: 258 
-Payload+3  valor: 257 
-Payload+4  valor: 2 
-Payload+5  valor: 1 
-Payload+6  valor: 3 
-Payload+7  valor: 769 
-Payload+8  valor: 770 
-Payload+9  valor: 771 
-Payload+10  valor: 515 
-Payload+11  valor: 259 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-16908290 Updating mapping_table[2 ] = 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33554435 Updating mapping_table[3 ] = 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-16777221 Updating mapping_table[5 ] = 256 
-Counters: 30312  11535  2305  1556  19152  13464  1173  8697  3212  14  41  745  950  249050 
+Counters: 22079  9394  998  727  9169  6829  768  5206  1468  14  20  453  553  249143 
 Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
 Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
 Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Counters: 43  5  13  12  95  72  4  7  11  0  1  11  16  249984 
-Clk gate off - interruptHandler_NI_RX
-Servico: 97 
-Task migration received
-Mapping_table[0 ] = 513 
-Mapping_table[1 ] = 514 
-Mapping_table[2 ] = 258 
-Mapping_table[3 ] = 1 
-Mapping_table[4 ] = 2 
-Mapping_table[5 ] = 257 
-Mapping_table[6 ] = 3 
-Mapping_table[7 ] = 769 
-Mapping_table[8 ] = 770 
-Mapping_table[9 ] = 771 
-Mapping_table[10 ] = 515 
-Mapping_table[11 ] = 259 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-16842757 Updating mapping_table[5 ] = 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 101 
-Task state received 786 
-Clk gate off - interruptHandler_NI_RX
-Servico: 100 
-Task pipe received 786 
-Clk gate off - interruptHandler_NI_RX
-Servico: 100 
-Task pipe received 786 
-Clk gate off - interruptHandler_NI_RX
-Servico: 102 
-Task pendingReq received 786 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 98 
-Task destination received
-task_addr[0 ] = 513 
-task_addr[1 ] = 514 
-task_addr[2 ] = 258 
-task_addr[3 ] = 768 
-task_addr[4 ] = 2 
-task_addr[5 ] = 257 
-task_addr[6 ] = 3 
-task_addr[7 ] = 769 
-task_addr[8 ] = 770 
-task_addr[9 ] = 771 
-task_addr[10 ] = 515 
-task_addr[11 ] = 259 
-task_addr[12 ] = 0 
-task_addr[13 ] = 0 
-task_addr[14 ] = 0 
-task_addr[15 ] = 0 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-50331651 Updating mapping_table[3 ] = 768 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 5 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 5 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Payload+0  valor: 50331651 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 5 
-Payload+0  valor: 50331651 
-Task 3 migrated
-State: 786 
-synthetic task D started.
-Pedindo mesnagem de: 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-20218500 taskD
-20219942 786 
-synthetic task D migrating.
-task_addr[0 ] = 513 
-task_addr[1 ] = 514 
-task_addr[2 ] = 258 
-task_addr[3 ] = 768 
-task_addr[4 ] = 2 
-task_addr[5 ] = 257 
-task_addr[6 ] = 3 
-task_addr[7 ] = 769 
-task_addr[8 ] = 770 
-task_addr[9 ] = 771 
-task_addr[10 ] = 515 
-task_addr[11 ] = 259 
-task_addr[12 ] = 0 
-task_addr[13 ] = 0 
-task_addr[14 ] = 0 
-task_addr[15 ] = 0 
-Tarefa: 3  migrando para: 768 
-Payload+0  valor: 787 
-Clk gate off - interruptHandler_NI_RX
-Servico: 101 
-Task state received 787 
-sendPipe()768 
-save the new destination of this 768 
-sendPendingReq()768 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
-> pendReq enviado
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Messafe request received from 5 
-Forwarding msg request from task 5  para o endereco: 768 
