@@ -338,7 +338,7 @@ void interruptHandler_NI_RX(void) {
         putsv("Messafe request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        //mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
+        mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             pendingReq[requester] = MESSAGE_REQ;
         }
@@ -365,8 +365,10 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_DEST){
         prints("Task destination received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++)
-            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        for(i=0; i<num_tasks; i++){
+            if(mapping_table[i] == 0)
+                mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        }
         migration_dst = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
