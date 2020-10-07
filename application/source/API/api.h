@@ -161,6 +161,7 @@ volatile unsigned int migration_upd = 0;
 volatile unsigned int num_tasks;
 volatile unsigned int new_state;
 volatile unsigned int mapping_table[DIM_X*DIM_Y];
+volatile unsigned int migration_mapping_table[DIM_X*DIM_Y];
 void clear_migration_src();
 void clear_migration_dst();
 void clear_mapping();
@@ -174,6 +175,7 @@ void set_taskMigrated(int destination);
 
 
 void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]);
+void get_migration_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]);
 //////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
@@ -272,6 +274,15 @@ void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
     }
 }
 
+void get_migration_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
+    int i;
+    for(i=0; i<DIM_X*DIM_Y; i++){
+        task_addr[i] = migration_mapping_table[i];
+        mapping_table[i] = migration_mapping_table[i];
+        putsvsv("task_addr[", i, "] = ", task_addr[i]);
+    }
+}
+
 void set_taskMigrated(int destination){
     taskMigrated = destination;
 }
@@ -335,11 +346,12 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
         //verificar se houve migracao
             //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
-        putsv("Messafe request received from ", incomingPacket[PI_TASK_ID]);
+        putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+            prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = MESSAGE_REQ;
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
@@ -356,7 +368,7 @@ void interruptHandler_NI_RX(void) {
         prints("Task migration received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++){
-            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+            migration_mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
             putsvsv("Mapping_table[", i, "] = ", mapping_table[i]);
         }
         migration_src = 1;
