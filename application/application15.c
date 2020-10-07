@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 
 		/* waits for mapping or migrating tasks and receives mapping table */
 		*clockGating_flag = TRUE;
-		while(!get_mapping() && !get_migration_dst()){ }
+		while(!get_mapping() && !(get_migration_dst() && get_mapping_update())){ }
 		set_taskMigrated(-1); // resets this, because it's running a new task here
 		*clockGating_flag = FALSE;
 		get_mapping_table(task_addr);
@@ -67,6 +67,7 @@ int main(int argc, char **argv)
 			prints("Task "); printi(running_task); prints("migrated\n");
 			putsv("State: ", state);
 			clear_migration_dst();
+			clear_mapping_update();
 		}
 
 		switch(running_task){
@@ -121,7 +122,7 @@ int main(int argc, char **argv)
 		
 		//disable_interruptions();
 		disable_interruption(2);
-		putsv("save the new destination of this ", destination);
+		//putsv("save the new destination of this ", destination);
 		set_taskMigrated(destination); // save the new destination of this 
 		sendPendingReq(destination);
 		enable_interruption(2);
