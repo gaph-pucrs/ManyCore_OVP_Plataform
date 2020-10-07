@@ -69,7 +69,6 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_MIGRATION_STATE 0x65
 #define TASK_MIGRATION_PEND  0x66  //102
 #define TASK_ADDR_UPDT       0x67  //103
-#define TASK_MAPPING_UPDATE  0x68  //104
 
 
 //////////////////////////////
@@ -158,7 +157,6 @@ volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
 volatile unsigned int mapping_en = 0;
-volatile unsigned int mapping_up = 0;
 volatile unsigned int migration_upd = 0;
 volatile unsigned int num_tasks;
 volatile unsigned int new_state;
@@ -242,10 +240,6 @@ void clear_mapping(){
     mapping_en = 0;
 }
 
-void clear_mapping_update(){
-    mapping_up = 0;
-}
-
 void clear_update(){
     migration_upd = 0;
 }
@@ -260,10 +254,6 @@ unsigned int get_migration_dst(){
 
 unsigned int get_mapping(){
     return mapping_en;
-}
-
-unsigned int get_mapping_update(){
-    return mapping_up;
 }
 
 unsigned int get_update(){
@@ -375,8 +365,8 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_DEST){
         prints("Task destination received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        //for(i=0; i<num_tasks; i++)
-            //mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        for(i=0; i<num_tasks; i++)
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         migration_dst = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
@@ -422,18 +412,6 @@ void interruptHandler_NI_RX(void) {
         mapping_table[taskID] = newAddr;
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
-    }
-    else if(incomingPacket[PI_SERVICE] == TASK_MAPPING_UPDATE){
-        prints("MAPPING UPDATE - Comming from MANAGER after Migrations");
-        num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++){
-            putsvsv("OLD mapping_table[", i, "] = ", mapping_table[i]);
-            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
-            putsvsv("NEW mapping_table[", i, "] = ", mapping_table[i]);
-        }
-        if(running_task = -1)
-            mapping_up = 1;
-        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
