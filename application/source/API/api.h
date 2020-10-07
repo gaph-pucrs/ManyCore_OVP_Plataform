@@ -366,8 +366,7 @@ void interruptHandler_NI_RX(void) {
         prints("Task destination received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++){
-            if(mapping_table[i] == 0)
-                mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         }
         migration_dst = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
@@ -560,7 +559,8 @@ void OVP_init(){
 
     // Initiate the message request queue
     for(i=0;i<N_PES;i++){
-        pendingReq[i] = 0; 
+        pendingReq[i] = 0;
+        mapping_table[i] = 0;
     }
 
     // Initiate the taskMigrated to -1
