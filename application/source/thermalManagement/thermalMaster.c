@@ -113,6 +113,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
 
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
+        LOG("task_addr[%d] = %x\n", i, task_addr[i]);
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
@@ -128,7 +129,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                     putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
                     LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
 
-                    if (how_many_tasks_PE_is_running(tgtProc, task_addr)==0 && tgtProc != srcProc && how_many_tasks_PE_is_running(tgtProc, src_vec)==0){
+                    if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
                         LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                         prints("send_task_migration\n");
 
