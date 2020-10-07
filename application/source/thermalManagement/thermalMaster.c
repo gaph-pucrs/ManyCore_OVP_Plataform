@@ -109,7 +109,11 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     int k=DIM_X*DIM_Y-1;
     unsigned int contNumberOfMigrations=0;
     int i, j;
-    int src_vec[DIM_X*DIM_Y] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int src_vec[DIM_X*DIM_Y];// = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    for(i=0; i< DIM_X*DIM_Y; i++){
+        src_vec[i] = 0;
+    }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
         if (temp[i] > 33300){

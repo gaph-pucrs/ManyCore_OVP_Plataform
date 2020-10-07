@@ -338,7 +338,7 @@ void interruptHandler_NI_RX(void) {
         putsv("Messafe request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
+        //mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             pendingReq[requester] = MESSAGE_REQ;
         }
