@@ -424,9 +424,13 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING_UPDATE){
+        prints("MAPPING UPDATE - Comming from MANAGER after Migrations");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++)
+        for(i=0; i<num_tasks; i++){
+            putsvsv("OLD mapping_table[", i, "] = ", mapping_table[i]);
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+            putsvsv("NEW mapping_table[", i, "] = ", mapping_table[i]);
+        }
         if(running_task = -1)
             mapping_up = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
