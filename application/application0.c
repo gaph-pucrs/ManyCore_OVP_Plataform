@@ -146,9 +146,9 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
             }
         }
     }
-    if(contNumberOfMigrations>0)
+    /*if(contNumberOfMigrations>0)
         for(i = 1; i <= DIM_X*DIM_Y; i++)
-            sendTaskService(TASK_MAPPING_UPDATE, getAddress(i), task_addr, tasks_to_map);
+            sendTaskService(TASK_MAPPING_UPDATE, getAddress(i), task_addr, tasks_to_map);*/
     return contNumberOfMigrations;
 }
 

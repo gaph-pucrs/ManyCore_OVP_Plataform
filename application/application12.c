@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 
 		/* waits for mapping or migrating tasks and receives mapping table */
 		*clockGating_flag = TRUE;
-		while(!get_mapping() && !(get_migration_dst() && get_mapping_update())){ }
+		while(!get_mapping() && !get_migration_dst()){ }
 		set_taskMigrated(-1); // resets this, because it's running a new task here
 		*clockGating_flag = FALSE;
 		get_mapping_table(task_addr);
@@ -55,7 +55,8 @@ int main(int argc, char **argv)
 		// Send the updt addr msg to every PE
 		for(i=1; i<N_PES; i++){
 			aux[0] =  ((*myAddress << 16) | running_task);
-			sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
+			if(getAddress(i) != *myAddress)
+				sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
 		}
 		
 		if(get_mapping()){
@@ -67,7 +68,6 @@ int main(int argc, char **argv)
 			prints("Task "); printi(running_task); prints("migrated\n");
 			putsv("State: ", state);
 			clear_migration_dst();
-			clear_mapping_update();
 		}
 
 		switch(running_task){
