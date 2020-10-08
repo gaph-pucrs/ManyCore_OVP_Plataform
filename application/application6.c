@@ -107,8 +107,10 @@ int main(int argc, char **argv)
 			case print:
 				state = dijkstra_print();
 		}
-		if(state == 0)
+		if(state == 0){
+			putsv("Tarefa FINALIZANDO: ", running_task);
 			sendFinishTask(running_task);
+		}
 		else{			
 			get_migration_mapping_table(new_task_addr);
 			destination = new_task_addr[running_task];
