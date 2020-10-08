@@ -405,7 +405,7 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
         putsv("Task pipe received ", new_state);
-        index = getEmptyIndex();
+        do{index = getEmptyIndex();}while(index==PIPE_WAIT)
         for(i=0; i<MESSAGE_MAX_SIZE; i++)
             buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
         bufferPush(index);
@@ -719,20 +719,21 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
 }
 
 void sendPipe(unsigned int dest){
-    int i, j;
-    int index = getServiceIndex();
+    int i, j, index;
     putsv("sendPipe()", dest);
-    myServicePacket[index][PI_DESTINATION] = dest;
-    myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
-    myServicePacket[index][PI_TASK_ID] = running_task;
-    myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
     for (j = 0; j < PIPE_SIZE; j++){
         if (buffer_map[j] == PIPE_OCCUPIED){
-            bufferPop(j);
+            index = getServiceIndex();
+            myServicePacket[index][PI_DESTINATION] = dest;
+            myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
+            myServicePacket[index][PI_TASK_ID] = running_task;
+            myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
             prints("> enviando\n");
-            for (i = 0; i < MESSAGE_MAX_SIZE; i++)
+            for (i = 0; i < MESSAGE_MAX_SIZE; i++){
                 myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[j][i];
-            SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+            }
+            bufferPop(j);
+            SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
         }
     }
 }
