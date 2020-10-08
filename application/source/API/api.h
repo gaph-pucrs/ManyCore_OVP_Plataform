@@ -842,6 +842,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
     // Once the packet is ready, check if the request has arrived
     dest_addr = checkPendingReq(destination_id);
     if(dest_addr){
+        putsvsv("Encontrei um pending da tarefa ", destination_id, " para o endereço ", dest_addr);
         // Clear the pending request
         pendingReq[destination_id] = 0;
         // Update the address to match the requester address 
