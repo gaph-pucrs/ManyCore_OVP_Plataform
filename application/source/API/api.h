@@ -455,6 +455,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == PE_FINISH_SIMULATION){
         prints("Finish Simulation Packet Received!\n");
         finishSimulation_flag = 1;
+        *NIcmdRX = DONE;
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
