@@ -281,8 +281,7 @@ void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
 void get_migration_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
     int i;
     for(i=0; i<DIM_X*DIM_Y; i++){
-        if(pendingReq[i] == 0)
-            task_addr[i] = migration_mapping_table[i];
+        task_addr[i] = migration_mapping_table[i];
         mapping_table[i] = migration_mapping_table[i];
         putsvsv("task_addr[", i, "] = ", task_addr[i]);
     }
@@ -354,10 +353,10 @@ void interruptHandler_NI_RX(void) {
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
+        //mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
-            pendingReq[requester] = MESSAGE_REQ;
+            pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
@@ -786,7 +785,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 void SendMessage(message *theMessage, unsigned int destination_id){
 #if USE_THERMAL
 #endif    
-    unsigned int index;
+    unsigned int index, dest_addr;
 #if USE_THERMAL
     *clockGating_flag = TRUE;
 #endif
@@ -808,9 +807,12 @@ void SendMessage(message *theMessage, unsigned int destination_id){
     // Change the selected buffer position to occupied
     bufferPush(index);
     // Once the packet is ready, check if the request has arrived
-    if(checkPendingReq(destination_id)){
+    dest_addr = checkPendingReq(destination_id);
+    if(dest_addr){
         // Clear the pending request
         pendingReq[destination_id] = 0;
+        // Update the address to match the requester address 
+        buffer_packets[index][PI_DESTINATION] = dest_addr;
         // Sends the packet
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
@@ -822,8 +824,9 @@ void SendMessage(message *theMessage, unsigned int destination_id){
 ///////////////////////////////////////////////////////////////////
 /* Check if there is any requested message for a given destination ID */
 unsigned int checkPendingReq(unsigned int destID){
-    if(pendingReq[destID]==MESSAGE_REQ) return 1; //it has a pending request
-    else return 0;
+    return pendingReq[destID];
+    /*if(pendingReq[destID]==MESSAGE_REQ) return 1; //it has a pending request
+    else return 0;*/
 }
 
 ///////////////////////////////////////////////////////////////////
