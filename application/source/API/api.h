@@ -405,9 +405,10 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
         putsv("Task pipe received ", new_state);
-        do{index = getEmptyIndex();}while(index==PIPE_WAIT)
-        for(i=0; i<MESSAGE_MAX_SIZE; i++)
+        do{index = getEmptyIndex();}while(index==PIPE_WAIT);
+        for(i=0; i<MESSAGE_MAX_SIZE; i++){
             buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
+        }
         bufferPush(index);
         *NIcmdRX = DONE;
     }
