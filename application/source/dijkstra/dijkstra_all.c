@@ -34,7 +34,8 @@ int dijkstra_divider(int state)
     /* SEND AdjMatrix[NUM_NODES][NUM_NODES] */
 	theMessage.size = NUM_NODES;
 
-    for(iter=0; iter<CALCULATIONS; iter++){
+    for(iter=state; iter<CALCULATIONS; iter++){
+		putsv("Começando iteracao ", iter);
 		for (i=0; i<NUM_NODES; i++) {
 			for (j=0; j<NUM_NODES; j++) {
 				theMessage.msg[j] = AdjMatrix[i][j];
