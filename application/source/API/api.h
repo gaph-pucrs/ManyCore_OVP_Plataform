@@ -806,15 +806,19 @@ void requestToForward(){
 void SendMessage(message *theMessage, unsigned int destination_id){
 #if USE_THERMAL
 #endif    
-    unsigned int index, dest_addr;
+    unsigned int index, dest_addr, flag;
 #if USE_THERMAL
     *clockGating_flag = TRUE;
 #endif
     index = getEmptyIndex();
+    flag = 0;
     while(index==PIPE_WAIT){     //stay bloqued here while the message buffer is full
         // if blocked during a migration scenario this could be required
-        if(get_migration_src())
+        if(migration_src == 1 && flag == 0){
+            LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
             requestToForward();
+            flag++;
+        }
     }
 #if USE_THERMAL
     *clockGating_flag = FALSE;
