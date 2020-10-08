@@ -221,6 +221,7 @@ void enable_interruptions();
 void disable_interruptions();
 int getServiceIndex();
 void requestToForward();
+void printFinish();
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -1068,3 +1069,15 @@ int getServiceIndex(){
     return index;
 }
 
+void printFinish(){
+    int i;
+    putsv("Tarefa FINALIZANDO ", running_task);
+    prints("at this point the pending is: \n");
+    for(i=0; i<N_PES; i++){
+        putsvsv("pendingReq[", i,"] = ", pendingReq[i]);
+    }
+    prints("at this point the PIPE is: \n");
+    for(i=0; i<PIPE_SIZE; i++){
+        putsvsv("pipeStatus[", i,"] = ", buffer_map[i]);
+    }
+}

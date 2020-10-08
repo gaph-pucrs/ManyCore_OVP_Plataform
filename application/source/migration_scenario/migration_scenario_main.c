@@ -108,7 +108,7 @@ int main(int argc, char **argv)
 				state = dijkstra_print();
 		}
 		if(state == 0){
-			putsv("Tarefa FINALIZANDO: ", running_task);
+			printFinish();
 			sendFinishTask(running_task);
 		}
 		else{			
