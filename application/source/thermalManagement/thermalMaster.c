@@ -181,6 +181,7 @@ int main(int argc, char **argv)
     unsigned int task_addr[DIM_X*DIM_Y];
     unsigned int tasks_to_map = 0;
     unsigned int time = 0;
+    int finishSimulation;
 
     /*Initialization*/
     generateSpiralMatrix();
@@ -319,6 +320,20 @@ int main(int argc, char **argv)
                 // }
                 // for(i=0;i<tasks_to_map;i++)
                 //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
+            }
+
+            // Verify if every task is finished
+            finishSimulation = 1;
+            for(i = 0; i < tasks_to_map; i++){
+                if(finishedTask[i]==FALSE){
+                    finishSimulation = 0;
+                    break;
+                }
+            }
+            if(finishSimulation){
+                for(i = 1; i < N_PES; i++){
+                    sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
+                }
             }
 
             time++;

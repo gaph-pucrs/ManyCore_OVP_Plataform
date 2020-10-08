@@ -71,6 +71,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_ADDR_UPDT       0x67  //103
 #define TASK_FINISHED        0x70  //112
 #define TASK_REQUEST_FORWARD 0x80
+#define PE_FINISH_SIMULATION 0x666 
 
 //////////////////////////////
 //////////////////////////////
@@ -164,6 +165,7 @@ volatile unsigned int new_state;
 volatile unsigned int mapping_table[DIM_X*DIM_Y];
 volatile unsigned int migration_mapping_table[DIM_X*DIM_Y];
 volatile unsigned int finishedTask[DIM_X*DIM_Y];
+volatile unsigned int finishSimulation_flag = 0;
 void clear_migration_src();
 void clear_migration_dst();
 void clear_mapping();
@@ -439,7 +441,7 @@ void interruptHandler_NI_RX(void) {
         finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
         *NIcmdRX = DONE;
     }
-    else if(incomingPacket[PI_SERVICE == TASK_REQUEST_FORWARD]){
+    else if(incomingPacket[PI_SERVICE] == TASK_REQUEST_FORWARD){
         putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
         taskMigrated = incomingPacket[PI_REQUESTER];
         for(i = 0; i < N_PES; i++){
@@ -449,6 +451,10 @@ void interruptHandler_NI_RX(void) {
             }
         }
         *NIcmdRX = DONE;
+    }
+    else if(incomingPacket[PI_SERVICE] == PE_FINISH_SIMULATION){
+        prints("Finish Simulation Packet Received!\n");
+        finishSimulation_flag = 1;
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
@@ -580,6 +586,8 @@ void OVP_init(){
     int_enable(2);
     // Enable external interrupts
     enable_interruptions();
+
+    finishSimulation_flag = 0;
 
     // Inform the processor ID to the router
     *myAddress = impProcessorId();
