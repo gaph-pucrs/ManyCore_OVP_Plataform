@@ -281,7 +281,7 @@ void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
 void get_migration_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
     int i;
     for(i=0; i<DIM_X*DIM_Y; i++){
-        if(pendingReq(i) == 0)
+        if(pendingReq[i] == 0)
             task_addr[i] = migration_mapping_table[i];
         mapping_table[i] = migration_mapping_table[i];
         putsvsv("task_addr[", i, "] = ", task_addr[i]);
