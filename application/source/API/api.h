@@ -434,6 +434,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_FINISHED){
         putsv("Tarefa finalizada - ", incomingPacket[PI_TASK_ID]);
         finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
+        *NIcmdRX = DONE;
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
