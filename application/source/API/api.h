@@ -817,7 +817,6 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         // if blocked during a migration scenario this could be required
         index = getEmptyIndex();
         if(migration_src == 1 && flag == 0){
-            LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
             requestToForward();
             flag++;
         }
