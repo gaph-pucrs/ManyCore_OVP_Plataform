@@ -116,6 +116,10 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
 
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
+        // clear finished applications
+        if(finishedTask[i]==TRUE){
+            task_addr[i] = 0;
+        }
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
