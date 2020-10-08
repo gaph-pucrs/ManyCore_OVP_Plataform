@@ -69,6 +69,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_MIGRATION_STATE 0x65
 #define TASK_MIGRATION_PEND  0x66  //102
 #define TASK_ADDR_UPDT       0x67  //103
+#define TASK_FINISHED        0x70  //112
 
 
 //////////////////////////////
@@ -162,6 +163,7 @@ volatile unsigned int num_tasks;
 volatile unsigned int new_state;
 volatile unsigned int mapping_table[DIM_X*DIM_Y];
 volatile unsigned int migration_mapping_table[DIM_X*DIM_Y];
+volatile unsigned int finishedTask[DIM_X*DIM_Y];
 void clear_migration_src();
 void clear_migration_dst();
 void clear_mapping();
@@ -190,6 +192,7 @@ void ReceiveRaw(message *theMessage);
 void FinishApplication();
 //////////////////////////////
 // Internal API functions
+void sendFinishTask(unsigned int running_task);
 void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
 void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int task_addr[DIM_X*DIM_Y], unsigned int size);
@@ -427,6 +430,10 @@ void interruptHandler_NI_RX(void) {
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
     }
+    else if(incomingPacket[PI_SERVICE] == TASK_FINISHED){
+        putsv("Tarefa finalizada - ", incomingPacket[PI_TASK_ID]);
+        finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
+    }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
     }
@@ -574,6 +581,7 @@ void OVP_init(){
     for(i=0;i<N_PES;i++){
         pendingReq[i] = 0;
         mapping_table[i] = 0;
+        finishedTask[i] = FALSE;
     }
 
     // Initiate the taskMigrated to -1
@@ -989,3 +997,13 @@ void enable_interruption(unsigned int n){
     MTSPR(SPR_PICMR, picmr);
     return;
 }
+
+void sendFinishTask(unsigned int running_task){
+    int i;
+    myServicePacket[PI_DESTINATION] = 0; // Thermal master address
+    myServicePacket[PI_SIZE] = 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[PI_TASK_ID] = running_task;
+    myServicePacket[PI_SERVICE] = TASK_FINISHED;
+    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+}
+
