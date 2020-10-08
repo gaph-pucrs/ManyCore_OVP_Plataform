@@ -153,9 +153,8 @@ int synthetic_taskA(int state){
 		theMessage.size = 30;
 		for(j=0;j<30;j++) theMessage.msg[j]=i;
 		
-		printi("enviando...\n");
+		
 		SendMessage(&theMessage, taskC);
-		printi("enviado!\n");
 		printi(clock()); prints("taskA\n");
 		printi(clock()); printi(i); prints("\n");
 
