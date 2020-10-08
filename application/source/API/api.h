@@ -1001,7 +1001,7 @@ void putsvsv(char* text1, int value1, char* text2, int value2){
 ///////////////////////////////////////////////////////////////////
 //
 unsigned int random(){
-    unsigned int lfsr = 0xACE1ACE1A;
+    unsigned int lfsr = 0xACE1ACE1;
     unsigned bit;
     bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
     return lfsr =  (lfsr >> 1) | (bit << 15);
@@ -1040,7 +1040,6 @@ void enable_interruption(unsigned int n){
 }
 
 void sendFinishTask(unsigned int running_task){
-    int i;
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = 0; // Thermal master address
     myServicePacket[index][PI_SIZE] = 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
