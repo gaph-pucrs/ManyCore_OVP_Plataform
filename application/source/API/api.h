@@ -446,6 +446,7 @@ void interruptHandler_NI_RX(void) {
                 pendingReq[i] = 0;
             }
         }
+        *NIcmdRX = DONE;
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
