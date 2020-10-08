@@ -41,7 +41,11 @@ int main(int argc, char **argv)
 
 		/* waits for mapping or migrating tasks and receives mapping table */
 		*clockGating_flag = TRUE;
-		while(!get_mapping() && !get_migration_dst()){ }
+		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ }
+
+		if(finishSimulation_flag)
+			break;
+
 		set_taskMigrated(-1); // resets this, because it's running a new task here
 		*clockGating_flag = FALSE;
 		get_mapping_table(task_addr);
