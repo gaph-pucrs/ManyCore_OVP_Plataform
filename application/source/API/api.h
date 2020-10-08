@@ -219,6 +219,7 @@ void putsvsv(char* text1, int value1, char* text2, int value2);
 void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
 void enable_interruptions();
 void disable_interruptions();
+int getServiceIndex();
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -1027,9 +1028,5 @@ int getServiceIndex(){
         }
     }
     return index;
-}
-
-void emptyServiceIndex(unsigned int index){
-    myServicePacket[i][0] = 0xFFFFFFFF;
 }
 
