@@ -93,43 +93,43 @@ int main(int argc, char **argv)
 				state = dijkstra_divider(state);
 				break;
 			case dijkstra_0:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case dijkstra_1:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case dijkstra_2:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case dijkstra_3:
-				dijkstra_slave();
+				state = dijkstra_slave();
 				break;
 			case print:
-				dijkstra_print();
+				state = dijkstra_print();
 		}
 		if(state == 0)
-			break;
-
-		
-		get_migration_mapping_table(new_task_addr);
-		destination = new_task_addr[running_task];
-		putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
-		
-		
-		sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
-		
-		sendPipe(destination);
-		
-		//disable_interruptions();
-		disable_interruption(2);
-		//putsv("save the new destination of this ", destination);
-		set_taskMigrated(destination); // save the new destination of this 
-		sendPendingReq(destination);
-		enable_interruption(2);
-		//enable_interruptions();		
-		
-		sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-		running_task = -1;
+			sendFinishTask(running_task);
+		else{			
+			get_migration_mapping_table(new_task_addr);
+			destination = new_task_addr[running_task];
+			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
+			
+			
+			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
+			
+			sendPipe(destination);
+			
+			//disable_interruptions();
+			disable_interruption(2);
+			//putsv("save the new destination of this ", destination);
+			set_taskMigrated(destination); // save the new destination of this 
+			sendPendingReq(destination);
+			enable_interruption(2);
+			//enable_interruptions();		
+			
+			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
+			running_task = -1;
+		}
 	}
 
 
@@ -417,7 +417,7 @@ int dijkstra_divider(int state)
 		//SendMessage(&theMessage, dijkstra_4);
 	}
 	prints("Divider Finished\n"); 
-    return 1;
+    return 0;
 }
 
 int dijkstra_slave()
@@ -490,7 +490,7 @@ int dijkstra_slave()
 
     SendMessage(&theMessage, print);
     prints("Dijkstra slave finished.\n");
-    return 1;
+    return 0;
 }
 
 int dijkstra_print()
@@ -524,5 +524,5 @@ int dijkstra_print()
 	// 	result[k] = theMessage.msg[k];
 
 	prints("PRINT FINISHED\n");
-    return 1;
+    return 0;
 }

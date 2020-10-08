@@ -86,7 +86,7 @@ int how_many_tasks_PE_is_running(unsigned int srcProc, unsigned int task_addr[DI
     int i;
 
     for(i=0; i<DIM_X*DIM_Y; i++){
-        if (task_addr[i] == srcProc)
+        if (task_addr[i] == srcProc && finishedTask[i] == FALSE)
             return 1;
     }
 
@@ -116,7 +116,6 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
 
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
-        LOG("task_addr[%d] = %x\n", i, task_addr[i]);
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
