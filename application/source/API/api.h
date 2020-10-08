@@ -126,7 +126,7 @@ typedef struct Message {
 message *deliveredMessage;                                  // Pointer used by the API to acess the packet that will be transmitted
 unsigned int sendAfterTX[PIPE_SIZE];                        // Informs the TX interruption if there is a packet that must be transmitted
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];      // Used by NI to store the recived packet
-volatile unsigned int myServicePacket[PACKET_MAX_SIZE];     // Used by the API to create a service packet
+volatile unsigned int myServicePacket[PIPE_SIZE][PACKET_MAX_SIZE];     // Used by the API to create a service packet
 volatile unsigned int receivingActive;                      // Used by the API to inform the processor if the receiving process is done
 volatile unsigned int transmittingActive = PIPE_WAIT;       // Used by the API to temporarily store the PIPE slot that is being transmitted
 volatile unsigned int interruptionType = 0;                 // TODO: LEGACY - NEED TO BE REMOVED! (inside the peripheral first)
@@ -516,14 +516,17 @@ void popSendAfterTX(){
 void interruptHandler_NI_TX(void) {
 #if USE_THERMAL
 #endif
+    int index;
     //////////////////////////////////////////////////////////////
     if(transmittingActive < PIPE_SIZE){ // Message packet
         // Releses the buffer
         bufferPop(transmittingActive);
         transmittingActive = PIPE_WAIT;
     }
-    else if(transmittingActive == 0xFFFFFFFE){ // Service packet
+    else if(transmittingActive >= 0xFFFF0000){ // Service packet
+        index = 0x0000FFFF & transmittingActive;
         transmittingActive = PIPE_WAIT;
+        myServicePacket[index][0] = 0xFFFFFFFF;
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_TX TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
@@ -575,6 +578,7 @@ void OVP_init(){
     for(i=0;i<PIPE_SIZE;i++){
         buffer_map[i] = PIPE_FREE;
         sendAfterTX[i] = PIPE_WAIT;
+        myServicePacket[i][0] = 0xFFFFFFFF;
     }
 
     // Initiate the message request queue
@@ -676,70 +680,75 @@ void ReceiveRaw(message *theMessage){
 ///////////////////////////////////////////////////////////////////
 /* Creates the request message and send it to the transmitter */
 void requestMsg(unsigned int from){
-    myServicePacket[PI_DESTINATION] = mapping_table[from];
+    int index = getServiceIndex();
+    myServicePacket[index][PI_DESTINATION] = mapping_table[from];
     putsv("Pedindo mesnagem de: ", mapping_table[from]);
-    myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
-    myServicePacket[PI_TASK_ID] = running_task; //task id do requester
-    myServicePacket[PI_SERVICE] = MESSAGE_REQ;
-    myServicePacket[PI_REQUESTER] = *myAddress;
-    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
+    myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
+    myServicePacket[index][PI_REQUESTER] = *myAddress;
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
 void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size){
     int i;
-    myServicePacket[PI_DESTINATION] = dest;
-    myServicePacket[PI_SIZE] = size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
-    myServicePacket[PI_TASK_ID] = running_task;
-    myServicePacket[PI_SERVICE] = service;
+    int index = getServiceIndex();
+    myServicePacket[index][PI_DESTINATION] = dest;
+    myServicePacket[index][PI_SIZE] = size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = service;
     for (i = 0; i < size; i++){
-        myServicePacket[PI_PAYLOAD+i] = payload[i];
-        putsvsv("Payload+", i, " valor: ", myServicePacket[PI_PAYLOAD+i]);
+        myServicePacket[index][PI_PAYLOAD+i] = payload[i];
+        putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
     }
-    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
 void sendPipe(unsigned int dest){
     int i, j;
+    int index = getServiceIndex();
     putsv("sendPipe()", dest);
-    myServicePacket[PI_DESTINATION] = dest;
-    myServicePacket[PI_SIZE] = PACKET_MAX_SIZE;
-    myServicePacket[PI_TASK_ID] = running_task;
-    myServicePacket[PI_SERVICE] = TASK_MIGRATION_PIPE;
+    myServicePacket[index][PI_DESTINATION] = dest;
+    myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
     for (j = 0; j < PIPE_SIZE; j++){
         if (buffer_map[j] == PIPE_OCCUPIED){
             bufferPop(j);
             prints("> enviando\n");
             for (i = 0; i < MESSAGE_MAX_SIZE; i++)
-                myServicePacket[PI_PAYLOAD+i] = buffer_packets[j][i];
-            SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+                myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[j][i];
+            SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
         }
     }
 }
 
 void sendPendingReq(unsigned int dest){
     int j;
+    int index = getServiceIndex();
     putsv("sendPendingReq()", dest);
-    myServicePacket[PI_DESTINATION] = dest;
-    myServicePacket[PI_SIZE] = N_PES + 2 + 3;
-    myServicePacket[PI_TASK_ID] = running_task;
-    myServicePacket[PI_SERVICE] = TASK_MIGRATION_PEND;
+    myServicePacket[index][PI_DESTINATION] = dest;
+    myServicePacket[index][PI_SIZE] = N_PES + 2 + 3;
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PEND;
     for (j = 0; j < N_PES; j++){
         putsv(" > > pendReq: ", pendingReq[j]);
-        myServicePacket[PI_PAYLOAD+j] = pendingReq[j];
+        myServicePacket[index][PI_PAYLOAD+j] = pendingReq[j];
         pendingReq[j] = 0;
     }
-    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE);
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index));
     prints("> pendReq enviado\n");
 }
 
 void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
+    int index = getServiceIndex();
     putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin_addr);
-    myServicePacket[PI_DESTINATION] = origin_addr;
-    myServicePacket[PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
-    myServicePacket[PI_TASK_ID] = requester; //task id do requester
-    myServicePacket[PI_SERVICE] = MESSAGE_REQ;
-    myServicePacket[PI_REQUESTER] = mapping_table[requester];
-    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+    myServicePacket[index][PI_DESTINATION] = origin_addr;
+    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
+    myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
+    myServicePacket[index][PI_REQUESTER] = mapping_table[requester];
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index))); // WARNING: This may cause a problem!!!!
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1000,10 +1009,27 @@ void enable_interruption(unsigned int n){
 
 void sendFinishTask(unsigned int running_task){
     int i;
-    myServicePacket[PI_DESTINATION] = 0; // Thermal master address
-    myServicePacket[PI_SIZE] = 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
-    myServicePacket[PI_TASK_ID] = running_task;
-    myServicePacket[PI_SERVICE] = TASK_FINISHED;
-    SendSlot((unsigned int)&myServicePacket, 0xFFFFFFFE); // WARNING: This may cause a problem!!!!
+    int index = getServiceIndex();
+    myServicePacket[index][PI_DESTINATION] = 0; // Thermal master address
+    myServicePacket[index][PI_SIZE] = 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = TASK_FINISHED;
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
+int getServiceIndex(){
+    int i;
+    int index = -1;
+    while(index<0){
+        for(i=0; i<PIPE_SIZE; i++){
+            if(myServicePacket[i][0] == 0xFFFFFFFF)
+                index = i;
+        }
+    }
+    return index;
+}
+
+void emptyServiceIndex(unsigned int index){
+    myServicePacket[i][0] = 0xFFFFFFFF;
 }
 
