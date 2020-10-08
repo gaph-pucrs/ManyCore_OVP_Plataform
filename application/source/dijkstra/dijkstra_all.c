@@ -66,12 +66,14 @@ int dijkstra_divider(int state)
 			//} 
 			//SendMessage(&theMessage, dijkstra_4);
 		}
+		
 		if(get_migration_src()){
 			prints("Dijkstra divider migrating.\n");
 			clear_migration_src();
 			return iter+1;
 		}
 	}
+
 
     AdjMatrix[0][0] = KILL;
 	for (i=0; i<NUM_NODES; i++) {
