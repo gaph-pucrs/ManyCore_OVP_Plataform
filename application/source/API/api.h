@@ -812,13 +812,13 @@ void SendMessage(message *theMessage, unsigned int destination_id){
 #endif
     index = getEmptyIndex();
     flag = 0;
-    while(index==PIPE_WAIT){     //stay bloqued here while the message buffer is full
+    while(index==PIPE_WAIT){ //stay bloqued here while the message buffer is full
         // if blocked during a migration scenario this could be required
-        if(migration_src == 1 && flag == 0){
+        /*if(migration_src == 1 && flag == 0){
             LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
             requestToForward();
             flag++;
-        }
+        }*/
     }
 #if USE_THERMAL
     *clockGating_flag = FALSE;
