@@ -70,7 +70,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_MIGRATION_PEND  0x66  //102
 #define TASK_ADDR_UPDT       0x67  //103
 #define TASK_FINISHED        0x70  //112
-
+#define TASK_REQUEST_FORWARD 0x80
 
 //////////////////////////////
 //////////////////////////////
@@ -220,6 +220,7 @@ void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
 void enable_interruptions();
 void disable_interruptions();
 int getServiceIndex();
+void requestToForward();
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -435,6 +436,16 @@ void interruptHandler_NI_RX(void) {
         putsv("Tarefa finalizada - ", incomingPacket[PI_TASK_ID]);
         finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
         *NIcmdRX = DONE;
+    }
+    else if(incomingPacket[PI_SERVICE == TASK_REQUEST_FORWARD]){
+        putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
+        taskMigrated = incomingPacket[PI_REQUESTER];
+        for(i = 0; i < N_PES; i++){
+            if(pendingReq[i] != 0){
+                forwardMsgRequest(i, taskMigrated);
+                pendingReq[i] = 0;
+            }
+        }
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
@@ -780,6 +791,16 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
     return (address | (x << 8) | y);
 }
 
+void requestToForward(){
+    int index = getServiceIndex();
+    myServicePacket[index][PI_DESTINATION] = migration_mapping_table[running_task];
+    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
+    myServicePacket[index][PI_SERVICE] = TASK_REQUEST_FORWARD;
+    myServicePacket[index][PI_REQUESTER] = *myAddress;
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
 ///////////////////////////////////////////////////////////////////
 /* Sends a message to a given destination */
 void SendMessage(message *theMessage, unsigned int destination_id){
@@ -789,7 +810,12 @@ void SendMessage(message *theMessage, unsigned int destination_id){
 #if USE_THERMAL
     *clockGating_flag = TRUE;
 #endif
-    do{index = getEmptyIndex(); /*LOG("ESPERANDO %x\n",*myAddress);/*stay bloqued here while the message buffer is full*/}while(index==PIPE_WAIT);
+    index = getEmptyIndex();
+    while(index==PIPE_WAIT){     //stay bloqued here while the message buffer is full
+        // if blocked during a migration scenario this could be required
+        if(get_migration_src())
+            requestToForward();
+    }
 #if USE_THERMAL
     *clockGating_flag = FALSE;
 #endif    
