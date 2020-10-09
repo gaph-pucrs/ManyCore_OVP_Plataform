@@ -265,10 +265,16 @@ int main(int argc, const char *argv[]) {
 
     // must advance to next phase for the API calls that follow
     opRootModulePreSimulate(mi);
-    
+
+    int actual_PE = 0;
+
+    for(actual_PE = 0; actual_PE < N_PES; actual_PE++){
+        PE_freq[actual_PE] = 1000;
+    }
+
     // flag to add the callbacks during the first quantum
     int firstRun = N_PES;
-    int actual_PE = 0;
+
     do {
         // move time forward by time slice on root module
         // NOTE: This matches the standard scheduler which moves time forward in
@@ -299,7 +305,7 @@ int main(int argc, const char *argv[]) {
                 PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE)/1000);
                 //PE_freq[actual_PE] = operationFreq;
 
-                //opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, PE_freq[actual_PE]);
+                opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, PE_freq[actual_PE]);
             }
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
