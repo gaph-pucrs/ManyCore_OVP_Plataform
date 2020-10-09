@@ -409,7 +409,7 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
         putsv("Task pipe received ", new_state);
-        do{index = getEmptyIndex();}while(index==PIPE_WAIT);
+        do{index = getEmptyIndex(); prints("PRESO6\n");}while(index==PIPE_WAIT);
         for(i=0; i<MESSAGE_MAX_SIZE; i++){
             buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
         }
@@ -856,6 +856,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
     flag = 0;
     while(index==PIPE_WAIT){ //stay bloqued here while the message buffer is full
         // if blocked during a migration scenario this could be required
+        prints("PRESO1\n");
         index = getEmptyIndex();
         if(migration_src == 1 && flag == 0){
             requestToForward();
@@ -946,6 +947,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
 #endif    
     ////////////////////////////////////////////////
     while(*NIcmdTX != NI_STATUS_OFF){
+        prints("PRESO2\n");
 #if USE_THERMAL
         *clockGating_flag = TRUE;
 #endif
@@ -960,6 +962,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
 #if USE_THERMAL
 #endif
     while(*NIcmdTX != NI_STATUS_OFF){
+        prints("PRESO3\n");
         /* waits until NI is ready to execute an operation */}
 #if USE_THERMAL
 #endif
@@ -1099,6 +1102,7 @@ int getServiceIndex(){
     int i;
     int index = -1;
     while(index<0){
+        prints("PRESO4\n");
         for(i=0; i<PIPE_SIZE; i++){
             if(myServicePacket[i][0] == 0xFFFFFFFF)
                 index = i;
