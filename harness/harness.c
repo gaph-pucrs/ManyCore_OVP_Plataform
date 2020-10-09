@@ -308,7 +308,7 @@ int main(int argc, const char *argv[]) {
                 //opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, operationFreq);
             }
 
-            /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
+            // simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions 
             stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
             if(stopReason == OP_SR_EXIT){
                 finishedProcessors++;
