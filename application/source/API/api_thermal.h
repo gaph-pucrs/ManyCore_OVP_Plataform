@@ -298,7 +298,7 @@ unsigned int latency_DVS = 0;
 
 // Activate this flag to deactivate the instruction count - "clock gating the processor"
 volatile unsigned int *clockGating_flag = CLK_GATING;
-volatile unsigned int *frequencyScale = FREQUENCY_SCALE;    // Used by the HARNESS to control the processor frequency
+volatile unsigned int *operationFrequency = FREQUENCY_SCALE;    // Used by the HARNESS to control the processor frequency
 volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];  // Used by the API_thermal to create the energy packet
 volatile unsigned int sendExecutedInstPacket = FALSE;       // Used by the API_thermal to inform if the energy packet must be sent after the TX interruption
 
