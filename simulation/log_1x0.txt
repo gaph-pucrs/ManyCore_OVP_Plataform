@@ -1884,10 +1884,10 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 144 
-PE frequency changed to 1000 
+The PE frequency will be changed in the next timer interruption. newValue = 677 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5143640 taskE
-5145083 179 
+5145376 taskE
+5145494 179 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1896,8 +1896,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5168590 taskE
-5168708 180 
+5168588 taskE
+5168706 180 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1906,8 +1906,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5198836 taskE
-5198954 181 
+5199338 taskE
+5199456 181 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1916,8 +1916,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5222084 taskE
-5222202 182 
+5222586 taskE
+5222704 182 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1926,8 +1926,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5250334 taskE
-5250452 183 
+5250833 taskE
+5250951 183 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1936,8 +1936,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5273590 taskE
-5273708 184 
+5274090 taskE
+5274208 184 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1946,8 +1946,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5301836 taskE
-5301954 185 
+5302336 taskE
+5302454 185 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1956,10 +1956,10 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5325084 taskE
-5325202 186 
+5325584 taskE
+5325702 186 
 Pedindo mesnagem de: 258 
-Counters: 35239  14220  2002  1405  18803  13632  1209  14032  2793  33  63  1061  1376  248122 
+Counters: 35395  14272  2002  1404  18906  13684  1209  14083  2792  33  63  1061  1376  248622 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 5 
@@ -2023,7 +2023,7 @@ Encontrei um pending da tarefa 5  para o endereço 512
 5497705 taskE
 5499147 192 
 Pedindo mesnagem de: 258 
-Counters: 23850  9575  1375  973  12703  9134  902  9418  1983  27  35  648  823  175431 
+Counters: 23842  9575  1375  973  12703  9134  902  9418  1983  27  35  648  823  174931 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 5 
@@ -2031,8 +2031,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
-5536909 taskE
-5538351 193 
+5536911 taskE
+5538354 193 
 Pedindo mesnagem de: 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -2088,7 +2088,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 5 
 Adicionando ao pendingReq
-Counters: 22951  9282  1221  833  11562  8325  546  9150  1557  12  35  637  812  170276 
+Counters: 22951  9282  1222  833  11562  8325  546  9150  1557  12  35  637  812  170276 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 512 
@@ -3280,11 +3280,11 @@ Servico: 32
 Message request received from 5 
 Forwarding msg request from task 5  para o endereco: 1 
 > pendReq enviado
-Payload+0  valor: 513 Clk gate off - interruptHandler_NI_RX
+Payload+0  valor: 513 
+Payload+1  vClk gate off - interruptHandler_NI_RX
 Servico: 103 
 131074 Updating mapping_table[2 ] = 2 
-
-Payload+1  valor: 514 
+alor: 514 
 Payload+2  valor: 2 
 Payload+3  valor: 257 
 Payload+4  valor: 1 
@@ -3298,7 +3298,7 @@ Payload+11  valor: 259
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 65540 Updating mapping_table[4 ] = 1 
-Counters: 21173  7364  1861  1331  14531  9724  828  7437  2800  30  27  447  582  167688 
+Counters: 21173  7365  1861  1331  14531  9724  828  7437  2800  30  27  447  582  167688 
 Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
 Counters: 43  5  13  16  98  74  4  7  15  0  16  137  217  168783 
 Counters: 43  5  13  16  98  74  4  7  15  0  16  137  217  168783 
@@ -3340,9 +3340,9 @@ Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796
 Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Clk gate off - interruptHandler_NI_RX
@@ -3352,29 +3352,30 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 131074 Updating mapping_table[2 ] = 2 
 Counters: 653  195  65  50  520  288  8  207  79  0  13  124  189  168811 
-Counters: 43  5  13  16  98  74  4  7  15  0  13  113  178  168822 
-Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
-Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
-Counters: 43  5  13  16  98  74  4  7  15  0  15  128  203  168797 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
-Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
-Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
-Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
-Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  16  136  216  168784 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
+Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  15  129  204  168796 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
+Counters: 43  5  13  16  98  74  4  7  15  0  14  121  191  168809 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50331650 Updating mapping_table[2 ] = 768 
-Counters: 348  100  39  33  309  181  6  107  47  0  25  412  537  168463 
+Counters: 348  100  39  33  309  181  6  107  47  0  28  465  605  168395 
+Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
 Counters: 43  5  13  16  98  74  4  7  15  0  40  851  1051  167949 
 Counters: 43  5  13  16  98  74  4  7  15  0  41  888  1093  167907 
 Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
@@ -3393,6 +3394,8 @@ Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920
 Counters: 43  5  13  16  98  74  4  7  15  0  42  896  1106  167894 
 Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
 Counters: 43  5  13  16  98  74  4  7  15  0  42  896  1106  167894 
+Counters: 43  5  13  16  98  74  4  7  15  0  41  888  1093  167907 
+Counters: 43  5  13  16  98  74  4  7  15  0  41  888  1093  167907 
 Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
 Counters: 43  5  13  16  98  74  4  7  15  0  42  896  1106  167894 
 Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
@@ -3407,10 +3410,7 @@ Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920
 Counters: 43  5  13  16  98  74  4  7  15  0  42  896  1106  167894 
 Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
 Counters: 43  5  13  16  98  74  4  7  15  0  42  896  1106  167894 
-Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
-Counters: 43  5  13  16  98  74  4  7  15  0  42  896  1106  167894 
-Counters: 43  5  13  16  98  74  4  7  15  0  40  880  1080  167920 
-Counters: 43  5  13  16  98  74  4  7  15  0  33  648  813  168187 
+Counters: 43  5  13  16  98  74  4  7  15  0  30  595  745  168255 
 Clk gate off - interruptHandler_NI_RX
 Servico: 1638 
 Finish Simulation Packet Received!

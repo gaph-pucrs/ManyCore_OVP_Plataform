@@ -56,8 +56,8 @@ Counters: 43  5  13  16  98  74  4  7  15  0  8  88  128  249872
 Counters: 43  5  13  16  98  74  4  7  15  0  8  88  128  249872 
 Clk gate off - interruptHandler_NI_RX
 Servico: 144 
-PE frequency changed to 1000 
-Counters: 332  101  32  31  297  171  4  105  39  0  12  135  195  249805 
+The PE frequency will be changed in the next timer interruption. newValue = 677 
+Counters: 488  153  32  30  400  223  4  156  38  0  12  135  195  249805 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 196614 Updating mapping_table[6 ] = 3 
@@ -157,7 +157,7 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 1 
-Counters: 16272  5752  1871  1215  16192  11829  899  5154  2602  46  51  574  829  168387 
+Counters: 16272  5752  1872  1215  16192  11829  899  5154  2602  46  51  574  829  168385 
 8720148 taskC
 8720266 310 
 Pedindo mesnagem de: 513 
@@ -271,7 +271,7 @@ Adicionando ao pendingReq
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 48949  19969  3249  2035  33810  24964  2201  14480  4380  40  74  1341  1711  167073 
+Counters: 48951  19969  3249  2035  33810  24964  2201  14480  4380  40  74  1341  1711  167075 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 4 
@@ -2442,8 +2442,8 @@ Counters: 43  5  13  16  98  74  4  7  15  0  14  310  380  168620
 Counters: 43  5  13  16  98  74  4  7  15  0  13  273  338  168662 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  310  380  168620 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  310  380  168620 
-Counters: 43  5  13  16  98  74  4  7  15  0  13  273  338  168662 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  310  380  168620 
+Counters: 43  5  13  16  98  74  4  7  15  0  13  273  338  168662 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  310  380  168620 
 Counters: 43  5  13  16  98  74  4  7  15  0  14  310  380  168620 
 Counters: 43  5  13  16  98  74  4  7  15  0  13  273  338  168662 
@@ -2490,10 +2490,10 @@ task_addr[11 ] = 259
 task_addr[12 ] = 0 
 task_addr[13 ] = 0 
 task_addr[14 ] = 0 
-taskClk gate off - interruptHandler_NI_RX
+tasClk gate off - interruptHandler_NI_RX
 Servico: 103 
 196612 Updating mapping_table[4 ] = 3 
-_addr[15 ] = 0 
+k_addr[15 ] = 0 
 Payload+0  valor: 131074 
 Payload+0  valor: 131074 
 Payload+0  valor: 131074 
@@ -2525,7 +2525,7 @@ Encontrei um pending da tarefa 3  para o endereço 257
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 16651  5447  1982  1256  18052  13389  1010  4469  2734  46  42  1070  1280  169262 
+Counters: 16651  5447  1981  1256  18052  13389  1010  4469  2734  46  42  1070  1280  169262 
 Encontrei um pending da tarefa 4  para o endereço 3 
 15655759 taskC
 15655877 548 
@@ -2536,11 +2536,11 @@ Message request received from 3
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
 Encontrei um pending da tarefa 3  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2549,135 +2549,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-15702530 taskC
-15702648 549 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending daClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
- tarefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-15727893 taskC
-15728011 550 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-da tarefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-15751933 taskC
-15753375 551 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3  para Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-15777297 taskC
-15778740 552 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3  parClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-a o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-15803985 taskC
-15804103 553 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-Counters: 46847  19275  2934  1852  30608  22501  2003  13742  3990  37  58  1126  1416  167965 
- para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 4  para o endereço 3 
-15854193 taskC
-15855635 554 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3  parClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-a o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-15880880 taskC
-15880998 555 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
- para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-15906276 taskC
-15906394 556 
+15699249 taskC
+15699367 549 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2694,8 +2567,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-15931641 taskC
-15931759 557 
+15724613 taskC
+15724731 550 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2712,8 +2585,135 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-15957004 taskC
-15957122 558 
+15749976 taskC
+15750094 551 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+a 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+15775339 taskC
+15775457 552 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+efa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+15800703 taskC
+15800821 553 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+arefa 3  para o endereço 257 
+Pedindo mesnaCounters: 47372  19459  3040  1916  31785  23414  2086  13993  4130  38  59  1163  1458  166648 
+gem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 4  para o endereço 3 
+15852670 taskC
+15854112 554 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 3  parClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+a o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+15879357 taskC
+15879475 555 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 3 Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+ para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+15904756 taskC
+15904874 556 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+15930120 taskC
+15930238 557 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefaClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+ 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+15955483 taskC
+15955601 558 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2730,17 +2730,17 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-Counters: 43691  17872  2781  1791  28834  21194  1897  13299  3810  37  59  1163  1458  166324 
-15987647 taskC
-15987765 559 
+15980846 taskC
+15980964 559 
 Pedindo mesnagem de: 513 
+Counters: 43637  17831  2757  1776  28323  20816  1857  13195  3773  36  58  1126  1416  166936 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Encontrei um pending da tarefa 3  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 4 
 Adicionando ao pendingReq
+Encontrei um pending da tarefa 3  para o endereço 257 
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2834,10 +2834,10 @@ tarefa 3  para o endereço 257
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 44956  18343  3010  1886  31438  23222  2078  12880  4085  38  60  1171  1471  168339 
+Counters: 44648  18265  2970  1858  31294  23100  2076  12835  4034  37  60  1171  1471  169044 
 Encontrei um pending da tarefa 4  para o endereço 3 
-16164055 taskC
-16164173 565 
+16164049 taskC
+16164167 565 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2858,8 +2858,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16205793 taskC
-16205911 566 
+16205794 taskC
+16205912 566 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2876,8 +2876,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16231157 taskC
-16231275 567 
+16231158 taskC
+16231276 567 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2894,8 +2894,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16256520 taskC
-16256638 568 
+16256521 taskC
+16256639 568 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2912,16 +2912,16 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16280559 taskC
-16282001 569 
+16280561 taskC
+16282003 569 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Encontrei um pending da tarefa 3  para oClk gate off - interruptHandler_NI_RX
+Encontrei um pending da tarefa 3  para Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 4 
 Adicionando ao pendingReq
- endereço 257 
+o endereço 257 
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2930,8 +2930,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16305923 taskC
-16307365 570 
+16305924 taskC
+16307366 570 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2940,7 +2940,7 @@ Servico: 32
 Message request received from 4 
 Adicionando ao pendingReq
 a o endereço 257 
-PedindCounters: 47498  19522  3078  1924  32199  23738  2122  14090  4169  38  59  1163  1458  166168 
+PedindCounters: 47491  19523  3078  1924  32199  23738  2122  14090  4169  38  59  1163  1458  166168 
 o mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -2949,8 +2949,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 4  para o endereço 3 
-16361020 taskC
-16362463 571 
+16361189 taskC
+16362632 571 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2967,8 +2967,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16387709 taskC
-16387827 572 
+16387878 taskC
+16387996 572 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2985,8 +2985,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16413104 taskC
-16413222 573 
+16413273 taskC
+16413391 573 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3003,8 +3003,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16438469 taskC
-16438587 574 
+16438638 taskC
+16438756 574 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3021,8 +3021,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16463832 taskC
-16463950 575 
+16464001 taskC
+16464119 575 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3039,17 +3039,17 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-Counters: 43348  17762  2718  1748  28194  20701  1855  13158  3722  35  58  1126  1416  167976 
-16494481 taskC
-16494599 576 
+Counters: 43349  17762  2718  1748  28194  20701  1855  13158  3722  35  58  1126  1416  168145 
+16494646 taskC
+16494764 576 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
 Encontrei um pending da tarefa 3  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3058,8 +3058,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16544250 taskC
-16544368 577 
+16541375 taskC
+16541493 577 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3076,8 +3076,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16569613 taskC
-16569731 578 
+16566740 taskC
+16566858 578 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3094,8 +3094,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16594976 taskC
-16595094 579 
+16592103 taskC
+16592221 579 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3112,8 +3112,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16620339 taskC
-16620457 580 
+16617466 taskC
+16617584 580 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3130,8 +3130,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16645703 taskC
-16645821 581 
+16642830 taskC
+16642948 581 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3140,8 +3140,117 @@ Servico: 32
 Message request received from 4 
 Adicionando ao pendingReq
 arefa 3  para o endereço 257 
-Pedindo mesnaCounters: 44269  18103  2905  1827  30228  22295  1999  12597  3949  37  61  1146  1451  167664 
-gem de: 514 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 44966  18342  3010  1886  31443  23223  2076  12879  4083  38  64  1199  1519  168294 
+Encontrei um pending da tarefa 4  para o endereço 3 
+16671051 taskC
+16671169 582 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+16712794 taskC
+16712912 583 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da taClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+refa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+16738157 taskC
+16738275 584 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending daClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+ tarefa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+16763520 taskC
+16763638 585 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending dClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+a tarefa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+16787559 taskC
+16789001 586 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 3  para Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+16812923 taskC
+16814365 587 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 3  paraClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+ o endereço 257 
+PedindoCounters: 47499  19521  3078  1924  32195  23738  2122  14090  4169  38  59  1163  1458  166168 
+ mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 3 
@@ -3149,8 +3258,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 4  para o endereço 3 
-16699194 taskC
-16700636 582 
+16866673 taskC
+16868115 588 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3167,8 +3276,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16725881 taskC
-16725999 583 
+16893360 taskC
+16893478 589 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3185,8 +3294,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16751277 taskC
-16751395 584 
+16918756 taskC
+16918874 590 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3203,8 +3312,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16776641 taskC
-16776759 585 
+16944120 taskC
+16944238 591 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3221,8 +3330,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16802004 taskC
-16802122 586 
+16969483 taskC
+16969601 592 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3239,17 +3348,17 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-Counters: 43322  17753  2717  1748  28180  20694  1855  13151  3722  35  58  1126  1416  167641 
-16832643 taskC
-16832761 587 
+16994846 taskC
+16994964 593 
 Pedindo mesnagem de: 513 
+Counters: 43653  17838  2757  1776  28336  20822  1857  13202  3773  36  58  1126  1416  167443 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
 Encontrei um pending da tarefa 3  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3258,8 +3367,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16879210 taskC
-16879328 588 
+17047703 taskC
+17047821 594 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3276,8 +3385,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16904574 taskC
-16904692 589 
+17073067 taskC
+17073185 595 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3294,8 +3403,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16929937 taskC
-16930055 590 
+17098430 taskC
+17098548 596 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3312,8 +3421,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16955300 taskC
-16955418 591 
+17123793 taskC
+17123911 597 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3330,8 +3439,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-16980665 taskC
-16980783 592 
+17149158 taskC
+17149276 598 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3343,17 +3452,17 @@ tarefa 3  para o endereço 257
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 44959  18341  3010  1886  31438  23222  2076  12879  4083  38  60  1171  1471  168170 
+Counters: 44654  18264  2970  1858  31294  23100  2076  12835  4034  37  60  1171  1471  168368 
 Encontrei um pending da tarefa 4  para o endereço 3 
-17008886 taskC
-17009004 593 
+17177373 taskC
+17177491 599 
 Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 3 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 4 
@@ -3367,8 +3476,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17050115 taskC
-17050233 594 
+17219118 taskC
+17219236 600 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3385,8 +3494,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17075478 taskC
-17075596 595 
+17244482 taskC
+17244600 601 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3403,8 +3512,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17100841 taskC
-17100959 596 
+17269845 taskC
+17269963 602 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3421,16 +3530,16 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17124881 taskC
-17126323 597 
+17293885 taskC
+17295327 603 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Encontrei um pending da tarefa 3  para oClk gate off - interruptHandler_NI_RX
+Encontrei um pending da tarefa 3  para Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 4 
 Adicionando ao pendingReq
- endereço 257 
+o endereço 257 
 Pedindo mesnagem de: 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3439,117 +3548,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17150244 taskC
-17151686 598 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3  paraClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
- o endereço 257 
-Pedindo mesnagem de: 514 
-Counters: 47766  19616  3133  1959  32796  24207  2163  14221  4240  39  61  1208  1513  167367 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 4  para o endereço 3 
-17177292 taskC
-17178734 599 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-17219117 taskC
-17219235 600 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-arefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-17244481 taskC
-17244599 601 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-tarefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-17269844 taskC
-17269962 602 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending dClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-a tarefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-17293883 taskC
-17295325 603 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3  para oClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
- endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-17319247 taskC
-17320689 604 
+17319248 taskC
+17320690 604 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3559,12 +3559,12 @@ Message request received from 4
 Adicionando ao pendingReq
 a o endereço 257 
 Pedindo mesnagem de: 514 
-Counters: 47925  19636  3109  1965  32520  23970  2131  14178  4224  39  62  1216  1526  167477 
+Counters: 47760  19617  3133  1959  32796  24207  2163  14221  4240  39  61  1208  1513  167878 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 4  para o endereço 3 
-17346289 taskC
-17347731 605 
+17347623 taskC
+17347741 605 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3585,8 +3585,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17388286 taskC
-17388404 606 
+17388117 taskC
+17388235 606 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3603,8 +3603,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17413650 taskC
-17413768 607 
+17413481 taskC
+17413599 607 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3621,8 +3621,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17439013 taskC
-17439131 608 
+17438844 taskC
+17438962 608 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3639,8 +3639,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17463052 taskC
-17464494 609 
+17462883 taskC
+17464325 609 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3657,8 +3657,117 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17488416 taskC
-17489858 610 
+17488247 taskC
+17489689 610 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 3  parClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+a o endereço 257 
+Pedindo mesnagem de: 514 
+Counters: 47927  19636  3110  1965  32520  23970  2131  14178  4224  39  62  1216  1526  167473 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 4  para o endereço 3 
+17515289 taskC
+17516731 611 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+17557286 taskC
+17557404 612 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+arefa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+17582650 taskC
+17582768 613 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+tarefa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+17608013 taskC
+17608131 614 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending dClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+a tarefa 3  para o endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+17632052 taskC
+17633494 615 
+Pedindo mesnagem de: 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 3  para oClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 4 
+Adicionando ao pendingReq
+ endereço 257 
+Pedindo mesnagem de: 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 3 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 4  para o endereço 3 
+17657416 taskC
+17658858 616 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3676,8 +3785,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 4  para o endereço 3 
-17542870 taskC
-17542988 611 
+17711870 taskC
+17711988 617 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3694,8 +3803,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17568234 taskC
-17568352 612 
+17737234 taskC
+17737352 618 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3712,8 +3821,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17593597 taskC
-17593715 613 
+17762597 taskC
+17762715 619 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3730,8 +3839,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17618960 taskC
-17619078 614 
+17787960 taskC
+17788078 620 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3748,8 +3857,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17644324 taskC
-17644442 615 
+17813324 taskC
+17813442 621 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3766,8 +3875,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17669687 taskC
-17669805 616 
+17838687 taskC
+17838805 622 
 Pedindo mesnagem de: 513 
 Counters: 44355  18159  2939  1850  30718  22690  2043  13696  3995  38  59  1163  1458  167859 
 Clk gate off - interruptHandler_NI_RX
@@ -3785,8 +3894,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17721840 taskC
-17721958 617 
+17890840 taskC
+17890958 623 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3803,8 +3912,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17747205 taskC
-17747323 618 
+17916205 taskC
+17916323 624 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3821,8 +3930,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17772568 taskC
-17772686 619 
+17941568 taskC
+17941686 625 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3839,8 +3948,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17797931 taskC
-17798049 620 
+17966931 taskC
+17967049 626 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3857,8 +3966,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17823295 taskC
-17823413 621 
+17992295 taskC
+17992413 627 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3872,8 +3981,8 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Counters: 44808  18364  2890  1830  30362  22358  2004  12863  3946  37  58  1126  1416  167234 
 Encontrei um pending da tarefa 4  para o endereço 3 
-17850190 taskC
-17850308 622 
+18019190 taskC
+18019308 628 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -3894,8 +4003,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17895288 taskC
-17895406 623 
+18064288 taskC
+18064406 629 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3912,8 +4021,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17920651 taskC
-17920769 624 
+18089651 taskC
+18089769 630 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3930,8 +4039,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17946014 taskC
-17946132 625 
+18115014 taskC
+18115132 631 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3948,8 +4057,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17970054 taskC
-17971496 626 
+18139054 taskC
+18140496 632 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3966,8 +4075,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-17995417 taskC
-17996859 627 
+18164417 taskC
+18165859 633 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -3985,8 +4094,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 4  para o endereço 3 
-18049873 taskC
-18049991 628 
+18218873 taskC
+18218991 634 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4003,8 +4112,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18075237 taskC
-18075355 629 
+18244237 taskC
+18244355 635 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4021,8 +4130,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18100600 taskC
-18100718 630 
+18269600 taskC
+18269718 636 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4039,8 +4148,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18125963 taskC
-18126081 631 
+18294963 taskC
+18295081 637 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4057,8 +4166,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18151328 taskC
-18151446 632 
+18320328 taskC
+18320446 638 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4075,8 +4184,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18176691 taskC
-18176809 633 
+18345691 taskC
+18345809 639 
 Pedindo mesnagem de: 513 
 Counters: 44365  18158  2941  1850  30718  22690  2043  13696  3995  38  59  1163  1458  167866 
 Clk gate off - interruptHandler_NI_RX
@@ -4094,8 +4203,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18228844 taskC
-18228962 634 
+18397844 taskC
+18397962 640 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4112,8 +4221,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18254208 taskC
-18254326 635 
+18423208 taskC
+18423326 641 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4130,8 +4239,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18279571 taskC
-18279689 636 
+18448571 taskC
+18448689 642 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4148,8 +4257,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18304934 taskC
-18305052 637 
+18473934 taskC
+18474052 643 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4166,8 +4275,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18330299 taskC
-18330417 638 
+18499299 taskC
+18499417 644 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4181,8 +4290,8 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Counters: 44804  18361  2891  1830  30362  22358  2004  12861  3946  37  58  1126  1416  167230 
 Encontrei um pending da tarefa 4  para o endereço 3 
-18357194 taskC
-18357312 639 
+18526194 taskC
+18526312 645 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -4203,8 +4312,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18402288 taskC
-18402406 640 
+18571288 taskC
+18571406 646 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4221,8 +4330,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18427651 taskC
-18427769 641 
+18596651 taskC
+18596769 647 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4239,8 +4348,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18453014 taskC
-18453132 642 
+18622014 taskC
+18622132 648 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4257,8 +4366,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18477054 taskC
-18478496 643 
+18646054 taskC
+18647496 649 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4275,8 +4384,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18502417 taskC
-18503859 644 
+18671417 taskC
+18672859 650 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4294,8 +4403,8 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 4  para o endereço 3 
-18556869 taskC
-18556987 645 
+18725869 taskC
+18725987 651 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4312,8 +4421,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18582234 taskC
-18582352 646 
+18751234 taskC
+18751352 652 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4330,8 +4439,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18607597 taskC
-18607715 647 
+18776597 taskC
+18776715 653 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4348,8 +4457,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18632960 taskC
-18633078 648 
+18801960 taskC
+18802078 654 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4366,8 +4475,8 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18658324 taskC
-18658442 649 
+18827324 taskC
+18827442 655 
 Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -4384,115 +4493,14 @@ Servico: 32
 Message request received from 3 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 4  para o endereço 3 
-18683687 taskC
-18683805 650 
+18852687 taskC
+18852805 656 
 Pedindo mesnagem de: 513 
 Counters: 44365  18159  2940  1850  30718  22690  2043  13696  3995  38  59  1163  1458  167858 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 3  para o endereço 257 
 Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-18735840 taskC
-18735958 651 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-18761205 taskC
-18761323 652 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefaClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
- 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-18786568 taskC
-18786686 653 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-a 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-18811931 taskC
-18812049 654 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-efa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 4  para o endereço 3 
-18837295 taskC
-18837413 655 
-Pedindo mesnagem de: 513 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq
-arefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 44808  18364  2890  1830  30362  22358  2004  12863  3946  37  58  1126  1416  167234 
-Encontrei um pending da tarefa 4  para o endereço 3 
-18864190 taskC
-18864308 656 
-Pedindo mesnagem de: 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 97 
 Task migration received
@@ -4522,25 +4530,17 @@ migration_mapping_table[11 ] = 0
 current   mapping_table[11 ] = 259 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 3 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
 Message request received from 4 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3  para o endereço 257 
-Pedindo mesnagem de: 514 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 3 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Encontrei um pending da tarefa 4  para o endereço 3 
-18923973 taskC
-18924091 657 
+18913764 taskC
+18913882 657 
 synthetic task C migrating.
 task_addr[0 ] = 513 
 task_addr[1 ] = 514 
@@ -4578,11 +4578,11 @@ sendPendingReq()768
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
-> penClk gate off - interruptHandler_NI_RX
+Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 4 
 Forwarding msg request from task 4  para o endereco: 768 
-dReq enviado
+> pendReq enviado
 Payload+0  valor: 513 
 Payload+1  valor: 514 
 Payload+2  valor: 768 
@@ -4598,7 +4598,8 @@ Payload+11  valor: 0
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50331650 Updating mapping_table[2 ] = 768 
-Counters: 19905  6902  1791  1286  14088  9448  825  6027  2730  30  33  557  722  168278 
+Counters: 16809  5633  1576  1162  11978  7876  704  4717  2463  28  31  512  667  167983 
+Counters: 43  5  13  16  98  74  4  7  15  0  26  493  623  168377 
 Counters: 43  5  13  16  98  74  4  7  15  0  26  493  623  168377 
 Counters: 43  5  13  16  98  74  4  7  15  0  28  538  678  168322 
 Counters: 43  5  13  16  98  74  4  7  15  0  26  493  623  168377 
@@ -4633,8 +4634,7 @@ Counters: 43  5  13  16  98  74  4  7  15  0  26  493  623  168377
 Counters: 43  5  13  16  98  74  4  7  15  0  28  538  678  168322 
 Counters: 43  5  13  16  98  74  4  7  15  0  26  493  623  168377 
 Counters: 43  5  13  16  98  74  4  7  15  0  28  538  678  168322 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  493  623  168377 
-Counters: 43  5  13  16  98  74  4  7  15  0  24  417  537  168463 
+Counters: 43  5  13  16  98  74  4  7  15  0  22  372  482  168518 
 Clk gate off - interruptHandler_NI_RX
 Servico: 1638 
 Finish Simulation Packet Received!
