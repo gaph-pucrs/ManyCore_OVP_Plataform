@@ -293,13 +293,17 @@ int main(int argc, const char *argv[]) {
                 // reads the clock gating flag in the processor memory
                 opProcessorRead(proc, 0x0FFFFFA0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
                 unsigned int operationFreq = htonl(vec2usi(value));
-                PE_freq[actual_PE] = operationFreq;
+
+                // INSTRUCTIONS_PER_TIME_SLICE <-> 1000
+                //              x              <-> operationFreq
+                PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE)/1000);
+                //PE_freq[actual_PE] = operationFreq;
 
                 //opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, PE_freq[actual_PE]);
             }
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
-            stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
+            stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
             if(stopReason == OP_SR_EXIT){
                 finishedProcessors++;
             }
