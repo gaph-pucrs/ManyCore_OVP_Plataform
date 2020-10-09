@@ -305,7 +305,7 @@ int main(int argc, const char *argv[]) {
                 PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE)/1000);
                 //PE_freq[actual_PE] = operationFreq;
 
-                opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, PE_freq[actual_PE]);
+                opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, operationFreq);
             }
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
