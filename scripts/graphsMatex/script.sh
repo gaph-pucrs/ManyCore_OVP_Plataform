@@ -1,8 +1,8 @@
 #!/bin/sh
 echo $1
-cat ../simulation/matex.txt | grep Temperatures > Temp
-cat ../simulation/matex.txt | grep Power: > Power
-cat ../simulation/matex.txt | grep Power_int: > Power_int
+cat ../../simulation/matex.txt | grep Temperatures > Temp
+cat ../../simulation/matex.txt | grep Power: > Power
+cat ../../simulation/matex.txt | grep Power_int: > Power_int
 
 python temp_offset.py Temp Temperatures
 python power_total.py Power PowerTotal
