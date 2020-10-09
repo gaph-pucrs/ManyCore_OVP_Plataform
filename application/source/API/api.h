@@ -459,20 +459,20 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == PE_SET_FREQUENCY){
-        newFreq = incomingPacket[PAYLOAD];
+        newFreq = incomingPacket[PI_PAYLOAD];
         // OPERATION RANGES:
         // 1000 MHz ~ 668 MHz   => 1.0 V [2]
-        if(newFreq <= 1000 || newFreq >= 668){
+        if(newFreq <= 1000 && newFreq >= 668){
             Voltage = 2; // 1.0 V;
             *operationFrequency = newFreq;
         }
         //  667 MHz ~ 601 MHz   => 0.9 V [1]
-        else if(newFreq <= 667 || newFreq >= 601){
+        else if(newFreq <= 667 && newFreq >= 601){
             Voltage = 1; // 0.9 V;
             *operationFrequency = newFreq;
         }
         //  600 MHz ~ 10  MHz   => 0.8 V [0]
-        else if(newFreq <= 600 || newFreq >= 100){
+        else if(newFreq <= 600 && newFreq >= 100){
             Voltage = 0; // 0.8 V;
             *operationFrequency = newFreq;
         }
