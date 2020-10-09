@@ -291,6 +291,8 @@ unsigned int weird_inst;
 time_t lastTimeInstructions = 0;
 Estimation_of_energy sampling;
 unsigned int Voltage = 2;
+unsigned int newVoltage = 2;
+unsigned int newFrequency = 1000;
 unsigned int flag_DFS = 7;
 unsigned int flag_DVS = 0;
 unsigned int latency_DVS = 0;

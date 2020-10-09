@@ -308,6 +308,10 @@ void interruptHandler_timer(void) {
     // YOUR TIMER FUNCTION ENTERS HERE
 #if USE_THERMAL
     energyEstimation();
+
+    *operationFrequency = newFrequency;
+    Voltage = newVoltage;
+
 #endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
@@ -463,18 +467,18 @@ void interruptHandler_NI_RX(void) {
         // OPERATION RANGES:
         // 1000 MHz ~ 668 MHz   => 1.0 V [2]
         if(newFreq <= 1000 && newFreq >= 668){
-            Voltage = 2; // 1.0 V;
-            *operationFrequency = newFreq;
+            newVoltage = 2; // 1.0 V;
+            newFrequency = newFreq;
         }
         //  667 MHz ~ 601 MHz   => 0.9 V [1]
         else if(newFreq <= 667 && newFreq >= 601){
-            Voltage = 1; // 0.9 V;
-            *operationFrequency = newFreq;
+            newVoltage = 1; // 0.9 V;
+            newFrequency = newFreq;
         }
         //  600 MHz ~ 10  MHz   => 0.8 V [0]
         else if(newFreq <= 600 && newFreq >= 100){
-            Voltage = 0; // 0.8 V;
-            *operationFrequency = newFreq;
+            newVoltage = 0; // 0.8 V;
+            newFrequency = newFreq;
         }
         else{ // if (1000 > newFreq < 100) 
             putsv("WARNING: Selected frequency out of operation range! selFreq = ", newFreq);
