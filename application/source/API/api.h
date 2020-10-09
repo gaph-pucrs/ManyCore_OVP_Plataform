@@ -856,7 +856,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
     flag = 0;
     while(index==PIPE_WAIT){ //stay bloqued here while the message buffer is full
         // if blocked during a migration scenario this could be required
-        prints("PRESO1\n");
+        //prints("PRESO1\n");
         index = getEmptyIndex();
         if(migration_src == 1 && flag == 0){
             requestToForward();
