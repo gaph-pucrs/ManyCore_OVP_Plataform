@@ -160,7 +160,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
             Frequency[i] = 677;
             setDVFS(srcProc, Frequency[i]);
         }
-        else if(temp[i] < 30000 && Frequency[i] == 677){
+        else if(temp[i] < 31000 && Frequency[i] == 677){
             //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
             Frequency[i] = 1000;
             setDVFS(srcProc, Frequency[i]);
