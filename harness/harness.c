@@ -295,7 +295,7 @@ int main(int argc, const char *argv[]) {
                 unsigned int operationFreq = htonl(vec2usi(value));
                 PE_freq[actual_PE] = operationFreq;
 
-                opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, PE_freq[actual_PE]);
+                //opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, PE_freq[actual_PE]);
             }
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
