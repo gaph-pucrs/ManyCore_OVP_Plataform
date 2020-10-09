@@ -14,6 +14,7 @@ unsigned int toPeriph[(DIM_X*DIM_Y)+2+3+1];
 
 unsigned int Power[DIM_X*DIM_Y];
 unsigned int Temperature[DIM_X*DIM_Y];
+unsigned int Frequency[DIM_X*DIM_Y];
 unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 
 unsigned int spiralMatrix[DIM_X*DIM_Y];
@@ -123,10 +124,10 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
+        int x = i % DIM_X;
+        int y = i / DIM_Y;
+        srcProc = x << 8 | y;
         if (temp[i] > 33300){
-            int x = i % DIM_X;
-            int y = i / DIM_Y;
-            srcProc = x << 8 | y;
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
             if (how_many_tasks_PE_is_running(srcProc, task_addr)>0){
                 while (k>0){
@@ -153,6 +154,11 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                     k--;
                 }
             }
+        }
+        if(temp[i] > 32000){
+            LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            Frequency[i] = 677;
+            setDVFS(srcProc, Frequency[i]);
         }
     }
     if(contNumberOfMigrations>0){
@@ -188,6 +194,7 @@ int main(int argc, char **argv)
     for(y=0;y<DIM_Y;y++){
         for(x=0;x<DIM_X;x++){
             Power[p_idx] = 0;
+            Frequency[p_idx] = 1000;
             Temperature[p_idx] = 31815;
             LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
             p_idx++;
