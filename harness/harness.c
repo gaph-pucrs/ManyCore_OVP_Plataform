@@ -36,6 +36,7 @@
 
 unsigned int activeFetch[N_PES];
 unsigned int fetch[N_PES];
+unsigned int PE_freq[N_PES];
 
 
 // Instructions
@@ -267,6 +268,7 @@ int main(int argc, const char *argv[]) {
     
     // flag to add the callbacks during the first quantum
     int firstRun = N_PES;
+    int actual_PE = 0;
     do {
         // move time forward by time slice on root module
         // NOTE: This matches the standard scheduler which moves time forward in
@@ -276,12 +278,24 @@ int main(int argc, const char *argv[]) {
         /*cont the number of processors that has exited */
         int finishedProcessors = 0;
         
+        // Reset the processor count
+        actual_PE = 0;
+
         /* loop for all processors */
         while ((proc = opProcessorNext(modNew, proc))) {
             if(firstRun){
                 // Add a fetch callback to each processor
                 opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
                 firstRun--;
+            } 
+            else if(countQuantum % 100 == 0){
+                char value[4]; // aux var
+                // reads the clock gating flag in the processor memory
+                opProcessorRead(proc, 0x0FFFFFA0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+                unsigned int operationFreq = htonl(vec2usi(value));
+                PE_freq[actual_PE] = operationFreq;
+
+                opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, PE_freq[actual_PE]);
             }
 
             /*simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions */
@@ -289,6 +303,9 @@ int main(int argc, const char *argv[]) {
             if(stopReason == OP_SR_EXIT){
                 finishedProcessors++;
             }
+
+            // Go to the next processor
+            actual_PE++;
         }
 
         countQuantum++;

@@ -71,7 +71,8 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_ADDR_UPDT       0x67  //103
 #define TASK_FINISHED        0x70  //112
 #define TASK_REQUEST_FORWARD 0x80
-#define PE_FINISH_SIMULATION 0x666 
+#define PE_FINISH_SIMULATION 0x666
+#define PE_SET_FREQUENCY     0x90
 
 //////////////////////////////
 //////////////////////////////
@@ -327,7 +328,7 @@ void interruptHandler_NI_RX(void) {
     putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, index, taskID, newAddr;
+    int requester, i, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
     }
@@ -455,6 +456,30 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == PE_FINISH_SIMULATION){
         prints("Finish Simulation Packet Received!\n");
         finishSimulation_flag = 1;
+        *NIcmdRX = DONE;
+    }
+    else if(incomingPacket[PI_SERVICE] == PE_SET_FREQUENCY){
+        newFreq = incomingPacket[PAYLOAD];
+        // OPERATION RANGES:
+        // 1000 MHz ~ 668 MHz   => 1.0 V [2]
+        if(newFreq <= 1000 || newFreq >= 668){
+            Voltage = 2; // 1.0 V;
+            *operationFrequency = newFreq;
+        }
+        //  667 MHz ~ 601 MHz   => 0.9 V [1]
+        else if(newFreq <= 667 || newFreq >= 601){
+            Voltage = 1; // 0.9 V;
+            *operationFrequency = newFreq;
+        }
+        //  600 MHz ~ 10  MHz   => 0.8 V [0]
+        else if(newFreq <= 600 || newFreq >= 100){
+            Voltage = 0; // 0.8 V;
+            *operationFrequency = newFreq;
+        }
+        else{ // if (1000 > newFreq < 100) 
+            putsv("WARNING: Selected frequency out of operation range! selFreq = ", newFreq);
+        }
+        putsv("PE frequency changed to ", *operationFrequency);
         *NIcmdRX = DONE;
     }
     else{
@@ -588,6 +613,10 @@ void OVP_init(){
     // Enable external interrupts
     enable_interruptions();
 
+    // Operating Frequency
+    *operationFrequency = 1000;
+    
+    // 
     finishSimulation_flag = 0;
 
     // Inform the processor ID to the router

@@ -152,8 +152,9 @@ const int powerSwitchControlActive[3]={DYN_CTRL_ACTIVE_0, DYN_CTRL_ACTIVE_1, DYN
 const int powerAvgBufferIdle[3]={DYN_BUFFER_IDLE_0, DYN_BUFFER_IDLE_1, DYN_BUFFER_IDLE_2};
 const int powerSwitchControlIdle[3]={DYN_CTRL_IDLE_0, DYN_CTRL_IDLE_1, DYN_CTRL_IDLE_2};
 
-#define CLK_GATING     ((unsigned int *) 0x0FFFFFFC)
-#define EXECUTED_INST  ((unsigned int *) 0x0FFFFFF8)
+#define FREQUENCY_SCALE ((unsigned int *) 0x0FFFFFA0)
+#define CLK_GATING      ((unsigned int *) 0x0FFFFFFC)
+#define EXECUTED_INST   ((unsigned int *) 0x0FFFFFF8)
 /* -------------------------------------------------
 // Instruction Type Counter ----------------------*/
 #define BRANCH_INST    ((unsigned int *) 0x0FFFFFF4)
@@ -297,6 +298,7 @@ unsigned int latency_DVS = 0;
 
 // Activate this flag to deactivate the instruction count - "clock gating the processor"
 volatile unsigned int *clockGating_flag = CLK_GATING;
+volatile unsigned int *frequencyScale = FREQUENCY_SCALE;    // Used by the HARNESS to control the processor frequency
 volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];  // Used by the API_thermal to create the energy packet
 volatile unsigned int sendExecutedInstPacket = FALSE;       // Used by the API_thermal to inform if the energy packet must be sent after the TX interruption
 
@@ -308,6 +310,7 @@ unsigned int getNumberOfPorts(unsigned int address);
 void energyEstimation();
 void ResetExecutedInstructions();
 void ReportExecutedInstructions();
+void setDVFS(unsigned int pe_addr, unsigned int frequency);
 
 
 ///////////////////////////////////////////////////////////////////
@@ -556,9 +559,19 @@ void energyEstimation(){
     if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
-        sendExecutedInstPacket = TRUE;
-    
+        sendExecutedInstPacket = TRUE;   
 }
+
+void setDVFS(unsigned int pe_addr, unsigned int frequency){
+    int index = getServiceIndex();
+    myServicePacket[index][PI_DESTINATION] = pe_addr;
+    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = PE_SET_FREQUENCY;
+    myServicePacket[index][PI_PAYLOAD] = frequency;
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
 
 ///////////////////////////////////////////////////////////////////
 //
