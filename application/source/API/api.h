@@ -962,7 +962,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
 #if USE_THERMAL
 #endif
     while(*NIcmdTX != NI_STATUS_OFF){
-        //prints("PRESO3\n");
+        prints("PRESO3\n");
         /* waits until NI is ready to execute an operation */}
 #if USE_THERMAL
 #endif
