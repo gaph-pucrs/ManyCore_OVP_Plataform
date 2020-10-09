@@ -483,7 +483,7 @@ void interruptHandler_NI_RX(void) {
         else{ // if (1000 > newFreq < 100) 
             putsv("WARNING: Selected frequency out of operation range! selFreq = ", newFreq);
         }
-        putsv("PE frequency changed to ", *operationFrequency);
+        putsv("The PE frequency will be changed in the next timer interruption. newValue = ", newFrequency);
         *NIcmdRX = DONE;
     }
     else{
