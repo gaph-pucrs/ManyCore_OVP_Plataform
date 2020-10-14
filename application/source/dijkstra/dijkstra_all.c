@@ -38,7 +38,7 @@ int dijkstra_divider(int state)
 		putsv("Começando iteracao ", iter);
 		for (i=0; i<NUM_NODES; i++) {
 			for (j=0; j<NUM_NODES; j++) {
-				theMessage.msg[j] = state;//AdjMatrix[i][j];
+				theMessage.msg[j] = AdjMatrix[i][j];
 			}
 			//if(i==NUM_NODES-1){
 				//sprintf(buffer, "enviando pacote para 0-%d,%d - %d",iter,i,clock());
@@ -113,7 +113,7 @@ int dijkstra_slave()
 			for (j=0; j<NUM_NODES; j++){
 				AdjMatrix[i][j] = theMessage.msg[j];
 			}
-			putsv("state: ", theMessage.msg[5]);
+			//putsv("state: ", theMessage.msg[5]);
 		}
 		calc = AdjMatrix[0][0];
 		
