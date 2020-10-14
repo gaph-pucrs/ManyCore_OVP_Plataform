@@ -7,7 +7,10 @@
 
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
+#include "sort_config.h"
+#include "aes_config.h"
 #include "thermalManagement_config.h"
+
 
 message theMessage;
 
@@ -25,6 +28,12 @@ int synthetic_taskF(int state);
 int dijkstra_divider(int state);
 int dijkstra_slave();
 int dijkstra_print();
+
+int sortMaster(int state);
+int sort_slave(int task);
+
+int aesMaster(int state);
+int aes_slave();
 
 int main(int argc, char **argv)
 {
@@ -75,41 +84,70 @@ int main(int argc, char **argv)
 		}
 
 		switch(running_task){
-			case taskA:
-				state = synthetic_taskA(state);
+			// case taskA:
+			// 	state = synthetic_taskA(state);
+			// 	break;
+			// case taskB:
+			// 	state = synthetic_taskB(state);
+			// 	break;
+			// case taskC:
+			// 	state = synthetic_taskC(state);
+			// 	break;
+			// case taskD:
+			// 	state = synthetic_taskD(state);
+			// 	break;
+			// case taskE:
+			// 	state = synthetic_taskE(state);
+			// 	break;
+			// case taskF:
+			// 	state = synthetic_taskF(state);
+			// 	break;
+			// case divider:
+			// 	state = dijkstra_divider(state);
+			// 	break;
+			// case dijkstra_0:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case dijkstra_1:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case dijkstra_2:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case dijkstra_3:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case print:
+			// 	state = dijkstra_print();
+			// 	break;
+			case sort_master:
+				state = sortMaster(state);
 				break;
-			case taskB:
-				state = synthetic_taskB(state);
+			case sort_slave1:
+				state = sort_slave(0);
 				break;
-			case taskC:
-				state = synthetic_taskC(state);
+			case sort_slave2:
+				state = sort_slave(1);
 				break;
-			case taskD:
-				state = synthetic_taskD(state);
+			case sort_slave3:
+				state = sort_slave(2);
 				break;
-			case taskE:
-				state = synthetic_taskE(state);
+			case aes_master:
+				state = aesMaster(state);
 				break;
-			case taskF:
-				state = synthetic_taskF(state);
+			case aes_slave1:
+				state = aes_slave();
 				break;
-			case divider:
-				state = dijkstra_divider(state);
+			case aes_slave2:
+				state = aes_slave();
 				break;
-			case dijkstra_0:
-				state = dijkstra_slave();
+			case aes_slave3:
+				state = aes_slave();
 				break;
-			case dijkstra_1:
-				state = dijkstra_slave();
+			case aes_slave4:
+				state = aes_slave();
 				break;
-			case dijkstra_2:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_3:
-				state = dijkstra_slave();
-				break;
-			case print:
-				state = dijkstra_print();
+
 		}
 		if(state == 0){
 			printFinish();
