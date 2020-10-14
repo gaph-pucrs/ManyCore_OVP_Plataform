@@ -488,10 +488,13 @@ int dijkstra_slave()
 		theMessage.size = NUM_NODES;
 		for (i=0; i<NUM_NODES; i++) {
 			ReceiveMessage(&theMessage, divider);
-			for (j=0; j<NUM_NODES; j++)
+			for (j=0; j<NUM_NODES; j++){
 				AdjMatrix[i][j] = theMessage.msg[j];
+			}
+			//putsv("state: ", theMessage.msg[5]);
 		}
 		calc = AdjMatrix[0][0];
+		
 		if (calc == KILL) break;
 
 		for (i=0;i<NUM_NODES;i++){
