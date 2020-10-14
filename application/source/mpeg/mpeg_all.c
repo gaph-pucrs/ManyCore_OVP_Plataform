@@ -486,7 +486,7 @@ unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int
   return temp2;
 }
 
-int mpeg_primt_mpeg(int state)
+int mpeg_print_mpeg(int state)
 {
     unsigned int time_a, time_b;
     int i;
