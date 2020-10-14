@@ -4,14 +4,16 @@
 #include "interrupt.h"
 #include "spr_defs.h"
 #include "source/API/api.h"
+#include "../peripheral/whnoc_dma/noc.h"
 
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
+#include "mpeg_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
 
-#define NUM_TASK	12
+#define NUM_TASK	N_PES-1
 int task_addr[NUM_TASK];
 int new_task_addr[NUM_TASK];
 
@@ -25,6 +27,22 @@ int synthetic_taskF(int state);
 int dijkstra_divider(int state);
 int dijkstra_slave();
 int dijkstra_print();
+
+// MPEG - threads
+int mpeg_idct(int state);
+int mpeg_iquant(int state);
+int mpeg_ivlc(int state);
+int mpeg_print_mpeg(int state);
+int mpeg_start(int state);
+// MPEG - auxiliar functions
+void idct_func(type_DATA *block,int lx);
+static void idctcol(type_DATA *block, int offs, int lx);
+static void idctrow (type_DATA *block, int offs);
+void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant);
+void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer);
+short int getDC(short int type, type_DATA *buffer);
+unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init);
+
 
 int main(int argc, char **argv)
 {
@@ -43,10 +61,11 @@ int main(int argc, char **argv)
 		*clockGating_flag = TRUE;
 		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ }
 
+		// Detects the end of simulation
 		if(finishSimulation_flag)
 			break;
 
-		set_taskMigrated(-1); // resets this, because it's running a new task here
+		set_taskMigrated(-1); // resets this, because it's running a new task
 		*clockGating_flag = FALSE;
 		get_mapping_table(task_addr);
 
@@ -75,6 +94,7 @@ int main(int argc, char **argv)
 		}
 
 		switch(running_task){
+			// SYNTHETIC
 			case taskA:
 				state = synthetic_taskA(state);
 				break;
@@ -93,6 +113,7 @@ int main(int argc, char **argv)
 			case taskF:
 				state = synthetic_taskF(state);
 				break;
+			// DIJKSTRA
 			case divider:
 				state = dijkstra_divider(state);
 				break;
@@ -108,8 +129,25 @@ int main(int argc, char **argv)
 			case dijkstra_3:
 				state = dijkstra_slave();
 				break;
+			// MPEG
 			case print:
 				state = dijkstra_print();
+				break;
+			case idct:
+				state = mpeg_idct(state);
+				break;
+			case iquant:
+				state = mpeg_iquant(state);
+				break;
+			case ivlc:
+				state = mpeg_ivlc(state);
+				break;
+			case print_mpeg:
+				state = mpeg_print_mpeg(state);
+				break;
+			case start:
+				state = mpeg_start(state);
+				break;
 		}
 		if(state == 0){
 			printFinish();
