@@ -23,6 +23,8 @@ unsigned char zig_zag_scan[64] ={
 };
 
 short int bytecount = 0;              // Bytes of the compressed VLC_array bitstream: must be specified as an input
+short int bitposition = 7;            // posizione del prossimo bit da scrivere sul buffer
+short int mask = 0x80;                // mask for reading and writing bytes on the vlc_stream
 
 typedef struct {
     char val, len;
