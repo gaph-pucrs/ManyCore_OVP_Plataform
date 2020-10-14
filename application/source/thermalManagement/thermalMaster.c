@@ -155,7 +155,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                 }
             }
         }
-        /*if(temp[i] > 32000 && Frequency[i] == 1000){
+        if(temp[i] > 32000 && Frequency[i] == 1000){
             //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
             Frequency[i] = 677;
             setDVFS(srcProc, Frequency[i]);
@@ -164,7 +164,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
             //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
             Frequency[i] = 1000;
             setDVFS(srcProc, Frequency[i]);
-        }*/
+        }
     }
     if(contNumberOfMigrations>0){
         for(i = 0; i < contNumberOfMigrations; i++)

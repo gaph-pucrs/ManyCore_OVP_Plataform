@@ -200,3 +200,8 @@ DCTtab DCTtab6[16] =
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
+#define iquant 16
+#define ivlc 15
+#define start 14
+#define idct 13
+#define print_mpeg 12
