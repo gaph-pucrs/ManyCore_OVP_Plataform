@@ -2,7 +2,7 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define MPEG_FRAMES				320//160
+#define MPEG_FRAMES				160//160
 // Cosine Transform Coefficients
 #define W1 2841                 /* 2048*sqrt(2)*cos(1*pi/16) */
 #define W2 2676                 /* 2048*sqrt(2)*cos(2*pi/16) */
@@ -23,6 +23,8 @@ unsigned char zig_zag_scan[64] ={
 };
 
 short int bytecount = 0;              // Bytes of the compressed VLC_array bitstream: must be specified as an input
+short int bitposition = 7;            // posizione del prossimo bit da scrivere sul buffer
+short int mask = 0x80;                // mask for reading and writing bytes on the vlc_stream
 
 typedef struct {
     char val, len;
@@ -198,8 +200,8 @@ DCTtab DCTtab6[16] =
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define iquant 4
-#define ivlc 3
-#define start 2
-#define idct 1
-#define print_mpeg 0
+#define iquant 16
+#define ivlc 15
+#define start 14
+#define idct 13
+#define print_mpeg 12
