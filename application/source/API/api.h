@@ -362,7 +362,6 @@ void interruptHandler_NI_RX(void) {
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        //mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
@@ -515,10 +514,12 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     if(found != PIPE_WAIT){
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
+            prints("Enviando do PIPE\n");
             // Sends the packet
             SendSlot((unsigned int)&buffer_packets[found], found);
         }
         else{
+            prints("Envio agendado após TX\n");
             // Set it to send after the next TX interruption
             addSendAfterTX(found);
         }
