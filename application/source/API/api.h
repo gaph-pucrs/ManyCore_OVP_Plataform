@@ -1025,12 +1025,10 @@ void FinishApplication(){
 //
 void prints(char* text){
     int i = 0;
-    disable_interruptions();
     do{
         *printChar = text[i];
         i++;
     }while(text[i-1] != '\0');
-    enable_interruptions();
     return;
 }
 
