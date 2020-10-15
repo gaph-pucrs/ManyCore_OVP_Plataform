@@ -75,6 +75,7 @@ unsigned int usFlit;
 // Tells to the NI control when a message is already ready to be delivered to the processor
 //unsigned int RXwaiting = 0;
 
+int flag_print = 0;
 ////////////////////////////// Auxiliar Funcions  /////////////////////////////
 
 // Transform a flit from VECTOR to UNSIGNED INT (using the global variables)
@@ -160,14 +161,23 @@ void niIteration(){
             // Runs the logic to get the packet size and the end-of-packet 
             if(transmittingCount == HEADER){
                 transmittingCount = SIZE;
+
+                //debug
+                if(htonl(usFlit) == 0x0200){
+                    flag_print = 1;
+                }
             }
             else if(transmittingCount == SIZE){
                 transmittingCount = htonl(usFlit);
             }
             else{
-                transmittingCount = transmittingCount - 1;
+                transmittingCount = transmittingCount - 1;    
             }
-    
+
+            // debug
+            if(flag_print == 1)
+                bhmMessage("INFO", "Printing flit %x: %d", transmittingCount, htonl(usFlit));
+
             // Increments the memory pointer to get the next flit
             transmittingAddress = transmittingAddress + 4;
 
@@ -176,6 +186,7 @@ void niIteration(){
         }
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
+            flag_print = 0; // debug
             // Changes the TX status to INTERRUPTION
             control_TX = NI_STATUS_INTER; 
             ppmWriteNet(handles.INT_NI_TX, 1); // Turns the interruption on
