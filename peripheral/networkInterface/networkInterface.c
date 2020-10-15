@@ -76,6 +76,7 @@ unsigned int usFlit;
 //unsigned int RXwaiting = 0;
 
 int flag_print = 0;
+int flag_print_rx = 0;
 ////////////////////////////// Auxiliar Funcions  /////////////////////////////
 
 // Transform a flit from VECTOR to UNSIGNED INT (using the global variables)
@@ -342,6 +343,11 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingField = SIZE;
             writeMem(flit, receivingAddress);
             receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
+
+            //debug
+            if(htonl(flit) == 0x0200){
+                flag_print_rx = 1;
+            }
         }
         else if(receivingField == SIZE){
             receivingField = PAYLOAD;
@@ -356,10 +362,14 @@ PPM_PACKETNET_CB(dataPortUpd) {
         }
     }
 
+    if(flag_print_rx == 1){
+        bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
+    }
     // bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
     
     // Detects the receiving finale
     if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){
+        flag_print_rx = 0; // debug
         setSTALL();
         control_RX = NI_STATUS_INTER;
         //writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
