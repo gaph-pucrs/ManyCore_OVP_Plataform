@@ -75,8 +75,8 @@ unsigned int usFlit;
 // Tells to the NI control when a message is already ready to be delivered to the processor
 //unsigned int RXwaiting = 0;
 
-int flag_print = 0;
-int flag_print_rx = 0;
+/*int flag_print = 0;
+int flag_print_rx = 0;*/
 ////////////////////////////// Auxiliar Funcions  /////////////////////////////
 
 // Transform a flit from VECTOR to UNSIGNED INT (using the global variables)
@@ -164,9 +164,9 @@ void niIteration(){
                 transmittingCount = SIZE;
 
                 //debug
-                if(htonl(usFlit) == 0x0200){
+                /*if(htonl(usFlit) == 0x0200){
                     flag_print = 1;
-                }
+                }*/
             }
             else if(transmittingCount == SIZE){
                 transmittingCount = htonl(usFlit);
@@ -176,9 +176,9 @@ void niIteration(){
             }
 
             // debug
-            if(flag_print == 1){
+            /*if(flag_print == 1){
                 bhmMessage("INFO", "NI_PRINTER", "Printing flit %x: %d\n", (int)transmittingCount, (int)htonl(usFlit));
-            }
+            }*/
 
             // Increments the memory pointer to get the next flit
             transmittingAddress = transmittingAddress + 4;
@@ -188,7 +188,7 @@ void niIteration(){
         }
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
-            flag_print = 0; // debug
+            //flag_print = 0; // debug
             // Changes the TX status to INTERRUPTION
             control_TX = NI_STATUS_INTER; 
             ppmWriteNet(handles.INT_NI_TX, 1); // Turns the interruption on
@@ -345,9 +345,9 @@ PPM_PACKETNET_CB(dataPortUpd) {
             receivingAddress = receivingAddress + 4;    // Increments the pointer, to write the next flit
 
             //debug
-            if(htonl(flit) == 0x0200){
+            /*if(htonl(flit) == 0x0200){
                 flag_print_rx = 1;
-            }
+            }*/
         }
         else if(receivingField == SIZE){
             receivingField = PAYLOAD;
@@ -362,14 +362,14 @@ PPM_PACKETNET_CB(dataPortUpd) {
         }
     }
 
-    if(flag_print_rx == 1){
+    /*if(flag_print_rx == 1){
         bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
-    }
+    }*/
     // bhmMessage("I", "INPUT", "receivingCount %x ~~~~~~~~~~Recebendo flit:%x",receivingCount, htonl(flit));
     
     // Detects the receiving finale
     if(receivingCount == EMPTY && control_RX == NI_STATUS_ON){
-        flag_print_rx = 0; // debug
+        //flag_print_rx = 0; // debug
         setSTALL();
         control_RX = NI_STATUS_INTER;
         //writeMem(htonl(NI_INT_TYPE_RX), intTypeAddr); // Writes the interruption type to the processor
