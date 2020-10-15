@@ -558,7 +558,7 @@ void energyEstimation(){
     executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;*/
-    if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
+    if(*NIcmdTX == NI_STATUS_OFF && insideSendSlot == 0) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
     else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
         sendExecutedInstPacket = TRUE;   

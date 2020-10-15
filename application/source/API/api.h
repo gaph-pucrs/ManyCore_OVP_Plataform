@@ -133,6 +133,7 @@ volatile unsigned int receivingActive;                      // Used by the API t
 volatile unsigned int transmittingActive = PIPE_WAIT;       // Used by the API to temporarily store the PIPE slot that is being transmitted
 volatile unsigned int interruptionType = 0;                 // TODO: LEGACY - NEED TO BE REMOVED! (inside the peripheral first)
 volatile unsigned int isRawReceive = 0;                     // Used by the API when using Raw send/receive functions
+volatile int insideSendSlot = 0;                            
 //////////////////////////////
 //////////////////////////////
 
@@ -949,7 +950,7 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
-
+    insideSendSlot = 1;
 #if USE_THERMAL
 #endif    
     ////////////////////////////////////////////////
@@ -987,6 +988,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     ////////////////////////////////////////////////
 #if USE_THERMAL    
 #endif
+    insideSendSlot = 0;
     return;
 }
 
