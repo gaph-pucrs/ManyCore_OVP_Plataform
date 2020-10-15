@@ -32,10 +32,7 @@ task_addr[10 ] = 512
 task_addr[11 ] = 768 
 task_addr[12 ] = 1024 
 task_addr[13 ] = 1025 
-task_addClk gate off - interruptHandler_NI_RX
-Servico: 103 
-16973830 Updating mapping_table[6 ] = 259 
-r[14 ] = 1026 
+task_addr[14 ] = 1026 
 task_addr[15 ] = 1027 
 task_addr[16 ] = 1028 
 task_addr[17 ] = 0 
@@ -45,14 +42,18 @@ task_addr[20 ] = 0
 task_addr[21 ] = 0 
 task_addr[22 ] = 0 
 task_addr[23 ] = 0 
-task_addr[24 ] = 0 
-Payload+0  valor: 67305487 
+task_addr[24 ] = Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+16973830 Updating mapping_table[6 ] = 259 
+0 
 Payload+0  valor: 67305487 
 Payload+0  valor: 67305487 
 Payload+0  valor: 67305487 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16908295 Updating mapping_table[7 ] = 258 
+Payload+0  valor: 67305487 
+Payload+0  valor: 67305487 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16842760 Updating mapping_table[8 ] = 257 
@@ -63,7 +64,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16777225 Updating mapping_table[9 ] = 256 
 Payload+0  valor: 67305487 
-Payload+0  valor: 67305487 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 33554442 Updating mapping_table[10 ] = 512 
@@ -71,18 +71,20 @@ Payload+0  valor: 67305487
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50331659 Updating mapping_table[11 ] = 768 
+Payload+0  valor: 67305487 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67108876 Updating mapping_table[12 ] = 1024 
 Payload+0  valor: 67305487 
 Payload+0  valor: 67305487 
 Payload+0  valor: 67305487 
-Counters: 12754  3991  1846  1142  15478  11049  1671  4230  3101  38  50  432  682  320745 
-Payload+0  valor: 67305487 
-Payload+0  valor: 67305487 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67174413 Updating mapping_table[13 ] = 1025 
+Counters: 13702  4254  2043  1284  15954  11222  1895  4517  3406  42  54  464  734  321697 
+Payload+0  valor: 67305487 
+Payload+0  valor: 67305487 
+Payload+0  valor: 67305487 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67239950 Updating mapping_table[14 ] = 1026 
@@ -91,21 +93,19 @@ Payload+0  valor: 67305487
 Payload+0  valor: 67305487 
 Payload+0  valor: 67305487 
 Payload+0  valor: 67305487 
-Payload+0  valor: 67305487 
-Payload+0  valor: 67305487 
-Payload+0  valor: 67305487 
-Task 15 mapped
-MPEG Task start: iVLC 359936 
-Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67371024 Updating mapping_table[16 ] = 1028 
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
+Payload+0  valor: 67305487 
+Task 15 mapped
+MPEG Task start: iVLC 361047 
+Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 0 
 Pedindo mesnagem de: 1026 
@@ -133,7 +133,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 67878  21255  4055  3913  28932  17249  63799  10974  17036  282  41  1217  1422  248578 
+Counters: 66897  20738  3819  3848  24295  13487  64002  10107  16723  276  37  1185  1370  247625 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 3 
 Pedindo mesnagem de: 1026 
@@ -179,7 +179,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72255  22517  3773  3902  26659  14987  69990  10868  17156  280  30  1508  1658  248342 
+Counters: 72112  22390  3728  3918  24564  13167  70748  10598  17205  279  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 8 
 Pedindo mesnagem de: 1026 
@@ -221,11 +221,11 @@ IVLC: 12
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 72486  22611  3797  3967  26112  14324  71835  10842  17570  294  29  1437  1582  250126 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72579  22503  3776  3986  24767  13321  70848  10612  17371  285  31  1516  1671  249755 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 13 
 Pedindo mesnagem de: 1026 
@@ -262,7 +262,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 71185  22237  3553  3759  24096  12921  71975  10461  17056  273  28  1302  1442  246850 
+Counters: 72121  22492  3667  3949  23196  11855  74177  10496  17753  294  26  1223  1353  247221 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 17 
 Pedindo mesnagem de: 1026 
@@ -308,7 +308,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72202  22491  3797  3936  26696  15023  69882  10856  17220  283  30  1508  1658  248342 
+Counters: 72199  22387  3739  3935  24643  13272  70405  10562  17201  280  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 22 
 Pedindo mesnagem de: 1026 
@@ -345,7 +345,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72501  22689  3714  3957  24742  13140  74270  10746  17854  299  26  1223  1353  248647 
+Counters: 72655  22628  3707  3999  23432  12020  74224  10504  17875  299  26  1223  1353  248647 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 26 
 Pedindo mesnagem de: 1026 
@@ -391,7 +391,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72247  22505  3779  3913  26671  15000  69961  10864  17177  281  30  1508  1658  248342 
+Counters: 72061  22383  3735  3925  24522  13143  70831  10607  17230  279  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 31 
 Pedindo mesnagem de: 1026 
@@ -428,7 +428,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72447  22669  3738  3988  24777  13171  74163  10735  17915  302  26  1223  1353  248647 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 35 
 Pedindo mesnagem de: 1026 
@@ -438,6 +437,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72505  22480  3771  3979  24747  13314  70765  10603  17346  285  31  1516  1671  249505 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 36 
 Pedindo mesnagem de: 1026 
@@ -474,7 +474,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72254  22521  3769  3895  26652  14979  70017  10871  17139  279  30  1508  1658  248342 
+Counters: 72204  22514  3675  3956  23216  11866  74253  10504  17782  295  26  1223  1353  247471 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 40 
 Pedindo mesnagem de: 1026 
@@ -516,11 +516,11 @@ IVLC: 44
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 72117  22489  3783  3952  26036  14306  71350  10788  17480  293  29  1437  1582  248876 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72207  22390  3732  3928  24635  13261  70439  10566  17184  279  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 45 
 Pedindo mesnagem de: 1026 
@@ -557,8 +557,8 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 71564  22355  3566  3777  24172  12941  72453  10513  17151  274  28  1302  1442  248100 
-Encontrei um pending da tarefa 16  para o endereço 1028 
+EnCounters: 72689  22627  3712  4004  23472  12053  74116  10493  17877  299  26  1223  1353  248647 
+contrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 49 
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
@@ -603,7 +603,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72197  22492  3795  3932  26696  15021  69893  10857  17218  283  30  1508  1658  248342 
+Counters: 72030  22381  3732  3924  24485  13116  70920  10616  17238  280  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 54 
 Pedindo mesnagem de: 1026 
@@ -640,7 +640,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72493  22686  3721  3965  24748  13148  74242  10743  17867  300  26  1223  1353  248647 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 58 
 Pedindo mesnagem de: 1026 
@@ -650,6 +649,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72438  22458  3769  3975  24732  13308  70674  10593  17324  284  31  1516  1671  249255 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 59 
 Pedindo mesnagem de: 1026 
@@ -686,7 +686,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72237  22506  3779  3913  26671  15000  69959  10864  17178  281  30  1508  1658  248342 
+Counters: 72287  22541  3679  3958  23229  11868  74352  10516  17795  295  26  1223  1353  247721 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 63 
 Pedindo mesnagem de: 1026 
@@ -723,7 +723,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72623  22692  3726  3976  24889  13279  73795  10697  17835  300  26  1223  1353  248647 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 67 
 Pedindo mesnagem de: 1026 
@@ -733,6 +732,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72201  22386  3735  3933  24640  13266  70425  10565  17193  279  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 68 
 Pedindo mesnagem de: 1026 
@@ -769,8 +769,8 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72095  22497  3779  3907  26538  14868  70393  10908  17219  281  30  1508  1658  248342 
-Encontrei um pending da tarefa 16  para o endereço 1028 
+Encontrei um pending da tarefa Counters: 72706  22634  3710  3997  23515  12077  74031  10513  17856  299  26  1223  1353  248647 
+16  para o endereço 1028 
 IVLC: 72 
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
@@ -811,11 +811,11 @@ IVLC: 76
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 72233  22490  3779  3956  26137  14490  70887  10746  17395  291  30  1508  1658  248342 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72014  22373  3731  3928  24440  13087  71016  10596  17256  280  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 77 
 Pedindo mesnagem de: 1026 
@@ -852,7 +852,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72470  22688  3730  3933  25298  13671  73285  10858  17673  291  27  1231  1366  248634 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 81 
 Pedindo mesnagem de: 1026 
@@ -862,6 +861,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72351  22433  3766  3971  24716  13306  70578  10582  17305  284  31  1516  1671  249005 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 82 
 Pedindo mesnagem de: 1026 
@@ -898,7 +898,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72208  22492  3793  3933  26694  15018  69895  10856  17218  283  30  1508  1658  248342 
+Counters: 72352  22563  3678  3960  23243  11868  74462  10526  17812  295  26  1223  1353  247971 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 86 
 Pedindo mesnagem de: 1026 
@@ -935,7 +935,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72490  22686  3725  3968  24753  13153  74223  10742  17873  300  26  1223  1353  248647 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 90 
 Pedindo mesnagem de: 1026 
@@ -945,6 +944,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72205  22387  3739  3935  24644  13272  70403  10564  17201  280  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 91 
 Pedindo mesnagem de: 1026 
@@ -963,9 +963,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 144 
-The PE frequency will be changed in the next timer interruption. newValue = 677 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 93 
 Pedindo mesnagem de: 1026 
@@ -984,8 +981,8 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 72094  22486  3799  3896  27283  15468  69078  11013  17032  277  30  1445  1595  248405 
 Encontrei um pending da tarefa 16  para o endereço 1028 
+Counters: 72719  22633  3717  4002  23555  12104  73943  10527  17847  298  26  1223  1353  248647 
 IVLC: 95 
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
@@ -994,12 +991,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33816578 Updating mapping_table[2 ] = 516 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-196621 Updating mapping_table[13 ] = 3 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 96 
 Pedindo mesnagem de: 1026 
@@ -1018,13 +1009,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-50593801 Updating mapping_table[9 ] = 772 
-Counters: 50582  15881  2806  2815  20221  11546  48953  8076  12241  201  36  1050  1230  175141 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-17039366 Updating mapping_table[6 ] = 260 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 98 
 Pedindo mesnagem de: 1026 
@@ -1043,6 +1027,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 71993  22373  3730  3926  24401  13065  71094  10581  17268  281  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 100 
 Pedindo mesnagem de: 1026 
@@ -1052,7 +1037,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 48958  15342  2681  2724  19138  10909  47786  7652  11895  197  20  922  1022  167978 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 101 
 Pedindo mesnagem de: 1026 
@@ -1080,7 +1064,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49135  15385  2647  2731  18594  10472  48576  7540  12002  200  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 104 
 Pedindo mesnagem de: 1026 
@@ -1090,6 +1073,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72279  22411  3759  3964  24697  13295  70500  10574  17277  283  31  1516  1671  248755 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 105 
 Pedindo mesnagem de: 1026 
@@ -1108,7 +1092,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49282  15447  2689  2747  19073  10852  48593  7639  12054  201  20  985  1085  167915 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 107 
 Pedindo mesnagem de: 1026 
@@ -1127,6 +1110,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72425  22588  3684  3967  23263  11879  74535  10535  17841  296  26  1223  1353  248221 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 109 
 Pedindo mesnagem de: 1026 
@@ -1136,7 +1120,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49298  15449  2682  2743  19067  10846  48610  7641  12043  200  20  922  1022  167978 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 110 
 Pedindo mesnagem de: 1026 
@@ -1164,7 +1147,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49289  15451  2682  2744  19069  10843  48618  7643  12042  200  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 113 
 Pedindo mesnagem de: 1026 
@@ -1174,6 +1156,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 72202  22386  3733  3932  24639  13263  70431  10565  17191  279  30  1508  1658  248342 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 114 
 Pedindo mesnagem de: 1026 
@@ -1192,7 +1175,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49284  15451  2688  2747  19074  10852  48591  7638  12057  201  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 116 
 Pedindo mesnagem de: 1026 
@@ -1213,6 +1195,7 @@ Message request received from 16
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 118 
+Counters: 72727  22621  3738  4018  23588  12126  73848  10531  17849  298  27  1294  1429  248571 
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1220,7 +1203,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49290  15449  2688  2748  19075  10852  48581  7640  12053  201  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 119 
 Pedindo mesnagem de: 1026 
@@ -1239,6 +1221,9 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 144 
+The PE frequency will be changed in the next timer interruption. newValue = 677 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 121 
 Pedindo mesnagem de: 1026 
@@ -1248,7 +1233,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49288  15447  2686  2750  19075  10850  48588  7637  12058  200  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 122 
 Pedindo mesnagem de: 1026 
@@ -1258,8 +1242,12 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 71702  22260  3636  3879  23671  12466  70558  10465  17083  278  32  1398  1558  248442 
 Encontrei um pending da tarefa 16  para o endereço 1028 
-IVLC: 123 
+IVLClk gate off - interruptHandler_NI_RX
+Servico: 103 
+50593794 Updating mapping_table[2 ] = 772 
+C: 123 
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1267,6 +1255,9 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33816589 Updating mapping_table[13 ] = 516 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 124 
 Pedindo mesnagem de: 1026 
@@ -1277,8 +1268,7 @@ Servico: 32
 Message request received from 16 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 16  para o endereço 1028 
-IVLCCounters: 49349  15432  2717  2742  19779  11451  47539  7693  11894  196  20  985  1085  168225 
-: 125 
+IVLC: 125 
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1286,11 +1276,15 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 50199  15607  2624  2790  16897  8858  49786  7447  12195  202  25  1025  1150  175221 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 126 
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+196614 Updating mapping_table[6 ] = 3 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
@@ -1309,11 +1303,11 @@ IVLC: 128
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 49460  15485  2755  2756  20213  11844  47370  7803  11909  197  21  1057  1162  169053 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 48686  15169  2607  2718  17311  9396  47948  7343  11833  196  18  906  996  168004 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 129 
 Pedindo mesnagem de: 1026 
@@ -1337,11 +1331,11 @@ IVLC: 131
 Pedindo mesnagem de: 1026 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 49171  15373  2650  2705  19037  11008  47558  7523  11831  195  19  914  1009  166466 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 48862  15213  2575  2728  16767  8962  48719  7228  11950  200  16  890  970  168030 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 132 
 Pedindo mesnagem de: 1026 
@@ -1369,7 +1363,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49134  15416  2712  2730  19648  11301  47760  7772  11907  195  20  922  1022  167978 
+Counters: 48878  15212  2578  2732  16773  8967  48698  7227  11954  200  16  890  970  168030 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 135 
 Pedindo mesnagem de: 1026 
@@ -1397,7 +1391,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49307  15450  2675  2738  19056  10840  48643  7644  12027  199  19  914  1009  167991 
+Counters: 49052  15233  2566  2720  16886  9075  48327  7188  11874  198  16  890  970  168030 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 138 
 Pedindo mesnagem de: 1026 
@@ -1425,10 +1419,10 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49317  15461  2671  2729  19054  10828  48658  7646  12018  199  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 141 
 Pedindo mesnagem de: 1026 
+Counters: 48281  14997  2621  2715  17213  9344  47208  7259  11714  194  19  1104  1199  167801 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Clk gate off - interruptHandler_NI_RX
@@ -1453,7 +1447,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49293  15456  2689  2744  19070  10849  48595  7641  12046  200  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 144 
 Pedindo mesnagem de: 1026 
@@ -1463,6 +1456,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 48881  15143  2457  2579  16513  8980  47183  7083  11357  178  17  898  983  169936 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 145 
 Pedindo mesnagem de: 1026 
@@ -1481,7 +1475,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49298  15454  2683  2740  19065  10844  48608  7641  12043  201  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 147 
 Pedindo mesnagem de: 1026 
@@ -1491,6 +1484,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 48327  15036  2537  2683  16629  8912  48061  7157  11758  195  16  890  970  166111 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 148 
 Pedindo mesnagem de: 1026 
@@ -1509,7 +1503,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49286  15451  2681  2743  19068  10841  48623  7641  12045  200  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 150 
 Pedindo mesnagem de: 1026 
@@ -1519,6 +1512,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 48910  15215  2566  2719  16755  8956  48748  7232  11924  198  16  890  970  168030 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 151 
 Pedindo mesnagem de: 1026 
@@ -1537,7 +1531,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49286  15450  2686  2747  19074  10848  48599  7641  12050  200  20  985  1085  167915 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 153 
 Pedindo mesnagem de: 1026 
@@ -1547,6 +1540,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 48896  15224  2572  2721  16758  8954  48732  7232  11928  199  16  890  970  168030 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 154 
 Pedindo mesnagem de: 1026 
@@ -1565,7 +1559,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49300  15450  2680  2740  19063  10841  48629  7642  12038  200  20  922  1022  167978 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 156 
 Pedindo mesnagem de: 1026 
@@ -1575,6 +1568,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
+Counters: 48897  15223  2566  2714  16755  8945  48764  7234  11919  198  17  961  1046  167954 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 157 
 Pedindo mesnagem de: 1026 
@@ -1593,10 +1587,9 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 16 
 Adicionando ao pendingReq
-Counters: 49283  15449  2687  2747  19074  10852  48590  7640  12054  201  19  914  1009  167991 
 Encontrei um pending da tarefa 16  para o endereço 1028 
 IVLC: 159 
-9153714 End Task B - MPEG
+9084145 End Task B - MPEG
 Tarefa FINALIZANDO 15 
 at this point the pending is: 
 pendingReq[0 ] = 0 
@@ -1629,203 +1622,12 @@ pipeStatus[0 ] = 0
 pipeStatus[1 ] = 0 
 pipeStatus[2 ] = 0 
 pipeStatus[3 ] = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-65542 Updating mapping_table[6 ] = 1 
-Counters: 8592  2527  866  707  5522  3386  4624  1841  2162  35  6  176  206  168794 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  19  29  168971 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-262146 Updating mapping_table[2 ] = 4 
-Counters: 348  100  39  33  309  181  6  107  47  0  9  122  167  168833 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67371014 Updating mapping_table[6 ] = 1028 
-Counters: 348  100  39  33  309  181  6  107  47  0  24  195  315  168685 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  203  328  168672 
-Counters: 43  5  13  16  98  74  4  7  15  0  27  219  354  168646 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  211  341  168659 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  219  344  168656 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33816582 Updating mapping_table[6 ] = 516 
-Counters: 348  100  39  33  309  181  6  107  47  0  16  131  211  168789 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  19  29  168971 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67371010 Updating mapping_table[2 ] = 1028 
-Counters: 348  100  39  33  309  181  6  107  47  0  24  514  634  168366 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  559  689  168311 
-Counters: 43  5  13  16  98  74  4  7  15  0  23  506  621  168379 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  19  416  511  168489 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  19  416  511  168489 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  19  416  511  168489 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  21  461  566  168434 
-Counters: 43  5  13  16  98  74  4  7  15  0  14  318  388  168612 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
+Counters: 43502  13391  2599  2584  16044  8563  41101  6775  10736  175  14  746  816  168184 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 

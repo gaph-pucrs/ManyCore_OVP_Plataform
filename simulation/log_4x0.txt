@@ -43,11 +43,11 @@ task_addr[9 ] = 256
 task_addr[10 ] = 512 
 task_addr[11 ] = 768 
 task_addr[12 ] = 1024 
-task_addr[13 Clk gate off - interruptHandler_NI_RX
+task_addr[13 ] = 1025 
+task_addr[14 ]Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 33554442 Updating mapping_table[10 ] = 512 
-] = 1025 
-task_addr[14 ] = 1026 
+ = 1026 
 task_addr[15 ] = 1027 
 task_addr[16 ] = 1028 
 task_addr[17 ] = 0 
@@ -73,14 +73,13 @@ Payload+0  valor: 67108876
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67174413 Updating mapping_table[13 ] = 1025 
-Payload+0  valor: 67108876 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67239950 Updating mapping_table[14 ] = 1026 
-Payload+0  valor: 67108876 
-Clk gate off - interruptHandler_NI_RX
+PaylClk gate off - interruptHandler_NI_RX
 Servico: 103 
 67305487 Updating mapping_table[15 ] = 1027 
+oad+0  valor: 67108876 
 Payload+0  valor: 67108876 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
@@ -94,10 +93,11 @@ Payload+0  valor: 67108876
 Payload+0  valor: 67108876 
 Payload+0  valor: 67108876 
 Payload+0  valor: 67108876 
-Payload+0  valor: Counters: 17531  5477  2470  1558  20426  14730  3016  5460  4688  64  53  504  769  320658 
-67108876 
 Payload+0  valor: 67108876 
-Task 12 mapped
+Payload+0  valor: 67108876 
+Payload+0  valor: 67108876 
+Task 12 mappeCounters: 18408  5695  2735  1740  20628  14644  3285  5736  5043  69  56  528  808  321683 
+d
 MPEG Task PRINT start:
 Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
@@ -112,7 +112,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 2 
 Pedindo mesnagem de: 1025 
-Counters: 4676  1436  630  479  5810  4352  723  1368  1138  28  11  280  335  249665 
+Counters: 3464  962  402  366  2818  1982  431  767  762  20  8  256  296  248639 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 3 
@@ -129,7 +129,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 6 
 Pedindo mesnagem de: 1025 
-Counters: 3343  969  357  268  3554  2682  176  847  487  8  9  327  372  249628 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 7 
@@ -150,7 +150,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 11 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 12 
@@ -170,8 +170,8 @@ Pedindo mesnagem de: 1025
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 16 
-Counters: 3897  1113  391  317  3842  2932  181  925  549  9  10  398  448  249552 
 Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 17 
@@ -188,7 +188,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 20 
 Pedindo mesnagem de: 1025 
-Counters: 4618  1388  568  446  5358  3997  567  1275  979  24  10  335  385  249615 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 21 
@@ -209,7 +209,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 25 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 26 
@@ -226,7 +226,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 29 
 Pedindo mesnagem de: 1025 
-Counters: 3343  969  357  268  3554  2682  176  847  487  8  9  327  372  249628 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 30 
@@ -247,7 +247,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 34 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 35 
@@ -264,11 +264,11 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 38 
 Pedindo mesnagem de: 1025 
-Counters: 3343  969  357  268  3554  2682  176  847  487  8  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 39 
 Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 40 
@@ -285,7 +285,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 43 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 44 
@@ -306,7 +306,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 48 
 Pedindo mesnagem de: 1025 
-Counters: 4189  1213  448  353  4454  3412  222  1063  623  10  11  406  461  250122 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 49 
@@ -323,7 +323,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 52 
 Pedindo mesnagem de: 1025 
-Counters: 4325  1290  511  410  4746  3517  528  1138  907  23  9  327  372  249045 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 53 
@@ -344,7 +344,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 57 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 58 
@@ -361,11 +361,11 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 61 
 Pedindo mesnagem de: 1025 
-Counters: 3343  969  357  268  3554  2682  176  847  487  8  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 62 
 Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 63 
@@ -382,7 +382,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 66 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 67 
@@ -399,11 +399,11 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 70 
 Pedindo mesnagem de: 1025 
-Counters: 3343  969  357  268  3554  2682  176  847  487  8  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 71 
 Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 72 
@@ -420,7 +420,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 75 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 76 
@@ -441,7 +441,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 80 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 81 
@@ -458,11 +458,11 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 84 
 Pedindo mesnagem de: 1025 
-Counters: 3343  969  357  268  3554  2682  176  847  487  8  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 85 
 Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 86 
@@ -479,14 +479,11 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 89 
 Pedindo mesnagem de: 1025 
-Counters: 4168  1210  443  331  4418  3334  219  1057  605  10  11  406  461  249539 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 90 
 Pedindo mesnagem de: 1025 
-Clk gate off - interruptHandler_NI_RX
-Servico: 144 
-The PE frequency will be changed in the next timer interruption. newValue = 677 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 91 
@@ -499,300 +496,296 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 93 
 Pedindo mesnagem de: 1025 
-Counters: 3788  1117  376  282  3856  2831  176  996  510  8  15  391  466  249534 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33816578 Updating mapping_table[2 ] = 516 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-196621 Updating mapping_table[13 ] = 3 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 94 
-Pedindo mesnagem de: 3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-50593801 Updating mapping_table[9 ] = 772 
+Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 95 
-Pedindo mesnagem de: Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-17039366 Updating mapping_table[6 ] = 260 
-3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-PRINT: 96 Counters: 3566  1064  352  262  3419  2412  138  1000  467  4  10  272  322  176049 
-
-Pedindo mesnagem de: 3 
+PRINT: 96 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 97 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 98 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 99 
-Pedindo mesnagem de: 3 
-Counters: 3843  1158  490  393  4508  3360  523  1070  877  23  8  256  296  168704 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 100 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 101 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 102 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 103 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 104 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 105 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 2954  847  283  216  2875  2158  133  693  388  6  8  319  359  170394 
 PRINT: 106 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 107 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 108 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 109 
-Pedindo mesnagem de: 3 
-Counters: 2932  853  355  279  3417  2633  179  797  486  8  8  256  296  167252 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 110 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 111 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 112 
-Pedindo mesnagem de: 3 
-Counters: 3498  1045  423  347  3870  2864  481  926  785  21  7  248  283  168416 
+Pedindo mesnagem de: 1025 
+Counters: 2715  669  229  224  1334  906  38  411  314  4  9  327  372  249628 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 113 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 114 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 115 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 116 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 117 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
+Counters: 3383  836  282  275  1659  1129  46  513  388  5  11  406  461  249539 
+Clk gate off - interruptHandler_NI_RX
+Servico: 144 
+The PE frequency will be changed in the next timer interruption. newValue = 677 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 118 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  271  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 119 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 120 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 1025 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 121 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  271  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 1025 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50593794 Updating mapping_table[2 ] = 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33816589 Updating mapping_table[13 ] = 516 
+Counters: 3770  1007  300  272  2058  1269  42  760  401  4  17  407  492  250948 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 122 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 123 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 124 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+196614 Updating mapping_table[6 ] = 3 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 125 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 3648  1044  403  305  3445  2489  188  927  534  8  10  335  385  174546 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 126 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 127 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 128 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 129 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 130 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  273  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 131 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 132 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 133 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 134 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 135 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 136 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  271  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 137 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 138 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 139 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 140 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 141 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 142 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 143 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 144 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 145 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  272  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 146 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 147 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 148 
-Pedindo mesnagem de: 3 
-Counters: 2518  728  271  205  2690  2030  133  637  369  6  7  248  283  168717 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 149 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 150 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 151 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 2954  847  283  216  2875  2158  133  693  388  6  8  319  359  170732 
 PRINT: 152 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
+Counters: 2518  712  287  221  2434  1790  141  621  381  6  7  248  283  168717 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 153 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 154 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 155 
-Pedindo mesnagem de: 3 
-Counters: 2933  853  356  279  3417  2633  179  797  486  8  8  256  296  167252 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
+Counters: 2954  831  298  232  2619  1918  141  677  400  6  8  319  359  169380 
 PRINT: 156 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 157 
-Pedindo mesnagem de: 3 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 158 
-Pedindo mesnagem de: 3 
-Counters: 3497  1045  421  347  3870  2864  481  926  785  21  7  248  283  168078 
+Pedindo mesnagem de: 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 PRINT: 159 
@@ -809,7 +802,8 @@ pendingReq[6 ] = 0
 pendingReq[7 ] = 0 
 pendingReq[8 ] = 0 
 pendingReq[9 ] = 0 
-pendingReq[10 ] = 0 
+pendingReq[10 ] Counters: 3569  950  411  332  2803  1956  108  835  573  5  7  248  283  167978 
+= 0 
 pendingReq[11 ] = 0 
 pendingReq[12 ] = 0 
 pendingReq[13 ] = 0 
@@ -829,203 +823,11 @@ pipeStatus[0 ] = 0
 pipeStatus[1 ] = 0 
 pipeStatus[2 ] = 0 
 pipeStatus[3 ] = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-65542 Updating mapping_table[6 ] = 1 
-Counters: 3774  1003  482  328  2895  1798  47  983  689  2  4  97  117  168883 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-262146 Updating mapping_table[2 ] = 4 
-Counters: 348  100  39  33  309  181  6  107  47  0  2  19  29  168971 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67371014 Updating mapping_table[6 ] = 1028 
-Counters: 348  100  39  33  309  181  6  107  47  0  2  19  29  168971 
-Counters: 43  5  13  16  98  74  4  7  15  0  8  67  107  168893 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  83  133  168867 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  83  133  168867 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  83  133  168867 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  83  133  168867 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  83  133  168867 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  9  75  120  168880 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  99  149  168851 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33816582 Updating mapping_table[6 ] = 516 
-Counters: 348  100  39  33  309  181  6  107  47  0  6  51  81  168919 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67371010 Updating mapping_table[2 ] = 1028 
-Counters: 348  100  39  33  309  181  6  107  47  0  2  19  29  168971 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
-Counters: 43  5  13  16  98  74  4  7  15  0  1  11  16  168984 
+Counters: 2667  723  414  329  2280  1452  359  692  792  16  2  18  28  168972 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
+Counters: 43  1  17  20  34  14  6  3  18  0  1  11  16  168984 
