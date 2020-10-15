@@ -27,10 +27,10 @@ Servico: 103
 16842760 Updating mapping_table[8 ] = 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 96 
-tClk gate off - interruptHandler_NI_RX
+tasClk gate off - interruptHandler_NI_RX
 Servico: 103 
 16777225 Updating mapping_table[9 ] = 256 
-ask_addr[0 ] = 514 
+k_addr[0 ] = 514 
 task_addr[1 ] = 513 
 task_addr[2 ] = 769 
 task_addr[3 ] = 770 
@@ -52,11 +52,11 @@ task_addr[18 ] = 0
 task_addr[19 ] = 0 
 task_addr[20 ] = 0 
 task_addr[21 ] = 0 
-Clk gate off - interruptHandler_NI_RX
+task_addr[22 ] = 0 
+taClk gate off - interruptHandler_NI_RX
 Servico: 103 
 33554442 Updating mapping_table[10 ] = 512 
-task_addr[22 ] = 0 
-task_addr[23 ] = 0 
+sk_addr[23 ] = 0 
 task_addr[24 ] = 0 
 Payload+0  valor: 50331659 
 Payload+0  valor: 50331659 
@@ -68,18 +68,18 @@ Servico: 103
 67108876 Updating mapping_table[12 ] = 1024 
 Payload+0  valor: 50331659 
 Payload+0  valor: 50331659 
-Payload+0  valor: 50331659 
-Payload+0  valor: 50331659 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67174413 Updating mapping_table[13 ] = 1025 
-PayloaClk gate off - interruptHandler_NI_RX
+Payload+0  valor: 50331659 
+Payload+0 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67239950 Updating mapping_table[14 ] = 1026 
+ valor: 50331659 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67305487 Updating mapping_table[15 ] = 1027 
-d+0  valor: 50331659 
+Payload+0  valor: 50331659 
 Payload+0  valor: 50331659 
 Payload+0  valor: 50331659 
 Clk gate off - interruptHandler_NI_RX
@@ -95,236 +95,264 @@ Payload+0  valor: 50331659
 Payload+0  valor: 50331659 
 Payload+0  valor: 50331659 
 Payload+0  valor: 50331659 
-Counters: 18208  5760  2634  1616  22337  16218  3174  5875  4885  66  82  800  1210  320216 
+Counters: 18664  5719  2777  1809  22020  16041  3229  5776  5003  66  81  792  1197  321296 
 Payload+0  valor: 50331659 
 Task 11 mapped
 STARTING PRINT
 Pedindo mesnagem de: 258 
-Counters: 1925  615  314  255  2619  1935  536  614  701  20  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
+Counters: 2009  619  338  282  2635  1955  549  615  723  19  6  54  84  248849 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  249968 
+Clk gate off - interruptHandler_NI_RX
+Servico: 144 
+The PE frequency will be changed in the next timer interruption. newValue = 677 
+Counters: 513  153  40  38  405  228  8  156  44  0  14  150  220  249780 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-33816578 Updating mapping_table[2 ] = 516 
-Counters: 348  100  39  33  309  181  6  107  47  0  13  142  207  249793 
+50593794 Updating mapping_table[2 ] = 772 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-196621 Updating mapping_table[13 ] = 3 
+17039365 Updating mapping_table[5 ] = 260 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33816589 Updating mapping_table[13 ] = 516 
+Counters: 983  290  99  75  736  400  14  307  117  0  6  54  84  176287 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+196614 Updating mapping_table[6 ] = 3 
+Counters: 373  100  47  41  314  186  10  107  53  0  7  62  97  168903 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  6  54  84  168916 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  3  29  44  168956 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Clk gate off - interruptHandler_NI_RX
+Servico: 144 
+The PE frequency will be changed in the next timer interruption. newValue = 1000 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+262146 Updating mapping_table[2 ] = 4 
+Counters: 818  248  66  55  616  335  10  256  76  0  5  62  87  168913 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+65545 Updating mapping_table[9 ] = 1 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+67108870 Updating mapping_table[6 ] = 1024 
+Counters: 678  195  73  58  525  293  12  207  85  0  24  228  348  242281 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  868  1088  248912 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  830  1045  248955 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  868  1088  248912 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  845  1060  248940 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  853  1073  248927 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  868  1088  248912 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  845  1060  248940 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  853  1073  248927 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  868  1088  248912 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  845  1060  248940 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  853  1073  248927 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  845  1060  248940 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  845  1060  248940 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  868  1088  248912 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  830  1045  248955 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  868  1088  248912 
+Counters: 68  5  21  24  103  79  8  7  21  0  43  845  1060  248940 
+Counters: 68  5  21  24  103  79  8  7  21  0  44  853  1073  248927 
+Clk gate off - interruptHandler_NI_RX
+Servico: 144 
+The PE frequency will be changed in the next timer interruption. newValue = 677 
+Counters: 513  153  40  38  405  228  8  156  44  0  41  800  1005  248995 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33751042 Updating mapping_table[2 ] = 515 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50593801 Updating mapping_table[9 ] = 772 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-17039366 Updating mapping_table[6 ] = 260 
-Counters: 958  290  91  67  731  395  10  307  111  0  10  133  183  249817 
-Counters: 43  5  13  16  98  74  4  7  15  0  6  54  84  249916 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  6  54  84  249916 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Counters: 43  5  13  16  98  74  4  7  15  0  5  46  71  249929 
-Clk gate off - interruptHandler_NI_RX
-Servico: 144 
-The PE frequency will be changed in the next timer interruption. newValue = 677 
-Counters: 488  153  32  30  400  223  4  156  38  0  7  62  97  249903 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-65542 Updating mapping_table[6 ] = 1 
-Counters: 348  100  39  33  309  181  6  107  47  0  7  62  97  176274 
-Counters: 43  5  13  16  98  74  4  7  15  0  3  29  44  168956 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
 67371014 Updating mapping_table[6 ] = 1028 
-Counters: 348  100  39  33  309  181  6  107  47  0  3  30  45  168955 
+Counters: 983  290  99  75  736  400  14  307  117  0  19  308  403  175968 
+Counters: 68  5  21  24  103  79  8  7  21  0  9  78  123  168877 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  9  78  123  168877 
+Counters: 68  5  21  24  103  79  8  7  21  0  9  78  123  168877 
+Counters: 68  5  21  24  103  79  8  7  21  0  11  94  149  168851 
+Counters: 68  5  21  24  103  79  8  7  21  0  9  78  123  168877 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  11  94  149  168851 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  11  94  149  168851 
+Counters: 68  5  21  24  103  79  8  7  21  0  9  78  123  168877 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  11  94  149  168851 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
+Counters: 68  5  21  24  103  79  8  7  21  0  9  78  123  168877 
+Counters: 68  5  21  24  103  79  8  7  21  0  9  78  123  168877 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-262146 Updating mapping_table[2 ] = 4 
-Counters: 348  100  39  33  309  181  6  107  47  0  9  78  123  168877 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  94  149  168851 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
-Counters: 43  5  13  16  98  74  4  7  15  0  11  110  165  168835 
-Counters: 43  5  13  16  98  74  4  7  15  0  10  86  136  168864 
+33816578 Updating mapping_table[2 ] = 516 
+Counters: 373  100  47  41  314  186  10  107  53  0  12  118  178  168822 
+Counters: 68  5  21  24  103  79  8  7  21  0  10  86  136  168864 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-33816582 Updating mapping_table[6 ] = 516 
-Counters: 348  100  39  33  309  181  6  107  47  0  5  46  71  168929 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  168968 
+196614 Updating mapping_table[6 ] = 3 
+Counters: 373  100  47  41  314  186  10  107  53  0  5  46  71  168929 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
 Clk gate off - interruptHandler_NI_RX
-Servico: 144 
-The PE frequency will be changed in the next timer interruption. newValue = 1000 
-Counters: 488  153  32  30  400  223  4  156  38  0  3  30  45  168955 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  242597 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
-Counters: 43  5  13  16  98  74  4  7  15  0  2  22  32  249968 
+Servico: 48 
+Pedindo mesnagem de: 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+PRINT FINISHED
+Tarefa FINALIZANDO 11 
+at this point the pending is: 
+pendingReq[0 ] = 0 
+pendingReq[1 ] = 0 
+pendingReq[2 ] = 0 
+pendingReq[3 ] = 0 
+pendingReq[4 ] = 0 
+pendingReq[5 ] = 0 
+pendingReq[6 ] = 0 
+pendingReq[7 ] = 0 
+pendingReq[8 ] = 0 
+pendingReq[9 ] = 0 
+pendingReq[10 ] = 0 
+pendingReq[11 ] = 0 
+pendingReq[12 ] = 0 
+pendingReq[13 ] = 0 
+pendingReq[14 ] = 0 
+pendingReq[15 ] = 0 
+pendingReq[16 ] = 0 
+pendingReq[17 ] = 0 
+pendingReq[18 ] = 0 
+pendingReq[19 ] = 0 
+pendingReq[20 ] = 0 
+pendingReq[21 ] = 0 
+pendingReq[22 ] = 0 
+pendingReq[23 ] = 0 
+pendingReq[24 ] = 0 
+at this point the PIPE is: 
+pipeStatus[0 ] = 0 
+pipeStatus[1 ] = 0 
+pipeStatus[2 ] = 0 
+pipeStatus[3 ] = 0 
+Counters: 6175  1712  796  549  6126  4355  266  1648  1101  8  10  209  259  168741 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+67371010 Updating mapping_table[2 ] = 1028 
+Counters: 373  100  47  41  314  186  10  107  53  0  3  30  45  168955 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50593794 Updating mapping_table[2 ] = 772 
+Counters: 373  100  47  41  314  186  10  107  53  0  4  54  74  168926 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Counters: 68  5  21  24  103  79  8  7  21  0  2  22  32  168968 
+Clk gate off - interruptHandler_NI_RX
+Servico: 1638 
+Finish Simulation Packet Received!
+Clk gate on - FinishApplication
+Finalizando 768 
+Counters: 371  108  35  34  309  178  8  112  37  0  12  92  152  168848 
+Clk gate off - interruptHandler_NI_RX
+Servico: 1638 
+Finish Simulation Packet Received!
