@@ -176,7 +176,7 @@ void niIteration(){
 
             // debug
             if(flag_print == 1){
-                bhmMessage("INFO", "NI_PRINTER", "Printing flit %x: %d\n", transmittingCount, htonl(usFlit));
+                bhmMessage("INFO", "NI_PRINTER", "Printing flit %x: %d\n", (int)transmittingCount, (int)htonl(usFlit));
             }
 
             // Increments the memory pointer to get the next flit
