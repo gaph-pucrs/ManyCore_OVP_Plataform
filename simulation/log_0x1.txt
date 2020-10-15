@@ -49,9 +49,8 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67371024 Updating mapping_table[16 ] = 1028 
-Counters: 5197  1615  444  297  3598  1826  34  1700  547  0  40  320  520  320908 
+Counters: 5197  1615  444  297  3598  1826  34  1700  547  0  40  320  520  320905 
 Counters: 43  5  13  16  98  74  4  7  15  0  21  228  333  249667 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  249680 
 Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  249680 
 Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  249680 
 Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  249680 
@@ -74,20 +73,23 @@ Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  249680
 Clk gate off - interruptHandler_NI_RX
 Servico: 144 
 The PE frequency will be changed in the next timer interruption. newValue = 677 
-Counters: 488  153  32  30  400  223  4  156  38  0  25  260  385  249615 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33816578 Updating mapping_table[2 ] = 516 
+Counters: 488  153  32  30  400  223  4  156  38  0  27  323  458  249542 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 196621 Updating mapping_table[13 ] = 3 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33816578 Updating mapping_table[2 ] = 516 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50593801 Updating mapping_table[9 ] = 772 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 17039366 Updating mapping_table[6 ] = 260 
-Counters: 1263  385  117  84  942  502  12  407  143  0  28  331  471  175900 
+Counters: 1263  385  117  84  942  502  12  407  143  0  26  268  398  175973 
+Counters: 43  5  13  16  98  74  4  7  15  0  24  252  372  168628 
+Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
+Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  24  252  372  168628 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
@@ -98,22 +100,19 @@ Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
-Counters: 43  5  13  16  98  74  4  7  15  0  24  252  372  168628 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
+Counters: 43  5  13  16  98  74  4  7  15  0  25  259  384  168616 
 Counters: 43  5  13  16  98  74  4  7  15  0  23  244  359  168641 
-Counters: 43  5  13  16  98  74  4  7  15  0  24  251  371  168629 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  257  382  168618 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  168680 
 Clk gate off - interruptHandler_NI_RX
 Servico: 101 
-Task state received 25 
+Task state received 23 
 Clk gate off - interruptHandler_NI_RX
 Servico: 102 
-Task pendingReq received 25 
+Task pendingReq received 23 
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
@@ -156,7 +155,7 @@ task_addr[10 ] = 512
 task_addr[11 ] = 768 
 task_addr[12 ] = 1024 
 task_addr[13 ] = 3 
-task_addr[14 ] = 0 
+task_addr[14 ] = 1026 
 task_addr[15 ] = 1027 
 task_addr[16 ] = 1028 
 task_addr[17 ] = 0 
@@ -191,86 +190,631 @@ Payload+0  valor: 65542
 Payload+0  valor: 65542 
 Payload+0  valor: 65542 
 Task 6 migrated
-State: 25 
+State: 23 
 STARTING DIVIDER
+Começando iteracao 23 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Counters: 21109  6188  2704  1739  22623  16637  3213  5706  5069  69  57  620  905  168356 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Encontrei um pending dClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+a tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Counters: 33908  10994  4189  2602  44734  31921  2734  12266  5696  15  86  1243  1673  168249 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Encontrei um pending da tareClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+fa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Começando iteracao 24 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Counters: 36104  11734  4545  2811  48640  34806  2992  13204  6131  15  90  1305  1755  166830 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Encontrei um pending da tarefa 10  pClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+ara o endereço 512 
+Encontrei um peClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+nding da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da Counters: 35352  11434  4369  2744  46602  33269  2847  12728  5948  15  90  1305  1755  166477 
+tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  paraClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+ o endereço 512 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Encontrei um pending da Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
 Começando iteracao 25 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
+Encontrei um pClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
+ending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Counters: 27649  8359  3549  2225  31915  23340  3749  8207  6163  69  66  785  1115  168367 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
@@ -278,22 +822,6 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -351,584 +879,29 @@ Message request received from 10
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
+Counters: 35098  11404  4412  2719  47091  33723  2897  12811  5968  15  89  1297  1742  168277 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Counters: 34849  11265  4303  2691  45832  32705  2791  12541  5855  15  89  1297  1742  166824 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Começando iteracao 26 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
 Encontrei um pending da tarefa 10  para o endereço 512 
 Encontrei um pending da tarefa 7  para o endereço 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Counters: 33840  10805  4076  2628  42587  30195  2554  11811  5572  15  92  1336  1796  167310 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefaClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
- 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Counters: 35680  11512  4381  2770  46567  33125  2829  12759  5961  15  92  1336  1796  167096 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Encontrei um pending da taClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-refa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Começando iteracao 27 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pendingCounters: 33260  10745  4080  2498  43854  31286  2391  12026  5318  0  88  1274  1714  167240 
- da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
-Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
@@ -938,11 +911,17 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
+Encontrei um pending da tarefa 10  para o endereço 512 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
@@ -950,32 +929,6 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Encontrei um pending da tarefaClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
- 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
@@ -1079,346 +1032,26 @@ Message request received from 10
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
-Counters: 35340  11503  4450  2741  47658  34146  2939  12936  6016  15  89  1297  1742  168498 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Começando iteracao 28 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
 Message request received from 9 
+Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 7 
+Message request received from 10 
 Adicionando ao pendingReq
+Counters: 35823  11655  4477  2779  48037  34347  2954  13070  6062  15  89  1282  1727  166254 
 Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Counters: 34581  11134  4219  2689  44641  31741  2704  12294  5756  15  91  1313  1768  167593 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Encontrei umClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
- pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Começando iteracao 29 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei umClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
- pending da tarefa 7  para o endereço 258 
-Counters: 35311  11400  4354  2754  46277  32991  2821  12652  5930  15  91  1313  1768  165631 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
@@ -1460,6 +1093,161 @@ Message request received from 9
 Adicionando ao pendingReq
 efa 8  para o endereço 257 
 Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7 Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+ para o endereço 258 
+Encontrei um pending da tarefa 8  para oClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+ endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Começando iteracao 26 
+EncontrClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+ei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Counters: 35424  11552  4498  2773  48220  34573  2985  13040  6063  15  90  1305  1755  167245 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
@@ -1468,7 +1256,339 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Counters: 33204  10647  4020  2551  42474  30169  2558  11756  5494  15  87  1266  1701  167662 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Encontrei um pending da tarefa 10  para o endereço Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Começando iteracao 27 
+Encontrei um Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço Counters: 35147  11420  4355  2689  46690  33331  2855  12782  5910  15  86  1243  1673  166964 
+257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+EncClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+ontrei um pending da tarefa 10  para o enderClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+eço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1588,37 +1708,38 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
-Counters: 34929  11269  4306  2719  45718  32528  2781  12537  5838  15  92  1336  1796  168141 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
+Counters: 35311  11447  4417  2772  47044  33646  2892  12785  5989  15  92  1336  1796  168989 
+Encontrei um pending da tarefa 8  para o endereço 257 
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
+Começando iteracao 28 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
+Message request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 7 
+Message request received from 10 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
@@ -1626,33 +1747,23 @@ Servico: 32
 Message request received from 9 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
+Message request received from 7 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
+Encontrei um pending da tarefa 7 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
+Message request received from 9 
+ para o endereço 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1708,14 +1819,12 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para oClk gate off - interruptHandler_NI_RX
+Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
- endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
@@ -1724,8 +1833,536 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Counters: 33879  10892  4147  2634  43782  31140  2654  12033  5642  15  90  1305  1755  167550 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefaClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+ 8  para o endereço 257 
+Counters: 34981  11399  4414  2695  47307  33911  2923  12834  5962  15  87  1266  1701  166088 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Começando iteracao 29 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 10  para o Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Counters: 34999  11329  4325  2712  45969  32774  2804  12592  5870  15  92  1321  1781  167125 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
 Começando iteracao 30 
-Encontrei umClk gate off - interruptHandler_NI_RX
+EncontClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
@@ -1733,7 +2370,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
- pending da tarefa 7  para o endereço 258 
+rei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1745,47 +2382,7 @@ Message request received from 8
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um peCounters: 34046  11019  4182  2548  45075  32191  2465  12370  5469  0  87  1266  1701  166362 
-nding da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
+Counters: 35748  11553  4429  2770  47282  33747  2878  12930  6010  15  89  1297  1742  167046 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
@@ -1794,21 +2391,43 @@ Encontrei um pending da tarefa 7  para o endereço 258
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
+Message request received from 10 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 9 
+Message request received from 8 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
@@ -1911,55 +2530,6 @@ Servico: 32
 Message request received from 10 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
-Counters: 32972  10722  4124  2550  44164  31583  2728  12046  5589  15  84  1212  1632  168067 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1981,25 +2551,33 @@ Message request received from 10
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
+Counters: 35666  11606  4450  2727  47839  34173  2933  13042  6027  15  88  1274  1714  167699 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
 Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 8 
+Message request received from 10 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 9 
+Message request received from 8 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -2009,30 +2587,95 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+EncClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+ontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o Clk gate off - interruptHandler_NI_RX
+Encontrei um pending da tarefa 7  para o enClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+dereço 258 
+Encontrei um pending da tarefa Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
+8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
 Começando iteracao 31 
-Encontrei um pClk gate off - interruptHandler_NI_RX
+Encontrei um pendClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
@@ -2040,7 +2683,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-ending da tarefa 7  para o endereço 258 
+ing da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -2080,28 +2723,19 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-Counters: 34939  11297  4329  2727  46048  32838  2812  12579  5871  15  91  1313  1768  167133 
+Counters: 33030  10564  3900  2453  41497  29308  2178  11649  5099  0  89  1282  1727  168407 
 Encontrei um pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 7 
+Message request received from 10 
+Adicionando ao pendingReq
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -2110,6 +2744,16 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
@@ -2121,227 +2765,234 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Counters: 35589  11475  4355  2754  46409  33067  2812  12758  5942  15  90  1305  1755  166271 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tClk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+arefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
+Encontrei um pending da tarefa 7  para oClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
+ endereço 258 
+Encontrei um pending da tarefa 8  para o enderClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Counters: 35089  11320  4340  2737  46110  32918  2813  12575  5908  15  93  1344  1809  168821 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
+eço 257 
 Encontrei um pending da tarefa 9  para o endereço 772 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
 Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Encontrei um pending da tarefa 10  para o endereço Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-ço 772 
-Encontrei um pending da tarefa 10  para o endereço Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
 Começando iteracao 32 
-Clk gate off - interruptHandler_NI_RX
+Encontrei um Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
@@ -2349,7 +3000,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
+pending da tarefa 7  para o endereço 258 
 Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -2410,20 +3061,10 @@ Servico: 32
 Message request received from 10 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 7  para o endereço 258 
+Counters: 35056  11380  4363  2687  46599  33296  2851  12750  5910  15  87  1266  1701  167139 
 Encontrei um pending da tarefa 8  para o endereço 257 
-Counters: 34033  10966  4158  2617  44149  31426  2673  12157  5678  15  86  1258  1688  165561 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
 Encontrei um pending da tarefa 9  para o endereço 772 
 Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
@@ -2435,22 +3076,14 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
 Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
@@ -2517,669 +3150,6 @@ Encontrei um pending da tarefa 10  para o endereço 512
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Counters: 36314  11844  4561  2807  49059  35120  3024  13324  6165  15  89  1282  1727  166794 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tareClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-fa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Começando iteracao 33 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Counters: 34762  11291  4372  2721  46669  33391  2873  12675  5905  15  90  1305  1755  167245 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Counters: 33349  10714  4059  2567  42944  30537  2596  11861  5540  15  87  1266  1701  167669 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Começando iteracao 34 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Counters: 35233  11282  4231  2723  44712  31693  2674  12422  5793  15  92  1321  1781  169116 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 7  para o endereço 258 
-Encontrei um pending da tarefa 8  para o endereço 257 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 97 
@@ -3213,17 +3183,11 @@ current   mapping_table[12 ] = 1024
 migration_mapping_table[13 ] = 0 
 current   mapping_table[13 ] = 3 
 migration_mapping_table[14 ] = 0 
-current   mapping_table[14 ] = 0 
+current   mapping_table[14 ] = 1026 
 migration_mapping_table[15 ] = 0 
 current   mapping_table[15 ] = 1027 
 migration_mapping_table[16 ] = 0 
 current   mapping_table[16 ] = 1028 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 9 
-Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 10 
@@ -3274,60 +3238,126 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
 Adicionando ao pendingReq
-Counters: 37020  11876  4574  2855  47637  33675  2812  13287  6285  15  81  1189  1594  167030 
-Encontrei um pending da tarefa 9  para o endereço 772 
-Encontrei um pending da tarefa 10  para o endereço 512 
-Encontrei um pending da tarefa 7  para o endereço 258 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 8 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 7 
-Encontrei um pending da tarefa 8  para o endereço 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 262146 Updating mapping_table[2 ] = 4 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 9 
-Encontrei um pending da tareClk gate off - interruptHandler_NI_RX
+Message request received from 8 
+Adicionando ao pendingReq
+Counters: 35752  11500  4448  2752  46348  32775  2754  12922  6089  15  81  1159  1564  166704 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Encontrei um pending da tarefa 7  para o endereço 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 7 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
 Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 8 
 Adicionando ao pendingReq
-fa 10  para o endereço 512 
-Dijkstra divider migrating.
-task_addr[0 ] = 514 
-task_addr[1 ] = 513 
-task_addr[2 ] = 4 
-task_addr[3 ] = 770 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 10 
-Adicionando ao pendingReq
-task_addr[4 ] = 771 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 9 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa 8  para o endereço 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 9  para o endereço 772 
+Encontrei um pending da tarefa 10  para o endereço 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 7  para o endereço 258 
+Encontrei um pending da tarefa Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+8  para o endereço 257 
+Encontrei um pending da tarefa 9  para o endereço 772 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 10  para o endereço 512 
+Dijkstra divider migrating.
+task_addr[0 ] = 514 
+task_addr[1 ] = Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 10 
+Adicionando ao pendingReq
+513 
+task_addr[2 ] = 4 
+task_addr[3 ] = 770 
+task_addr[4 ] = 771 
 task_addr[5 ] = 515 
 task_addr[6 ] = 1028 
 task_addr[7 ] = 258 
@@ -3349,7 +3379,7 @@ task_addr[22 ] = 0
 task_addr[23 ] = 0 
 task_addr[24 ] = 0 
 Tarefa: 6  migrando para: 1028 
-Payload+0  valor: 35 
+Payload+0  valor: 33 
 sendPipe()1028 
 sendPendingReq()1028 
  > > pendReq: 0 
@@ -3405,7 +3435,9 @@ Payload+23  valor: 0
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67371014 Updating mapping_table[6 ] = 1028 
-Counters: 18643  5661  2531  1785  21502  14935  1402  6110  3748  25  51  781  1036  166073 
+Counters: 29683  9123  3785  2470  35150  24536  2015  9979  5306  24  72  1129  1489  167257 
+Counters: 43  5  13  16  98  74  4  7  15  0  26  442  572  168428 
+Counters: 43  5  13  16  98  74  4  7  15  0  26  442  572  168428 
 Counters: 43  5  13  16  98  74  4  7  15  0  26  442  572  168428 
 Counters: 43  5  13  16  98  74  4  7  15  0  26  442  572  168428 
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
@@ -3421,8 +3453,6 @@ Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  442  572  168428 
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
 Clk gate off - interruptHandler_NI_RX
@@ -3435,77 +3465,3 @@ Counters: 43  5  13  16  98  74  4  7  15  0  26  442  572  168428
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
 Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  26  442  572  168428 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  29  470  615  168385 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  25  442  567  168433 
-Counters: 43  5  13  16  98  74  4  7  15  0  27  456  591  168409 
-Counters: 43  5  13  16  98  74  4  7  15  0  27  359  494  168506 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  168680 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  168680 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  168680 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  168680 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  168680 
-Counters: 43  5  13  16  98  74  4  7  15  0  20  220  320  168680 
