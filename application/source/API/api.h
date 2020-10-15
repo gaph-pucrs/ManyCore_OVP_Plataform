@@ -514,12 +514,12 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     if(found != PIPE_WAIT){
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
-            prints("Enviando do PIPE\n");
+            //prints("Enviando do PIPE\n");
             // Sends the packet
             SendSlot((unsigned int)&buffer_packets[found], found);
         }
         else{
-            prints("Envio agendado após TX\n");
+            //prints("Envio agendado após TX\n");
             // Set it to send after the next TX interruption
             addSendAfterTX(found);
         }
