@@ -8,8 +8,8 @@
 
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
-#include "sort_config.h"
-#include "aes_config.h"
+//#include "sort_config.h"
+//#include "aes_config.h"
 #include "mpeg_config.h"
 #include "thermalManagement_config.h"
 
@@ -157,7 +157,7 @@ int main(int argc, char **argv)
 			case start:
 				state = mpeg_start(state);
 				break;
-			//Sort
+			/*//Sort
 			case sort_master:
 				state = sortMaster(state);
 				break;
@@ -185,7 +185,7 @@ int main(int argc, char **argv)
 				break;
 			case aes_slave4:
 				state = aes_slave();
-				break;
+				break;*/
 		}
 		if(state == 0){
 			printFinish();
