@@ -222,6 +222,8 @@ void putsvsv(char* text1, int value1, char* text2, int value2);
 void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
 void enable_interruptions();
 void disable_interruptions();
+void disable_interruption(unsigned int n);
+void enable_interruption(unsigned int n);
 int getServiceIndex();
 void requestToForward();
 void printFinish();
