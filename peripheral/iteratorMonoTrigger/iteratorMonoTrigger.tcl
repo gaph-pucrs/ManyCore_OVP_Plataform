@@ -173,3 +173,69 @@ imodeladdpacketnetport  \
       -updatefunction iteration24 \
       -updatefunctionargument 0x00
 
+imodeladdpacketnetport  \
+      -name iterationPort25 \
+      -maxbytes 8 \
+      -updatefunction iteration25 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort26 \
+      -maxbytes 8 \
+      -updatefunction iteration26 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort27 \
+      -maxbytes 8 \
+      -updatefunction iteration27 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort28 \
+      -maxbytes 8 \
+      -updatefunction iteration28 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort29 \
+      -maxbytes 8 \
+      -updatefunction iteration29 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort30 \
+      -maxbytes 8 \
+      -updatefunction iteration30 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort31 \
+      -maxbytes 8 \
+      -updatefunction iteration31 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort32 \
+      -maxbytes 8 \
+      -updatefunction iteration32 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort33 \
+      -maxbytes 8 \
+      -updatefunction iteration33 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort34 \
+      -maxbytes 8 \
+      -updatefunction iteration34 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort35 \
+      -maxbytes 8 \
+      -updatefunction iteration35 \
+      -updatefunctionargument 0x00
+

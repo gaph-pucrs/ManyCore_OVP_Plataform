@@ -8,8 +8,11 @@
 
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
+//#include "sort_config.h"
+//#include "aes_config.h"
 #include "mpeg_config.h"
 #include "thermalManagement_config.h"
+
 
 message theMessage;
 
@@ -27,6 +30,12 @@ int synthetic_taskF(int state);
 int dijkstra_divider(int state);
 int dijkstra_slave();
 int dijkstra_print();
+
+int sortMaster(int state);
+int sort_slave(int task);
+
+int aesMaster(int state);
+int aes_slave();
 
 // MPEG - threads
 int mpeg_idct(int state);
@@ -148,6 +157,35 @@ int main(int argc, char **argv)
 			case start:
 				state = mpeg_start(state);
 				break;
+			/*//Sort
+			case sort_master:
+				state = sortMaster(state);
+				break;
+			case sort_slave1:
+				state = sort_slave(0);
+				break;
+			case sort_slave2:
+				state = sort_slave(1);
+				break;
+			case sort_slave3:
+				state = sort_slave(2);
+				break;
+			//AES
+			case aes_master:
+				state = aesMaster(state);
+				break;
+			case aes_slave1:
+				state = aes_slave();
+				break;
+			case aes_slave2:
+				state = aes_slave();
+				break;
+			case aes_slave3:
+				state = aes_slave();
+				break;
+			case aes_slave4:
+				state = aes_slave();
+				break;*/
 		}
 		if(state == 0){
 			printFinish();
