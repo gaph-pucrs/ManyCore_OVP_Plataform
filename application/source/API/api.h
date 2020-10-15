@@ -965,7 +965,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     *clockGating_flag = FALSE;
 #endif
 
-    disable_interruption(2); // rx
+    //disable_interruption(2); // rx
     //disable_interruption(1); // tx
     //disable_interruption(0); // timer
     int_disable(1);
@@ -984,7 +984,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     int_enable(0);
     int_enable(1);
     //enable_interruption(1); // tx
-    enable_interruption(2); // rx
+    //enable_interruption(2); // rx
     //enable_interruption(0); // timer
     ////////////////////////////////////////////////
 #if USE_THERMAL    
