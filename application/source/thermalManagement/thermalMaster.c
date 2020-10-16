@@ -252,6 +252,7 @@ int main(int argc, char **argv)
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
             prints("Waiting for energy packets from slave PEs...\n");
+            enable_interruptions();
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
