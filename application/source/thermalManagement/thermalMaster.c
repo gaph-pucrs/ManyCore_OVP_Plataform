@@ -256,7 +256,7 @@ int main(int argc, char **argv)
 #endif
             while(waitingEnergyReport < N_PES){
             }
-
+            waitingEnergyReport = 0;
 #if USE_THERMAL
             *clockGating_flag = FALSE;
 #endif
@@ -331,9 +331,11 @@ int main(int argc, char **argv)
             //////////////////////////
             // Migration procedures //
             //////////////////////////
+            prints("Generating TempMatrix\n");
             generateTempMatrix(Temperature);
 
             if ((time+1)%20 == 0){
+                prints("Starting the thermal actuation analysis\n");
                 temperature_migration(Temperature, tasks_to_map, task_addr);
                 // for(i = 0; i < tasks_to_map; i++)
                 //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
@@ -344,6 +346,9 @@ int main(int argc, char **argv)
                 // }
                 // for(i=0;i<tasks_to_map;i++)
                 //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
+            }
+            else{
+                prints("Skiping the thermal actuation analysis\n");
             }
 
             // Verify if every task is finished
