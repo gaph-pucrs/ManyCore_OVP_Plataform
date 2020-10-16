@@ -584,6 +584,7 @@ void popSendAfterTX(){
 void interruptHandler_NI_TX(void) {
 #if USE_THERMAL
 #endif
+    prints("TX interruption!\n");
     int index;
     //////////////////////////////////////////////////////////////
     if(transmittingActive < PIPE_SIZE){ // Message packet
