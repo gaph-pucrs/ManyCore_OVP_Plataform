@@ -64,7 +64,7 @@ void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
     int i, j;
 
     //memcpy(ordered_temp, temp, DIM_X*DIM_Y*4);
-    for(int i=0;i<DIM_X*DIM_Y; i++){
+    for(i=0;i<DIM_X*DIM_Y; i++){
         ordered_temp[i] = temp[i];
     }
 
