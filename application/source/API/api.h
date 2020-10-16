@@ -312,7 +312,6 @@ void interruptHandler_timer(void) {
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     // YOUR TIMER FUNCTION ENTERS HERE
-    prints(">> Começando energia\n");
 #if USE_THERMAL
     energyEstimation();
 
@@ -323,7 +322,6 @@ void interruptHandler_timer(void) {
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     *timerConfig = 0xFFFFFFFF; // Say OKAY to the timer
-    prints(">> Terminando energia\n");
 #if USE_THERMAL
     *clockGating_flag = savedClkGating;
 #endif
@@ -357,11 +355,11 @@ void interruptHandler_NI_RX(void) {
         }
 
         // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
-        if(isRawReceive == 1){
+        /*if(isRawReceive == 1){
             prints(">>>>>>Disable RX interruption\n");
             int_disable(2);
             isRawReceive = 0;
-        }
+        }*/
         
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
