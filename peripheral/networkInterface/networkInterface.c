@@ -75,8 +75,8 @@ unsigned int usFlit;
 // Tells to the NI control when a message is already ready to be delivered to the processor
 //unsigned int RXwaiting = 0;
 
-/*int flag_print = 0;
-int flag_print_rx = 0;*/
+int flag_print = 0;
+//int flag_print_rx = 0;
 ////////////////////////////// Auxiliar Funcions  /////////////////////////////
 
 // Transform a flit from VECTOR to UNSIGNED INT (using the global variables)
@@ -164,9 +164,9 @@ void niIteration(){
                 transmittingCount = SIZE;
 
                 //debug
-                /*if(htonl(usFlit) == 0x0200){
+                if((htonl(usFlit) & 0x0000FFFF) == 0x0000){
                     flag_print = 1;
-                }*/
+                }
             }
             else if(transmittingCount == SIZE){
                 transmittingCount = htonl(usFlit);
@@ -176,9 +176,9 @@ void niIteration(){
             }
 
             // debug
-            /*if(flag_print == 1){
+            if(flag_print == 1){
                 bhmMessage("INFO", "NI_PRINTER", "Printing flit %x: %d\n", (int)transmittingCount, (int)htonl(usFlit));
-            }*/
+            }
 
             // Increments the memory pointer to get the next flit
             transmittingAddress = transmittingAddress + 4;
@@ -188,9 +188,9 @@ void niIteration(){
         }
         // If the packet transmittion is done, change the NI status to IDLE
         if(transmittingCount == EMPTY){
-            //flag_print = 0; // debug
+            flag_print = 0; // debug
             // Changes the TX status to INTERRUPTION
-            bhmMessage("INFO", "NI_INR", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Delivering a packet!\n");
+            //bhmMessage("INFO", "NI_INR", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Delivering a packet!\n");
             control_TX = NI_STATUS_INTER; 
             ppmWriteNet(handles.INT_NI_TX, 1); // Turns the interruption on
         }
