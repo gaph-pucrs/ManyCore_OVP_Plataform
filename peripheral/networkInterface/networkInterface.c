@@ -190,6 +190,7 @@ void niIteration(){
         if(transmittingCount == EMPTY){
             //flag_print = 0; // debug
             // Changes the TX status to INTERRUPTION
+            bhmMessage("INFO", "NI_INR", ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Delivering a packet!\n");
             control_TX = NI_STATUS_INTER; 
             ppmWriteNet(handles.INT_NI_TX, 1); // Turns the interruption on
         }
