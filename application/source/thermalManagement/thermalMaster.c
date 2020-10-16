@@ -193,6 +193,7 @@ int main(int argc, char **argv)
     unsigned int time = 0;
     int finishSimulation;
 
+    Uns32 aux = MFSPR(SPR_PICMR);
     /*Initialization*/
     generateSpiralMatrix();
     for(y=0;y<DIM_Y;y++){
@@ -252,7 +253,8 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             prints("Waiting for energy packets from slave PEs...\n");
             while(waitingEnergyReport < N_PES){
-                printi(*timerConfig);
+                aux = MFSPR(SPR_PICMR);
+                printi(aux);
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
