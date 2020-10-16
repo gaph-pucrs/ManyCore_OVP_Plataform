@@ -250,6 +250,7 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
+            prints("Waiting for energy packets from slave PEs...\n");
             while(waitingEnergyReport < N_PES){
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
@@ -259,7 +260,7 @@ int main(int argc, char **argv)
 #if USE_THERMAL
             *clockGating_flag = FALSE;
 #endif
-            LOG("TODOS OS PACOTES DE ENERGIA FORAM RECEBIDOS!\n");
+            prints("TODOS OS PACOTES DE ENERGIA FORAM RECEBIDOS!\n");
             /*for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
                     ReceiveRaw(&theMsg);
@@ -314,10 +315,10 @@ int main(int argc, char **argv)
                 *clockGating_flag = TRUE;
 #endif
             }
-            tempPacket = 0;
 #if USE_THERMAL
             *clockGating_flag = FALSE;
 #endif
+            tempPacket = FALSE;
             prints("TEA Packet Received: ");
             for(i = 0; i < DIM_X*DIM_Y; i++){
                 printi(deliveredMessage->msg[i]);
