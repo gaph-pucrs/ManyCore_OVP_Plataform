@@ -49,7 +49,7 @@ volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
 ////////////////////////////////////////////////////////////
 // Network Interface - mapped registers
-volatile unsigned int *NIaddr = ((unsigned int *)0x80000004);// NI_BASE + 0x0; 
+volatile unsigned int *NIaddr =  ((unsigned int *)0x80000004);//NI_BASE + 0x0; 
 volatile unsigned int *NIcmdTX = ((unsigned int *)0x80000008);//NI_BASE + 0x1;
 volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 //////////////////////////////
