@@ -38,6 +38,14 @@ apps:
     p3: 3
     p4: 4
     recognizer: 5
+ - name: sort
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    sort_master: 0
+    sort_slave1: 1
+    sort_slave2: 2
+    sort_slave3: 3
  - name: thermalManagement
    cluster: 0
    mapping: static
