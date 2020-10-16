@@ -10,8 +10,8 @@
 #include "dijkstra_config.h"
 //#include "sort_config.h"
 //#include "aes_config.h"
-//#include "mpeg_config.h"
-#include "dtw_config.h"
+#include "mpeg_config.h"
+//#include "dtw_config.h"
 #include "thermalManagement_config.h"
 
 
