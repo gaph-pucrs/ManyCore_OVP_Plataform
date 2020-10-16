@@ -10,7 +10,7 @@
 #include "dijkstra_config.h"
 //#include "sort_config.h"
 //#include "aes_config.h"
-#include "mpeg_config.h"
+//#include "mpeg_config.h"
 #include "dtw_config.h"
 #include "thermalManagement_config.h"
 
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 			case print:
 				state = dijkstra_print();
 				break;
-			// MPEG
+			/*// MPEG
 			case idct:
 				state = mpeg_idct(state);
 				break;
@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 				break;
 			case start:
 				state = mpeg_start(state);
-				break;
+				break;*/
 			/*//Sort
 			case sort_master:
 				state = sortMaster(state);
