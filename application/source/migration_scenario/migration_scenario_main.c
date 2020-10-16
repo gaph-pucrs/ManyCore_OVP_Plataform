@@ -66,6 +66,7 @@ int dtw_abs(int num);
 int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE]);
 int dtw_euclideanDistance(int *x, int *y);
 int dtw_min(int x, int y);
+int dtw_randNum(int seed, int min, int max);
 
 int main(int argc, char **argv)
 {
