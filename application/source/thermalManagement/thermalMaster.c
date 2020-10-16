@@ -63,10 +63,10 @@ void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
     unsigned int ordered_temp[DIM_X*DIM_Y];
     int i, j;
 
-    //memcpy(ordered_temp, temp, DIM_X*DIM_Y*4);
-    for(i=0;i<DIM_X*DIM_Y; i++){
+    memcpy(ordered_temp, temp, DIM_X*DIM_Y*4);
+    /*for(i=0;i<DIM_X*DIM_Y; i++){
         ordered_temp[i] = temp[i];
-    }
+    }*/
 
     proc_address[0] = 0;
 
@@ -256,12 +256,12 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             prints("Waiting for energy packets from slave PEs...\n");
 #if USE_THERMAL
-                *clockGating_flag = TRUE;
+                //*clockGating_flag = TRUE;
 #endif
             while(waitingEnergyReport < N_PES){ }
             waitingEnergyReport = 0;
 #if USE_THERMAL
-            *clockGating_flag = FALSE;
+            //*clockGating_flag = FALSE;
 #endif
             prints("Every energy packet was received!\n");
             /*for(y=0;y<DIM_Y;y++){
