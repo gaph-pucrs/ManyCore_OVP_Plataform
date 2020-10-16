@@ -356,7 +356,7 @@ void interruptHandler_NI_RX(void) {
 
         // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
         if(isRawReceive == 1){
-            prints("Disable RX interruption\n");
+            prints(">>>>>>Disable RX interruption\n");
             int_disable(2);
             isRawReceive = 0;
         }
