@@ -164,7 +164,7 @@ void niIteration(){
                 transmittingCount = SIZE;
 
                 //debug
-                if((htonl(usFlit) & 0x0000FFFF) == 0x0000){
+                if(htonl(usFlit) == 0x0000){
                     flag_print = 1;
                 }
             }
