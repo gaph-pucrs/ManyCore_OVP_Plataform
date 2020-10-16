@@ -377,10 +377,7 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         waitingEnergyReport++;
-        prints("Energy packet received from ");
-        printi(getXpos(incomingPacket[PI_PAYLOAD+3])); 
-        printi(getYpos(incomingPacket[PI_PAYLOAD+3])); 
-        prints("\n");
+        putsvsv("Energy packet received from PE ", getID(incomingPacket[PI_PAYLOAD+3]), " total energy packet received until now: ", waitingEnergyReport);
         energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD+3])][getYpos(incomingPacket[PI_PAYLOAD+3])] = incomingPacket[PI_PAYLOAD+1]; // total energy
         *NIcmdRX = DONE;
     }
