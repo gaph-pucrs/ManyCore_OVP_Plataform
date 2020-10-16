@@ -410,7 +410,7 @@ void energyEstimation(){
     unsigned int avoidOverflow, energyProcDif_leak, energyLocalDif_dyn, energyLocalDif_leak;
 
     // This is required by the thermalMaster to synchronize the power analysis.
-    waitingEnergyReport = 0;
+    //waitingEnergyReport = 0;
 
     actualTime = (unsigned int)clock();
     difTime = actualTime - (unsigned int)lastTimeInstructions;
