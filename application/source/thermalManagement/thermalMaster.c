@@ -309,7 +309,21 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
-            if(tempPacket){
+            while(!tempPacket){
+#if USE_THERMAL
+                *clockGating_flag = TRUE;
+#endif
+            }
+            tempPacket = 0;
+#if USE_THERMAL
+            *clockGating_flag = FALSE;
+#endif
+            prints("TEA Packet Received: ");
+            for(i = 0; i < DIM_X*DIM_Y; i++){
+                printi(deliveredMessage->msg[i]);
+                Temperature[i] = deliveredMessage->msg[i];
+            }
+            /*if(tempPacket){
                 prints("1Pacote Recebido: ");
                 for(i = 0; i < DIM_X*DIM_Y; i++){
                     printi(deliveredMessage->msg[i]);
@@ -325,7 +339,7 @@ int main(int argc, char **argv)
                 }
             }
             prints("\n");
-            tempPacket = FALSE;
+            tempPacket = FALSE;*/
 
             //////////////////////////
             // Migration procedures //
