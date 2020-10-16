@@ -38,7 +38,7 @@ int sort_slave(int task);
 int aesMaster(int state);
 int aes_slave();
 
-// MPEG - threads
+/*// MPEG - threads
 int mpeg_idct(int state);
 int mpeg_iquant(int state);
 int mpeg_ivlc(int state);
@@ -52,7 +52,7 @@ void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant);
 void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer);
 short int getDC(short int type, type_DATA *buffer);
 unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init);
-
+*/
 // DTW
 int dtw_bank(int state);
 int dtw_p1(int state);
