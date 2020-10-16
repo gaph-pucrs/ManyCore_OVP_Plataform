@@ -253,8 +253,6 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             prints("Waiting for energy packets from slave PEs...\n");
             while(waitingEnergyReport < N_PES){
-                aux = MFSPR(SPR_PICMR);
-                printi(aux);
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
