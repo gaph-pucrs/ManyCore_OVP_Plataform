@@ -591,11 +591,11 @@ void interruptHandler_NI_TX(void) {
         transmittingActive = PIPE_WAIT;
     }
     else if(transmittingActive >= 0xFFFF0000){ // Service packet
-        prints("TX - Clearing service flag\n");
+        //prints("TX - Clearing service flag\n");
         index = 0x0000FFFF & transmittingActive;
         transmittingActive = PIPE_WAIT;
         if(index <= PIPE_SIZE){
-            prints("TX - regular servicePacket\n");
+            //prints("TX - regular servicePacket\n");
             myServicePacket[index][0] = 0xFFFFFFFF;
         }
     }
