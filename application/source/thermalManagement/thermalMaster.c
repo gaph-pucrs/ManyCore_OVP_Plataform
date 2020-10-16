@@ -252,6 +252,7 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             prints("Waiting for energy packets from slave PEs...\n");
             while(waitingEnergyReport < N_PES){
+                printi(*timerConfig);
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
