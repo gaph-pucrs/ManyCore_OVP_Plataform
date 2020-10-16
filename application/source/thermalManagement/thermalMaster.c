@@ -252,10 +252,10 @@ int main(int argc, char **argv)
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
             prints("Waiting for energy packets from slave PEs...\n");
-            while(waitingEnergyReport < N_PES){
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
+            while(waitingEnergyReport < N_PES){
             }
             waitingEnergyReport = 0;
 #if USE_THERMAL
