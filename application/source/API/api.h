@@ -341,8 +341,14 @@ void interruptHandler_NI_RX(void) {
     int requester, i, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
+        deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
+        // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
+        for(i=0;i<deliveredMessage->size;i++){
+            deliveredMessage->msg[i] = incomingPacket[i+4];
+        }
+        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
-    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY /*|| incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET*/ || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
+    else if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY /*|| incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET*/){
         receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
 
@@ -355,11 +361,11 @@ void interruptHandler_NI_RX(void) {
         }
 
         // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
-        /*if(isRawReceive == 1){
-            prints(">>>>>>Disable RX interruption\n");
+        if(isRawReceive == 1){
+            //prints(">>>>>>Disable RX interruption\n");
             int_disable(2);
             isRawReceive = 0;
-        }*/
+        }
         
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
@@ -731,8 +737,6 @@ void ReceiveRaw(message *theMessage){
 #endif
     // Pass the pointer to the message structure to a global var, acessible inside the interruption
     deliveredMessage = theMessage;
-    //prints("ReceiveRaw\n");
-    //printi(deliveredMessage);
 
     // Set a flag to zero that will only gets a one when the interruption is done
     receivingActive = 0;
@@ -982,8 +986,8 @@ void SendSlot(unsigned int addr, unsigned int slot){
     disable_interruption(2); // rx
     //disable_interruption(1); // tx
     disable_interruption(0); // timer
-    //int_disable(1);
-    //int_disable(0);
+    int_disable(1);
+    int_disable(0);
 
 #if USE_THERMAL
 #endif
@@ -995,8 +999,8 @@ void SendSlot(unsigned int addr, unsigned int slot){
 
     transmittingActive = slot;
     SendRaw(addr);
-    //int_enable(0);
-    //int_enable(1);
+    int_enable(0);
+    int_enable(1);
     //enable_interruption(1); // tx
     enable_interruption(2); // rx
     enable_interruption(0); // timer
