@@ -260,7 +260,7 @@ int main(int argc, char **argv)
 #if USE_THERMAL
             *clockGating_flag = FALSE;
 #endif
-            prints("TODOS OS PACOTES DE ENERGIA FORAM RECEBIDOS!\n");
+            prints("Every energy packet was received!\n");
             /*for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
                     ReceiveRaw(&theMsg);

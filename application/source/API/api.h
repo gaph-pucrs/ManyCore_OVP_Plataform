@@ -591,10 +591,13 @@ void interruptHandler_NI_TX(void) {
         transmittingActive = PIPE_WAIT;
     }
     else if(transmittingActive >= 0xFFFF0000){ // Service packet
+        prints("TX - Clearing service flag\n");
         index = 0x0000FFFF & transmittingActive;
         transmittingActive = PIPE_WAIT;
-        if(index <= PIPE_SIZE)
+        if(index <= PIPE_SIZE){
+            prints("TX - regular servicePacket\n");
             myServicePacket[index][0] = 0xFFFFFFFF;
+        }
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_TX TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
