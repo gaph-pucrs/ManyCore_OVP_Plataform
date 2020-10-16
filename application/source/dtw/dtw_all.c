@@ -112,11 +112,11 @@ int dtw_bank(int state){
 int dtw_p1(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P1 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P1 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -144,7 +144,7 @@ int dtw_p1(int state){
 		if(get_migration_src()){
 			prints("DTW P1 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
@@ -156,11 +156,11 @@ int dtw_p1(int state){
 int dtw_p2(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P2 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P2 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -188,7 +188,7 @@ int dtw_p2(int state){
 		if(get_migration_src()){
 			prints("DTW P2 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
@@ -200,11 +200,11 @@ int dtw_p2(int state){
 int dtw_p3(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P3 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P3 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -232,7 +232,7 @@ int dtw_p3(int state){
 		if(get_migration_src()){
 			prints("DTW P3 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
@@ -244,11 +244,11 @@ int dtw_p3(int state){
 int dtw_p4(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P4 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P4 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -276,7 +276,7 @@ int dtw_p4(int state){
 		if(get_migration_src()){
 			prints("DTW P4 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
