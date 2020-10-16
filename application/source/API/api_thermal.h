@@ -409,6 +409,9 @@ void energyEstimation(){
     unsigned int timeActiveNoC, nPorts, actualTime, difTime, timeIdleNoC, energyActive, energyIdle, idleNoC, activeNoC, EnergyNoC, energyProcDif_dyn, energyMemoryDif_dyn, energyMemoryDif_leak;
     unsigned int avoidOverflow, energyProcDif_leak, energyLocalDif_dyn, energyLocalDif_leak;
 
+    // This is required by the thermalMaster to synchronize the power analysis.
+    waitingEnergyReport = 0;
+
     actualTime = (unsigned int)clock();
     difTime = actualTime - (unsigned int)lastTimeInstructions;
     lastTimeInstructions = (time_t)actualTime;

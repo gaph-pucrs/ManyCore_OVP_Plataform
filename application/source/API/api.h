@@ -133,7 +133,10 @@ volatile unsigned int receivingActive;                      // Used by the API t
 volatile unsigned int transmittingActive = PIPE_WAIT;       // Used by the API to temporarily store the PIPE slot that is being transmitted
 volatile unsigned int interruptionType = 0;                 // TODO: LEGACY - NEED TO BE REMOVED! (inside the peripheral first)
 volatile unsigned int isRawReceive = 0;                     // Used by the API when using Raw send/receive functions
-volatile int insideSendSlot = 0;                            
+volatile int insideSendSlot = 0;              
+// API Master - thermal stuff
+volatile unsigned int waitingEnergyReport = 0;
+volatile unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 //////////////////////////////
 //////////////////////////////
 
@@ -339,7 +342,7 @@ void interruptHandler_NI_RX(void) {
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
     }
-    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY || incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
+    if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY /*|| incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET*/ || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
 
@@ -370,6 +373,15 @@ void interruptHandler_NI_RX(void) {
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
+    }
+    else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
+        waitingEnergyReport++;
+        prints("Energy packet received from ");
+        printi(getXpos(incomingPacket[PI_PAYLOAD+3])); 
+        printi(getYpos(incomingPacket[PI_PAYLOAD+3])); 
+        prints("\n");
+        energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD+3])][getYpos(incomingPacket[PI_PAYLOAD+3])] = incomingPacket[PI_PAYLOAD+1]; // total energy
+        *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
         mapping_en = 1;

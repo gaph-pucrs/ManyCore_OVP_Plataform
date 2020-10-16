@@ -15,7 +15,6 @@ unsigned int toPeriph[(DIM_X*DIM_Y)+2+3+1];
 unsigned int Power[DIM_X*DIM_Y];
 unsigned int Temperature[DIM_X*DIM_Y];
 unsigned int Frequency[DIM_X*DIM_Y];
-unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 
 unsigned int spiralMatrix[DIM_X*DIM_Y];
 
@@ -251,7 +250,18 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
-            for(y=0;y<DIM_Y;y++){
+
+#if USE_THERMAL
+            *clockGating_flag = TRUE;
+#endif
+            while(waitingEnergyReport < N_PES){
+            }
+
+#if USE_THERMAL
+            *clockGating_flag = FALSE;
+#endif
+            LOG("TODOS OS PACOTES DE ENERGIA FORAM RECEBIDOS!\n");
+            /*for(y=0;y<DIM_Y;y++){
                 for(x=0;x<DIM_X;x++){
                     ReceiveRaw(&theMsg);
                     prints("Pacote recebido de ");
@@ -260,7 +270,7 @@ int main(int argc, char **argv)
                     prints("\n");
                     energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
                 }
-            }
+            }*/
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
