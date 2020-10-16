@@ -8,9 +8,10 @@
 
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
-#include "sort_config.h"
-#include "aes_config.h"
+//#include "sort_config.h"
+//#include "aes_config.h"
 #include "mpeg_config.h"
+#include "dtw_config.h"
 #include "thermalManagement_config.h"
 
 
@@ -52,6 +53,20 @@ void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer
 short int getDC(short int type, type_DATA *buffer);
 unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init);
 
+// DTW
+int dtw_bank(int state);
+int dtw_p1(int state);
+int dtw_p2(int state);
+int dtw_p3(int state);
+int dtw_p4(int state);
+int dtw_recognizer(int state);
+// DTW - auxiliar functins
+void randPattern(int in[MATX_SIZE][MATX_SIZE]);
+int dtw_abs(int num);
+int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE]);
+int dtw_euclideanDistance(int *x, int *y);
+int dtw_min(int x, int y);
+int dtw_randNum(int seed, int min, int max);
 
 int main(int argc, char **argv)
 {
@@ -138,10 +153,10 @@ int main(int argc, char **argv)
 			case dijkstra_3:
 				state = dijkstra_slave();
 				break;
-			// MPEG
 			case print:
 				state = dijkstra_print();
 				break;
+			// MPEG
 			case idct:
 				state = mpeg_idct(state);
 				break;
@@ -157,7 +172,6 @@ int main(int argc, char **argv)
 			case start:
 				state = mpeg_start(state);
 				break;
-			
 			// //Sort
 			// case sort_master:
 			// 	state = sortMaster(state);
@@ -187,7 +201,25 @@ int main(int argc, char **argv)
 			// case aes_slave4:
 			// 	state = aes_slave();
 			// 	break;
-
+			// DTW
+			case bank:
+				state = dtw_bank(state);
+				break;
+			case p1:
+				state = dtw_p1(state);
+				break;
+			case p2:
+				state = dtw_p2(state);
+				break;
+			case p3:
+				state = dtw_p3(state);
+				break;
+			case p4:
+				state = dtw_p4(state);
+				break;
+			case recognizer:
+				state = dtw_recognizer(state);
+				break;
 		}
 		if(state == 0){
 			printFinish();

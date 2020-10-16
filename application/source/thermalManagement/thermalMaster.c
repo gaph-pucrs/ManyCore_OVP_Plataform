@@ -134,10 +134,10 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                     tgtProc = spiralMatrix[k];
                     task_ID = getSomeTaskID(srcProc, task_addr);
                     putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
-                    LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
+                    //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
 
                     if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
-                        LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
+                        //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                         prints("send_task_migration\n");
 
                         task_addr[task_ID] = tgtProc;
@@ -201,7 +201,8 @@ int main(int argc, char **argv)
             Power[p_idx] = 0;
             Frequency[p_idx] = 1000;
             Temperature[p_idx] = 31815;
-            LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
+            //LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
+            putsvsv("spiralMatrix ", p_idx, "- ",  spiralMatrix[p_idx]);
             p_idx++;
         }
     }
@@ -233,7 +234,8 @@ int main(int argc, char **argv)
     int i;
     for(i = 0; i < tasks_to_map; i++){
         task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
-        LOG("Task %d mapped in processor %x\n", i, task_addr[i]);
+        //LOG("Task %d mapped in processor %x\n", i, task_addr[i]);
+        putsvsv("Task", i, " mapped in processor ", task_addr[i]);
     }
 
     for(i = tasks_to_map; i < DIM_X*DIM_Y; i++)

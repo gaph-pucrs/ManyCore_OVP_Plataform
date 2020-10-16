@@ -49,7 +49,7 @@ volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 
 ////////////////////////////////////////////////////////////
 // Network Interface - mapped registers
-volatile unsigned int *NIaddr = ((unsigned int *)0x80000004);// NI_BASE + 0x0; 
+volatile unsigned int *NIaddr =  ((unsigned int *)0x80000004);//NI_BASE + 0x0; 
 volatile unsigned int *NIcmdTX = ((unsigned int *)0x80000008);//NI_BASE + 0x1;
 volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 //////////////////////////////
@@ -133,6 +133,7 @@ volatile unsigned int receivingActive;                      // Used by the API t
 volatile unsigned int transmittingActive = PIPE_WAIT;       // Used by the API to temporarily store the PIPE slot that is being transmitted
 volatile unsigned int interruptionType = 0;                 // TODO: LEGACY - NEED TO BE REMOVED! (inside the peripheral first)
 volatile unsigned int isRawReceive = 0;                     // Used by the API when using Raw send/receive functions
+volatile int insideSendSlot = 0;                            
 //////////////////////////////
 //////////////////////////////
 
@@ -222,6 +223,8 @@ void putsvsv(char* text1, int value1, char* text2, int value2);
 void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
 void enable_interruptions();
 void disable_interruptions();
+void disable_interruption(unsigned int n);
+void enable_interruption(unsigned int n);
 int getServiceIndex();
 void requestToForward();
 void printFinish();
@@ -362,7 +365,6 @@ void interruptHandler_NI_RX(void) {
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        //mapping_table[incomingPacket[PI_TASK_ID]] = incomingPacket[PI_REQUESTER];
         if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
@@ -515,10 +517,12 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     if(found != PIPE_WAIT){
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
+            //prints("Enviando do PIPE\n");
             // Sends the packet
             SendSlot((unsigned int)&buffer_packets[found], found);
         }
         else{
+            //prints("Envio agendado após TX\n");
             // Set it to send after the next TX interruption
             addSendAfterTX(found);
         }
@@ -578,7 +582,8 @@ void interruptHandler_NI_TX(void) {
     else if(transmittingActive >= 0xFFFF0000){ // Service packet
         index = 0x0000FFFF & transmittingActive;
         transmittingActive = PIPE_WAIT;
-        myServicePacket[index][0] = 0xFFFFFFFF;
+        if(index <= PIPE_SIZE)
+            myServicePacket[index][0] = 0xFFFFFFFF;
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_TX TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
@@ -946,7 +951,7 @@ unsigned int getID(unsigned int address){
 ///////////////////////////////////////////////////////////////////
 /* Configure the NI to transmitt a given packet */
 void SendSlot(unsigned int addr, unsigned int slot){
-
+    insideSendSlot = 1;
 #if USE_THERMAL
 #endif    
     ////////////////////////////////////////////////
@@ -960,6 +965,9 @@ void SendSlot(unsigned int addr, unsigned int slot){
     *clockGating_flag = FALSE;
 #endif
 
+    disable_interruption(2); // rx
+    //disable_interruption(1); // tx
+    disable_interruption(0); // timer
     int_disable(1);
     int_disable(0);
 
@@ -975,9 +983,13 @@ void SendSlot(unsigned int addr, unsigned int slot){
     SendRaw(addr);
     int_enable(0);
     int_enable(1);
+    //enable_interruption(1); // tx
+    enable_interruption(2); // rx
+    enable_interruption(0); // timer
     ////////////////////////////////////////////////
 #if USE_THERMAL    
 #endif
+    insideSendSlot = 0;
     return;
 }
 
