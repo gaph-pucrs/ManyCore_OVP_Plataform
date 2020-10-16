@@ -250,11 +250,10 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
-
-#if USE_THERMAL
-            *clockGating_flag = TRUE;
-#endif
             while(waitingEnergyReport < N_PES){
+#if USE_THERMAL
+                *clockGating_flag = TRUE;
+#endif
             }
             waitingEnergyReport = 0;
 #if USE_THERMAL
