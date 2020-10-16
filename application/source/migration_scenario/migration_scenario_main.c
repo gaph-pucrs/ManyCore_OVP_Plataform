@@ -38,7 +38,7 @@ int sort_slave(int task);
 int aesMaster(int state);
 int aes_slave();
 
-/*// MPEG - threads
+// MPEG - threads
 int mpeg_idct(int state);
 int mpeg_iquant(int state);
 int mpeg_ivlc(int state);
@@ -52,8 +52,8 @@ void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant);
 void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer);
 short int getDC(short int type, type_DATA *buffer);
 unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init);
-*/
-// DTW
+
+/*// DTW
 int dtw_bank(int state);
 int dtw_p1(int state);
 int dtw_p2(int state);
@@ -67,7 +67,7 @@ int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SI
 int dtw_euclideanDistance(int *x, int *y);
 int dtw_min(int x, int y);
 int dtw_randNum(int seed, int min, int max);
-
+*/
 int main(int argc, char **argv)
 {
 	OVP_init();
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 			case print:
 				state = dijkstra_print();
 				break;
-			/*// MPEG
+			// MPEG
 			case idct:
 				state = mpeg_idct(state);
 				break;
@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 				break;
 			case start:
 				state = mpeg_start(state);
-				break;*/
+				break;
 			/*//Sort
 			case sort_master:
 				state = sortMaster(state);
@@ -202,7 +202,7 @@ int main(int argc, char **argv)
 				state = aes_slave();
 				break;*/
 			// DTW
-			case bank:
+			/*case bank:
 				state = dtw_bank(state);
 				break;
 			case p1:
@@ -219,7 +219,7 @@ int main(int argc, char **argv)
 				break;
 			case recognizer:
 				state = dtw_recognizer(state);
-				break;
+				break;*/
 		}
 		if(state == 0){
 			printFinish();
