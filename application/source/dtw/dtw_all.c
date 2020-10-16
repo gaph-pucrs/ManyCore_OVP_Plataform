@@ -4,6 +4,12 @@ int dtw_abs(int num){
 	else return num;
 }
 
+int dtw_randNum(int seed, int min, int max){ 
+	int lfsr = seed;
+	lfsr = (lfsr >> 1) ^ (-(lfsr & 1u) & 0xB400u);
+	return ((lfsr % max) + min);
+}
+
 void randPattern(int in[MATX_SIZE][MATX_SIZE]){
 	int i, j;
 	for (i = 0; i < MATX_SIZE; i++){
