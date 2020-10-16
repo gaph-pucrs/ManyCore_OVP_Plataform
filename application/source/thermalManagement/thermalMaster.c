@@ -63,7 +63,10 @@ void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
     unsigned int ordered_temp[DIM_X*DIM_Y];
     int i, j;
 
-    memcpy(ordered_temp, temp, DIM_X*DIM_Y*4);
+    //memcpy(ordered_temp, temp, DIM_X*DIM_Y*4);
+    for(int i=0;i<DIM_X*DIM_Y; i++){
+        ordered_temp[i] = temp[i];
+    }
 
     proc_address[0] = 0;
 
@@ -252,7 +255,6 @@ int main(int argc, char **argv)
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
             prints("Waiting for energy packets from slave PEs...\n");
-            enable_interruptions();
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
