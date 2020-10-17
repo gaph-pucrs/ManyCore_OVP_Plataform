@@ -9,7 +9,7 @@
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
 //#include "sort_config.h"
-//#include "aes_config.h"
+#include "aes_config.h"
 #include "mpeg_config.h"
 #include "dtw_config.h"
 #include "thermalManagement_config.h"
@@ -186,21 +186,21 @@ int main(int argc, char **argv)
 			// 	state = sort_slave(2);
 			// 	break;
 			// //AES
-			// case aes_master:
-			// 	state = aesMaster(state);
-			// 	break;
-			// case aes_slave1:
-			// 	state = aes_slave();
-			// 	break;
-			// case aes_slave2:
-			// 	state = aes_slave();
-			// 	break;
-			// case aes_slave3:
-			// 	state = aes_slave();
-			// 	break;
-			// case aes_slave4:
-			// 	state = aes_slave();
-			// 	break;
+			case aes_master:
+				state = aesMaster(state);
+				break;
+			case aes_slave1:
+				state = aes_slave();
+				break;
+			case aes_slave2:
+				state = aes_slave();
+				break;
+			case aes_slave3:
+				state = aes_slave();
+				break;
+			case aes_slave4:
+				state = aes_slave();
+				break;
 			// DTW
 			case bank:
 				state = dtw_bank(state);
