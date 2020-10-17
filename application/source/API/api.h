@@ -341,10 +341,11 @@ void interruptHandler_NI_RX(void) {
     int requester, i, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
-        deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
+        //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
         // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
-        for(i=0;i<deliveredMessage->size;i++){
-            deliveredMessage->msg[i] = incomingPacket[i+4];
+        for(i=0; i<(incomingPacket[PI_SIZE]-3 -2);i++){
+            //deliveredMessage->msg[i] = incomingPacket[i+4];
+            executedInstPacket[i] = incomingPacket[i+4];
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }

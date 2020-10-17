@@ -324,8 +324,9 @@ int main(int argc, char **argv)
             tempPacket = FALSE;
             prints("TEA Packet Received: ");
             for(i = 0; i < DIM_X*DIM_Y; i++){
-                printi(deliveredMessage->msg[i]);
-                Temperature[i] = deliveredMessage->msg[i];
+                //printi(deliveredMessage->msg[i]);
+                printi(executedInstPacket[i]);
+                Temperature[i] = executedInstPacket[i];//deliveredMessage->msg[i];
             }
             /*if(tempPacket){
                 prints("1Pacote Recebido: ");
