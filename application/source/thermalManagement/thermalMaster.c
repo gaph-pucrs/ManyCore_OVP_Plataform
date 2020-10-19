@@ -258,7 +258,7 @@ int main(int argc, char **argv)
 #if USE_THERMAL
             *clockGating_flag = TRUE;
 #endif
-            while(waitingEnergyReport < N_PES){ }
+            while(waitingEnergyReport != N_PES){ }
             waitingEnergyReport = 0;
 #if USE_THERMAL
             *clockGating_flag = FALSE;
