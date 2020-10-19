@@ -254,7 +254,7 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
-            prints("Waiting for energy packets from slave PEs...\n");
+            putsv("Waiting for energy packets from slave PEs... WER: ", waitingEnergyReport);
 #if USE_THERMAL
             *clockGating_flag = TRUE;
 #endif
