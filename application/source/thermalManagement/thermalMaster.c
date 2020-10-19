@@ -296,10 +296,14 @@ int main(int argc, char **argv)
                 }
             }
             disable_interruption(1); //TX
-            if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
+            if(*NIcmdTX == NI_STATUS_OFF){ // If the NI is OFF then send the executed instruction packet
+                prints("enviando SendSlot\n");
                 SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-            else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
+            }
+            else{ // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
+                prints("enviando via flag sendExecutedInstPacket\n");
                 sendExecutedInstPacket = TRUE;
+            }
             enable_interruption(1); //TX
 
             //////////////////////////////////////////////////////
