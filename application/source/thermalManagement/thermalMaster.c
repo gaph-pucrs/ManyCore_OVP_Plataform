@@ -305,18 +305,20 @@ int main(int argc, char **argv)
                     p_idx++;
                 }
             }
+            disable_interruption(1); //TX
             if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
                 SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
             else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
                 sendExecutedInstPacket = TRUE;
+            enable_interruption(1); //TX
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
-            while(!tempPacket){
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
+            while(!tempPacket){
             }
 #if USE_THERMAL
             *clockGating_flag = FALSE;
