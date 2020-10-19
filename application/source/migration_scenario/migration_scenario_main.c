@@ -8,10 +8,11 @@
 
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
-//#include "sort_config.h"
-//#include "aes_config.h"
+// #include "sort_config.h"
+// #include "aes_config.h"
 #include "mpeg_config.h"
 #include "dtw_config.h"
+//#include "audio_video_config.h"
 #include "thermalManagement_config.h"
 
 
@@ -38,7 +39,16 @@ int sort_slave(int task);
 int aesMaster(int state);
 int aes_slave();
 
-// MPEG - threads
+
+int av_split(int state);
+int av_ivlc(int state);
+int av_iquant(int state);
+int av_idct(int state);
+int av_adpcm_dec(int state);
+int av_FIR(int state);
+int av_join(int state);
+
+// // MPEG - threads
 int mpeg_idct(int state);
 int mpeg_iquant(int state);
 int mpeg_ivlc(int state);
@@ -185,7 +195,7 @@ int main(int argc, char **argv)
 			// case sort_slave3:
 			// 	state = sort_slave(2);
 			// 	break;
-			// // //AES
+			// //AES
 			// case aes_master:
 			// 	state = aesMaster(state);
 			// 	break;
@@ -200,6 +210,28 @@ int main(int argc, char **argv)
 			// 	break;
 			// case aes_slave4:
 			// 	state = aes_slave();
+			// 	break;
+			// Audio Video
+			// case split_av:
+			// 	state = av_split(state);
+			// 	break;
+			// case ivlc_av:
+			// 	state = av_ivlc(state);
+			// 	break;
+			// case iquant_av:
+			// 	state = av_iquant(state);
+			// 	break;
+			// case idct_av:
+			// 	state = av_idct(state);
+			// 	break;
+			// case adpcm_dec_av:
+			// 	state = av_adpcm_dec(state);
+			// 	break;
+			// case FIR_av:
+			// 	state = av_FIR(state);
+			// 	break;
+			// case join_av:
+			// 	state = av_join(state);
 			// 	break;
 			// DTW
 			case bank:

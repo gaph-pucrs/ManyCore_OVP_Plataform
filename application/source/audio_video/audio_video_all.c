@@ -528,7 +528,7 @@ void decode(int input)
 }
 
 
-int av_adpcm_dec() {
+int av_adpcm_dec(int state) {
 	int i, k;
 	int * compressed_adpcm;
 	int result[COMPRESSED_SAMPLES*2];	/* Compression factor: 2 */
@@ -539,7 +539,7 @@ int av_adpcm_dec() {
 
     //RealTime(AUDIO_VIDEO_PERIOD, ADPCM_DEC_deadline, ADPCM_DEC_exe_time);
 
-	for(k=0; k<FRAMES; k++ ) {
+	for(k=state; k<FRAMES; k++ ) {
 
 
 		ReceiveMessage(&theMessage, split_av);
@@ -556,6 +556,12 @@ int av_adpcm_dec() {
 
 		/* Sends the adpcm uncompressed stream */
 		SendMessage(&theMessage, FIR_av);
+
+        if(get_migration_src()){
+            prints("av_adpcm_dec migrating.\n");
+            clear_migration_src();
+            return k+1;
+        }
 
 	}
 
@@ -646,7 +652,7 @@ void fir_filter_int(int* in,int* out,int in_len,
 
 
 
-int av_FIR() {
+int av_FIR(int state) {
     int k;
     int * input_stream;
 
@@ -654,7 +660,7 @@ int av_FIR() {
 
     //RealTime(AUDIO_VIDEO_PERIOD, FIR_deadline, FIR_exe_time);
 
-    for(k=0; k<FRAMES; k++ ) {
+    for(k=state; k<FRAMES; k++ ) {
 
         ReceiveMessage(&theMessage, adpcm_dec_av);
         input_stream = theMessage.msg;
@@ -667,6 +673,12 @@ int av_FIR() {
         /* Sends the adpcm uncompressed stream */
         SendMessage(&theMessage, join_av);
 
+        if(get_migration_src()){
+            prints("av_FIR migrating.\n");
+            clear_migration_src();
+            return k+1;
+        }
+
     }
 
     prints("FIR - end");
@@ -674,7 +686,7 @@ int av_FIR() {
     return 0;
 }
 
-typedef int type_DATA; //unsigned (WARNING - POTENTIAL CONFLICT)
+typedef int type_DATA_av; //unsigned (WARNING - POTENTIAL CONFLICT)
 
 // Cosine Transform Coefficients
 
@@ -731,9 +743,9 @@ short int iclp[1024] = {
 // * IDCD Functions
 // ****************************************************************************************************
 
-static void idctrow (type_DATA *block, int offs)
+static void idctrow_av (type_DATA_av *block, int offs)
 {
-  type_DATA x0, x1, x2, x3, x4, x5, x6, x7, x8; //int
+  type_DATA_av x0, x1, x2, x3, x4, x5, x6, x7, x8; //int
 
   /* shortcut */
   if (!((x1 = block[4+offs]<<11) | (x2 = block[6+offs]) | (x3 = block[2+offs]) |
@@ -785,9 +797,9 @@ static void idctrow (type_DATA *block, int offs)
 }
 
 
-static void idctcol(type_DATA *block, int offs, int lx)
+static void idctcol_av(type_DATA_av *block, int offs, int lx)
 {
-  type_DATA x0, x1, x2, x3, x4, x5, x6, x7, x8; //int
+  type_DATA_av x0, x1, x2, x3, x4, x5, x6, x7, x8; //int
 
   /* shortcut */
   if (!((x1 = (block[lx*4+offs]<<8)) | (x2 = block[lx*6+offs]) | (x3 = block[lx*2+offs]) |
@@ -840,29 +852,29 @@ static void idctcol(type_DATA *block, int offs, int lx)
 
 
 /* two-dimensional inverse discrete cosine transform */
-void idct_(type_DATA *block,int lx)
+void idct_(type_DATA_av *block,int lx)
 {
   int i;
 
   for (i=0; i<8; i ++)
-    idctrow(block,lx*i);
+    idctrow_av(block,lx*i);
 
   for (i=0; i<8; i++)
-    idctcol(block,i,lx);
+    idctcol_av(block,i,lx);
 }
 
-int av_idct()
+int av_idct(int state)
 {
     unsigned int time_a, time_b;
     int i,j, b;
-    type_DATA block[64];
+    type_DATA_av block[64];
 
 
     prints("Task IDCT start:");
 
     //RealTime(AUDIO_VIDEO_PERIOD, IDCT_deadline, IDCT_exe_time);
 
-    for(j=0;j<FRAMES;j++)
+    for(j=state;j<FRAMES;j++)
     {
 
 
@@ -880,6 +892,12 @@ int av_idct()
 
         SendMessage(&theMessage,join_av);
 
+        if(get_migration_src()){
+            prints("av_idct migrating.\n");
+            clear_migration_src();
+            return j+1;
+        }
+
     }
 
     prints("End Task IDCT");
@@ -894,7 +912,7 @@ unsigned char intramatrix[64] = { 8, 16, 19, 22, 26, 27, 29, 34, 16, 16, 22, 24,
         26, 27, 29, 34, 38, 46, 56, 69, 27, 29, 35, 38, 46, 56, 69, 83 };
 
 /* MPEG-2 inverse quantization */
-void iquant_(type_DATA *src, int lx, int dc_prec, int mquant) {
+void iquant_(type_DATA_av *src, int lx, int dc_prec, int mquant) {
     int i, j, val, sum, offs;
 
     offs = 0;
@@ -917,18 +935,18 @@ void iquant_(type_DATA *src, int lx, int dc_prec, int mquant) {
         src[offs + 7] ^= 1;
 }
 
-int av_iquant() {
+int av_iquant(int state) {
     unsigned int time_a, time_b;
     int i, j, b;
 
-    type_DATA clk_count;
-    type_DATA block[64];
+    type_DATA_av clk_count;
+    type_DATA_av block[64];
 
     prints("Task IQUANT start:");
 
     //RealTime(AUDIO_VIDEO_PERIOD, IQUANT_deadline, IQUANT_exe_time);
 
-    for (j = 0; j < FRAMES; j++) {
+    for (j = state; j < FRAMES; j++) {
 
         ReceiveMessage(&theMessage, ivlc_av);
 
@@ -943,6 +961,12 @@ int av_iquant() {
 
         SendMessage(&theMessage, idct_av);
 
+        if(get_migration_src()){
+            prints("av_iquant migrating.\n");
+            clear_migration_src();
+            return j+1;
+        }
+
     }
 
     prints("End Task IQUANT");
@@ -952,7 +976,7 @@ int av_iquant() {
 
 int out;
 
-short int bytecount = 0;              // Bytes of the compressed VLC_array bitstream: must be specified as an input
+short int bytecount_av = 0;              // Bytes of the compressed VLC_array bitstream: must be specified as an input
 
 /*short int block[64]=  // Extracted Image: Must match with the above described result
   {
@@ -969,7 +993,7 @@ short int bytecount = 0;              // Bytes of the compressed VLC_array bitst
 /* zig-zag scan
    Scanning order: The zig-zag scan is used in order to maximize adjacent zeroes */
 
-unsigned char zig_zag_scan[64] =
+unsigned char zig_zag_scan_av[64] =
 {
   0,1,8,16,9,2,3,10,17,24,32,25,18,11,4,5,
   12,19,26,33,40,48,41,34,27,20,13,6,7,14,21,28,
@@ -979,15 +1003,15 @@ unsigned char zig_zag_scan[64] =
 
 typedef struct {
   char val, len;
-} VLCtab;
+} VLCtab_av;
 
 typedef struct {
   char run, level, len;
-} DCTtab;
+} DCTtab_av;
 
 
 /* Table B-12, dct_dc_size_luminance, codes 00xxx ... 11110 */
-static VLCtab DClumtab0[32] =
+static VLCtab_av DClumtab0_av[32] =
 { {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2},
   {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2},
   {0, 3}, {0, 3}, {0, 3}, {0, 3}, {3, 3}, {3, 3}, {3, 3}, {3, 3},
@@ -995,13 +1019,13 @@ static VLCtab DClumtab0[32] =
 };
 
 /* Table B-12, dct_dc_size_luminance, codes 111110xxx ... 111111111 */
-static VLCtab DClumtab1[16] =
+static VLCtab_av DClumtab1_av[16] =
 { {7, 6}, {7, 6}, {7, 6}, {7, 6}, {7, 6}, {7, 6}, {7, 6}, {7, 6},
   {8, 7}, {8, 7}, {8, 7}, {8, 7}, {9, 8}, {9, 8}, {10,9}, {11,9}
 };
 
 /* Table B-13, dct_dc_size_chrominance, codes 00xxx ... 11110 */
-static VLCtab DCchromtab0[32] =
+static VLCtab_av DCchromtab0_av[32] =
 { {0, 2}, {0, 2}, {0, 2}, {0, 2}, {0, 2}, {0, 2}, {0, 2}, {0, 2},
   {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2}, {1, 2},
   {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2}, {2, 2},
@@ -1009,7 +1033,7 @@ static VLCtab DCchromtab0[32] =
 };
 
 /* Table B-13, dct_dc_size_chrominance, codes 111110xxxx ... 1111111111 */
-static VLCtab DCchromtab1[32] =
+static VLCtab_av DCchromtab1_av[32] =
 { {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6},
   {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6}, {6, 6},
   {7, 7}, {7, 7}, {7, 7}, {7, 7}, {7, 7}, {7, 7}, {7, 7}, {7, 7},
@@ -1020,7 +1044,7 @@ static VLCtab DCchromtab1[32] =
 /* Table B-15, DCT coefficients table one,
  * codes 000001xx ... 11111111
 */
-DCTtab DCTtab0a[252] =
+DCTtab_av DCTtab0a_av[252] =
 {
   {65,0,6}, {65,0,6}, {65,0,6}, {65,0,6}, /* Escape */
   {7,1,7}, {7,1,7}, {8,1,7}, {8,1,7},
@@ -1090,7 +1114,7 @@ DCTtab DCTtab0a[252] =
 /* Table B-15, DCT coefficients table one,
  * codes 000000100x ... 000000111x
  */
-DCTtab DCTtab1a[8] =
+DCTtab_av DCTtab1a_av[8] =
 {
   {5,2,9}, {5,2,9}, {14,1,9}, {14,1,9},
   {2,4,10}, {16,1,10}, {15,1,9}, {15,1,9}
@@ -1099,7 +1123,7 @@ DCTtab DCTtab1a[8] =
 /* Table B-14/15, DCT coefficients table zero / one,
  * codes 000000010000 ... 000000011111
  */
-DCTtab DCTtab2[16] =
+DCTtab_av DCTtab2_av[16] =
 {
   {0,11,12}, {8,2,12}, {4,3,12}, {0,10,12},
   {2,4,12}, {7,2,12}, {21,1,12}, {20,1,12},
@@ -1110,7 +1134,7 @@ DCTtab DCTtab2[16] =
 /* Table B-14/15, DCT coefficients table zero / one,
  * codes 0000000010000 ... 0000000011111
  */
-DCTtab DCTtab3[16] =
+DCTtab_av DCTtab3_av[16] =
 {
   {10,2,13}, {9,2,13}, {5,3,13}, {3,4,13},
   {2,5,13}, {1,7,13}, {1,6,13}, {0,15,13},
@@ -1121,7 +1145,7 @@ DCTtab DCTtab3[16] =
 /* Table B-14/15, DCT coefficients table zero / one,
  * codes 00000000010000 ... 00000000011111
  */
-DCTtab DCTtab4[16] =
+DCTtab_av DCTtab4_av[16] =
 {
   {0,31,14}, {0,30,14}, {0,29,14}, {0,28,14},
   {0,27,14}, {0,26,14}, {0,25,14}, {0,24,14},
@@ -1132,7 +1156,7 @@ DCTtab DCTtab4[16] =
 /* Table B-14/15, DCT coefficients table zero / one,
  * codes 000000000010000 ... 000000000011111
  */
-DCTtab DCTtab5[16] =
+DCTtab_av DCTtab5_av[16] =
 {
   {0,40,15}, {0,39,15}, {0,38,15}, {0,37,15},
   {0,36,15}, {0,35,15}, {0,34,15}, {0,33,15},
@@ -1143,7 +1167,7 @@ DCTtab DCTtab5[16] =
 /* Table B-14/15, DCT coefficients table zero / one,
  * codes 0000000000010000 ... 0000000000011111
  */
-DCTtab DCTtab6[16] =
+DCTtab_av DCTtab6_av[16] =
 {
   {1,18,16}, {1,17,16}, {1,16,16}, {1,15,16},
   {6,3,16}, {16,2,16}, {15,2,16}, {14,2,16},
@@ -1151,22 +1175,22 @@ DCTtab DCTtab6[16] =
   {30,1,16}, {29,1,16}, {28,1,16}, {27,1,16}
 };
 
-short int bitposition = 7;            // posizione del prossimo bit da scrivere sul buffer
-short int mask = 0x80;                // mask for reading and writing bytes on the vlc_stream
+short int bitposition_av = 7;            // posizione del prossimo bit da scrivere sul buffer
+short int mask_av = 0x80;                // mask for reading and writing bytes on the vlc_stream
 
 
 // ************************************************************************
 //  IVLC SubFunctions ...                                                 *
 // ************************************************************************
 
-unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int init)
+unsigned int getbits_av (short int n, short int flush, type_DATA_av *buffer, short int init)
 {
   short int i = 0;
   short int temp = 0;
   int temp2 = 0;
-  short int tmp_bytecnt = bytecount;
-  short int tmp_bitpstn  = bitposition;
-  unsigned char tmp_mask = mask;
+  short int tmp_bytecnt = bytecount_av;
+  short int tmp_bitpstn  = bitposition_av;
+  unsigned char tmp_mask = mask_av;
 
   //printfuart("Start getbits:");
   //printfuart("buffer:"); printfuart(itoa(buffer));
@@ -1193,9 +1217,9 @@ unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int
       //printfuart("tmp_bitpstn:"); printfuart(itoa(tmp_bitpstn));
 
       if (flush) {
-    bytecount = tmp_bytecnt;
-    bitposition = tmp_bitpstn;
-    mask = tmp_mask;
+    bytecount_av = tmp_bytecnt;
+    bitposition_av = tmp_bitpstn;
+    mask_av = tmp_mask;
       }
       //printfuart("End getbits:");
     }
@@ -1203,11 +1227,11 @@ unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int
     {
       //printfuart("Init");
       tmp_bytecnt = 0;
-      bytecount = 0;
+      bytecount_av = 0;
       tmp_bitpstn  = 7;
-      bitposition = 7;
+      bitposition_av = 7;
       tmp_mask = 0x80;
-      mask =0x80;
+      mask_av =0x80;
       //printfuart("tmp_bytecnt:"); printfuart(itoa(tmp_bytecnt));
       //printfuart("tmp_mask:"); printfuart(itoa(tmp_mask));
       //printfuart("tmp_bitpstn:"); printfuart(itoa(tmp_bitpstn));
@@ -1215,14 +1239,14 @@ unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int
   return temp2;
 }
 
-/* unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int init) */
+/* unsigned int getbits_av (short int n, short int flush, type_DATA_av *buffer, short int init) */
 /* { */
 /*   short int i = 0; */
 /*   short int temp = 0; */
 /*   int temp2 = 0; */
-/*   short int tmp_bytecnt = bytecount; */
-/*   short int tmp_bitpstn = bitposition; */
-/*   unsigned char tmp_mask = mask; */
+/*   short int tmp_bytecnt = bytecount_av; */
+/*   short int tmp_bitpstn = bitposition_av; */
+/*   unsigned char tmp_mask = mask_av; */
 /*   //printfuart(""); */
 /*   for (i = 0; i < n; i++) { */
 /*     temp = (buffer [tmp_bytecnt] & tmp_mask) >> tmp_bitpstn; */
@@ -1238,41 +1262,41 @@ unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int
 /*   } */
 
 /*   if (flush) { */
-/*     bytecount = tmp_bytecnt; */
-/*     bitposition = tmp_bitpstn; */
-/*     mask = tmp_mask; */
+/*     bytecount_av = tmp_bytecnt; */
+/*     bitposition_av = tmp_bitpstn; */
+/*     mask_av = tmp_mask; */
 /*   } */
 /*   //printfuart(""); */
 /*   return temp2; */
 /* } */
 
-short int getDC (short int type, type_DATA *buffer)
+short int getDC_av (short int type, type_DATA_av *buffer)
 {
   short int code, size, val;
 
-  code = getbits (5, 0, buffer,0);
+  code = getbits_av (5, 0, buffer,0);
   //printfuart("codeDC:"); printfuart(itoa(code));
 
   if (code < 31) {
     if (type) {
-      size = DCchromtab0[code].val;
-      getbits (DCchromtab0[code].len, 1, buffer,0);
+      size = DCchromtab0_av[code].val;
+      getbits_av (DCchromtab0_av[code].len, 1, buffer,0);
     }
     else {
-      size = DClumtab0 [code].val;
-      getbits (DClumtab0 [code].len, 1, buffer,0);
+      size = DClumtab0_av [code].val;
+      getbits_av (DClumtab0_av [code].len, 1, buffer,0);
     }
   }
   else {
     if (type) {
-      code = getbits (10, 0, buffer,0) - 0x3E0;
-      size = DCchromtab1 [code].val;
-      getbits (DCchromtab1 [code].len, 1, buffer,0);
+      code = getbits_av (10, 0, buffer,0) - 0x3E0;
+      size = DCchromtab1_av [code].val;
+      getbits_av (DCchromtab1_av [code].len, 1, buffer,0);
     }
     else {
-      code = getbits (9, 0, buffer,0) - 0x1F0;
-      size = DClumtab1 [code].val;
-      getbits (DClumtab1 [code].len, 1, buffer,0);
+      code = getbits_av (9, 0, buffer,0) - 0x1F0;
+      size = DClumtab1_av [code].val;
+      getbits_av (DClumtab1_av [code].len, 1, buffer,0);
     }
   }
 
@@ -1280,7 +1304,7 @@ short int getDC (short int type, type_DATA *buffer)
     val = 0;
   }
   else {
-    val = getbits (size, 1, buffer,0);
+    val = getbits_av (size, 1, buffer,0);
     if ((val & (1 << (size - 1))) == 0)
       val -= (1 << size) - 1;
   }
@@ -1292,58 +1316,58 @@ short int getDC (short int type, type_DATA *buffer)
 // * IVLC Function
 // ************************************************************************************
 
-void ivlc_(type_DATA *block, short int comp, short int lx, type_DATA *buffer)
+void ivlc_(type_DATA_av *block, short int comp, short int lx, type_DATA_av *buffer)
 {
   int val, i, sign, run;
   short int temp, temp2;
   unsigned int code;
-  DCTtab *tab;
+  DCTtab_av *tab;
 
-  sign = getbits(0,0,0,1);      /*init get bit*/
+  sign = getbits_av(0,0,0,1);      /*init get bit*/
 
   /* decode DC coefficients */
   if (comp == 0) {
-    block[0] = getDC(0, buffer);
+    block[0] = getDC_av(0, buffer);
     //printfuart("block[0]:"); printfuart(itoa(block[0]));
   }
   else if (comp == 1) {
-    block[0] = getDC(1, buffer);
+    block[0] = getDC_av(1, buffer);
   }
   else {
-    block[0] = getDC(1, buffer);
+    block[0] = getDC_av(1, buffer);
   }
 
    /* decode AC coefficients */
   for (i=1; ; i++)
   {
-    code = getbits (16, 0, buffer,0);
+    code = getbits_av (16, 0, buffer,0);
     //printfuart("codeAC:"); printfuart(itoa(code));
     if (code>=1024)
-      tab = &DCTtab0a[(code>>8)-4];
+      tab = &DCTtab0a_av[(code>>8)-4];
     else if (code>=512)
-      tab = &DCTtab1a[(code>>6)-8];
+      tab = &DCTtab1a_av[(code>>6)-8];
     else if (code>=256)
-      tab = &DCTtab2[(code>>4)-16];
+      tab = &DCTtab2_av[(code>>4)-16];
     else if (code>=128)
-      tab = &DCTtab3[(code>>3)-16];
+      tab = &DCTtab3_av[(code>>3)-16];
     else if (code>=64)
-      tab = &DCTtab4[(code>>2)-16];
+      tab = &DCTtab4_av[(code>>2)-16];
     else if (code>=32)
-      tab = &DCTtab5[(code>>1)-16];
+      tab = &DCTtab5_av[(code>>1)-16];
     else if (code>=16)
-      tab = &DCTtab6[code-16];
+      tab = &DCTtab6_av[code-16];
     else
       return;
 
-    getbits (tab->len, 1, buffer,0);
+    getbits_av (tab->len, 1, buffer,0);
 
     if (tab->run==64) /* end_of_block */
       return;
 
     if (tab->run==65) /* escape */
     {
-      i += run = getbits(6, 1, buffer,0);
-      val = getbits(12, 1, buffer,0);
+      i += run = getbits_av(6, 1, buffer,0);
+      val = getbits_av(12, 1, buffer,0);
       if ((val&2047)==0)
         return;
       if (sign = val>=(2048))
@@ -1353,7 +1377,7 @@ void ivlc_(type_DATA *block, short int comp, short int lx, type_DATA *buffer)
     {
       i+= run = tab->run;
       val = tab->level;
-      sign = getbits(1, 1, buffer,0);
+      sign = getbits_av(1, 1, buffer,0);
     }
 
     if (i>=64)
@@ -1361,27 +1385,27 @@ void ivlc_(type_DATA *block, short int comp, short int lx, type_DATA *buffer)
       return;
     }
 
-    temp = zig_zag_scan[i] >> 3;
-    temp2 = (zig_zag_scan[i] - (temp << 3));
+    temp = zig_zag_scan_av[i] >> 3;
+    temp2 = (zig_zag_scan_av[i] - (temp << 3));
 
     block[(temp * lx + temp2)] = sign ? -val : val;
   }
   return;
 }
 
-int av_ivlc()
+int av_ivlc(int state)
 {
     unsigned int time_a, time_b, a, b;
     int i,j;
 
-    type_DATA vlc_array[128];
-    type_DATA block[64];
+    type_DATA_av vlc_array[128];
+    type_DATA_av block[64];
 
     prints("Task IVLC start");
 
     //RealTime(AUDIO_VIDEO_PERIOD, IVLC_deadline, IVLC_exe_time);
 
-    for(j=0;j<FRAMES;j++)
+    for(j=state;j<FRAMES;j++)
     {
 
         ReceiveMessage(&theMessage,split_av);
@@ -1401,6 +1425,12 @@ int av_ivlc()
 
         SendMessage(&theMessage,iquant_av);
 
+        if(get_migration_src()){
+            prints("av_ivlc migrating.\n");
+            clear_migration_src();
+            return j+1;
+        }
+
     }
 
     prints("End Task IVLC");
@@ -1408,7 +1438,7 @@ int av_ivlc()
     return 0;
 }
 
-int av_join() {
+int av_join(int state) {
 
     unsigned char decoded_block[1000];
     int samples[COMPRESSED_SAMPLES*2];
@@ -1423,13 +1453,19 @@ int av_join() {
     //RealTime(AUDIO_VIDEO_PERIOD, JOIN_deadline, JOIN_exe_time);
 
     j = 0;
-    for(k=0; k<FRAMES; k++ ) {
+    for(k=state; k<FRAMES; k++ ) {
 
         ReceiveMessage(&theMessage, FIR_av);
 
         ReceiveMessage(&theMessage,idct_av);
 
         printi(clock());
+
+        if(get_migration_src()){
+            prints("av_join migrating.\n");
+            clear_migration_src();
+            return k+1;
+        }
 
     }
 
@@ -1455,7 +1491,7 @@ unsigned int vlc_array[128] = { // array containing the compressed data stream
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
 
-int av_split() {
+int av_split(int state) {
 
     int i, b;
     char str[20];
@@ -1476,11 +1512,17 @@ int av_split() {
 
     //RealTime(AUDIO_VIDEO_PERIOD, SPLIT_deadline, SPLIT_exe_time);
 
-    for (i = 0; i < FRAMES; i++) {
+    for (i = state; i < FRAMES; i++) {
 
         SendMessage(&compresssed_adpcm, adpcm_dec_av);
 
         SendMessage(&theMessage, ivlc_av);
+
+        if(get_migration_src()){
+            prints("av_split migrating.\n");
+            clear_migration_src();
+            return i+1;
+        }
 
     }
 
