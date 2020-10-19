@@ -264,16 +264,6 @@ int main(int argc, char **argv)
             *clockGating_flag = FALSE;
 #endif
             prints("Every energy packet was received!\n");
-            /*for(y=0;y<DIM_Y;y++){
-                for(x=0;x<DIM_X;x++){
-                    ReceiveRaw(&theMsg);
-                    prints("Pacote recebido de ");
-                    printi(getXpos(theMsg.msg[3])); 
-                    printi(getYpos(theMsg.msg[3])); 
-                    prints("\n");
-                    energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
-                }
-            }*/
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
@@ -316,9 +306,10 @@ int main(int argc, char **argv)
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
 #if USE_THERMAL
-                *clockGating_flag = TRUE;
+            *clockGating_flag = TRUE;
 #endif
             while(!tempPacket){
+                prints("waiting tea\n");
             }
 #if USE_THERMAL
             *clockGating_flag = FALSE;
