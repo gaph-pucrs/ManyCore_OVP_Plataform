@@ -196,9 +196,9 @@ int main(int argc, char **argv)
 				state = sort_slave(2);
 				break;
 			//AES
-			case aes_master:
-				state = aesMaster(state);
-				break;
+			// case aes_master:
+			// 	state = aesMaster(state);
+			// 	break;
 			// case aes_slave1:
 			// 	state = aes_slave();
 			// 	break;
