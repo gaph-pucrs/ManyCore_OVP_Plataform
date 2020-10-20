@@ -108,6 +108,7 @@ int main(int argc, char **argv)
 			if (task_addr[i] == *myAddress)
 				running_task = i;
 		}
+		putsv("NEW RUNNING TASK: ", running_task);
 
 		// Send the updt addr msg to every PE
 		for(i=1; i<N_PES; i++){
