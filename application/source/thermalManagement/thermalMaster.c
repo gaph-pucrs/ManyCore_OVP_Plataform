@@ -379,7 +379,6 @@ int main(int argc, char **argv)
                 // putsv("energy ", energy_i[i]);
                 // putsv("control_signal ", control_signal[i]);
             }
-            //generateTempMatrix(Temperature); //
             generateTempMatrix(control_signal);
 
             if ((time+1)%20 == 0){
