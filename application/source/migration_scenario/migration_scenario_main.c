@@ -12,7 +12,7 @@
 #include "aes_config.h"
 #include "mpeg_config.h"
 #include "dtw_config.h"
-//#include "audio_video_config.h"
+#include "audio_video_config.h"
 #include "thermalManagement_config.h"
 
 
@@ -212,27 +212,27 @@ int main(int argc, char **argv)
 				state = aes_slave();
 				break;
 			// Audio Video
-			// case split_av:
-			// 	state = av_split(state);
-			// 	break;
-			// case ivlc_av:
-			// 	state = av_ivlc(state);
-			// 	break;
-			// case iquant_av:
-			// 	state = av_iquant(state);
-			// 	break;
-			// case idct_av:
-			// 	state = av_idct(state);
-			// 	break;
-			// case adpcm_dec_av:
-			// 	state = av_adpcm_dec(state);
-			// 	break;
-			// case FIR_av:
-			// 	state = av_FIR(state);
-			// 	break;
-			// case join_av:
-			// 	state = av_join(state);
-			// 	break;
+			case split_av:
+				state = av_split(state);
+				break;
+			case ivlc_av:
+				state = av_ivlc(state);
+				break;
+			case iquant_av:
+				state = av_iquant(state);
+				break;
+			case idct_av:
+				state = av_idct(state);
+				break;
+			case adpcm_dec_av:
+				state = av_adpcm_dec(state);
+				break;
+			case FIR_av:
+				state = av_FIR(state);
+				break;
+			case join_av:
+				state = av_join(state);
+				break;
 			// DTW
 			case bank:
 				state = dtw_bank(state);
