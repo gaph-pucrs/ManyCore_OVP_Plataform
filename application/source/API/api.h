@@ -339,7 +339,7 @@ void interruptHandler_NI_RX(void) {
     putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, j, index, taskID, newAddr, newFreq, producer;
+    int requester, i, j, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
         //waitingEnergyReport = 0;
@@ -378,9 +378,9 @@ void interruptHandler_NI_RX(void) {
             //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
-        producer = incomingPacket[PI_PROCUDER_ID];
+        //producer = incomingPacket[PI_PROCUDER_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(!sendFromMsgBuffer(requester, incomingPacket[PI_REQUESTER], producer)){ // if the package is not ready yet add a request to the pending request queue
+        if(!sendFromMsgBuffer(requester, incomingPacket[PI_REQUESTER])){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }
