@@ -251,64 +251,6 @@ int main(int argc, char **argv)
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             
-            //////////////////////////////////////////////////////
-            // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
-            //////////////////////////////////////////////////////
-//             putsv("Waiting for energy packets from slave PEs... WER: ", waitingEnergyReport);
-// #if USE_THERMAL
-//             *clockGating_flag = TRUE;
-// #endif
-//             while(waitingEnergyReport != N_PES){ }
-//             waitingEnergyReport = 0;
-// #if USE_THERMAL
-//             *clockGating_flag = FALSE;
-// #endif
-//             prints("Every energy packet was received!\n");
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-            //prints("Todos os pacotes de energia foram recebidos!\n");
-            //LOG("Todos os pacotes foram recebidos!!!\n");
-            //*clockGating_flag = TRUE;
-            // LOG("FPRINTF - MASTER %x\n",*myAddress);
-            // FILE *filepointer;
-            // int err0;
-            // char logFileName[26];
-            // err0 = sprintf(logFileName, "simulation/power_log.txt");
-            // filepointer = fopen (logFileName,"a");
-            // fprintf(filepointer,"%u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
-            // fclose(filepointer);    
-            //*clockGating_flag = FALSE;
-            /////////////////////////////////////////////////
-            // SEND THE ENERGY PACKET TO THE TEA ////////////
-            /////////////////////////////////////////////////
-            // executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
-            // executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
-            // tsend = clock();
-            // tsend = tsend - tinicio;
-            // executedInstPacket[PI_SEND_TIME] = tsend;
-            // executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
-            // p_idx=0;
-            // for(y=0;y<DIM_Y;y++){
-            //     for(x=0;x<DIM_X;x++){
-            //         executedInstPacket[p_idx+4] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
-            //         p_idx++;
-            //     }
-            // }
-            // disable_interruption(1); //TX
-            // if(*NIcmdTX == NI_STATUS_OFF){ // If the NI is OFF then send the executed instruction packet
-            //     prints("enviando SendSlot\n");
-            //     SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-            // }
-            // else{ // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
-            //     prints("enviando via flag sendExecutedInstPacket\n");
-            //     sendExecutedInstPacket = TRUE;
-            // }
-            // enable_interruption(1); //TX
-
-            //////////////////////////////////////////////////////
-            // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
-            //////////////////////////////////////////////////////
             prints("----> waiting TEA packet\n");
 #if USE_THERMAL
             *clockGating_flag = TRUE;
@@ -322,28 +264,10 @@ int main(int argc, char **argv)
             tempPacket = FALSE;
             prints("TEA Packet Received: ");
             for(i = 0; i < DIM_X*DIM_Y; i++){
-                //printi(deliveredMessage->msg[i]);
                 printi(executedInstPacket[i]);
                 Temperature[i] = executedInstPacket[i];//deliveredMessage->msg[i];
             }
-            /*if(tempPacket){
-                prints("1Pacote Recebido: ");
-                for(i = 0; i < DIM_X*DIM_Y; i++){
-                    printi(deliveredMessage->msg[i]);
-                    Temperature[i] = deliveredMessage->msg[i];
-                }
-            }
-            else{
-                ReceiveRaw(&theMsg2);
-                prints("2Pacote Recebido: ");
-                for(i = 0; i < DIM_X*DIM_Y; i++){
-                    printi(theMsg2.msg[i]);
-                    Temperature[i] = theMsg2.msg[i];
-                }
-            }
-            prints("\n");
-            tempPacket = FALSE;*/
-
+            
             //////////////////////////
             // Migration procedures //
             //////////////////////////
