@@ -832,6 +832,7 @@ void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = mapping_table[requester];
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+    prints("Slot sent\n");
 }
 
 ///////////////////////////////////////////////////////////////////
