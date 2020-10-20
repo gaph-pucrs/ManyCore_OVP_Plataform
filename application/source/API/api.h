@@ -377,7 +377,7 @@ void interruptHandler_NI_RX(void) {
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+        if(!sendFromMsgBuffer(requester, incomingPacket[PI_REQUESTER])){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }
@@ -496,7 +496,7 @@ void interruptHandler_NI_RX(void) {
         taskMigrated = incomingPacket[PI_REQUESTER];
         for(i = 0; i < N_PES; i++){
             if(pendingReq[i] != 0){
-                forwardMsgRequest(i, taskMigrated);
+                forwardMsgRequest(i, taskMigrated, pendingReq[i]);
                 pendingReq[i] = 0;
             }
         }
@@ -542,7 +542,7 @@ void interruptHandler_NI_RX(void) {
 
 ///////////////////////////////////////////////////////////////////
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
-unsigned int sendFromMsgBuffer(unsigned int requester){
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr){
     int i;
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
@@ -572,7 +572,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
         return 1; // packet was sent with success
     }
     else if(taskMigrated != -1){
-        forwardMsgRequest(requester, taskMigrated);
+        forwardMsgRequest(requester, taskMigrated, requester_addr);
         return 1;
     }
     else{
@@ -849,14 +849,14 @@ void sendPendingReq(unsigned int dest){
     prints("> pendReq enviado\n");
 }
 
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr){
     int index = getServiceIndex();
     putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin_addr);
     myServicePacket[index][PI_DESTINATION] = origin_addr;
     myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
-    myServicePacket[index][PI_REQUESTER] = mapping_table[requester];
+    myServicePacket[index][PI_REQUESTER] = requester_addr;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
