@@ -99,8 +99,8 @@ int main(int argc, char **argv)
 		if(finishSimulation_flag)
 			break;
 
-		set_taskMigrated(-1); // resets this, because it's running a new task
 		*clockGating_flag = FALSE;
+		set_taskMigrated(-1); // resets this, because it's running a new task
 		get_mapping_table(task_addr);
 
 		// Get its task to run
@@ -269,7 +269,6 @@ int main(int argc, char **argv)
 			
 			//disable_interruptions();
 			disable_interruption(2);
-			//putsv("save the new destination of this ", destination);
 			set_taskMigrated(destination); // save the new destination of this 
 			sendPendingReq(destination);
 			enable_interruption(2);
