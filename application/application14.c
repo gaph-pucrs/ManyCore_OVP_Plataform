@@ -8,10 +8,11 @@
 
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
-//#include "sort_config.h"
-//#include "aes_config.h"
+// #include "sort_config.h"
+// #include "aes_config.h"
 #include "mpeg_config.h"
 #include "dtw_config.h"
+//#include "audio_video_config.h"
 #include "thermalManagement_config.h"
 
 
@@ -38,7 +39,16 @@ int sort_slave(int task);
 int aesMaster(int state);
 int aes_slave();
 
-// MPEG - threads
+
+int av_split(int state);
+int av_ivlc(int state);
+int av_iquant(int state);
+int av_idct(int state);
+int av_adpcm_dec(int state);
+int av_FIR(int state);
+int av_join(int state);
+
+// // MPEG - threads
 int mpeg_idct(int state);
 int mpeg_iquant(int state);
 int mpeg_ivlc(int state);
@@ -172,35 +182,57 @@ int main(int argc, char **argv)
 			case start:
 				state = mpeg_start(state);
 				break;
-			/*//Sort
-			case sort_master:
-				state = sortMaster(state);
-				break;
-			case sort_slave1:
-				state = sort_slave(0);
-				break;
-			case sort_slave2:
-				state = sort_slave(1);
-				break;
-			case sort_slave3:
-				state = sort_slave(2);
-				break;
-			//AES
-			case aes_master:
-				state = aesMaster(state);
-				break;
-			case aes_slave1:
-				state = aes_slave();
-				break;
-			case aes_slave2:
-				state = aes_slave();
-				break;
-			case aes_slave3:
-				state = aes_slave();
-				break;
-			case aes_slave4:
-				state = aes_slave();
-				break;*/
+			// //Sort
+			// case sort_master:
+			// 	state = sortMaster(state);
+			// 	break;
+			// case sort_slave1:
+			// 	state = sort_slave(0);
+			// 	break;
+			// case sort_slave2:
+			// 	state = sort_slave(1);
+			// 	break;
+			// case sort_slave3:
+			// 	state = sort_slave(2);
+			// 	break;
+			// //AES
+			// case aes_master:
+			// 	state = aesMaster(state);
+			// 	break;
+			// case aes_slave1:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave2:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave3:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave4:
+			// 	state = aes_slave();
+			// 	break;
+			// Audio Video
+			// case split_av:
+			// 	state = av_split(state);
+			// 	break;
+			// case ivlc_av:
+			// 	state = av_ivlc(state);
+			// 	break;
+			// case iquant_av:
+			// 	state = av_iquant(state);
+			// 	break;
+			// case idct_av:
+			// 	state = av_idct(state);
+			// 	break;
+			// case adpcm_dec_av:
+			// 	state = av_adpcm_dec(state);
+			// 	break;
+			// case FIR_av:
+			// 	state = av_FIR(state);
+			// 	break;
+			// case join_av:
+			// 	state = av_join(state);
+			// 	break;
 			// DTW
 			case bank:
 				state = dtw_bank(state);
@@ -1325,11 +1357,11 @@ int dtw_bank(int state){
 int dtw_p1(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P1 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P1 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -1357,7 +1389,7 @@ int dtw_p1(int state){
 		if(get_migration_src()){
 			prints("DTW P1 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
@@ -1369,11 +1401,11 @@ int dtw_p1(int state){
 int dtw_p2(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P2 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P2 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -1401,7 +1433,7 @@ int dtw_p2(int state){
 		if(get_migration_src()){
 			prints("DTW P2 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
@@ -1413,11 +1445,11 @@ int dtw_p2(int state){
 int dtw_p3(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P3 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P3 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -1445,7 +1477,7 @@ int dtw_p3(int state){
 		if(get_migration_src()){
 			prints("DTW P3 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
@@ -1457,11 +1489,11 @@ int dtw_p3(int state){
 int dtw_p4(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i;
+	int result, j, i, iter;
 
 	prints("DTW P4 Resuming!\n");
 
-	for (j = state; j < PATTERN_PER_TASK; j++){
+	for (iter = state; iter < PATTERN_PER_TASK; iter++){
 		putsv("DTW P4 at ", j);
 		ReceiveMessage(&theMessage, recognizer);
 
@@ -1489,7 +1521,7 @@ int dtw_p4(int state){
 		if(get_migration_src()){
 			prints("DTW P4 is migrating!\n");
 			clear_migration_src();
-			return j+1;
+			return iter+1;
 		}
 
 	}
