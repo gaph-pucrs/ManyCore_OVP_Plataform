@@ -142,9 +142,10 @@ volatile unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 
 ////////////////////////////////////////////////////////////
 // PIPE Message buffer
-unsigned int buffer_packets[PIPE_SIZE][MESSAGE_MAX_SIZE];   // The PIPE!
-unsigned int buffer_map[PIPE_SIZE];                         // The PIPE map, informing occupied and empty slots
-unsigned int buffer_history[PIPE_SIZE];                     // The PIPE history, to keep every slot in use, preserving sent packets longer for restauration propouse (not implemented! just an idea) 
+volatile unsigned int buffer_packets[PIPE_SIZE][MESSAGE_MAX_SIZE];   // The PIPE!
+volatile unsigned int buffer_map[PIPE_SIZE];                         // The PIPE map, informing occupied and empty slots
+volatile int sendingPipe = -1; 
+volatile unsigned int buffer_history[PIPE_SIZE];                     // The PIPE history, to keep every slot in use, preserving sent packets longer for restauration propouse (not implemented! just an idea) 
 volatile unsigned int pendingReq[N_PES];                    // Inform about pending requests
 //////////////////////////////
 //////////////////////////////
@@ -817,7 +818,7 @@ void sendPipe(unsigned int dest){
     int i, j, index;
     putsv("sendPipe()", dest);
     for (j = 0; j < PIPE_SIZE; j++){
-        if (buffer_map[j] == PIPE_OCCUPIED){
+        if (buffer_map[j] == PIPE_OCCUPIED && transmittingActive != j){
             index = getServiceIndex();
             myServicePacket[index][PI_DESTINATION] = dest;
             myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
