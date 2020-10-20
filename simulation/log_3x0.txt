@@ -98,7 +98,10 @@ task_addr[25 ] = 256
 task_addr[26 ] = 512 
 task_addr[27 ] = 768 
 task_addr[28 ] = 1024 
-task_addr[29 ] = 1280 
+task_addr[29 ] = 1280 Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+16908311 Updating mapping_table[23 ] = 258 
+
 task_addr[30 ] = 1536 
 task_addr[31 ] = 1537 
 task_addr[32 ] = 1538 
@@ -113,21 +116,21 @@ task_addr[40 ] = 0
 task_addr[41 ] = 0 
 task_addr[42 ] = 0 
 task_addr[43 ] = 0 
-task_addr[44 ] = 0 
+task_addr[44 Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+16777241 Updating mapping_table[25 ] = 256 
+] = 0 
 task_addr[45 ] = 0 
 task_addr[46 ] = 0 
 task_addr[47 ] = 0 
 task_addr[48 ] = 0 
 TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-16908311 Updating mapping_table[23 ] = 258 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67108892 Updating mapping_table[28 ] = 1024 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33554458 Updating mapping_table[26 ] = 512 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 83886109 Updating mapping_table[29 ] = 1280 
@@ -152,18 +155,15 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67502118 Updating mapping_table[38 ] = 1030 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-16777241 Updating mapping_table[25 ] = 256 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33554458 Updating mapping_table[26 ] = 512 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-100728863 Updating mapping_table[31 ] = 1537 
+TX interruption!
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 100794400 Updating mapping_table[32 ] = 1538 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+100728863 Updating mapping_table[31 ] = 1537 
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 100859937 Updating mapping_table[33 ] = 1539 
@@ -176,7 +176,7 @@ TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
-Counters: 23801  7429  3052  1976  26269  17752  2011  7977  4630  39  110  1906  2456  319506 
+Counters: 23763  7397  3100  1943  26174  17761  2019  8016  4601  39  110  1906  2456  319446 
 >> Energy packet sent to thermalMaster
 TX interruption!
 TX interruption!
@@ -216,11 +216,11 @@ TX interruption!
 Task 27 mapped
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 28 
+Message request received from 30 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 30 
+Message request received from 28 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -230,16 +230,16 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 31 
 Adicionando ao pendingReq
-Counters: 71099  22220  6040  2511  28811  21901  40193  8248  27250  112  142  1152  1862  247602 
+Counters: 70687  22131  6078  2528  29776  22636  39630  8461  26938  114  142  1152  1862  247662 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 88532  29306  3344  1456  5893  4213  68514  4071  44570  14  4  44  64  249936 
+Counters: 88527  29303  3344  1457  5893  4213  68525  4065  44572  14  4  44  64  249936 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 88507  29612  3289  1434  5816  4158  68077  4426  44580  14  4  44  64  249936 
+Counters: 88515  29605  3289  1433  5816  4158  68082  4420  44581  14  4  44  64  249936 
 >> Energy packet sent to thermalMaster
 TX interruption!
-task AES started.1104215  Blocks:128  plain msg65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 -- Pushing in index = 3 
+task AES started.1106449  Blocks:128  plain msg65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 -- Pushing in index = 3 
 Encontrei um pending da tarefa 28  para o endereço 1024 
 TX interruption!
 -- Cleaning index = 3 
@@ -253,12 +253,12 @@ TX interruption!
 -- Cleaning index = 2 
 -- Pushing in index = 1 
 Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 29 
 Adicionando ao pendingReq
+TX interruption!
+-- Cleaning index = 1 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
@@ -268,206 +268,11 @@ Encontrei um pending da tarefa 31  para o endereço 1537
 TX interruption!
 -- Cleaning index = 0 
 -- Pushing in index = 3 
-Clk gate off - interruptHandler_NI_RX
+Encontrei umClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 31 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Counters: 63166  16376  8626  5198  57051  37234  11087  11491  11842  31  66  2378  2708  248112 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
+ pending da tarefa 28  para o endereço 1024 
 TX interruption!
 -- Cleaning index = 3 
 -- Pushing in index = 2 
@@ -630,832 +435,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 28 
 Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Counters: 52442  14733  5148  3806  54630  37821  4155  13383  7293  44  88  3342  3782  245398 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 52933  14848  5215  3859  55663  38594  4331  13473  7414  47  88  3404  3844  246668 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-Counters: 51952  14509  5073  3735  54577  37851  3976  13167  7014  32  87  3395  3830  245729 
->> Energy packet sent to thermalMaster
-TX interruption!
--- Cleaning index = 3 
-TX interruption!
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 2 
-TX interruption!
--- Cleaning index = 1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Counters: 53779  14996  5248  3906  55190  38088  4170  13493  7446  43  88  3466  3906  247921 
+Counters: 63756  16612  8670  5202  57295  37476  11731  11534  12252  32  65  2369  2694  248954 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Pedindo mesnagem de: 1024 
@@ -1469,54 +449,6 @@ Servico: 32
 Message request received from 30 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -1714,9 +646,105 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 31 
 Adicionando ao pendingReq
-Counters: 52850  14858  5173  3824  54892  37955  4157  13504  7324  44  89  3351  3796  244306 
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+PCounters: 53237  14973  5218  3864  55533  38403  4244  13631  7408  46  89  3351  3796  244556 
 >> Energy packet sent to thermalMaster
 TX interruption!
+edindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
 Pedindo mesnagem de: 1280 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1725,6 +753,978 @@ Pedindo mesnagem de: 1536
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 52766  14822  5209  3837  55535  38534  4281  13469  7380  46  88  3404  3844  246668 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+--Counters: 52627  14697  5140  3772  55348  38398  4025  13321  7103  32  87  3395  3830  245658 
+>> Energy packet sent to thermalMaster
+TX interruption!
+ Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Counters: 55194  15591  5549  4045  58814  40867  4424  14391  7815  46  91  3493  3948  246778 
+>> Energy packet sent to thermalMaster
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1280 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 54901  15509  5437  3978  58426  40570  4493  14201  7692  48  89  3484  3929  247107 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Pedindo mesnagem de: 1537 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1927,271 +1927,28 @@ Message request received from 28
 Adicionando ao pendingReq
 Pedindo mesnagem de: 1024 
 TX interruption!
-Counters: 56484  14503  8586  5356  59246  38766  5649  13610  8452  38  74  2627  2997  248272 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Counters: 55901  14473  8533  5186  59404  38916  5264  13812  8090  21  72  2556  2916  247136 
 >> Energy packet sent to thermalMaster
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-1280 
-TX interruption!
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
 Pedindo mesnagem de: 1280 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Counters: 54895  15516  5459  3998  58557  40621  4500  14269  7716  48  89  3493  3938  245519 
->> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2437,300 +2194,9 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Pedindo mesnagem de: 1537 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
-Counters: 53527  14926  5203  3802  55828  38670  4039  13481  7178  31  88  3466  3906  245368 
+Counters: 53614  15038  5334  3936  56942  39481  4479  13705  7562  48  90  3484  3934  244252 
 >> Energy packet sent to thermalMaster
 TX interruption!
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Counters: 52819  14777  5145  3779  54762  37867  3852  13436  7075  32  90  3484  3934  246274 
->> Energy packet sent to thermalMaster
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1280 
-TX interruption!
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 -- Pushing in index = 3 
@@ -2969,45 +2435,45 @@ Pedindo mesnagem de: 1536
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 54815  15482  5430  3960  58329  40463  4488  14170  7669  47  90  3422  3872  247182 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Counters: 54682  15285  5363  3896  57385  39820  4084  13876  7375  30  88  3528  3968  247008 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Pedindo mesnagem de: 1537 
+Pedindo mesnagem de: 1024 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 28 
 Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 29 
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 31 
@@ -3216,55 +2682,298 @@ Pedindo mesnagem de: 1537
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 51001  14251  4989  3671  53592  37172  3899  12953  6881  31  86  3324  3754  244984 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Counters: 53205  14979  5188  3834  55092  38059  4146  13624  7349  44  90  3360  3810  245275 
+>> Energy packet sent to thermalMaster
+Pedindo mesnagem de: 1280 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Counters: 53452  15004  5295  3918  56483  39093  4442  13637  7512  47  90  3484  3934  246005 
 >> Energy packet sent to thermalMaster
 TX interruption!
--- Pushing in index = 3 
-Encontrei um pending da tarefa 28  para o endereço 1024 
-TX interruption!
--- Cleaning index = 3 
--- Pushing in index = 2 
-Encontrei um pending da tarefa 29  para o endereço 1280 
-TX interruption!
--- Cleaning index = 2 
--- Pushing in index = 1 
-Encontrei um pending da tarefa 30  para o endereço 1536 
-TX interruption!
--- Cleaning index = 1 
--- Pushing in index = 0 
-Encontrei um pending da tarefa 31  para o endereço 1537 
-TX interruption!
--- Cleaning index = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 28 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1024 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 29 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 31 
-Adicionando ao pendingReq
-Pedindo mesnagem de: 1280 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1536 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagem de: 1537 
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 -- Pushing in index = 3 
@@ -3415,18 +3124,306 @@ Servico: 48
 Encontrei um pending da tarefa 28  para o endereço 1024 
 TX interruption!
 -- Cleaning index = 3 
-Pedindo mesnagem de: 1024 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 28 
 Adicionando ao pendingReq
-decipher msg65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 Counters: 56077  14109  7834  4958  56986  37519  5389  11312  7972  40  72  2764  3124  246876 
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Counters: 54682  15285  5364  3896  57385  39820  4084  13876  7375  30  88  3528  3968  247008 
 >> Energy packet sent to thermalMaster
 TX interruption!
-69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 -- Pushing in index = 2 
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+-- Pushing in index = 2 
+Encontrei um pending da tarefa 29  para o endereço 1280 
+TX interruption!
+-- Cleaning index = 2 
+-- Pushing in index = 1 
+Encontrei um pending da tarefa 30  para o endereço 1536 
+TX interruption!
+-- Cleaning index = 1 
+-- Pushing in index = 0 
+Encontrei um pending da tarefa 31  para o endereço 1537 
+TX interruption!
+-- Cleaning index = 0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 29 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 31 
+Adicionando ao pendingReq
+Pedindo mesnagem de: 1280 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1536 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Pedindo mesnagem de: 1537 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+-- Pushing in index = 3 
+Encontrei um pending da tarefa 28  para o endereço 1024 
+TX interruption!
+-- Cleaning index = 3 
+Pedindo mesnagem de: 1024 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 28 
+Adicionando ao pendingReq
+decipher msg65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 89 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 65 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 69 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 71 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 73 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 75 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 77 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 79 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 81 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 83 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 85 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 87 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 -- Pushing in index = 2 
 Encontrei um pending da tarefa 28  para o endereço 1024 
 TX interruption!
 -- Cleaning index = 2 
@@ -3434,15 +3431,18 @@ TX interruption!
 Encontrei um pending da tarefa 29  para o endereço 1280 
 TX interruption!
 -- Cleaning index = 1 
+Counters: 54754  13341  8017  5041  53618  34651  5328  10202  7721  39  70  2518  2868  246663 
+>> Energy packet sent to thermalMaster
 -- Pushing in index = 0 
 Encontrei um pending da tarefa 30  para o endereço 1536 
 TX interruption!
 -- Cleaning index = 0 
+TX interruption!
 -- Pushing in index = 3 
 Encontrei um pending da tarefa 31  para o endereço 1537 
-task AES fTX interruption!
+task AES finished.4338621  Final ResultAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGTX interruption!
 -- Cleaning index = 3 
-inished.4353071  Final ResultAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXTarefa FINALIZANDO 27 
+HHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXYYYYYYYYYYYYYYYYZZZZZZZZZZZZZZZZAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEFFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHIIIIIIIIIIIIIIIIJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNOOOOOOOOOOOOOOOOPPPPPPPPPPPPPPPPQQQQQQQQQQQQQQQQRRRRRRRRRRRRRRRRSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTUUUUUUUUUUUUUUUUVVVVVVVVVVVVVVVVWWWWWWWWWWWWWWWWXXXXXXXXXXXXXXXXTarefa FINALIZANDO 27 
 at this point the pending is: 
 pendingReq[0 ] = 0 
 pendingReq[1 ] = 0 
@@ -3499,7 +3499,7 @@ pipeStatus[1 ] = 0
 pipeStatus[2 ] = 0 
 pipeStatus[3 ] = 0 
 TX interruption!
-Counters: 25613  5837  2923  1737  21366  11496  4480  5073  4884  15  12  148  208  249792 
+Counters: 21938  5091  2103  1292  17717  9263  4070  4597  4303  15  10  110  160  249333 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
@@ -3531,22 +3531,25 @@ Counters: 192  45  23  26  185  120  8  48  24  0  8  228  268  249732
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-33947673 Updating mapping_table[25 ] = 518 
+393218 Updating mapping_table[2 ] = 6 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 65549 Updating mapping_table[13 ] = 1 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-50724890 Updating mapping_table[26 ] = 774 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-393218 Updating mapping_table[2 ] = 6 
+17170456 Updating mapping_table[24 ] = 262 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 100663311 Updating mapping_table[15 ] = 1536 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-17170456 Updating mapping_table[24 ] = 262 
+33947673 Updating mapping_table[25 ] = 518 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50724890 Updating mapping_table[26 ] = 774 
+Counters: 2022  609  179  128  1445  762  20  636  216  0  39  419  614  249386 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 33882121 Updating mapping_table[9 ] = 517 
@@ -3556,10 +3559,7 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 17104902 Updating mapping_table[6 ] = 261 
-Counters: 2955  900  248  188  2102  1083  26  921  321  0  42  443  653  249347 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
+Counters: 1107  327  101  77  815  441  14  342  120  0  7  68  103  249897 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
@@ -3631,9 +3631,6 @@ TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
->> Energy packet sent to thermalMaster
-TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  12  412  472  249528 
 >> Energy packet sent to thermalMaster
 TX interruption!
@@ -3642,810 +3639,427 @@ Servico: 103
 67108897 Updating mapping_table[33 ] = 1024 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-33816579 Updating mapping_table[3 ] = 516 
+83951650 Updating mapping_table[34 ] = 1281 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33947683 Updating mapping_table[35 ] = 518 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+83886082 Updating mapping_table[2 ] = 1280 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50659332 Updating mapping_table[4 ] = 773 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-100728834 Updating mapping_table[2 ] = 1537 
+67436545 Updating mapping_table[1 ] = 1029 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-196642 Updating mapping_table[34 ] = 3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-16973859 Updating mapping_table[35 ] = 259 
-Counters: 2034  615  173  134  1463  762  20  630  222  0  36  300  480  249520 
+100728840 Updating mapping_table[8 ] = 1537 
+Counters: 2327  703  205  145  1655  869  22  734  248  0  63  516  831  250609 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 101 
-Task state received 1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 102 
-Task pendingReq received 1 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 1025 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 98 
-Task destination received
-task_addr[0 ] = 1281 
-task_addr[1 ] = 518 
-task_addr[2 ] = 1537 
-task_addr[3 ] = 516 
-task_addr[4 ] = 773 
-task_addr[5 ] = 772 
-task_addr[6 ] = 774 
-task_addr[7 ] = 768 
-task_addr[8 ] = 1280 
-task_addr[9 ] = 517 
-task_addr[10 ] = 1029 
-task_addr[11 ] = 1025 
-task_addr[12 ] = 0 
-task_addr[13 ] = 0 
-task_addr[14 ] = 0 
-task_addr[15 ] = 0 
-task_addr[16 ] = 0 
-task_addr[17 ] = 0 
-task_addr[18 ] = 0 
-task_addr[19 ] = 0 
-task_addr[20 ] = 0 
-task_addr[21 ] = 0 
-task_addr[22 ] = 0 
-task_addr[23 ] = 0 
-task_addr[24 ] = 0 
-task_addr[25 ] = 0 
-task_addr[26 ] = 0 
-task_addr[27 ] = 0 
-task_addr[28 ] = 0 
-task_addr[29 ] = 0 
-task_addr[30 ] = 0 
-task_addr[31 ] = 0 
-task_addr[32 ] = 1538 
-task_addr[33 ] = 1024 
-task_addr[34 ] = 3 
-task_addr[35 ] = 259 
-task_addr[36 ] = 260 
-task_addr[37 ] = 1286 
-task_addr[38 ] = 1030 
-task_addr[39 ] = 0 
-task_addr[40 ] = 0 
-task_addr[41 ] = 0 
-task_addr[42 ] = 0 
-task_addr[43 ] = 0 
-task_addr[44 ] = 0 
-task_addr[45 ] = 0 
-task_addr[46 ] = 0 
-task_addr[47 ] = 0 
-task_addr[48 ] = 0 
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
+Servico: 103 
+16973834 Updating mapping_table[10 ] = 259 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50724870 Updating mapping_table[6 ] = 774 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-83886088 Updating mapping_table[8 ] = 1280 
+33816579 Updating mapping_table[3 ] = 516 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+196608 Updating mapping_table[0 ] = 3 
+Counters: 1412  421  127  94  1025  548  16  440  152  0  20  352  452  248108 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  26  690  820  249180 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  22  542  652  249348 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  22  542  652  249348 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  22  542  652  249348 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  22  542  652  249348 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  22  542  652  249348 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  24  588  708  249292 
+>> Energy packet sent to thermalMaster
 TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  23  579  694  249306 
+>> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 16077  4700  2239  1521  16030  11090  1851  4598  3736  46  26  307  437  249563 
+Counters: 192  45  23  26  185  120  8  48  24  0  21  505  610  249390 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  25  625  750  249250 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  24  616  736  249264 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  26  634  764  249236 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  25  625  750  249250 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  28  708  848  249152 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  28  708  848  249152 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  27  699  834  249166 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  26  634  764  249236 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  26  662  792  249208 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  26  662  792  249208 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  26  634  764  249236 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  28  708  848  249152 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  26  708  838  249162 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+17170434 Updating mapping_table[2 ] = 262 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+65541 Updating mapping_table[5 ] = 1 
+Counters: 802  233  75  60  605  334  12  244  88  0  9  179  224  249776 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  1  46  51  249949 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  1  46  51  249949 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  4  44  64  249936 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
->> Energy packet sent to thermalMaster
+TX interruption!
