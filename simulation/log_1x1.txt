@@ -73,11 +73,11 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 96 
 task_addr[0 ] = 771 
-task_Counters: 2504  733  216  180  1776  1009  26  726  286  0  23  392  507  249493 
+task_addr[1 ] = 770 
+task_adCounters: 2588  753  228  189  1832  1042  27  746  306  0  23  392  507  249493 
 >> Energy packet sent to thermalMaster
 TX interruption!
-addr[1 ] = 770 
-task_addr[2 ] = 1026 
+dr[2 ] = 1026 
 task_addr[3 ] = 1027 
 task_addr[4 ] = 1028 
 task_addr[5 ] = 772 
@@ -148,9 +148,13 @@ Payload+0  valor: 16842776
 TX interruption!
 Payload+0  valor: 16842776 
 TX interruption!
+Payload+0  valor: 16842776 
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16908311 Updating mapping_table[23 ] = 258 
+Payload+0  valor: 16842776 
+TX interruption!
 Payload+0  valor: 16842776 
 TX interruption!
 Payload+0  valor: 16842776 
@@ -219,13 +223,10 @@ TX interruption!
 Payload+0  valor: 16842776 
 TX interruption!
 Payload+0  valor: 16842776 
-TX interruption!
-Payload+0  valor: 16842776 
-TX interruption!
-Payload+0  valor: 16842776 
 TaTX interruption!
 sk 24 mapped
-sort_slave startedPedindo mesnagem de: 258 
+sort_slave startedPushing in index = 3 
+Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -238,6 +239,7 @@ Packet received
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16777241 Updating mapping_table[25 ] = 256 
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -246,7 +248,7 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50331675 Updating mapping_table[27 ] = 768 
-Counters: 54428  17070  6772  3772  43467  32312  17266  11467  20191  158  66  646  976  249024 
+Counters: 54500  17096  6774  3773  43521  32341  17265  11493  20193  158  66  646  976  249024 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -270,6 +272,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+Pushing in index = 1 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -286,9 +289,10 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 100859937 Updating mapping_table[33 ] = 1539 
-Counters: 42497  14478  3443  831  11329  8069  18869  4945  19400  1  70  1570  1920  248080 
+Counters: 40402  13722  3304  807  11125  7893  17609  4736  18248  1  69  1463  1808  248192 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -308,41 +312,42 @@ Servico: 103
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 100991011 Updating mapping_table[35 ] = 1541 
+Pushing in index = 3 
+Pedindo mesnagem de: 258 
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
+Found message inside the buffer 3 sending to addr 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
+Servico: 32 
+Message request received from 23 
+Found message inside the buffer 2 sending to addr 258 
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 84279333 Updating mapping_table[37 ] = 1286 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Packet received
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 67502118 Updating mapping_table[38 ] = 1030 
-Counters: 71769  24455  5824  1480  20545  14770  31673  8483  32686  20  53  1927  2192  247808 
+Counters: 70936  24270  5533  1420  17844  12701  32013  8055  32782  19  51  1812  2067  247933 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+Pushing in index = 1 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -354,6 +359,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+Pushing in index = 0 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -361,6 +367,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -371,9 +378,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 80355  27721  6110  1502  19624  14184  37021  8890  37902  20  36  1791  1971  248029 
+Counters: 78846  27053  5956  1439  17780  12726  36204  8368  37138  19  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -384,6 +392,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 1 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -398,6 +407,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+Pushing in index = 0 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -405,9 +415,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 76205  26093  5849  1400  17148  12483  35605  8203  35982  20  36  1791  1971  248029 
+Counters: 76170  25962  5907  1407  17388  12641  35262  8186  35743  20  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -418,6 +429,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -428,10 +440,11 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Clk gate off - interruptHandler_NI_RX
+Pushing iClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+n index = 1 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -439,9 +452,59 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 74304  25184  5811  1350  16683  12117  34203  7754  34770  19  36  1791  1971  248029 
+Counters: 78274  26608  6146  1449  18357  13358  36012  8396  36618  20  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 0 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Pushing in index = 3 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Found message inside the buffer 3 sending to addr 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 2 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 79609  27340  6175  1507  19082  14011  37405  8959  37614  19  39  2013  2208  247792 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pushing in index = 1 
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Found message inside the buffer 1 sending to addr 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -452,20 +515,11 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 3 sending to addr 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
+Pushing in inClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+dex = 3 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -473,9 +527,21 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 76681  26299  5910  1429  17548  12890  36212  8428  36331  19  36  1791  1971  248029 
+Counters: 76630  26093  5870  1427  17234  12617  35805  8338  35990  19  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Pushing in index = 2 
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Found message inside the buffer 2 sending to addr 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Pushing in index = 1 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -486,100 +552,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 78539  26808  5985  1431  17324  12705  36901  8482  37070  18  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 2 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 77216  26414  5992  1447  18233  13376  36102  8530  36350  20  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 3 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 2 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 74143  25213  5696  1349  16477  11942  34164  7820  34720  19  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -590,6 +563,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Counters: 76126  25994  5877  1411  17198  12569  35568  8233  35851  20  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -600,6 +577,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -610,9 +588,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 74336  25092  5839  1341  16118  11815  34606  7725  34837  20  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
+Pushing in index = 1 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -623,51 +599,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 75639  25905  5799  1414  17459  12757  35411  8291  35671  19  36  1791  1971  248029 
+Counters: 73922  25088  5636  1330  15574  11241  34130  7633  34652  19  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 2 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 1 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -678,9 +613,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 78100  26645  6019  1424  17308  12707  36780  8399  36934  20  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -691,6 +624,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -701,6 +635,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Counters: 73596  24910  5717  1338  15551  11352  34443  7671  34610  19  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pushing in index = 1 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -711,9 +649,111 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 73115  24795  5568  1306  15370  11088  33654  7459  34275  19  36  1791  1971  248029 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 0 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 3 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 75455  25701  5867  1416  17721  12925  34913  8239  35313  19  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 2 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 1 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 0 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 77689  26494  6070  1475  18945  13893  35997  8721  36319  19  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 3 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 2 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Pushing in index = 1 
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Found message inside the buffer 1 sending to addr 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 79227  27014  6101  1470  18702  13586  36524  8665  37083  20  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -724,6 +764,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -734,6 +775,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -744,15 +786,16 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 72709  24950  5403  1320  14986  10833  34161  7609  34502  19  36  1791  1971  248029 
+Counters: 72018  24682  5367  1322  15065  10842  33552  7566  34020  19  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Pedindo mesnClk gate off - interruptHandler_NI_RX
+Pushing in index = 1 
+Pedindo mesnageClk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Found message inside the buffer 1 sending to addr 258 
 TX interruption!
-agem de: 258 
+m de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -761,6 +804,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+Pushing in index = 0 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -772,6 +816,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
 Adicionando ao pendingReq
+Pushing in index = 3 
 Encontrei um pending da tarefa 23  para o endereço 258 
 TX interruption!
 Pedindo mesnagem de: 258 
@@ -779,9 +824,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 79163  27092  6195  1490  19508  14322  36765  8869  37164  20  36  1791  1971  248029 
+Counters: 78718  26908  6144  1479  19077  13967  36550  8785  36917  19  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -792,6 +838,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 1 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -802,6 +849,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -812,9 +860,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 76142  25928  5766  1365  16066  11698  35577  7986  35897  20  37  1798  1983  248017 
+Counters: 76033  25866  5764  1376  16187  11761  35378  8014  35746  20  37  1798  1983  248017 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -825,29 +874,189 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
+Pushing in index = Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
-Found message inside the buffer 2 sending to addr 258 
+Adicionando ao pendingReq
+2 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Pedindo mesnagem de: 258 
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 23 
-Found message inside the buffer 1 sending to addr 258 
+Adicionando ao pendingReq
+Pushing in index = 1 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 76455  25992  5897  1379  16962  12259  35154  7951  35851  20  36  1791  1971  248029 
+Counters: 73974  25109  5788  1398  18193  13145  33399  8056  34229  20  36  1791  1971  248029 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 0 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 3 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 2 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 78136  26725  6024  1485  19449  14147  35807  8817  36409  20  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 1 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 0 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 3 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 78431  26897  6124  1509  19530  14295  36503  8904  36861  20  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 2 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 1 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 0 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 79648  27283  6190  1512  19734  14395  36778  8955  37337  20  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pushing in index = 3 
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Found message inside the buffer 3 sending to addr 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 2 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Adicionando ao pendingReq
+Pushing in index = 1 
+Encontrei um pending da tarefa 23  para o endereço 258 
+TX interruption!
+Pedindo mesnagem de: 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
+Counters: 74470  25377  5677  1397  17484  12646  34066  8116  34700  19  36  1791  1971  248029 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -858,143 +1067,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 3 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 76462  26128  5827  1422  17655  12822  35358  8291  35891  20  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 1 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 0 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 3 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 76611  26153  5860  1373  16268  11830  35904  7993  36264  20  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 2 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 75795  25966  5825  1431  18016  13136  35172  8356  35653  20  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 3 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 23  para o endereço 258 
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Counters: 74395  25377  5666  1381  17346  12566  34162  8071  34763  19  36  1791  1971  248029 
->> Energy packet sent to thermalMaster
-TX interruption!
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 0 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1008,9 +1081,10 @@ Packet received
 Clk gate off - interruptHandler_NI_RX
 Servico: 144 
 The PE frequency will be changed in the next timer interruption. newValue = 677 
+Pushing in index = 2 
 Pedindo mesnagem de: 258 
 TX interruption!
-Counters: 63817  21970  4832  1175  13859  10027  30367  6906  30433  19  31  1355  1510  248490 
+Counters: 63967  22006  4852  1186  14022  10109  30311  6968  30417  19  30  1248  1398  248602 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1021,6 +1095,7 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 1 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1031,9 +1106,10 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
-Counters: 44923  15067  3529  701  8834  6479  20639  4384  20976  2  27  1125  1260  175111 
+Counters: 43708  14615  3451  690  8738  6395  19898  4264  20288  2  28  1232  1372  174999 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Pushing in index = 0 
 Pedindo mesnagem de: 258 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1044,8 +1120,17 @@ TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Packet received
+Pushing in index = 3 
 Pedindo mesnagem de: 258 
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 23 
+Found message inside the buffer 3 sending to addr 258 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Packet received
 Clk gate off - interruptHandler_NI_RX
 Servico: 97 
 Task migration received
@@ -1128,22 +1213,12 @@ current   mapping_table[37 ] = 1286
 migration_mapping_table[38 ] = 1030 
 current   mapping_table[38 ] = 1030 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Found message inside the buffer 3 sending to addr 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 33947673 Updating mapping_table[25 ] = 518 
-Counters: 40821  13285  3341  1442  14683  9340  14097  6342  15820  18  23  882  997  169488 
+Counters: 48076  15602  4006  1577  17184  11242  16836  7118  18825  18  24  941  1061  167939 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Packet received
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-17170458 Updating mapping_table[26 ] = 262 
+Pushing in index = 2 
 sort_slave migrating.
 task_addr[0 ] = 771 
 task_addr[1 ] = 770 
@@ -1157,13 +1232,7 @@ task_addr[8 ] = 514
 task_addr[9 ] = 513 
 task_addr[10 ] = 769 
 task_addr[11 ] = 1025 
-taskClk gate off - interruptHandler_NI_RX
-Servico: 103 
-17104909 Updating mapping_table[13 ] = 261 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-393218 Updating mapping_table[2 ] = 6 
-_addr[12 ] = 1281 
+task_addr[12 ] = 1281 
 task_addr[13 ] = 261 
 task_addr[14 ] = 1283 
 task_addr[15 ] = 1284 
@@ -1257,6 +1326,9 @@ sendPendingReq()774
  > > pendReq: 0 
  > > pendReq: 0 
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+393218 Updating mapping_table[2 ] = 6 
 > pendReq enviado
 Payload+0  valor: 771 
 Payload+1  valor: 770 
@@ -1307,14 +1379,12 @@ Payload+45  valor: 0
 Payload+46  valor: 0 
 Payload+47  valor: 0 
 TX interruption!
-Counters: 40954  12653  3839  1759  16914  11413  12186  6378  14671  12  19  924  1019  166496 
->> Energy packet sent to thermalMaster
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 23 
-Forwarding msg request from task 23  para o endereco: 774 
-TX interruption!
+Servico: 103 
+17104909 Updating mapping_table[13 ] = 261 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+17170458 Updating mapping_table[26 ] = 262 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 50724888 Updating mapping_table[24 ] = 774 
@@ -1323,103 +1393,109 @@ Servico: 32
 Message request received from 23 
 Forwarding msg request from task 23  para o endereco: 774 
 TX interruption!
+Counters: 37231  11484  3530  1887  16653  11027  10566  6390  12954  27  25  1434  1559  167441 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 65542 Updating mapping_table[6 ] = 1 
-Counters: 2032  569  195  156  1465  868  28  560  248  2  39  330  525  168475 
+Counters: 497  139  49  43  395  227  10  146  56  0  30  255  405  168595 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  61  866  1171  167829 
+Counters: 192  45  23  26  185  120  8  48  24  0  61  839  1144  167856 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  58  962  1252  167748 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  57  939  1224  167776 
+Counters: 192  45  23  26  185  120  8  48  24  0  58  962  1252  167748 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  59  985  1280  167720 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  57  954  1239  167761 
+Counters: 192  45  23  26  185  120  8  48  24  0  58  962  1252  167748 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  57  954  1239  167761 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  59  985  1280  167720 
+Counters: 192  45  23  26  185  120  8  48  24  0  57  954  1239  167761 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  56  931  1211  167789 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  55  923  1198  167802 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  54  900  1170  167830 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  57  954  1239  167761 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  58  977  1267  167733 
+Counters: 192  45  23  26  185  120  8  48  24  0  56  931  1211  167789 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  57  954  1239  167761 
+Counters: 192  45  23  26  185  120  8  48  24  0  54  900  1170  167830 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  58  977  1267  167733 
+Counters: 192  45  23  26  185  120  8  48  24  0  55  923  1198  167802 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  59  985  1280  167720 
+Counters: 192  45  23  26  185  120  8  48  24  0  55  908  1183  167817 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  57  954  1239  167761 
+Counters: 192  45  23  26  185  120  8  48  24  0  53  906  1171  167829 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  59  985  1280  167720 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  55  937  1212  167788 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  55  953  1228  167772 
+Counters: 192  45  23  26  185  120  8  48  24  0  53  907  1172  167828 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  52  884  1144  167856 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  52  899  1159  167841 
+Counters: 192  45  23  26  185  120  8  48  24  0  51  891  1146  167854 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-83886086 Updating mapping_table[6 ] = 1280 
-Counters: 497  139  49  43  395  227  10  146  56  0  20  348  448  168552 
+Counters: 192  45  23  26  185  120  8  48  24  0  49  830  1075  167925 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67436547 Updating mapping_table[3 ] = 1029 
+Counters: 192  45  23  26  185  120  8  48  24  0  46  776  1006  167994 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 17039393 Updating mapping_table[33 ] = 260 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-67108865 Updating mapping_table[1 ] = 1024 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-196608 Updating mapping_table[0 ] = 3 
-Counters: 1412  421  127  94  1025  548  16  440  152  0  17  154  239  168761 
->> Energy packet sent to thermalMaster
-TX interruption!
+67436545 Updating mapping_table[1 ] = 1029 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 33816580 Updating mapping_table[4 ] = 516 
-Counters: 497  139  49  43  395  227  10  146  56  0  12  114  174  168826 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+67108864 Updating mapping_table[0 ] = 1024 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+196611 Updating mapping_table[3 ] = 3 
+Counters: 1717  515  153  111  1235  655  18  538  184  0  59  925  1220  167780 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-50659336 Updating mapping_table[8 ] = 773 
+100728840 Updating mapping_table[8 ] = 1537 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-100728841 Updating mapping_table[9 ] = 1537 
-Counters: 802  233  75  60  605  334  12  244  88  0  15  138  213  168787 
+50659337 Updating mapping_table[9 ] = 773 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+83886086 Updating mapping_table[6 ] = 1280 
+Counters: 1107  327  101  77  815  441  14  342  120  0  38  507  697  168303 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  12  114  174  168826 
+Counters: 192  45  23  26  185  120  8  48  24  0  13  122  187  168813 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
@@ -1478,7 +1554,64 @@ Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-33947654 Updating mapping_table[6 ] = 518 
+50724870 Updating mapping_table[6 ] = 774 
+Counters: 497  139  49  43  395  227  10  146  56  0  8  82  122  168878 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 192  45  23  26  185  120  8  48  24  0  7  112  147  168853 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+17170465 Updating mapping_table[33 ] = 262 
 Counters: 497  139  49  43  395  227  10  146  56  0  8  82  122  168878 
 >> Energy packet sent to thermalMaster
 TX interruption!
@@ -1539,58 +1672,7 @@ TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  9  87  132  168868 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 192  45  23  26  185  120  8  48  24  0  6  66  96  168904 
@@ -1961,9 +2043,9 @@ Servico: 1638
 Finish Simulation Packet Received!
 Clk gate on - FinishApplication
 Finalizando 257 
-Counters: 495  147  37  36  390  219  8  151  40  0  9  87  132  168868 
+Counters: 495  147  37  36  390  219  8  151  40  0  10  94  144  168856 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 192  45  23  26  185  120  8  48  24  0  9  87  132  168868 
+Counters: 192  45  23  26  185  120  8  48  24  0  8  80  120  168880 
 >> Energy packet sent to thermalMaster
 TX interruption!
