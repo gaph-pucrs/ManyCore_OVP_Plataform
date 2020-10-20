@@ -99,8 +99,8 @@ int main(int argc, char **argv)
 		if(finishSimulation_flag)
 			break;
 
-		set_taskMigrated(-1); // resets this, because it's running a new task
 		*clockGating_flag = FALSE;
+		set_taskMigrated(-1); // resets this, because it's running a new task
 		get_mapping_table(task_addr);
 
 		// Get its task to run
