@@ -161,7 +161,6 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 // Migration control                //
 //////////////////////////////////////
 volatile int taskMigrated = -1;
-volatile int last_task = -1;
 volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
@@ -215,7 +214,7 @@ unsigned int getEmptyIndex();
 void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr, unsigned int producer);
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr);
 void interruptHandler_NI_TX(void);
 void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
@@ -546,7 +545,7 @@ void interruptHandler_NI_RX(void) {
 
 ///////////////////////////////////////////////////////////////////
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr, unsigned int producer){
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr){
     int i;
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
@@ -576,12 +575,8 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_ad
         }
         return 1; // packet was sent with success
     }
-    else if(taskMigrated != -1 && last_task == producer){
+    else if(taskMigrated != -1){
         forwardMsgRequest(requester, taskMigrated, requester_addr);
-        return 1;
-    }
-    else if(running_task != producer){
-        forwardMsgRequest(requester, mapping_table[requester], requester_addr);
         return 1;
     }
     else{
@@ -709,7 +704,6 @@ void OVP_init(){
 
     // Initiate the taskMigrated to -1
     taskMigrated = -1;
-    last_task = -1;
 
     // Configure the Printer
     *printChar = getXpos(*myAddress);
