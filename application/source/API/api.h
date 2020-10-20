@@ -976,6 +976,7 @@ unsigned int getEmptyIndex(){
 ///////////////////////////////////////////////////////////////////
 /* Changes the buffer controls to occupied for a given index */
 void bufferPush(unsigned int index){
+    putsv("Pushing in index = ", index);
     buffer_map[index] = PIPE_OCCUPIED;
 }
 
