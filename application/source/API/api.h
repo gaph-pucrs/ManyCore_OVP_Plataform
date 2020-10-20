@@ -485,6 +485,9 @@ void interruptHandler_NI_RX(void) {
         printi(incomingPacket[PI_PAYLOAD]);
         taskID = incomingPacket[PI_PAYLOAD] & 0x0000FFFF;
         newAddr = (incomingPacket[PI_PAYLOAD] & 0xFFFF0000) >> 16;
+        if(mapping_table[taskID] == *myAddress){
+            taskMigrated = -1;
+        }
         mapping_table[taskID] = newAddr;
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
