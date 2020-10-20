@@ -817,7 +817,7 @@ void sendPipe(unsigned int dest){
     int i, j, index;
     putsv("sendPipe()", dest);
     for (j = 0; j < PIPE_SIZE; j++){
-        if(buffer_map[j] == PIPE_OCCUPIED){ //&& transmittingActive != j){
+        if(buffer_map[j] == PIPE_OCCUPIED && transmittingActive != j){
             index = getServiceIndex();
             myServicePacket[index][PI_DESTINATION] = dest;
             myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
