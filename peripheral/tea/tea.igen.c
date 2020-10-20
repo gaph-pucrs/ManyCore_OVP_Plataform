@@ -257,7 +257,7 @@ PPM_PACKETNET_CB(controlUpdate) {
 
 PPM_PACKETNET_CB(dataUpdate) {
     unsigned int newFlit = *(unsigned int *)data;
-    bhmMessage("I", "TEA", "Chegou um flit: %x", htonl(newFlit));
+    //bhmMessage("I", "TEA", "Chegou um flit: %x", htonl(newFlit));
     flit_in_counter++;
     if(flit_in_counter == 2){       // Segundo flit - SIZE
         msg_size = htonl(newFlit);
