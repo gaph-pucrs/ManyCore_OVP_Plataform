@@ -341,6 +341,7 @@ void interruptHandler_NI_RX(void) {
     int requester, i, j, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
+        prints("TEA energy packet received!!!\n");
         //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
         // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
         for(i=0; i<(incomingPacket[PI_SIZE]-3 -2);i++){
@@ -387,6 +388,7 @@ void interruptHandler_NI_RX(void) {
         putsvsv("Energy packet received from PE ", getID(incomingPacket[PI_PAYLOAD+3]), " total energy packet received until now: ", waitingEnergyReport);
         energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD+3])][getYpos(incomingPacket[PI_PAYLOAD+3])] = incomingPacket[PI_PAYLOAD+1]; // total energy
         if(waitingEnergyReport == N_PES){ // send to TEA
+            prints("Sending energy packet to TEA!\n");
             executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
             executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
             tsend = clock();
@@ -403,7 +405,7 @@ void interruptHandler_NI_RX(void) {
             waitingEnergyReport = 0;
             if(*NIcmdTX == NI_STATUS_OFF){
             // Sends the packet
-             SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+                SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
             }
             else{
                 // Set it to send after the next TX interruption
