@@ -341,7 +341,7 @@ void interruptHandler_NI_RX(void) {
     int requester, i, j, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
-        waitingEnergyReport = 0;
+        //waitingEnergyReport = 0;
         prints("TEA energy packet received!!!\n");
         //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
         // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
@@ -809,7 +809,7 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
     myServicePacket[index][PI_SERVICE] = service;
     for (i = 0; i < size; i++){
         myServicePacket[index][PI_PAYLOAD+i] = payload[i];
-        putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
+        //putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
     }
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
