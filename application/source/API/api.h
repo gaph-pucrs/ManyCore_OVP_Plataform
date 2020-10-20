@@ -549,7 +549,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_ad
     for(i=0;i<PIPE_SIZE;i++){
         if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
-                buffer_packets[i][PI_DESTINATION] = mapping_table[requester];
+                buffer_packets[i][PI_DESTINATION] = requester_addr;//mapping_table[requester];
                 //if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
                     found = i;
                     foundSent = buffer_packets[i][PI_SEND_TIME];
@@ -558,6 +558,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_ad
         }
     }
     if(found != PIPE_WAIT){
+        putsvsv("Found message inside the buffer ", found, "sending to addr ", requester_addr);
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
             //prints("Enviando do PIPE\n");
