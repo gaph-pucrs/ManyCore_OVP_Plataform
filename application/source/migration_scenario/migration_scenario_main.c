@@ -33,12 +33,11 @@ int dijkstra_divider(int state);
 int dijkstra_slave();
 int dijkstra_print();
 
-int sortMaster(int state);
-int sort_slave(int task);
+// int sortMaster(int state);
+// int sort_slave(int task);
 
-int aesMaster(int state);
-int aes_slave();
-
+// int aesMaster(int state);
+// int aes_slave();
 
 int av_split(int state);
 int av_ivlc(int state);
