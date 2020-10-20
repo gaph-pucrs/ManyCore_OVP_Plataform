@@ -301,12 +301,19 @@ int main(int argc, char **argv)
             }
             if(finishSimulation){
                 for(i = 1; i < N_PES; i++){
+                    putsv("Terminating PE ", i);
                     sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
                 }
+                break;
             }
 
             time++;
 
+        }
+        time = 0;
+        while(*SyncToPE != 1){
+            putsv("Waiting everyone ", time);
+            time++;    
         }
     }
     //////////////////////////////////////////////////////
