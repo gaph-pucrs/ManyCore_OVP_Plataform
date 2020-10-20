@@ -976,13 +976,14 @@ unsigned int getEmptyIndex(){
 ///////////////////////////////////////////////////////////////////
 /* Changes the buffer controls to occupied for a given index */
 void bufferPush(unsigned int index){
-    putsv("Pushing in index = ", index);
+    putsv("-- Pushing in index = ", index);
     buffer_map[index] = PIPE_OCCUPIED;
 }
 
 ///////////////////////////////////////////////////////////////////
 /* Releases a buffer position and increases the history */
 void bufferPop(unsigned int index){
+    putsv("-- Cleaning index = ", index);
     buffer_history[index]++; // Increase the history
     buffer_map[index] = PIPE_FREE;
 }
