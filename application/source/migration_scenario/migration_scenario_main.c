@@ -212,25 +212,25 @@ int main(int argc, char **argv)
 			// 	state = aes_slave();
 			// 	break;
 			// Audio Video
-			case split_av:
+			case av_split:
 				state = av_split(state);
 				break;
-			case ivlc_av:
+			case av_ivlc:
 				state = av_ivlc(state);
 				break;
-			case iquant_av:
+			case av_iquant:
 				state = av_iquant(state);
 				break;
-			case idct_av:
+			case av_idct:
 				state = av_idct(state);
 				break;
-			case adpcm_dec_av:
+			case av_adpcm_dec:
 				state = av_adpcm_dec(state);
 				break;
-			case FIR_av:
+			case av_FIR:
 				state = av_FIR(state);
 				break;
-			case join_av:
+			case av_join:
 				state = av_join(state);
 				break;
 			// DTW
