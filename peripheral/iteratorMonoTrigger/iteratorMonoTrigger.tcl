@@ -239,3 +239,81 @@ imodeladdpacketnetport  \
       -updatefunction iteration35 \
       -updatefunctionargument 0x00
 
+imodeladdpacketnetport  \
+      -name iterationPort36 \
+      -maxbytes 8 \
+      -updatefunction iteration36 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort37 \
+      -maxbytes 8 \
+      -updatefunction iteration37 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort38 \
+      -maxbytes 8 \
+      -updatefunction iteration38 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort39 \
+      -maxbytes 8 \
+      -updatefunction iteration39 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort40 \
+      -maxbytes 8 \
+      -updatefunction iteration40 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort41 \
+      -maxbytes 8 \
+      -updatefunction iteration41 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort42 \
+      -maxbytes 8 \
+      -updatefunction iteration42 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort43 \
+      -maxbytes 8 \
+      -updatefunction iteration43 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort44 \
+      -maxbytes 8 \
+      -updatefunction iteration44 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort45 \
+      -maxbytes 8 \
+      -updatefunction iteration45 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort46 \
+      -maxbytes 8 \
+      -updatefunction iteration46 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort47 \
+      -maxbytes 8 \
+      -updatefunction iteration47 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort48 \
+      -maxbytes 8 \
+      -updatefunction iteration48 \
+      -updatefunctionargument 0x00
+
