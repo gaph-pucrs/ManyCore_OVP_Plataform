@@ -338,7 +338,7 @@ void interruptHandler_NI_RX(void) {
     putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, index, taskID, newAddr, newFreq;
+    int requester, i, j, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
         //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
@@ -383,12 +383,33 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
-        if(waitingEnergyReport > N_PES)
-            waitingEnergyReport = 0;
-        else
-            waitingEnergyReport++; 
+        waitingEnergyReport++;
         putsvsv("Energy packet received from PE ", getID(incomingPacket[PI_PAYLOAD+3]), " total energy packet received until now: ", waitingEnergyReport);
         energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD+3])][getYpos(incomingPacket[PI_PAYLOAD+3])] = incomingPacket[PI_PAYLOAD+1]; // total energy
+        if(waitingEnergyReport == N_PES){ // send to TEA
+            executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
+            executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
+            tsend = clock();
+            tsend = tsend - tinicio;
+            executedInstPacket[PI_SEND_TIME] = tsend;
+            executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
+            index=0;
+            for(i=0;i<DIM_Y;i++){
+                for(j=0;j<DIM_X;j++){
+                    executedInstPacket[index+4] = (unsigned int)((energyLocalsDif_total[j][i])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
+                    index++;
+                }
+            }
+            waitingEnergyReport = 0;
+            if(*NIcmdTX == NI_STATUS_OFF){
+            // Sends the packet
+             SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+            }
+            else{
+                // Set it to send after the next TX interruption
+                sendExecutedInstPacket = TRUE;
+            } 
+        }   
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){

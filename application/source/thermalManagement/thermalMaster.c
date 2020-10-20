@@ -254,16 +254,16 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
-            putsv("Waiting for energy packets from slave PEs... WER: ", waitingEnergyReport);
-#if USE_THERMAL
-            *clockGating_flag = TRUE;
-#endif
-            while(waitingEnergyReport != N_PES){ }
-            waitingEnergyReport = 0;
-#if USE_THERMAL
-            *clockGating_flag = FALSE;
-#endif
-            prints("Every energy packet was received!\n");
+//             putsv("Waiting for energy packets from slave PEs... WER: ", waitingEnergyReport);
+// #if USE_THERMAL
+//             *clockGating_flag = TRUE;
+// #endif
+//             while(waitingEnergyReport != N_PES){ }
+//             waitingEnergyReport = 0;
+// #if USE_THERMAL
+//             *clockGating_flag = FALSE;
+// #endif
+//             prints("Every energy packet was received!\n");
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
@@ -282,38 +282,39 @@ int main(int argc, char **argv)
             /////////////////////////////////////////////////
             // SEND THE ENERGY PACKET TO THE TEA ////////////
             /////////////////////////////////////////////////
-            executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
-            executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
-            tsend = clock();
-            tsend = tsend - tinicio;
-            executedInstPacket[PI_SEND_TIME] = tsend;
-            executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
-            p_idx=0;
-            for(y=0;y<DIM_Y;y++){
-                for(x=0;x<DIM_X;x++){
-                    executedInstPacket[p_idx+4] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
-                    p_idx++;
-                }
-            }
-            disable_interruption(1); //TX
-            if(*NIcmdTX == NI_STATUS_OFF){ // If the NI is OFF then send the executed instruction packet
-                prints("enviando SendSlot\n");
-                SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-            }
-            else{ // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
-                prints("enviando via flag sendExecutedInstPacket\n");
-                sendExecutedInstPacket = TRUE;
-            }
-            enable_interruption(1); //TX
+            // executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
+            // executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
+            // tsend = clock();
+            // tsend = tsend - tinicio;
+            // executedInstPacket[PI_SEND_TIME] = tsend;
+            // executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
+            // p_idx=0;
+            // for(y=0;y<DIM_Y;y++){
+            //     for(x=0;x<DIM_X;x++){
+            //         executedInstPacket[p_idx+4] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
+            //         p_idx++;
+            //     }
+            // }
+            // disable_interruption(1); //TX
+            // if(*NIcmdTX == NI_STATUS_OFF){ // If the NI is OFF then send the executed instruction packet
+            //     prints("enviando SendSlot\n");
+            //     SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+            // }
+            // else{ // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
+            //     prints("enviando via flag sendExecutedInstPacket\n");
+            //     sendExecutedInstPacket = TRUE;
+            // }
+            // enable_interruption(1); //TX
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
+            prints("----> waiting TEA packet\n");
 #if USE_THERMAL
             *clockGating_flag = TRUE;
 #endif
             while(!tempPacket){
-                prints("waiting tea\n");
+                
             }
 #if USE_THERMAL
             *clockGating_flag = FALSE;
