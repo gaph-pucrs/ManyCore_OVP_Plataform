@@ -132,7 +132,7 @@ const int nopDyn[3]={DYN_NOP_0, DYN_NOP_1, DYN_NOP_2};
 const int branchDyn[3]={DYN_BRANCH_0, DYN_BRANCH_1, DYN_BRANCH_2};
 const int jumpDyn[3]={DYN_JUMP_0, DYN_JUMP_1, DYN_JUMP_2};
 
-int tempPacket = 0;
+volatile int tempPacket = 0;
 /*--------------------------------------------------------------------------------
  * Total dynamic read/write energy per access (pJ)
  * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
