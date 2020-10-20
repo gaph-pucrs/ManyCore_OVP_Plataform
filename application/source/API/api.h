@@ -341,6 +341,7 @@ void interruptHandler_NI_RX(void) {
     int requester, i, j, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
+        waitingEnergyReport = 0;
         prints("TEA energy packet received!!!\n");
         //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
         // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
