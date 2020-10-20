@@ -142,10 +142,9 @@ volatile unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 
 ////////////////////////////////////////////////////////////
 // PIPE Message buffer
-volatile unsigned int buffer_packets[PIPE_SIZE][MESSAGE_MAX_SIZE];   // The PIPE!
-volatile unsigned int buffer_map[PIPE_SIZE];                         // The PIPE map, informing occupied and empty slots
-volatile int sendingPipe = -1; 
-volatile unsigned int buffer_history[PIPE_SIZE];                     // The PIPE history, to keep every slot in use, preserving sent packets longer for restauration propouse (not implemented! just an idea) 
+unsigned int buffer_packets[PIPE_SIZE][MESSAGE_MAX_SIZE];   // The PIPE!
+unsigned int buffer_map[PIPE_SIZE];                         // The PIPE map, informing occupied and empty slots
+unsigned int buffer_history[PIPE_SIZE];                     // The PIPE history, to keep every slot in use, preserving sent packets longer for restauration propouse (not implemented! just an idea) 
 volatile unsigned int pendingReq[N_PES];                    // Inform about pending requests
 //////////////////////////////
 //////////////////////////////
