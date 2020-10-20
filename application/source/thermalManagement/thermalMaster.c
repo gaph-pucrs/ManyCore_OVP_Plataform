@@ -410,10 +410,15 @@ int main(int argc, char **argv)
                 for(i = 1; i < N_PES; i++){
                     sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
                 }
+                break;
             }
 
             time++;
-
+        }
+        time = 0;
+        while(*SyncToPE != 1){
+            putsv("Waiting everyone ", time);
+            time++;    
         }
     }
     //////////////////////////////////////////////////////
