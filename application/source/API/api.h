@@ -100,6 +100,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PI_REQUESTER        4
 #define PI_PAYLOAD          4
 #define PI_I_MYADDR         4
+#define PI_PROCUDER_ID      5
 #define PI_I_BRANCH         5
 #define PI_I_ARITH          6
 #define PI_I_JUMP           7
@@ -160,6 +161,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 // Migration control                //
 //////////////////////////////////////
 volatile int taskMigrated = -1;
+volatile int last_task = -1;
 volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
@@ -338,7 +340,7 @@ void interruptHandler_NI_RX(void) {
     putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, j, index, taskID, newAddr, newFreq;
+    int requester, i, j, index, taskID, newAddr, newFreq, producer;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
         //waitingEnergyReport = 0;
@@ -377,8 +379,9 @@ void interruptHandler_NI_RX(void) {
             //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
+        producer = incomingPacket[PI_PROCUDER_ID];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(!sendFromMsgBuffer(requester, incomingPacket[PI_REQUESTER])){ // if the package is not ready yet add a request to the pending request queue
+        if(!sendFromMsgBuffer(requester, incomingPacket[PI_REQUESTER], producer)){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }
@@ -543,7 +546,7 @@ void interruptHandler_NI_RX(void) {
 
 ///////////////////////////////////////////////////////////////////
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr){
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr, unsigned int producer){
     int i;
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
@@ -573,8 +576,12 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_ad
         }
         return 1; // packet was sent with success
     }
-    else if(taskMigrated != -1){
+    else if(taskMigrated != -1 && last_task == producer){
         forwardMsgRequest(requester, taskMigrated, requester_addr);
+        return 1;
+    }
+    else if(running_task != producer){
+        forwardMsgRequest(requester, mapping_table[requester], requester_addr);
         return 1;
     }
     else{
@@ -702,6 +709,7 @@ void OVP_init(){
 
     // Initiate the taskMigrated to -1
     taskMigrated = -1;
+    last_task = -1;
 
     // Configure the Printer
     *printChar = getXpos(*myAddress);
@@ -793,10 +801,11 @@ void requestMsg(unsigned int from){
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = mapping_table[from];
     putsv("Pedindo mesnagem de: ", mapping_table[from]);
-    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 1 + 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = *myAddress;
+    myServicePacket[index][PI_PROCUDER_ID] = from;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 

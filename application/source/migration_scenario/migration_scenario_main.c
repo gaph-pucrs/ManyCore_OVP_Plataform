@@ -269,6 +269,7 @@ int main(int argc, char **argv)
 			
 			//disable_interruptions();
 			disable_interruption(2);
+			last_task = running_task;
 			set_taskMigrated(destination); // save the new destination of this 
 			sendPendingReq(destination);
 			enable_interruption(2);
