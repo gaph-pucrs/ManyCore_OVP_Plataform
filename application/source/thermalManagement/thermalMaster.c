@@ -16,7 +16,15 @@ unsigned int Power[DIM_X*DIM_Y];
 unsigned int Temperature[DIM_X*DIM_Y];
 unsigned int Frequency[DIM_X*DIM_Y];
 
+//PID control variables
+unsigned int derivative[DIM_Y*DIM_X];
+unsigned int integral[DIM_Y*DIM_X];
+unsigned int integral_prev[INT_WINDOW][DIM_Y*DIM_X];
+unsigned int Temperature_prev[DIM_Y*DIM_X];
+unsigned int control_signal[DIM_Y*DIM_X];
+
 unsigned int spiralMatrix[DIM_X*DIM_Y];
+unsigned int tempSort[DIM_X*DIM_Y];
 
 void generateSpiralMatrix()
 {
@@ -79,6 +87,7 @@ void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
         proc_address[i] = (coolest%DIM_X << 8) | coolest/DIM_X;
 
         spiralMatrix[i] = proc_address[i];
+        tempSort[i] = coolest;
 
         ordered_temp[coolest] = -1;
     }
@@ -108,7 +117,7 @@ int getSomeTaskID(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
 
 int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_map, unsigned int task_addr[DIM_X*DIM_Y]){
     int task_ID;
-    unsigned int tgtProc, srcProc;
+    unsigned int tgtProc, srcProc, srcID;
     int k=DIM_X*DIM_Y-1;
     unsigned int contNumberOfMigrations=0;
     int i, j;
@@ -126,10 +135,11 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
-        int x = i % DIM_X;
-        int y = i / DIM_Y;
+        srcID = tempSort[i];
+        int x = srcID % DIM_X;
+        int y = srcID / DIM_Y;
         srcProc = x << 8 | y;
-        if (temp[i] > 33300){
+        if (temp[srcID] > 33300){
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
             if (how_many_tasks_PE_is_running(srcProc, task_addr)>0){
                 while (k>0){
@@ -157,16 +167,16 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                 }
             }
         }
-        if(temp[i] > 32000 && Frequency[i] == 1000){
-            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
-            Frequency[i] = 677;
-            setDVFS(srcProc, Frequency[i]);
-        }
-        else if(temp[i] < 31000 && Frequency[i] == 677){
-            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
-            Frequency[i] = 1000;
-            setDVFS(srcProc, Frequency[i]);
-        }
+        // if(temp[i] > 32000 && Frequency[i] == 1000){
+        //     //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+        //     Frequency[i] = 677;
+        //     setDVFS(srcProc, Frequency[i]);
+        // }
+        // else if(temp[i] < 31000 && Frequency[i] == 677){
+        //     //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+        //     Frequency[i] = 1000;
+        //     setDVFS(srcProc, Frequency[i]);
+        // }
     }
     if(contNumberOfMigrations>0){
         for(i = 0; i < contNumberOfMigrations; i++)
@@ -203,7 +213,9 @@ int main(int argc, char **argv)
         for(x=0;x<DIM_X;x++){
             Power[p_idx] = 0;
             Frequency[p_idx] = 1000;
-            Temperature[p_idx] = 31815;
+            Temperature[p_idx] = TAMB;
+            integral[p_idx] = 0;
+            Temperature_prev[p_idx] = 0;
             //LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
             putsvsv("spiralMatrix ", p_idx, "- ",  spiralMatrix[p_idx]);
             p_idx++;
@@ -272,7 +284,27 @@ int main(int argc, char **argv)
             // Migration procedures //
             //////////////////////////
             prints("\nGenerating TempMatrix\n");
-            generateTempMatrix(Temperature);
+            //generateTempMatrix(Temperature);
+
+            for(i = 0; i < DIM_X*DIM_Y; i++){
+
+                if (time >= INT_WINDOW)
+                    integral[i] = integral[i] - integral_prev[time%INT_WINDOW][i];
+
+                integral_prev[time%INT_WINDOW][i] = Temperature[i];
+
+                //if (time != 0) energy_i[i] = getEnergySlaveAcc_total(i)/time;
+                derivative[i] = Temperature[i] - Temperature_prev[i];
+                integral[i] = integral[i] + Temperature[i];
+                control_signal[i] = KP*Temperature[i] + KI*integral[i]/INT_WINDOW + KD*derivative[i];
+                Temperature_prev[i] = Temperature[i];
+
+                // putsv("proc ", i);
+                // putsv("energy ", energy_i[i]);
+                // putsv("control_signal ", control_signal[i]);
+            }
+            generateTempMatrix(control_signal);//generateTempMatrix(Temperature); //
+
 
             if ((time+1)%20 == 0){
                 prints("Starting the thermal actuation analysis\n");
