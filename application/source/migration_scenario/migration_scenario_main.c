@@ -12,9 +12,8 @@
 // #include "aes_config.h"
 #include "mpeg_config.h"
 #include "dtw_config.h"
-#include "audio_video_config.h"
+//#include "audio_video_config.h"
 #include "thermalManagement_config.h"
-
 
 message theMessage;
 
