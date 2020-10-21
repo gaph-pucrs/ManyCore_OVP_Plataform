@@ -38,6 +38,7 @@ int dijkstra_print();
 // int aesMaster(int state);
 // int aes_slave();
 
+// AV threads
 int av_split(int state);
 int av_ivlc(int state);
 int av_iquant(int state);
@@ -210,25 +211,25 @@ int main(int argc, char **argv)
 			// 	state = aes_slave();
 			// 	break;
 			// Audio Video
-			case av_split:
+			case split_av:
 				state = av_split(state);
 				break;
-			case av_ivlc:
+			case ivlc_av:
 				state = av_ivlc(state);
 				break;
-			case av_iquant:
+			case iquant_av:
 				state = av_iquant(state);
 				break;
-			case av_idct:
+			case idct_av:
 				state = av_idct(state);
 				break;
-			case av_adpcm_dec:
+			case adpcm_dec_av:
 				state = av_adpcm_dec(state);
 				break;
-			case av_FIR:
+			case FIR_av:
 				state = av_FIR(state);
 				break;
-			case av_join:
+			case join_av:
 				state = av_join(state);
 				break;
 			// DTW
