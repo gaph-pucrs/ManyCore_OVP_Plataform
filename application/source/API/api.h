@@ -544,7 +544,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        if(buffer_map[i]>PIPE_OCCUPIED){ // if this position has something valid
+        if(buffer_map[i]>PIPE_OCCUPIED && buffer_map[i] != -1){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
                 buffer_packets[i][PI_DESTINATION] = mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
@@ -829,7 +829,7 @@ void sendPipe(unsigned int dest){
         // Loop to find the oldest message inside the PIPE
         for (j = 0; j < PIPE_SIZE; j++){
             putsv("buffer map: ", buffer_map[j]);
-            if(buffer_map[j] > older){
+            if(buffer_map[j] > older && buffer_map[j] != -1){
                 prints("older = j1\n");
                 older = j;
             }
@@ -848,7 +848,7 @@ void sendPipe(unsigned int dest){
             myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
             myServicePacket[index][PI_TASK_ID] = running_task;
             myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
-            prints("> enviando\n");
+            putsv("> enviando older: ", older);
             for (i = 0; i < MESSAGE_MAX_SIZE; i++){
                 myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[older][i];
             }
