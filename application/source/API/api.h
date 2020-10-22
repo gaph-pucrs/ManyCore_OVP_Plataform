@@ -82,7 +82,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PIPE_SIZE           4 // Defines the PIPE size
 //////////////////////////////
 #define PIPE_OCCUPIED       1
-#define PIPE_FREE           0
+#define PIPE_FREE           -1
 #define PIPE_WAIT           0xFFFFFFFF
 //////////////////////////////
 //////////////////////////////
@@ -521,7 +521,17 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
+        if(buffer_map[i]>PIPE_OCCUPIED){ // if this position has something valid
+            if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
+                buffer_packets[i][PI_DESTINATION] = mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
+                if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
+                    found = i;
+                    foundSent = buffer_packets[i];
+                }
+            }
+        }
+        
+        /*if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
                 buffer_packets[i][PI_DESTINATION] = mapping_table[requester];
                 //if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
@@ -529,7 +539,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
                     foundSent = buffer_packets[i][PI_SEND_TIME];
                 //}
             }
-        }
+        }*/
     }
     if(found != PIPE_WAIT){
         // Checks if the TX module is able to transmmit the package 
@@ -790,7 +800,7 @@ void sendPipe(unsigned int dest){
     int i, j, index;
     putsv("sendPipe()", dest);
     for (j = 0; j < PIPE_SIZE; j++){
-        if (buffer_map[j] == PIPE_OCCUPIED){
+        if (buffer_map[j] > PIPE_OCCUPIED){
             index = getServiceIndex();
             myServicePacket[index][PI_DESTINATION] = dest;
             myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
@@ -950,7 +960,7 @@ unsigned int getEmptyIndex(){
 ///////////////////////////////////////////////////////////////////
 /* Changes the buffer controls to occupied for a given index */
 void bufferPush(unsigned int index){
-    buffer_map[index] = PIPE_OCCUPIED;
+    buffer_map[index] = clock();
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -987,8 +997,6 @@ void SendSlot(unsigned int addr, unsigned int slot){
     disable_interruption(2); // rx
     //disable_interruption(1); // tx
     disable_interruption(0); // timer
-    //int_disable(1);
-    //int_disable(0);
 
     while(*NIcmdTX != NI_STATUS_OFF){
         //prints("PRESO3\n");
@@ -996,8 +1004,6 @@ void SendSlot(unsigned int addr, unsigned int slot){
 
     transmittingActive = slot;
     SendRaw(addr);
-    //int_enable(0);
-    //int_enable(1);
     //enable_interruption(1); // tx
     enable_interruption(2); // rx
     enable_interruption(0); // timer
