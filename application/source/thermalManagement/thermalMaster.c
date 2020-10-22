@@ -146,10 +146,10 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                     tgtProc = spiralMatrix[k];
                     task_ID = getSomeTaskID(srcProc, task_addr);
                     putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
-                    LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
+                    //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
 
                     if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
-                        LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
+                        //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                         prints("send_task_migration\n");
 
                         task_addr[task_ID] = tgtProc;
@@ -203,7 +203,6 @@ int main(int argc, char **argv)
     unsigned int yaml_tasks = 0;
     unsigned int task_addr[DIM_X*DIM_Y];
     unsigned int tasks_to_map = 0;
-    unsigned int time = 0;
     int finishSimulation;
 
     Uns32 aux = MFSPR(SPR_PICMR);
@@ -266,7 +265,7 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
             //////////////////////////////////////////////////////
-            prints("Waiting for energy packets from slave PEs...\n");
+            /*prints("Waiting for energy packets from slave PEs...\n");
 #if USE_THERMAL
             *clockGating_flag = TRUE;
 #endif
@@ -296,7 +295,7 @@ int main(int argc, char **argv)
             if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
                 SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
             else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
-                sendExecutedInstPacket = TRUE;
+                sendExecutedInstPacket = TRUE;*/
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
@@ -323,12 +322,12 @@ int main(int argc, char **argv)
             prints("\nGenerating TempMatrix\n");
             for(i = 0; i < DIM_X*DIM_Y; i++){
 
-                if (time >= INT_WINDOW)
-                    integral[i] = integral[i] - integral_prev[time%INT_WINDOW][i];
+                if (measuredWindows >= INT_WINDOW)
+                    integral[i] = integral[i] - integral_prev[measuredWindows%INT_WINDOW][i];
 
-                integral_prev[time%INT_WINDOW][i] = Temperature[i];
+                integral_prev[measuredWindows%INT_WINDOW][i] = Temperature[i];
 
-                //if (time != 0) energy_i[i] = getEnergySlaveAcc_total(i)/time;
+                //if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
                 derivative[i] = Temperature[i] - Temperature_prev[i];
                 integral[i] = integral[i] + Temperature[i];
                 control_signal[i] = KP*Temperature[i] + KI*integral[i]/INT_WINDOW + KD*derivative[i];
@@ -340,7 +339,7 @@ int main(int argc, char **argv)
             }
             generateTempMatrix(control_signal);
 
-            if ((time+1)%20 == 0){
+            if ((measuredWindows)%20 == 0){
                 prints("Starting the thermal actuation analysis\n");
                 temperature_migration(Temperature, tasks_to_map, task_addr);
                 // for(i = 0; i < tasks_to_map; i++)
@@ -372,12 +371,11 @@ int main(int argc, char **argv)
                 break;
             }
 
-            time++;
         }
-        time = 0;
+        measuredWindows = 0;
         while(*SyncToPE != 1){
-            putsv("Waiting everyone ", time);
-            time++;    
+            putsv("Waiting everyone ", measuredWindows);
+            measuredWindows++;    
         }
     }
     //////////////////////////////////////////////////////

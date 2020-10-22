@@ -136,6 +136,7 @@ volatile unsigned int isRawReceive = 0;                     // Used by the API w
 volatile int insideSendSlot = 0;              
 // API Master - thermal stuff
 volatile unsigned int waitingEnergyReport = 0;
+volatile unsigned int measuredWindows = 0;
 volatile unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 //////////////////////////////
 //////////////////////////////
@@ -386,6 +387,28 @@ void interruptHandler_NI_RX(void) {
         waitingEnergyReport++;
         putsvsv("Energy packet received from PE ", getID(incomingPacket[PI_PAYLOAD+3]), " total energy packet received until now: ", waitingEnergyReport);
         energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD+3])][getYpos(incomingPacket[PI_PAYLOAD+3])] = incomingPacket[PI_PAYLOAD+1]; // total energy
+
+        if(waitingEnergyReport <= N_PES){
+            waitingEnergyReport = 0;
+            measuredWindows++;
+            executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
+            executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
+            tsend = clock();
+            tsend = tsend - tinicio;
+            executedInstPacket[PI_SEND_TIME] = tsend;
+            executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
+            index=0;
+            for(y=0;y<DIM_Y;y++){
+                for(x=0;x<DIM_X;x++){
+                    executedInstPacket[index+4] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
+                    index++;
+                }
+            }
+            if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
+                SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
+            else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
+                sendExecutedInstPacket = TRUE;
+        }
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
@@ -658,6 +681,7 @@ void OVP_init(){
     
     // 
     finishSimulation_flag = 0;
+    measuredWindows = 0;
 
     // Inform the processor ID to the router
     *myAddress = impProcessorId();
