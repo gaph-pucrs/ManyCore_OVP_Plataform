@@ -2102,19 +2102,17 @@ void decode(int input)
 }
 
 
-int av_adpcm_dec(int state) {
+int av_adpcm_dec(int state) { //r 
 	int i, k;
 	int * compressed_adpcm;
 	int result[COMPRESSED_SAMPLES*2];	/* Compression factor: 2 */
 
-	prints("ADPCM Decoder - start");
+	prints("ADPCM Decoder - start\n");
 
-    reset_av();
-
-    //RealTime(AUDIO_VIDEO_PERIOD, ADPCM_DEC_deadline, ADPCM_DEC_exe_time);
+  reset_av();
 
 	for(k=state; k<FRAMES; k++ ) {
-
+    putsv("> adpcm ", k);
 
 		ReceiveMessage(&theMessage, split_av);
 		compressed_adpcm = theMessage.msg;
@@ -2139,7 +2137,7 @@ int av_adpcm_dec(int state) {
 
 	}
 
-    prints("ADPCM Decoder - end");
+    prints("AV - End Task ADPCM Decoder\n");
 
     return 0;
 }
@@ -2226,15 +2224,14 @@ void fir_filter_int(int* in,int* out,int in_len,
 
 
 
-int av_FIR(int state) {
+int av_FIR(int state) { // r 
     int k;
     int * input_stream;
 
-    prints("FIR - start");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, FIR_deadline, FIR_exe_time);
+    prints("FIR - start\n");
 
     for(k=state; k<FRAMES; k++ ) {
+        putsv("> fir ", k);
 
         ReceiveMessage(&theMessage, adpcm_dec_av);
         input_stream = theMessage.msg;
@@ -2255,7 +2252,7 @@ int av_FIR(int state) {
 
     }
 
-    prints("FIR - end");
+    prints("AV - End Task FIR finished\n");
 
     return 0;
 }
@@ -2437,21 +2434,16 @@ void idct_(type_DATA_av *block,int lx)
     idctcol_av(block,i,lx);
 }
 
-int av_idct(int state)
+int av_idct(int state) // r 
 {
-    unsigned int time_a, time_b;
-    int i,j, b;
+    int i,j;
     type_DATA_av block[64];
 
-
-    prints("Task IDCT start:");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, IDCT_deadline, IDCT_exe_time);
+    prints("Task IDCT - start\n");
 
     for(j=state;j<FRAMES;j++)
     {
-
-
+        putsv("> idct ", j);
         ReceiveMessage(&theMessage, iquant_av);
 
         for(i=0;i<theMessage.size;i++)
@@ -2464,7 +2456,7 @@ int av_idct(int state)
             theMessage.msg[i] = block[i];
 
 
-        SendMessage(&theMessage,join_av);
+        SendMessage(&theMessage, join_av);
 
         if(get_migration_src()){
             prints("av_idct migrating.\n");
@@ -2474,7 +2466,7 @@ int av_idct(int state)
 
     }
 
-    prints("End Task IDCT");
+    prints("AV - End Task IDCT\n");
 
     return 0;
 }
@@ -2509,18 +2501,15 @@ void iquant_(type_DATA_av *src, int lx, int dc_prec, int mquant) {
         src[offs + 7] ^= 1;
 }
 
-int av_iquant(int state) {
-    unsigned int time_a, time_b;
-    int i, j, b;
+int av_iquant(int state) { // r
+    int i, j;
 
-    type_DATA_av clk_count;
     type_DATA_av block[64];
 
-    prints("Task IQUANT start:");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, IQUANT_deadline, IQUANT_exe_time);
+    prints("Task IQUANT - start\n");
 
     for (j = state; j < FRAMES; j++) {
+        putsv("> iquant ", j);
 
         ReceiveMessage(&theMessage, ivlc_av);
 
@@ -2543,7 +2532,7 @@ int av_iquant(int state) {
 
     }
 
-    prints("End Task IQUANT");
+    prints("AV - End Task IQUANT\n");
 
     return 0;
 }
@@ -2967,22 +2956,20 @@ void ivlc_(type_DATA_av *block, short int comp, short int lx, type_DATA_av *buff
   return;
 }
 
-int av_ivlc(int state)
+int av_ivlc(int state) //r
 {
-    unsigned int time_a, time_b, a, b;
     int i,j;
 
     type_DATA_av vlc_array[128];
     type_DATA_av block[64];
 
-    prints("Task IVLC start");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, IVLC_deadline, IVLC_exe_time);
+    prints("Task IVLC - start\n");
 
     for(j=state;j<FRAMES;j++)
     {
+        putsv("> ivlc ", j);
 
-        ReceiveMessage(&theMessage,split_av);
+        ReceiveMessage(&theMessage, split_av);
 
         for(i=0; i<theMessage.size; i++)
             vlc_array[i] = theMessage.msg[i];
@@ -2992,12 +2979,11 @@ int av_ivlc(int state)
 
         ivlc_(block, 0, 8, vlc_array);      // codifica RLE-VLC (returns the number of bits in the produced stream)
 
-
         theMessage.size = 64;
         for(i=0; i<theMessage.size; i++)
            theMessage.msg[i] = block[i];
 
-        SendMessage(&theMessage,iquant_av);
+        SendMessage(&theMessage, iquant_av);
 
         if(get_migration_src()){
             prints("av_ivlc migrating.\n");
@@ -3007,33 +2993,26 @@ int av_ivlc(int state)
 
     }
 
-    prints("End Task IVLC");
+    prints("AV - End Task IVLC\n");
 
     return 0;
 }
 
-int av_join(int state) {
+int av_join(int state) { // r 
+    int k;
 
-    unsigned char decoded_block[1000];
-    int samples[COMPRESSED_SAMPLES*2];
-    unsigned int j, time_arrive =0, last_arrive = 0, jitter[2000];
-    int block_size, blocks;
-    int i, k;
-
-    prints("Join start...");
-    prints("Number of frames");
+    prints("Join - start\n");
+    prints("Number of frames ");
     printi(FRAMES);
+    prints("\n");
 
-    //RealTime(AUDIO_VIDEO_PERIOD, JOIN_deadline, JOIN_exe_time);
 
-    j = 0;
     for(k=state; k<FRAMES; k++ ) {
+        putsv("> join ", k);
 
         ReceiveMessage(&theMessage, FIR_av);
 
-        ReceiveMessage(&theMessage,idct_av);
-
-        printi(clock());
+        ReceiveMessage(&theMessage, idct_av);
 
         if(get_migration_src()){
             prints("av_join migrating.\n");
@@ -3043,10 +3022,7 @@ int av_join(int state) {
 
     }
 
-    //for(i=0; i<j; i++)
-    //  Echo(itoa(jitter[i]));
-
-    prints("Join finished.");
+    prints("AV - End Task Join finished.\n");
 
     return 0;
 }
@@ -3065,14 +3041,11 @@ unsigned int vlc_array[128] = { // array containing the compressed data stream
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
 
-int av_split(int state) {
-
-    int i, b;
-    char str[20];
-    int compressed_adpcm[COMPRESSED_SAMPLES];
+int av_split(int state) { // r
+    int i;
     message compresssed_adpcm;
 
-    prints("Task SPLIT start:  ");
+    prints("Task SPLIT - start\n");
 
     /* Generates the compressed adpcm stream */
     for (i = 0; i < COMPRESSED_SAMPLES; i += 2)
@@ -3084,9 +3057,8 @@ int av_split(int state) {
         theMessage.msg[i] = vlc_array[i];
     theMessage.size = 128;
 
-    //RealTime(AUDIO_VIDEO_PERIOD, SPLIT_deadline, SPLIT_exe_time);
-
     for (i = state; i < FRAMES; i++) {
+        putsv("> split ", i);
 
         SendMessage(&compresssed_adpcm, adpcm_dec_av);
 
@@ -3100,7 +3072,7 @@ int av_split(int state) {
 
     }
 
-    prints("End Task SPLIT");
+    prints("AV - End Task SPLIT\n");
 
     return 0;
 }
