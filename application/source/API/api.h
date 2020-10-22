@@ -979,7 +979,6 @@ void SendSlot(unsigned int addr, unsigned int slot){
 #endif
     ////////////////////////////////////////////////
     while(*NIcmdTX != NI_STATUS_OFF){
-        for(insideSendSlot = 1; insideSendSlot < 5; insideSendSlot++){}
         /* waits until NI is ready to execute an operation */}
 #if USE_THERMAL
     *clockGating_flag = FALSE;

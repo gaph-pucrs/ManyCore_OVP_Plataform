@@ -276,31 +276,7 @@ int main(int argc, char **argv)
             *clockGating_flag = FALSE;
 #endif
             prints("Every energy packet was received!\n");
-            /*for(y=0;y<DIM_Y;y++){
-                for(x=0;x<DIM_X;x++){
-                    ReceiveRaw(&theMsg);
-                    prints("Pacote recebido de ");
-                    printi(getXpos(theMsg.msg[3])); 
-                    printi(getYpos(theMsg.msg[3])); 
-                    prints("\n");
-                    energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
-                }
-            }*/
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-            //prints("Todos os pacotes 00de energia foram recebidos!\n");
-            //LOG("Todos os pacotes foram recebidos!!!\n");
-            //*clockGating_flag = TRUE;
-            // LOG("FPRINTF - MASTER %x\n",*myAddress);
-            // FILE *filepointer;
-            // int err0;
-            // char logFileName[26];
-            // err0 = sprintf(logFileName, "simulation/power_log.txt");
-            // filepointer = fopen (logFileName,"a");
-            // fprintf(filepointer,"%u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
-            // fclose(filepointer);    
-            //*clockGating_flag = FALSE;
+
             /////////////////////////////////////////////////
             // SEND THE ENERGY PACKET TO THE TEA ////////////
             /////////////////////////////////////////////////
@@ -340,23 +316,6 @@ int main(int argc, char **argv)
                 printi(executedInstPacket[i]);
                 Temperature[i] = executedInstPacket[i];//deliveredMessage->msg[i];
             }
-            /*if(tempPacket){
-                prints("1Pacote Recebido: ");
-                for(i = 0; i < DIM_X*DIM_Y; i++){
-                    printi(deliveredMessage->msg[i]);
-                    Temperature[i] = deliveredMessage->msg[i];
-                }
-            }
-            else{
-                ReceiveRaw(&theMsg2);
-                prints("2Pacote Recebido: ");
-                for(i = 0; i < DIM_X*DIM_Y; i++){
-                    printi(theMsg2.msg[i]);
-                    Temperature[i] = theMsg2.msg[i];
-                }
-            }
-            prints("\n");
-            tempPacket = FALSE;*/
 
             //////////////////////////
             // Migration procedures //
