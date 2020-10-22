@@ -310,12 +310,23 @@ void set_taskMigrated(int destination){
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */
 void interruptHandler_timer(void) {
+    int i;
 #if USE_THERMAL
     unsigned int savedClkGating = *clockGating_flag;
 #endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     // YOUR TIMER FUNCTION ENTERS HERE
+
+    //
+    /*if(*NIcmdTX != NI_STATUS_OFF){
+        for(i=0; i<N_PES; i++){
+            if(pendingReq[i] != 0){
+                sendFromMsgBuffer(i, pendingReq[i]);
+            }
+        }
+    }*/
+
 #if USE_THERMAL
     energyEstimation();
 
@@ -464,6 +475,21 @@ void interruptHandler_NI_RX(void) {
             buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
         }
         bufferPush(index);
+        requester = checkPendingReq(buffer_packets[index][PI_TASK_ID]);
+        if(requester){
+            putsvsv("Encontrei um pending da tarefa ", requester, " para o endereço ", pendingReq[requester]);
+            // Clear the pending request
+            pendingReq[requester] = 0;
+            // Update the address to match the requester address 
+            buffer_packets[index][PI_DESTINATION] = pendingReq[requester];
+            // Sends the packet
+            if(*NIcmdTX == NI_STATUS_OFF){
+                SendSlot((unsigned int)&buffer_packets[index], index);
+            }
+            else{
+                addSendAfterTX(index);
+            }
+        }
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PEND){
