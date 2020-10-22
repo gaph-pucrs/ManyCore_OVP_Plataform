@@ -973,13 +973,13 @@ unsigned int getID(unsigned int address){
 void SendSlot(unsigned int addr, unsigned int slot){
     insideSendSlot = 1;
 #if USE_THERMAL
-#endif    
-    ////////////////////////////////////////////////
-    while(*NIcmdTX != NI_STATUS_OFF){
-        prints("PRESO2\n");
+#endif
 #if USE_THERMAL
         *clockGating_flag = TRUE;
 #endif
+    ////////////////////////////////////////////////
+    while(*NIcmdTX != NI_STATUS_OFF){
+        //prints("PRESO2\n");
         /* waits until NI is ready to execute an operation */}
 #if USE_THERMAL
     *clockGating_flag = FALSE;
@@ -991,13 +991,9 @@ void SendSlot(unsigned int addr, unsigned int slot){
     //int_disable(1);
     //int_disable(0);
 
-#if USE_THERMAL
-#endif
     while(*NIcmdTX != NI_STATUS_OFF){
-        prints("PRESO3\n");
+        //prints("PRESO3\n");
         /* waits until NI is ready to execute an operation */}
-#if USE_THERMAL
-#endif
 
     transmittingActive = slot;
     SendRaw(addr);
