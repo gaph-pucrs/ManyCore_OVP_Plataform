@@ -339,7 +339,7 @@ void interruptHandler_NI_RX(void) {
     putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, index, taskID, newAddr, newFreq;
+    int requester, i, j, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
         //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
@@ -398,9 +398,9 @@ void interruptHandler_NI_RX(void) {
             executedInstPacket[PI_SEND_TIME] = tsend;
             executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
             index=0;
-            for(y=0;y<DIM_Y;y++){
-                for(x=0;x<DIM_X;x++){
-                    executedInstPacket[index+4] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
+            for(i=0;i<DIM_Y;i++){
+                for(j=0;j<DIM_X;j++){
+                    executedInstPacket[index+4] = (unsigned int)((energyLocalsDif_total[j][i])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
                     index++;
                 }
             }
