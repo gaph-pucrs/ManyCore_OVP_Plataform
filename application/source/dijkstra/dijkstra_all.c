@@ -114,7 +114,8 @@ int dijkstra_slave()
 				AdjMatrix[i][j] = theMessage.msg[j];
 			}
 		}
-		calc = AdjMatrix[0][0];		
+		calc = AdjMatrix[0][0];
+		putsv("adjMatrix[0][0]", calc);	
 		if (calc == KILL) break;
 
 		for (i=0;i<NUM_NODES;i++){
