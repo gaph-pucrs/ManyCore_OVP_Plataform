@@ -478,10 +478,10 @@ void interruptHandler_NI_RX(void) {
         requester = checkPendingReq(buffer_packets[index][PI_TASK_ID]);
         if(requester){
             putsvsv("Encontrei um pending da tarefa ", requester, " para o endereço ", pendingReq[requester]);
-            // Clear the pending request
-            pendingReq[requester] = 0;
             // Update the address to match the requester address 
             buffer_packets[index][PI_DESTINATION] = pendingReq[requester];
+            // Clear the pending request
+            pendingReq[requester] = 0;
             // Sends the packet
             if(*NIcmdTX == NI_STATUS_OFF){
                 SendSlot((unsigned int)&buffer_packets[index], index);
