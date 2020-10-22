@@ -804,6 +804,7 @@ void sendPipe(unsigned int dest){
         empty = 0;
         // Loop to find the oldest message inside the PIPE
         for (j = 0; j < PIPE_SIZE; j++){
+            putsv("buffer map: ", buffer_map[j]);
             if(buffer_map[j] > older){
                 older = j;
             }
