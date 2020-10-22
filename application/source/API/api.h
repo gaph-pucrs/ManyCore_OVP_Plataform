@@ -797,10 +797,22 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
 }
 
 void sendPipe(unsigned int dest){
-    int i, j, index;
+    int i, j, index, older, empty;
     putsv("sendPipe()", dest);
-    for (j = 0; j < PIPE_SIZE; j++){
-        if (buffer_map[j] > PIPE_OCCUPIED){
+    while(empty != PIPE_SIZE){
+        older = -1;
+        empty = 0;
+        // Loop to find the oldest message inside the PIPE
+        for (j = 0; j < PIPE_SIZE; j++){
+            if(buffer_map[j] > older){
+                older = j;
+            }
+            else{
+                empty++;
+            }
+        }
+        // If it finds something inside the pipe
+        if(older != -1){
             index = getServiceIndex();
             myServicePacket[index][PI_DESTINATION] = dest;
             myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
@@ -808,10 +820,25 @@ void sendPipe(unsigned int dest){
             myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
             prints("> enviando\n");
             for (i = 0; i < MESSAGE_MAX_SIZE; i++){
-                myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[j][i];
+                myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[older][i];
             }
-            bufferPop(j);
+            bufferPop(older);
             SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
+        }
+            
+            /*if (buffer_map[j] > PIPE_OCCUPIED){
+                index = getServiceIndex();
+                myServicePacket[index][PI_DESTINATION] = dest;
+                myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
+                myServicePacket[index][PI_TASK_ID] = running_task;
+                myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
+                prints("> enviando\n");
+                for (i = 0; i < MESSAGE_MAX_SIZE; i++){
+                    myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[j][i];
+                }
+                bufferPop(j);
+                SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
+            }*/
         }
     }
 }
