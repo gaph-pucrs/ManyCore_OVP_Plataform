@@ -830,6 +830,11 @@ void sendPipe(unsigned int dest){
         for (j = 0; j < PIPE_SIZE; j++){
             putsv("buffer map: ", buffer_map[j]);
             if(buffer_map[j] > older){
+                prints("older = j1\n");
+                older = j;
+            }
+            else if(buffer_map[j] != -1){
+                prints("older = j2\n");
                 older = j;
             }
             else{
