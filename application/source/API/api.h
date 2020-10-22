@@ -675,7 +675,7 @@ void interruptHandler_NI_TX(void) {
     }
     // 
     else if(sendServiceAfterTX[0] <= PIPE_SIZE){
-        SendSlot((unsigned int)&myServicePacket[sendAfterTX[0]], (sendAfterTX[0] | 0xFFFF0000));
+        SendSlot((unsigned int)&myServicePacket[sendServiceAfterTX[0]], (sendServiceAfterTX[0] | 0xFFFF0000));
         popServiceAfterTX();
     }
 #if USE_THERMAL
@@ -726,6 +726,7 @@ void OVP_init(){
     for(i=0;i<PIPE_SIZE;i++){
         buffer_map[i] = PIPE_FREE;
         sendAfterTX[i] = PIPE_WAIT;
+        sendServiceAfterTX[i] = PIPE_WAIT;
         myServicePacket[i][0] = 0xFFFFFFFF;
     }
 
