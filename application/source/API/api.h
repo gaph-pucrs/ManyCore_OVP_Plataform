@@ -388,7 +388,7 @@ void interruptHandler_NI_RX(void) {
         putsvsv("Energy packet received from PE ", getID(incomingPacket[PI_PAYLOAD+3]), " total energy packet received until now: ", waitingEnergyReport);
         energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD+3])][getYpos(incomingPacket[PI_PAYLOAD+3])] = incomingPacket[PI_PAYLOAD+1]; // total energy
 
-        if(waitingEnergyReport <= N_PES){
+        if(waitingEnergyReport >= N_PES){
             waitingEnergyReport = 0;
             measuredWindows++;
             executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
