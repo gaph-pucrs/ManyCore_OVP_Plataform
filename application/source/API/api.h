@@ -553,16 +553,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester){
                 }
             }
         }
-        
-        /*if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
-            if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
-                buffer_packets[i][PI_DESTINATION] = mapping_table[requester];
-                //if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
-                    found = i;
-                    foundSent = buffer_packets[i][PI_SEND_TIME];
-                //}
-            }
-        }*/
     }
     if(found != PIPE_WAIT){
         // Checks if the TX module is able to transmmit the package 
@@ -634,7 +624,7 @@ void interruptHandler_NI_TX(void) {
         //prints("TX - Clearing service flag\n");
         index = 0x0000FFFF & transmittingActive;
         transmittingActive = PIPE_WAIT;
-        if(index <= PIPE_SIZE){
+        if(index < PIPE_SIZE){
             //prints("TX - regular servicePacket\n");
             myServicePacket[index][0] = 0xFFFFFFFF;
         }
@@ -1055,7 +1045,7 @@ void SendSlot(unsigned int addr, unsigned int slot){
     disable_interruption(0); // timer
 
     while(*NIcmdTX != NI_STATUS_OFF){
-        //prints("PRESO3\n");
+        prints("PRESO3\n");
         /* waits until NI is ready to execute an operation */}
 
     transmittingActive = slot;
