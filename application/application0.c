@@ -167,16 +167,16 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                 }
             }
         }
-        // if(temp[i] > 32000 && Frequency[i] == 1000){
-        //     //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
-        //     Frequency[i] = 677;
-        //     setDVFS(srcProc, Frequency[i]);
-        // }
-        // else if(temp[i] < 31000 && Frequency[i] == 677){
-        //     //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
-        //     Frequency[i] = 1000;
-        //     setDVFS(srcProc, Frequency[i]);
-        // }
+        if(temp[i] > 35515 && Frequency[i] == 1000){
+            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            Frequency[i] = 677;
+            setDVFS(srcProc, Frequency[i]);
+        }
+        else if(temp[i] < 35515 && Frequency[i] == 677){
+            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            Frequency[i] = 1000;
+            setDVFS(srcProc, Frequency[i]);
+        }
     }
     if(contNumberOfMigrations>0){
         for(i = 0; i < contNumberOfMigrations; i++)
@@ -289,7 +289,7 @@ int main(int argc, char **argv)
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
             //////////////////////////////////////////////////////
-            //prints("Todos os pacotes de energia foram recebidos!\n");
+            //prints("Todos os pacotes 00de energia foram recebidos!\n");
             //LOG("Todos os pacotes foram recebidos!!!\n");
             //*clockGating_flag = TRUE;
             // LOG("FPRINTF - MASTER %x\n",*myAddress);
@@ -379,7 +379,7 @@ int main(int argc, char **argv)
                 // putsv("energy ", energy_i[i]);
                 // putsv("control_signal ", control_signal[i]);
             }
-            generateTempMatrix(Temperature); //generateTempMatrix(control_signal);
+            generateTempMatrix(control_signal);
 
             if ((time+1)%20 == 0){
                 prints("Starting the thermal actuation analysis\n");
