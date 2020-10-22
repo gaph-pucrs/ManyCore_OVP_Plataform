@@ -872,7 +872,7 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
     myServicePacket[index][PI_SERVICE] = service;
     for (i = 0; i < size; i++){
         myServicePacket[index][PI_PAYLOAD+i] = payload[i];
-        putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
+        //putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
     }
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
