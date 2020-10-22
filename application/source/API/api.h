@@ -318,15 +318,6 @@ void interruptHandler_timer(void) {
     //////////////////////////////////////////////////////////////
     // YOUR TIMER FUNCTION ENTERS HERE
 
-    //
-    /*if(*NIcmdTX != NI_STATUS_OFF){
-        for(i=0; i<N_PES; i++){
-            if(pendingReq[i] != 0){
-                sendFromMsgBuffer(i, pendingReq[i]);
-            }
-        }
-    }*/
-
 #if USE_THERMAL
     energyEstimation();
 
