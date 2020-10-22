@@ -533,7 +533,7 @@ int av_adpcm_dec(int state) {
 	int * compressed_adpcm;
 	int result[COMPRESSED_SAMPLES*2];	/* Compression factor: 2 */
 
-	prints("ADPCM Decoder - start");
+	prints("ADPCM Decoder - start\n");
 
     reset_av();
 
@@ -656,7 +656,7 @@ int av_FIR(int state) {
     int k;
     int * input_stream;
 
-    prints("FIR - start");
+    prints("FIR - start\n");
 
     //RealTime(AUDIO_VIDEO_PERIOD, FIR_deadline, FIR_exe_time);
 
@@ -870,7 +870,7 @@ int av_idct(int state)
     type_DATA_av block[64];
 
 
-    prints("Task IDCT start:");
+    prints("Task IDCT - start\n");
 
     //RealTime(AUDIO_VIDEO_PERIOD, IDCT_deadline, IDCT_exe_time);
 
@@ -942,7 +942,7 @@ int av_iquant(int state) {
     type_DATA_av clk_count;
     type_DATA_av block[64];
 
-    prints("Task IQUANT start:");
+    prints("Task IQUANT - start\n");
 
     //RealTime(AUDIO_VIDEO_PERIOD, IQUANT_deadline, IQUANT_exe_time);
 
@@ -1401,7 +1401,7 @@ int av_ivlc(int state)
     type_DATA_av vlc_array[128];
     type_DATA_av block[64];
 
-    prints("Task IVLC start");
+    prints("Task IVLC - start\n");
 
     //RealTime(AUDIO_VIDEO_PERIOD, IVLC_deadline, IVLC_exe_time);
 
@@ -1446,7 +1446,7 @@ int av_join(int state) {
     int block_size, blocks;
     int i, k;
 
-    prints("Join start...");
+    prints("Join - start\n");
     prints("Number of frames");
     printi(FRAMES);
 
@@ -1498,7 +1498,7 @@ int av_split(int state) {
     int compressed_adpcm[COMPRESSED_SAMPLES];
     message compresssed_adpcm;
 
-    prints("Task SPLIT start:  ");
+    prints("Task SPLIT - start\n");
 
     /* Generates the compressed adpcm stream */
     for (i = 0; i < COMPRESSED_SAMPLES; i += 2)
