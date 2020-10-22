@@ -594,6 +594,8 @@ int dijkstra_slave()
 			ReceiveMessage(&theMessage, divider);
 			for (j=0; j<NUM_NODES; j++){
 				AdjMatrix[i][j] = theMessage.msg[j];
+				if(theMessage.msg[j] == KILL)
+					prints("adjMatrix["); printi(i); prints("]["); printi(j); prints("] = "); printi(theMessage.msg[j]); prints("\n");
 			}
 		}
 		calc = AdjMatrix[0][0];
