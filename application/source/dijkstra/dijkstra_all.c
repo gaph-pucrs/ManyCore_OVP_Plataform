@@ -74,12 +74,13 @@ int dijkstra_divider(int state)
 		}
 	}
 
-
+	prints("Sending KILL msg\n");
     AdjMatrix[0][0] = KILL;
 	for (i=0; i<NUM_NODES; i++) {
 		for (j=0; j<NUM_NODES; j++) {
 			theMessage.msg[j] = AdjMatrix[i][j];
 		}
+		putsvsv("i: ", i, "theMsg[0]: ", theMessage.msg[0]);
 		SendMessage(&theMessage, dijkstra_0);
 		SendMessage(&theMessage, dijkstra_1);
 		SendMessage(&theMessage, dijkstra_2);
@@ -112,9 +113,12 @@ int dijkstra_slave()
 			ReceiveMessage(&theMessage, divider);
 			for (j=0; j<NUM_NODES; j++){
 				AdjMatrix[i][j] = theMessage.msg[j];
+				if(theMessage.msg[j] == KILL)
+					prints("adjMatrix["); printi(i); prints("]["); printi(j); prints("] = "); printi(theMessage.msg[j]); prints("\n");
 			}
 		}
-		calc = AdjMatrix[0][0];		
+		calc = AdjMatrix[0][0];
+		putsv("adjMatrix[0][0]", calc);	
 		if (calc == KILL) break;
 
 		for (i=0;i<NUM_NODES;i++){

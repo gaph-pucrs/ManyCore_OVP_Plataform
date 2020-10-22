@@ -146,10 +146,10 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                     tgtProc = spiralMatrix[k];
                     task_ID = getSomeTaskID(srcProc, task_addr);
                     putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
-                    LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
+                    //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
 
                     if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
-                        LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
+                        //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                         prints("send_task_migration\n");
 
                         task_addr[task_ID] = tgtProc;
@@ -167,16 +167,16 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
                 }
             }
         }
-        // if(temp[i] > 32000 && Frequency[i] == 1000){
-        //     //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
-        //     Frequency[i] = 677;
-        //     setDVFS(srcProc, Frequency[i]);
-        // }
-        // else if(temp[i] < 31000 && Frequency[i] == 677){
-        //     //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
-        //     Frequency[i] = 1000;
-        //     setDVFS(srcProc, Frequency[i]);
-        // }
+        if(temp[i] > 35515 && Frequency[i] == 1000){
+            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            Frequency[i] = 677;
+            setDVFS(srcProc, Frequency[i]);
+        }
+        else if(temp[i] < 35515 && Frequency[i] == 677){
+            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            Frequency[i] = 1000;
+            setDVFS(srcProc, Frequency[i]);
+        }
     }
     if(contNumberOfMigrations>0){
         for(i = 0; i < contNumberOfMigrations; i++)
@@ -203,7 +203,6 @@ int main(int argc, char **argv)
     unsigned int yaml_tasks = 0;
     unsigned int task_addr[DIM_X*DIM_Y];
     unsigned int tasks_to_map = 0;
-    unsigned int time = 0;
     int finishSimulation;
 
     Uns32 aux = MFSPR(SPR_PICMR);
@@ -262,66 +261,7 @@ int main(int argc, char **argv)
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
-            
-            //////////////////////////////////////////////////////
-            // RECEIVES EACH PE TEMPERATURE PACKET  //////////////
-            //////////////////////////////////////////////////////
-            prints("Waiting for energy packets from slave PEs...\n");
-#if USE_THERMAL
-            *clockGating_flag = TRUE;
-#endif
-            while(waitingEnergyReport < N_PES){ }
-            waitingEnergyReport = 0;
-#if USE_THERMAL
-            *clockGating_flag = FALSE;
-#endif
-            prints("Every energy packet was received!\n");
-            /*for(y=0;y<DIM_Y;y++){
-                for(x=0;x<DIM_X;x++){
-                    ReceiveRaw(&theMsg);
-                    prints("Pacote recebido de ");
-                    printi(getXpos(theMsg.msg[3])); 
-                    printi(getYpos(theMsg.msg[3])); 
-                    prints("\n");
-                    energyLocalsDif_total[getXpos(theMsg.msg[3])][getYpos(theMsg.msg[3])] = theMsg.msg[1]; // total energy
-                }
-            }*/
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////
-            //prints("Todos os pacotes de energia foram recebidos!\n");
-            //LOG("Todos os pacotes foram recebidos!!!\n");
-            //*clockGating_flag = TRUE;
-            // LOG("FPRINTF - MASTER %x\n",*myAddress);
-            // FILE *filepointer;
-            // int err0;
-            // char logFileName[26];
-            // err0 = sprintf(logFileName, "simulation/power_log.txt");
-            // filepointer = fopen (logFileName,"a");
-            // fprintf(filepointer,"%u %u %u %u %u %u %u %u %u %u %u %u %u %u %u %u\n",energyLocalsDif_total[0][0],energyLocalsDif_total[1][0],energyLocalsDif_total[2][0],energyLocalsDif_total[3][0],energyLocalsDif_total[0][1],energyLocalsDif_total[1][1],energyLocalsDif_total[2][1],energyLocalsDif_total[3][1],energyLocalsDif_total[0][2],energyLocalsDif_total[1][2],energyLocalsDif_total[2][2],energyLocalsDif_total[3][2],energyLocalsDif_total[0][3],energyLocalsDif_total[1][3],energyLocalsDif_total[2][3],energyLocalsDif_total[3][3]);
-            // fclose(filepointer);    
-            //*clockGating_flag = FALSE;
-            /////////////////////////////////////////////////
-            // SEND THE ENERGY PACKET TO THE TEA ////////////
-            /////////////////////////////////////////////////
-            executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
-            executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
-            tsend = clock();
-            tsend = tsend - tinicio;
-            executedInstPacket[PI_SEND_TIME] = tsend;
-            executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
-            p_idx=0;
-            for(y=0;y<DIM_Y;y++){
-                for(x=0;x<DIM_X;x++){
-                    executedInstPacket[p_idx+4] = (unsigned int)((energyLocalsDif_total[x][y])*64/1000/100)*128/100; // return energyLocalsDif_total[x][y]*64/1000/100;
-                    p_idx++;
-                }
-            }
-            if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
-                SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-            else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
-                sendExecutedInstPacket = TRUE;
-
+            putsv("Tasks to map: ", tasks_to_map);
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
@@ -340,23 +280,6 @@ int main(int argc, char **argv)
                 printi(executedInstPacket[i]);
                 Temperature[i] = executedInstPacket[i];//deliveredMessage->msg[i];
             }
-            /*if(tempPacket){
-                prints("1Pacote Recebido: ");
-                for(i = 0; i < DIM_X*DIM_Y; i++){
-                    printi(deliveredMessage->msg[i]);
-                    Temperature[i] = deliveredMessage->msg[i];
-                }
-            }
-            else{
-                ReceiveRaw(&theMsg2);
-                prints("2Pacote Recebido: ");
-                for(i = 0; i < DIM_X*DIM_Y; i++){
-                    printi(theMsg2.msg[i]);
-                    Temperature[i] = theMsg2.msg[i];
-                }
-            }
-            prints("\n");
-            tempPacket = FALSE;*/
 
             //////////////////////////
             // Migration procedures //
@@ -364,12 +287,12 @@ int main(int argc, char **argv)
             prints("\nGenerating TempMatrix\n");
             for(i = 0; i < DIM_X*DIM_Y; i++){
 
-                if (time >= INT_WINDOW)
-                    integral[i] = integral[i] - integral_prev[time%INT_WINDOW][i];
+                if (measuredWindows >= INT_WINDOW)
+                    integral[i] = integral[i] - integral_prev[measuredWindows%INT_WINDOW][i];
 
-                integral_prev[time%INT_WINDOW][i] = Temperature[i];
+                integral_prev[measuredWindows%INT_WINDOW][i] = Temperature[i];
 
-                //if (time != 0) energy_i[i] = getEnergySlaveAcc_total(i)/time;
+                //if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
                 derivative[i] = Temperature[i] - Temperature_prev[i];
                 integral[i] = integral[i] + Temperature[i];
                 control_signal[i] = KP*Temperature[i] + KI*integral[i]/INT_WINDOW + KD*derivative[i];
@@ -379,10 +302,10 @@ int main(int argc, char **argv)
                 // putsv("energy ", energy_i[i]);
                 // putsv("control_signal ", control_signal[i]);
             }
-            generateTempMatrix(Temperature); //generateTempMatrix(control_signal);
+            generateTempMatrix(control_signal);
 
-            if ((time+1)%20 == 0){
-                prints("Starting the thermal actuation analysis\n");
+            if ((measuredWindows)%20 == 0){
+                prints("Starting thermal actuation analysis\n");
                 temperature_migration(Temperature, tasks_to_map, task_addr);
                 // for(i = 0; i < tasks_to_map; i++)
                 //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
@@ -395,7 +318,7 @@ int main(int argc, char **argv)
                 //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
             }
             else{
-                prints("Skiping the thermal actuation analysis\n");
+                prints("Skiping thermal actuation analysis\n");
             }
 
             // Verify if every task is finished
@@ -410,10 +333,14 @@ int main(int argc, char **argv)
                 for(i = 1; i < N_PES; i++){
                     sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
                 }
+                break;
             }
 
-            time++;
-
+        }
+        measuredWindows = 0;
+        while(*SyncToPE != 1){
+            putsv("Waiting everyone ", measuredWindows);
+            measuredWindows++;    
         }
     }
     //////////////////////////////////////////////////////
