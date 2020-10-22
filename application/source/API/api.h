@@ -214,7 +214,7 @@ unsigned int getEmptyIndex();
 void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
-unsigned int sendFromMsgBuffer(unsigned int requester);
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr);
 void interruptHandler_NI_TX(void);
 void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
@@ -376,8 +376,9 @@ void interruptHandler_NI_RX(void) {
             //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
+        newAddr = incomingPacket[PI_REQUESTER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(!sendFromMsgBuffer(requester)){ // if the package is not ready yet add a request to the pending request queue
+        if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }
@@ -539,14 +540,14 @@ void interruptHandler_NI_RX(void) {
 
 ///////////////////////////////////////////////////////////////////
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
-unsigned int sendFromMsgBuffer(unsigned int requester){
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr){
     int i;
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
         if(buffer_map[i]>PIPE_OCCUPIED && buffer_map[i] != -1){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
-                buffer_packets[i][PI_DESTINATION] = mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
+                buffer_packets[i][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
                     foundSent = buffer_packets[i];
