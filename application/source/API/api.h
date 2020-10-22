@@ -127,6 +127,7 @@ typedef struct Message {
 // API useful stuff
 message *deliveredMessage;                                  // Pointer used by the API to acess the packet that will be transmitted
 unsigned int sendAfterTX[PIPE_SIZE];                        // Informs the TX interruption if there is a packet that must be transmitted
+unsigned int sendServiceAfterTX[PIPE_SIZE];                 // Informs the TX interruption if there is a service packet that must be transmitted
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];      // Used by NI to store the recived packet
 volatile unsigned int myServicePacket[PIPE_SIZE][PACKET_MAX_SIZE];     // Used by the API to create a service packet
 volatile unsigned int receivingActive;                      // Used by the API to inform the processor if the receiving process is done
@@ -220,6 +221,8 @@ void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
 void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
+void addServiceAfterTX(unsigned int slot);
+void popServiceAfterTX();
 void prints(char* text);
 void printi(int value);
 void putsv(char* text1, int value1);
@@ -593,6 +596,20 @@ void addSendAfterTX(unsigned int slot){
 }
 
 ///////////////////////////////////////////////////////////////////
+/* Adds to the end of the list an slot to send the service packet after the next TX interruption */
+void addServiceAfterTX(unsigned int slot){
+    int i=0;
+    do{
+        if(sendServiceAfterTX[i] == PIPE_WAIT){
+            sendServiceAfterTX[i] = slot;
+            break;
+        }
+        i++;
+    }while(i<PIPE_SIZE);
+    return;
+}
+
+///////////////////////////////////////////////////////////////////
 /* Removes the first send slot in the list and shift others keeping the insertion orther  */
 void popSendAfterTX(){
     int i;
@@ -604,6 +621,22 @@ void popSendAfterTX(){
         // others will be shifted
         else{
             sendAfterTX[i] = sendAfterTX[i+1];
+        }   
+    }
+}
+
+///////////////////////////////////////////////////////////////////
+/* Removes the first send service slot in the list and shift others keeping the insertion orther  */
+void popServiceAfterTX(){
+    int i;
+    for(i=0; i<PIPE_SIZE; i++){
+        // in the last one we put a blank value (pipe_wait)
+        if(i == PIPE_SIZE-1){ 
+            sendServiceAfterTX[i] = PIPE_WAIT;
+        }
+        // others will be shifted
+        else{
+            sendServiceAfterTX[i] = sendServiceAfterTX[i+1];
         }   
     }
 }
@@ -640,6 +673,11 @@ void interruptHandler_NI_TX(void) {
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
         popSendAfterTX();
     }
+    // 
+    else if(sendServiceAfterTX[0] <= PIPE_SIZE){
+        SendSlot((unsigned int)&myServicePacket[sendAfterTX[0]], (sendAfterTX[0] | 0xFFFF0000));
+        popServiceAfterTX();
+    }
 #if USE_THERMAL
     // If there is a Executed Instructions Packet available to send, send it!
     else if(sendExecutedInstPacket == TRUE){
@@ -652,6 +690,7 @@ void interruptHandler_NI_TX(void) {
 #if USE_THERMAL
 #endif
 }
+
 
 ///////////////////////////////////////////////////////////////////
 /* Initiation function */
@@ -888,7 +927,12 @@ void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
     myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = mapping_table[requester];
-    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+    if(*NIcmdTX == NI_STATUS_OFF){
+        SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+    }
+    else{
+        addServiceAfterTX(index);
+    }
     prints("Slot sent\n");
 }
 
