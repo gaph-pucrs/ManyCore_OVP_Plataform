@@ -839,7 +839,6 @@ void sendPipe(unsigned int dest){
                 bufferPop(j);
                 SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
             }*/
-        }
     }
 }
 
