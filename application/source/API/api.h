@@ -87,6 +87,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 //////////////////////////////
 //////////////////////////////
 
+
 ////////////////////////////////////////////////////////////
 // Packet defines --TODO: CHANGE THE PACKET TO MATCH HEMPS STANDART?
 #define MESSAGE_MAX_SIZE    512
@@ -1269,3 +1270,47 @@ void printFinish(){
         putsvsv("pipeStatus[", i,"] = ", buffer_map[i]);
     }
 }
+
+void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y]){
+    int i;
+    int tasks_to_map = 0;
+    for(i = 0; i < DIM_X*DIM_Y; i++){
+        if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
+            task_addr[i] = getEmptyPE(task_addr);
+            if(task_addr[i]) // if the task got some valid address
+                task_start_time[i] = -2; // PRE-RELEASE
+        }
+        if(tasks_to_map == 0 && task_addr[i] == 0){
+            tasks_to_map = i;
+            break;
+        }
+        putsvsv("Task", i, " mapped in processor ", task_addr[i]);
+    }
+
+    for(i = 0; i < DIM_X*DIM_Y; i++){
+        if(task_start_time[i] == -2){
+            sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
+            task_start_time[i] = -1; //RELEASED
+        }
+    }
+
+    return;
+}
+
+int getEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+    int i, j, empty;
+    for(j = 1; j < DIM_X*DIM_Y; j++){ // assumes an address
+        empty = 1;                    // presumes that it is empty
+        for(i = 0; i < DIM_X*DIM_Y; i++){
+            if(task_addr[i] == getAddress(j)){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;                         // breaks
+            }
+        }
+        if(empty){
+            return j;
+        }
+    }
+    return 0;
+}
+
