@@ -245,8 +245,8 @@ void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X
     int tasks_to_map = 0;
     for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
-            //task_addr[i] = getSpiralMatixEmptyPE(task_addr);
-            task_addr[i] = getRandomEmptyPE(task_addr);
+            task_addr[i] = getSpiralMatixEmptyPE(task_addr);
+            //task_addr[i] = getRandomEmptyPE(task_addr);
             if(task_addr[i]){ // if the task got some valid address
                 task_start_time[i] = -2; // PRE-RELEASE
                 finishedTask[i] = FALSE;
