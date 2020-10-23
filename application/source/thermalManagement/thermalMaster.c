@@ -260,6 +260,7 @@ int main(int argc, char **argv)
     
     for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
         task_addr[i] = 0xFFFFFFFF;
+        task_start_time[i] = 0xFFFFFFF0;
     }
 
     /* Wait for every PE to send each power estimation */
