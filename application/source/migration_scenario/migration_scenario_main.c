@@ -117,6 +117,7 @@ int main(int argc, char **argv)
 		
 		if(get_mapping()){
 			prints("Task "); printi(running_task); prints("mapped\n");
+			state = 0;
 			clear_mapping();
 		}
 		else if(get_migration_dst()){
