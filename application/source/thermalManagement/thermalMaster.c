@@ -198,6 +198,8 @@ int main(int argc, char **argv)
     testcase = fopen("application/scenario.yaml","r");
     char line[64];
     char *app_name;
+    char *starting_time_str;
+    int starting_time;
     char *task_name;
     char *task_number;
     unsigned int yaml_tasks = 0;
@@ -229,6 +231,7 @@ int main(int argc, char **argv)
             app_name = strtok(NULL, " ");
             app_name[strlen(app_name)-1] = '\0';
             yaml_tasks = 0;
+            starting_time = 0; // defines the starting time to zero
         }
 
         if (yaml_tasks){
@@ -242,6 +245,18 @@ int main(int argc, char **argv)
 
         if (strstr(line, "dynamic_mapping") != NULL){
             yaml_tasks = 1;
+        }
+
+        if(strstr(line, "start_time_ms") != NULL){
+            starting_time_str = strtok(line, ":");
+            starting_time_str = strtok(NULL, " ");
+            starting_time_str[strlen(app_name)-1] = '\0';
+            starting_time = atoi(starting_time_str);
+            prints("App: ");
+            prints(app_name);
+            prints(" starting at: ");
+            printi(starting_time);
+            prints("\n");
         }
     }
 
