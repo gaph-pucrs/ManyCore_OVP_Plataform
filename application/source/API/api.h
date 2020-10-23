@@ -1198,7 +1198,7 @@ void putsvsv(char* text1, int value1, char* text2, int value2){
 ///////////////////////////////////////////////////////////////////
 //
 unsigned int random(){
-    unsigned int lfsr = 0xACE1ACE1;
+    unsigned int lfsr = 0xACE1ACE1 || clock();
     unsigned bit;
     bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
     return lfsr =  (lfsr >> 1) | (bit << 15);
@@ -1271,12 +1271,36 @@ void printFinish(){
     }
 }
 
+int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+    int i, j, empty, pe;
+    pe = random() % DIM_X*DIM_Y; // assumes a random address
+    for(j = 1; j < DIM_X*DIM_Y; j++){ 
+        empty = 1;                   // presumes that it is empty
+        for(i = 0; i < DIM_X*DIM_Y; i++){
+            if(task_addr[i] == getAddress(pe)){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;                         // breaks
+            }
+        }
+        if(empty){
+            return getAddress(pe);
+        }
+        else{
+            if(pe == 1)
+                pe = DIM_X*DIM_Y-1;
+            else
+                pe--;
+        }
+    }
+    return 0;
+}
+
 void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y]){
     int i;
     int tasks_to_map = 0;
     for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
-            task_addr[i] = getEmptyPE(task_addr);
+            task_addr[i] = getRandomEmptyPE(task_addr);
             if(task_addr[i]){ // if the task got some valid address
                 task_start_time[i] = -2; // PRE-RELEASE
                 putsvsv("Task", i, " mapped in processor ", task_addr[i]);
@@ -1295,22 +1319,5 @@ void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X
     }
 
     return;
-}
-
-int getEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
-    int i, j, empty;
-    for(j = 1; j < DIM_X*DIM_Y; j++){ // assumes an address
-        empty = 1;                    // presumes that it is empty
-        for(i = 0; i < DIM_X*DIM_Y; i++){
-            if(task_addr[i] == getAddress(j)){ // if you find some task runnin inside that processor
-                empty = 0;
-                break;                         // breaks
-            }
-        }
-        if(empty){
-            return getAddress(j);
-        }
-    }
-    return 0;
 }
 
