@@ -383,19 +383,20 @@ int main(int argc, char **argv)
             }
 
             // Verify if every task is finished
+            disable_interruption(0);
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i]==TRUE)
                     task_addr[i] = 0;
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
-                    finishedTask[i] = 3; // Restarting!
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
                 }
-                if(finishedTask[i]==FALSE){
+                else if(finishedTask[i]==FALSE){
                    finishSimulation = 0;
                 }
             }
+            enable_interruption(0);
             if(finishSimulation){
                 for(i = 1; i < N_PES; i++){
                     sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
