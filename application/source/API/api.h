@@ -1308,7 +1308,7 @@ int getEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
             }
         }
         if(empty){
-            return j;
+            return getAddress(j);
         }
     }
     return 0;
