@@ -356,6 +356,7 @@ int main(int argc, char **argv)
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0){
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
+                    task_addr[i] = 0;
                     finishedTask[i] = FALSE;
                 }
                 if(finishedTask[i]==FALSE){
