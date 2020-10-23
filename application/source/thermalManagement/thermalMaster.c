@@ -185,6 +185,18 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     return contNumberOfMigrations;
 }
 
+int appFinished(int id, int task_applicationID[DIM_X*DIM_Y]){
+    int i;
+    for(i=0;i<DIM_X*DIM_Y;i++){
+        if(task_applicationID[i] == task_applicationID[id]){
+            if(finishedTask[i] == FALSE)
+                return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+
 int main(int argc, char **argv)
 {
     OVP_init();
@@ -209,6 +221,7 @@ int main(int argc, char **argv)
     int task_start_time[DIM_X*DIM_Y];
     int task_remaining_executions[DIM_X*DIM_Y];
     int task_repeat_after[DIM_X*DIM_Y];
+    int task_applicationID[DIM_X*DIM_Y];
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i;
@@ -354,7 +367,7 @@ int main(int argc, char **argv)
             // Verify if every task is finished
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
-                if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0){
+                if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     task_addr[i] = 0;
                     finishedTask[i] = FALSE;
@@ -383,3 +396,4 @@ int main(int argc, char **argv)
     FinishApplication();
     return 1;
 }
+
