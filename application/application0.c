@@ -198,12 +198,16 @@ int main(int argc, char **argv)
     testcase = fopen("application/scenario.yaml","r");
     char line[64];
     char *app_name;
+    char *starting_time_str;
+    int starting_time;
     char *task_name;
     char *task_number;
     unsigned int yaml_tasks = 0;
     unsigned int task_addr[DIM_X*DIM_Y];
+    int task_start_time[DIM_X*DIM_Y];
     unsigned int tasks_to_map = 0;
     int finishSimulation;
+    int i;
 
     Uns32 aux = MFSPR(SPR_PICMR);
     /*Initialization*/
@@ -229,6 +233,7 @@ int main(int argc, char **argv)
             app_name = strtok(NULL, " ");
             app_name[strlen(app_name)-1] = '\0';
             yaml_tasks = 0;
+            starting_time = 0; // defines the starting time to zero
         }
 
         if (yaml_tasks){
@@ -237,31 +242,34 @@ int main(int argc, char **argv)
             task_number = strtok(NULL, " ");
             task_number[strlen(task_number)-1] = '\0';
             task_addr[tasks_to_map] = atoi(task_number);
+            task_start_time[tasks_to_map] = starting_time;
             tasks_to_map++;
         }
 
         if (strstr(line, "dynamic_mapping") != NULL){
             yaml_tasks = 1;
         }
+
+        if(strstr(line, "start_time_ms") != NULL){
+            starting_time_str = strtok(line, ":");
+            starting_time_str = strtok(NULL, " ");
+            starting_time_str[strlen(app_name)-1] = '\0';
+            starting_time = atoi(starting_time_str);
+        }
     }
-
-    int i;
-    for(i = 0; i < tasks_to_map; i++){
-        task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
-        //LOG("Task %d mapped in processor %x\n", i, task_addr[i]);
-        putsvsv("Task", i, " mapped in processor ", task_addr[i]);
+    
+    for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
+        task_addr[i] = 0xFFFFFFFF;
+        task_start_time[i] = 0xFFFFFFF0;
     }
-
-    for(i = tasks_to_map; i < DIM_X*DIM_Y; i++)
-        task_addr[i] = 0;
-
-    for(i = 0; i < tasks_to_map; i++)
-        sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
 
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Tasks to map: ", tasks_to_map);
+            
+            releaseTasks(task_addr, task_start_time);
+
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
