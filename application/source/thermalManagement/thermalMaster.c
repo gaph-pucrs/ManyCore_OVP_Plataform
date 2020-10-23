@@ -383,6 +383,7 @@ int main(int argc, char **argv)
             }
 
             // Verify if every task is finished
+            disable_interruption(0);
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i]==TRUE)
@@ -395,6 +396,7 @@ int main(int argc, char **argv)
                    finishSimulation = 0;
                 }
             }
+            enable_interruption(0);
             if(finishSimulation){
                 for(i = 1; i < N_PES; i++){
                     sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
