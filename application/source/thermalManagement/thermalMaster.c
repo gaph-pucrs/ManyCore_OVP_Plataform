@@ -261,7 +261,7 @@ int main(int argc, char **argv)
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
-            //putsv("Tasks to map: ", tasks_to_map);
+            putsv("Tasks to map: ", tasks_to_map);
             
             releaseTasks(task_addr, task_start_time);
 
