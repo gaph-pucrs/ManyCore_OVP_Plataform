@@ -98,7 +98,7 @@ int how_many_tasks_PE_is_running(unsigned int srcProc, unsigned int task_addr[DI
     int i;
 
     for(i=0; i<DIM_X*DIM_Y; i++){
-        if (task_addr[i] == srcProc && finishedTask[i] == FALSE)
+        if (task_addr[i] == srcProc && (finishedTask[i] == FALSE || finishedTask[i] == 3))
             return 1;
     }
 
@@ -129,7 +129,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
         // clear finished applications
-        if(finishedTask[i]==TRUE){
+        if(finishedTask[i]==TRUE || finishedTask[i] == 3){
             task_addr[i] = 0;
         }
     }
@@ -390,6 +390,7 @@ int main(int argc, char **argv)
                     task_addr[i] = 0;
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
+                    finishedTask[i]==3;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
                 }
                 else if(finishedTask[i]==FALSE){
