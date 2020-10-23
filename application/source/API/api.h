@@ -1297,7 +1297,7 @@ int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     return 0;
 }
 
-void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y]){
+void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y], int task_remaining_executions[DIM_X*DIM_Y]){
     int i;
     int tasks_to_map = 0;
     for(i = 0; i < DIM_X*DIM_Y; i++){
@@ -1317,6 +1317,7 @@ void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X
         if(task_start_time[i] == -2){
             sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
             task_start_time[i] = -1; //RELEASED
+            task_remaining_executions[i]--;
         }
     }
 

@@ -198,13 +198,17 @@ int main(int argc, char **argv)
     testcase = fopen("application/scenario.yaml","r");
     char line[64];
     char *app_name;
-    char *starting_time_str;
+    char *aux_str;
     int starting_time;
+    int executions;
+    int repeat_after;
     char *task_name;
     char *task_number;
     unsigned int yaml_tasks = 0;
     unsigned int task_addr[DIM_X*DIM_Y];
     int task_start_time[DIM_X*DIM_Y];
+    int task_remaining_executions[DIM_X*DIM_Y];
+    int task_repeat_after[DIM_X*DIM_Y];
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i;
@@ -234,6 +238,8 @@ int main(int argc, char **argv)
             app_name[strlen(app_name)-1] = '\0';
             yaml_tasks = 0;
             starting_time = 0; // defines the starting time to zero
+            repeat_after = 0;
+            executions = 1;
         }
 
         if (yaml_tasks){
@@ -243,6 +249,8 @@ int main(int argc, char **argv)
             task_number[strlen(task_number)-1] = '\0';
             task_addr[tasks_to_map] = atoi(task_number);
             task_start_time[tasks_to_map] = starting_time;
+            task_remaining_executions[tasks_to_map] = executions;
+            task_repeat_after[tasks_to_map] = repeat_after;
             tasks_to_map++;
         }
 
@@ -251,11 +259,25 @@ int main(int argc, char **argv)
         }
 
         if(strstr(line, "start_time_ms") != NULL){
-            starting_time_str = strtok(line, ":");
-            starting_time_str = strtok(NULL, " ");
-            starting_time_str[strlen(app_name)-1] = '\0';
-            starting_time = atoi(starting_time_str);
+            aux_str = strtok(line, ":");
+            aux_str = strtok(NULL, " ");
+            aux_str[strlen(app_name)-1] = '\0';
+            starting_time = atoi(aux_str);
         }
+
+        if(strstr(line, "repeat_after_ms") != NULL){
+            aux_str = strtok(line, ":");
+            aux_str = strtok(NULL, " ");
+            aux_str[strlen(app_name)-1] = '\0';
+            repeat_after = atoi(aux_str);
+        }
+
+        if(strstr(line, "repeat_times") != NULL){
+            aux_str = strtok(line, ":");
+            aux_str = strtok(NULL, " ");
+            aux_str[strlen(app_name)-1] = '\0';
+            executions = atoi(aux_str);
+        }        
     }
     
     for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
@@ -268,7 +290,7 @@ int main(int argc, char **argv)
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Timer (ms) ", measuredWindows);
             
-            releaseTasks(task_addr, task_start_time);
+            releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
@@ -332,9 +354,12 @@ int main(int argc, char **argv)
             // Verify if every task is finished
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
+                if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0){
+                    task_start_time[i] = measuredWindows + task_repeat_after[i];
+                    finishedTask[i] = FALSE;
+                }
                 if(finishedTask[i]==FALSE){
                     finishSimulation = 0;
-                    break;
                 }
             }
             if(finishSimulation){
