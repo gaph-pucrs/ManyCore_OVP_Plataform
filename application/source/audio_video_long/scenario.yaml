@@ -1,0 +1,17 @@
+apps:
+ - name: audio_video_long
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    split_av: 0
+    ivlc_av: 1
+    iquant_av: 2
+    idct_av: 3
+    adpcm_dec_av: 4
+    FIR_av: 5
+    join_av: 6
+ - name: thermalManagement
+   cluster: 0
+   mapping: static
+   static_mapping:
+    thermalMaster: [0,0]
