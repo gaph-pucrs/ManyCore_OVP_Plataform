@@ -389,6 +389,7 @@ int main(int argc, char **argv)
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     task_addr[i] = 0;
                     finishedTask[i] = FALSE;
+                    putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
                 }
                 if(finishedTask[i]==FALSE){
                    finishSimulation = 0;
