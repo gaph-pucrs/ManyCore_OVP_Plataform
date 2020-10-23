@@ -389,10 +389,9 @@ int main(int argc, char **argv)
                     task_addr[i] = 0;
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
-                    finishedTask[i] = 3; // Restarting!
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
                 }
-                if(finishedTask[i]==FALSE){
+                else if(finishedTask[i]==FALSE){
                    finishSimulation = 0;
                 }
             }
