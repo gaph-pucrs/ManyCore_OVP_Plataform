@@ -262,7 +262,7 @@ int main(int argc, char **argv)
             task_name[strlen(task_name)-1] = '\0';
             task_number = strtok(NULL, " ");
             task_number[strlen(task_number)-1] = '\0';
-            task_addr[tasks_to_map] = atoi(task_number);
+            task_addr[tasks_to_map] = 0;
             task_start_time[tasks_to_map] = starting_time;
             task_remaining_executions[tasks_to_map] = executions;
             task_repeat_after[tasks_to_map] = repeat_after;
