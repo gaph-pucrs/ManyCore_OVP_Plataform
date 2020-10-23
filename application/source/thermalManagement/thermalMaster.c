@@ -296,6 +296,21 @@ int main(int argc, char **argv)
         }        
     }
     
+    for(i = 0; i < tasks_to_map; i++){
+        prints("==================\n");
+        prints("Tarefa ("); 
+        printi(i); 
+        prints(") começa a executar em "); 
+        printi(task_start_time[i]); 
+        prints("ms e pertence a app "); 
+        printi(task_applicationID[i]);
+        prints(". Ela vai executar "); 
+        printi(task_remaining_executions[i]); 
+        prints(" vezes, começando "); 
+        printi(task_repeat_after[i]);
+        prints("ms depois de terminar a execução anterior.\n\n");
+    }
+
     for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
         task_addr[i] = 0xFFFFFFFF;
         task_start_time[i] = 0xFFFFFFF0;
