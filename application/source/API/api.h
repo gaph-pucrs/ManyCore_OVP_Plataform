@@ -1198,7 +1198,7 @@ void putsvsv(char* text1, int value1, char* text2, int value2){
 ///////////////////////////////////////////////////////////////////
 //
 unsigned int random(){
-    unsigned int lfsr = 0xACE1ACE1 || clock();
+    unsigned int lfsr = 0xACE1ACE1 | clock();
     unsigned bit;
     bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
     return lfsr =  (lfsr >> 1) | (bit << 15);
