@@ -87,6 +87,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 //////////////////////////////
 //////////////////////////////
 
+
 ////////////////////////////////////////////////////////////
 // Packet defines --TODO: CHANGE THE PACKET TO MATCH HEMPS STANDART?
 #define MESSAGE_MAX_SIZE    512
@@ -418,11 +419,11 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
-        mapping_en = 1;
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         mapping_en = 1;
+        migration_dst = 0;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_SRC){
@@ -570,7 +571,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
                 buffer_packets[i][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
-                    foundSent = buffer_packets[i];
+                    foundSent = buffer_map[i];
                 }
             }
         }
@@ -1197,7 +1198,7 @@ void putsvsv(char* text1, int value1, char* text2, int value2){
 ///////////////////////////////////////////////////////////////////
 //
 unsigned int random(){
-    unsigned int lfsr = 0xACE1ACE1;
+    unsigned int lfsr = 0xACE1ACE1 | clock();
     unsigned bit;
     bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
     return lfsr =  (lfsr >> 1) | (bit << 15);
@@ -1269,3 +1270,58 @@ void printFinish(){
         putsvsv("pipeStatus[", i,"] = ", buffer_map[i]);
     }
 }
+
+int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+    int i, j, empty, pe;
+    pe = random() % (DIM_X*DIM_Y); // assumes a random address
+    if(pe == 0) // zero is reserved to the master 
+        pe++; 
+    for(j = 1; j < DIM_X*DIM_Y; j++){ 
+        empty = 1;                   // presumes that it is empty
+        for(i = 0; i < DIM_X*DIM_Y; i++){
+            if(task_addr[i] == getAddress(pe)){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;                         // breaks
+            }
+        }
+        if(empty){
+            return getAddress(pe);
+        }
+        else{
+            if(pe == 1)
+                pe = DIM_X*DIM_Y-1;
+            else
+                pe--;
+        }
+    }
+    return 0;
+}
+
+void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y], int task_remaining_executions[DIM_X*DIM_Y]){
+    int i;
+    int tasks_to_map = 0;
+    for(i = 0; i < DIM_X*DIM_Y; i++){
+        if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
+            task_addr[i] = getRandomEmptyPE(task_addr);
+            if(task_addr[i]){ // if the task got some valid address
+                task_start_time[i] = -2; // PRE-RELEASE
+                finishedTask[i] = FALSE;
+                putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
+            }
+        }
+        if(tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF){
+            tasks_to_map = i;
+        }
+    }
+
+    for(i = 0; i < DIM_X*DIM_Y; i++){
+        if(task_start_time[i] == -2){
+            sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
+            task_start_time[i] = -1; //RELEASED
+            task_remaining_executions[i]--;
+        }
+    }
+
+    return;
+}
+

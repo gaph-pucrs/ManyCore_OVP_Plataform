@@ -98,7 +98,7 @@ int how_many_tasks_PE_is_running(unsigned int srcProc, unsigned int task_addr[DI
     int i;
 
     for(i=0; i<DIM_X*DIM_Y; i++){
-        if (task_addr[i] == srcProc && finishedTask[i] == FALSE)
+        if (task_addr[i] == srcProc && (finishedTask[i] == FALSE || finishedTask[i] == 3))
             return 1;
     }
 
@@ -129,7 +129,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
         // clear finished applications
-        if(finishedTask[i]==TRUE){
+        if(finishedTask[i]==TRUE || finishedTask[i] == 3){
             task_addr[i] = 0;
         }
     }
@@ -185,6 +185,18 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     return contNumberOfMigrations;
 }
 
+int appFinished(int id, int task_applicationID[DIM_X*DIM_Y]){
+    int i;
+    for(i=0;i<DIM_X*DIM_Y;i++){
+        if(task_applicationID[i] == task_applicationID[id]){
+            if(finishedTask[i] == FALSE)
+                return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+
 int main(int argc, char **argv)
 {
     OVP_init();
@@ -198,12 +210,22 @@ int main(int argc, char **argv)
     testcase = fopen("application/scenario.yaml","r");
     char line[64];
     char *app_name;
+    char *aux_str;
+    int starting_time;
+    int executions;
+    int repeat_after;
     char *task_name;
     char *task_number;
     unsigned int yaml_tasks = 0;
     unsigned int task_addr[DIM_X*DIM_Y];
+    int task_start_time[DIM_X*DIM_Y];
+    int task_remaining_executions[DIM_X*DIM_Y];
+    int task_repeat_after[DIM_X*DIM_Y];
+    int task_applicationID[DIM_X*DIM_Y];
+    int task_id = 10;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
+    int i;
 
     Uns32 aux = MFSPR(SPR_PICMR);
     /*Initialization*/
@@ -229,6 +251,10 @@ int main(int argc, char **argv)
             app_name = strtok(NULL, " ");
             app_name[strlen(app_name)-1] = '\0';
             yaml_tasks = 0;
+            starting_time = 0; // defines the starting time to zero
+            repeat_after = 0;
+            executions = 1;
+            task_id = task_id + 10;
         }
 
         if (yaml_tasks){
@@ -236,32 +262,67 @@ int main(int argc, char **argv)
             task_name[strlen(task_name)-1] = '\0';
             task_number = strtok(NULL, " ");
             task_number[strlen(task_number)-1] = '\0';
-            task_addr[tasks_to_map] = atoi(task_number);
+            task_addr[tasks_to_map] = 0;
+            task_start_time[tasks_to_map] = starting_time;
+            task_remaining_executions[tasks_to_map] = executions;
+            task_repeat_after[tasks_to_map] = repeat_after;
+            task_applicationID[tasks_to_map] = task_id;
             tasks_to_map++;
         }
 
         if (strstr(line, "dynamic_mapping") != NULL){
             yaml_tasks = 1;
         }
-    }
 
-    int i;
+        if(strstr(line, "start_time_ms") != NULL){
+            aux_str = strtok(line, ":");
+            aux_str = strtok(NULL, " ");
+            aux_str[strlen(app_name)-1] = '\0';
+            starting_time = atoi(aux_str);
+        }
+
+        if(strstr(line, "repeat_after_ms") != NULL){
+            aux_str = strtok(line, ":");
+            aux_str = strtok(NULL, " ");
+            aux_str[strlen(app_name)-1] = '\0';
+            repeat_after = atoi(aux_str);
+        }
+
+        if(strstr(line, "repeat_times") != NULL){
+            aux_str = strtok(line, ":");
+            aux_str = strtok(NULL, " ");
+            aux_str[strlen(app_name)-1] = '\0';
+            executions = atoi(aux_str);
+        }        
+    }
+    
     for(i = 0; i < tasks_to_map; i++){
-        task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
-        //LOG("Task %d mapped in processor %x\n", i, task_addr[i]);
-        putsvsv("Task", i, " mapped in processor ", task_addr[i]);
+        prints("==================\n");
+        prints("Tarefa ("); 
+        printi(i); 
+        prints(") começa a executar em "); 
+        printi(task_start_time[i]); 
+        prints("ms e pertence a app "); 
+        printi(task_applicationID[i]);
+        prints(". Ela vai executar "); 
+        printi(task_remaining_executions[i]); 
+        prints(" vezes, começando "); 
+        printi(task_repeat_after[i]);
+        prints("ms depois de terminar a execução anterior.\n\n");
     }
 
-    for(i = tasks_to_map; i < DIM_X*DIM_Y; i++)
-        task_addr[i] = 0;
-
-    for(i = 0; i < tasks_to_map; i++)
-        sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
+    for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
+        task_addr[i] = 0xFFFFFFFF;
+        task_start_time[i] = 0xFFFFFFF0;
+    }
 
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
-            putsv("Tasks to map: ", tasks_to_map);
+            putsv("Timer (ms) ", measuredWindows);
+            
+            releaseTasks(task_addr, task_start_time, task_remaining_executions);
+
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
@@ -322,13 +383,21 @@ int main(int argc, char **argv)
             }
 
             // Verify if every task is finished
+            disable_interruption(0);
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
-                if(finishedTask[i]==FALSE){
-                    finishSimulation = 0;
-                    break;
+                if(finishedTask[i]==TRUE)
+                    task_addr[i] = 0;
+                if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
+                    task_start_time[i] = measuredWindows + task_repeat_after[i];
+                    finishedTask[i]=3;
+                    putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
+                }
+                else if(finishedTask[i]==FALSE){
+                   finishSimulation = 0;
                 }
             }
+            enable_interruption(0);
             if(finishSimulation){
                 for(i = 1; i < N_PES; i++){
                     sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
@@ -349,3 +418,4 @@ int main(int argc, char **argv)
     FinishApplication();
     return 1;
 }
+
