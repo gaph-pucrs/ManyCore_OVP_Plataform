@@ -570,7 +570,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
                 buffer_packets[i][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
-                    foundSent = buffer_packets[i];
+                    foundSent = buffer_map[i];
                 }
             }
         }
