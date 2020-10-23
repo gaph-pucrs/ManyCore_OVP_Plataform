@@ -23,8 +23,8 @@ apps:
  - name: mpeg
    cluster: 0
    mapping: dynamic
-   repeat_after_ms: 15
-   repeat_times: 2
+   repeat_after_ms: 12
+   repeat_times: 5
    dynamic_mapping:
     print_mpeg: 0
     idct: 1
@@ -66,6 +66,8 @@ apps:
  - name: sort
    cluster: 0
    mapping: dynamic
+   repeat_after_ms: 12
+   repeat_times: 2
    start_time_ms: 111
    dynamic_mapping:
     sort_master: 0
