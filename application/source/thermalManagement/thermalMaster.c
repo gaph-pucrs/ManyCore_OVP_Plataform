@@ -196,6 +196,78 @@ int appFinished(int id, int task_applicationID[DIM_X*DIM_Y]){
     return TRUE;
 }
 
+int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+    int i, j, empty, pe;
+    pe = random() % (DIM_X*DIM_Y); // assumes a random address
+    if(pe == 0) // zero is reserved to the master 
+        pe++; 
+    for(j = 1; j < DIM_X*DIM_Y; j++){ 
+        empty = 1;                   // presumes that it is empty
+        for(i = 0; i < DIM_X*DIM_Y; i++){
+            if(task_addr[i] == getAddress(pe)){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;                         // breaks
+            }
+        }
+        if(empty){
+            return getAddress(pe);
+        }
+        else{
+            if(pe == 1)
+                pe = DIM_X*DIM_Y-1;
+            else
+                pe--;
+        }
+    }
+    return 0;
+}
+
+int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+    int i, j, empty, pe;
+    for(j = 1; j < DIM_X*DIM_Y; j++){ 
+        pe = spiralMatrix[j-1];      // gets the peAddr from spiralMatrix
+        empty = 1;                   // presumes that it is empty
+        for(i = 0; i < DIM_X*DIM_Y; i++){
+            if(task_addr[i] == pe){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;             // breaks
+            }
+        }
+        if(empty){
+            return pe;
+        }
+    }
+    return 0;
+}
+
+void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y], int task_remaining_executions[DIM_X*DIM_Y]){
+    int i;
+    int tasks_to_map = 0;
+    for(i = 0; i < DIM_X*DIM_Y; i++){
+        if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
+            task_addr[i] = getSpiralMatixEmptyPE(task_addr);//getRandomEmptyPE(task_addr);
+            if(task_addr[i]){ // if the task got some valid address
+                task_start_time[i] = -2; // PRE-RELEASE
+                finishedTask[i] = FALSE;
+                putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
+            }
+        }
+        if(tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF){
+            tasks_to_map = i;
+        }
+    }
+
+    for(i = 0; i < DIM_X*DIM_Y; i++){
+        if(task_start_time[i] == -2){
+            sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
+            task_start_time[i] = -1; //RELEASED
+            task_remaining_executions[i]--;
+        }
+    }
+
+    return;
+}
+
 
 int main(int argc, char **argv)
 {
