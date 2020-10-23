@@ -207,6 +207,7 @@ int main(int argc, char **argv)
     int task_start_time[DIM_X*DIM_Y];
     unsigned int tasks_to_map = 0;
     int finishSimulation;
+    int i;
 
     Uns32 aux = MFSPR(SPR_PICMR);
     /*Initialization*/
@@ -263,7 +264,7 @@ int main(int argc, char **argv)
             //putsv("Tasks to map: ", tasks_to_map);
             
             releaseTasks(task_addr, task_start_time);
-            
+
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
