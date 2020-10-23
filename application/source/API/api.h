@@ -1274,7 +1274,7 @@ void printFinish(){
 int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     int i, j, empty, pe;
     pe = random() % (DIM_X*DIM_Y); // assumes a random address
-    if(pe == 0) // zero is reserved by the master 
+    if(pe == 0) // zero is reserved to the master 
         pe++; 
     for(j = 1; j < DIM_X*DIM_Y; j++){ 
         empty = 1;                   // presumes that it is empty
