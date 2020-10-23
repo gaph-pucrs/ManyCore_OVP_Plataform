@@ -257,6 +257,10 @@ int main(int argc, char **argv)
             starting_time = atoi(starting_time_str);
         }
     }
+    
+    for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
+        task_addr[i] = 0xFFFFFFFF;
+    }
 
     /* Wait for every PE to send each power estimation */
     if(*timerConfig != 0){

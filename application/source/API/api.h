@@ -1277,14 +1277,14 @@ void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X
     for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
             task_addr[i] = getEmptyPE(task_addr);
-            if(task_addr[i]) // if the task got some valid address
+            if(task_addr[i]){ // if the task got some valid address
                 task_start_time[i] = -2; // PRE-RELEASE
+                putsvsv("Task", i, " mapped in processor ", task_addr[i]);
+            }
         }
-        if(tasks_to_map == 0 && task_addr[i] == 0){
+        if(tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF){
             tasks_to_map = i;
-            break;
         }
-        putsvsv("Task", i, " mapped in processor ", task_addr[i]);
     }
 
     for(i = 0; i < DIM_X*DIM_Y; i++){
