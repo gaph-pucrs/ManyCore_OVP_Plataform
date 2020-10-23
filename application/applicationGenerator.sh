@@ -14,9 +14,9 @@ for i in $(seq 0 $N);
 do
 	if [ ! -z "$APP_NAME" ] 
 	then
-		file="source/"$APP_NAME"/application"$i".c"
+		file="source/"$APP_NAME"/"$APP_NAME"_main.c"
 		if [ -f "$file" ]; then
-			cp -u -v source/"$APP_NAME"/application$i.c application$i.c
+			cp -u -v source/"$APP_NAME"/"$APP_NAME"_main.c application$i.c
 		else 
 			cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 		fi

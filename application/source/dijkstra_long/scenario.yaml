@@ -1,0 +1,16 @@
+apps:
+ - name: dijkstra_long
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    divider: 0
+    dijkstra_0: 1
+    dijkstra_1: 2
+    dijkstra_2: 3
+    dijkstra_3: 4
+    dijkstra_4: 5
+    print: 6
+ - name: thermalManagement
+   cluster: 0
+   static_mapping:
+    thermalMaster: [0,0]
