@@ -419,7 +419,6 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
-        mapping_en = 1;
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
@@ -1305,7 +1304,8 @@ void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X
             task_addr[i] = getRandomEmptyPE(task_addr);
             if(task_addr[i]){ // if the task got some valid address
                 task_start_time[i] = -2; // PRE-RELEASE
-                putsvsv("Task", i, " mapped in processor ", task_addr[i]);
+                finishedTask[i] = FALSE;
+                putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
             }
         }
         if(tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF){
