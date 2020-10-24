@@ -84,16 +84,16 @@ Servico: 103
 16777219 Updating mapping_table[3 ] = 256 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-83951620 Updating mapping_table[4 ] = 1281 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
 16842754 Updating mapping_table[2 ] = 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-84017157 Updating mapping_table[5 ] = 1282 
+83951620 Updating mapping_table[4 ] = 1281 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16908289 Updating mapping_table[1 ] = 258 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+84017157 Updating mapping_table[5 ] = 1282 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 17104896 Updating mapping_table[0 ] = 261 
@@ -136,7 +136,10 @@ TX interruption!
 Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50331650 Updating mapping_table[2 ] = 768 
+Counters: 460  135  40  35  325  161  6  143  50  0  5  46  71  249929 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
@@ -153,7 +156,7 @@ Servico: 96
 Chegou um task mapping!
 task_addr[0 ] = 261 
 task_addr[1 ] = 258 
-task_addr[2 ] = 257 
+task_addr[2 ] = 768 
 task_addr[3 ] = 256 
 task_addr[4 ] = 1281 
 task_addr[5 ] = 1282 
@@ -185,7 +188,7 @@ task_addr[30 ] = 260
 task_addr[31 ] = 517 
 task_addr[32 ] = 1284 
 task_addr[33 ] = 1283 
-task_addr[34 ] = 773 
+task_addr[34 ] = 515 
 task_addr[35 ] = 0 
 task_addr[36 ] = 0 
 task_addr[37 ] = 0 
@@ -206,8 +209,7 @@ TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
-TX interruption!
-Counters: 7151  2012  1108  874  7057  4820  435  2059  1805  21  14  156  226  249774 
+Counters: 6743  1879  1042  834  6489  4391  322  1930  1669  18  12  140  200  250782 
 >> Energy packet sent to thermalMaster
 TX interruption!
 TX interruption!
@@ -226,9 +228,7 @@ TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-17039390 Updating mapping_table[30 ] = 260 
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 84082721 Updating mapping_table[33 ] = 1283 
@@ -245,6 +245,17 @@ TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33751074 Updating mapping_table[34 ] = 515 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+17039390 Updating mapping_table[30 ] = 260 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
@@ -254,18 +265,10 @@ Servico: 103
 33882143 Updating mapping_table[31 ] = 517 
 TX interruption!
 TX interruption!
+Task 32 mapped
+6986630 task AES SLAVE started - ID:Pedindo mesnagem de: 260 
 TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-Task 32 mapTX interruption!
-ped
-6985516 task AES SLAVE started - ID:Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-50659362 Updating mapping_table[34 ] = 773 
-Pedindo mesnagem de: 260 
-TX interruption!
-Counters: 28870  9667  3217  2056  25924  19492  12668  6610  11440  133  66  535  865  249135 
+Counters: 28696  9551  3173  2047  24988  18775  12671  6393  11431  134  66  535  865  248153 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
@@ -296,85 +299,7 @@ Message request received from 30
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Counters: 9582  1755  946  540  10523  6939  2623  1345  4329  7  23  789  904  249096 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 12381  2244  1185  648  13696  9066  3488  1655  5668  8  27  1053  1188  249322 
->> Energy packet sent to thermalMaster
-TX interruption!
- received msg68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  encriptROUND 0 finished.Counters: 12701  2107  1262  688  14423  9533  3963  1534  6378  7  27  1053  1188  248302 
+ received msg74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74  encriptROUND 0 finished.Counters: 7758  1425  764  457  8255  5486  2039  1067  3393  5  19  691  786  249214 
 >> Energy packet sent to thermalMaster
 TX interruption!
 ROUND Final finished.Pedindo mesnagem de: 260 
@@ -385,41 +310,6 @@ Message request received from 30
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74  encriptROUND 0 finished.ROUND FinaCounters: 13226  2393  1340  798  15021  9963  4131  1809  6500  21  26  982  1112  248888 
->> Energy packet sent to thermalMaster
-TX interruption!
-l finished.Pedindo mesnagem de: 260 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 30 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
  received msg78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -444,10 +334,10 @@ Message request received from 30
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Counters: 13564  2594  1377  843  15112  10081  3865  1964  6159  23  27  991  1126  249356 
+ received msg90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90  encriptROUND 0 finished.Counters: 13346  2381  1351  800  15259  10114  4244  1792  6638  21  26  982  1112  248888 
 >> Energy packet sent to thermalMaster
+TX interruption!
+ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -479,10 +369,10 @@ Message request received from 30
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
-TX interruption!
-Counters: 13011  2471  1334  805  14795  9871  3856  1919  6094  22  26  982  1112  248888 
+ received msg80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80  encriptROUND 0 finished.Counters: 12128  2379  1225  768  13072  8699  3302  1789  5315  21  26  982  1112  248888 
 >> Energy packet sent to thermalMaster
+TX interruption!
+ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -516,7 +406,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
  received msg70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
-Counters: 12981  2467  1325  782  14738  9781  3852  1911  6076  22  26  982  1112  248406 
+Counters: 14399  2606  1466  866  16613  11057  4506  1974  7072  23  27  991  1126  250106 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -551,8 +441,121 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
  received msg86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
-Counters: 11949  2127  1176  639  13513  8939  3488  1601  5651  8  26  982  1112  248888 
+Counters: 12995  2467  1325  782  14738  9781  3856  1907  6076  22  26  982  1112  247656 
 >> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg68 68 68 68 68 68 68 68 68 68 68 68 68 68 68 68  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg72 72 72 72 72 72 72 72 72 72 72 72 72 72 72 72  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg76 76 76 76 76 76 76 76 76 76 76 76 76 76 76 76  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+Counters: 12318  2234  1208  668  13735  9060  3498  1696  5706  8  28  1062  1202  250657 
+>> Energy packet sent to thermalMaster
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg80 80 80 80 80 80 80 80 80 80 80 80 80 80 80 80  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg84 84 84 84 84 84 84 84 84 84 84 84 84 84 84 84  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg88 88 88 88 88 88 88 88 88 88 88 88 88 88 88 88  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg66 66 66 66 66 66 66 66 66 66 66 66 66 66 66 66  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 31415  21086  1292  674  33666  10069  3596  20593  5786  8  28  1062  1202  248699 
+>> Energy packet sent to thermalMaster
+TX interruption!
+ received msg70 70 70 70 70 70 70 70 70 70 70 70 70 70 70 70  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg74 74 74 74 74 74 74 74 74 74 74 74 74 74 74 74  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg78 78 78 78 78 78 78 78 78 78 78 78 78 78 78 78  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg82 82 82 82 82 82 82 82 82 82 82 82 82 82 82 82  encriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 30 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86  encriptROUND 0 finished.Counters: 12701  2107  1262  688  14422  9532  3967  1530  6378  7  27  1053  1188  247052 
+>> Energy packet sent to thermalMaster
+TX interruption!
+ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -574,12 +577,12 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
  received msg177 146 173 235 9 210 50 20 196 123 26 246 239 168 183 27  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
+Counters: 9463  1533  820  541  9339  5967  2365  1076  3789  18  18  558  648  249352 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
-TX interruption!
-Counters: 7820  1163  613  376  7276  4554  1683  808  2896  3  20  638  738  249262 
->> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -609,7 +612,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
  received msg237 102 181 40 167 208 127 232 13 53 28 115 237 71 240 34  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
-Counters: 13198  1656  992  532  13047  8248  3335  1003  5438  4  23  893  1008  249474 
+Counters: 13572  1765  1026  562  13271  8370  3344  1100  5494  4  26  982  1112  248888 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -640,12 +643,12 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received msg72 28 212 38 73 249 54 141 104 164 221 231 197 196 245 140  decriptROUND 0 finished.Counters: 12522  1636  959  538  12296  7809  3095  1056  5101  3  25  973  1098  248420 
+Counters: 10592  1443  807  456  10206  6413  2515  936  4181  3  23  831  946  249054 
 >> Energy packet sent to thermalMaster
 TX interruption!
-ROUND Final finished.Pedindo mesnagem de: 260 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg72 28 212 38 73 249 54 141 104 164 221 231 197 196 245 140  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -659,9 +662,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-50593794 Updating mapping_table[2 ] = 772 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
  received msg145 246 106 127 46 219 62 242 251 13 159 194 124 50 120 227  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
@@ -678,12 +678,15 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 TX interruption!
-Counters: 13244  2102  1099  683  13189  8402  3163  1530  5101  19  38  952  1142  248858 
->> Energy packet sent to thermalMaster
-TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50528262 Updating mapping_table[6 ] = 771 
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg159 7 6 76 70 254 198 153 157 88 100 64 122 205 223 40  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+ received mCounters: 14439  2001  1081  619  13779  8732  3350  1276  5579  4  28  1061  1201  248799 
+>> Energy packet sent to thermalMaster
+TX interruption!
+sg159 7 6 76 70 254 198 153 157 88 100 64 122 205 223 40  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -693,9 +696,6 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 48 
  received msg177 146 173 235 9 210 50 20 196 123 26 246 239 168 183 27  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67371014 Updating mapping_table[6 ] = 1028 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
@@ -716,12 +716,12 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
- received mCounters: 14440  2002  1081  619  13779  8732  3346  1280  5579  4  41  1165  1370  248630 
+Counters: 14291  2059  1196  708  14771  9436  3745  1466  5936  19  27  927  1062  248938 
 >> Energy packet sent to thermalMaster
 TX interruption!
-sg184 242 233 211 196 61 102 65 227 7 21 179 253 194 153 117  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ received msg184 242 233 211 196 61 102 65 227 7 21 179 253 194 153 117  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -751,12 +751,12 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 TX interruption!
-Counters: 14296  2059  1196  708  14771  9436  3741  1470  5936  19  25  911  1036  248964 
->> Energy packet sent to thermalMaster
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg230 122 103 79 21 57 56 178 50 59 9 196 133 221 160 29  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+ received msg230 122 103 79 21 57 56 178 50 59 9 196 133 221 160 29  decriptROUND 0 finished.Counters: 15574  1958  1178  644  15438  9805  3952  1216  6452  4  28  1124  1264  248736 
+>> Energy packet sent to thermalMaster
+TX interruption!
+ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -786,7 +786,7 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 TX interruption!
-Counters: 13572  1765  1026  562  13271  8370  3340  1104  5494  4  26  982  1112  248888 
+Counters: 12852  2008  1073  666  12902  8256  3141  1427  5031  19  24  840  960  249040 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -815,10 +815,7 @@ Message request received from 30
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg183 1 85 15 250 229 14 80 42 27 11 222 228 74 32 115  decriptROUND 0 finished.Counters: 12148  1527  925  508  12072  7687  3090  955  5045  3  22  884  994  249006 
->> Energy packet sent to thermalMaster
-TX interruption!
-ROUND Final finished.Pedindo mesnagem de: 260 
+ received msg183 1 85 15 250 229 14 80 42 27 11 222 228 74 32 115  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -826,7 +823,10 @@ Message request received from 30
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- received msg18 121 245 147 223 154 250 132 122 24 180 132 106 208 158 96  decriptROUND 0 finished.ROUND Final finished.Pedindo mesnagem de: 260 
+ received msg18 121 245 147 223 154 250 132 122 24 180 132 106 208 158 96  decriptROUND 0 finished.Counters: 15574  1958  1178  644  15438  9805  3952  1216  6452  4  28  1124  1264  248736 
+>> Energy packet sent to thermalMaster
+TX interruption!
+ROUND Final finished.Pedindo mesnagem de: 260 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
@@ -848,12 +848,12 @@ Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 30 
 TX interruption!
-Counters: 12925  2010  1075  667  12981  8296  3161  1432  5070  19  24  840  960  249040 
+Counters: 9503  1579  822  531  9615  6178  2306  1164  3663  18  18  600  690  249310 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
- Slave configuration2 0 4  Operation:2 Blocks:0 task AES SLAVE finished  - ID: 2 12004487 Tarefa FINALIZANDO 32 
+ Slave configuration2 0 4  Operation:2 Blocks:0 task AES SLAVE finished  - ID: 2 11862237 Tarefa FINALIZANDO 32 
 at this point the pending is: 
 pendingReq[0 ] = 0 
 pendingReq[1 ] = 0 
@@ -943,25 +943,25 @@ TX interruption!
 Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  12  102  162  249838 
->> Energy packet sent to thermalMaster
-TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+65548 Updating mapping_table[12 ] = 1 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16842765 Updating mapping_table[13 ] = 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-65551 Updating mapping_table[15 ] = 1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33619984 Updating mapping_table[16 ] = 513 
+16973840 Updating mapping_table[16 ] = 259 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 17039374 Updating mapping_table[14 ] = 260 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-50659340 Updating mapping_table[12 ] = 773 
-Counters: 1676  511  144  103  1165  589  14  539  178  0  20  166  266  249734 
+33882127 Updating mapping_table[15 ] = 517 
+Counters: 1676  511  144  103  1165  589  14  539  178  0  30  246  396  249604 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
@@ -987,30 +987,27 @@ Servico: 96
 Chegou um task mapping!
 task_addr[0 ] = 261 
 task_addr[1 ] = 258 
-task_addr[2 ] = 772 
+task_addr[2 ] = 768 
 task_addr[3 ] = 256 
 task_addr[4 ] = 1281 
 task_addr[5 ] = 1282 
-task_addr[6 ] = 1028 
+task_addr[6 ] = 771 
 task_addr[7 ] = 2 
 task_addr[8 ] = 3 
-Counters: 1363  348  159  163  924  580  18  316  269  0  3  68  83  249917 
->> Energy packet sent to thermalMaster
-TX interruption!
 task_addr[9 ] = 4 
 task_addr[10 ] = 5 
 task_addr[11 ] = 6 
-task_addr[12 ] = 773 
+task_addr[12 ] = 1 
 task_addr[13 ] = 257 
 task_addr[14 ] = 260 
-task_addr[15 ] = 1 
-task_addr[16 ] = 513 
-task_addr[17 ] = 1284 
-task_addr[18 ] = 514 
-task_addr[19 ] = 259 
-task_addr[20 ] = 1283 
-task_addr[21 ] = 517 
-task_addr[22 ] = 1285 
+task_addr[15 ] = 517 
+task_addr[16 ] = 259 
+task_addr[17 ] = 513 
+task_addr[18 ] = 1280 
+task_addr[19 ] = 1284 
+task_addr[20 ] = 514 
+task_addr[21 ] = 1283 
+task_addr[22 ] = 515 
 task_addr[23 ] = 1542 
 task_addr[24 ] = 1541 
 task_addr[25 ] = 1540 
@@ -1049,10 +1046,40 @@ TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
+Counters: 9400  2758  1427  1084  9835  6947  1201  2711  2624  38  15  164  239  249761 
+>> Energy packet sent to thermalMaster
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-33685522 Updating mapping_table[18 ] = 514 
+83886098 Updating mapping_table[18 ] = 1280 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33619985 Updating mapping_table[17 ] = 513 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+84082709 Updating mapping_table[21 ] = 1283 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33685524 Updating mapping_table[20 ] = 514 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
@@ -1060,7 +1087,7 @@ TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-16973843 Updating mapping_table[19 ] = 259 
+33751062 Updating mapping_table[22 ] = 515 
 TX interruption!
 TX interruption!
 TX interruption!
@@ -1071,503 +1098,359 @@ TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
+Task 19 mapped
 TX interruption!
+DTW P2 Resuming!
+DTW P2 at 49 
+Pedindo mesnagem de: 515 
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-Task 17 TX interruption!
-mapped
-DTW Bank resuming!
-BANK - Pattern sent to P0 
-BANK - Pattern sent to P1 
-BANK - Pattern sent to P2 
-BANK - Pattern sent to P3 
-Counters: 43259  13522  4428  3295  32028  24418  13288  8315  14148  207  66  574  904  249096 
+Counters: 32710  8776  3263  1841  26255  17647  7018  5697  7139  1467  59  722  1017  248983 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-84082708 Updating mapping_table[20 ] = 1283 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33882133 Updating mapping_table[21 ] = 517 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-84213782 Updating mapping_table[22 ] = 1285 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 13617  4052  686  627  3136  2352  3961  1196  3777  33  22  670  780  249220 
+Counters: 15839  3253  968  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at 11 TX interruption!
+
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  16  741  821  249179 
+Counters: 15839  3252  968  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at 11 
+TX interruption!
+Pedindo mesnagem de: 515 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 19 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P1 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 21307  4482  1183  387  9408  4758  1903  1292  1544  1623  12  587  647  249353 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 22  para o endereço 515 
+TX interruption!
+DTW P2 at 11 
+Pedindo mesnagem de: 515 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 20 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
+TX interruption!
+Counters: 26760  5424  1791  480  12068  5312  3197  1431  2420  2461  10  330  380  249620 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Counters: 15839  3253  968  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Counters: 15839  3253  969  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at 11 
+TX interruption!
+Pedindo mesnagem de: 515 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 19 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P1 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 21307  4482  1183  387  9408  4758  1903  1292  1544  1623  12  587  647  249353 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 22  para o endereço 515 
+TX interruption!
+DTW P2 at 11 
+Pedindo mesnagem de: 515 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 20 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
+TX interruption!
+Counters: 26760  5425  1791  480  12068  5312  3197  1431  2420  2461  10  330  380  249620 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Counters: 15839  3253  969  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Counters: 15839  3253  968  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at 11 
+TX interruption!
+Pedindo mesnagem de: 515 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 19 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P1 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 21307  4483  1184  387  9408  4758  1903  1292  1544  1623  12  587  647  249353 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 22  para o endereço 515 
+TX interruption!
+DTW P2 at 11 
+Pedindo mesnagem de: 515 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 20 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at 11 TX interruption!
+
+Pedindo mesnagem de: 515 
+TX interruption!
+Counters: 26760  5424  1792  480  12068  5312  3197  1431  2420  2461  10  330  380  249620 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
+Counters: 15839  3253  968  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at TX interruption!
+11 
+Pedindo mesnagem de: 515 
 TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  19  766  861  249139 
+Counters: 15839  3253  968  250  7099  3317  1603  891  1211  1357  8  313  353  249647 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P0 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 22  para o endereço 515 
+DTW P2 at 11 
+TX interruption!
+Pedindo mesnagem de: 515 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 19 
+Message request received from 22 
+Adicionando ao pendingReq = 515 
+Pedindo mesnagem de: 513 
 TX interruption!
-BANK - Pattern sent to P1 
 Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  17  750  835  249165 
+Servico: 48 
+Counters: 22597  4710  1264  387  9819  4834  2070  1292  1639  1777  12  587  647  249353 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
+Encontrei um pending da tarefa 22  para o endereço 515 
 TX interruption!
-BANK - Pattern sent to P3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 18 
-TX interruption!
-BANK - Pattern sent to P0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
-TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 18 
-TX interruption!
-BANK - Pattern sent to P0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
-TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  18  758  848  249152 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-84279309 Updating mapping_table[13 ] = 1286 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 18 
-TX interruption!
-BANK - Pattern sent to P0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67436559 Updating mapping_table[15 ] = 1029 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-50331664 Updating mapping_table[16 ] = 768 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67502086 Updating mapping_table[6 ] = 1030 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
-TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-33947672 Updating mapping_table[24 ] = 518 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 18416  5485  938  848  4355  3226  5282  1682  5063  44  45  1132  1357  248643 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-67108882 Updating mapping_table[18 ] = 1024 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 18 
-TX interruption!
-BANK - Pattern sent to P0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-17170459 Updating mapping_table[27 ] = 262 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
-TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 17504  5203  860  797  3725  2905  5276  1385  4967  44  34  1079  1249  248751 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 18 
-TX interruption!
-BANK - Pattern sent to P0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
-TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  24  874  994  249006 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 18 
-TX interruption!
-BANK - Pattern sent to P0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
-TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  21  785  890  249110 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 18 
-TX interruption!
-BANK - Pattern sent to P0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 19 
-TX interruption!
-BANK - Pattern sent to P1 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 20 
-TX interruption!
-BANK - Pattern sent to P2 
-Counters: 16896  5015  808  763  3305  2691  5272  1187  4903  44  20  776  876  249124 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 21 
-TX interruption!
-BANK - Pattern sent to P3 
-DTW Bank Finished!
-Tarefa FINALIZANDO 17 
+DTW P2 Finished!
+Tarefa FINALIZANDO 19 
 at this point the pending is: 
 pendingReq[0 ] = 0 
 pendingReq[1 ] = 0 
@@ -1619,31 +1502,2415 @@ pendingReq[46 ] = 0
 pendingReq[47 ] = 0 
 pendingReq[48 ] = 0 
 at this point the PIPE is: 
-pipeStatus[0 ] = 21929993 
-pipeStatus[1 ] = 21804707 
-pipeStatus[2 ] = 21763977 
-pipeStatus[3 ] = 21723172 
+pipeStatus[0 ] = -1 
+pipeStatus[1 ] = -1 
+pipeStatus[2 ] = -1 
+pipeStatus[3 ] = -1 
+TX interruption!
+Counters: 14253  3109  1394  668  7651  3656  1429  1711  2080  950  4  37  57  249943 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+84279309 Updating mapping_table[13 ] = 1286 
+Counters: 460  135  40  35  325  161  6  143  50  0  15  412  487  249513 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  9  271  316  249684 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  8  262  302  249698 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  7  253  288  249712 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+16842787 Updating mapping_table[35 ] = 257 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33620005 Updating mapping_table[37 ] = 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33685542 Updating mapping_table[38 ] = 514 
+Counters: 1068  323  92  69  745  375  10  341  114  0  11  94  149  249851 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 96 
+Chegou um task mapping!
+task_addr[0 ] = 261 
+task_addr[1 ] = 258 
+task_addr[2 ] = 768 
+task_addr[3 ] = 1030 
+task_addr[4 ] = 1281 
+task_addr[5 ] = 1282 
+task_addr[6 ] = 771 
+task_addr[7 ] = 2 
+task_addr[8 ] = 3 
+task_addr[9 ] = 4 
+task_addr[10 ] = 5 
+task_addr[11 ] = 6 
+task_addr[12 ] = 1286 
+task_addr[13 ] = 512 
+task_addr[14 ] = 770 
+task_addr[15 ] = 769 
+task_addr[16 ] = 1284 
+task_addr[17 ] = 0 
+task_addr[18 ] = 0 
+task_addr[19 ] = 0 
+task_addr[20 ] = 0 
+task_addr[21 ] = 0 
+task_addr[22 ] = 0 
+task_addr[23 ] = 1542 
+task_addr[24 ] = 1541 
+task_addr[25 ] = 1540 
+task_addr[26 ] = 1539 
+task_addr[27 ] = 1538 
+task_addr[28 ] = 1537 
+task_addr[29 ] = 1536 
+task_addr[30 ] = 0 
+task_addr[31 ] = 0 
+task_addr[32 ] = 0 
+task_addr[33 ] = 0 
+task_addr[34 ] = 0 
+task_addr[35 ] = 257 
+task_addr[36 ] = 256 
+task_addr[37 ] = 513 
+task_addr[38 ] = 514 
+task_addr[39 ] = 0 
+task_addr[40 ] = 0 
+task_addr[41 ] = 0 
+task_addr[42 ] = 0 
+task_addr[43 ] = 0 
+task_addr[44 ] = 0 
+task_addr[45 ] = 0 
+task_addr[46 ] = 0 
+task_addr[47 ] = 0 
+task_addr[48 ] = 0 
+TX interruption!
+TX interruption!
+TX interruption!
+Counters: 5806  1563  867  716  4850  3128  193  1547  1409  9  8  146  186  251046 
+>> Energy packet sent to thermalMaster
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33554445 Updating mapping_table[13 ] = 512 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50397199 Updating mapping_table[15 ] = 769 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50462734 Updating mapping_table[14 ] = 770 
+TX interruption!
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 18 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+84279308 Updating mapping_table[12 ] = 1286 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Task 16 mappeTX interruption!
+d
+MPEG Task start: iquant 31481780 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 0 
+TX interruption!
+Pedindo mesnagem de: 769 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 19 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 1 
+TX interruption!
+Counters: 27078  8698  3258  2247  29011  21543  6907  7064  7996  394  68  869  1209  248298 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Pedindo mesnagem de: 769 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 20 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 2 
+Pedindo mesnagem de: 769 
 TX interruption!
-Counters: 7004  1814  842  606  4477  2499  31  1654  1274  1  17  747  832  249168 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 3 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 4 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 5 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 14185  4133  838  686  8548  5597  1128  2086  2010  525  25  1035  1160  248127 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 6 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 7 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 8 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 9 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 10 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  698  558  7711  5042  905  1686  1745  637  25  1097  1222  248752 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 21 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 11 
+Pedindo mesnagem de: 769 
 TX interruption!
-Counters: 530  150  48  48  339  176  9  145  74  0  4  159  179  249821 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 12 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 13 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 14 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  660  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 15 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 16 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 17 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 18 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 19 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  698  558  7711  5042  905  1686  1745  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 20 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 21 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 22 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 23 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  659  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 24 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 25 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 26 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 27 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 28 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14882  4287  733  571  8187  5414  941  1787  1789  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 29 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 30 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 31 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 32 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 14041  4048  685  549  7628  5012  813  1805  1647  558  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 33 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 34 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+IQUANT: 35 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 36 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 37 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 14660  4238  797  675  8157  5287  1180  1859  2050  603  26  1106  1236  250040 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 38 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 39 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 40 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 41 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 42 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  700  558  7711  5042  905  1686  1745  637  25  1097  1222  247502 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 43 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 44 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 45 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 46 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  662  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 47 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 48 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 49 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 50 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 51 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  698  558  7711  5042  905  1686  1745  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 52 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 53 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 54 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 55 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  659  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 56 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 57 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 58 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 59 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 60 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  696  558  7711  5042  905  1686  1745  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 61 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 62 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 63 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 64 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 13400  3871  669  522  7404  4804  756  1796  1557  510  25  1097  1222  248788 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 65 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 66 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 67 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 68 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 69 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 13788  3932  625  514  6819  4419  868  1420  1650  637  26  1106  1236  248754 
+>> Energy packet sent to thermalMaster
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 70 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 71 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 72 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 73 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 74 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 15176  4358  729  579  7989  5185  906  1815  1791  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 75 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 76 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 77 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 78 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  662  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 79 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 80 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 81 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 82 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 83 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  698  558  7711  5042  905  1686  1745  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 84 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 85 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 86 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 87 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  659  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 88 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 89 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 90 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 91 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 92 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  696  558  7711  5042  905  1686  1745  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 93 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 94 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 95 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 96 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 13400  3871  669  522  7404  4804  756  1796  1557  510  25  1097  1222  249788 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 97 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 98 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 99 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 100 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 101 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14295  4103  685  548  7526  4914  905  1631  1727  637  24  1026  1146  247844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 102 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 103 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 104 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 105 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  658  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 106 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 107 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 108 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 109 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 110 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  697  558  7711  5042  905  1686  1745  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 111 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 112 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 113 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 114 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Counters: 13400  3871  671  522  7404  4804  756  1796  1557  510  25  1097  1222  249538 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 115 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 116 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 117 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 118 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 119 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 13571  3842  584  495  6305  4031  831  1296  1599  636  24  1026  1146  248094 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 120 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 121 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 122 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 123 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 124 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 15176  4358  727  579  7989  5185  906  1815  1791  637  27  1177  1312  248688 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 125 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 126 
+Pedindo mesnagem de: 769 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 127 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 128 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 13550  3996  776  563  8724  5826  867  2091  1684  511  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 129 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 130 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 131 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 132 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 133 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4222  696  558  7711  5042  905  1686  1745  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 134 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 135 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 136 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 137 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  658  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 138 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 139 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 140 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 141 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 142 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14732  4221  698  558  7711  5042  905  1686  1745  637  26  1104  1234  248766 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 143 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 144 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 145 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 146 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Counters: 12963  3752  660  512  7219  4676  756  1741  1539  510  24  1026  1146  248854 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 147 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 148 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 149 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 150 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 151 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Counters: 14882  4287  734  571  8187  5414  941  1787  1789  637  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 152 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 153 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 154 TX interruption!
+
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 155 
+TX interruption!
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+Adicionando ao pendingReq = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+ECounters: 15213  4408  735  574  8441  5582  935  1907  1801  636  25  1097  1222  248778 
+>> Energy packet sent to thermalMaster
+TX interruption!
+ncontrei um pending da tarefa 13  para o endereço 512 
+IQUANT: 156 
+Pedindo mesnagem de: 769 
+TX interruption!
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 157 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+IQUANT: 158 
+Pedindo mesnagem de: 769 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+IQUANT: 159 
+40243389 End Task iquant - MPEG
+Tarefa FINALIZANDO 16 
+at this point the pending is: 
+pendingReq[0 ] = 0 
+pendingReq[1 ] = 0 
+pendingReq[2 ] = 0 
+pendingReq[3 ] = 0 
+pendingReq[4 ] = 0 
+pendingReq[5 ] = 0 
+pendingReq[6 ] = 0 
+pendingReq[7 ] = 0 
+pendingReq[8 ] = 0 
+pendingReq[9 ] = 0 
+pendingReq[10 ] = 0 
+pendingReq[11 ] = 0 
+pendingReq[12 ] = 0 
+pendingReq[13 ] = 0 
+pendingReq[14 ] = 0 
+pendingReq[15 ] = 0 
+pendingReq[16 ] = 0 
+pendingReq[17 ] = 0 
+pendingReq[18 ] = 0 Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 13 
+TX interruption!
+
+pendingReq[19 ] = 0 
+pendingReq[20 ] = 0 
+pendingReq[21 ] = 0 
+pendingReq[22 ] = 0 
+pendingReq[23 ] = 0 
+pendingReq[24 ] = 0 
+pendingReq[25 ] = 0 
+pendingReq[26 ] = 0 
+pendingReq[27 ] = 0 
+pendingReq[28 ] = 0 
+pendingReq[29 ] = 0 
+pendingReq[30 ] = 0 
+pendingReq[31 ] = 0 
+pendingReq[32 ] = 0 
+pendingReq[33 ] = 0 
+pendingReq[34 ] = 0 
+pendingReq[35 ] = 0 
+pendingReq[36 ] = 0 
+pendingReq[37 ] = 0 
+pendingReq[38 ] = 0 
+pendingReq[39 ] = 0 
+pendingReq[40 ] = 0 
+pendingReq[41 ] = 0 
+pendingReq[42 ] = 0 
+pendingReq[43 ] = 0 
+pendingReq[44 ] = 0 
+pendingReq[45 ] = 0 
+pendingReq[46 ] = 0 
+pendingReq[47 ] = 0 
+pendingReq[48 ] = 0 
+at this point the PIPE is: 
+pipeStatus[0 ] = -1 
+pipeStatus[1 ] = -1 
+pipeStatus[2 ] = -1 
+pipeStatus[3 ] = -1 
+TX interruption!
+Counters: 14742  4102  1286  960  9297  5888  940  2565  2523  397  20  864  964  249036 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+33554445 Updating mapping_table[13 ] = 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+50397200 Updating mapping_table[16 ] = 769 
+Counters: 764  229  66  52  535  268  8  242  82  0  8  70  110  249890 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 156  41  14  18  115  54  4  44  18  0  2  22  32  249968 
