@@ -231,13 +231,13 @@ void prints(char* text);
 void printi(int value);
 void putsv(char* text1, int value1);
 void putsvsv(char* text1, int value1, char* text2, int value2);
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int producer);
 void enable_interruptions();
 void disable_interruptions();
 void disable_interruption(unsigned int n);
 void enable_interruption(unsigned int n);
 int getServiceIndex();
-void requestToForward();
+void requestToForward(unsigned int myTaskID);
 void printFinish();
 
 // DEFINES THERMAL STUFF
@@ -522,9 +522,10 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_REQUEST_FORWARD){
         putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
         taskMigrated = incomingPacket[PI_REQUESTER];
+        producer = incomingPacket[PI_PRODUCER];
         for(i = 0; i < N_PES; i++){
             if(pendingReq[i] != 0){
-                forwardMsgRequest(i, taskMigrated);
+                forwardMsgRequest(i, taskMigrated, producer);
                 pendingReq[i] = 0;
             }
         }
@@ -600,7 +601,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         return 1; // packet was sent with success
     }
     else if(taskMigrated != -1 && migratedTask == producer){
-        forwardMsgRequest(requester, taskMigrated);
+        forwardMsgRequest(requester, taskMigrated, producer);
         return 1;
     }
     else{
@@ -944,14 +945,15 @@ void sendPendingReq(unsigned int dest){
     prints("> pendReq enviado\n");
 }
 
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int producer){
     int index = getServiceIndex();
     putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin_addr);
     myServicePacket[index][PI_DESTINATION] = origin_addr;
-    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = mapping_table[requester];
+    myServicePacket[index][PI_PRODUCER] = producer;
     if(*NIcmdTX == NI_STATUS_OFF){
         SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
     }
@@ -988,13 +990,14 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
     return (address | (x << 8) | y);
 }
 
-void requestToForward(){
+void requestToForward(unsigned int myTaskID){
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = migration_mapping_table[running_task];
-    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[index][PI_SERVICE] = TASK_REQUEST_FORWARD;
     myServicePacket[index][PI_REQUESTER] = *myAddress;
+    myServicePacket[index][PI_PRODUCER] = myTaskID;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
@@ -1014,7 +1017,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         //prints("PRESO1\n");
         index = getEmptyIndex();
         if(migration_src == 1 && flag == 0){
-            requestToForward();
+            requestToForward(running_task);
             flag++;
         }
     }
