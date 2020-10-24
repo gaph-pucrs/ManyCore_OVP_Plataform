@@ -171,6 +171,7 @@ volatile unsigned int migration_upd = 0;
 volatile unsigned int num_tasks;
 volatile unsigned int new_state;
 volatile unsigned int mapping_table[DIM_X*DIM_Y];
+volatile unsigned int new_mapping_table[DIM_X*DIM_Y];
 volatile unsigned int migration_mapping_table[DIM_X*DIM_Y];
 volatile unsigned int finishedTask[DIM_X*DIM_Y];
 volatile unsigned int finishSimulation_flag = 0;
@@ -289,6 +290,7 @@ unsigned int get_new_state(){
 void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
     int i;
     for(i=0; i<DIM_X*DIM_Y; i++){
+        mapping_table[i] = new_mapping_table[i];
         task_addr[i] = mapping_table[i];
         putsvsv("task_addr[", i, "] = ", task_addr[i]);
     }
@@ -419,9 +421,10 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
+        prints("Chegou um task mapping!");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
-            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+            new_mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         mapping_en = 1;
         taskMigrated = -1;
         //migration_dst = 0; 
