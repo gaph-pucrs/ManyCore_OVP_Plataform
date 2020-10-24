@@ -391,8 +391,8 @@ void interruptHandler_NI_RX(void) {
         producer = incomingPacket[PI_PRODUCER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(!sendFromMsgBuffer(requester, newAddr, producer)){ // if the package is not ready yet add a request to the pending request queue
-            prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+            putsv("Adicionando ao pendingReq = ", pendingReq[requester]);
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
