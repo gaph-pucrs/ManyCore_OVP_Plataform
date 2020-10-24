@@ -298,7 +298,7 @@ int main(int argc, char **argv)
     int task_id = 10;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
-    int i;
+    int i, totalExecutions;
 
     Uns32 aux = MFSPR(SPR_PICMR);
     /*Initialization*/
@@ -368,7 +368,7 @@ int main(int argc, char **argv)
             executions = atoi(aux_str);
         }        
     }
-    
+    totalExecutions = 0;
     for(i = 0; i < tasks_to_map; i++){
         prints("==================\n");
         prints("Tarefa ("); 
@@ -382,6 +382,7 @@ int main(int argc, char **argv)
         prints(" vezes, começando "); 
         printi(task_repeat_after[i]);
         prints("ms depois de terminar a execução anterior.\n\n");
+        totalExecutions += task_remaining_executions[i];
     }
 
     for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){

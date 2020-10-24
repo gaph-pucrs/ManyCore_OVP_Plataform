@@ -83,6 +83,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 //////////////////////////////
 #define PIPE_OCCUPIED       1
 #define PIPE_FREE           -1
+#define PIPE_SENDING        -2
 #define PIPE_WAIT           0xFFFFFFFF
 //////////////////////////////
 //////////////////////////////
@@ -487,6 +488,7 @@ void interruptHandler_NI_RX(void) {
             pendingReq[buffer_packets[index][PI_TASK_ID]] = 0;
             // Sends the packet
             if(*NIcmdTX == NI_STATUS_OFF){
+                buffer_map[index] = PIPE_SENDING;
                 SendSlot((unsigned int)&buffer_packets[index], index);
             }
             else{
@@ -580,7 +582,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        if(buffer_map[i]>PIPE_OCCUPIED && buffer_map[i] != -1){ // if this position has something valid
+        if(buffer_map[i]>PIPE_OCCUPIED && buffer_map[i] != PIPE_FREE && buffer_map[i]!= PIPE_SENDING){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
@@ -595,6 +597,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         if(*NIcmdTX == NI_STATUS_OFF){
             //prints("Enviando do PIPE\n");
             // Sends the packet
+            buffer_map[found] = PIPE_SENDING;
             SendSlot((unsigned int)&buffer_packets[found], found);
         }
         else{
@@ -701,7 +704,8 @@ void interruptHandler_NI_TX(void) {
     *NIcmdTX = DONE;
 
     // If there is some packet inside the PIPE waiting to be sent, send it!
-    if(sendAfterTX[0] <= PIPE_SIZE){ 
+    if(sendAfterTX[0] <= PIPE_SIZE){
+        buffer_map[sendAfterTX[0]] = PIPE_SENDING;
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
         popSendAfterTX();
     }
@@ -893,7 +897,7 @@ void sendPipe(unsigned int dest){
         // Loop to find the oldest message inside the PIPE
         for (j = 0; j < PIPE_SIZE; j++){
             putsv("buffer map: ", buffer_map[j]);
-            if(buffer_map[j] < older){
+            if(buffer_map[j] < older && buffer_map[j] != PIPE_FREE && buffer_map[i] != PIPE_SENDING){
                 prints("older = j1\n");
                 older = j;
             }
@@ -1051,6 +1055,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         // Update the address to match the requester address 
         buffer_packets[index][PI_DESTINATION] = dest_addr;
         // Sends the packet
+        buffer_map[index] = PIPE_SENDING;
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
 #if USE_THERMAL
