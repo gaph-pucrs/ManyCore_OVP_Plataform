@@ -453,6 +453,7 @@ void interruptHandler_NI_RX(void) {
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         }
         migration_dst = 1;
+        migration_src = 0;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_UPDT){
