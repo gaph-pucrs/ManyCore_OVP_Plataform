@@ -35,6 +35,8 @@ apps:
    cluster: 0
    mapping: dynamic
    start_time_ms: 66
+   repeat_after_ms: 3
+   repeat_times: 3
    dynamic_mapping:
     bank: 0
     p1: 1
@@ -63,17 +65,6 @@ apps:
     aes_slave2: 2
     aes_slave3: 3
     aes_slave4: 4
- - name: sort
-   cluster: 0
-   mapping: dynamic
-   repeat_after_ms: 12
-   repeat_times: 2
-   start_time_ms: 111
-   dynamic_mapping:
-    sort_master: 0
-    sort_slave1: 1
-    sort_slave2: 2
-    sort_slave3: 3
  - name: thermalManagement
    cluster: 0
    mapping: static
