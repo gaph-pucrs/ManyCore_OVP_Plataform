@@ -524,6 +524,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_REQUEST_FORWARD){
         putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
         taskMigrated = incomingPacket[PI_REQUESTER]; // endereço novo
+        migratedTask = incomingPacket[PI_PRODUCER];
         producer = incomingPacket[PI_PRODUCER]; // id da task que produziu
         for(i = 0; i < N_PES; i++){ // i = id da task que tá solicitando
             if(pendingReq[i] != 0){
