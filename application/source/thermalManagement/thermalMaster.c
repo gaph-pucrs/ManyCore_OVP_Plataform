@@ -396,6 +396,14 @@ int main(int argc, char **argv)
             
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
+            prints("================================\n== Fila de tasks:\n");
+            for(i = 0; i < DIM_X*DIM_Y; i++){
+                if(task_remaining_executions[i] < 0){
+                    putsvsv(">> Task[", i, "] ainda precisa executar ", task_remaining_executions[i]);
+                }
+            }
+            prints("================================\n");
+
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
