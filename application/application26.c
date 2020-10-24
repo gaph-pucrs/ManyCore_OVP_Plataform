@@ -257,7 +257,8 @@ int main(int argc, char **argv)
 			printFinish();
 			sendFinishTask(running_task);
 		}
-		else{			
+		else{
+			migratedTask = running_task;	
 			get_migration_mapping_table(new_task_addr);
 			destination = new_task_addr[running_task];
 			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
