@@ -431,8 +431,9 @@ void interruptHandler_NI_RX(void) {
             new_mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         mapping_en = 1;
         taskMigrated = -1;
-        //migration_dst = 0; 
-        migration_src = 0; // resets if there is some task here
+        //migration_dst = 0;
+        if(running_task == -1)
+            migration_src = 0; // resets if there is some task here
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_SRC){
