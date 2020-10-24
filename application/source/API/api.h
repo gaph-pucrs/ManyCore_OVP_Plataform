@@ -523,9 +523,9 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_REQUEST_FORWARD){
         putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
-        taskMigrated = incomingPacket[PI_REQUESTER];
-        producer = incomingPacket[PI_PRODUCER];
-        for(i = 0; i < N_PES; i++){
+        taskMigrated = incomingPacket[PI_REQUESTER]; // endereço novo
+        producer = incomingPacket[PI_PRODUCER]; // id da task que produziu
+        for(i = 0; i < N_PES; i++){ // i = id da task que tá solicitando
             if(pendingReq[i] != 0){
                 forwardMsgRequest(i, taskMigrated, producer);
                 pendingReq[i] = 0;
@@ -954,7 +954,7 @@ void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigne
     myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
-    myServicePacket[index][PI_REQUESTER] = mapping_table[requester];
+    myServicePacket[index][PI_REQUESTER] = pendingReq[requester];
     myServicePacket[index][PI_PRODUCER] = producer;
     if(*NIcmdTX == NI_STATUS_OFF){
         SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
@@ -993,6 +993,7 @@ unsigned int makeAddress(unsigned int x, unsigned int y){
 }
 
 void requestToForward(unsigned int myTaskID){
+    putsv("Requesting PENDREQ forward! to task ", myTaskID);
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = migration_mapping_table[running_task];
     myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
