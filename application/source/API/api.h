@@ -862,7 +862,7 @@ void requestMsg(unsigned int from){
     myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = *myAddress;
-    myServicePacket[index][PI_PROCUCER] = from;
+    myServicePacket[index][PI_PRODUCER] = from;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
