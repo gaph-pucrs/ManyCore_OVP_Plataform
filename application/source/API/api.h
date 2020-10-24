@@ -102,6 +102,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PI_PAYLOAD          4
 #define PI_I_MYADDR         4
 #define PI_I_BRANCH         5
+#define PI_PRODUCER         5
 #define PI_I_ARITH          6
 #define PI_I_JUMP           7
 #define PI_I_MOVE           8
@@ -218,7 +219,7 @@ unsigned int getEmptyIndex();
 void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr);
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr, unsigned int producer){
 void interruptHandler_NI_TX(void);
 void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
@@ -349,7 +350,7 @@ void interruptHandler_NI_RX(void) {
     putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, j, index, taskID, newAddr, newFreq;
+    int requester, i, j, index, taskID, newAddr, newFreq, producer;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
         //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
@@ -387,8 +388,9 @@ void interruptHandler_NI_RX(void) {
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         newAddr = incomingPacket[PI_REQUESTER];
+        producer = incomingPacket[PI_PRODUCER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
+        if(!sendFromMsgBuffer(requester, newAddr, producer)){ // if the package is not ready yet add a request to the pending request queue
             prints("Adicionando ao pendingReq\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }
@@ -423,7 +425,7 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
-        prints("Chegou um task mapping!");
+        prints("Chegou um task mapping!\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
             new_mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
@@ -568,7 +570,7 @@ void interruptHandler_NI_RX(void) {
 
 ///////////////////////////////////////////////////////////////////
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr){
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr, unsigned int producer){
     int i;
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
@@ -597,7 +599,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         }
         return 1; // packet was sent with success
     }
-    else if(taskMigrated != -1 && migratedTask == requester){
+    else if(taskMigrated != -1 && migratedTask == producer){
         forwardMsgRequest(requester, taskMigrated);
         return 1;
     }
@@ -855,10 +857,11 @@ void requestMsg(unsigned int from){
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = mapping_table[from];
     putsv("Pedindo mesnagem de: ", mapping_table[from]);
-    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = *myAddress;
+    myServicePacket[index][PI_PROCUCER] = from;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
