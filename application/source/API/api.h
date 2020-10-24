@@ -492,6 +492,7 @@ void interruptHandler_NI_RX(void) {
                 SendSlot((unsigned int)&buffer_packets[index], index);
             }
             else{
+                buffer_map[index] = PIPE_SENDING;
                 addSendAfterTX(index);
             }
         }
@@ -603,6 +604,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         else{
             //prints("Envio agendado após TX\n");
             // Set it to send after the next TX interruption
+            buffer_map[found] = PIPE_SENDING;
             addSendAfterTX(found);
         }
         return 1; // packet was sent with success
