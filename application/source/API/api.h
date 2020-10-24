@@ -528,6 +528,7 @@ void interruptHandler_NI_RX(void) {
         producer = incomingPacket[PI_PRODUCER]; // id da task que produziu
         for(i = 0; i < N_PES; i++){ // i = id da task que tá solicitando
             if(pendingReq[i] != 0){
+                putsvsv("Sending request from ", i, " that current is at address ", pendingReq[i]);
                 forwardMsgRequest(i, taskMigrated, producer);
                 pendingReq[i] = 0;
             }
