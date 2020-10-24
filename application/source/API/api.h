@@ -163,6 +163,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 // Migration control                //
 //////////////////////////////////////
 volatile int taskMigrated = -1;
+volatile int migratedTask = -1;
 volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
@@ -596,7 +597,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         }
         return 1; // packet was sent with success
     }
-    else if(taskMigrated != -1){
+    else if(taskMigrated != -1 && migratedTask == requester){
         forwardMsgRequest(requester, taskMigrated);
         return 1;
     }
