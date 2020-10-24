@@ -570,7 +570,6 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
     for(i=0;i<PIPE_SIZE;i++){
         if(buffer_map[i]>PIPE_OCCUPIED && buffer_map[i] != -1){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
-                buffer_packets[i][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
                     foundSent = buffer_map[i];
@@ -579,6 +578,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         }
     }
     if(found != PIPE_WAIT){
+        buffer_packets[found][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
             //prints("Enviando do PIPE\n");
