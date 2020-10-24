@@ -473,8 +473,10 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE; 
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
+        for(i=0; i<PIPE_SIZE; i++)
+            bufferPop(i);
         putsv("Task pipe received ", new_state);
-        do{index = getEmptyIndex(); prints("PRESO6\n");}while(index==PIPE_WAIT);
+        do{index = getEmptyIndex(); /*prints("PRESO6\n"*/);}while(index==PIPE_WAIT);
         for(i=0; i<MESSAGE_MAX_SIZE; i++){
             buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
         }
