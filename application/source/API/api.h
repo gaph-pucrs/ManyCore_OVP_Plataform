@@ -872,7 +872,7 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
 }
 
 void sendPipe(unsigned int dest){
-    int i, j, index, older, empty;
+    unsigned int i, j, index, older, empty;
     putsv("sendPipe()", dest);
     while(empty != PIPE_SIZE){
         older = -1;
@@ -880,12 +880,8 @@ void sendPipe(unsigned int dest){
         // Loop to find the oldest message inside the PIPE
         for (j = 0; j < PIPE_SIZE; j++){
             putsv("buffer map: ", buffer_map[j]);
-            if(buffer_map[j] < older && buffer_map[j] != -1){
+            if(buffer_map[j] < older){
                 prints("older = j1\n");
-                older = j;
-            }
-            else if(buffer_map[j] != -1){
-                prints("older = j2\n");
                 older = j;
             }
             else{
