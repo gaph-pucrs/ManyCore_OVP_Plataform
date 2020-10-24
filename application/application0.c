@@ -398,7 +398,7 @@ int main(int argc, char **argv)
 
             prints("================================\n== Fila de tasks:\n");
             for(i = 0; i < DIM_X*DIM_Y; i++){
-                if(task_remaining_executions[i] < 0){
+                if(task_remaining_executions[i] > 0){
                     putsvsv(">> Task[", i, "] ainda precisa executar ", task_remaining_executions[i]);
                 }
             }
