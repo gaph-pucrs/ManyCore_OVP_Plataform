@@ -219,7 +219,7 @@ unsigned int getEmptyIndex();
 void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr, unsigned int producer){
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr, unsigned int producer);
 void interruptHandler_NI_TX(void);
 void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
