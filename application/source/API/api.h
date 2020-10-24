@@ -423,7 +423,7 @@ void interruptHandler_NI_RX(void) {
         for(i=0; i<num_tasks; i++)
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         mapping_en = 1;
-        migration_dst = 0; 
+        //migration_dst = 0; 
         migration_src = 0; // resets if there is some task here
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
