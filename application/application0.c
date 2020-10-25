@@ -469,18 +469,23 @@ int main(int argc, char **argv)
                 if(finishedTask[i]==TRUE)
                     task_addr[i] = 0;
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
+                    // calculates the next start time
+                    task_start_time[i] = measuredWindows + task_repeat_after[i];
+                    finishedTask[i]=2;
+                    putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
+                }
+                else if(finishedTask[i]==FALSE){
+                   finishSimulation = 0;
+                }
+            }
+            for(i = 0; i < tasks_to_map; i++){
+                if(finishedTask[i] == 2){
+                    finishedTask[i] = 3;
                     // updates every PE mapping table to clear the past address
                     for(j=1; j<N_PES; j++){
                         aux[0] =  ((0 << 16) | i);
                         sendTaskService(TASK_ADDR_UPDT, getAddress(j), aux, 1);
                     }
-                    // calculates the next start time
-                    task_start_time[i] = measuredWindows + task_repeat_after[i];
-                    finishedTask[i]=3;
-                    putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
-                }
-                else if(finishedTask[i]==FALSE){
-                   finishSimulation = 0;
                 }
             }
             enable_interruption(0);
