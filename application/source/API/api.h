@@ -642,7 +642,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        putsv("buffer_map=", buffer_map[i], "   task_dest=", buffer_packets[i][PI_TASK_ID]);
+        putsvsv("buffer_map=", buffer_map[i], "   task_dest=", buffer_packets[i][PI_TASK_ID]);
         if(buffer_map[i] != PIPE_FREE && buffer_map[i] != PIPE_TRANSMITTING){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
