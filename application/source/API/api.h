@@ -510,7 +510,7 @@ void interruptHandler_NI_RX(void) {
         // Acha a tarefa que migrou e atualiza só o endereço dela
         // as outras atualizações vão vir conforme as tasks forem migrando
         for(i=0; i<num_tasks;i++){
-            if(incomingPacket[PI_PAYLOAD+i] == *myAddress){
+            if((incomingPacket[PI_PAYLOAD+i] & 0x80000000) != 0){
                 mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
             }
         }
