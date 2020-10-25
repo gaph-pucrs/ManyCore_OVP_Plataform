@@ -244,7 +244,7 @@ int getSpiralMatixEmptyPE(unsigned int current_addr[NUMBER_TASKS], unsigned int 
             return pe;
         }
     }
-    return 0;
+    return 0xFFFFFFFF;
 }
 
 void releaseTasks(unsigned int task_current_addr[NUMBER_TASKS], unsigned int task_future_addr[NUMBER_TASKS], int task_start_time[NUMBER_TASKS], int task_remaining_executions[NUMBER_TASKS]){
