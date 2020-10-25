@@ -487,7 +487,7 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ALLOCATED){
         taskID = incomingPacket[PI_TASK_ID];
-        if(task_future_addr[taskID] == incomingPacket[PAYLOAD]){  // If the task was allocated in the correct address
+        if(task_future_addr[taskID] == incomingPacket[PI_PAYLOAD]){  // If the task was allocated in the correct address
             putsvsv("Tarefa ", taskID, " alocada em ", task_future_addr[taskID]);
             task_current_addr[taskID] = task_future_addr[taskID]; // updates the current addr
         }
