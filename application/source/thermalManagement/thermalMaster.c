@@ -393,6 +393,14 @@ int main(int argc, char **argv)
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Timer (ms) ", measuredWindows);
             
+            prints("================================\n== Fila de tasks:\n");
+            for(i = 0; i < DIM_X*DIM_Y; i++){
+                if(task_remaining_executions[i] > 0){
+                    putsvsv(">> Task[", i, "] ainda precisa executar ", task_remaining_executions[i]);
+                }
+            }
+            prints("================================\n");
+
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
             //////////////////////////////////////////////////////
