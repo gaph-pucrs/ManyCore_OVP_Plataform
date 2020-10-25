@@ -3376,7 +3376,7 @@ int aesMaster(int state)
 
 
 #define TASKS 300
-#define SLAVES 3
+#define SORT_SLAVES 3
 
 
 void init_array(int *array, int size){
@@ -3398,20 +3398,20 @@ void print_array(int *array, int size){
 
 int sortMaster(int state){
 	int i, j;
-	int slave_addr[SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
+	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
 
-	int array[ARRAY_SIZE][SLAVES];
-	int slave_task[SLAVES];
+	int array[ARRAY_SIZE][SORT_SLAVES];
+	int slave_task[SORT_SLAVES];
 	int task = 0;
 
 	int msg_kill = KILL_PROC;
 
-	prints("sortMaster started");
+	prints("sortMaster started\n");
 
-	for (i = 0; i < SLAVES; i++)
+	for (i = 0; i < SORT_SLAVES; i++)
 		init_array(array[i], ARRAY_SIZE);
 
-	for (i = 0; i < SLAVES; i++){
+	for (i = 0; i < SORT_SLAVES; i++){
 		ReceiveMessage(&theMessage, slave_addr[i]);
 		prints("Received ");
 		printi(theMessage.size);
@@ -3425,24 +3425,25 @@ int sortMaster(int state){
 	}
 
 	for (i = 0; i < TASKS; i++){
-		ReceiveMessage(&theMessage, slave_addr[i%SLAVES]);
+		ReceiveMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
 		prints("Received array from slave: ");
-		printi(i%SLAVES);
-		
+		printi(i%SORT_SLAVES);
+		prints("\n");
 		//print_array(msg.msg, ARRAY_SIZE);
-		slave_task[i%SLAVES] = task;
+		slave_task[i%SORT_SLAVES] = task;
 		if (task == TASKS){
 			theMessage.size = 1;
 			theMessage.msg[0] = msg_kill;
-			SendMessage(&theMessage, slave_addr[i%SLAVES]);
+			SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
 			prints("Master Sening kill to ");
-			printi(i%SLAVES);
+			printi(i%SORT_SLAVES);
+			prints("\n");
 		}
 		else {
 			theMessage.size = ARRAY_SIZE;
 			for (j = 0; j < ARRAY_SIZE; j++)
-				theMessage.msg[j] = array[i%SLAVES][j];
-			SendMessage(&theMessage, slave_addr[i%SLAVES]);
+				theMessage.msg[j] = array[i%SORT_SLAVES][j];
+			SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
 			task++;
 		}
 	}
@@ -3458,7 +3459,7 @@ int sort_slave(int task){
 	task_request[0] = task;
 	task_request[1] = TASK_REQUEST;
 
-	prints("sort_slave started");
+	prints("sort_slave started\n");
 
     /*Requests initial task*/
     theMessage.size = 2;
