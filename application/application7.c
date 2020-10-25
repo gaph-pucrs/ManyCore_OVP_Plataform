@@ -271,14 +271,14 @@ int main(int argc, char **argv)
 			
 			sendPipe(destination);
 			
-			//disable_interruptions();
+			
 			disable_interruption(2);
-			//putsv("save the new destination of this ", destination);
+			
 			set_taskMigrated(destination); // save the new destination of this 
 			sendPendingReq(destination);
 			enable_interruption(2);
-			//enable_interruptions();		
 			
+			new_task_addr[running_task] = new_task_addr[running_task] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 			running_task = -1;
 		}
