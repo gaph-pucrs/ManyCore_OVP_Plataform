@@ -378,7 +378,7 @@ void interruptHandler_NI_RX(void) {
             }
         }
         else if(*myAddress == 0){ // if it's the master, then we have an lost packet
-            LOG("Master recebeu um lost packet, enviando para o dono\n");
+            while(1){LOG("Master recebeu um lost packet, enviando para o dono\n");}
         }
         else{
             putsvsv("Recebi uma mensagem indevida (taskID = ", incomingPacket[PI_TASK_ID], ") defletindo para o MASTER ", 0);
