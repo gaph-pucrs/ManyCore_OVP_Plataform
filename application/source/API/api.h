@@ -383,6 +383,7 @@ void interruptHandler_NI_RX(void) {
             }
         }
         else if(*myAddress == 0){ // if it's the master, then we have an lost packet
+            putsv("Enviando pacote perdido para endereço: ", task_confirmed_addr[incomingPacket[PI_TASK_ID]]);
             index = getServiceIndex();
             myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[incomingPacket[PI_TASK_ID]];
             myServicePacket[index][PI_SIZE] = incomingPacket[PI_SIZE];
@@ -480,6 +481,7 @@ void interruptHandler_NI_RX(void) {
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         mapping_en = 1;
         migration_dst = 0;
+        migration_src = 0;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ALLOCATED){
