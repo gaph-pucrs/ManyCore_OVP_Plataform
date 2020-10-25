@@ -253,7 +253,7 @@ void releaseTasks(unsigned int task_current_addr[NUMBER_TASKS], unsigned int tas
         if(task_start_time[i] <= measuredWindows && task_start_time[i] != 0xFFFFFFFF){          // if the task is ready to start
             task_future_addr[i] = getSpiralMatixEmptyPE(task_current_addr, task_future_addr);   // then, get a valid address that is empty based on both mapping tables (future and current)
             //task_addr[i] = getRandomEmptyPE(task_addr);
-            if(task_future_addr[i]){                                                            // if we could get a valid address for that task then:
+            if(task_future_addr[i] != 0xFFFFFFFF){                                              // if we could get a valid address for that task then:
                 task_start_time[i] = PRE_RELEASE;                                               // flags this task as pre-released
                 finishedTask[i] = FALSE;                                                        // and set that this task is not finished
                 putsvsv("Task ", i, " mapped in processor ", task_future_addr[i]);
