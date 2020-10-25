@@ -507,7 +507,8 @@ int dijkstra_divider(int state)
     int AdjMatrix[NUM_NODES][NUM_NODES];
 	int i, j, k, iter;
 	char buffer[70];
-
+	k = 0;
+	
 	prints("STARTING DIVIDER\n"); 
 
 	for (i=0;i<NUM_NODES;i++) {
@@ -599,8 +600,15 @@ int dijkstra_slave()
 			ReceiveMessage(&theMessage, divider);
 			for (j=0; j<NUM_NODES; j++){
 				AdjMatrix[i][j] = theMessage.msg[j];
-				if(theMessage.msg[j] == KILL)
-					prints("adjMatrix["); printi(i); prints("]["); printi(j); prints("] = "); printi(theMessage.msg[j]); prints("\n");
+				if(theMessage.msg[j] == KILL){
+					prints("adjMatrix["); 
+					printi(i); 
+					prints("]["); 
+					printi(j); 
+					prints("] = "); 
+					printi(theMessage.msg[j]); 
+					prints("\n");
+				}
 			}
 		}
 		calc = AdjMatrix[0][0];
