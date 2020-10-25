@@ -281,6 +281,7 @@ int main(int argc, char **argv)
     FILE *testcase;
     testcase = fopen("application/scenario.yaml","r");
     char line[64];
+    int aux[1];
     char *app_name;
     char *aux_str;
     int starting_time;
@@ -297,7 +298,7 @@ int main(int argc, char **argv)
     int task_id = 10;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
-    int i;
+    int i, j;
 
     Uns32 aux = MFSPR(SPR_PICMR);
     /*Initialization*/
@@ -461,6 +462,12 @@ int main(int argc, char **argv)
                 if(finishedTask[i]==TRUE)
                     task_addr[i] = 0;
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
+                    // updates every PE mapping table to clear the past address
+                    for(j=1; j<N_PES; j++){
+                        aux[0] =  ((0 << 16) | i);
+                        sendTaskService(TASK_ADDR_UPDT, getAddress(j), aux, 1);
+                    }
+                    // calculates the next start time
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i]=3;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
