@@ -385,15 +385,20 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
         //verificar se houve migracao
-            //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
+        //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         newAddr = incomingPacket[PI_REQUESTER];
         producer = incomingPacket[PI_PRODUCER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(!sendFromMsgBuffer(requester, newAddr, producer)){ // if the package is not ready yet add a request to the pending request queue
-            pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
-            putsv("Adicionando ao pendingReq = ", pendingReq[requester]);
+            if(mapping_table[producer] != 0 && mapping_table[producer] != *myAddress){
+                forwardMsgRequest(requester, mapping_table[producer], producer);
+            }
+            else{
+                pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+                putsv("Adicionando ao pendingReq = ", pendingReq[requester]);
+            }
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
