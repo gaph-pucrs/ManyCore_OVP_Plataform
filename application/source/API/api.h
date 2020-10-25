@@ -168,7 +168,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 //////////////////////////////////////
 volatile int taskMigrated = -1;
 volatile int migratedTask = -1;
-volatile int running_task = -1;
+volatile unsigned int running_task = 0xFFFFFFFF;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
 volatile unsigned int mapping_en = 0;
