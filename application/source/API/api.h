@@ -482,7 +482,7 @@ void interruptHandler_NI_RX(void) {
         migration_dst = 0;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
-    else if(incommingPacket[PI_SERVICE] == TASK_ALLOCATED){
+    else if(incomingPacket[PI_SERVICE] == TASK_ALLOCATED){
         if(*myAddress == 0 && task_addr[incomingPacket[PI_TASK_ID]] == incomingPacket[PI_PAYLOAD]){
             task_confirmed_addr[incomingPacket[PI_TASK_ID]] = task_addr[incomingPacket[PI_TASK_ID]];
         }
