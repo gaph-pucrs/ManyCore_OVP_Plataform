@@ -102,7 +102,7 @@ int main(int argc, char **argv)
 		}
 
 		// Send to the master the allocation completion
-		allocationComplete();
+		sendAllocationComplete();
 
 		// Verify if this execution is the continuation of a migration process
 		if(isMigration()){

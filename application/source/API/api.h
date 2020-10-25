@@ -208,7 +208,8 @@ void ReceiveRaw(message *theMessage);
 void FinishApplication();
 //////////////////////////////
 // Internal API functions
-void sendFinishTask(unsigned int running_task);
+void sendFinishTask();
+void sendAllocationComplete();
 void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
 void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int task_addr[DIM_X*DIM_Y], unsigned int size);
@@ -481,7 +482,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
         prints("Chegou um task mapping!\n");
         running_task = incomingPacket[PI_TASK_ID];  // defines the new task that this PE will execute
-        setTaskAddr(*myAddress);                    // defines this task address inside the mapping table        
+        setTaskAddr(running_task, *myAddress);      // defines this task address inside the mapping table        
         *NIcmdRX = DONE;                            // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE == TASK_ALLOCATED]){
@@ -1328,7 +1329,7 @@ void sendFinishTask(){
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
-void allocationComplete(){
+void sendAllocationComplete(){
     int index = getServiceIndex();
     migration_src = 0; // to reset if there is any migration pending for this PE
     myServicePacket[index][PI_DESTINATION] = 0; // Thermal master address
