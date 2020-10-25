@@ -420,7 +420,7 @@ void interruptHandler_NI_RX(void) {
         if(*myAddress == 0){
             index = getServiceIndex();
             myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[taskID];
-            myServicePacket[index][PI_SIZE] = 3+3;
+            myServicePacket[index][PI_SIZE] = 4+3;
             myServicePacket[index][PI_TASK_ID] = requester;
             myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
             myServicePacket[index][PI_PAYLOAD] = newAddr;
