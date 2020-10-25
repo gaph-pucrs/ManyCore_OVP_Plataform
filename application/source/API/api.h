@@ -630,7 +630,7 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else{
-        while(1){LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n",*myAddress);}
+        while(1){LOG("%x - ERROR code %x: Unexpected interruption! NI_RX \n",*myAddress, incomingPacket[PI_SERVICE]);}
     }
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
