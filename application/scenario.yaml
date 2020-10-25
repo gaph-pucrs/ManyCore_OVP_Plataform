@@ -2,7 +2,7 @@ apps:
  - name: synthetic
    cluster: 0
    mapping: dynamic
-   start_time_ms: 7
+   start_time_ms: 21
    dynamic_mapping:
     taskA: 0
     taskB: 1
@@ -23,7 +23,7 @@ apps:
  - name: mpeg
    cluster: 0
    mapping: dynamic
-   repeat_after_ms: 12
+   repeat_after_ms: 4
    repeat_times: 5
    dynamic_mapping:
     print_mpeg: 0
@@ -56,6 +56,8 @@ apps:
  - name: aes
    cluster: 0
    mapping: dynamic
+   repeat_after_ms: 8
+   repeat_times: 2
    start_time_ms: 26
    dynamic_mapping:
     aes_master: 0
