@@ -18,7 +18,7 @@
 message theMessage;
 
 #define NUM_TASK	N_PES-1
-int task_addr[NUM_TASK];
+int my_task_addr[NUM_TASK];
 int new_task_addr[NUM_TASK];
 
 int synthetic_taskA(int state);
@@ -100,13 +100,16 @@ int main(int argc, char **argv)
 
 		set_taskMigrated(-1); // resets this, because it's running a new task
 		*clockGating_flag = FALSE;
-		get_mapping_table(task_addr);
+		get_mapping_table(my_task_addr);
 
 		// Get its task to run
 		for (i = 0; i < NUM_TASK; i++){
-			if (task_addr[i] == *myAddress)
+			if (my_task_addr[i] == *myAddress)
 				running_task = i;
 		}
+
+		// Informs the master that the task has occupied the defined address
+		sendAllocationConfirmation();
 
 		// Send the updt addr msg to every PE
 		for(i=1; i<N_PES; i++){
@@ -257,7 +260,8 @@ int main(int argc, char **argv)
 			printFinish();
 			sendFinishTask(running_task);
 		}
-		else{			
+		else{	
+			migratedTask = running_task;		
 			get_migration_mapping_table(new_task_addr);
 			destination = new_task_addr[running_task];
 			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
