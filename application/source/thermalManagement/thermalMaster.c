@@ -115,7 +115,7 @@ int getSomeTaskID(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
     return -1; 
 }
 
-int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DIM_Y], task_addr[DIM_Y*DIM_X]){
+int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DIM_Y], unsigned int task_addr[DIM_Y*DIM_X]){
     int i;
     for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_addr[i] == pe){ // found a task that is running this PE
