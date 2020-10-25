@@ -225,13 +225,17 @@ int getRandomEmptyPE(unsigned int task_addr[NUMBER_TASKS]){
     return 0;
 }
 
-int getSpiralMatixEmptyPE(unsigned int task_addr[NUMBER_TASKS]){
+int getSpiralMatixEmptyPE(unsigned int current_addr[NUMBER_TASKS], unsigned int future_addr[NUMBER_TASKS]){
     int i, j, empty, pe;
     for(j = 1; j < NUMBER_TASKS; j++){ 
         pe = spiralMatrix[j-1];      // gets the peAddr from spiralMatrix
         empty = 1;                   // presumes that it is empty
         for(i = 0; i < NUMBER_TASKS; i++){
-            if(task_addr[i] == pe){ // if you find some task runnin inside that processor
+            if(current_addr[i] == pe){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;             // breaks
+            }
+            if(future_addr[i] == pe){ // if you find some task runnin inside that processor
                 empty = 0;
                 break;             // breaks
             }
