@@ -249,7 +249,7 @@ int main(int argc, char **argv)
 			sendFinishTask();
 		}
 		else{
-			destination = new_task_addr[running_task];
+			//destination = new_task_addr[running_task];
 			putsvsv("Tarefa: ", getRunningTask(), " migrando para: ", destination);
 			
 			// Sends the current task status
