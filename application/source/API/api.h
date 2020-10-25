@@ -358,10 +358,10 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY /*|| incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET*/){
-        receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
 
         if(running_task == incomingPacket[PI_TASK_ID]){
+            receivingActive = 1; // Inform the index where the received packet is stored
             ///////////////////  Delivers the Message ///////////////////
             // Alocate the packet message inside the structure
             deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
