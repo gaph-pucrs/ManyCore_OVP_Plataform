@@ -31,6 +31,40 @@ apps:
     start: 2
     ivlc: 3
     iquant: 4
+ - name: dtw
+   cluster: 0
+   mapping: dynamic
+   start_time_ms: 66
+   repeat_after_ms: 3
+   repeat_times: 3
+   dynamic_mapping:
+    bank: 0
+    p1: 1
+    p2: 2
+    p3: 3
+    p4: 4
+    recognizer: 5
+ - name: audio_video
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    split_av: 0
+    ivlc_av: 1
+    iquant_av: 2
+    idct_av: 3
+    adpcm_dec_av: 4
+    FIR_av: 5
+    join_av: 6
+ - name: aes
+   cluster: 0
+   mapping: dynamic
+   start_time_ms: 26
+   dynamic_mapping:
+    aes_master: 0
+    aes_slave1: 1
+    aes_slave2: 2
+    aes_slave3: 3
+    aes_slave4: 4
  - name: thermalManagement
    cluster: 0
    mapping: static
