@@ -762,9 +762,9 @@ void interruptHandler_NI_TX(void) {
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_TX TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
-    }
+    }    
     *NIcmdTX = DONE;
-
+    
     // If there is some packet inside the PIPE waiting to be sent, send it!
     if(sendAfterTX[0] <= PIPE_SIZE){ 
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
@@ -783,6 +783,7 @@ void interruptHandler_NI_TX(void) {
     }
 #endif
     
+
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
 #endif
@@ -1106,9 +1107,6 @@ void SendMessage(message *theMessage, unsigned int destination_id){
     for(a=0;a<theMessage->size;a++){
         buffer_packets[index][a+4] = theMessage->msg[a];
     }
-    //////////////////////////////////////////
-    // Change the selected buffer position to occupied
-    bufferPush(index);
     // Once the packet is ready, check if the request has arrived
     dest_addr = checkPendingReq(destination_id);
     if(dest_addr){
@@ -1120,6 +1118,11 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         // Sends the packet
         buffer_map[index] = PIPE_TRANSMITTING;
         SendSlot((unsigned int)&buffer_packets[index], index);
+    }
+    else{
+        //////////////////////////////////////////
+        // Change the selected buffer position to occupied
+        bufferPush(index);
     }
 #if USE_THERMAL
 #endif
