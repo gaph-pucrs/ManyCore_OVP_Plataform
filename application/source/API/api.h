@@ -228,7 +228,7 @@ void prints(char* text);
 void printi(int value);
 void putsv(char* text1, int value1);
 void putsvsv(char* text1, int value1, char* text2, int value2);
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr);
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr);
 void enable_interruptions();
 void disable_interruptions();
 void disable_interruption(unsigned int n);
@@ -515,7 +515,7 @@ void interruptHandler_NI_RX(void) {
         taskMigrated = incomingPacket[PI_REQUESTER];
         for(i = 0; i < N_PES; i++){
             if(pendingReq[i] != 0){
-                forwardMsgRequest(i, taskMigrated);
+                forwardMsgRequest(i, taskMigrated, mapping_table[i]);
                 pendingReq[i] = 0;
             }
         }
@@ -591,7 +591,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         return 1; // packet was sent with success
     }
     else if(taskMigrated != -1){
-        forwardMsgRequest(requester, taskMigrated);
+        forwardMsgRequest(requester, taskMigrated, requesterAddr);
         return 1;
     }
     else{
@@ -938,14 +938,14 @@ void sendPendingReq(unsigned int dest){
     prints("> pendReq enviado\n");
 }
 
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr){
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr){
     int index = getServiceIndex();
     putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin_addr);
     myServicePacket[index][PI_DESTINATION] = origin_addr;
     myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
-    myServicePacket[index][PI_REQUESTER] = mapping_table[requester];
+    myServicePacket[index][PI_REQUESTER] = requester_addr;
     if(*NIcmdTX == NI_STATUS_OFF){
         SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
     }
