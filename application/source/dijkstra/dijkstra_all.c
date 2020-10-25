@@ -21,7 +21,7 @@ int dijkstra_divider(int state)
     int AdjMatrix[NUM_NODES][NUM_NODES];
 	int i, j, k, iter;
 	char buffer[70];
-
+	k = 0;
 	prints("STARTING DIVIDER\n"); 
 
 	for (i=0;i<NUM_NODES;i++) {
@@ -78,7 +78,7 @@ int dijkstra_divider(int state)
     AdjMatrix[0][0] = KILL;
 	for (i=0; i<NUM_NODES; i++) {
 		for (j=0; j<NUM_NODES; j++) {
-			theMessage.msg[j] = KILL;//AdjMatrix[i][j];
+			theMessage.msg[j] = AdjMatrix[i][j];
 		}
 		putsvsv("i: ", i, "theMsg[0]: ", theMessage.msg[0]);
 		SendMessage(&theMessage, dijkstra_0);
