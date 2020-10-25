@@ -485,7 +485,7 @@ void interruptHandler_NI_RX(void) {
         setTaskAddr(running_task, *myAddress);      // defines this task address inside the mapping table        
         *NIcmdRX = DONE;                            // releases the NI RX to return to the IDLE state
     }
-    else if(incomingPacket[PI_SERVICE == TASK_ALLOCATED]){
+    else if(incomingPacket[PI_SERVICE] == TASK_ALLOCATED){
         taskID = incomingPacket[PI_TASK_ID];
         if(task_future_addr[taskID] == incomingPacket[PAYLOAD]){  // If the task was allocated in the correct address
             putsvsv("Tarefa ", taskID, " alocada em ", task_future_addr[taskID]);
