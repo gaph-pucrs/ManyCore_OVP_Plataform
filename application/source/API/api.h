@@ -642,13 +642,13 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        putsvsv("buffer_map=", buffer_map[i], "   task_dest=", buffer_packets[i][PI_TASK_ID]);
+        //putsvsv("buffer_map=", buffer_map[i], "   task_dest=", buffer_packets[i][PI_TASK_ID]);
         if(buffer_map[i] != PIPE_FREE && buffer_map[i] != PIPE_TRANSMITTING){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
                     foundSent = buffer_map[i];
-                    prints("xng\n");
+                    //prints("xng\n");
                 }
             }
         }
@@ -958,13 +958,13 @@ void sendPipe(unsigned int dest){
         empty = 0;
         // Loop to find the oldest message inside the PIPE
         for (j = 0; j < PIPE_SIZE; j++){
-            putsv("buffer map: ", buffer_map[j]);
+            //putsv("buffer map: ", buffer_map[j]);
             if(buffer_map[j] < older && buffer_map[j] != PIPE_FREE && buffer_map[j] != PIPE_TRANSMITTING){
-                prints("older = j1\n");
+                //prints("older = j1\n");
                 older = j;
             }
             else if(older == -1 && buffer_map[j] != PIPE_FREE && buffer_map[j] != PIPE_TRANSMITTING){
-                prints("older = j2\n");
+                //prints("older = j2\n");
                 older = j;
             }
             else{
