@@ -419,7 +419,10 @@ void interruptHandler_NI_RX(void) {
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(*myAddress == 0){
             index = getServiceIndex();
-            myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[taskID];
+            if(task_confirmed_addr[taskID] != 0)
+                myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[taskID];
+            else
+                myServicePacket[index][PI_DESTINATION] = task_addr[taskID];
             myServicePacket[index][PI_SIZE] = 4+3;
             myServicePacket[index][PI_TASK_ID] = requester;
             myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
