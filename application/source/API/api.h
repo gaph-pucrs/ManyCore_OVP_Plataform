@@ -928,6 +928,7 @@ void ReceiveRaw(message *theMessage){
 /* Creates the request message and send it to the transmitter */
 void requestMsg(unsigned int from){
     int index = getServiceIndex();
+    while(mapping_table[from] == 0xFFFFFFFF){/* waits the address */}
     myServicePacket[index][PI_DESTINATION] = mapping_table[from];
     putsv("Pedindo mesnagem de: ", mapping_table[from]);
     myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
