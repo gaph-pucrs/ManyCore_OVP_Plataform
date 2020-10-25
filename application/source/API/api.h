@@ -196,6 +196,7 @@ void get_migration_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
 // MASTER ONLY
 unsigned int task_addr[DIM_X*DIM_Y];
 unsigned int task_confirmed_addr[DIM_X*DIM_Y];
+unsigned int serviceIndexNextTimer = -1;
 //////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
@@ -333,6 +334,16 @@ void interruptHandler_timer(void) {
     *operationFrequency = newFrequency;
     Voltage = newVoltage;
 
+    if(*myAddress == 0){
+        if(*NIcmdTX == NI_STATUS_OFF){
+            SendSlot((unsigned int)&myServicePacket[serviceIndexNextTimer], (0xFFFF0000 | serviceIndexNextTimer)); // WARNING: This may cause a problem!!!!
+        }
+        else{
+            addServiceAfterTX(serviceIndexNextTimer);
+        }
+        serviceIndexNextTimer = -1;
+    }
+
 #endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
@@ -415,7 +426,7 @@ void interruptHandler_NI_RX(void) {
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         newAddr = incomingPacket[PI_REQUESTER];
-        taskID = incomingPacket[PI_PRODUCER] & 0x7FFFFFFF; 
+        taskID = incomingPacket[PI_PRODUCER];// & 0x7FFFFFFF; 
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         if(*myAddress == 0){
             index = getServiceIndex();
@@ -427,12 +438,18 @@ void interruptHandler_NI_RX(void) {
             myServicePacket[index][PI_TASK_ID] = requester;
             myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
             myServicePacket[index][PI_PAYLOAD] = newAddr;
-            myServicePacket[index][PI_PRODUCER] = taskID | 0x80000000;
-            if(*NIcmdTX == NI_STATUS_OFF){
-                SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+            myServicePacket[index][PI_PRODUCER] = taskID;// | 0x80000000;
+            if(serviceIndexNextTimer == -1){
+                serviceIndexNextTimer = index;
             }
             else{
-                addServiceAfterTX(index);
+                if(*NIcmdTX == NI_STATUS_OFF){
+                    SendSlot((unsigned int)&myServicePacket[serviceIndexNextTimer], (0xFFFF0000 | serviceIndexNextTimer)); // WARNING: This may cause a problem!!!!
+                }
+                else{
+                    addServiceAfterTX(serviceIndexNextTimer);
+                }
+                serviceIndexNextTimer = index;
             }
         }
         else if(taskID == running_task){
@@ -444,10 +461,10 @@ void interruptHandler_NI_RX(void) {
         else if(taskMigrated != -1 && migratedTask == taskID){
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
         }
-        else if((incomingPacket[PI_PRODUCER] & 0x80000000) != 0){
+        /*else if((incomingPacket[PI_PRODUCER] & 0x80000000) != 0){
             prints("Adicionando ao pendingReq sob ordem do Master\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
-        }
+        }*/
         else{
             prints("A lost request, sending to MASTER\n");
             forwardMsgRequest(requester, 0, newAddr, taskID);
