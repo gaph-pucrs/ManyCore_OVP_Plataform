@@ -103,6 +103,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PI_PAYLOAD          4
 #define PI_I_MYADDR         4
 #define PI_I_BRANCH         5
+#define PI_PRODUCER         5
 #define PI_I_ARITH          6
 #define PI_I_JUMP           7
 #define PI_I_MOVE           8
@@ -164,6 +165,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 // Migration control                //
 //////////////////////////////////////
 volatile int taskMigrated = -1;
+volatile int migratedTask = -1;
 volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
@@ -229,7 +231,7 @@ void prints(char* text);
 void printi(int value);
 void putsv(char* text1, int value1);
 void putsvsv(char* text1, int value1, char* text2, int value2);
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr);
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr, unsigned int producerTaskID);
 void enable_interruptions();
 void disable_interruptions();
 void disable_interruption(unsigned int n);
@@ -393,16 +395,27 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        //verificar se houve migracao
-            //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
         newAddr = incomingPacket[PI_REQUESTER];
+        taskID = incomingPacket[PI_PRODUCER];
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
-            prints("Adicionando ao pendingReq\n");
-            pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+        if(*myAddress == 0){
+            while(1){prints("Received a lost message request!\n");}
         }
+        else if(taskID == running_task){
+            if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
+                prints("Adicionando ao pendingReq\n");
+                pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+            }
+        }
+        else if(taskMigrated != -1 && migratedTask == taskID){
+            forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
+        }
+        else{
+            prints("A lost request, sending to MASTER\n");
+            forwardMsgRequest(requester, 0, newAddr, taskID);
+        }        
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -535,9 +548,10 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_REQUEST_FORWARD){
         putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
         taskMigrated = incomingPacket[PI_REQUESTER];
+        migratedTask = incomingPacket[PI_TASK_ID];
         for(i = 0; i < N_PES; i++){
             if(pendingReq[i] != 0){
-                forwardMsgRequest(i, taskMigrated, mapping_table[i]);
+                forwardMsgRequest(i, taskMigrated, mapping_table[i], incomingPacket[PI_TASK_ID]);
                 pendingReq[i] = 0;
             }
         }
@@ -613,10 +627,10 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
         }
         return 1; // packet was sent with success
     }
-    else if(taskMigrated != -1){
+    /*else if(taskMigrated != -1){
         forwardMsgRequest(requester, taskMigrated, requesterAddr);
         return 1;
-    }
+    }*/
     else{
         return 0; // packet is not in the buffer yet
     }
@@ -871,10 +885,11 @@ void requestMsg(unsigned int from){
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = mapping_table[from];
     putsv("Pedindo mesnagem de: ", mapping_table[from]);
-    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = *myAddress;
+    myServicePacket[index][PI_PRODUCER] = from;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
@@ -961,7 +976,7 @@ void sendPendingReq(unsigned int dest){
     prints("> pendReq enviado\n");
 }
 
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr){
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr, unsigned int producerTaskID){
     int index = getServiceIndex();
     putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin_addr);
     myServicePacket[index][PI_DESTINATION] = origin_addr;
@@ -969,6 +984,7 @@ void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigne
     myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = requester_addr;
+    myServicePacket[index][PI_PRODUCER] = producerTaskID;
     if(*NIcmdTX == NI_STATUS_OFF){
         SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
     }

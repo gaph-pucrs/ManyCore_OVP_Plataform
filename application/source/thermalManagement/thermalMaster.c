@@ -447,7 +447,7 @@ int main(int argc, char **argv)
 
             if ((measuredWindows)%20 == 0){
                 prints("Starting thermal actuation analysis\n");
-                //temperature_migration(Temperature, tasks_to_map, task_addr);
+                temperature_migration(Temperature, tasks_to_map, task_addr);
                 // for(i = 0; i < tasks_to_map; i++)
                 //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
 
