@@ -455,9 +455,15 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_DEST){
         prints("Task destination received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++){
-            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        // Acha a tarefa que migrou e atualiza só o endereço dela
+        for(i=0; i<num_tasks;i++){
+            if(incomingPacket[PI_PAYLOAD+i] == *myAddress){
+                mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+            }
         }
+        /*for(i=0; i<num_tasks; i++){
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        }*/
         migration_dst = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
