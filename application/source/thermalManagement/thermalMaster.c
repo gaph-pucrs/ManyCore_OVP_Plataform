@@ -300,7 +300,6 @@ int main(int argc, char **argv)
     int finishSimulation;
     int i, j;
 
-    Uns32 aux = MFSPR(SPR_PICMR);
     /*Initialization*/
     generateSpiralMatrix();
     for(y=0;y<DIM_Y;y++){
