@@ -78,13 +78,13 @@ Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-83951620 Updating mapping_table[4 ] = 1281 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
 16842754 Updating mapping_table[2 ] = 257 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 16777219 Updating mapping_table[3 ] = 256 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+83951620 Updating mapping_table[4 ] = 1281 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 84017157 Updating mapping_table[5 ] = 1282 
@@ -159,10 +159,10 @@ Servico: 103
 33619998 Updating mapping_table[30 ] = 513 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-16973858 Updating mapping_table[34 ] = 259 
+33685535 Updating mapping_table[31 ] = 514 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-33685535 Updating mapping_table[31 ] = 514 
+16973858 Updating mapping_table[34 ] = 259 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 17039392 Updating mapping_table[32 ] = 260 
@@ -213,18 +213,18 @@ Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 101 
-Task state received 301 
+Task state received 26 
 Clk gate off - interruptHandler_NI_RX
 Servico: 102 
-Task pendingReq received 301 
+Task pendingReq received 26 
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
- > > pendReq: 256 
- > > pendReq: 1281 
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 2 
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
@@ -271,14 +271,18 @@ Servico: 98
 Task destination received
 task_addr[0 ] = 258 
 task_addr[1 ] = 261 
-task_addr[2 ] = 772 
+task_addr[2 ] = 1028 
 task_addr[3 ] = 1029 
 task_addr[4 ] = 1281 
 task_addr[5 ] = 1282 
-task_addr[6 ] = 1028 
+task_addr[6 ] = 772 
 task_addr[7 ] = 2 
 task_addr[8 ] = 3 
-task_addr[9 ] = 4 
+task_addr[9 ] = 4 Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 8 
+Adicionando ao pendingReq = 0 
+
 task_addr[10 ] = 5 
 task_addr[11 ] = 6 
 task_addr[12 ] = 262 
@@ -298,7 +302,11 @@ task_addr[25 ] = 1540
 task_addr[26 ] = 1539 
 task_addr[27 ] = 1538 
 task_addr[28 ] = 1537 
-task_addr[29 ] = 1536 
+task_addr[Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 9 
+Adicionando ao pendingReq = 0 
+29 ] = 1536 
 task_addr[30 ] = 1027 
 task_addr[31 ] = 514 
 task_addr[32 ] = 260 
@@ -328,120 +336,71 @@ TX interruption!
 TX interruption!
 TX interruption!
 TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-Task 2 migrated
-TX interruption!
-State: 301 
-synthetic task C started.
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 3  para o endereço 256 
-TX interruption!
-Pedindo mesnagem de: 261 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 4  para o endereço 1281 
-10766421 taskCTX interruption!
-
-10768028 301 
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq = 1281 
-agem de: 261 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 4  para o endereço 1281 
-10787660 taskC
-TX interruption!
-10789267 302 
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Pedindo mesnagClk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq = 1281 
-em de: 261 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 4  para o endereço 1281 
-10808906 taskC
-TX interruption!
-10810513 303 
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq = 1281 
-Pedindo mesnagem de: 261 
+Message request received from 10 
+Adicionando ao pendingReq = 0 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 54311  19778  5189  3604  43108  31215  7079  14993  10299  151  77  1082  1467  248533 
+Servico: 103 
+67371010 Updating mapping_table[2 ] = 1028 
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+TX interruption!
+Task 6 migrated
+TX interruption!
+State: 26 
+STARTING DIVIDER
+Começando iteracao 26 
+Encontrei um pending da tarefa 7  para o endereço 2 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 7 
+Adicionando ao pendingReq = 2 
+Counters: 34875  10669  4388  3036  35941  25849  6618  9612  9237  139  99  972  1467  248533 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Encontrei um pending da tarefa 4  para o endereço 1281 
-10835838 taskC
-10835956 304 TX interruption!
-
-Pedindo mesnagem de: 258 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 4 
-Adicionando ao pendingReq = 1281 
-Counters: 3484  1229  321  275  2510  1702  425  1159  661  15  6  83  113  249887 
+Counters: 156  41  14  18  115  54  4  44  18  0  3  31  46  249954 
 >> Energy packet sent to thermalMaster
+TX interruption!
 Counters: 156  41  14  18  115  54  4  44  18  0  0  0  0  250000 
 >> Energy packet sent to thermalMaster
-Counters: 0  0  0  0  0  0  0  0  0  0  0  0  0  250000 
+Counters: 156  41  14  18  115  54  4  44  18  0  0  0  0  250000 
 >> Energy packet sent to thermalMaster
