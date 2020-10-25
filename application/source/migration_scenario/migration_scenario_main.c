@@ -9,17 +9,13 @@
 #include "synthetic_config.h"
 #include "dijkstra_config.h"
 //#include "sort_config.h"
-#include "aes_config.h"
+//#include "aes_config.h"
 #include "mpeg_config.h"
-#include "dtw_config.h"
-#include "audio_video_config.h"
+//#include "dtw_config.h"
+//#include "audio_video_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
-
-#define NUM_TASK	N_PES-1
-int task_addr[NUM_TASK];
-int new_task_addr[NUM_TASK];
 
 int synthetic_taskA(int state);
 int synthetic_taskB(int state);
@@ -35,17 +31,17 @@ int dijkstra_print();
 /*int sortMaster(int state);
 int sort_slave(int task);*/
 
-int aesMaster(int state);
-int aes_slave();
+// int aesMaster(int state);
+// int aes_slave();
 
 // AV threads
-int av_split(int state);
-int av_ivlc(int state);
-int av_iquant(int state);
-int av_idct(int state);
-int av_adpcm_dec(int state);
-int av_FIR(int state);
-int av_join(int state);
+// int av_split(int state);
+// int av_ivlc(int state);
+// int av_iquant(int state);
+// int av_idct(int state);
+// int av_adpcm_dec(int state);
+// int av_FIR(int state);
+// int av_join(int state);
 
 // // MPEG - threads
 int mpeg_idct(int state);
@@ -63,19 +59,19 @@ short int getDC(short int type, type_DATA *buffer);
 unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init);
 
 // DTW
-int dtw_bank(int state);
-int dtw_p1(int state);
-int dtw_p2(int state);
-int dtw_p3(int state);
-int dtw_p4(int state);
-int dtw_recognizer(int state);
-// DTW - auxiliar functins
-void randPattern(int in[MATX_SIZE][MATX_SIZE]);
-int dtw_abs(int num);
-int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE]);
-int dtw_euclideanDistance(int *x, int *y);
-int dtw_min(int x, int y);
-int dtw_randNum(int seed, int min, int max);
+// int dtw_bank(int state);
+// int dtw_p1(int state);
+// int dtw_p2(int state);
+// int dtw_p3(int state);
+// int dtw_p4(int state);
+// int dtw_recognizer(int state);
+// // DTW - auxiliar functins
+// void randPattern(int in[MATX_SIZE][MATX_SIZE]);
+// int dtw_abs(int num);
+// int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE]);
+// int dtw_euclideanDistance(int *x, int *y);
+// int dtw_min(int x, int y);
+// int dtw_randNum(int seed, int min, int max);
 
 int main(int argc, char **argv)
 {
@@ -90,23 +86,13 @@ int main(int argc, char **argv)
 
 	while(1){
 
-		// waits for mapping or migrating tasks and receives mapping table
+		// Waits for a task to be mapped
 		*clockGating_flag = TRUE;
-		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ }
-
+		while(!isRunningTask() && !finishSimulation_flag){ }
 		// Detects the end of simulation
 		if(finishSimulation_flag)
 			break;
-
-		set_taskMigrated(-1); // resets this, because it's running a new task
 		*clockGating_flag = FALSE;
-		get_mapping_table(task_addr);
-
-		// Get its task to run
-		for (i = 0; i < NUM_TASK; i++){
-			if (task_addr[i] == *myAddress)
-				running_task = i;
-		}
 
 		// Send the updt addr msg to every PE
 		for(i=1; i<N_PES; i++){
@@ -114,20 +100,25 @@ int main(int argc, char **argv)
 			if(getAddress(i) != *myAddress)
 				sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
 		}
-		
-		if(get_mapping()){
-			prints("Task "); printi(running_task); prints("mapped\n");
-			state = 0;
-			clear_mapping();
-		}
-		else if(get_migration_dst()){
+
+		// Send to the master the allocation completion
+		allocationComplete();
+
+		// Verify if this execution is the continuation of a migration process
+		if(isMigration()){
 			state = get_new_state();
 			prints("Task "); printi(running_task); prints("migrated\n");
 			putsv("State: ", state);
 			clear_migration_dst();
 		}
+		// or a brand new execution
+		else{
+			prints("Task "); printi(running_task); prints("mapped\n");
+			state = 0;
+			clear_mapping();
+		}
 
-		switch(running_task){
+		switch(getRunningTask()){
 			// SYNTHETIC
 			case taskA:
 				state = synthetic_taskA(state);
@@ -196,88 +187,86 @@ int main(int argc, char **argv)
 			// 	state = sort_slave(2);
 			// 	break;
 			//AES
-			case aes_master:
-				state = aesMaster(state);
-				break;
-			case aes_slave1:
-				state = aes_slave();
-				break;
-			case aes_slave2:
-				state = aes_slave();
-				break;
-			case aes_slave3:
-				state = aes_slave();
-				break;
-			case aes_slave4:
-				state = aes_slave();
-				break;
-			// Audio Video
-			case split_av:
-				state = av_split(state);
-				break;
-			case ivlc_av:
-				state = av_ivlc(state);
-				break;
-			case iquant_av:
-				state = av_iquant(state);
-				break;
-			case idct_av:
-				state = av_idct(state);
-				break;
-			case adpcm_dec_av:
-				state = av_adpcm_dec(state);
-				break;
-			case FIR_av:
-				state = av_FIR(state);
-				break;
-			case join_av:
-				state = av_join(state);
-				break;
-			// DTW
-			case bank:
-				state = dtw_bank(state);
-				break;
-			case p1:
-				state = dtw_p1(state);
-				break;
-			case p2:
-				state = dtw_p2(state);
-				break;
-			case p3:
-				state = dtw_p3(state);
-				break;
-			case p4:
-				state = dtw_p4(state);
-				break;
-			case recognizer:
-				state = dtw_recognizer(state);
-				break;
+			// case aes_master:
+			// 	state = aesMaster(state);
+			// 	break;
+			// case aes_slave1:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave2:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave3:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave4:
+			// 	state = aes_slave();
+			// 	break;
+			// // Audio Video
+			// case split_av:
+			// 	state = av_split(state);
+			// 	break;
+			// case ivlc_av:
+			// 	state = av_ivlc(state);
+			// 	break;
+			// case iquant_av:
+			// 	state = av_iquant(state);
+			// 	break;
+			// case idct_av:
+			// 	state = av_idct(state);
+			// 	break;
+			// case adpcm_dec_av:
+			// 	state = av_adpcm_dec(state);
+			// 	break;
+			// case FIR_av:
+			// 	state = av_FIR(state);
+			// 	break;
+			// case join_av:
+			// 	state = av_join(state);
+			// 	break;
+			// // DTW
+			// case bank:
+			// 	state = dtw_bank(state);
+			// 	break;
+			// case p1:
+			// 	state = dtw_p1(state);
+			// 	break;
+			// case p2:
+			// 	state = dtw_p2(state);
+			// 	break;
+			// case p3:
+			// 	state = dtw_p3(state);
+			// 	break;
+			// case p4:
+			// 	state = dtw_p4(state);
+			// 	break;
+			// case recognizer:
+			// 	state = dtw_recognizer(state);
+			// 	break;
 		}
 		if(state == 0){
 			printFinish();
-			sendFinishTask(running_task);
+			sendFinishTask();
 		}
 		else{
-			migratedTask = running_task;	
-			get_migration_mapping_table(new_task_addr);
 			destination = new_task_addr[running_task];
-			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
+			putsvsv("Tarefa: ", getRunningTask(), " migrando para: ", destination);
 			
-			
+			// Sends the current task status
 			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 			
+			// Send the current task pipe
 			sendPipe(destination);
 			
-			//disable_interruptions();
 			disable_interruption(2);
-			//putsv("save the new destination of this ", destination);
-			set_taskMigrated(destination); // save the new destination of this 
-			sendPendingReq(destination);
+			taskMigrating(getRunningTask(), destination); // save the new destination of this task
 			enable_interruption(2);
-			//enable_interruptions();		
+
+			// Send the current pending requests
+			sendPendingReq(destination);
 			
-			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-			running_task = -1;
+			aux[0] = getRunningTask();
+			sendTaskService(TASK_MIGRATION_DEST, destination, aux, 1);
 		}
 	}
 

@@ -73,6 +73,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_REQUEST_FORWARD 0x80
 #define PE_FINISH_SIMULATION 0x666
 #define PE_SET_FREQUENCY     0x90
+#define TASK_ALLOCATED       0x100
 
 //////////////////////////////
 //////////////////////////////
@@ -87,6 +88,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PIPE_WAIT           0xFFFFFFFF
 //////////////////////////////
 //////////////////////////////
+#define NUMBER_TASKS        (DIM_X*DIM_Y)
 
 
 ////////////////////////////////////////////////////////////
@@ -240,6 +242,20 @@ void enable_interruption(unsigned int n);
 int getServiceIndex();
 void requestToForward(unsigned int myTaskID);
 void printFinish();
+unsigned int getTaskAddr(unsigned int taskID);
+void setTaskAddr(unsigned int taskID, unsigned int taskAddr);
+
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+// MASTER STUFF ///////////////////////////////////////////////////
+sendTaskMap(unsigned int taskID, unsigned int taskAddr);
+// Task mapping table
+volatile unsigned int task_current_addr[NUMBER_TASKS];
+volatile unsigned int task_future_addr[NUMBER_TASKS];
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 // DEFINES THERMAL STUFF
 #if USE_THERMAL
@@ -313,6 +329,43 @@ void set_taskMigrated(int destination){
     taskMigrated = destination;
 }
 
+unsigned int getTaskAddr(unsigned int taskID){
+    if(taskID < NUMBER_TASKS)
+        return mapping_table[taskID];
+    else
+        return 0xFFFFFFFF;
+}
+
+void setTaskAddr(unsigned int taskID, unsigned int taskAddr){
+    if(taskID < NUMBER_TASKS)
+        mapping_table[taskID] = taskAddr;
+    return;
+}
+
+unsigned int getRunningTask(){
+    return running_task;
+}
+
+unsigned int isRunningTask(){
+    if(running_task < NUMBER_TASKS)
+        return 1;
+    else
+        return 0;
+}
+
+unsigned int isMigration(){
+    return migration_dst;
+}
+
+unsigned int needToMigrate(){
+    return migration_src;
+}
+
+void taskMigrating(unsigned int taskID, unsigned int destination){
+    taskMigrated = destination;
+    migratedTask = taskID;
+    return;
+}
 
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */
@@ -427,15 +480,20 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
         prints("Chegou um task mapping!\n");
-        num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++)
-            new_mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
-        mapping_en = 1;
-        taskMigrated = -1;
-        //migration_dst = 0;
-        if(running_task == -1)
-            migration_src = 0; // resets if there is some task here
-        *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
+        running_task = incomingPacket[PI_TASK_ID];  // defines the new task that this PE will execute
+        setTaskAddr(*myAddress);                    // defines this task address inside the mapping table        
+        *NIcmdRX = DONE;                            // releases the NI RX to return to the IDLE state
+    }
+    else if(incomingPacket[PI_SERVICE == TASK_ALLOCATED]){
+        taskID = incomingPacket[PI_TASK_ID];
+        if(task_future_addr[taskID] == incomingPacket[PAYLOAD]){  // If the task was allocated in the correct address
+            putsvsv("Tarefa ", taskID, " alocada em ", task_future_addr[taskID]);
+            task_current_addr[taskID] = task_future_addr[taskID]; // updates the current addr
+        }
+        else{
+            putsvsv("ERROR! - Tarefa ", taskID, " NÃO foi alocada corretamente em ", task_future_addr[taskID]);
+        }
+        *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_SRC){
         prints("Task migration received\n");
@@ -520,8 +578,11 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_FINISHED){
-        putsv("Tarefa finalizada - ", incomingPacket[PI_TASK_ID]);
-        finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
+        taskID = incomingPacket[PI_TASK_ID];
+        putsv("Tarefa finalizada - ", taskID);
+        task_current_addr[taskID] = 0xFFFFFFFF;
+        task_future_addr[taskID] = 0xFFFFFFFF;
+        finishedTask[taskID] = TRUE;
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_REQUEST_FORWARD){
@@ -1257,13 +1318,24 @@ void enable_interruption(unsigned int n){
     return;
 }
 
-void sendFinishTask(unsigned int running_task){
+void sendFinishTask(){
     int index = getServiceIndex();
     migration_src = 0; // to reset if there is any migration pending for this PE
     myServicePacket[index][PI_DESTINATION] = 0; // Thermal master address
     myServicePacket[index][PI_SIZE] = 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = running_task;
     myServicePacket[index][PI_SERVICE] = TASK_FINISHED;
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
+void allocationComplete(){
+    int index = getServiceIndex();
+    migration_src = 0; // to reset if there is any migration pending for this PE
+    myServicePacket[index][PI_DESTINATION] = 0; // Thermal master address
+    myServicePacket[index][PI_SIZE] = 3 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = TASK_ALLOCATED;
+    myServicePacket[index][PI_PAYLOAD] = *myAddress;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
@@ -1292,4 +1364,14 @@ void printFinish(){
         putsvsv("pipeStatus[", i,"] = ", buffer_map[i]);
     }
 }
+
+sendTaskMap(unsigned int taskID, unsigned int taskAddr){
+    int index = getServiceIndex();
+    myServicePacket[index][PI_DESTINATION] = taskAddr; // Thermal master address
+    myServicePacket[index][PI_SIZE] = 2 + 3; // +2 (taskID,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = taskID;
+    myServicePacket[index][PI_SERVICE] = TASK_MAPPING;
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
 
