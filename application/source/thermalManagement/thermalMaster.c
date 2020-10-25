@@ -479,8 +479,6 @@ int main(int argc, char **argv)
             disable_interruption(0);
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
-                if(finishedTask[i]==TRUE)
-                    task_addr[i] = 0;
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i]=3;
