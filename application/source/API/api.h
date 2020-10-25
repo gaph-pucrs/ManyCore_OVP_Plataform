@@ -549,6 +549,7 @@ void interruptHandler_NI_RX(void) {
             // Clear the pending request
             pendingReq[buffer_packets[index][PI_TASK_ID]] = 0;
             // Sends the packet
+            buffer_map[index] = PIPE_TRANSMITTING;
             if(*NIcmdTX == NI_STATUS_OFF){
                 SendSlot((unsigned int)&buffer_packets[index], index);
             }
@@ -1115,6 +1116,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         // Update the address to match the requester address 
         buffer_packets[index][PI_DESTINATION] = dest_addr;
         // Sends the packet
+        buffer_map[index] = PIPE_TRANSMITTING;
         SendSlot((unsigned int)&buffer_packets[index], index);
     }
 #if USE_THERMAL
