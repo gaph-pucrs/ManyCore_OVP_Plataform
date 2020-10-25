@@ -115,6 +115,18 @@ int getSomeTaskID(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
     return -1; 
 }
 
+int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DIM_Y], task_addr[DIM_Y*DIM_X]){
+    int i;
+    for(i = 0; i < DIM_X*DIM_Y; i++){
+        if(task_addr[i] == pe){ // found a task that is running this PE
+            if(task_confirmed_addr[i] == pe) // if the occupation is confirmed then
+                return FALSE; // this PE is not envolved in any migration
+            else
+                return TRUE;
+        }
+    }
+}
+
 int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_map, unsigned int task_addr[DIM_X*DIM_Y]){
     int task_ID;
     unsigned int tgtProc, srcProc, srcID;
@@ -141,29 +153,32 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
         srcProc = x << 8 | y;
         if (temp[srcID] > 33300){
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
-            if (how_many_tasks_PE_is_running(srcProc, task_addr)>0){
-                while (k>0){
-                    tgtProc = spiralMatrix[k];
-                    task_ID = getSomeTaskID(srcProc, task_addr);
-                    putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
-                    //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
+            if(!migrationEnvolved(srcProc, task_confirmed_addr, task_addr)){ // iaçanã: detecta PEs que nao podem migrar (por exemplo o master do sort - se mandar migrar ele nao vai conseguir e se der tempo de chegar em outra janela o master vai achar que o PE ta livre e pode mandar alguuma coisa pra lá e dar merda)
+                if(how_many_tasks_PE_is_running(srcProc, task_addr)>0){
+                    while (k>0){
+                        tgtProc = spiralMatrix[k];
+                        task_ID = getSomeTaskID(srcProc, task_addr);
+                        putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);                       
+                        //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);                     
+                        if(!migrationEnvolved(tgtProc, task_confirmed_addr, task_addr)){ // iaçanã: mesma coisa de antes 
+                            if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
+                                //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
+                                prints("send_task_migration\n");
 
-                    if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
-                        //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
-                        prints("send_task_migration\n");
+                                task_addr[task_ID] = tgtProc;
+                                src_vec[task_ID] = srcProc;
 
-                        task_addr[task_ID] = tgtProc;
-                        src_vec[task_ID] = srcProc;
-
-                        //Save to send later
-                        srcProcs[contNumberOfMigrations] = srcProc;
-                        //sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
-                        
-                        contNumberOfMigrations++;
-                        //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
-                        break;
+                                //Save to send later
+                                srcProcs[contNumberOfMigrations] = srcProc;
+                                //sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
+                                
+                                contNumberOfMigrations++;
+                                //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
+                                break;
+                            }
+                        }
+                        k--;
                     }
-                    k--;
                 }
             }
         }
@@ -208,6 +223,10 @@ int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
                 empty = 0;
                 break;                         // breaks
             }
+            if(task_confirmed_addr[i] == getAddress(pe)){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;                         // breaks
+            }
         }
         if(empty){
             return getAddress(pe);
@@ -230,7 +249,11 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
         for(i = 0; i < DIM_X*DIM_Y; i++){
             if(task_addr[i] == pe){ // if you find some task runnin inside that processor
                 empty = 0;
-                break;             // breaks
+                break;              // breaks
+            }
+            if(task_confirmed_addr[i] == pe){ // if you find some task runnin inside that processor
+                empty = 0;
+                break;              // breaks
             }
         }
         if(empty){
@@ -290,7 +313,6 @@ int main(int argc, char **argv)
     char *task_name;
     char *task_number;
     unsigned int yaml_tasks = 0;
-    unsigned int task_addr[DIM_X*DIM_Y];
     int task_start_time[DIM_X*DIM_Y];
     int task_remaining_executions[DIM_X*DIM_Y];
     int task_repeat_after[DIM_X*DIM_Y];
@@ -385,6 +407,7 @@ int main(int argc, char **argv)
 
     for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
         task_addr[i] = 0xFFFFFFFF;
+        task_confirmed_addr[i] = 0xFFFFFFFF;
         task_start_time[i] = 0xFFFFFFF0;
     }
 
@@ -466,8 +489,12 @@ int main(int argc, char **argv)
             disable_interruption(0);
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
-                if(finishedTask[i]==TRUE)
+                if(finishedTask[i]==TRUE){
                     task_addr[i] = 0;
+                    if(appFinished(i, task_applicationID)){
+                        task_confirmed_addr[i] = 0;
+                    }
+                }
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     // calculates the next start time
                     task_start_time[i] = measuredWindows + task_repeat_after[i];

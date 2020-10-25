@@ -108,6 +108,9 @@ int main(int argc, char **argv)
 				running_task = i;
 		}
 
+		// Informs the master that the task has occupied the defined address
+		sendAllocationConfirmation();
+
 		// Send the updt addr msg to every PE
 		for(i=1; i<N_PES; i++){
 			aux[0] =  ((*myAddress << 16) | running_task);
