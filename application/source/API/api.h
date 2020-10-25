@@ -361,19 +361,33 @@ void interruptHandler_NI_RX(void) {
         receivingActive = 1; // Inform the index where the received packet is stored
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
 
-        ///////////////////  Delivers the Message ///////////////////
-        // Alocate the packet message inside the structure
-        deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
-        // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
-        for(i=0;i<deliveredMessage->size;i++){
-            deliveredMessage->msg[i] = incomingPacket[i+4];
-        }
+        if(running_task == incomingPacket[PI_TASK_ID]){
+            ///////////////////  Delivers the Message ///////////////////
+            // Alocate the packet message inside the structure
+            deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
+            // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
+            for(i=0;i<deliveredMessage->size;i++){
+                deliveredMessage->msg[i] = incomingPacket[i+4];
+            }
 
-        // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
-        if(isRawReceive == 1){
-            //prints(">>>>>>Disable RX interruption\n");
-            int_disable(2);
-            isRawReceive = 0;
+            // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
+            if(isRawReceive == 1){
+                //prints(">>>>>>Disable RX interruption\n");
+                int_disable(2);
+                isRawReceive = 0;
+            }
+        }
+        else if(*myAddress == 0){ // if it's the master, then we have an lost packet
+            LOG("Master recebeu um lost packet, enviando para o dono\n");
+        }
+        else{
+            putsvsv("Recebi uma mensagem indevida (taskID = ", incomingPacket[PI_TASK_ID], ") defletindo para o MASTER ", 0);
+            index = getServiceIndex();
+            for(i=0;i<PACKET_MAX_SIZE;i++){
+                myServicePacket[index][i] = incomingPacket[i];
+            }
+            myServicePacket[index][0] = 0; // adjust the header to send to the master
+            SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index));
         }
         
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
