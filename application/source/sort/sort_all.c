@@ -33,8 +33,16 @@ int sortMaster(int state){
 
 	prints("sortMaster started\n");
 
-	for (i = 0; i < SORT_SLAVES; i++)
+	for (i = 0; i < SORT_SLAVES; i++){
 		init_array(array[i], ARRAY_SIZE);
+	}
+
+	for(j = 0; j < ARRAY_SIZE; j++){
+		putsvsv("array[", j, "] = ", array[j][0]);
+		putsvsv("array[", j, "] = ", array[j][1]);
+		putsvsv("array[", j, "] = ", array[j][2]);
+	}
+
 
 	for (i = 0; i < SORT_SLAVES; i++){
 		ReceiveMessage(&theMessage, slave_addr[i]);
