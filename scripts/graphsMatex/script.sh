@@ -11,7 +11,7 @@ python temp_offset.py Temp Temperatures
 python power_total.py Power PowerTotal
 python peak_temp.py Temperatures PeakTemp
 
-gnuplot -c plot_temp4
+gnuplot -c plot_temp
 gnuplot -c plot_power
 gnuplot -c plot_total
 gnuplot -c plot_peak

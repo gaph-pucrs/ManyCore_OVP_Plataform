@@ -73,6 +73,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define TASK_REQUEST_FORWARD 0x80
 #define PE_FINISH_SIMULATION 0x666
 #define PE_SET_FREQUENCY     0x90
+#define TASK_ALLOCATED       0x100
 
 //////////////////////////////
 //////////////////////////////
@@ -82,10 +83,12 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PIPE_SIZE           4 // Defines the PIPE size
 //////////////////////////////
 #define PIPE_OCCUPIED       1
-#define PIPE_FREE           0
+#define PIPE_FREE           -1
+#define PIPE_TRANSMITTING   -2
 #define PIPE_WAIT           0xFFFFFFFF
 //////////////////////////////
 //////////////////////////////
+
 
 ////////////////////////////////////////////////////////////
 // Packet defines --TODO: CHANGE THE PACKET TO MATCH HEMPS STANDART?
@@ -100,8 +103,8 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C);//NI_BASE + 0x2;
 #define PI_REQUESTER        4
 #define PI_PAYLOAD          4
 #define PI_I_MYADDR         4
-#define PI_PROCUDER_ID      5
 #define PI_I_BRANCH         5
+#define PI_PRODUCER         5
 #define PI_I_ARITH          6
 #define PI_I_JUMP           7
 #define PI_I_MOVE           8
@@ -128,6 +131,7 @@ typedef struct Message {
 // API useful stuff
 message *deliveredMessage;                                  // Pointer used by the API to acess the packet that will be transmitted
 unsigned int sendAfterTX[PIPE_SIZE];                        // Informs the TX interruption if there is a packet that must be transmitted
+unsigned int sendServiceAfterTX[PIPE_SIZE];                 // Informs the TX interruption if there is a service packet that must be transmitted
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];      // Used by NI to store the recived packet
 volatile unsigned int myServicePacket[PIPE_SIZE][PACKET_MAX_SIZE];     // Used by the API to create a service packet
 volatile unsigned int receivingActive;                      // Used by the API to inform the processor if the receiving process is done
@@ -137,15 +141,16 @@ volatile unsigned int isRawReceive = 0;                     // Used by the API w
 volatile int insideSendSlot = 0;              
 // API Master - thermal stuff
 volatile unsigned int waitingEnergyReport = 0;
+volatile unsigned int measuredWindows = 0;
 volatile unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 //////////////////////////////
 //////////////////////////////
 
 ////////////////////////////////////////////////////////////
 // PIPE Message buffer
-unsigned int buffer_packets[PIPE_SIZE][MESSAGE_MAX_SIZE];   // The PIPE!
-unsigned int buffer_map[PIPE_SIZE];                         // The PIPE map, informing occupied and empty slots
-unsigned int buffer_history[PIPE_SIZE];                     // The PIPE history, to keep every slot in use, preserving sent packets longer for restauration propouse (not implemented! just an idea) 
+volatile unsigned int buffer_packets[PIPE_SIZE][MESSAGE_MAX_SIZE];   // The PIPE!
+volatile unsigned int buffer_map[PIPE_SIZE];                         // The PIPE map, informing occupied and empty slots
+volatile unsigned int buffer_history[PIPE_SIZE];                     // The PIPE history, to keep every slot in use, preserving sent packets longer for restauration propouse (not implemented! just an idea) 
 volatile unsigned int pendingReq[N_PES];                    // Inform about pending requests
 //////////////////////////////
 //////////////////////////////
@@ -161,6 +166,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 // Migration control                //
 //////////////////////////////////////
 volatile int taskMigrated = -1;
+volatile int migratedTask = -1;
 volatile int running_task = -1;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
@@ -184,8 +190,13 @@ unsigned int get_new_state();
 void set_taskMigrated(int destination);
 
 
-void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]);
-void get_migration_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]);
+void get_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
+void get_migration_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
+
+// MASTER ONLY
+unsigned int task_addr[DIM_X*DIM_Y];
+unsigned int task_confirmed_addr[DIM_X*DIM_Y];
+unsigned int serviceIndexNextTimer = -1;
 //////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
@@ -203,7 +214,7 @@ void FinishApplication();
 void sendFinishTask(unsigned int running_task);
 void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
-void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int task_addr[DIM_X*DIM_Y], unsigned int size);
+void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int taskAddr[DIM_X*DIM_Y], unsigned int size);
 unsigned int getAddress(unsigned int id);
 unsigned int getID(unsigned int addr);
 unsigned int getXpos(unsigned int addr);
@@ -214,17 +225,19 @@ unsigned int getEmptyIndex();
 void bufferPush(unsigned int index);
 void bufferPop(unsigned int index);
 unsigned int getID(unsigned int address);
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr);
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr);
 void interruptHandler_NI_TX(void);
 void interruptHandler_NI_RX(void);
 void interruptHandler_timer(void);
 void addSendAfterTX(unsigned int slot);
 void popSendAfterTX();
+void addServiceAfterTX(unsigned int slot);
+void popServiceAfterTX();
 void prints(char* text);
 void printi(int value);
 void putsv(char* text1, int value1);
 void putsvsv(char* text1, int value1, char* text2, int value2);
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr);
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr, unsigned int producerTaskID);
 void enable_interruptions();
 void disable_interruptions();
 void disable_interruption(unsigned int n);
@@ -282,20 +295,20 @@ unsigned int get_new_state(){
     return new_state;
 }
 
-void get_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
+void get_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]){
     int i;
     for(i=0; i<DIM_X*DIM_Y; i++){
-        task_addr[i] = mapping_table[i];
-        putsvsv("task_addr[", i, "] = ", task_addr[i]);
+        taskAddr[i] = mapping_table[i];
+        putsvsv("task_addr[", i, "] = ", taskAddr[i]);
     }
 }
 
-void get_migration_mapping_table(unsigned int task_addr[DIM_X*DIM_Y]){
+void get_migration_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]){
     int i;
     for(i=0; i<DIM_X*DIM_Y; i++){
-        task_addr[i] = migration_mapping_table[i];
+        taskAddr[i] = migration_mapping_table[i];
         mapping_table[i] = migration_mapping_table[i];
-        putsvsv("task_addr[", i, "] = ", task_addr[i]);
+        putsvsv("task_addr[", i, "] = ", taskAddr[i]);
     }
 }
 
@@ -307,17 +320,29 @@ void set_taskMigrated(int destination){
 ///////////////////////////////////////////////////////////////////
 /* Interruption function for Timer */
 void interruptHandler_timer(void) {
+    int i;
 #if USE_THERMAL
     unsigned int savedClkGating = *clockGating_flag;
 #endif
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     // YOUR TIMER FUNCTION ENTERS HERE
+
 #if USE_THERMAL
     energyEstimation();
 
     *operationFrequency = newFrequency;
     Voltage = newVoltage;
+
+    if(*myAddress == 0){
+        if(*NIcmdTX == NI_STATUS_OFF){
+            SendSlot((unsigned int)&myServicePacket[serviceIndexNextTimer], (0xFFFF0000 | serviceIndexNextTimer)); // WARNING: This may cause a problem!!!!
+        }
+        else{
+            addServiceAfterTX(serviceIndexNextTimer);
+        }
+        serviceIndexNextTimer = -1;
+    }
 
 #endif
     //////////////////////////////////////////////////////////////
@@ -342,8 +367,6 @@ void interruptHandler_NI_RX(void) {
     int requester, i, j, index, taskID, newAddr, newFreq;
     if(incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET){
         tempPacket = TRUE;
-        //waitingEnergyReport = 0;
-        prints("TEA energy packet received!!!\n");
         //deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
         // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
         for(i=0; i<(incomingPacket[PI_SIZE]-3 -2);i++){
@@ -353,45 +376,109 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY /*|| incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET*/){
-        receivingActive = 1; // Inform the index where the received packet is stored
+        if(running_task == incomingPacket[PI_TASK_ID]){
+            receivingActive = 1; // Inform the index where the received packet is stored
+            ///////////////////  Delivers the Message ///////////////////
+            // Alocate the packet message inside the structure
+            deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
+            // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
+            for(i=0;i<deliveredMessage->size;i++){
+                deliveredMessage->msg[i] = incomingPacket[i+4];
+            }
+
+            // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
+            if(isRawReceive == 1){
+                //prints(">>>>>>Disable RX interruption\n");
+                int_disable(2);
+                isRawReceive = 0;
+            }
+        }
+        else if(*myAddress == 0){ // if it's the master, then we have an lost packet
+            putsv("Enviando pacote perdido para endereço: ", task_confirmed_addr[incomingPacket[PI_TASK_ID]]);
+            index = getServiceIndex();
+            myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[incomingPacket[PI_TASK_ID]];
+            myServicePacket[index][PI_SIZE] = incomingPacket[PI_SIZE];
+            myServicePacket[index][PI_TASK_ID] = incomingPacket[PI_TASK_ID];
+            myServicePacket[index][PI_SERVICE] = incomingPacket[PI_SERVICE];
+            for(i = 0; i < incomingPacket[PI_SIZE]; i++){
+                myServicePacket[index][PI_PAYLOAD+i] = incomingPacket[PI_PAYLOAD+i];
+            }
+            if(*NIcmdTX == NI_STATUS_OFF){
+                SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+            }
+            else{
+                addServiceAfterTX(index);
+            }
+        }
+        else{
+            putsvsv("Recebi uma mensagem indevida (taskID = ", incomingPacket[PI_TASK_ID], ") defletindo para o MASTER ", 0);
+            index = getServiceIndex();
+            for(i=0;i<PACKET_MAX_SIZE;i++){
+                myServicePacket[index][i] = incomingPacket[i];
+            }
+            myServicePacket[index][0] = 0; // adjust the header to send to the master
+            SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index));
+        }
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-
-        ///////////////////  Delivers the Message ///////////////////
-        // Alocate the packet message inside the structure
-        deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
-        // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
-        for(i=0;i<deliveredMessage->size;i++){
-            deliveredMessage->msg[i] = incomingPacket[i+4];
-        }
-
-        // Disables RX interruptions after a RAW Receive - giving some time to the processor consume the packet information - IT WILL BE ENABLED IN ANOTHER RawReceive() / ReceiveNessage() 
-        if(isRawReceive == 1){
-            //prints(">>>>>>Disable RX interruption\n");
-            int_disable(2);
-            isRawReceive = 0;
-        }
-        
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == MESSAGE_REQ){
-        //verificar se houve migracao
-            //se houve, fazer forward do request e enviat um TASK_MIGRATION_UPTD
         putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
         requester = incomingPacket[PI_TASK_ID];
-        //producer = incomingPacket[PI_PROCUDER_ID];
+        newAddr = incomingPacket[PI_REQUESTER];
+        taskID = incomingPacket[PI_PRODUCER];// & 0x7FFFFFFF; 
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(!sendFromMsgBuffer(requester, incomingPacket[PI_REQUESTER])){ // if the package is not ready yet add a request to the pending request queue
-            prints("Adicionando ao pendingReq\n");
-            pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+        if(*myAddress == 0){
+            index = getServiceIndex();
+            if(task_confirmed_addr[taskID] != 0)
+                myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[taskID];
+            else
+                myServicePacket[index][PI_DESTINATION] = task_addr[taskID];
+            myServicePacket[index][PI_SIZE] = 4+3;
+            myServicePacket[index][PI_TASK_ID] = requester;
+            myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
+            myServicePacket[index][PI_PAYLOAD] = newAddr;
+            myServicePacket[index][PI_PRODUCER] = taskID;// | 0x80000000;
+            if(serviceIndexNextTimer == -1){
+                serviceIndexNextTimer = index;
+            }
+            else{
+                if(*NIcmdTX == NI_STATUS_OFF){
+                    SendSlot((unsigned int)&myServicePacket[serviceIndexNextTimer], (0xFFFF0000 | serviceIndexNextTimer)); // WARNING: This may cause a problem!!!!
+                }
+                else{
+                    addServiceAfterTX(serviceIndexNextTimer);
+                }
+                serviceIndexNextTimer = index;
+            }
         }
+        else if(taskID == running_task){
+            if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
+                prints("Adicionando ao pendingReq\n");
+                pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+            }
+        }
+        else if(taskMigrated != -1 && migratedTask == taskID){
+            forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
+        }
+        /*else if((incomingPacket[PI_PRODUCER] & 0x80000000) != 0){
+            prints("Adicionando ao pendingReq sob ordem do Master\n");
+            pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+        }*/
+        else{
+            prints("A lost request, sending to MASTER\n");
+            forwardMsgRequest(requester, 0, newAddr, taskID);
+        }        
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
         waitingEnergyReport++;
         putsvsv("Energy packet received from PE ", getID(incomingPacket[PI_PAYLOAD+3]), " total energy packet received until now: ", waitingEnergyReport);
         energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD+3])][getYpos(incomingPacket[PI_PAYLOAD+3])] = incomingPacket[PI_PAYLOAD+1]; // total energy
-        if(waitingEnergyReport == N_PES){ // send to TEA
-            prints("Sending energy packet to TEA!\n");
+
+        if(waitingEnergyReport >= N_PES){
+            waitingEnergyReport = 0;
+            measuredWindows++;
             executedInstPacket[PI_DESTINATION] = makeAddress(0,0) | PERIPH_WEST;
             executedInstPacket[PI_SIZE] = DIM_Y*DIM_X + 2 + 3;
             tsend = clock();
@@ -405,25 +492,30 @@ void interruptHandler_NI_RX(void) {
                     index++;
                 }
             }
-            waitingEnergyReport = 0;
-            if(*NIcmdTX == NI_STATUS_OFF){
-            // Sends the packet
+            if(*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
                 SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-            }
-            else{
-                // Set it to send after the next TX interruption
+            else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet 
                 sendExecutedInstPacket = TRUE;
-            } 
-        }   
+        }
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
-        mapping_en = 1;
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         mapping_en = 1;
+        migration_dst = 0;
+        migration_src = 0;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
+    }
+    else if(incomingPacket[PI_SERVICE] == TASK_ALLOCATED){
+        if(*myAddress == 0 && task_addr[incomingPacket[PI_TASK_ID]] == incomingPacket[PI_PAYLOAD]){
+            task_confirmed_addr[incomingPacket[PI_TASK_ID]] = task_addr[incomingPacket[PI_TASK_ID]];
+        }
+        else{
+            putsvsv("ERROR - TASK_ALLOCATED: Task ", incomingPacket[PI_TASK_ID], " allocated at ", incomingPacket[PI_PAYLOAD]);
+        }
+        *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_SRC){
         prints("Task migration received\n");
@@ -439,9 +531,16 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_DEST){
         prints("Task destination received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++){
-            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        // Acha a tarefa que migrou e atualiza só o endereço dela
+        // as outras atualizações vão vir conforme as tasks forem migrando
+        for(i=0; i<num_tasks;i++){
+            if((incomingPacket[PI_PAYLOAD+i] & 0x80000000) != 0){
+                mapping_table[i] = incomingPacket[PI_PAYLOAD+i] & 0x7FFFFFFF;
+            }
         }
+        /*for(i=0; i<num_tasks; i++){
+            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        }*/
         migration_dst = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
@@ -466,6 +565,22 @@ void interruptHandler_NI_RX(void) {
             buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
         }
         bufferPush(index);
+        requester = checkPendingReq(buffer_packets[index][PI_TASK_ID]);
+        if(requester){
+            putsvsv("Encontrei um pending da tarefa ", buffer_packets[index][PI_TASK_ID], " para o endereço ", requester);
+            // Update the address to match the requester address 
+            buffer_packets[index][PI_DESTINATION] = requester;
+            // Clear the pending request
+            pendingReq[buffer_packets[index][PI_TASK_ID]] = 0;
+            // Sends the packet
+            buffer_map[index] = PIPE_TRANSMITTING;
+            if(*NIcmdTX == NI_STATUS_OFF){
+                SendSlot((unsigned int)&buffer_packets[index], index);
+            }
+            else{
+                addSendAfterTX(index);
+            }
+        }
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PEND){
@@ -485,9 +600,6 @@ void interruptHandler_NI_RX(void) {
         printi(incomingPacket[PI_PAYLOAD]);
         taskID = incomingPacket[PI_PAYLOAD] & 0x0000FFFF;
         newAddr = (incomingPacket[PI_PAYLOAD] & 0xFFFF0000) >> 16;
-        /*if(mapping_table[taskID] == *myAddress){
-            taskMigrated = -1;
-        }*/
         mapping_table[taskID] = newAddr;
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
@@ -500,9 +612,10 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_REQUEST_FORWARD){
         putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
         taskMigrated = incomingPacket[PI_REQUESTER];
+        migratedTask = incomingPacket[PI_TASK_ID];
         for(i = 0; i < N_PES; i++){
             if(pendingReq[i] != 0){
-                forwardMsgRequest(i, taskMigrated, pendingReq[i]);
+                forwardMsgRequest(i, taskMigrated, mapping_table[i], incomingPacket[PI_TASK_ID]);
                 pendingReq[i] = 0;
             }
         }
@@ -548,23 +661,25 @@ void interruptHandler_NI_RX(void) {
 
 ///////////////////////////////////////////////////////////////////
 /* Verify if a message for a given requester is inside the buffer, if yes then send it and return 1 else returns 0 */
-unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_addr){
+unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAddr){
     int i;
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        if(buffer_map[i]==PIPE_OCCUPIED){ // if this position has something valid
+        //putsvsv("buffer_map=", buffer_map[i], "   task_dest=", buffer_packets[i][PI_TASK_ID]);
+        if(buffer_map[i] != PIPE_FREE && buffer_map[i] != PIPE_TRANSMITTING){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
-                buffer_packets[i][PI_DESTINATION] = requester_addr;//mapping_table[requester];
-                //if(buffer_packets[i][PI_SEND_TIME] < foundSent){ // verify if the founded packet is newer
+                if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
-                    foundSent = buffer_packets[i][PI_SEND_TIME];
-                //}
+                    foundSent = buffer_map[i];
+                    //prints("xng\n");
+                }
             }
         }
     }
     if(found != PIPE_WAIT){
-        putsvsv("Found message inside the buffer ", found, "sending to addr ", requester_addr);
+        buffer_map[found] = PIPE_TRANSMITTING;
+        buffer_packets[i][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
             //prints("Enviando do PIPE\n");
@@ -578,10 +693,10 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requester_ad
         }
         return 1; // packet was sent with success
     }
-    else if(taskMigrated != -1){
-        forwardMsgRequest(requester, taskMigrated, requester_addr);
+    /*else if(taskMigrated != -1){
+        forwardMsgRequest(requester, taskMigrated, requesterAddr);
         return 1;
-    }
+    }*/
     else{
         return 0; // packet is not in the buffer yet
     }
@@ -594,6 +709,20 @@ void addSendAfterTX(unsigned int slot){
     do{
         if(sendAfterTX[i] == PIPE_WAIT){
             sendAfterTX[i] = slot;
+            break;
+        }
+        i++;
+    }while(i<PIPE_SIZE);
+    return;
+}
+
+///////////////////////////////////////////////////////////////////
+/* Adds to the end of the list an slot to send the service packet after the next TX interruption */
+void addServiceAfterTX(unsigned int slot){
+    int i=0;
+    do{
+        if(sendServiceAfterTX[i] == PIPE_WAIT){
+            sendServiceAfterTX[i] = slot;
             break;
         }
         i++;
@@ -618,6 +747,22 @@ void popSendAfterTX(){
 }
 
 ///////////////////////////////////////////////////////////////////
+/* Removes the first send service slot in the list and shift others keeping the insertion orther  */
+void popServiceAfterTX(){
+    int i;
+    for(i=0; i<PIPE_SIZE; i++){
+        // in the last one we put a blank value (pipe_wait)
+        if(i == PIPE_SIZE-1){ 
+            sendServiceAfterTX[i] = PIPE_WAIT;
+        }
+        // others will be shifted
+        else{
+            sendServiceAfterTX[i] = sendServiceAfterTX[i+1];
+        }   
+    }
+}
+
+///////////////////////////////////////////////////////////////////
 /* Interruption function for Network Interface TX module */ 
 void interruptHandler_NI_TX(void) {
 #if USE_THERMAL
@@ -634,20 +779,25 @@ void interruptHandler_NI_TX(void) {
         //prints("TX - Clearing service flag\n");
         index = 0x0000FFFF & transmittingActive;
         transmittingActive = PIPE_WAIT;
-        if(index <= PIPE_SIZE){
+        if(index < PIPE_SIZE){
             //prints("TX - regular servicePacket\n");
             myServicePacket[index][0] = 0xFFFFFFFF;
         }
     }
     else{
         while(1){LOG("%x - ERROR! Unexpected interruption! NI_TX TA(%x) - can not handle it! Call the SAC!\n",*myAddress,transmittingActive);}
-    }
+    }    
     *NIcmdTX = DONE;
-
+    
     // If there is some packet inside the PIPE waiting to be sent, send it!
     if(sendAfterTX[0] <= PIPE_SIZE){ 
         SendSlot((unsigned int)&buffer_packets[sendAfterTX[0]], sendAfterTX[0]);
         popSendAfterTX();
+    }
+    // 
+    else if(sendServiceAfterTX[0] <= PIPE_SIZE){
+        SendSlot((unsigned int)&myServicePacket[sendServiceAfterTX[0]], (sendServiceAfterTX[0] | 0xFFFF0000));
+        popServiceAfterTX();
     }
 #if USE_THERMAL
     // If there is a Executed Instructions Packet available to send, send it!
@@ -657,10 +807,12 @@ void interruptHandler_NI_TX(void) {
     }
 #endif
     
+
     //////////////////////////////////////////////////////////////
 #if USE_THERMAL
 #endif
 }
+
 
 ///////////////////////////////////////////////////////////////////
 /* Initiation function */
@@ -681,6 +833,7 @@ void OVP_init(){
     
     // 
     finishSimulation_flag = 0;
+    measuredWindows = 0;
 
     // Inform the processor ID to the router
     *myAddress = impProcessorId();
@@ -695,6 +848,7 @@ void OVP_init(){
     for(i=0;i<PIPE_SIZE;i++){
         buffer_map[i] = PIPE_FREE;
         sendAfterTX[i] = PIPE_WAIT;
+        sendServiceAfterTX[i] = PIPE_WAIT;
         myServicePacket[i][0] = 0xFFFFFFFF;
     }
 
@@ -798,11 +952,11 @@ void requestMsg(unsigned int from){
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = mapping_table[from];
     putsv("Pedindo mesnagem de: ", mapping_table[from]);
-    myServicePacket[index][PI_SIZE] = 1 + 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = running_task; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = *myAddress;
-    myServicePacket[index][PI_PROCUDER_ID] = from;
+    myServicePacket[index][PI_PRODUCER] = from;
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
@@ -821,22 +975,54 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
 }
 
 void sendPipe(unsigned int dest){
-    int i, j, index;
+    int i, j, index, older, empty;
     putsv("sendPipe()", dest);
-    for (j = 0; j < PIPE_SIZE; j++){
-        if(buffer_map[j] == PIPE_OCCUPIED && transmittingActive != j){
+    while(empty != PIPE_SIZE){
+        older = -1;
+        empty = 0;
+        // Loop to find the oldest message inside the PIPE
+        for (j = 0; j < PIPE_SIZE; j++){
+            //putsv("buffer map: ", buffer_map[j]);
+            if(buffer_map[j] < older && buffer_map[j] != PIPE_FREE && buffer_map[j] != PIPE_TRANSMITTING){
+                //prints("older = j1\n");
+                older = j;
+            }
+            else if(older == -1 && buffer_map[j] != PIPE_FREE && buffer_map[j] != PIPE_TRANSMITTING){
+                //prints("older = j2\n");
+                older = j;
+            }
+            else{
+                empty++;
+            }
+        }
+        // If it finds something inside the pipe
+        if(older != -1){
             index = getServiceIndex();
             myServicePacket[index][PI_DESTINATION] = dest;
             myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
             myServicePacket[index][PI_TASK_ID] = running_task;
             myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
-            prints("> enviando\n");
+            putsv("> enviando older: ", older);
             for (i = 0; i < MESSAGE_MAX_SIZE; i++){
-                myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[j][i];
+                myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[older][i];
             }
-            bufferPop(j);
+            bufferPop(older);
             SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
         }
+            
+            /*if (buffer_map[j] > PIPE_OCCUPIED){
+                index = getServiceIndex();
+                myServicePacket[index][PI_DESTINATION] = dest;
+                myServicePacket[index][PI_SIZE] = PACKET_MAX_SIZE;
+                myServicePacket[index][PI_TASK_ID] = running_task;
+                myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PIPE;
+                prints("> enviando\n");
+                for (i = 0; i < MESSAGE_MAX_SIZE; i++){
+                    myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[j][i];
+                }
+                bufferPop(j);
+                SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
+            }*/
     }
 }
 
@@ -857,15 +1043,22 @@ void sendPendingReq(unsigned int dest){
     prints("> pendReq enviado\n");
 }
 
-void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr){
+void forwardMsgRequest(unsigned int requester, unsigned int origin_addr, unsigned int requester_addr, unsigned int producerTaskID){
     int index = getServiceIndex();
     putsvsv("Forwarding msg request from task ", requester, " para o endereco: ", origin_addr);
     myServicePacket[index][PI_DESTINATION] = origin_addr;
-    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 2 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = requester; //task id do requester
     myServicePacket[index][PI_SERVICE] = MESSAGE_REQ;
     myServicePacket[index][PI_REQUESTER] = requester_addr;
-    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+    myServicePacket[index][PI_PRODUCER] = producerTaskID;
+    if(*NIcmdTX == NI_STATUS_OFF){
+        SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+    }
+    else{
+        addServiceAfterTX(index);
+    }
+    prints("Slot sent\n");
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -938,9 +1131,6 @@ void SendMessage(message *theMessage, unsigned int destination_id){
     for(a=0;a<theMessage->size;a++){
         buffer_packets[index][a+4] = theMessage->msg[a];
     }
-    //////////////////////////////////////////
-    // Change the selected buffer position to occupied
-    bufferPush(index);
     // Once the packet is ready, check if the request has arrived
     dest_addr = checkPendingReq(destination_id);
     if(dest_addr){
@@ -950,7 +1140,13 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         // Update the address to match the requester address 
         buffer_packets[index][PI_DESTINATION] = dest_addr;
         // Sends the packet
+        buffer_map[index] = PIPE_TRANSMITTING;
         SendSlot((unsigned int)&buffer_packets[index], index);
+    }
+    else{
+        //////////////////////////////////////////
+        // Change the selected buffer position to occupied
+        bufferPush(index);
     }
 #if USE_THERMAL
 #endif
@@ -983,14 +1179,12 @@ unsigned int getEmptyIndex(){
 ///////////////////////////////////////////////////////////////////
 /* Changes the buffer controls to occupied for a given index */
 void bufferPush(unsigned int index){
-    putsv("-- Pushing in index = ", index);
-    buffer_map[index] = PIPE_OCCUPIED;
+    buffer_map[index] = clock();
 }
 
 ///////////////////////////////////////////////////////////////////
 /* Releases a buffer position and increases the history */
 void bufferPop(unsigned int index){
-    putsv("-- Cleaning index = ", index);
     buffer_history[index]++; // Increase the history
     buffer_map[index] = PIPE_FREE;
 }
@@ -1008,13 +1202,12 @@ unsigned int getID(unsigned int address){
 void SendSlot(unsigned int addr, unsigned int slot){
     insideSendSlot = 1;
 #if USE_THERMAL
-#endif    
-    ////////////////////////////////////////////////
-    while(*NIcmdTX != NI_STATUS_OFF){
-        //prints("PRESO2\n");
+#endif
 #if USE_THERMAL
         *clockGating_flag = TRUE;
 #endif
+    ////////////////////////////////////////////////
+    while(*NIcmdTX != NI_STATUS_OFF){
         /* waits until NI is ready to execute an operation */}
 #if USE_THERMAL
     *clockGating_flag = FALSE;
@@ -1023,21 +1216,13 @@ void SendSlot(unsigned int addr, unsigned int slot){
     disable_interruption(2); // rx
     //disable_interruption(1); // tx
     disable_interruption(0); // timer
-    int_disable(1);
-    int_disable(0);
 
-#if USE_THERMAL
-#endif
     while(*NIcmdTX != NI_STATUS_OFF){
-        //prints("PRESO3\n");
+        prints("PRESO3\n");
         /* waits until NI is ready to execute an operation */}
-#if USE_THERMAL
-#endif
 
     transmittingActive = slot;
     SendRaw(addr);
-    int_enable(0);
-    int_enable(1);
     //enable_interruption(1); // tx
     enable_interruption(2); // rx
     enable_interruption(0); // timer
@@ -1059,15 +1244,14 @@ void SendRaw(unsigned int addr){
 ///////////////////////////////////////////////////////////////////
 /* Waits until every packet is transmitted */
 void FinishApplication(){
-    //unsigned int done;
+    unsigned int done;
     unsigned int i;
     /*do{
-        done = 1; // assumes that every packet was transmitted */
+        done = 1; // assumes that every packet was transmitted 
         for(i=0;i<PIPE_SIZE;i++){
-            if(buffer_map[i]!=EMPTY) //done = 0; // if some position in the buffer is occupied then the program must wait!
-                putsv("Buffer ocupado: ", i);
+            if(buffer_map[i]!=EMPTY) done = 0; // if some position in the buffer is occupied then the program must wait!
         }
-    /*}while(done==0);*/
+    }while(done==0);*/
 
     // Activate the clock gating and waits until every other processor finish its task
 #if USE_THERMAL
@@ -1123,7 +1307,7 @@ void putsvsv(char* text1, int value1, char* text2, int value2){
 ///////////////////////////////////////////////////////////////////
 //
 unsigned int random(){
-    unsigned int lfsr = 0xACE1ACE1;
+    unsigned int lfsr = 0xACE1ACE1 | clock();
     unsigned bit;
     bit  = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5) ) & 1;
     return lfsr =  (lfsr >> 1) | (bit << 15);
@@ -1174,7 +1358,7 @@ int getServiceIndex(){
     int i;
     int index = -1;
     while(index<0){
-        prints("PRESO4\n");
+        //prints("PRESO4\n");
         for(i=0; i<PIPE_SIZE; i++){
             if(myServicePacket[i][0] == 0xFFFFFFFF)
                 index = i;
@@ -1195,3 +1379,15 @@ void printFinish(){
         putsvsv("pipeStatus[", i,"] = ", buffer_map[i]);
     }
 }
+
+void sendAllocationConfirmation(){
+    int index = getServiceIndex();
+    myServicePacket[index][PI_DESTINATION] = 0; // Thermal master address
+    myServicePacket[index][PI_SIZE] = 3 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = TASK_ALLOCATED;
+    myServicePacket[index][PI_PAYLOAD] = *myAddress;
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
+

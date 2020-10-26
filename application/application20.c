@@ -15,11 +15,10 @@
 #include "audio_video_config.h"
 #include "thermalManagement_config.h"
 
-
 message theMessage;
 
 #define NUM_TASK	N_PES-1
-int task_addr[NUM_TASK];
+int my_task_addr[NUM_TASK];
 int new_task_addr[NUM_TASK];
 
 int synthetic_taskA(int state);
@@ -39,7 +38,7 @@ int sort_slave(int task);
 int aesMaster(int state);
 int aes_slave();
 
-
+// AV threads
 int av_split(int state);
 int av_ivlc(int state);
 int av_iquant(int state);
@@ -91,7 +90,7 @@ int main(int argc, char **argv)
 
 	while(1){
 
-		/* waits for mapping or migrating tasks and receives mapping table */
+		// waits for mapping or migrating tasks and receives mapping table
 		*clockGating_flag = TRUE;
 		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ }
 
@@ -99,16 +98,18 @@ int main(int argc, char **argv)
 		if(finishSimulation_flag)
 			break;
 
-		*clockGating_flag = FALSE;
 		set_taskMigrated(-1); // resets this, because it's running a new task
-		get_mapping_table(task_addr);
+		*clockGating_flag = FALSE;
+		get_mapping_table(my_task_addr);
 
 		// Get its task to run
 		for (i = 0; i < NUM_TASK; i++){
-			if (task_addr[i] == *myAddress)
+			if (my_task_addr[i] == *myAddress)
 				running_task = i;
 		}
-		putsv("NEW RUNNING TASK: ", running_task);
+
+		// Informs the master that the task has occupied the defined address
+		sendAllocationConfirmation();
 
 		// Send the updt addr msg to every PE
 		for(i=1; i<N_PES; i++){
@@ -119,6 +120,7 @@ int main(int argc, char **argv)
 		
 		if(get_mapping()){
 			prints("Task "); printi(running_task); prints("mapped\n");
+			state = 0;
 			clear_mapping();
 		}
 		else if(get_migration_dst()){
@@ -258,7 +260,8 @@ int main(int argc, char **argv)
 			printFinish();
 			sendFinishTask(running_task);
 		}
-		else{			
+		else{	
+			migratedTask = running_task;		
 			get_migration_mapping_table(new_task_addr);
 			destination = new_task_addr[running_task];
 			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
@@ -268,14 +271,14 @@ int main(int argc, char **argv)
 			
 			sendPipe(destination);
 			
-			//disable_interruptions();
 			disable_interruption(2);
 			set_taskMigrated(destination); // save the new destination of this 
 			sendPendingReq(destination);
 			enable_interruption(2);
-			//enable_interruptions();		
 			
+			new_task_addr[running_task] = new_task_addr[running_task] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
+			new_task_addr[running_task] = new_task_addr[running_task] & 0x7FFFFFFF;
 			running_task = -1;
 		}
 	}
@@ -503,7 +506,8 @@ int dijkstra_divider(int state)
     int AdjMatrix[NUM_NODES][NUM_NODES];
 	int i, j, k, iter;
 	char buffer[70];
-
+	k = 0;
+	
 	prints("STARTING DIVIDER\n"); 
 
 	for (i=0;i<NUM_NODES;i++) {
@@ -556,12 +560,13 @@ int dijkstra_divider(int state)
 		}
 	}
 
-
+	prints("Sending KILL msg\n");
     AdjMatrix[0][0] = KILL;
 	for (i=0; i<NUM_NODES; i++) {
 		for (j=0; j<NUM_NODES; j++) {
 			theMessage.msg[j] = AdjMatrix[i][j];
 		}
+		putsvsv("i: ", i, "theMsg[0]: ", theMessage.msg[0]);
 		SendMessage(&theMessage, dijkstra_0);
 		SendMessage(&theMessage, dijkstra_1);
 		SendMessage(&theMessage, dijkstra_2);
@@ -594,9 +599,19 @@ int dijkstra_slave()
 			ReceiveMessage(&theMessage, divider);
 			for (j=0; j<NUM_NODES; j++){
 				AdjMatrix[i][j] = theMessage.msg[j];
+				if(theMessage.msg[j] == KILL){
+					prints("adjMatrix["); 
+					printi(i); 
+					prints("]["); 
+					printi(j); 
+					prints("] = "); 
+					printi(theMessage.msg[j]); 
+					prints("\n");
+				}
 			}
 		}
-		calc = AdjMatrix[0][0];		
+		calc = AdjMatrix[0][0];
+		putsv("adjMatrix[0][0]", calc);	
 		if (calc == KILL) break;
 
 		for (i=0;i<NUM_NODES;i++){
@@ -1573,410 +1588,6 @@ int dtw_recognizer(int state){
 	prints("DTW Recognizer Finished!\n");
 	return 0;
 }
-
-
-#define TASKS 300
-#define SLAVES 3
-
-
-void init_array(int *array, int size){
-	int i;
-
-	for (i = 0; i < size; i++)
-		array[i] = size - i;
-}
-
-
-void print_array(int *array, int size){
-	int i;
-	for (i = 0; i < size; i++) {
-		printi(array[i]);
-	}
-	prints("\n");
-
-}
-
-int sortMaster(int state){
-	int i, j;
-	int slave_addr[SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
-
-	int array[ARRAY_SIZE][SLAVES];
-	int slave_task[SLAVES];
-	int task = 0;
-
-	int msg_kill = KILL_PROC;
-
-	prints("sortMaster started");
-
-	for (i = 0; i < SLAVES; i++)
-		init_array(array[i], ARRAY_SIZE);
-
-	for (i = 0; i < SLAVES; i++){
-		ReceiveMessage(&theMessage, slave_addr[i]);
-		prints("Received ");
-		printi(theMessage.size);
-		prints(" bytes\n");
-		theMessage.size = ARRAY_SIZE;
-		for (j = 0; j < ARRAY_SIZE; j++)
-			theMessage.msg[j] = array[i][j];
-		SendMessage(&theMessage, slave_addr[i]);
-		prints("Packet sent\n");
-		task++;
-	}
-
-	for (i = 0; i < TASKS; i++){
-		ReceiveMessage(&theMessage, slave_addr[i%SLAVES]);
-		prints("Received array from slave: ");
-		printi(i%SLAVES);
-		
-		//print_array(msg.msg, ARRAY_SIZE);
-		slave_task[i%SLAVES] = task;
-		if (task == TASKS){
-			theMessage.size = 1;
-			theMessage.msg[0] = msg_kill;
-			SendMessage(&theMessage, slave_addr[i%SLAVES]);
-			prints("Master Sening kill to ");
-			printi(i%SLAVES);
-		}
-		else {
-			theMessage.size = ARRAY_SIZE;
-			for (j = 0; j < ARRAY_SIZE; j++)
-				theMessage.msg[j] = array[i%SLAVES][j];
-			SendMessage(&theMessage, slave_addr[i%SLAVES]);
-			task++;
-		}
-	}
-	return 0;
-}
-
-
-int sort_slave(int task){
-	int task_request[2];
-	int array[ARRAY_SIZE];
-	int i;
-
-	task_request[0] = task;
-	task_request[1] = TASK_REQUEST;
-
-	prints("sort_slave started");
-
-    /*Requests initial task*/
-    theMessage.size = 2;
-    for (i = 0; i < 2; i++)
-    	theMessage.msg[i] = task_request[i];
-
-    SendMessage(&theMessage, sort_master);
-
-    /* Wait for a task, execute and return result to master*/
-    for (;;) {
-    	ReceiveMessage(&theMessage, sort_master);
-    	prints("Packet received\n");
-    	if (theMessage.msg[0] == KILL_PROC) break;
-		quicksort(theMessage.msg, 0, ARRAY_SIZE-1);
-		SendMessage(&theMessage, sort_master);
-
-		//Migration breakpoint
-		if(get_migration_src()){
-			prints("sort_slave migrating.\n");
-			clear_migration_src();
-			return 1;
-		}
-    }
-    return 0;
-}
-
-/*********************************************************************
-* Filename:   aes_sl(n).c
-* Author:     Leonardo Rezende Juracy and Luciano L. Caimi
-* Copyleft:    
-* Disclaimer: This code is presented "as is" without any guarantees.
-* Details:   
-*********************************************************************/
-
-/*************************** HEADER FILES ***************************/
-#include "source/aes/aes.h"
-/**************************** VARIABLES *****************************/
-
-
-/*************************** MAIN PROGRAM ***************************/
-int aes_slave()
-{
-	unsigned int key_schedule[60];
-	int qtd_messages, op_mode, x, flag=1, id = -1, i;
-	unsigned int enc_buf[128];
-	unsigned int input_text[16]; 
-	unsigned int key[1][32] = {
-		{0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,0x2b,0x73,0xae,0xf0,0x85,0x7d,0x77,0x81,0x1f,0x35,0x2c,0x07,0x3b,0x61,0x08,0xd7,0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4}
-	};
-
-	printi(clock());
-    prints("task AES SLAVE started - ID:"); 
-	aes_key_setup(&key[0][0], key_schedule, 256);    
-    
-    while(flag){
-		ReceiveMessage(&theMessage, aes_master);
-		memcpy(input_text, theMessage.msg, 12);
-			
-#ifdef debug_comunication_on
-	prints(" ");  
-	prints("Slave configuration");
-	for(i=0; i<3;i++){
-		printi(input_text[i]);	
-	}
-	prints(" "); 
-#endif 
-				
-		op_mode = input_text[0];
-		qtd_messages = input_text[1];
-		x = input_text[2];	
-		
-		if(id == -1){
-				id = x;
-				printi(id);
-		}	
-		prints("Operation:"); 
-		printi(op_mode);
-		prints("Blocks:"); 		
-		printi(qtd_messages);
-
-		if (op_mode == END_TASK){
-			flag = 0;
-			qtd_messages = 0;
-		}
-		for(x = 0; x < qtd_messages; x++){
-			ReceiveMessage(&theMessage, aes_master);		
-			memcpy(input_text, theMessage.msg, 4*AES_BLOCK_SIZE);
-			
-#ifdef debug_comunication_on
-	prints(" ");  
-	prints("received msg");
-	for(i=0; i<16;i++){
-		printi(input_text[i]);	
-	}
-	prints(" "); 
-#endif 
-			
-			if(op_mode == CIPHER_MODE){
-				prints("encript");				
-				aes_encrypt(input_text, enc_buf, key_schedule, KEY_SIZE);	
-			}
-			else{
-				prints("decript");					
-				aes_decrypt(input_text, enc_buf, key_schedule, KEY_SIZE);
-			}			
-			theMessage.size = 4*AES_BLOCK_SIZE;
-			memcpy( theMessage.msg, enc_buf,4*AES_BLOCK_SIZE);
-			SendMessage(&theMessage, aes_master);	
-		}
-		//Migration breakpoint
-		if(get_migration_src()){
-			prints("aes_slave migrating.\n");
-			clear_migration_src();
-			return 1;
-		}
-	}
-    prints("task AES SLAVE finished  - ID: ");
-    printi(id);
-    printi(clock());
-   
-	return 0;	
-}
-
-/*************************** HEADER FILES ***************************/
-#include "source/aes/aes_master.h"
-/***************************** DEFINES ******************************/
-// total message length
-#define MSG_LENGHT 2048			
-// number of efectived used slaves
-#define NUMBER_OF_SLAVES 4	
-// number of total slaves allocated
-#define MAX_SLAVES 4		 	
-
-/**************************** VARIABLES *****************************/
-
-//index of slaves (slave names)
-int Slave[MAX_SLAVES] = {aes_slave1,aes_slave2,aes_slave3,aes_slave4};
-
-/*************************** MAIN PROGRAM ***************************/
-
-int aesMaster(int state)
-{
-	volatile int x, y, i,j;
-	int plain_msg[MSG_LENGHT];
-	int cipher_msg[MSG_LENGHT], decipher_msg[MSG_LENGHT];
-	int msg_length, blocks, qtd_messages[MAX_SLAVES];
-	int pad_value, aux_msg[3];
-	int aux1_blocks_PE;
-	int aux2_blocks_PE;	
-
-	// fill each block with values 'A', 'B', ...
-	for(x = 0; x < MSG_LENGHT; x++){
-		plain_msg[x] = ((x/16)%26)+0x41;
-	}
-	
-    prints("task AES started.");
-    printi(clock());
-
-	// calculate number of block and pad value (PCKS5) of last block
-	msg_length = MSG_LENGHT;	
-	blocks = (MSG_LENGHT%AES_BLOCK_SIZE)==0 ? (MSG_LENGHT/AES_BLOCK_SIZE) : (MSG_LENGHT/AES_BLOCK_SIZE)+1;
-	pad_value = (AES_BLOCK_SIZE - (msg_length%AES_BLOCK_SIZE))%AES_BLOCK_SIZE;	
-	
-	prints(" ");
-	prints("Blocks:");	
-	printi(blocks);
-
-#ifdef debug_comunication_on	
-    prints(" ");
-    prints("plain msg");
-    for(x=0; x<MSG_LENGHT-1;x++){
-		printi(plain_msg[x]);		
-	}
-#endif
-
-	//	Calculate number of blocks/messages to sent
-	//   to each Slave_PE
-	aux1_blocks_PE = blocks / NUMBER_OF_SLAVES;
-	aux2_blocks_PE = blocks % NUMBER_OF_SLAVES;
-	
-	////////////////////////////////////////////////
-	//				Start Encrypt				  //
-	////////////////////////////////////////////////	
-	for(x = 0; x < MAX_SLAVES; x++){
-		qtd_messages[x] = aux1_blocks_PE;
-		if(x < aux2_blocks_PE)
-			qtd_messages[x] += 1;
-	}
-	
-	// Send number of block and operation mode and ID
-	// to each Slave_PE
-	for(x=0; x < MAX_SLAVES; x++){
-		theMessage.size = sizeof(aux_msg);
-		aux_msg[0] = CIPHER_MODE;
-		aux_msg[1] = qtd_messages[x];
-		aux_msg[2] = x+1;
-		if(x >= NUMBER_OF_SLAVES) // zero messages to Slave not used
-			aux_msg[0] = END_TASK;
-		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
-		SendMessage(&theMessage, Slave[x]);  
-	}
-
-	// Send blocks to Cipher and 
-	// Receive the correspondent block Encrypted
-	for(x = 0; x < blocks+1; x += NUMBER_OF_SLAVES){
-		// send a block to Slave_PE encrypt
-		for(y = 0; y < NUMBER_OF_SLAVES; y++){
-			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
-				theMessage.size = 4*AES_BLOCK_SIZE;
-				memcpy(theMessage.msg, &plain_msg[(x+y)*AES_BLOCK_SIZE], 4*AES_BLOCK_SIZE);
-				SendMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
-			}
-		}
-	
-		// Receive Encrypted block from Slave_PE
-		for(y = 0; y < NUMBER_OF_SLAVES; y++){
-			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
-				ReceiveMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
-				j = 0;
-				for (i=(x+y)*AES_BLOCK_SIZE;i < ((x+y)*AES_BLOCK_SIZE) + AES_BLOCK_SIZE; i++)
-				{
-					cipher_msg[i] = theMessage.msg[j];
-					j++;
-				}
-				j = 0;
-				qtd_messages[(x+y) % NUMBER_OF_SLAVES]--;
-			}
-		}
-	}
-#ifdef debug_comunication_on
-	prints(" ");  
-	prints("cipher msg");
-	for(i=0; i<MSG_LENGHT;i++){
-		printi(cipher_msg[i]);		
-	}
-	prints(" "); 
-#endif 
-	
-	////////////////////////////////////////////////
-	//				Start Decrypt				  //
-	////////////////////////////////////////////////
-	for(x = 0; x < NUMBER_OF_SLAVES; x++){
-		qtd_messages[x] = aux1_blocks_PE;
-		if(x <= aux2_blocks_PE)
-			qtd_messages[x] += 1;
-	}
-	
-	// Send number of block and operation mode
-	// to each Slave_PE
-	for(x=0; x < NUMBER_OF_SLAVES; x++){
-		theMessage.size = sizeof(aux_msg);
-		aux_msg[0] = DECIPHER_MODE;
-		aux_msg[1] = qtd_messages[x];
-		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
-		SendMessage(&theMessage, Slave[x]);  
-	}
-
-	// Send blocks to Cipher and 
-	// Receive the correspondent block Encrypted
-	for(x = 0; x < blocks+1; x += NUMBER_OF_SLAVES){
-		// send each block to a Slave_PE
-		for(y = 0; y < NUMBER_OF_SLAVES; y++){
-			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
-				theMessage.size = 4*AES_BLOCK_SIZE;
-				memcpy(theMessage.msg, &cipher_msg[(x+y)*AES_BLOCK_SIZE], 4*AES_BLOCK_SIZE);
-				SendMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);   
-			} 
-		}
-		// Receive Encrypted block from Slave_PE
-		for(y = 0; y < NUMBER_OF_SLAVES; y++){
-			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
-				ReceiveMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
-				j = 0;
-				for (i=(x+y)*AES_BLOCK_SIZE;i < ((x+y)*AES_BLOCK_SIZE) + AES_BLOCK_SIZE; i++)
-				{
-					decipher_msg[i] = theMessage.msg[j];
-					j++;
-				}
-				j = 0;
-				qtd_messages[(x+y) % NUMBER_OF_SLAVES]--;
-			}
-		}
-	}
-#ifdef debug_comunication_on	
-	prints("decipher msg");
-    for(x=0; x<MSG_LENGHT-1;x++){
-		printi(decipher_msg[x]);		
-	}
-#endif
-	//  End tasks still running
-	//  End Applicattion
-	for(x=0; x < NUMBER_OF_SLAVES; x++){
-		theMessage.size = sizeof(aux_msg);
-		aux_msg[0] = END_TASK;
-		aux_msg[1] = 0;
-		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
-		SendMessage(&theMessage, Slave[x]);  
-	}	
-    prints("task AES finished.");
-    printi(clock());
-
-//#ifdef debug_comunication_on	
-	prints(" ");
-	prints("Final Result");
-	unsigned int int_aux2 = 0;
-    for(x=0; x<MSG_LENGHT;x+=4){
-		int_aux2 = decipher_msg[0+x] << 24;
-		int_aux2 = int_aux2 | decipher_msg[1+x] << 16;
-		int_aux2 = int_aux2 | decipher_msg[2+x] << 8;
-		int_aux2 = int_aux2 | decipher_msg[3+x];
-		prints( &int_aux2 );
-		int_aux2 = 0;
-	}
-//#endif 
-
-	return 0;		
-}
-
 /* common sampling rate for sound cards on IBM/PC */
 #define SAMPLE_RATE 11025
 
@@ -2507,19 +2118,17 @@ void decode(int input)
 }
 
 
-int av_adpcm_dec(int state) {
+int av_adpcm_dec(int state) { //r 
 	int i, k;
 	int * compressed_adpcm;
 	int result[COMPRESSED_SAMPLES*2];	/* Compression factor: 2 */
 
-	prints("ADPCM Decoder - start");
+	prints("ADPCM Decoder - start\n");
 
-    reset_av();
-
-    //RealTime(AUDIO_VIDEO_PERIOD, ADPCM_DEC_deadline, ADPCM_DEC_exe_time);
+  reset_av();
 
 	for(k=state; k<FRAMES; k++ ) {
-
+    putsv("> adpcm ", k);
 
 		ReceiveMessage(&theMessage, split_av);
 		compressed_adpcm = theMessage.msg;
@@ -2544,7 +2153,7 @@ int av_adpcm_dec(int state) {
 
 	}
 
-    prints("ADPCM Decoder - end");
+    prints("AV - End Task ADPCM Decoder\n");
 
     return 0;
 }
@@ -2631,15 +2240,14 @@ void fir_filter_int(int* in,int* out,int in_len,
 
 
 
-int av_FIR(int state) {
+int av_FIR(int state) { // r 
     int k;
     int * input_stream;
 
-    prints("FIR - start");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, FIR_deadline, FIR_exe_time);
+    prints("FIR - start\n");
 
     for(k=state; k<FRAMES; k++ ) {
+        putsv("> fir ", k);
 
         ReceiveMessage(&theMessage, adpcm_dec_av);
         input_stream = theMessage.msg;
@@ -2660,7 +2268,7 @@ int av_FIR(int state) {
 
     }
 
-    prints("FIR - end");
+    prints("AV - End Task FIR finished\n");
 
     return 0;
 }
@@ -2842,21 +2450,16 @@ void idct_(type_DATA_av *block,int lx)
     idctcol_av(block,i,lx);
 }
 
-int av_idct(int state)
+int av_idct(int state) // r 
 {
-    unsigned int time_a, time_b;
-    int i,j, b;
+    int i,j;
     type_DATA_av block[64];
 
-
-    prints("Task IDCT start:");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, IDCT_deadline, IDCT_exe_time);
+    prints("Task IDCT - start\n");
 
     for(j=state;j<FRAMES;j++)
     {
-
-
+        putsv("> idct ", j);
         ReceiveMessage(&theMessage, iquant_av);
 
         for(i=0;i<theMessage.size;i++)
@@ -2869,7 +2472,7 @@ int av_idct(int state)
             theMessage.msg[i] = block[i];
 
 
-        SendMessage(&theMessage,join_av);
+        SendMessage(&theMessage, join_av);
 
         if(get_migration_src()){
             prints("av_idct migrating.\n");
@@ -2879,7 +2482,7 @@ int av_idct(int state)
 
     }
 
-    prints("End Task IDCT");
+    prints("AV - End Task IDCT\n");
 
     return 0;
 }
@@ -2914,18 +2517,15 @@ void iquant_(type_DATA_av *src, int lx, int dc_prec, int mquant) {
         src[offs + 7] ^= 1;
 }
 
-int av_iquant(int state) {
-    unsigned int time_a, time_b;
-    int i, j, b;
+int av_iquant(int state) { // r
+    int i, j;
 
-    type_DATA_av clk_count;
     type_DATA_av block[64];
 
-    prints("Task IQUANT start:");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, IQUANT_deadline, IQUANT_exe_time);
+    prints("Task IQUANT - start\n");
 
     for (j = state; j < FRAMES; j++) {
+        putsv("> iquant ", j);
 
         ReceiveMessage(&theMessage, ivlc_av);
 
@@ -2948,7 +2548,7 @@ int av_iquant(int state) {
 
     }
 
-    prints("End Task IQUANT");
+    prints("AV - End Task IQUANT\n");
 
     return 0;
 }
@@ -3372,22 +2972,20 @@ void ivlc_(type_DATA_av *block, short int comp, short int lx, type_DATA_av *buff
   return;
 }
 
-int av_ivlc(int state)
+int av_ivlc(int state) //r
 {
-    unsigned int time_a, time_b, a, b;
     int i,j;
 
     type_DATA_av vlc_array[128];
     type_DATA_av block[64];
 
-    prints("Task IVLC start");
-
-    //RealTime(AUDIO_VIDEO_PERIOD, IVLC_deadline, IVLC_exe_time);
+    prints("Task IVLC - start\n");
 
     for(j=state;j<FRAMES;j++)
     {
+        putsv("> ivlc ", j);
 
-        ReceiveMessage(&theMessage,split_av);
+        ReceiveMessage(&theMessage, split_av);
 
         for(i=0; i<theMessage.size; i++)
             vlc_array[i] = theMessage.msg[i];
@@ -3397,12 +2995,11 @@ int av_ivlc(int state)
 
         ivlc_(block, 0, 8, vlc_array);      // codifica RLE-VLC (returns the number of bits in the produced stream)
 
-
         theMessage.size = 64;
         for(i=0; i<theMessage.size; i++)
            theMessage.msg[i] = block[i];
 
-        SendMessage(&theMessage,iquant_av);
+        SendMessage(&theMessage, iquant_av);
 
         if(get_migration_src()){
             prints("av_ivlc migrating.\n");
@@ -3412,33 +3009,26 @@ int av_ivlc(int state)
 
     }
 
-    prints("End Task IVLC");
+    prints("AV - End Task IVLC\n");
 
     return 0;
 }
 
-int av_join(int state) {
+int av_join(int state) { // r 
+    int k;
 
-    unsigned char decoded_block[1000];
-    int samples[COMPRESSED_SAMPLES*2];
-    unsigned int j, time_arrive =0, last_arrive = 0, jitter[2000];
-    int block_size, blocks;
-    int i, k;
-
-    prints("Join start...");
-    prints("Number of frames");
+    prints("Join - start\n");
+    prints("Number of frames ");
     printi(FRAMES);
+    prints("\n");
 
-    //RealTime(AUDIO_VIDEO_PERIOD, JOIN_deadline, JOIN_exe_time);
 
-    j = 0;
     for(k=state; k<FRAMES; k++ ) {
+        putsv("> join ", k);
 
         ReceiveMessage(&theMessage, FIR_av);
 
-        ReceiveMessage(&theMessage,idct_av);
-
-        printi(clock());
+        ReceiveMessage(&theMessage, idct_av);
 
         if(get_migration_src()){
             prints("av_join migrating.\n");
@@ -3448,10 +3038,7 @@ int av_join(int state) {
 
     }
 
-    //for(i=0; i<j; i++)
-    //  Echo(itoa(jitter[i]));
-
-    prints("Join finished.");
+    prints("AV - End Task Join finished.\n");
 
     return 0;
 }
@@ -3470,14 +3057,11 @@ unsigned int vlc_array[128] = { // array containing the compressed data stream
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
 
-int av_split(int state) {
-
-    int i, b;
-    char str[20];
-    int compressed_adpcm[COMPRESSED_SAMPLES];
+int av_split(int state) { // r
+    int i;
     message compresssed_adpcm;
 
-    prints("Task SPLIT start:  ");
+    prints("Task SPLIT - start\n");
 
     /* Generates the compressed adpcm stream */
     for (i = 0; i < COMPRESSED_SAMPLES; i += 2)
@@ -3489,9 +3073,8 @@ int av_split(int state) {
         theMessage.msg[i] = vlc_array[i];
     theMessage.size = 128;
 
-    //RealTime(AUDIO_VIDEO_PERIOD, SPLIT_deadline, SPLIT_exe_time);
-
     for (i = state; i < FRAMES; i++) {
+        putsv("> split ", i);
 
         SendMessage(&compresssed_adpcm, adpcm_dec_av);
 
@@ -3505,7 +3088,412 @@ int av_split(int state) {
 
     }
 
-    prints("End Task SPLIT");
+    prints("AV - End Task SPLIT\n");
 
     return 0;
 }
+/*********************************************************************
+* Filename:   aes_sl(n).c
+* Author:     Leonardo Rezende Juracy and Luciano L. Caimi
+* Copyleft:    
+* Disclaimer: This code is presented "as is" without any guarantees.
+* Details:   
+*********************************************************************/
+
+/*************************** HEADER FILES ***************************/
+#include "source/aes/aes.h"
+/**************************** VARIABLES *****************************/
+
+
+/*************************** MAIN PROGRAM ***************************/
+int aes_slave()
+{
+	unsigned int key_schedule[60];
+	int qtd_messages, op_mode, x, flag=1, id = -1, i;
+	unsigned int enc_buf[128];
+	unsigned int input_text[16]; 
+	unsigned int key[1][32] = {
+		{0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,0x2b,0x73,0xae,0xf0,0x85,0x7d,0x77,0x81,0x1f,0x35,0x2c,0x07,0x3b,0x61,0x08,0xd7,0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4}
+	};
+
+	printi(clock());
+    prints("task AES SLAVE started - ID:"); 
+	aes_key_setup(&key[0][0], key_schedule, 256);    
+    
+    while(flag){
+		ReceiveMessage(&theMessage, aes_master);
+		memcpy(input_text, theMessage.msg, 12);
+			
+#ifdef debug_comunication_on
+	prints(" ");  
+	prints("Slave configuration");
+	for(i=0; i<3;i++){
+		printi(input_text[i]);	
+	}
+	prints(" "); 
+#endif 
+				
+		op_mode = input_text[0];
+		qtd_messages = input_text[1];
+		x = input_text[2];	
+		
+		if(id == -1){
+				id = x;
+				printi(id);
+		}	
+		prints("Operation:"); 
+		printi(op_mode);
+		prints("Blocks:"); 		
+		printi(qtd_messages);
+
+		if (op_mode == END_TASK){
+			flag = 0;
+			qtd_messages = 0;
+		}
+		for(x = 0; x < qtd_messages; x++){
+			ReceiveMessage(&theMessage, aes_master);		
+			memcpy(input_text, theMessage.msg, 4*AES_BLOCK_SIZE);
+			
+#ifdef debug_comunication_on
+	prints(" ");  
+	prints("received msg");
+	for(i=0; i<16;i++){
+		printi(input_text[i]);	
+	}
+	prints(" "); 
+#endif 
+			
+			if(op_mode == CIPHER_MODE){
+				prints("encript");				
+				aes_encrypt(input_text, enc_buf, key_schedule, KEY_SIZE);	
+			}
+			else{
+				prints("decript");					
+				aes_decrypt(input_text, enc_buf, key_schedule, KEY_SIZE);
+			}			
+			theMessage.size = 4*AES_BLOCK_SIZE;
+			memcpy( theMessage.msg, enc_buf,4*AES_BLOCK_SIZE);
+			SendMessage(&theMessage, aes_master);	
+		}
+		//Migration breakpoint
+		if(get_migration_src()){
+			prints("aes_slave migrating.\n");
+			clear_migration_src();
+			return 1;
+		}
+	}
+    prints("task AES SLAVE finished  - ID: ");
+    printi(id);
+    printi(clock());
+   
+	return 0;	
+}
+
+/*************************** HEADER FILES ***************************/
+#include "source/aes/aes_master.h"
+/***************************** DEFINES ******************************/
+// total message length
+#define MSG_LENGHT 2048			
+// number of efectived used slaves
+#define NUMBER_OF_SLAVES 4	
+// number of total slaves allocated
+#define MAX_SLAVES 4		 	
+
+/**************************** VARIABLES *****************************/
+
+//index of slaves (slave names)
+int Slave[MAX_SLAVES] = {aes_slave1,aes_slave2,aes_slave3,aes_slave4};
+
+/*************************** MAIN PROGRAM ***************************/
+
+int aesMaster(int state)
+{
+	volatile int x, y, i,j;
+	int plain_msg[MSG_LENGHT];
+	int cipher_msg[MSG_LENGHT], decipher_msg[MSG_LENGHT];
+	int msg_length, blocks, qtd_messages[MAX_SLAVES];
+	int pad_value, aux_msg[3];
+	int aux1_blocks_PE;
+	int aux2_blocks_PE;	
+
+	// fill each block with values 'A', 'B', ...
+	for(x = 0; x < MSG_LENGHT; x++){
+		plain_msg[x] = ((x/16)%26)+0x41;
+	}
+	
+    prints("task AES started.");
+    printi(clock());
+
+	// calculate number of block and pad value (PCKS5) of last block
+	msg_length = MSG_LENGHT;	
+	blocks = (MSG_LENGHT%AES_BLOCK_SIZE)==0 ? (MSG_LENGHT/AES_BLOCK_SIZE) : (MSG_LENGHT/AES_BLOCK_SIZE)+1;
+	pad_value = (AES_BLOCK_SIZE - (msg_length%AES_BLOCK_SIZE))%AES_BLOCK_SIZE;	
+	
+	prints(" ");
+	prints("Blocks:");	
+	printi(blocks);
+
+#ifdef debug_comunication_on	
+    prints(" ");
+    prints("plain msg");
+    for(x=0; x<MSG_LENGHT-1;x++){
+		printi(plain_msg[x]);		
+	}
+#endif
+
+	//	Calculate number of blocks/messages to sent
+	//   to each Slave_PE
+	aux1_blocks_PE = blocks / NUMBER_OF_SLAVES;
+	aux2_blocks_PE = blocks % NUMBER_OF_SLAVES;
+	
+	////////////////////////////////////////////////
+	//				Start Encrypt				  //
+	////////////////////////////////////////////////	
+	for(x = 0; x < MAX_SLAVES; x++){
+		qtd_messages[x] = aux1_blocks_PE;
+		if(x < aux2_blocks_PE)
+			qtd_messages[x] += 1;
+	}
+	
+	// Send number of block and operation mode and ID
+	// to each Slave_PE
+	for(x=0; x < MAX_SLAVES; x++){
+		theMessage.size = sizeof(aux_msg);
+		aux_msg[0] = CIPHER_MODE;
+		aux_msg[1] = qtd_messages[x];
+		aux_msg[2] = x+1;
+		if(x >= NUMBER_OF_SLAVES) // zero messages to Slave not used
+			aux_msg[0] = END_TASK;
+		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
+		SendMessage(&theMessage, Slave[x]);  
+	}
+
+	// Send blocks to Cipher and 
+	// Receive the correspondent block Encrypted
+	for(x = 0; x < blocks+1; x += NUMBER_OF_SLAVES){
+		// send a block to Slave_PE encrypt
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				theMessage.size = 4*AES_BLOCK_SIZE;
+				memcpy(theMessage.msg, &plain_msg[(x+y)*AES_BLOCK_SIZE], 4*AES_BLOCK_SIZE);
+				SendMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
+			}
+		}
+	
+		// Receive Encrypted block from Slave_PE
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				ReceiveMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
+				j = 0;
+				for (i=(x+y)*AES_BLOCK_SIZE;i < ((x+y)*AES_BLOCK_SIZE) + AES_BLOCK_SIZE; i++)
+				{
+					cipher_msg[i] = theMessage.msg[j];
+					j++;
+				}
+				j = 0;
+				qtd_messages[(x+y) % NUMBER_OF_SLAVES]--;
+			}
+		}
+	}
+#ifdef debug_comunication_on
+	prints(" ");  
+	prints("cipher msg");
+	for(i=0; i<MSG_LENGHT;i++){
+		printi(cipher_msg[i]);		
+	}
+	prints(" "); 
+#endif 
+	
+	////////////////////////////////////////////////
+	//				Start Decrypt				  //
+	////////////////////////////////////////////////
+	for(x = 0; x < NUMBER_OF_SLAVES; x++){
+		qtd_messages[x] = aux1_blocks_PE;
+		if(x <= aux2_blocks_PE)
+			qtd_messages[x] += 1;
+	}
+	
+	// Send number of block and operation mode
+	// to each Slave_PE
+	for(x=0; x < NUMBER_OF_SLAVES; x++){
+		theMessage.size = sizeof(aux_msg);
+		aux_msg[0] = DECIPHER_MODE;
+		aux_msg[1] = qtd_messages[x];
+		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
+		SendMessage(&theMessage, Slave[x]);  
+	}
+
+	// Send blocks to Cipher and 
+	// Receive the correspondent block Encrypted
+	for(x = 0; x < blocks+1; x += NUMBER_OF_SLAVES){
+		// send each block to a Slave_PE
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				theMessage.size = 4*AES_BLOCK_SIZE;
+				memcpy(theMessage.msg, &cipher_msg[(x+y)*AES_BLOCK_SIZE], 4*AES_BLOCK_SIZE);
+				SendMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);   
+			} 
+		}
+		// Receive Encrypted block from Slave_PE
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				ReceiveMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
+				j = 0;
+				for (i=(x+y)*AES_BLOCK_SIZE;i < ((x+y)*AES_BLOCK_SIZE) + AES_BLOCK_SIZE; i++)
+				{
+					decipher_msg[i] = theMessage.msg[j];
+					j++;
+				}
+				j = 0;
+				qtd_messages[(x+y) % NUMBER_OF_SLAVES]--;
+			}
+		}
+	}
+#ifdef debug_comunication_on	
+	prints("decipher msg");
+    for(x=0; x<MSG_LENGHT-1;x++){
+		printi(decipher_msg[x]);		
+	}
+#endif
+	//  End tasks still running
+	//  End Applicattion
+	for(x=0; x < NUMBER_OF_SLAVES; x++){
+		theMessage.size = sizeof(aux_msg);
+		aux_msg[0] = END_TASK;
+		aux_msg[1] = 0;
+		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
+		SendMessage(&theMessage, Slave[x]);  
+	}	
+    prints("task AES finished.");
+    printi(clock());
+
+//#ifdef debug_comunication_on	
+	prints(" ");
+	prints("Final Result");
+	unsigned int int_aux2 = 0;
+    for(x=0; x<MSG_LENGHT;x+=4){
+		int_aux2 = decipher_msg[0+x] << 24;
+		int_aux2 = int_aux2 | decipher_msg[1+x] << 16;
+		int_aux2 = int_aux2 | decipher_msg[2+x] << 8;
+		int_aux2 = int_aux2 | decipher_msg[3+x];
+		prints( &int_aux2 );
+		int_aux2 = 0;
+	}
+//#endif 
+
+	return 0;		
+}
+
+
+
+#define TASKS 300
+#define SORT_SLAVES 3
+
+
+void init_array(int *array, int size){
+	int i;
+
+	for (i = 0; i < size; i++)
+		array[i] = size - i;
+}
+
+
+void print_array(int *array, int size){
+	int i;
+	for (i = 0; i < size; i++) {
+		printi(array[i]);
+	}
+	prints("\n");
+
+}
+
+int sortMaster(int state){
+	int i, j;
+	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
+
+	int array[ARRAY_SIZE][SORT_SLAVES];
+	int slave_task[SORT_SLAVES];
+	int task = 0;
+
+	int msg_kill = KILL_PROC;
+
+	prints("sortMaster started\n");
+
+	for (i = 0; i < SORT_SLAVES; i++)
+		init_array(array[i], ARRAY_SIZE);
+
+	for (i = 0; i < SORT_SLAVES; i++){
+		ReceiveMessage(&theMessage, slave_addr[i]);
+		prints("Received ");
+		printi(theMessage.size);
+		prints(" bytes\n");
+		theMessage.size = ARRAY_SIZE;
+		for (j = 0; j < ARRAY_SIZE; j++)
+			theMessage.msg[j] = array[i][j];
+		SendMessage(&theMessage, slave_addr[i]);
+		prints("Packet sent\n");
+		task++;
+	}
+
+	for (i = 0; i < TASKS; i++){
+		ReceiveMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
+		prints("Received array from slave: ");
+		printi(i%SORT_SLAVES);
+		prints("\n");
+		//print_array(msg.msg, ARRAY_SIZE);
+		slave_task[i%SORT_SLAVES] = task;
+		if (task == TASKS){
+			theMessage.size = 1;
+			theMessage.msg[0] = msg_kill;
+			SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
+			prints("Master Sening kill to ");
+			printi(i%SORT_SLAVES);
+			prints("\n");
+		}
+		else {
+			theMessage.size = ARRAY_SIZE;
+			for (j = 0; j < ARRAY_SIZE; j++)
+				theMessage.msg[j] = array[i%SORT_SLAVES][j];
+			SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
+			task++;
+		}
+	}
+	return 0;
+}
+
+
+int sort_slave(int task){
+	int task_request[2];
+	int array[ARRAY_SIZE];
+	int i;
+
+	task_request[0] = task;
+	task_request[1] = TASK_REQUEST;
+
+	prints("sort_slave started\n");
+
+    /*Requests initial task*/
+    theMessage.size = 2;
+    for (i = 0; i < 2; i++)
+    	theMessage.msg[i] = task_request[i];
+
+    SendMessage(&theMessage, sort_master);
+
+    /* Wait for a task, execute and return result to master*/
+    for (;;) {
+    	ReceiveMessage(&theMessage, sort_master);
+    	prints("Packet received\n");
+    	if (theMessage.msg[0] == KILL_PROC) break;
+		quicksort(theMessage.msg, 0, ARRAY_SIZE-1);
+		SendMessage(&theMessage, sort_master);
+
+		//Migration breakpoint
+		if(get_migration_src()){
+			prints("sort_slave migrating.\n");
+			clear_migration_src();
+			return 1;
+		}
+    }
+    return 0;
+}
+

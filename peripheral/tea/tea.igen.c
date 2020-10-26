@@ -317,7 +317,7 @@ PPM_PACKETNET_CB(dataUpdate) {
         thePacket[3] = htonl(0x50); // #define TEMPERATURE_PACKET  0x50 (api.h)
         for(i=0; i<DIM_Y*DIM_X; i++){
             tempi = TempTraceEnd[i]*100;
-            bhmMessage("I", "Input", "tempi %d %d\n", i, tempi);
+            //bhmMessage("I", "Input", "tempi %d %d\n", i, tempi);
             thePacket[i+4] = htonl(tempi);
         }
         sendPacketToMaster = 1;
