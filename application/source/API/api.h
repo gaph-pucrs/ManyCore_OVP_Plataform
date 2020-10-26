@@ -452,7 +452,7 @@ void interruptHandler_NI_RX(void) {
                 serviceIndexNextTimer = index;
             }
         }
-        else if(taskID == running_task){
+        else if(taskID == running_task || taskMigrated = -2){
             if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
                 prints("Adicionando ao pendingReq\n");
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
@@ -470,8 +470,9 @@ void interruptHandler_NI_RX(void) {
             putsv("taskMigraed = ", taskMigrated);
             putsv("migratedTask = ", migratedTask);
             putsv("id_taskProducer = ", taskID);
-            forwardMsgRequest(requester, 0, newAddr, taskID);
-        }        
+            while(1){LOG("ERROR!!!!!!!!!!!!!!!!!!!!!\n");}
+            //forwardMsgRequest(requester, 0, newAddr, taskID);
+        }  
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -558,7 +559,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE){
         new_state = incomingPacket[PI_PAYLOAD];
         putsv("Task state received ", new_state);
-        taskMigrated = -1;
+        taskMigrated = -2;
         *NIcmdRX = DONE; 
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
