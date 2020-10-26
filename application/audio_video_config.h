@@ -33,15 +33,6 @@
 
 #define AUDIO_VIDEO_PERIOD	40000*/
 
-<<<<<<< HEAD
-#define join_av 38
-#define FIR_av 37
-#define adpcm_dec_av 36
-#define idct_av 35
-#define iquant_av 34
-#define ivlc_av 33
-#define split_av 32
-=======
 #define join_av 29
 #define FIR_av 28
 #define adpcm_dec_av 27
@@ -49,4 +40,3 @@
 #define iquant_av 25
 #define ivlc_av 24
 #define split_av 23
->>>>>>> taskMigration

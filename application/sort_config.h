@@ -49,14 +49,7 @@ void quicksort(int *array, int lo, int hi) {
         quicksort(array, p + 1, hi);
     }
 }
-<<<<<<< HEAD
-#define sort_slave3 26
-#define sort_slave2 25
-#define sort_slave1 24
-#define sort_master 23
-=======
 #define sort_slave3 38
 #define sort_slave2 37
 #define sort_slave1 36
 #define sort_master 35
->>>>>>> taskMigration
