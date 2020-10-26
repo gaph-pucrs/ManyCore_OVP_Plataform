@@ -57,7 +57,7 @@ int sortMaster(int state){
 		task++;
 	}
 
-	for (i = 0; i < TASKS; i++){
+	for (i = 0; i <= TASKS; i++){
 		ReceiveMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
 		prints("Received array from slave: ");
 		printi(i%SORT_SLAVES);
