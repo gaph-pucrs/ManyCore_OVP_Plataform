@@ -194,8 +194,8 @@ void get_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
 void get_migration_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
 
 // MASTER ONLY
-unsigned int task_addr[DIM_X*DIM_Y];
-unsigned int task_confirmed_addr[DIM_X*DIM_Y];
+volatile unsigned int task_addr[DIM_X*DIM_Y];
+volatile unsigned int task_confirmed_addr[DIM_X*DIM_Y];
 unsigned int serviceIndexNextTimer = -1;
 //////////////////////////////////////
 

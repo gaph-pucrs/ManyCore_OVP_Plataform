@@ -141,9 +141,9 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
         // clear finished applications
-        if(finishedTask[i]==TRUE || finishedTask[i] == 3){
+        /*if(finishedTask[i]==TRUE || finishedTask[i] == 3){
             task_addr[i] = 0;
-        }
+        }*/
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
@@ -153,14 +153,14 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
         srcProc = x << 8 | y;
         if (temp[srcID] > 33300){
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
-            if(!migrationEnvolved(srcProc, task_confirmed_addr, task_addr)){ // iaçanã: detecta PEs que nao podem migrar (por exemplo o master do sort - se mandar migrar ele nao vai conseguir e se der tempo de chegar em outra janela o master vai achar que o PE ta livre e pode mandar alguuma coisa pra lá e dar merda)
+            if(migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: detecta PEs que nao podem migrar (por exemplo o master do sort - se mandar migrar ele nao vai conseguir e se der tempo de chegar em outra janela o master vai achar que o PE ta livre e pode mandar alguuma coisa pra lá e dar merda)
                 if(how_many_tasks_PE_is_running(srcProc, task_addr)>0){
                     while (k>0){
                         tgtProc = spiralMatrix[k];
                         task_ID = getSomeTaskID(srcProc, task_addr);
                         putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);                       
                         //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);                     
-                        if(!migrationEnvolved(tgtProc, task_confirmed_addr, task_addr)){ // iaçanã: mesma coisa de antes 
+                        if(migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: mesma coisa de antes 
                             if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
                                 //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                                 prints("send_task_migration\n");
@@ -490,8 +490,8 @@ int main(int argc, char **argv)
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i]==TRUE){
-                    task_addr[i] = 0;
                     if(appFinished(i, task_applicationID)){
+                        task_addr[i] = 0;
                         task_confirmed_addr[i] = 0;
                     }
                 }
