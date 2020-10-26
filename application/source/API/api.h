@@ -467,6 +467,9 @@ void interruptHandler_NI_RX(void) {
         }*/
         else{
             prints("A lost request, sending to MASTER\n");
+            putsv("taskMigraed = ", taskMigrated);
+            putsv("migratedTask = ", migratedTask);
+            putsv("id_taskProducer = ", taskID);
             forwardMsgRequest(requester, 0, newAddr, taskID);
         }        
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
