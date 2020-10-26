@@ -526,7 +526,7 @@ int main(int argc, char **argv)
         }
         measuredWindows = 0;
         while(*SyncToPE != 1){
-            putsv("Waiting everyone ", measuredWindows);
+            LOG("Waiting everyone %X\n", measuredWindows);
             measuredWindows++;    
         }
     }
