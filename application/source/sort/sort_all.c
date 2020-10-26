@@ -85,7 +85,7 @@ int sortMaster(int state){
 }
 
 
-int sort_slave(int task){
+int sort_slave(int task, int state){
 	int task_request[2];
 	int array[ARRAY_SIZE];
 	int i;
@@ -100,8 +100,10 @@ int sort_slave(int task){
     for (i = 0; i < 2; i++)
     	theMessage.msg[i] = task_request[i];
 
-    SendMessage(&theMessage, sort_master);
-
+	if(state == 0){
+		SendMessage(&theMessage, sort_master);
+	}
+    
     /* Wait for a task, execute and return result to master*/
     for (;;) {
     	ReceiveMessage(&theMessage, sort_master);

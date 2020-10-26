@@ -190,13 +190,13 @@ int main(int argc, char **argv)
 				state = sortMaster(state);
 				break;
 			case sort_slave1:
-				state = sort_slave(0);
+				state = sort_slave(0, state);
 				break;
 			case sort_slave2:
-				state = sort_slave(1);
+				state = sort_slave(1, state);
 				break;
 			case sort_slave3:
-				state = sort_slave(2);
+				state = sort_slave(2, state);
 				break;
 			//AES
 			case aes_master:
