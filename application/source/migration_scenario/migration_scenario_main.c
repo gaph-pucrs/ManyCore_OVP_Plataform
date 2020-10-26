@@ -33,7 +33,7 @@ int dijkstra_slave();
 int dijkstra_print();
 
 int sortMaster(int state);
-int sort_slave(int task);
+int sort_slave(int task, int state);
 
 int aesMaster(int state);
 int aes_slave();
