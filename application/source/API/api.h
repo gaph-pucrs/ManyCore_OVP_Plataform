@@ -334,7 +334,7 @@ void interruptHandler_timer(void) {
     *operationFrequency = newFrequency;
     Voltage = newVoltage;
 
-    if(*myAddress == 0){
+    /*if(*myAddress == 0){
         if(*NIcmdTX == NI_STATUS_OFF){
             SendSlot((unsigned int)&myServicePacket[serviceIndexNextTimer], (0xFFFF0000 | serviceIndexNextTimer)); // WARNING: This may cause a problem!!!!
         }
@@ -342,7 +342,7 @@ void interruptHandler_timer(void) {
             addServiceAfterTX(serviceIndexNextTimer);
         }
         serviceIndexNextTimer = -1;
-    }
+    }*/
 
 #endif
     //////////////////////////////////////////////////////////////
@@ -428,7 +428,7 @@ void interruptHandler_NI_RX(void) {
         newAddr = incomingPacket[PI_REQUESTER];
         taskID = incomingPacket[PI_PRODUCER];// & 0x7FFFFFFF; 
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(*myAddress == 0){
+        /*if(*myAddress == 0){
             index = getServiceIndex();
             if(task_confirmed_addr[taskID] != 0)
                 myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[taskID];
@@ -451,8 +451,8 @@ void interruptHandler_NI_RX(void) {
                 }
                 serviceIndexNextTimer = index;
             }
-        }
-        else if(taskID == running_task || taskMigrated = -2){
+        }*/
+        if(taskID == running_task || taskMigrated = -2){
             if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
                 prints("Adicionando ao pendingReq\n");
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
@@ -470,7 +470,6 @@ void interruptHandler_NI_RX(void) {
             putsv("taskMigraed = ", taskMigrated);
             putsv("migratedTask = ", migratedTask);
             putsv("id_taskProducer = ", taskID);
-            while(1){LOG("ERROR!!!!!!!!!!!!!!!!!!!!!\n");}
             //forwardMsgRequest(requester, 0, newAddr, taskID);
         }  
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
