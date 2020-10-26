@@ -261,10 +261,10 @@ int main(int argc, char **argv)
 			sendFinishTask(running_task);
 		}
 		else{	
-			migratedTask = running_task;		
+			migratedTask = running_task;
 			get_migration_mapping_table(new_task_addr);
-			destination = new_task_addr[running_task];
-			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
+			destination = new_task_addr[migratedTask];
+			putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 			
 			
 			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
@@ -272,14 +272,15 @@ int main(int argc, char **argv)
 			sendPipe(destination);
 			
 			disable_interruption(2);
+			running_task = -1;
 			set_taskMigrated(destination); // save the new destination of this 
 			sendPendingReq(destination);
 			enable_interruption(2);
 			
-			new_task_addr[running_task] = new_task_addr[running_task] | 0x80000000; // flag this as the migrating task
+			new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-			new_task_addr[running_task] = new_task_addr[running_task] & 0x7FFFFFFF;
-			running_task = -1;
+			new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
+			
 		}
 	}
 
