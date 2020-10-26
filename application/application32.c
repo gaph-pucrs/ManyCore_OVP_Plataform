@@ -33,7 +33,7 @@ int dijkstra_slave();
 int dijkstra_print();
 
 int sortMaster(int state);
-int sort_slave(int task);
+int sort_slave(int task, int state);
 
 int aesMaster(int state);
 int aes_slave();
@@ -190,13 +190,13 @@ int main(int argc, char **argv)
 				state = sortMaster(state);
 				break;
 			case sort_slave1:
-				state = sort_slave(0);
+				state = sort_slave(0, state);
 				break;
 			case sort_slave2:
-				state = sort_slave(1);
+				state = sort_slave(1, state);
 				break;
 			case sort_slave3:
-				state = sort_slave(2);
+				state = sort_slave(2, state);
 				break;
 			//AES
 			case aes_master:
@@ -3412,7 +3412,7 @@ int sortMaster(int state){
 	int i, j;
 	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
 
-	int array[ARRAY_SIZE][SORT_SLAVES];
+	int array[SORT_SLAVES][ARRAY_SIZE];
 	int slave_task[SORT_SLAVES];
 	int task = 0;
 
@@ -3420,8 +3420,16 @@ int sortMaster(int state){
 
 	prints("sortMaster started\n");
 
-	for (i = 0; i < SORT_SLAVES; i++)
+	for (i = 0; i < SORT_SLAVES; i++){
 		init_array(array[i], ARRAY_SIZE);
+	}
+
+	for(j = 0; j < ARRAY_SIZE; j++){
+		putsvsv("array[", j, "] = ", array[0][j]);
+		putsvsv("array[", j, "] = ", array[1][j]);
+		putsvsv("array[", j, "] = ", array[2][j]);
+	}
+
 
 	for (i = 0; i < SORT_SLAVES; i++){
 		ReceiveMessage(&theMessage, slave_addr[i]);
@@ -3430,15 +3438,16 @@ int sortMaster(int state){
 		prints(" bytes\n");
 		theMessage.size = ARRAY_SIZE;
 		for (j = 0; j < ARRAY_SIZE; j++)
-			theMessage.msg[j] = array[j][i];
+			theMessage.msg[j] = array[i][j];
 		SendMessage(&theMessage, slave_addr[i]);
 		prints("Packet sent\n");
 		task++;
 	}
 
-	for (i = 0; i < TASKS; i++){
+	for (i = 0; i <= TASKS; i++){
 		ReceiveMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
-		prints("Received array from slave: ");
+		printi(i);
+		prints(" - Received array from slave: ");
 		printi(i%SORT_SLAVES);
 		prints("\n");
 		//print_array(msg.msg, ARRAY_SIZE);
@@ -3454,7 +3463,7 @@ int sortMaster(int state){
 		else {
 			theMessage.size = ARRAY_SIZE;
 			for (j = 0; j < ARRAY_SIZE; j++)
-				theMessage.msg[j] = array[j][i%SORT_SLAVES];
+				theMessage.msg[j] = array[i%SORT_SLAVES][j];
 			SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
 			task++;
 		}
@@ -3463,7 +3472,7 @@ int sortMaster(int state){
 }
 
 
-int sort_slave(int task){
+int sort_slave(int task, int state){
 	int task_request[2];
 	int array[ARRAY_SIZE];
 	int i;
@@ -3478,8 +3487,10 @@ int sort_slave(int task){
     for (i = 0; i < 2; i++)
     	theMessage.msg[i] = task_request[i];
 
-    SendMessage(&theMessage, sort_master);
-
+	if(state == 0){
+		SendMessage(&theMessage, sort_master);
+	}
+    
     /* Wait for a task, execute and return result to master*/
     for (;;) {
     	ReceiveMessage(&theMessage, sort_master);
