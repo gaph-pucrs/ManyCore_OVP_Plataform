@@ -25,7 +25,7 @@ int sortMaster(int state){
 	int i, j;
 	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
 
-	int array[ARRAY_SIZE][SORT_SLAVES];
+	int array[SORT_SLAVES][ARRAY_SIZE];
 	int slave_task[SORT_SLAVES];
 	int task = 0;
 
@@ -38,9 +38,9 @@ int sortMaster(int state){
 	}
 
 	for(j = 0; j < ARRAY_SIZE; j++){
-		putsvsv("array[", j, "] = ", array[j][0]);
-		putsvsv("array[", j, "] = ", array[j][1]);
-		putsvsv("array[", j, "] = ", array[j][2]);
+		putsvsv("array[", j, "] = ", array[0][j]);
+		putsvsv("array[", j, "] = ", array[1][j]);
+		putsvsv("array[", j, "] = ", array[2][j]);
 	}
 
 
@@ -51,7 +51,7 @@ int sortMaster(int state){
 		prints(" bytes\n");
 		theMessage.size = ARRAY_SIZE;
 		for (j = 0; j < ARRAY_SIZE; j++)
-			theMessage.msg[j] = array[j][i];
+			theMessage.msg[j] = array[i][j];
 		SendMessage(&theMessage, slave_addr[i]);
 		prints("Packet sent\n");
 		task++;
@@ -75,7 +75,7 @@ int sortMaster(int state){
 		else {
 			theMessage.size = ARRAY_SIZE;
 			for (j = 0; j < ARRAY_SIZE; j++)
-				theMessage.msg[j] = array[j][i%SORT_SLAVES];
+				theMessage.msg[j] = array[i%SORT_SLAVES][j];
 			SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
 			task++;
 		}
