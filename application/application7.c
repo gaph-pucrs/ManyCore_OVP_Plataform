@@ -3430,7 +3430,7 @@ int sortMaster(int state){
 		prints(" bytes\n");
 		theMessage.size = ARRAY_SIZE;
 		for (j = 0; j < ARRAY_SIZE; j++)
-			theMessage.msg[j] = array[i][j];
+			theMessage.msg[j] = array[j][i];
 		SendMessage(&theMessage, slave_addr[i]);
 		prints("Packet sent\n");
 		task++;
@@ -3454,7 +3454,7 @@ int sortMaster(int state){
 		else {
 			theMessage.size = ARRAY_SIZE;
 			for (j = 0; j < ARRAY_SIZE; j++)
-				theMessage.msg[j] = array[i%SORT_SLAVES][j];
+				theMessage.msg[j] = array[j][i%SORT_SLAVES];
 			SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
 			task++;
 		}
