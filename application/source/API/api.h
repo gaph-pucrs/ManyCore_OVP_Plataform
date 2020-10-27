@@ -452,30 +452,27 @@ void interruptHandler_NI_RX(void) {
                 serviceIndexNextTimer = index;
             }
         }*/
-        /*if(taskID == running_task || taskMigrated == -2 || mapping_en == 1 || (mapping_en == 0 && taskMigrated = -1)){
+        if(taskID == running_task || taskMigrated == -2 || mapping_en == 1 || (mapping_en == 0 && taskMigrated = -1)){
             if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
                 prints("Adicionando ao pendingReq\n");
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
             }
-        }*/
-        if(taskMigrated != -1 && migratedTask == taskID){ // TASK MIGROU
+        }
+        else if(taskMigrated != -1 && migratedTask == taskID){ // TASK MIGROU
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
         }
-        else if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
-            prints("Adicionando ao pendingReq\n");
-            pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
-        }   
         /*else if((incomingPacket[PI_PRODUCER] & 0x80000000) != 0){
             prints("Adicionando ao pendingReq sob ordem do Master\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }*/
-        /*else{
+        else{
             prints("A lost request, sending to MASTER\n");
             putsv("taskMigraed = ", taskMigrated);
             putsv("migratedTask = ", migratedTask);
             putsv("id_taskProducer = ", taskID);
+            LOG("ERRO! migratedTask = %d -- taskMigrated = %d -- taskProducer = %d",migratedTask,taskMigrated,taskID);
             //forwardMsgRequest(requester, 0, newAddr, taskID);
-        } */ 
+        } 
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -607,6 +604,9 @@ void interruptHandler_NI_RX(void) {
         printi(incomingPacket[PI_PAYLOAD]);
         taskID = incomingPacket[PI_PAYLOAD] & 0x0000FFFF;
         newAddr = (incomingPacket[PI_PAYLOAD] & 0xFFFF0000) >> 16;
+        if(mapping_en[taskID] == *myAddress){
+            taskMigrated = -1; // reseting this makes this PE ready to receive a new app!
+        }
         mapping_table[taskID] = newAddr;
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
