@@ -303,10 +303,10 @@ Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-Updating mapping_table[32 ] = 1284 
+Updating mapping_table[4 ] = 1284 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-Updating mapping_table[12 ] = 1541 
+Updating mapping_table[2 ] = 1541 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 Updating mapping_table[24 ] = 1028 
@@ -377,7 +377,7 @@ Task pendingReq received 265
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
-Counters: 14738  4010  637  444  6378  4230  46  1981  775  0  30  2495  2645  251114 
+Counters: 14738  4010  637  444  6378  4230  46  1981  775  0  30  2493  2643  251116 
 >> Energy packet sent to thermalMaster
 Clk gate off - interruptHandler_NI_RX
 Servico: 98 
@@ -389,9 +389,9 @@ Message request received from 24
 S4 - chegou durante a migração
 task_addr[0 ] = 1 
 task_addr[1 ] = 2 
-task_addr[2 ] = 3 
+task_addr[2 ] = 1541 
 task_addr[3 ] = 4 
-task_addr[4 ] = 5 
+task_addr[4 ] = 1284 
 task_addr[5 ] = 6 
 task_addr[6 ] = 262 
 task_addr[7 ] = 518 
@@ -475,10 +475,10 @@ Servico: 32
 Message request received from 24 
 S1 - caso normal
 TX interruption!
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
-Updating mapping_table[30 ] = 1029 
-TX interruption!
+Updating mapping_table[27 ] = 1029 
 TX interruption!
 TX interruption!
 TX interruption!
@@ -503,32 +503,26 @@ Servico: 32
 Message request received from 24 
 S1 - caso normal
 TX interruption!
-Counters: 28609  9120  3917  2904  32836  24129  6747  8317  8830  143  61  886  1191  245050 
->> Energy packet sent to thermalMaster
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 24 
+Message request received from 27 
 S1 - caso normal
 TX interruption!
 > split 267 
 Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[31 ] = 1285 
-Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 24 
+Message request received from 27 
 S1 - caso normal
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 24 
+Message request received from 27 
 S1 - caso normal
+Counters: 30589  9658  4058  3030  34025  24760  6774  8717  9025  143  67  984  1319  245454 
+>> Energy packet sent to thermalMaster
+TX interruption!
 TX interruption!
 > split 268 
-Counters: 3039  826  199  173  1826  958  36  559  272  0  17  535  620  249380 
->> Energy packet sent to thermalMaster
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 24 
@@ -536,78 +530,6047 @@ S1 - caso normal
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
-Message request received from 24 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 269 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
 S1 - caso normal
 Adicionando ao pendingReq
-Counters: 1153  338  88  81  752  385  15  325  118  0  9  215  260  249740 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[6 ] = 1285 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 270 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 271 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 6937  1966  487  377  4863  2751  140  1480  663  0  24  640  760  248708 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 272 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 273 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 274 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+Counters: 5997  1662  389  350  3635  1924  65  1246  554  0  21  743  848  250700 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 275 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 276 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 277 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 278 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 7190  2019  503  400  4998  2848  143  1521  696  0  22  640  750  247702 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 279 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 280 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 281 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Counters: 5997  1662  389  350  3635  1924  65  1246  554  0  21  743  848  250439 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 282 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 283 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 284 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 285 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 6695  1822  421  371  4001  2129  71  1258  593  0  22  640  750  247963 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 286 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 287 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 288 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Counters: 5997  1662  389  350  3635  1924  65  1246  554  0  21  743  848  249435 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 289 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 290 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 291 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 292 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Counters: 7124  1952  457  406  4278  2271  78  1389  646  0  24  784  904  249096 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 293 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 294 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 295 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 296 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 6695  1822  421  371  4003  2129  71  1258  595  0  22  640  750  248967 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 297 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 298 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 299 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Counters: 5997  1662  389  350  3635  1924  65  1246  554  0  21  743  848  249437 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 300 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 301 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 302 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 303 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 6943  1899  430  379  4164  2216  69  1341  611  0  22  640  750  248965 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 304 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 305 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 306 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 307 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 308 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 309 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Counters: 5997  1662  389  350  3635  1924  65  1246  554  0  21  743  848  249439 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 310 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 311 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 312 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 313 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 7161  1985  472  398  4676  2606  107  1464  660  0  22  640  750  248963 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 314 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 315 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 316 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Counters: 5997  1662  389  350  3635  1924  65  1246  554  0  21  743  848  250435 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 317 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 318 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 319 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 320 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Counters: 7344  2040  499  425  4793  2661  116  1514  696  0  24  784  904  248346 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 321 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 322 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 323 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 324 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 6695  1822  421  371  4003  2129  71  1258  595  0  22  640  750  248717 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 325 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 326 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 327 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 328 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 7372  2029  466  414  4440  2358  76  1472  663  0  24  784  904  249096 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 329 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 330 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 331 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[24 ] = 768 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 332 
+Counters: 1790  482  124  113  1095  583  23  347  178  0  16  380  460  249540 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[6 ] = 1024 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 333 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 334 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 335 
+Counters: 5621  1550  368  323  3404  1800  62  1131  518  0  31  815  970  249030 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+> split 336 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 337 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 338 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 339 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 7344  2023  475  418  4421  2336  81  1456  663  0  37  1069  1254  248746 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 340 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 341 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 342 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 343 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereçCounters: 8261  2327  595  513  5788  3367  167  1825  839  0  38  1204  1394  248606 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+o 1029 
+TX interruption!
+> split 344 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 345 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 346 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 347 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 348 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 9043  2517  667  595  6001  3377  451  1795  1139  14  39  1101  1296  248704 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 156  41  14  18  115  54  4  44  18  0  4  44  64  249936 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 349 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 350 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 351 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 352 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+Counters: 7856  2154  522  472  4736  2527  92  1578  746  0  40  1236  1436  248564 
+>> Energy packet sent to thermalMaster
+TX interruption!
+> split 353 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 354 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 355 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 356 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 357 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 7948  2170  496  431  4738  2504  84  1474  689  0  37  1069  1254  248746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 358 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 359 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 360 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 361 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereçoCounters: 8043  2240  553  494  5275  2978  129  1701  790  0  38  1204  1394  248606 
+>> Energy packet sent to thermalMaster
+TX interruption!
+ 1029 
+TX interruption!
+> split 362 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 363 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 364 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 365 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 366 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 9045  2516  667  595  6000  3376  451  1794  1139  14  39  1101  1296  248704 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 367 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 368 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 369 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 370 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+Counters: 7856  2154  522  472  4738  2527  92  1578  748  0  40  1236  1436  248564 
+>> Energy packet sent to thermalMaster
+TX interruption!
+> split 371 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 372 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 373 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 374 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 375 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 7948  2170  496  431  4738  2504  84  1474  689  0  37  1069  1254  248746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 376 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 377 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 378 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 379 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+Counters: 8076  2242  564  491  5252  2917  130  1703  797  0  39  1227  1422  248578 
+>> Energy packet sent to thermalMaster
+TX interruption!
+TX interruption!
+> split 380 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 381 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 382 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 383 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 384 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 8427  2384  611  475  6093  3526  198  1783  829  0  38  1078  1268  248732 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 385 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 386 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 387 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 388 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+Counters: 7889  2158  532  496  4801  2618  96  1586  763  0  39  1227  1422  248578 
+>> Energy packet sent to thermalMaster
+TX interruption!
+TX interruption!
+> split 389 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 390 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 391 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 392 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 393 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 9066  2532  656  589  6044  3407  452  1813  1129  14  38  1078  1268  248732 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 394 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 395 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 396 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 397 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+Counters: 8076  2242  564  491  5253  2917  130  1703  798  0  39  1227  1422  248578 
+>> Energy packet sent to thermalMaster
+TX interruption!
+TX interruption!
+> split 398 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 399 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 400 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 401 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 402 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 8415  2379  610  471  6090  3526  196  1781  824  0  26  802  932  249068 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 403 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 404 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 405 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 406 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+Counters: 7773  2170  536  460  5070  2803  123  1645  749  0  26  928  1058  249240 
+>> Energy packet sent to thermalMaster
+TX interruption!
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 407 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 408 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 409 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 410 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 411 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 8483  2359  596  477  5756  3249  162  1711  816  0  27  825  960  248742 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 412 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 413 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 414 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 415 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 7124  1952  457  406  4278  2271  78  1389  646  0  24  784  904  249096 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[24 ] = 1542 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 416 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+Counters: 3457  978  268  246  2546  1531  81  822  386  0  17  437  522  249478 
+>> Energy packet sent to thermalMaster
+TX interruption!
+> split 417 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 418 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 419 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 420 
+Counters: 6986  1963  524  467  4788  2733  420  1439  945  14  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+TX interruption!
+> split 421 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 422 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 423 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5791  1606  371  327  3505  1847  61  1185  519  0  20  608  708  249292 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 424 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 425 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 426 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 427 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 428 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 429 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 430 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 431 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 432 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 433 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 434 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 435 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3874  2172  96  1240  552  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 436 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 437 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 438 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 439 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 440 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 441 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 442 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 443 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 444 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 445 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 446 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 447 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3874  2172  96  1240  552  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 448 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 449 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 450 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 451 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 452 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 453 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 454 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 455 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 456 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3875  2172  96  1240  553  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 457 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 458 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 459 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 460 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 461 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 462 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 463 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 464 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 465 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 466 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 467 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 468 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3875  2172  96  1240  553  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 469 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 470 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 471 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 472 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 473 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 474 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 475 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 476 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 477 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 478 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 479 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 480 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 481 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 482 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 483 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 484 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 485 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 486 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 487 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 488 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 489 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 490 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 491 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 492 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 493 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 494 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 495 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 496 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 497 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 498 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 499 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 500 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 501 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 6008  1708  437  353  4388  2562  134  1365  601  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 502 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 503 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 504 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 505 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 506 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 507 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 508 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 509 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 510 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 511 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 512 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 513 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 514 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 515 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 516 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 517 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 518 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 519 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 520 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 521 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 522 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 523 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 524 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 525 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 526 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 527 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 528 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 529 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 530 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 531 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 532 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 533 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 534 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 535 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 536 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 537 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 538 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 539 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 540 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 541 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 542 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 543 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 544 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 545 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 546 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 547 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 548 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 549 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 550 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 551 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 552 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 553 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 554 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 555 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3874  2172  96  1240  552  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 556 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 557 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 558 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 559 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 560 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 561 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 562 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 563 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 564 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 565 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 566 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 567 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3874  2172  96  1240  552  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 568 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 569 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 570 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 571 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 572 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 573 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 574 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 575 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 576 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3875  2172  96  1240  553  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 577 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 578 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 579 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 580 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 581 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 582 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 583 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 584 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 585 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 586 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 587 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 588 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 589 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 590 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 591 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 592 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 593 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 594 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 595 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 596 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 597 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 598 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 599 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 600 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 601 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 602 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 603 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 604 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 605 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 606 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 607 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 608 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 609 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 610 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 611 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 612 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 613 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 614 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 615 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 616 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 617 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 618 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 619 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 620 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 621 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 622 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 623 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 624 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 625 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 626 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 627 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  396  334  3874  2172  96  1240  552  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 628 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 629 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 630 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 631 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 632 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 633 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 634 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 635 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 636 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 637 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 638 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 639 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3874  2172  96  1240  552  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 640 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 641 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 642 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 643 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 644 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 645 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 646 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 647 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 648 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3875  2172  96  1240  553  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 649 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 650 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 651 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 652 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 653 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 654 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 655 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 656 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 657 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 658 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 659 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 660 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 661 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 662 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 663 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 664 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 665 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 666 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 667 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 668 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 669 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 670 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 671 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 672 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 673 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 674 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 675 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 676 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 677 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 678 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 679 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 680 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 681 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 682 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 683 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 684 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 685 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 686 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 687 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 688 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 689 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 690 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5788  1620  395  334  3873  2172  96  1240  551  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 691 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 692 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 693 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3358  1782  58  1115  501  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 694 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 695 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 696 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3360  1782  58  1115  503  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 697 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 698 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+> split 699 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 27 
+S1 - caso normal
+Adicionando ao pendingReq
+Counters: 5568  1532  353  315  3359  1782  58  1115  502  0  19  599  694  249306 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S1 - caso normal
+TX interruption!
+Encontrei um pending da tarefa 27  para o endereço 1029 
+TX interruption!
+AV - End Task SPLIT
+Tarefa FINALIZANDO 23 
+at this point the pending is: 
+pendingReq[0 ] = 0 
+pendingReq[1 ] = 0 
+pendingReq[2 ] = 0 
+pendingReq[3 ] = 0 
+pendingReq[4 ] = 0 
+pendingReq[5 ] = 0 
+pendingReq[6 ] = 0 
+pendingReq[7 ] = 0 
+pendingReq[8 ] = 0 
+pendingReq[9 ] = 0 
+pendingReq[10 ] = 0 
+pendingReq[11 ] = 0 
+pendingReq[12 ] = 0 
+pendingReq[13 ] = 0 
+pendingReq[14 ] = 0 
+pendingReq[15 ] = 0 
+pendingReq[16 ] = 0 
+pendingReq[17 ] = 0 
+pendingReq[18 ] = 0 
+pendingReq[19 ] = 0 
+pendingReq[20 ] = 0 
+pendingReq[21 ] = 0 
+pendingReq[22 ] = 0 
+pendingReq[23 ] = 0 
+pendingReq[24 ] = 0 
+pendingReq[25 ] = 0 
+pendingReq[26 ] = 0 
+pendingReq[27 ] = 0 
+pendingReq[28 ] = 0 
+pendingReq[29 ] = 0 
+pendingReq[30 ] = 0 
+pendingReq[31 ] = 0 
+pendingReq[32 ] = 0 
+pendingReq[33 ] = 0 
+pendingReq[34 ] = 0 
+pendingReq[35 ] = 0 
+pendingReq[36 ] = 0 
+pendingReq[37 ] = 0 
+pendingReq[38 ] = 0 
+pendingReq[39 ] = 0 
+pendingReq[40 ] = 0 
+pendingReq[41 ] = 0 
+pendingReq[42 ] = 0 
+pendingReq[43 ] = 0 
+pendingReq[44 ] = 0 
+pendingReq[45 ] = 0 
+pendingReq[46 ] = 0 
+pendingReq[47 ] = 0 
+pendingReq[48 ] = 0 
+at this point the PIPE is: 
+pipeStatus[0 ] = 49183687 
+pipeStatus[1 ] = 49435428 
+pipeStatus[2 ] = 49237390 
+pipeStatus[3 ] = 49291164 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S2 - antes da instalação
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S2 - antes da instalação
+TX interruption!
+Counters: 7073  1834  835  621  4573  2546  40  1695  1239  1  15  533  608  249392 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S2 - antes da instalação
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 24 
+S2 - antes da instalação
+TX interruption!
+Counters: 1065  312  86  92  697  358  18  317  125  0  10  350  400  249600 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 1638 
+Finish Simulation Packet Received!
+Counters: 457  143  28  28  320  153  4  149  34  0  5  51  76  250327 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate on - FinishApplication
+Finalizando 771 
+Counters: 156  41  14  18  115  54  4  44  18  0  7  65  100  249497 
 >> Energy packet sent to thermalMaster
 TX interruption!
