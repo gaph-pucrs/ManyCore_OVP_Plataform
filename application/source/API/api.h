@@ -443,7 +443,7 @@ void interruptHandler_NI_RX(void) {
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
             }
         }
-        else if((taskMigrated != -1 || taskMigrated != -2) && migratedTask == taskID){
+        else if(taskMigrated != -1 && migratedTask == taskID){
             prints("S3 - depois da tarefa começar a migrar\n");
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
         }
@@ -604,6 +604,7 @@ void interruptHandler_NI_RX(void) {
         putsv("Task state received ", new_state);
         migration_src = 0;
         taskMigrated = -2;
+        migratedTask = -1;
         *NIcmdRX = DONE; 
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
