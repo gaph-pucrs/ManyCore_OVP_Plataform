@@ -453,6 +453,17 @@ int main(int argc, char **argv)
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
             progresso = (finishedTasks*100)/totalTasks;
+            progresso = progresso/2;
+            line[0] = '<'
+            for(i = 1; i<=50; i++){
+                if(i<progresso)
+                    line[i] = '=';
+                else
+                    line[i] = ' ';
+            }
+            line[51] = '>';
+            line[52] = '\n';
+            LOG(line);
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
