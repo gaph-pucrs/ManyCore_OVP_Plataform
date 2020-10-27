@@ -457,15 +457,15 @@ void interruptHandler_NI_RX(void) {
         else{
             prints("S66 - deu pau\n");
             printi(taskMigrated);
-            prints("-");
+            prints(" x ");
             printi(migratedTask);
-            prints("-");
+            prints(" x ");
             printi(running_task);
-            prints("-");
+            prints(" x ");
             printi(migration_src);
-            prints("-");
+            prints(" x ");
             printi(migration_dst);
-            prints("-");
+            prints(" x ");
             printi(mapping_en);
             while(1){LOG("S66 DEU MERDA!\n");}
         }

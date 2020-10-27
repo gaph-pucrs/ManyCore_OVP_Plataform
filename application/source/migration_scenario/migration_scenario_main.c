@@ -260,6 +260,7 @@ int main(int argc, char **argv)
 			printFinish();
 			mapping_table[running_task] = 0;   // clear this address value
 			sendFinishTask(running_task);
+			migratedTask = -1;
 			running_task = -1;
 		}
 		else{	
