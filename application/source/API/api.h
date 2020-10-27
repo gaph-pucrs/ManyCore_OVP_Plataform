@@ -552,6 +552,7 @@ void interruptHandler_NI_RX(void) {
         mapping_en = 1;
         migration_dst = 0;
         migration_src = 0;
+        new_state = 0;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ALLOCATED){

@@ -63,7 +63,6 @@ int sortMaster(int state){
 		prints(" - Received array from slave: ");
 		printi(i%SORT_SLAVES);
 		prints("\n");
-		//print_array(msg.msg, ARRAY_SIZE);
 		slave_task[i%SORT_SLAVES] = task;
 		if (task == TASKS){
 			theMessage.size = 1;
@@ -93,8 +92,10 @@ int sort_slave(int task, int state){
 	task_request[0] = task;
 	task_request[1] = TASK_REQUEST;
 
-	prints("sort_slave started\n");
-
+	prints("sort_slave started state = ");
+	printi(state);
+	prints("\n");
+	
     /*Requests initial task*/
     theMessage.size = 2;
     for (i = 0; i < 2; i++)
