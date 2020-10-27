@@ -442,39 +442,22 @@ int main(int argc, char **argv)
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Timer (ms) ", measuredWindows);
             
-            prints("================================\n== Fila de tasks:\n");
+            /*prints("================================\n== Fila de tasks:\n");
             for(i = 0; i < DIM_X*DIM_Y; i++){
                 if(task_remaining_executions[i] > 0){
                     putsvsv(">> Task[", i, "] ainda precisa executar ", task_remaining_executions[i]);
                 }
             }
-            prints("================================\n");
+            prints("================================\n");*/
+
+            progresso = (finishedTasks*100)/totalTasks;
+            putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. %", progresso);
+            LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
+
 
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
-            char progressBar[60];
-            char ch;
-
-            progresso = (finishedTasks*100)/totalTasks;
-            progresso = progresso/2;
-            sprintf(progressBar, "Progresso %d <", measuredWindows);
-            /*ch = '<';
-            strncat(progressBar, &ch, 1);*/
-            for(i = 1; i<=50; i++){
-                if(i<progresso)
-                    ch = '=';
-                else
-                    ch = ' ';
-                strncat(progressBar, &ch, 1);
-            }
-            ch = '>';
-            strncat(progressBar, &ch, 1);
-            ch = '\n';
-            strncat(progressBar, &ch, 1);
-            ch = '\0';
-            strncat(progressBar, &ch, 1);
-            printf("%s", progressBar);
-
+            
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
