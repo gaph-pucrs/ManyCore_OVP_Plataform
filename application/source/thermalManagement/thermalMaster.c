@@ -119,7 +119,7 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
     int i;
     int foundI = -1;
     int foundJ = -1;
-
+    putsv("pe = ", pe);
     for(i = 0; i < DIM_X*DIM_Y; i++){
         putsvsv("regular[", i,"] = ", task_addr[i]);
         putsvsv("regular[", i,"] = ", task_confirmed_addr[i]);
