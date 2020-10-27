@@ -142,6 +142,12 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
     if(foundI == -1 && foundJ == -1){
         return FALSE;
     }
+    else if(foundI != -1 && foundJ == -1){
+        return TRUE;
+    }
+    else if(foundI == -1 && foundJ != -1){
+        return TRUE;
+    }
     else{
         while(1){LOG("EROOOOOOOOUUU! 55555555555555555555\n");}
     }
