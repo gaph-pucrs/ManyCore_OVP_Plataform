@@ -554,6 +554,7 @@ void interruptHandler_NI_RX(void) {
             if(mapping_table[i] == 0){
                 mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
             }
+        }
         mapping_en = 1;
         migration_dst = 0;
         migration_src = 0;
