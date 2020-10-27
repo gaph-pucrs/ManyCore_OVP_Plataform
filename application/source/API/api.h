@@ -550,8 +550,10 @@ void interruptHandler_NI_RX(void) {
             bufferPop(i);
         }
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
-        for(i=0; i<num_tasks; i++)
-            mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+        for(i=0; i<num_tasks; i++){
+            if(mapping_table[i] == 0){
+                mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
+            }
         mapping_en = 1;
         migration_dst = 0;
         migration_src = 0;
