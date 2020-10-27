@@ -266,7 +266,7 @@ int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
 int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     int i, j, empty, pe;
     for(j = 1; j < DIM_X*DIM_Y; j++){ 
-        pe = spiralMatrix[j-1];      // gets the peAddr from spiralMatrix
+        pe = spiralMatrix[DIM_X*DIM_Y-j];      // gets the peAddr from spiralMatrix
         empty = 1;                   // presumes that it is empty
         for(i = 0; i < DIM_X*DIM_Y; i++){
             if(task_addr[i] == pe){ // if you find some task runnin inside that processor
@@ -451,7 +451,7 @@ int main(int argc, char **argv)
             prints("================================\n");*/
 
             progresso = (finishedTasks*100)/totalTasks;
-            putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. %", progresso);
+            putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
             LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
 
 
@@ -523,13 +523,13 @@ int main(int argc, char **argv)
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i]==TRUE){
                     if(appFinished(i, task_applicationID)){
-                        finishedTasks++;
                         task_addr[i] = 0;
                         task_confirmed_addr[i] = 0;
                     }
                 }
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     // calculates the next start time
+                    finishedTasks++;
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i]=2;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
