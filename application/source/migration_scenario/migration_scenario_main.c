@@ -258,7 +258,9 @@ int main(int argc, char **argv)
 		}
 		if(state == 0){
 			printFinish();
+			task_addr[running_task] = 0;   // clear this address value
 			sendFinishTask(running_task);
+			running_task = -1;
 		}
 		else{	
 			migratedTask = running_task;
