@@ -452,7 +452,7 @@ void interruptHandler_NI_RX(void) {
                 serviceIndexNextTimer = index;
             }
         }*/
-        if(taskID == running_task || taskMigrated == -2){
+        if(taskID == running_task || taskMigrated == -2 || mapping_en == 1){
             if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
                 prints("Adicionando ao pendingReq\n");
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
@@ -972,7 +972,7 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
     myServicePacket[index][PI_SERVICE] = service;
     for (i = 0; i < size; i++){
         myServicePacket[index][PI_PAYLOAD+i] = payload[i];
-        putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
+        //putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
     }
     SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
