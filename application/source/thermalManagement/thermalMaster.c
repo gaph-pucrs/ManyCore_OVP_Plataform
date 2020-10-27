@@ -457,7 +457,7 @@ int main(int argc, char **argv)
 
             progresso = (finishedTasks*100)/totalTasks;
             progresso = progresso/2;
-            sprintf(progressBar, "Progresso <");
+            sprintf(progressBar, "Progresso %d <", measuredWindows);
             /*ch = '<';
             strncat(progressBar, &ch, 1);*/
             for(i = 1; i<=50; i++){
