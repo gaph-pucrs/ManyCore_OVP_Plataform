@@ -447,7 +447,7 @@ void interruptHandler_NI_RX(void) {
             prints("S3 - depois da tarefa começar a migrar\n");
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
         }
-        else if(migration_dst == 1){
+        else if(migration_dst == 1 || taskMigrated == -2){
             prints("S4 - chegou durante a migração\n");
             if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
                 prints("Adicionando ao pendingReq\n");
