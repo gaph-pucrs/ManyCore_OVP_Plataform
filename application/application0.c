@@ -117,14 +117,40 @@ int getSomeTaskID(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
 
 int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DIM_Y], unsigned int task_addr[DIM_Y*DIM_X]){
     int i;
+    int foundI = -1;
+    int foundJ = -1;
+    putsv("pe = ", pe);
     for(i = 0; i < DIM_X*DIM_Y; i++){
+        putsvsv("regular[", i,"] = ", task_addr[i]);
+        putsvsv("regular[", i,"] = ", task_confirmed_addr[i]);
+        prints("---------");
+        if(task_addr[i] == pe && foundI == -1){
+            foundI = i;
+        }
+        if(task_confirmed_addr[i] == pe && foundJ == -1){
+            foundJ = i;
+        }
+        if(foundI != -1 && foundJ != -1){
+            if(foundI == foundJ){
+                return FALSE;
+            }
+            else{
+                if(foundI == -1 && foundJ == -1){
+                    return FALSE;
+                }
+                return TRUE;
+            }
+        }
+    }
+
+    /*for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_addr[i] == pe){ // found a task that is running this PE
             if(task_confirmed_addr[i] == pe) // if the occupation is confirmed then
                 return FALSE; // this PE is not envolved in any migration
             else
                 return TRUE;
         }
-    }
+    }*/
 }
 
 int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_map, unsigned int task_addr[DIM_X*DIM_Y]){
