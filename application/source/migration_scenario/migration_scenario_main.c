@@ -258,7 +258,7 @@ int main(int argc, char **argv)
 		}
 		if(state == 0){
 			printFinish();
-			task_addr[running_task] = 0;   // clear this address value
+			mapping_table[running_task] = 0;   // clear this address value
 			sendFinishTask(running_task);
 			running_task = -1;
 		}
@@ -276,7 +276,7 @@ int main(int argc, char **argv)
 			disable_interruption(2);
 			set_taskMigrated(destination); // save the new destination of this 
 			running_task = -1;
-			task_addr[migratedTask] = 0;   // clear this address value
+			mapping_table[migratedTask] = 0;   // clear this address value
 			sendPendingReq(destination);
 			enable_interruption(2);
 			
