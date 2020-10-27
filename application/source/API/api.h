@@ -660,7 +660,9 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_FINISHED){
-        putsv("Tarefa finalizada - ", incomingPacket[PI_TASK_ID]);
+        prints("Tarefa finalizada - ");
+        printi(incomingPacket[PI_TASK_ID]);
+        prints("-\n");
         finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
         *NIcmdRX = DONE;
     }
