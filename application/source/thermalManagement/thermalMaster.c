@@ -121,9 +121,9 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
     int foundJ = -1;
     putsv("pe = ", pe);
     for(i = 0; i < DIM_X*DIM_Y; i++){
-        putsvsv("regular[", i,"] = ", task_addr[i]);
+        /*putsvsv("regular[", i,"] = ", task_addr[i]);
         putsvsv("confirm[", i,"] = ", task_confirmed_addr[i]);
-        prints("---------\n");
+        prints("---------\n");*/
         if(task_addr[i] == pe && foundI == -1){
             foundI = i;
         }
