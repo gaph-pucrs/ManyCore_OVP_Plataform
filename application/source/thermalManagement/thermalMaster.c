@@ -463,7 +463,7 @@ int main(int argc, char **argv)
             }
             line[51] = '>';
             line[52] = '\n';
-            LOG(*line);
+            LOG(&line);
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
