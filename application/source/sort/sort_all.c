@@ -22,7 +22,7 @@ void print_array(int *array, int size){
 }
 
 int sortMaster(int state){
-	int i, j;
+	int i, j, k;
 	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
 
 	int array[SORT_SLAVES][ARRAY_SIZE];
@@ -43,8 +43,40 @@ int sortMaster(int state){
 		putsvsv("array[", j, "] = ", array[2][j]);
 	}
 
-
-	for (i = 0; i < SORT_SLAVES; i++){
+	for(k = 0; k < TASKS; k++){
+		for(i = 0; i < SORT_SLAVES; i++){
+			theMessage.size = ARRAY_SIZE;
+			for (j = 0; j < ARRAY_SIZE; j++)
+				theMessage.msg[j] = array[i][j];
+			SendMessage(&theMessage, slave_addr[i]);
+			putsv("Packet sent to slave ", i);
+		}
+		for(i = 0; i < SORT_SLAVES; i++){
+			ReceiveMessage(&theMessage, slave_addr[i]);
+			prints("Received ");
+			printi(theMessage.size);
+			prints(" flits from ");
+			printi(i);
+			prints("\n");
+		}
+		if(k == TASKS-1){ // FINISH
+			for(i = 0; i < SORT_SLAVES; i++){
+				theMessage.size = 1;
+				theMessage.msg[0] = msg_kill;
+				SendMessage(&theMessage, slave_addr[i]);
+				prints("Master Sening kill to ");
+				printi(i%SORT_SLAVES);
+				prints("\n");
+			}
+		}
+		// CHECKS THE MIGRATION HERE!
+	}
+	return 0;
+}	
+	
+	
+	
+/*	for (i = 0; i < SORT_SLAVES; i++){
 		ReceiveMessage(&theMessage, slave_addr[i]);
 		prints("Received ");
 		printi(theMessage.size);
@@ -81,7 +113,7 @@ int sortMaster(int state){
 		}
 	}
 	return 0;
-}
+}*/
 
 
 int sort_slave(int task, int state){
@@ -97,13 +129,13 @@ int sort_slave(int task, int state){
 	prints("\n");
 	
     /*Requests initial task*/
-    theMessage.size = 2;
+    /*theMessage.size = 2;
     for (i = 0; i < 2; i++)
     	theMessage.msg[i] = task_request[i];
 
 	if(state == 0){
 		SendMessage(&theMessage, sort_master);
-	}
+	}*/
     
     /* Wait for a task, execute and return result to master*/
     for (;;) {
