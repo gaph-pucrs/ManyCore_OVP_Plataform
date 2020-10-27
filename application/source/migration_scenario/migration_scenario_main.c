@@ -33,7 +33,7 @@ int dijkstra_slave();
 int dijkstra_print();
 
 int sortMaster(int state);
-int sort_slave(int task);
+int sort_slave(int task, int state);
 
 int aesMaster(int state);
 int aes_slave();
@@ -190,13 +190,13 @@ int main(int argc, char **argv)
 				state = sortMaster(state);
 				break;
 			case sort_slave1:
-				state = sort_slave(0);
+				state = sort_slave(0, state);
 				break;
 			case sort_slave2:
-				state = sort_slave(1);
+				state = sort_slave(1, state);
 				break;
 			case sort_slave3:
-				state = sort_slave(2);
+				state = sort_slave(2, state);
 				break;
 			//AES
 			case aes_master:
@@ -258,13 +258,16 @@ int main(int argc, char **argv)
 		}
 		if(state == 0){
 			printFinish();
+			mapping_table[running_task] = 0;   // clear this address value
 			sendFinishTask(running_task);
+			migratedTask = -1;
+			running_task = -1;
 		}
 		else{	
-			migratedTask = running_task;		
+			migratedTask = running_task;
 			get_migration_mapping_table(new_task_addr);
-			destination = new_task_addr[running_task];
-			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
+			destination = new_task_addr[migratedTask];
+			putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 			
 			
 			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
@@ -273,13 +276,14 @@ int main(int argc, char **argv)
 			
 			disable_interruption(2);
 			set_taskMigrated(destination); // save the new destination of this 
+			running_task = -1;
+			mapping_table[migratedTask] = 0;   // clear this address value
 			sendPendingReq(destination);
 			enable_interruption(2);
 			
-			new_task_addr[running_task] = new_task_addr[running_task] | 0x80000000; // flag this as the migrating task
+			new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-			new_task_addr[running_task] = new_task_addr[running_task] & 0x7FFFFFFF;
-			running_task = -1;
+			new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
 		}
 	}
 

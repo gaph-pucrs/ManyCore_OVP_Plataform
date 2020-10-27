@@ -194,8 +194,8 @@ void get_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
 void get_migration_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
 
 // MASTER ONLY
-unsigned int task_addr[DIM_X*DIM_Y];
-unsigned int task_confirmed_addr[DIM_X*DIM_Y];
+volatile unsigned int task_addr[DIM_X*DIM_Y];
+volatile unsigned int task_confirmed_addr[DIM_X*DIM_Y];
 unsigned int serviceIndexNextTimer = -1;
 //////////////////////////////////////
 
@@ -334,7 +334,7 @@ void interruptHandler_timer(void) {
     *operationFrequency = newFrequency;
     Voltage = newVoltage;
 
-    if(*myAddress == 0){
+    /*if(*myAddress == 0){
         if(*NIcmdTX == NI_STATUS_OFF){
             SendSlot((unsigned int)&myServicePacket[serviceIndexNextTimer], (0xFFFF0000 | serviceIndexNextTimer)); // WARNING: This may cause a problem!!!!
         }
@@ -342,7 +342,7 @@ void interruptHandler_timer(void) {
             addServiceAfterTX(serviceIndexNextTimer);
         }
         serviceIndexNextTimer = -1;
-    }
+    }*/
 
 #endif
     //////////////////////////////////////////////////////////////
@@ -411,7 +411,7 @@ void interruptHandler_NI_RX(void) {
             }
         }
         else{
-            putsvsv("Recebi uma mensagem indevida (taskID = ", incomingPacket[PI_TASK_ID], ") defletindo para o MASTER ", 0);
+            putsvsv("Recebi uma mensagem indevida (taskID = ", incomingPacket[PI_TASK_ID], ") defletindo para o MASTER, veio de ", incomingPacket[PI_REQUESTER]);
             index = getServiceIndex();
             for(i=0;i<PACKET_MAX_SIZE;i++){
                 myServicePacket[index][i] = incomingPacket[i];
@@ -428,7 +428,49 @@ void interruptHandler_NI_RX(void) {
         newAddr = incomingPacket[PI_REQUESTER];
         taskID = incomingPacket[PI_PRODUCER];// & 0x7FFFFFFF; 
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
-        if(*myAddress == 0){
+
+        if(running_task == taskID){
+            prints("S1 - caso normal\n");
+            if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
+                prints("Adicionando ao pendingReq\n");
+                pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+            }
+        }
+        else if(taskMigrated == -1 && migratedTask == -1 && running_task == -1){
+            prints("S2 - antes da instalação\n");
+            if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
+                prints("Adicionando ao pendingReq\n");
+                pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+            }
+        }
+        else if(taskMigrated != -1 && migratedTask == taskID){
+            prints("S3 - depois da tarefa começar a migrar\n");
+            forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
+        }
+        else if(migration_dst == 1 || taskMigrated == -2){
+            prints("S4 - chegou durante a migração\n");
+            if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
+                prints("Adicionando ao pendingReq\n");
+                pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+            }
+        }
+        else{
+            prints("S66 - deu pau\n");
+            printi(taskMigrated);
+            prints(" x ");
+            printi(migratedTask);
+            prints(" x ");
+            printi(running_task);
+            prints(" x ");
+            printi(migration_src);
+            prints(" x ");
+            printi(migration_dst);
+            prints(" x ");
+            printi(mapping_en);
+            while(1){LOG("S66 DEU MERDA!\n");}
+        }
+
+        /*if(*myAddress == 0){
             index = getServiceIndex();
             if(task_confirmed_addr[taskID] != 0)
                 myServicePacket[index][PI_DESTINATION] = task_confirmed_addr[taskID];
@@ -451,24 +493,28 @@ void interruptHandler_NI_RX(void) {
                 }
                 serviceIndexNextTimer = index;
             }
-        }
-        else if(taskID == running_task){
+        }*/
+        /*if(taskID == running_task || taskMigrated == -2 || mapping_en == 1 || (mapping_en == 0 && taskMigrated == -1)){
             if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
                 prints("Adicionando ao pendingReq\n");
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
             }
         }
-        else if(taskMigrated != -1 && migratedTask == taskID){
+        else if(taskMigrated != -1 && migratedTask == taskID){ // TASK MIGROU
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
-        }
+        }*/
         /*else if((incomingPacket[PI_PRODUCER] & 0x80000000) != 0){
             prints("Adicionando ao pendingReq sob ordem do Master\n");
             pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
         }*/
-        else{
+        /*else{
             prints("A lost request, sending to MASTER\n");
-            forwardMsgRequest(requester, 0, newAddr, taskID);
-        }        
+            putsv("taskMigraed = ", taskMigrated);
+            putsv("migratedTask = ", migratedTask);
+            putsv("id_taskProducer = ", taskID);
+            LOG("ERRO! migratedTask = %d -- taskMigrated = %d -- taskProducer = %d",migratedTask,taskMigrated,taskID);
+            //forwardMsgRequest(requester, 0, newAddr, taskID);
+        }*/
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET){
@@ -506,6 +552,7 @@ void interruptHandler_NI_RX(void) {
         mapping_en = 1;
         migration_dst = 0;
         migration_src = 0;
+        new_state = 0;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ALLOCATED){
@@ -544,22 +591,24 @@ void interruptHandler_NI_RX(void) {
         migration_dst = 1;
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     }
-    else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_UPDT){
+    /*else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_UPDT){
         prints("Task update received\n");
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
         migration_upd = 1;
         *NIcmdRX = DONE; 
-    }
+    }*/
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE){
         new_state = incomingPacket[PI_PAYLOAD];
         putsv("Task state received ", new_state);
-        taskMigrated = -1;
+        migration_src = 0;
+        taskMigrated = -2;
+        migratedTask = -1;
         *NIcmdRX = DONE; 
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE){
-        putsv("Task pipe received ", new_state);
+        putsv("Task pipe received para tarefa ", incomingPacket[PI_TASK_ID]);
         do{index = getEmptyIndex(); /*prints("PRESO6\n");*/}while(index==PIPE_WAIT);
         for(i=0; i<MESSAGE_MAX_SIZE; i++){
             buffer_packets[index][i] = incomingPacket[PI_PAYLOAD+i];
@@ -597,15 +646,24 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ADDR_UPDT){
-        printi(incomingPacket[PI_PAYLOAD]);
+        //printi(incomingPacket[PI_PAYLOAD]);
         taskID = incomingPacket[PI_PAYLOAD] & 0x0000FFFF;
         newAddr = (incomingPacket[PI_PAYLOAD] & 0xFFFF0000) >> 16;
+        if(newAddr == 0 && taskID == migratedTask){
+            migratedTask = -1;
+            taskMigrated = -1;
+        }
+        /*if(mapping_table[taskID] == *myAddress){
+            taskMigrated = -1; // reseting this makes this PE ready to receive a new app!
+        }*/
         mapping_table[taskID] = newAddr;
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_FINISHED){
-        putsv("Tarefa finalizada - ", incomingPacket[PI_TASK_ID]);
+        prints("Tarefa finalizada - ");
+        printi(incomingPacket[PI_TASK_ID]);
+        prints("-\n");
         finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
         *NIcmdRX = DONE;
     }
@@ -666,7 +724,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
     unsigned int found = PIPE_WAIT;
     unsigned int foundSent = PIPE_WAIT;
     for(i=0;i<PIPE_SIZE;i++){
-        //putsvsv("buffer_map=", buffer_map[i], "   task_dest=", buffer_packets[i][PI_TASK_ID]);
+        putsvsv("buffer_map=", buffer_map[i], "   task_dest=", buffer_packets[i][PI_TASK_ID]);
         if(buffer_map[i] != PIPE_FREE && buffer_map[i] != PIPE_TRANSMITTING){ // if this position has something valid
             if(buffer_packets[i][PI_TASK_ID] == requester){ // and the destination is the same as the requester
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
@@ -679,7 +737,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
     }
     if(found != PIPE_WAIT){
         buffer_map[found] = PIPE_TRANSMITTING;
-        buffer_packets[i][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
+        buffer_packets[found][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
             //prints("Enviando do PIPE\n");
@@ -1113,10 +1171,10 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         // if blocked during a migration scenario this could be required
         //prints("PRESO1\n");
         index = getEmptyIndex();
-        if(migration_src == 1 && flag == 0){
+        /*if(migration_src == 1 && flag == 0){
             requestToForward();
             flag++;
-        }
+        }*/
     }
 #if USE_THERMAL
     *clockGating_flag = FALSE;

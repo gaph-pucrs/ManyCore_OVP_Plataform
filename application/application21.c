@@ -33,7 +33,7 @@ int dijkstra_slave();
 int dijkstra_print();
 
 int sortMaster(int state);
-int sort_slave(int task);
+int sort_slave(int task, int state);
 
 int aesMaster(int state);
 int aes_slave();
@@ -190,13 +190,13 @@ int main(int argc, char **argv)
 				state = sortMaster(state);
 				break;
 			case sort_slave1:
-				state = sort_slave(0);
+				state = sort_slave(0, state);
 				break;
 			case sort_slave2:
-				state = sort_slave(1);
+				state = sort_slave(1, state);
 				break;
 			case sort_slave3:
-				state = sort_slave(2);
+				state = sort_slave(2, state);
 				break;
 			//AES
 			case aes_master:
@@ -258,13 +258,16 @@ int main(int argc, char **argv)
 		}
 		if(state == 0){
 			printFinish();
+			mapping_table[running_task] = 0;   // clear this address value
 			sendFinishTask(running_task);
+			migratedTask = -1;
+			running_task = -1;
 		}
 		else{	
-			migratedTask = running_task;		
+			migratedTask = running_task;
 			get_migration_mapping_table(new_task_addr);
-			destination = new_task_addr[running_task];
-			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
+			destination = new_task_addr[migratedTask];
+			putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 			
 			
 			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
@@ -273,13 +276,14 @@ int main(int argc, char **argv)
 			
 			disable_interruption(2);
 			set_taskMigrated(destination); // save the new destination of this 
+			running_task = -1;
+			mapping_table[migratedTask] = 0;   // clear this address value
 			sendPendingReq(destination);
 			enable_interruption(2);
 			
-			new_task_addr[running_task] = new_task_addr[running_task] | 0x80000000; // flag this as the migrating task
+			new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-			new_task_addr[running_task] = new_task_addr[running_task] & 0x7FFFFFFF;
-			running_task = -1;
+			new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
 		}
 	}
 
@@ -3408,10 +3412,10 @@ void print_array(int *array, int size){
 }
 
 int sortMaster(int state){
-	int i, j;
+	int i, j, k;
 	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
 
-	int array[ARRAY_SIZE][SORT_SLAVES];
+	int array[SORT_SLAVES][ARRAY_SIZE];
 	int slave_task[SORT_SLAVES];
 	int task = 0;
 
@@ -3419,10 +3423,50 @@ int sortMaster(int state){
 
 	prints("sortMaster started\n");
 
-	for (i = 0; i < SORT_SLAVES; i++)
-		init_array(array[i], ARRAY_SIZE);
-
 	for (i = 0; i < SORT_SLAVES; i++){
+		init_array(array[i], ARRAY_SIZE);
+	}
+
+	for(j = 0; j < ARRAY_SIZE; j++){
+		putsvsv("array[", j, "] = ", array[0][j]);
+		putsvsv("array[", j, "] = ", array[1][j]);
+		putsvsv("array[", j, "] = ", array[2][j]);
+	}
+
+	for(k = 0; k < TASKS; k++){
+		for(i = 0; i < SORT_SLAVES; i++){
+			theMessage.size = ARRAY_SIZE;
+			for (j = 0; j < ARRAY_SIZE; j++)
+				theMessage.msg[j] = array[i][j];
+			SendMessage(&theMessage, slave_addr[i]);
+			putsv("Packet sent to slave ", i);
+		}
+		for(i = 0; i < SORT_SLAVES; i++){
+			ReceiveMessage(&theMessage, slave_addr[i]);
+			prints("Received ");
+			printi(theMessage.size);
+			prints(" flits from ");
+			printi(i);
+			prints("\n");
+		}
+		if(k == TASKS-1){ // FINISH
+			for(i = 0; i < SORT_SLAVES; i++){
+				theMessage.size = 1;
+				theMessage.msg[0] = msg_kill;
+				SendMessage(&theMessage, slave_addr[i]);
+				prints("Master Sening kill to ");
+				printi(i%SORT_SLAVES);
+				prints("\n");
+			}
+		}
+		// CHECKS THE MIGRATION HERE!
+	}
+	return 0;
+}	
+	
+	
+	
+/*	for (i = 0; i < SORT_SLAVES; i++){
 		ReceiveMessage(&theMessage, slave_addr[i]);
 		prints("Received ");
 		printi(theMessage.size);
@@ -3437,10 +3481,10 @@ int sortMaster(int state){
 
 	for (i = 0; i < TASKS; i++){
 		ReceiveMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
-		prints("Received array from slave: ");
+		printi(i);
+		prints(" - Received array from slave: ");
 		printi(i%SORT_SLAVES);
 		prints("\n");
-		//print_array(msg.msg, ARRAY_SIZE);
 		slave_task[i%SORT_SLAVES] = task;
 		if (task == TASKS){
 			theMessage.size = 1;
@@ -3459,10 +3503,10 @@ int sortMaster(int state){
 		}
 	}
 	return 0;
-}
+}*/
 
 
-int sort_slave(int task){
+int sort_slave(int task, int state){
 	int task_request[2];
 	int array[ARRAY_SIZE];
 	int i;
@@ -3470,15 +3514,19 @@ int sort_slave(int task){
 	task_request[0] = task;
 	task_request[1] = TASK_REQUEST;
 
-	prints("sort_slave started\n");
-
+	prints("sort_slave started state = ");
+	printi(state);
+	prints("\n");
+	
     /*Requests initial task*/
-    theMessage.size = 2;
+    /*theMessage.size = 2;
     for (i = 0; i < 2; i++)
     	theMessage.msg[i] = task_request[i];
 
-    SendMessage(&theMessage, sort_master);
-
+	if(state == 0){
+		SendMessage(&theMessage, sort_master);
+	}*/
+    
     /* Wait for a task, execute and return result to master*/
     for (;;) {
     	ReceiveMessage(&theMessage, sort_master);

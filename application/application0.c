@@ -117,13 +117,35 @@ int getSomeTaskID(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
 
 int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DIM_Y], unsigned int task_addr[DIM_Y*DIM_X]){
     int i;
+    int foundI = -1;
+    int foundJ = -1;
     for(i = 0; i < DIM_X*DIM_Y; i++){
-        if(task_addr[i] == pe){ // found a task that is running this PE
-            if(task_confirmed_addr[i] == pe) // if the occupation is confirmed then
-                return FALSE; // this PE is not envolved in any migration
-            else
-                return TRUE;
+        if(task_addr[i] == pe && foundI == -1){
+            foundI = i;
         }
+        if(task_confirmed_addr[i] == pe && foundJ == -1){
+            foundJ = i;
+        }
+        if(foundI != -1 && foundJ != -1){
+            if(foundI == foundJ){
+                return FALSE;
+            }
+            else{
+                return TRUE;
+            }
+        }
+    }
+    if(foundI == -1 && foundJ == -1){
+        return FALSE;
+    }
+    else if(foundI != -1 && foundJ == -1){
+        return TRUE;
+    }
+    else if(foundI == -1 && foundJ != -1){
+        return TRUE;
+    }
+    else{
+        while(1){LOG("EROOOOOOOOUUU! 55555555555555555555\n");}
     }
 }
 
@@ -141,9 +163,9 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
         // clear finished applications
-        if(finishedTask[i]==TRUE || finishedTask[i] == 3){
+        /*if(finishedTask[i]==TRUE || finishedTask[i] == 3){
             task_addr[i] = 0;
-        }
+        }*/
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
@@ -153,14 +175,14 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
         srcProc = x << 8 | y;
         if (temp[srcID] > 33300){
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
-            if(!migrationEnvolved(srcProc, task_confirmed_addr, task_addr)){ // iaçanã: detecta PEs que nao podem migrar (por exemplo o master do sort - se mandar migrar ele nao vai conseguir e se der tempo de chegar em outra janela o master vai achar que o PE ta livre e pode mandar alguuma coisa pra lá e dar merda)
+            if(migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: detecta PEs que nao podem migrar (por exemplo o master do sort - se mandar migrar ele nao vai conseguir e se der tempo de chegar em outra janela o master vai achar que o PE ta livre e pode mandar alguuma coisa pra lá e dar merda)
                 if(how_many_tasks_PE_is_running(srcProc, task_addr)>0){
                     while (k>0){
                         tgtProc = spiralMatrix[k];
                         task_ID = getSomeTaskID(srcProc, task_addr);
                         putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);                       
                         //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);                     
-                        if(!migrationEnvolved(tgtProc, task_confirmed_addr, task_addr)){ // iaçanã: mesma coisa de antes 
+                        if(migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: mesma coisa de antes 
                             if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
                                 //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                                 prints("send_task_migration\n");
@@ -244,7 +266,7 @@ int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
 int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     int i, j, empty, pe;
     for(j = 1; j < DIM_X*DIM_Y; j++){ 
-        pe = spiralMatrix[j-1];      // gets the peAddr from spiralMatrix
+        pe = spiralMatrix[DIM_X*DIM_Y-j];      // gets the peAddr from spiralMatrix
         empty = 1;                   // presumes that it is empty
         for(i = 0; i < DIM_X*DIM_Y; i++){
             if(task_addr[i] == pe){ // if you find some task runnin inside that processor
@@ -321,6 +343,7 @@ int main(int argc, char **argv)
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
+    int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/
     generateSpiralMatrix();
@@ -390,6 +413,8 @@ int main(int argc, char **argv)
         }        
     }
     
+    totalTasks = 0;
+    finishedTasks = 0;
     for(i = 0; i < tasks_to_map; i++){
         prints("==================\n");
         prints("Tarefa ("); 
@@ -400,6 +425,7 @@ int main(int argc, char **argv)
         printi(task_applicationID[i]);
         prints(". Ela vai executar "); 
         printi(task_remaining_executions[i]); 
+        totalTasks += task_remaining_executions[i];
         prints(" vezes, começando "); 
         printi(task_repeat_after[i]);
         prints("ms depois de terminar a execução anterior.\n\n");
@@ -416,16 +442,22 @@ int main(int argc, char **argv)
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Timer (ms) ", measuredWindows);
             
-            prints("================================\n== Fila de tasks:\n");
+            /*prints("================================\n== Fila de tasks:\n");
             for(i = 0; i < DIM_X*DIM_Y; i++){
                 if(task_remaining_executions[i] > 0){
                     putsvsv(">> Task[", i, "] ainda precisa executar ", task_remaining_executions[i]);
                 }
             }
-            prints("================================\n");
+            prints("================================\n");*/
+
+            progresso = (finishedTasks*100)/totalTasks;
+            putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
+            LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
+
 
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
+            
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
@@ -490,13 +522,14 @@ int main(int argc, char **argv)
             finishSimulation = 1;
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i]==TRUE){
-                    task_addr[i] = 0;
                     if(appFinished(i, task_applicationID)){
+                        task_addr[i] = 0;
                         task_confirmed_addr[i] = 0;
                     }
                 }
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     // calculates the next start time
+                    finishedTasks++;
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i]=2;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
@@ -526,7 +559,7 @@ int main(int argc, char **argv)
         }
         measuredWindows = 0;
         while(*SyncToPE != 1){
-            putsv("Waiting everyone ", measuredWindows);
+            LOG("Waiting everyone %X\n", measuredWindows);
             measuredWindows++;    
         }
     }
