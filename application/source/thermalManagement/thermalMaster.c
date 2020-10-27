@@ -343,7 +343,7 @@ int main(int argc, char **argv)
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
-    int totalTasks, finishedTasks, progresso;
+    //int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/
     generateSpiralMatrix();
@@ -413,8 +413,8 @@ int main(int argc, char **argv)
         }        
     }
     
-    totalTasks = 0;
-    finishedTasks = 0;
+    //totalTasks = 0;
+    //finishedTasks = 0;
     for(i = 0; i < tasks_to_map; i++){
         prints("==================\n");
         prints("Tarefa ("); 
@@ -425,7 +425,7 @@ int main(int argc, char **argv)
         printi(task_applicationID[i]);
         prints(". Ela vai executar "); 
         printi(task_remaining_executions[i]); 
-        totalTasks += task_remaining_executions[i];
+        //totalTasks += task_remaining_executions[i];
         prints(" vezes, começando "); 
         printi(task_repeat_after[i]);
         prints("ms depois de terminar a execução anterior.\n\n");
@@ -450,9 +450,9 @@ int main(int argc, char **argv)
             }
             prints("================================\n");*/
 
-            progresso = (finishedTasks*100)/totalTasks;
-            putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
-            LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
+            //progresso = (finishedTasks*100)/totalTasks;
+            //putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
+            //LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
 
 
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
@@ -529,7 +529,7 @@ int main(int argc, char **argv)
                 }
                 if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     // calculates the next start time
-                    finishedTasks++;
+                    //finishedTasks++;
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i]=2;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
