@@ -546,6 +546,9 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MAPPING){
+        for(i=0;i<PIPE_SIZE;i++){
+            bufferPop(i);
+        }
         num_tasks = incomingPacket[PI_SIZE]-3 -2;
         for(i=0; i<num_tasks; i++)
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
@@ -602,6 +605,9 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE){
         new_state = incomingPacket[PI_PAYLOAD];
         putsv("Task state received ", new_state);
+        for(i=0;i<PIPE_SIZE;i++){
+            bufferPop(i);
+        }
         migration_src = 0;
         taskMigrated = -2;
         migratedTask = -1;

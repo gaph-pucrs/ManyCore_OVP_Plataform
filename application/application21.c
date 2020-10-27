@@ -3416,8 +3416,8 @@ int sortMaster(int state){
 	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
 
 	int array[SORT_SLAVES][ARRAY_SIZE];
-	int slave_task[SORT_SLAVES];
-	int task = 0;
+	//int slave_task[SORT_SLAVES];
+	//int task = 0;
 
 	int msg_kill = KILL_PROC;
 
@@ -3433,7 +3433,7 @@ int sortMaster(int state){
 		putsvsv("array[", j, "] = ", array[2][j]);
 	}
 
-	for(k = 0; k < TASKS; k++){
+	for(k = state; k < TASKS; k++){
 		for(i = 0; i < SORT_SLAVES; i++){
 			theMessage.size = ARRAY_SIZE;
 			for (j = 0; j < ARRAY_SIZE; j++)
@@ -3459,7 +3459,12 @@ int sortMaster(int state){
 				prints("\n");
 			}
 		}
-		// CHECKS THE MIGRATION HERE!
+		//Migration breakpoint
+		if(get_migration_src()){
+			prints("sort_slave migrating.\n");
+			clear_migration_src();
+			return k+1;
+		}
 	}
 	return 0;
 }	
@@ -3507,12 +3512,12 @@ int sortMaster(int state){
 
 
 int sort_slave(int task, int state){
-	int task_request[2];
+	//int task_request[2];
 	int array[ARRAY_SIZE];
-	int i;
+	//int i;
 
-	task_request[0] = task;
-	task_request[1] = TASK_REQUEST;
+	/*task_request[0] = task;
+	task_request[1] = TASK_REQUEST;*/
 
 	prints("sort_slave started state = ");
 	printi(state);

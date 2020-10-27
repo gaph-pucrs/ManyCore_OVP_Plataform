@@ -44,6 +44,7 @@ int sortMaster(int state){
 	}
 
 	for(k = state; k < TASKS; k++){
+		putsv("Começando rodada ", k);
 		for(i = 0; i < SORT_SLAVES; i++){
 			theMessage.size = ARRAY_SIZE;
 			for (j = 0; j < ARRAY_SIZE; j++)
@@ -59,16 +60,7 @@ int sortMaster(int state){
 			printi(i);
 			prints("\n");
 		}
-		if(k == TASKS-1){ // FINISH
-			for(i = 0; i < SORT_SLAVES; i++){
-				theMessage.size = 1;
-				theMessage.msg[0] = msg_kill;
-				SendMessage(&theMessage, slave_addr[i]);
-				prints("Master Sening kill to ");
-				printi(i%SORT_SLAVES);
-				prints("\n");
-			}
-		}
+
 		//Migration breakpoint
 		if(get_migration_src()){
 			prints("sort_slave migrating.\n");
@@ -76,6 +68,16 @@ int sortMaster(int state){
 			return k+1;
 		}
 	}
+
+	for(i = 0; i < SORT_SLAVES; i++){
+		theMessage.size = 1;
+		theMessage.msg[0] = msg_kill;
+		SendMessage(&theMessage, slave_addr[i]);
+		prints("Master Sening kill to ");
+		printi(i);
+		prints("\n");
+	}
+
 	return 0;
 }	
 	
