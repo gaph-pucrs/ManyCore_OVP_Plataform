@@ -454,7 +454,7 @@ int main(int argc, char **argv)
 
             progresso = (finishedTasks*100)/totalTasks;
             progresso = progresso/2;
-            line[0] = '<'
+            line[0] = '<';
             for(i = 1; i<=50; i++){
                 if(i<progresso)
                     line[i] = '=';
