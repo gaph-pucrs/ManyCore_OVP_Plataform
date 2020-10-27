@@ -601,6 +601,7 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE){
         new_state = incomingPacket[PI_PAYLOAD];
         putsv("Task state received ", new_state);
+        migration_src = 0;
         taskMigrated = -2;
         *NIcmdRX = DONE; 
     }
