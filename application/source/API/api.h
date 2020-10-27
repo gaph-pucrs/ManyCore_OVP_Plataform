@@ -411,7 +411,7 @@ void interruptHandler_NI_RX(void) {
             }
         }
         else{
-            putsvsv("Recebi uma mensagem indevida (taskID = ", incomingPacket[PI_TASK_ID], ") defletindo para o MASTER ", 0);
+            putsvsv("Recebi uma mensagem indevida (taskID = ", incomingPacket[PI_TASK_ID], ") defletindo para o MASTER, veio de ", incomingPacket[PI_REQUESTER]);
             index = getServiceIndex();
             for(i=0;i<PACKET_MAX_SIZE;i++){
                 myServicePacket[index][i] = incomingPacket[i];
@@ -732,7 +732,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
     }
     if(found != PIPE_WAIT){
         buffer_map[found] = PIPE_TRANSMITTING;
-        buffer_packets[i][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
+        buffer_packets[found][PI_DESTINATION] = requesterAddr;//mapping_table[requester]; // Updates the address (because if the task has migrated since the message production)
         // Checks if the TX module is able to transmmit the package 
         if(*NIcmdTX == NI_STATUS_OFF){
             //prints("Enviando do PIPE\n");

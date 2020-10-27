@@ -119,11 +119,7 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
     int i;
     int foundI = -1;
     int foundJ = -1;
-    putsv("pe = ", pe);
     for(i = 0; i < DIM_X*DIM_Y; i++){
-        /*putsvsv("regular[", i,"] = ", task_addr[i]);
-        putsvsv("confirm[", i,"] = ", task_confirmed_addr[i]);
-        prints("---------\n");*/
         if(task_addr[i] == pe && foundI == -1){
             foundI = i;
         }
@@ -347,6 +343,7 @@ int main(int argc, char **argv)
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
+    int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/
     generateSpiralMatrix();
@@ -416,6 +413,8 @@ int main(int argc, char **argv)
         }        
     }
     
+    totalTasks = 0;
+    finishedTasks = 0;
     for(i = 0; i < tasks_to_map; i++){
         prints("==================\n");
         prints("Tarefa ("); 
@@ -426,6 +425,7 @@ int main(int argc, char **argv)
         printi(task_applicationID[i]);
         prints(". Ela vai executar "); 
         printi(task_remaining_executions[i]); 
+        totalTasks += task_remaining_executions[i];
         prints(" vezes, começando "); 
         printi(task_repeat_after[i]);
         prints("ms depois de terminar a execução anterior.\n\n");
@@ -451,6 +451,8 @@ int main(int argc, char **argv)
             prints("================================\n");
 
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
+
+            progresso = (finishedTasks*100)/totalTasks;
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
@@ -517,6 +519,7 @@ int main(int argc, char **argv)
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i]==TRUE){
                     if(appFinished(i, task_applicationID)){
+                        finishedTasks++;
                         task_addr[i] = 0;
                         task_confirmed_addr[i] = 0;
                     }
