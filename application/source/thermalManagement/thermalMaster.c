@@ -452,13 +452,14 @@ int main(int argc, char **argv)
 
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
-            char progressBar[];
+            char progressBar[60];
             char ch;
 
             progresso = (finishedTasks*100)/totalTasks;
             progresso = progresso/2;
-            ch = '<';
-            strncat(progressBar, &ch, 1);
+            sprintf(progressBar, "Progresso <");
+            /*ch = '<';
+            strncat(progressBar, &ch, 1);*/
             for(i = 1; i<=50; i++){
                 if(i<progresso)
                     ch = '=';
