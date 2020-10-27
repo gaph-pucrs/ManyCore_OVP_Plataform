@@ -17,7 +17,7 @@
 message theMessage;
 
 #define NUM_TASK	N_PES-1
-int task_addr[NUM_TASK];
+int my_task_addr[NUM_TASK];
 int new_task_addr[NUM_TASK];
 
 int synthetic_taskA(int state);
@@ -96,11 +96,11 @@ int main(int argc, char **argv)
 
 		set_taskMigrated(-1); // resets this, because it's running a new task
 		*clockGating_flag = FALSE;
-		get_mapping_table(task_addr);
+		get_mapping_table(my_task_addr);
 
 		// Get its task to run
 		for (i = 0; i < NUM_TASK; i++){
-			if (task_addr[i] == *myAddress)
+			if (my_task_addr[i] == *myAddress)
 				running_task = i;
 		}
 
@@ -237,7 +237,8 @@ int main(int argc, char **argv)
 			printFinish();
 			sendFinishTask(running_task);
 		}
-		else{			
+		else{	
+			migratedTask = running_task;		
 			get_migration_mapping_table(new_task_addr);
 			destination = new_task_addr[running_task];
 			putsvsv("Tarefa: ", running_task, " migrando para: ", destination);
@@ -255,7 +256,9 @@ int main(int argc, char **argv)
 			enable_interruption(2);
 			//enable_interruptions();		
 			
+			new_task_addr[running_task] = new_task_addr[running_task] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
+			new_task_addr[running_task] = new_task_addr[running_task] & 0x7FFFFFFF;
 			running_task = -1;
 		}
 	}
