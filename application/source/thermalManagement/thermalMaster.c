@@ -473,7 +473,7 @@ int main(int argc, char **argv)
             strncat(progressBar, &ch, 1);
             ch = '\0';
             strncat(progressBar, &ch, 1);
-            LOG(progressBar);
+            printf(progressBar);
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
