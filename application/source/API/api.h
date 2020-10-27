@@ -443,7 +443,7 @@ void interruptHandler_NI_RX(void) {
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
             }
         }
-        else if(taskMigrated != -1 && taskMigrated != -2 && migratedTask == taskID){
+        else if((taskMigrated != -1 || taskMigrated != -2) && migratedTask == taskID){
             prints("S3 - depois da tarefa começar a migrar\n");
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
         }
