@@ -452,18 +452,27 @@ int main(int argc, char **argv)
 
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
+            char progressBar[];
+            char ch;
+
             progresso = (finishedTasks*100)/totalTasks;
             progresso = progresso/2;
-            line[0] = '<';
+            ch = '<';
+            strncat(progressBar, &ch, 1);
             for(i = 1; i<=50; i++){
                 if(i<progresso)
-                    line[i] = '=';
+                    ch = '=';
                 else
-                    line[i] = ' ';
+                    ch = ' ';
+                strncat(progressBar, &ch, 1);
             }
-            line[51] = '>';
-            line[52] = '\n';
-            LOG(&line);
+            ch = '>';
+            strncat(progressBar, &ch, 1);
+            ch = '\n';
+            strncat(progressBar, &ch, 1);
+            ch = '\0';
+            strncat(progressBar, &ch, 1);
+            LOG(progressBar);
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
