@@ -452,7 +452,7 @@ void interruptHandler_NI_RX(void) {
                 serviceIndexNextTimer = index;
             }
         }*/
-        if(taskID == running_task || taskMigrated == -2 || mapping_en == 1 || (mapping_en == 0 && taskMigrated = -1)){
+        if(taskID == running_task || taskMigrated == -2 || mapping_en == 1 || (mapping_en == 0 && taskMigrated == -1)){
             if(!sendFromMsgBuffer(requester, newAddr)){ // if the package is not ready yet add a request to the pending request queue
                 prints("Adicionando ao pendingReq\n");
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
