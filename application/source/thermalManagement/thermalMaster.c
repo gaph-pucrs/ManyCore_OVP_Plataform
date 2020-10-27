@@ -120,18 +120,21 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
     int foundI = -1;
     int foundJ = -1;
 
-    for(i = 1; i < DIM_X*DIM_Y; i++){
+    for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_addr[i] == pe && foundI == -1){
             foundI = i;
         }
         if(task_confirmed_addr[i] == pe && foundJ == -1){
-            foundJ = i;
+            foundJ = j;
         }
         if(foundI != -1 && foundJ != -1){
             if(foundI == foundJ){
                 return FALSE;
             }
             else{
+                if(foundI == -1 && foundJ == -1){
+                    return FALSE;
+                }
                 return TRUE;
             }
         }
