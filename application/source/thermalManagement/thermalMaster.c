@@ -135,22 +135,16 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
                 return FALSE;
             }
             else{
-                if(foundI == -1 && foundJ == -1){
-                    return FALSE;
-                }
                 return TRUE;
             }
         }
     }
-
-    /*for(i = 0; i < DIM_X*DIM_Y; i++){
-        if(task_addr[i] == pe){ // found a task that is running this PE
-            if(task_confirmed_addr[i] == pe) // if the occupation is confirmed then
-                return FALSE; // this PE is not envolved in any migration
-            else
-                return TRUE;
-        }
-    }*/
+    if(foundI == -1 && foundJ == -1){
+        return FALSE;
+    }
+    else{
+        while(1){LOG("EROOOOOOOOUUU! 55555555555555555555\n");}
+    }
 }
 
 int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_map, unsigned int task_addr[DIM_X*DIM_Y]){
