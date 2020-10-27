@@ -451,7 +451,7 @@ int main(int argc, char **argv)
             prints("================================\n");*/
 
             progresso = (finishedTasks*100)/totalTasks;
-            putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. %", progresso);
+            putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
             LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
 
 
