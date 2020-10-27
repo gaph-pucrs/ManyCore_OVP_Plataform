@@ -125,7 +125,7 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
             foundI = i;
         }
         if(task_confirmed_addr[i] == pe && foundJ == -1){
-            foundJ = j;
+            foundJ = i;
         }
         if(foundI != -1 && foundJ != -1){
             if(foundI == foundJ){
