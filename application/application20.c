@@ -273,6 +273,7 @@ int main(int argc, char **argv)
 			
 			disable_interruption(2);
 			running_task = -1;
+			task_addr[migratedTask] = 0;   // clear this address value
 			set_taskMigrated(destination); // save the new destination of this 
 			sendPendingReq(destination);
 			enable_interruption(2);
@@ -280,6 +281,7 @@ int main(int argc, char **argv)
 			new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 			new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
+			
 			
 		}
 	}
