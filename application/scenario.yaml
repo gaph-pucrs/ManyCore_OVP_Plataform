@@ -2,8 +2,9 @@ apps:
  - name: synthetic
    cluster: 0
    mapping: dynamic
-   repeat_after_ms: 4
-   repeat_times: 6
+   start_time_ms: 0
+   repeat_after_ms: 0
+   repeat_times: 0
    dynamic_mapping:
     taskA: 0
     taskB: 1
@@ -11,75 +12,6 @@ apps:
     taskD: 3
     taskE: 4
     taskF: 5
- - name: dijkstra
-   cluster: 0
-   mapping: dynamic
-   repeat_after_ms: 12
-   repeat_times: 6
-   dynamic_mapping:
-    divider: 0
-    dijkstra_0: 1
-    dijkstra_1: 2
-    dijkstra_2: 3
-    dijkstra_3: 4
-    print: 5
- - name: mpeg
-   cluster: 0
-   mapping: dynamic
-   repeat_after_ms: 9
-   repeat_times: 6
-   dynamic_mapping:
-    print_mpeg: 0
-    idct: 1
-    start: 2
-    ivlc: 3
-    iquant: 4
- - name: dtw
-   cluster: 0
-   mapping: dynamic
-   repeat_after_ms: 4
-   repeat_times: 6   
-   dynamic_mapping:
-    bank: 0
-    p1: 1
-    p2: 2
-    p3: 3
-    p4: 4
-    recognizer: 5
- - name: audio_video
-   cluster: 0
-   mapping: dynamic
-   repeat_after_ms: 20
-   repeat_times: 6
-   dynamic_mapping:
-    split_av: 0
-    ivlc_av: 1
-    iquant_av: 2
-    idct_av: 3
-    adpcm_dec_av: 4
-    FIR_av: 5
-    join_av: 6
- - name: aes
-   cluster: 0
-   mapping: dynamic
-   repeat_after_ms: 1
-   repeat_times: 6
-   dynamic_mapping:
-    aes_master: 0
-    aes_slave1: 1
-    aes_slave2: 2
-    aes_slave3: 3
-    aes_slave4: 4
- - name: sort
-   cluster: 0
-   mapping: dynamic
-   repeat_after_ms: 61
-   repeat_times: 6
-   dynamic_mapping:
-    sort_master: 0
-    sort_slave1: 1
-    sort_slave2: 2
-    sort_slave3: 3
  - name: thermalManagement
    cluster: 0
    mapping: static

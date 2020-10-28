@@ -409,7 +409,7 @@ int main(int argc, char **argv)
             aux_str = strtok(line, ":");
             aux_str = strtok(NULL, " ");
             aux_str[strlen(app_name)-1] = '\0';
-            executions = atoi(aux_str);
+            executions = atoi(aux_str) + 1;
         }        
     }
     
