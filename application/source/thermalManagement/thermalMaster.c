@@ -387,7 +387,6 @@ int main(int argc, char **argv)
             else{
                 task_start_time[tasks_to_map] = -1;
             }
-            task_remaining_executions[tasks_to_map] = executions;
             task_repeat_after[tasks_to_map] = repeat_after;
             task_applicationID[tasks_to_map] = task_id;
             tasks_to_map++;
