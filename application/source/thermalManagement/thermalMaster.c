@@ -7,10 +7,10 @@
 
 #include "thermalManagement_config.h"
 
-message theMsg;
-message theMsg2;
+//message theMsg;
+//message theMsg2;
 
-unsigned int toPeriph[(DIM_X*DIM_Y)+2+3+1];
+//unsigned int toPeriph[(DIM_X*DIM_Y)+2+3+1];
 
 unsigned int Power[DIM_X*DIM_Y];
 unsigned int Temperature[DIM_X*DIM_Y];
@@ -145,7 +145,7 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
         return TRUE;
     }
     else{
-        while(1){LOG("EROOOOOOOOUUU! 55555555555555555555\n");}
+        while(1){LOG("ERROU! migrationEnvolved() - thermalMaster\n");}
     }
 }
 
@@ -155,17 +155,12 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     int k=DIM_X*DIM_Y-1;
     unsigned int contNumberOfMigrations=0;
     int i, j;
-    int src_vec[DIM_X*DIM_Y];// = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
+    int src_vec[DIM_X*DIM_Y];
     int srcProcs[DIM_X*DIM_Y];
 
 
     for(i=0; i< DIM_X*DIM_Y; i++){
         src_vec[i] = 0;
-        // clear finished applications
-        /*if(finishedTask[i]==TRUE || finishedTask[i] == 3){
-            task_addr[i] = 0;
-        }*/
     }
 
     for (i = 1; i < DIM_X*DIM_Y; i++){
@@ -386,6 +381,7 @@ int main(int argc, char **argv)
             }
             else{
                 task_start_time[tasks_to_map] = -1;
+                finishedTask[tasks_to_map]=TRUE;
             }
             task_repeat_after[tasks_to_map] = repeat_after;
             task_applicationID[tasks_to_map] = task_id;
