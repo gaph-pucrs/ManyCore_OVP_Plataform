@@ -2,7 +2,7 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define MPEG_FRAMES				160//160
+#define MPEG_FRAMES				325 // ~100ms 
 // Cosine Transform Coefficients
 #define W1 2841                 /* 2048*sqrt(2)*cos(1*pi/16) */
 #define W2 2676                 /* 2048*sqrt(2)*cos(2*pi/16) */
