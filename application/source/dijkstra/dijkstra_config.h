@@ -4,7 +4,7 @@
 // Task defines //////////////////////
 #define NUM_NODES 					16		//16 for small input;
 #define NPROC 						5
-#define CALCULATIONS				50
+#define CALCULATIONS				50      // ~ 100ms
 #define INFINITY					9999
 #define KILL						99999
 //////////////////////////////////////
