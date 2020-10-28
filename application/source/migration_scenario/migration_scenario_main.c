@@ -28,54 +28,54 @@ int synthetic_taskD(int state);
 int synthetic_taskE(int state);
 int synthetic_taskF(int state);
 
-int dijkstra_divider(int state);
-int dijkstra_slave();
-int dijkstra_print();
+// int dijkstra_divider(int state);
+// int dijkstra_slave();
+// int dijkstra_print();
 
-int sortMaster(int state);
-int sort_slave(int task, int state);
+// int sortMaster(int state);
+// int sort_slave(int task, int state);
 
-int aesMaster(int state);
-int aes_slave();
+// int aesMaster(int state);
+// int aes_slave();
 
-// AV threads
-int av_split(int state);
-int av_ivlc(int state);
-int av_iquant(int state);
-int av_idct(int state);
-int av_adpcm_dec(int state);
-int av_FIR(int state);
-int av_join(int state);
+// // AV threads
+// int av_split(int state);
+// int av_ivlc(int state);
+// int av_iquant(int state);
+// int av_idct(int state);
+// int av_adpcm_dec(int state);
+// int av_FIR(int state);
+// int av_join(int state);
 
-// // MPEG - threads
-int mpeg_idct(int state);
-int mpeg_iquant(int state);
-int mpeg_ivlc(int state);
-int mpeg_print_mpeg(int state);
-int mpeg_start(int state);
-// MPEG - auxiliar functions
-void idct_func(type_DATA *block,int lx);
-static void idctcol(type_DATA *block, int offs, int lx);
-static void idctrow (type_DATA *block, int offs);
-void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant);
-void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer);
-short int getDC(short int type, type_DATA *buffer);
-unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init);
+// // // MPEG - threads
+// int mpeg_idct(int state);
+// int mpeg_iquant(int state);
+// int mpeg_ivlc(int state);
+// int mpeg_print_mpeg(int state);
+// int mpeg_start(int state);
+// // MPEG - auxiliar functions
+// void idct_func(type_DATA *block,int lx);
+// static void idctcol(type_DATA *block, int offs, int lx);
+// static void idctrow (type_DATA *block, int offs);
+// void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant);
+// void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer);
+// short int getDC(short int type, type_DATA *buffer);
+// unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init);
 
-// DTW
-int dtw_bank(int state);
-int dtw_p1(int state);
-int dtw_p2(int state);
-int dtw_p3(int state);
-int dtw_p4(int state);
-int dtw_recognizer(int state);
-// DTW - auxiliar functins
-void randPattern(int in[MATX_SIZE][MATX_SIZE]);
-int dtw_abs(int num);
-int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE]);
-int dtw_euclideanDistance(int *x, int *y);
-int dtw_min(int x, int y);
-int dtw_randNum(int seed, int min, int max);
+// // DTW
+// int dtw_bank(int state);
+// int dtw_p1(int state);
+// int dtw_p2(int state);
+// int dtw_p3(int state);
+// int dtw_p4(int state);
+// int dtw_recognizer(int state);
+// // DTW - auxiliar functins
+// void randPattern(int in[MATX_SIZE][MATX_SIZE]);
+// int dtw_abs(int num);
+// int dtw_dynamicTimeWarping(int x[MATX_SIZE][MATX_SIZE], int y[MATX_SIZE][MATX_SIZE]);
+// int dtw_euclideanDistance(int *x, int *y);
+// int dtw_min(int x, int y);
+// int dtw_randNum(int seed, int min, int max);
 
 int main(int argc, char **argv)
 {
@@ -150,111 +150,111 @@ int main(int argc, char **argv)
 			case taskF:
 				state = synthetic_taskF(state);
 				break;
-			// DIJKSTRA
-			case divider:
-				state = dijkstra_divider(state);
-				break;
-			case dijkstra_0:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_1:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_2:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_3:
-				state = dijkstra_slave();
-				break;
-			case print:
-				state = dijkstra_print();
-				break;
-			// MPEG
-			case idct:
-				state = mpeg_idct(state);
-				break;
-			case iquant:
-				state = mpeg_iquant(state);
-				break;
-			case ivlc:
-				state = mpeg_ivlc(state);
-				break;
-			case print_mpeg:
-				state = mpeg_print_mpeg(state);
-				break;
-			case start:
-				state = mpeg_start(state);
-				break;
-			//Sort
-			case sort_master:
-				state = sortMaster(state);
-				break;
-			case sort_slave1:
-				state = sort_slave(0, state);
-				break;
-			case sort_slave2:
-				state = sort_slave(1, state);
-				break;
-			case sort_slave3:
-				state = sort_slave(2, state);
-				break;
-			//AES
-			case aes_master:
-				state = aesMaster(state);
-				break;
-			case aes_slave1:
-				state = aes_slave();
-				break;
-			case aes_slave2:
-				state = aes_slave();
-				break;
-			case aes_slave3:
-				state = aes_slave();
-				break;
-			case aes_slave4:
-				state = aes_slave();
-				break;
-			// Audio Video
-			case split_av:
-				state = av_split(state);
-				break;
-			case ivlc_av:
-				state = av_ivlc(state);
-				break;
-			case iquant_av:
-				state = av_iquant(state);
-				break;
-			case idct_av:
-				state = av_idct(state);
-				break;
-			case adpcm_dec_av:
-				state = av_adpcm_dec(state);
-				break;
-			case FIR_av:
-				state = av_FIR(state);
-				break;
-			case join_av:
-				state = av_join(state);
-				break;
-			// DTW
-			case bank:
-				state = dtw_bank(state);
-				break;
-			case p1:
-				state = dtw_p1(state);
-				break;
-			case p2:
-				state = dtw_p2(state);
-				break;
-			case p3:
-				state = dtw_p3(state);
-				break;
-			case p4:
-				state = dtw_p4(state);
-				break;
-			case recognizer:
-				state = dtw_recognizer(state);
-				break;
+			// // DIJKSTRA
+			// case divider:
+			// 	state = dijkstra_divider(state);
+			// 	break;
+			// case dijkstra_0:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case dijkstra_1:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case dijkstra_2:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case dijkstra_3:
+			// 	state = dijkstra_slave();
+			// 	break;
+			// case print:
+			// 	state = dijkstra_print();
+			// 	break;
+			// // MPEG
+			// case idct:
+			// 	state = mpeg_idct(state);
+			// 	break;
+			// case iquant:
+			// 	state = mpeg_iquant(state);
+			// 	break;
+			// case ivlc:
+			// 	state = mpeg_ivlc(state);
+			// 	break;
+			// case print_mpeg:
+			// 	state = mpeg_print_mpeg(state);
+			// 	break;
+			// case start:
+			// 	state = mpeg_start(state);
+			// 	break;
+			// //Sort
+			// case sort_master:
+			// 	state = sortMaster(state);
+			// 	break;
+			// case sort_slave1:
+			// 	state = sort_slave(0, state);
+			// 	break;
+			// case sort_slave2:
+			// 	state = sort_slave(1, state);
+			// 	break;
+			// case sort_slave3:
+			// 	state = sort_slave(2, state);
+			// 	break;
+			// //AES
+			// case aes_master:
+			// 	state = aesMaster(state);
+			// 	break;
+			// case aes_slave1:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave2:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave3:
+			// 	state = aes_slave();
+			// 	break;
+			// case aes_slave4:
+			// 	state = aes_slave();
+			// 	break;
+			// // Audio Video
+			// case split_av:
+			// 	state = av_split(state);
+			// 	break;
+			// case ivlc_av:
+			// 	state = av_ivlc(state);
+			// 	break;
+			// case iquant_av:
+			// 	state = av_iquant(state);
+			// 	break;
+			// case idct_av:
+			// 	state = av_idct(state);
+			// 	break;
+			// case adpcm_dec_av:
+			// 	state = av_adpcm_dec(state);
+			// 	break;
+			// case FIR_av:
+			// 	state = av_FIR(state);
+			// 	break;
+			// case join_av:
+			// 	state = av_join(state);
+			// 	break;
+			// // DTW
+			// case bank:
+			// 	state = dtw_bank(state);
+			// 	break;
+			// case p1:
+			// 	state = dtw_p1(state);
+			// 	break;
+			// case p2:
+			// 	state = dtw_p2(state);
+			// 	break;
+			// case p3:
+			// 	state = dtw_p3(state);
+			// 	break;
+			// case p4:
+			// 	state = dtw_p4(state);
+			// 	break;
+			// case recognizer:
+			// 	state = dtw_recognizer(state);
+			// 	break;
 		}
 		if(state == 0){
 			printFinish();
