@@ -165,6 +165,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 //////////////////////////////////////
 // Migration control                //
 //////////////////////////////////////
+#define MAX_TASK 128
 volatile int taskMigrated = -1;
 volatile int migratedTask = -1;
 volatile int running_task = -1;
@@ -174,9 +175,9 @@ volatile unsigned int mapping_en = 0;
 volatile unsigned int migration_upd = 0;
 volatile unsigned int num_tasks;
 volatile unsigned int new_state;
-volatile unsigned int mapping_table[DIM_X*DIM_Y];
-volatile unsigned int migration_mapping_table[DIM_X*DIM_Y];
-volatile unsigned int finishedTask[DIM_X*DIM_Y];
+volatile unsigned int mapping_table[MAX_TASK];
+volatile unsigned int migration_mapping_table[MAX_TASK];
+volatile unsigned int finishedTask[MAX_TASK];
 volatile unsigned int finishSimulation_flag = 0;
 void clear_migration_src();
 void clear_migration_dst();
@@ -190,12 +191,12 @@ unsigned int get_new_state();
 void set_taskMigrated(int destination);
 
 
-void get_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
-void get_migration_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]);
+void get_mapping_table(unsigned int taskAddr[MAX_TASK]);
+void get_migration_mapping_table(unsigned int taskAddr[MAX_TASK]);
 
 // MASTER ONLY
-volatile unsigned int task_addr[DIM_X*DIM_Y];
-volatile unsigned int task_confirmed_addr[DIM_X*DIM_Y];
+volatile unsigned int task_addr[MAX_TASK];
+volatile unsigned int task_confirmed_addr[MAX_TASK];
 unsigned int serviceIndexNextTimer = -1;
 //////////////////////////////////////
 
@@ -214,7 +215,7 @@ void FinishApplication();
 void sendFinishTask(unsigned int running_task);
 void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
-void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int taskAddr[DIM_X*DIM_Y], unsigned int size);
+void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int taskAddr[MAX_TASK], unsigned int size);
 unsigned int getAddress(unsigned int id);
 unsigned int getID(unsigned int addr);
 unsigned int getXpos(unsigned int addr);
@@ -295,17 +296,17 @@ unsigned int get_new_state(){
     return new_state;
 }
 
-void get_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]){
+void get_mapping_table(unsigned int taskAddr[MAX_TASK]){
     int i;
-    for(i=0; i<DIM_X*DIM_Y; i++){
+    for(i=0; i<MAX_TASK; i++){
         taskAddr[i] = mapping_table[i];
         putsvsv("task_addr[", i, "] = ", taskAddr[i]);
     }
 }
 
-void get_migration_mapping_table(unsigned int taskAddr[DIM_X*DIM_Y]){
+void get_migration_mapping_table(unsigned int taskAddr[MAX_TASK]){
     int i;
-    for(i=0; i<DIM_X*DIM_Y; i++){
+    for(i=0; i<MAX_TASK; i++){
         taskAddr[i] = migration_mapping_table[i];
         mapping_table[i] = migration_mapping_table[i];
         putsvsv("task_addr[", i, "] = ", taskAddr[i]);
@@ -643,7 +644,7 @@ void interruptHandler_NI_RX(void) {
     }
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PEND){
         putsv("Task pendingReq received ", new_state);
-        for(i=0; i<N_PES; i++){
+        for(i=0; i<MAX_TASK; i++){
             if(pendingReq[i] == 0 && incomingPacket[PI_PAYLOAD+i] != 0)
                 pendingReq[i] = incomingPacket[PI_PAYLOAD+i];
             else if(pendingReq[i] != 0 && incomingPacket[PI_PAYLOAD+i] != 0)
@@ -680,7 +681,7 @@ void interruptHandler_NI_RX(void) {
         putsvsv("Forwarding packets to ", incomingPacket[PI_TASK_ID], "at address ", incomingPacket[PI_REQUESTER]);
         taskMigrated = incomingPacket[PI_REQUESTER];
         migratedTask = incomingPacket[PI_TASK_ID];
-        for(i = 0; i < N_PES; i++){
+        for(i = 0; i < MAX_TASK; i++){
             if(pendingReq[i] != 0){
                 forwardMsgRequest(i, taskMigrated, mapping_table[i], incomingPacket[PI_TASK_ID]);
                 pendingReq[i] = 0;
@@ -920,7 +921,7 @@ void OVP_init(){
     }
 
     // Initiate the message request queue
-    for(i=0;i<N_PES;i++){
+    for(i=0;i<MAX_TASK;i++){
         pendingReq[i] = 0;
         mapping_table[i] = 0;
         finishedTask[i] = FALSE;
@@ -1101,7 +1102,7 @@ void sendPendingReq(unsigned int dest){
     myServicePacket[index][PI_SIZE] = N_PES + 2 + 3;
     myServicePacket[index][PI_TASK_ID] = running_task;
     myServicePacket[index][PI_SERVICE] = TASK_MIGRATION_PEND;
-    for (j = 0; j < N_PES; j++){
+    for (j = 0; j < MAX_TASK; j++){
         putsv(" > > pendReq: ", pendingReq[j]);
         myServicePacket[index][PI_PAYLOAD+j] = pendingReq[j];
         pendingReq[j] = 0;
@@ -1438,7 +1439,7 @@ void printFinish(){
     int i;
     putsv("Tarefa FINALIZANDO ", running_task);
     prints("at this point the pending is: \n");
-    for(i=0; i<N_PES; i++){
+    for(i=0; i<MAX_TASK; i++){
         putsvsv("pendingReq[", i,"] = ", pendingReq[i]);
     }
     prints("at this point the PIPE is: \n");

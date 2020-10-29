@@ -7,8 +7,6 @@
 
 #include "thermalManagement_config.h"
 
-#define MAX_TASK 128
-
 //message theMsg;
 //message theMsg2;
 
