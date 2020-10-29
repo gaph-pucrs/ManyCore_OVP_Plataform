@@ -446,7 +446,8 @@ int main(int argc, char **argv)
     if(*timerConfig != 0){
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Timer (ms) ", measuredWindows);
-            
+            putsv("DIMX ", DIM_X);
+            putsv("DIMY ", DIM_Y);
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
             
