@@ -7,6 +7,8 @@
 
 #include "thermalManagement_config.h"
 
+#define MAX_TASK 128
+
 //message theMsg;
 //message theMsg2;
 
@@ -25,6 +27,8 @@ unsigned int control_signal[DIM_Y*DIM_X];
 
 unsigned int spiralMatrix[DIM_X*DIM_Y];
 unsigned int tempSort[DIM_X*DIM_Y];
+
+
 
 void generateSpiralMatrix()
 {
@@ -94,10 +98,10 @@ void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
 
 }
 
-int how_many_tasks_PE_is_running(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
+int how_many_tasks_PE_is_running(unsigned int srcProc, unsigned int task_addr[MAX_TASK]){
     int i;
 
-    for(i=0; i<DIM_X*DIM_Y; i++){
+    for(i=0; i<MAX_TASK; i++){
         if (task_addr[i] == srcProc && (finishedTask[i] == FALSE || finishedTask[i] == 3))
             return 1;
     }
@@ -105,21 +109,21 @@ int how_many_tasks_PE_is_running(unsigned int srcProc, unsigned int task_addr[DI
     return 0;
 }
 
-int getSomeTaskID(unsigned int srcProc, unsigned int task_addr[DIM_X*DIM_Y]){
+int getSomeTaskID(unsigned int srcProc, unsigned int task_addr[MAX_TASK]){
     int i;
 
-    for(i=0; i<DIM_X*DIM_Y; i++)
+    for(i=0; i<MAX_TASK; i++)
         if (task_addr[i] == srcProc)
             return i;
 
     return -1; 
 }
 
-int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DIM_Y], unsigned int task_addr[DIM_Y*DIM_X]){
+int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[MAX_TASK], unsigned int task_addr[MAX_TASK]){
     int i;
     int foundI = -1;
     int foundJ = -1;
-    for(i = 0; i < DIM_X*DIM_Y; i++){
+    for(i = 0; i < MAX_TASK; i++){
         if(task_addr[i] == pe && foundI == -1){
             foundI = i;
         }
@@ -149,7 +153,7 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
     }
 }
 
-int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_map, unsigned int task_addr[DIM_X*DIM_Y]){
+int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_map, unsigned int task_addr[MAX_TASK]){
     int task_ID;
     unsigned int tgtProc, srcProc, srcID;
     int k=DIM_X*DIM_Y-1;
@@ -217,9 +221,9 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
     return contNumberOfMigrations;
 }
 
-int appFinished(int id, int task_applicationID[DIM_X*DIM_Y]){
+int appFinished(int id, int task_applicationID[MAX_TASK]){
     int i;
-    for(i=0;i<DIM_X*DIM_Y;i++){
+    for(i=0;i<MAX_TASK;i++){
         if(task_applicationID[i] == task_applicationID[id]){
             if(finishedTask[i] == FALSE)
                 return FALSE;
@@ -228,14 +232,14 @@ int appFinished(int id, int task_applicationID[DIM_X*DIM_Y]){
     return TRUE;
 }
 
-int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+int getRandomEmptyPE(unsigned int task_addr[MAX_TASK]){
     int i, j, empty, pe;
     pe = random() % (DIM_X*DIM_Y); // assumes a random address
     if(pe == 0) // zero is reserved to the master 
         pe++; 
     for(j = 1; j < DIM_X*DIM_Y; j++){ 
         empty = 1;                   // presumes that it is empty
-        for(i = 0; i < DIM_X*DIM_Y; i++){
+        for(i = 0; i < MAX_TASK; i++){
             if(task_addr[i] == getAddress(pe)){ // if you find some task runnin inside that processor
                 empty = 0;
                 break;                         // breaks
@@ -258,12 +262,12 @@ int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     return 0;
 }
 
-int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+int getSpiralMatixEmptyPE(unsigned int task_addr[MAX_TASK]){
     int i, j, empty, pe;
     for(j = 1; j < DIM_X*DIM_Y; j++){ 
         pe = spiralMatrix[DIM_X*DIM_Y-j];      // gets the peAddr from spiralMatrix
         empty = 1;                   // presumes that it is empty
-        for(i = 0; i < DIM_X*DIM_Y; i++){
+        for(i = 0; i < MAX_TASK; i++){
             if(task_addr[i] == pe){ // if you find some task runnin inside that processor
                 empty = 0;
                 break;              // breaks
@@ -280,10 +284,10 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     return 0;
 }
 
-void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y], int task_remaining_executions[DIM_X*DIM_Y]){
+void releaseTasks(unsigned int task_addr[MAX_TASK], int task_start_time[MAX_TASK], int task_remaining_executions[MAX_TASK]){
     int i;
     int tasks_to_map = 0;
-    for(i = 0; i < DIM_X*DIM_Y; i++){
+    for(i = 0; i < MAX_TASK; i++){
         if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
             task_addr[i] = getSpiralMatixEmptyPE(task_addr);//getRandomEmptyPE(task_addr);
             if(task_addr[i]){ // if the task got some valid address
@@ -297,7 +301,7 @@ void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X
         }
     }
 
-    for(i = 0; i < DIM_X*DIM_Y; i++){
+    for(i = 0; i < MAX_TASK; i++){
         if(task_start_time[i] == -2){
             sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
             task_start_time[i] = -1; //RELEASED
@@ -316,7 +320,6 @@ int main(int argc, char **argv)
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int y, x, p_idx = 0;
-    //int ordem[DIM_X*DIM_Y];
 
     FILE *testcase;
     testcase = fopen("application/scenario.yaml","r");
@@ -330,15 +333,14 @@ int main(int argc, char **argv)
     char *task_name;
     char *task_number;
     unsigned int yaml_tasks = 0;
-    int task_start_time[DIM_X*DIM_Y];
-    int task_remaining_executions[DIM_X*DIM_Y];
-    int task_repeat_after[DIM_X*DIM_Y];
-    int task_applicationID[DIM_X*DIM_Y];
+    int task_start_time[MAX_TASK];
+    int task_remaining_executions[MAX_TASK];
+    int task_repeat_after[MAX_TASK];
+    int task_applicationID[MAX_TASK];
     int task_id = 10;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
-    //int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/
     generateSpiralMatrix();
@@ -357,6 +359,9 @@ int main(int argc, char **argv)
 
     /* YAML TEMPORARY PARSER TO MAP TASKS */
     while(fgets(line, sizeof(line), testcase)){
+        if(tasks_to_map >= MAX_TASK){
+            while(1){LOG("ERROR - increase the MAX_TASK to admit this amount allocated tasks");}
+        }
 
         if (strstr(line, "name") != NULL){
             app_name = strtok(line, ":");
@@ -376,6 +381,8 @@ int main(int argc, char **argv)
             task_number[strlen(task_number)-1] = '\0';
             task_addr[tasks_to_map] = 0;
             task_remaining_executions[tasks_to_map] = executions;
+            task_repeat_after[tasks_to_map] = repeat_after;
+            task_applicationID[tasks_to_map] = task_id;
             if(executions > 0){
                 task_start_time[tasks_to_map] = starting_time;
             }
@@ -383,8 +390,6 @@ int main(int argc, char **argv)
                 task_start_time[tasks_to_map] = -1;
                 finishedTask[tasks_to_map]=TRUE;
             }
-            task_repeat_after[tasks_to_map] = repeat_after;
-            task_applicationID[tasks_to_map] = task_id;
             tasks_to_map++;
         }
 
@@ -415,8 +420,6 @@ int main(int argc, char **argv)
         }        
     }
     
-    //totalTasks = 0;
-    //finishedTasks = 0;
     for(i = 0; i < tasks_to_map; i++){
         prints("==================\n");
         prints("Tarefa ("); 
@@ -433,7 +436,7 @@ int main(int argc, char **argv)
         prints("ms depois de terminar a execução anterior.\n\n");
     }
 
-    for(i = tasks_to_map; i < DIM_Y*DIM_X; i++){
+    for(i = tasks_to_map; i < MAX_TASK; i++){
         task_addr[i] = 0xFFFFFFFF;
         task_confirmed_addr[i] = 0xFFFFFFFF;
         task_start_time[i] = 0xFFFFFFF0;
@@ -444,29 +447,16 @@ int main(int argc, char **argv)
         while(*SyncToPE != 1){ // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Timer (ms) ", measuredWindows);
             
-            /*prints("================================\n== Fila de tasks:\n");
-            for(i = 0; i < DIM_X*DIM_Y; i++){
-                if(task_remaining_executions[i] > 0){
-                    putsvsv(">> Task[", i, "] ainda precisa executar ", task_remaining_executions[i]);
-                }
-            }
-            prints("================================\n");*/
-
-            //progresso = (finishedTasks*100)/totalTasks;
-            //putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
-            //LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
-
-
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
             
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
             //////////////////////////////////////////////////////
-            while(!tempPacket){
 #if USE_THERMAL
                 *clockGating_flag = TRUE;
 #endif
+            while(!tempPacket){
             }
 #if USE_THERMAL
             *clockGating_flag = FALSE;
@@ -474,9 +464,8 @@ int main(int argc, char **argv)
             tempPacket = FALSE;
             prints("TEA Packet Received: ");
             for(i = 0; i < DIM_X*DIM_Y; i++){
-                //printi(deliveredMessage->msg[i]);
                 printi(executedInstPacket[i]);
-                Temperature[i] = executedInstPacket[i];//deliveredMessage->msg[i];
+                Temperature[i] = executedInstPacket[i];
             }
 
             //////////////////////////
@@ -502,55 +491,58 @@ int main(int argc, char **argv)
             }
             generateTempMatrix(control_signal);
 
+            // In each 20 windows (20 ms) run the migration routine
             if ((measuredWindows)%20 == 0){
                 prints("Starting thermal actuation analysis\n");
                 temperature_migration(Temperature, tasks_to_map, task_addr);
-                // for(i = 0; i < tasks_to_map; i++)
-                //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
-
-                // for(i = 0; i < tasks_to_map; i++){
-                //     task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
-                //     LOG("Task %d migrate to processor %x\n", i, task_addr[i]);
-                // }
-                // for(i=0;i<tasks_to_map;i++)
-                //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
             }
             else{
                 prints("Skiping thermal actuation analysis\n");
             }
 
             // Verify if every task is finished
-            disable_interruption(0);
-            finishSimulation = 1;
-            for(i = 0; i < tasks_to_map; i++){
-                if(finishedTask[i]==TRUE){
-                    if(appFinished(i, task_applicationID)){
-                        task_addr[i] = 0;
+            disable_interruption(0); // disable timer interruptions 
+            finishSimulation = 1;    // assumes that every task has finished
+            for(i = 0; i < tasks_to_map; i++){ // for every task
+                if(finishedTask[i]==TRUE){     // verify it the task is finished
+                    if(appFinished(i, task_applicationID)){ // and if every task from this app has also finished
+                        task_addr[i] = 0;                   // if so, then reset the mapping
                         task_confirmed_addr[i] = 0;
+                    
+                        if(task_remaining_executions[i] > 0){
+                            // calculates the next start time
+                            //finishedTasks++;
+                            task_start_time[i] = measuredWindows + task_repeat_after[i];
+                            finishedTask[i] = 2;
+                            putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
+                        }
                     }
                 }
-                if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
+                /*if(finishedTask[i]==TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)){
                     // calculates the next start time
                     //finishedTasks++;
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i]=2;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
-                }
-                else if(finishedTask[i]==FALSE){
+                }*/
+                else if(finishedTask[i]==FALSE){ // if some task is running yet, then turn off the finishSimulation
                    finishSimulation = 0;
                 }
             }
             for(i = 0; i < tasks_to_map; i++){
                 if(finishedTask[i] == 2){
                     finishedTask[i] = 3;
-                    // updates every PE mapping table to clear the past address
+                    // updates every PE mapping table to clear the past address and keep the coherence between PEs address
                     for(j=1; j<N_PES; j++){
                         aux[0] =  ((0 << 16) | i);
                         sendTaskService(TASK_ADDR_UPDT, getAddress(j), aux, 1);
                     }
                 }
             }
-            enable_interruption(0);
+            enable_interruption(0); // enable timer interruptions once again
+
+
+            // If every task is done, then sends the finish packet to every PE
             if(finishSimulation){
                 for(i = 1; i < N_PES; i++){
                     sendTaskService(PE_FINISH_SIMULATION, getAddress(i), 0, 0);
@@ -560,6 +552,8 @@ int main(int argc, char **argv)
 
         }
         measuredWindows = 0;
+        // Waits here until every PE is finished, so the Master can also stop
+        // The master cannot stop before, because it is responsible for receive the energy packet from each PE and send it to TEA
         while(*SyncToPE != 1){
             LOG("Waiting everyone %X\n", measuredWindows);
             measuredWindows++;    
