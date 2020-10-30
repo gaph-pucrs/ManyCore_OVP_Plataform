@@ -335,6 +335,14 @@ void interruptHandler_timer(void) {
     *operationFrequency = newFrequency;
     Voltage = newVoltage;
 
+
+    // To prevent overflow/signal problems in the packets production register
+    if(packetsCounter >= 0x70000000){
+        for(i = 0; i < PIPE_SIZE; i++){
+            packetsCounter -= 117440000;
+            buffer_map[i] -= 117440000;
+        }
+    }
     /*if(*myAddress == 0){
         if(*NIcmdTX == NI_STATUS_OFF){
             SendSlot((unsigned int)&myServicePacket[serviceIndexNextTimer], (0xFFFF0000 | serviceIndexNextTimer)); // WARNING: This may cause a problem!!!!
@@ -1249,12 +1257,6 @@ unsigned int getEmptyIndex(){
 void bufferPush(unsigned int index){
     packetsCounter++;
     buffer_map[index] = packetsCounter;
-    /*if(packetsCounter >= 0x70000000){
-        for(index = 0; index < PIPE_SIZE; i++){
-            packetsCounter -= 117440000;
-            buffer_map[index] -= 117440000;
-        }
-    }*/
 }
 
 ///////////////////////////////////////////////////////////////////
