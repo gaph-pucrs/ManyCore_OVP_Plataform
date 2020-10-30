@@ -340,7 +340,9 @@ void interruptHandler_timer(void) {
     if(packetsCounter >= 0x70000000){
         for(i = 0; i < PIPE_SIZE; i++){
             packetsCounter -= 117440000;
-            buffer_map[i] -= 117440000;
+            if(buffer_map[i] != -1){
+                buffer_map[i] -= 117440000;
+            }
         }
     }
     /*if(*myAddress == 0){
