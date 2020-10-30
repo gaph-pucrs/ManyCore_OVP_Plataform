@@ -165,7 +165,7 @@ time_t tinicio, tsend;//, tfim, tignore;                    // TODO: GEANINNE - 
 //////////////////////////////////////
 // Migration control                //
 //////////////////////////////////////
-#define MAX_TASK 128
+#define MAX_TASK DIM_X*DIM_Y
 volatile int taskMigrated = -1;
 volatile int migratedTask = -1;
 volatile int running_task = -1;
