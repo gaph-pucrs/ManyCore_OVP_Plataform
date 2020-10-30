@@ -755,7 +755,7 @@ unsigned int sendFromMsgBuffer(unsigned int requester, unsigned int requesterAdd
                 if(buffer_map[i] < foundSent){ // verify if the founded packet is newer
                     found = i;
                     foundSent = buffer_map[i];
-                    //prints("xng\n");
+                    putsv("found", i);
                 }
             }
         }
