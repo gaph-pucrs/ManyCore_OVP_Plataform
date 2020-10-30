@@ -655,14 +655,19 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_MIGRATION_PEND){
         putsv("Task pendingReq received ", new_state);
         for(i=0; i<N_PES; i++){
-            if(pendingReq[i] == 0 && incomingPacket[PI_PAYLOAD+i] != 0)
-                pendingReq[i] = incomingPacket[PI_PAYLOAD+i];
-            else if(pendingReq[i] != 0 && incomingPacket[PI_PAYLOAD+i] != 0)
+            if(pendingReq[i] == 0 && incomingPacket[PI_PAYLOAD+i] != 0){
+                //pendingReq[i] = incomingPacket[PI_PAYLOAD+i];
+                if(!sendFromMsgBuffer(i, incomingPacket[PI_REQUESTER])){ // if the package is not ready yet add a request to the pending request queue
+                    //prints("Adicionando ao pendingReq\n");
+                    pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+                }   
+            }
+            else if(pendingReq[i] != 0 && incomingPacket[PI_PAYLOAD+i] != 0){
                 prints("ERROR - pendingReq already exists!\n");
-            //else if(pendingReq[i] != 0 && incomingPacket[PI_PAYLOAD+i] == 0 )
-                //nao precisa fazer nada
+            }
             putsv(" > > pendReq: ", pendingReq[i]);
         }
+
         *NIcmdRX = DONE;
     }
     else if(incomingPacket[PI_SERVICE] == TASK_ADDR_UPDT){
