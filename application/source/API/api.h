@@ -1209,6 +1209,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
     for(a=0;a<theMessage->size;a++){
         buffer_packets[index][a+4] = theMessage->msg[a];
     }
+    disable_interruption(2); // disable RX INTERRUPTION
     // Once the packet is ready, check if the request has arrived
     dest_addr = checkPendingReq(destination_id);
     if(dest_addr){
@@ -1226,6 +1227,7 @@ void SendMessage(message *theMessage, unsigned int destination_id){
         // Change the selected buffer position to occupied
         bufferPush(index);
     }
+    enable_interruption(2); // enable RX INTERRUPTION
 #if USE_THERMAL
 #endif
     return;
