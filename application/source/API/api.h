@@ -130,6 +130,7 @@ typedef struct Message {
 ////////////////////////////////////////////////////////////
 // API useful stuff
 message *deliveredMessage;                                  // Pointer used by the API to acess the packet that will be transmitted
+volatile unsigned int packetsCounter;
 unsigned int sendAfterTX[PIPE_SIZE];                        // Informs the TX interruption if there is a packet that must be transmitted
 unsigned int sendServiceAfterTX[PIPE_SIZE];                 // Informs the TX interruption if there is a service packet that must be transmitted
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];      // Used by NI to store the recived packet
@@ -1246,7 +1247,14 @@ unsigned int getEmptyIndex(){
 ///////////////////////////////////////////////////////////////////
 /* Changes the buffer controls to occupied for a given index */
 void bufferPush(unsigned int index){
-    buffer_map[index] = clock();
+    packetsCounter++;
+    buffer_map[index] = packetsCounter;
+    /*if(packetsCounter >= 0x70000000){
+        for(index = 0; index < PIPE_SIZE; i++){
+            packetsCounter -= 117440000;
+            buffer_map[index] -= 117440000;
+        }
+    }*/
 }
 
 ///////////////////////////////////////////////////////////////////
