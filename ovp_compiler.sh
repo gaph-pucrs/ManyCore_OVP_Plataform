@@ -69,5 +69,20 @@ harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu46=application/application46.${CROSS}.elf $* \
      --program cpu47=application/application47.${CROSS}.elf $* \
      --program cpu48=application/application48.${CROSS}.elf $* \
+     --program cpu49=application/application49.${CROSS}.elf $* \
+     --program cpu50=application/application50.${CROSS}.elf $* \
+     --program cpu51=application/application51.${CROSS}.elf $* \
+     --program cpu52=application/application52.${CROSS}.elf $* \
+     --program cpu53=application/application53.${CROSS}.elf $* \
+     --program cpu54=application/application54.${CROSS}.elf $* \
+     --program cpu55=application/application55.${CROSS}.elf $* \
+     --program cpu56=application/application56.${CROSS}.elf $* \
+     --program cpu57=application/application57.${CROSS}.elf $* \
+     --program cpu58=application/application58.${CROSS}.elf $* \
+     --program cpu59=application/application59.${CROSS}.elf $* \
+     --program cpu60=application/application60.${CROSS}.elf $* \
+     --program cpu61=application/application61.${CROSS}.elf $* \
+     --program cpu62=application/application62.${CROSS}.elf $* \
+     --program cpu63=application/application63.${CROSS}.elf $* \
      --program cpuIterator=application/source/applicationIterator/applicationIterator.${CROSS}.elf --imperasintercepts  $* \
 $*
