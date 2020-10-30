@@ -130,7 +130,7 @@ typedef struct Message {
 ////////////////////////////////////////////////////////////
 // API useful stuff
 message *deliveredMessage;                                  // Pointer used by the API to acess the packet that will be transmitted
-volatile unsigned int packetsCounter;
+volatile unsigned int packetsCounter = 0;
 unsigned int sendAfterTX[PIPE_SIZE];                        // Informs the TX interruption if there is a packet that must be transmitted
 unsigned int sendServiceAfterTX[PIPE_SIZE];                 // Informs the TX interruption if there is a service packet that must be transmitted
 volatile unsigned int incomingPacket[PACKET_MAX_SIZE];      // Used by NI to store the recived packet
@@ -657,9 +657,9 @@ void interruptHandler_NI_RX(void) {
         for(i=0; i<N_PES; i++){
             if(pendingReq[i] == 0 && incomingPacket[PI_PAYLOAD+i] != 0){
                 //pendingReq[i] = incomingPacket[PI_PAYLOAD+i];
-                if(!sendFromMsgBuffer(i, incomingPacket[PI_REQUESTER])){ // if the package is not ready yet add a request to the pending request queue
-                    //prints("Adicionando ao pendingReq\n");
-                    pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
+                if(!sendFromMsgBuffer(i, incomingPacket[PI_PAYLOAD+i])){ // if the package is not ready yet add a request to the pending request queue
+                    prints("Adicionando ao pendingReq\n");
+                    pendingReq[i] = incomingPacket[PI_PAYLOAD+i]; // actual requester address
                 }   
             }
             else if(pendingReq[i] != 0 && incomingPacket[PI_PAYLOAD+i] != 0){
