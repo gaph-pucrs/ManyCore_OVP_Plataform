@@ -28,11 +28,11 @@ for line in b:
 
 	line_num = line_num + 1
 	sum_peak = sum_peak + peak
-	sum_avg = sum_avg + sum/16
+	sum_avg = sum_avg + sum/64
 	if peak > peak_peak:
 		peak_peak = peak
 
-	o.write(str(sum/16) + '\t' + str(peak))
+	o.write(str(sum/64) + '\t' + str(peak))
 
 	o.write('\n')
 

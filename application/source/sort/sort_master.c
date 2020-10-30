@@ -4,7 +4,7 @@
 
 #include "sort.h"
 
-#define TASKS 300
+#define TASKS 1000
 #define SLAVES 3
 
 

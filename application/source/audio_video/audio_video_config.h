@@ -7,7 +7,7 @@
 
 #define COMPRESSED_SAMPLES	(8*2)
 
-#define FRAMES				200 //HeMPS 4X4 sc demora 7s para cada frame 20
+#define FRAMES				1000 //HeMPS 4X4 sc demora 7s para cada frame 20
 
 
 /*#define IVLC_exe_time		35000
