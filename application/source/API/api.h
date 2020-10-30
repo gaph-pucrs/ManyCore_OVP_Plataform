@@ -337,11 +337,11 @@ void interruptHandler_timer(void) {
 
 
     // To prevent overflow/signal problems in the packets production register
-    if(packetsCounter >= 0x70000000){
-        packetsCounter -= 117440000;
+    if(packetsCounter >= 197440000){
+        packetsCounter = packetsCounter - 117440000;
         for(i = 0; i < PIPE_SIZE; i++){
-            if(buffer_map[i] != -1){
-                buffer_map[i] -= 117440000;
+            if(buffer_map[i] != -1 && buffer_map[i] != -2){
+                buffer_map[i] = buffer_map[i] - 117440000;
             }
         }
     }
