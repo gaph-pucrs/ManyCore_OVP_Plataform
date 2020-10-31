@@ -176,7 +176,7 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
         if (temp[srcID] > 33300){
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
             if(migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: detecta PEs que nao podem migrar 
-                if(how_many_tasks_PE_is_running(srcProc, task_addr)>0) && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE){
+                if(how_many_tasks_PE_is_running(srcProc, task_addr)>0 && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE){
                     while (k>0){
                         tgtProc = spiralMatrix[k];
                         task_ID = getSomeTaskID(srcProc, task_addr);
