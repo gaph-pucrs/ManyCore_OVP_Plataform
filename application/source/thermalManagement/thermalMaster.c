@@ -304,7 +304,9 @@ void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X
 
     for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_start_time[i] == -2){
+            task_addr[i] = task_addr[i] | 0x80000000;
             sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
+            task_addr[i] = task_addr[i] & 0x7FFFFFFF;
             task_start_time[i] = -1; //RELEASED
             task_remaining_executions[i]--;
         }

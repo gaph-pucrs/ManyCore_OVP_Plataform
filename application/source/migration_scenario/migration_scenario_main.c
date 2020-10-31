@@ -99,10 +99,10 @@ int main(int argc, char **argv)
 		get_mapping_table(my_task_addr);
 
 		// Get its task to run
-		for (i = 0; i < NUM_TASK; i++){
+		/*for (i = 0; i < NUM_TASK; i++){
 			if (my_task_addr[i] == *myAddress)
 				running_task = i;
-		}
+		}*/
 
 		// Informs the master that the task has occupied the defined address
 		sendAllocationConfirmation();
