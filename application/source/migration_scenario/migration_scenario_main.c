@@ -252,9 +252,10 @@ int main(int argc, char **argv)
 			
 			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 			
-			sendPipe(destination);
+			
 			
 			disable_interruption(2);
+			sendPipe(destination);
 			set_taskMigrated(destination); // save the new destination of this 
 			running_task = -1;
 			mapping_table[migratedTask] = 0;   // clear this address value
