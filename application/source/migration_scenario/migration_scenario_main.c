@@ -253,7 +253,6 @@ int main(int argc, char **argv)
 			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 			
 			
-			
 			disable_interruption(2);
 			sendPipe(destination);
 			set_taskMigrated(destination); // save the new destination of this 

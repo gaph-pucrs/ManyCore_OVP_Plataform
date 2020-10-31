@@ -207,6 +207,7 @@ void OVP_init();
 // API Functions
 void SendMessage(message *theMessage, unsigned int destination);
 void SendSlot(unsigned int addr, unsigned int slot); // Use this as SendRaw (the NI protocol is only respected here - the SendRaw function will not fit in every situation) the put a "0xFFFFFFFE" in slot if using to transmitt a random packet
+void SendSlot2(unsigned int addr, unsigned int slot); // Use this as SendRaw (the NI protocol is only respected here - the SendRaw function will not fit in every situation) the put a "0xFFFFFFFE" in slot if using to transmitt a random packet
 void ReceiveMessage(message *theMessage, unsigned int from);
 void ReceiveRaw(message *theMessage);
 void FinishApplication();
@@ -1089,7 +1090,7 @@ void sendPipe(unsigned int dest){
                 myServicePacket[index][PI_PAYLOAD+i] = buffer_packets[older][i];
             }
             bufferPop(older);
-            SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
+            SendSlot2((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!,
         }
             
             /*if (buffer_map[j] > PIPE_OCCUPIED){
@@ -1121,7 +1122,7 @@ void sendPendingReq(unsigned int dest){
         myServicePacket[index][PI_PAYLOAD+j] = pendingReq[j];
         pendingReq[j] = 0;
     }
-    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index));
+    SendSlot2((unsigned int)&myServicePacket[index], (0xFFFF0000 | index));
     prints("> pendReq enviado\n");
 }
 
@@ -1310,6 +1311,41 @@ void SendSlot(unsigned int addr, unsigned int slot){
     SendRaw(addr);
     //enable_interruption(1); // tx
     enable_interruption(2); // rx
+    enable_interruption(0); // timer
+    ////////////////////////////////////////////////
+#if USE_THERMAL    
+#endif
+    insideSendSlot = 0;
+    return;
+}
+
+
+///////////////////////////////////////////////////////////////////
+/* Configure the NI to transmitt a given packet */
+void SendSlot2(unsigned int addr, unsigned int slot){
+    insideSendSlot = 1;
+#if USE_THERMAL
+#endif
+#if USE_THERMAL
+        *clockGating_flag = TRUE;
+#endif
+    ////////////////////////////////////////////////
+    while(*NIcmdTX != NI_STATUS_OFF){
+        /* waits until NI is ready to execute an operation */}
+#if USE_THERMAL
+    *clockGating_flag = FALSE;
+#endif
+
+    //disable_interruption(1); // tx
+    disable_interruption(0); // timer
+
+    while(*NIcmdTX != NI_STATUS_OFF){
+        prints("PRESO3\n");
+        /* waits until NI is ready to execute an operation */}
+
+    transmittingActive = slot;
+    SendRaw(addr);
+    //enable_interruption(1); // tx
     enable_interruption(0); // timer
     ////////////////////////////////////////////////
 #if USE_THERMAL    
