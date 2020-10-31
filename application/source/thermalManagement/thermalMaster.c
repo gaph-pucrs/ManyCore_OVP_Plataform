@@ -121,17 +121,17 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
     int foundJ = -1;
     for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_addr[i] == pe && foundI == -1){
-            foundI = i;
+            foundI = i; // found inside the future address
         }
         if(task_confirmed_addr[i] == pe && foundJ == -1){
-            foundJ = i;
+            foundJ = i; // found inside the confirmed address
         }
-        if(foundI != -1 && foundJ != -1){
-            if(foundI == foundJ){
-                return FALSE;
+        if(foundI != -1 && foundJ != -1){ // if u found in both address list
+            if(foundI == foundJ){ // and they are in the same ID (task)
+                return FALSE;   
             }
             else{
-                return TRUE;
+                return TRUE; 
             }
         }
     }
@@ -175,8 +175,8 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
         srcProc = x << 8 | y;
         if (temp[srcID] > 33300){
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
-            if(migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: detecta PEs que nao podem migrar (por exemplo o master do sort - se mandar migrar ele nao vai conseguir e se der tempo de chegar em outra janela o master vai achar que o PE ta livre e pode mandar alguuma coisa pra lá e dar merda)
-                if(how_many_tasks_PE_is_running(srcProc, task_addr)>0){
+            if(migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: detecta PEs que nao podem migrar 
+                if(how_many_tasks_PE_is_running(srcProc, task_addr)>0 && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE){
                     while (k>0){
                         tgtProc = spiralMatrix[k];
                         task_ID = getSomeTaskID(srcProc, task_addr);
