@@ -5,7 +5,7 @@
 #define TASK_REQUEST    0x1000
 #define KILL_PROC		0x2000
 #define MSG_ACK			0x3000
-#define TASKS 			30000
+#define TASKS 			15000
 #define SORT_SLAVES 3
 
 unsigned int rand_val = LFSR_POL;

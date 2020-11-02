@@ -87,8 +87,7 @@ int main(int argc, char **argv)
 	while(1){
 
 		// waits for mapping or migrating tasks and receives mapping table
-		*clockGating_flag = TRUE;
-		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ }
+		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ *clockGating_flag = TRUE; }
 
 		// Detects the end of simulation
 		if(finishSimulation_flag)
