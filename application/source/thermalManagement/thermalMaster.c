@@ -67,16 +67,17 @@ void generateSpiralMatrix()
 }
 
 void generatePatternMatrix(int n){
+    int i;
     putsv("entrou aqui ", n);
     if (n == 16) {
         int matrix[16] = {0,11,9,1,3,6,4,12,14,7,2,5,8,13,10,15};
-        for (int i = 0; i < 16; i++)
+        for (i = 0; i < 16; i++)
             spiralMatrix[i] = (matrix[i]/DIM_X << 8) | matrix[i]%DIM_X;
     }
     if (n == 64) {
         int matrix[64] = {0,2,18,16,34,32,48,50,52,54,36,38,20,22,4,6,15,13,31,29,47,45,63,61,59,57,43,41,27,25,11,9,
                           1,3,5,7,14,12,10,8,17,19,21,23,30,28,26,24,33,35,37,39,46,44,42,40,49,51,53,55,62,60,58,56};
-        for (int i = 0; i < 64; i++)
+        for (i = 0; i < 64; i++)
             spiralMatrix[i] = (matrix[i]/DIM_X << 8) | matrix[i]%DIM_X;
     }
 }
