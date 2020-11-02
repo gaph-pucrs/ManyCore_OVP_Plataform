@@ -66,6 +66,21 @@ void generateSpiralMatrix()
     }
 }
 
+void generatePatternMatrix(int n){
+    putsv("entrou aqui ", n);
+    if (n == 16) {
+        int matrix[16] = {0,11,9,1,3,6,4,12,14,7,2,5,8,13,10,15};
+        for (int i = 0; i < 16; i++)
+            spiralMatrix[i] = (matrix[i]/DIM_X << 8) | matrix[i]%DIM_X;
+    }
+    if (n == 64) {
+        int matrix[64] = {0,2,18,16,34,32,48,50,52,54,36,38,20,22,4,6,15,13,31,29,47,45,63,61,59,57,43,41,27,25,11,9,
+                          1,3,5,7,14,12,10,8,17,19,21,23,30,28,26,24,33,35,37,39,46,44,42,40,49,51,53,55,62,60,58,56};
+        for (int i = 0; i < 64; i++)
+            spiralMatrix[i] = (matrix[i]/DIM_X << 8) | matrix[i]%DIM_X;
+    }
+}
+
 void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
     unsigned int proc_address[DIM_X*DIM_Y];
     unsigned int ordered_temp[DIM_X*DIM_Y];
@@ -348,7 +363,8 @@ int main(int argc, char **argv)
     //int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/
-    generateSpiralMatrix();
+    //generateSpiralMatrix();
+    generatePatternMatrix(DIM_X*DIM_Y);
     for(y=0;y<DIM_Y;y++){
         for(x=0;x<DIM_X;x++){
             Power[p_idx] = 0;
@@ -482,42 +498,42 @@ int main(int argc, char **argv)
             //////////////////////////
             // Migration procedures //
             //////////////////////////
-            prints("\nGenerating TempMatrix\n");
-            for(i = 0; i < DIM_X*DIM_Y; i++){
+            // prints("\nGenerating TempMatrix\n");
+            // for(i = 0; i < DIM_X*DIM_Y; i++){
 
-                if (measuredWindows >= INT_WINDOW)
-                    integral[i] = integral[i] - integral_prev[measuredWindows%INT_WINDOW][i];
+            //     if (measuredWindows >= INT_WINDOW)
+            //         integral[i] = integral[i] - integral_prev[measuredWindows%INT_WINDOW][i];
 
-                integral_prev[measuredWindows%INT_WINDOW][i] = Temperature[i];
+            //     integral_prev[measuredWindows%INT_WINDOW][i] = Temperature[i];
 
-                //if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
-                derivative[i] = Temperature[i] - Temperature_prev[i];
-                integral[i] = integral[i] + Temperature[i];
-                control_signal[i] = KP*Temperature[i] + KI*integral[i]/INT_WINDOW + KD*derivative[i];
-                Temperature_prev[i] = Temperature[i];
+            //     //if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
+            //     derivative[i] = Temperature[i] - Temperature_prev[i];
+            //     integral[i] = integral[i] + Temperature[i];
+            //     control_signal[i] = KP*Temperature[i] + KI*integral[i]/INT_WINDOW + KD*derivative[i];
+            //     Temperature_prev[i] = Temperature[i];
 
-                // putsv("proc ", i);
-                // putsv("energy ", energy_i[i]);
-                // putsv("control_signal ", control_signal[i]);
-            }
-            generateTempMatrix(control_signal);
+            //     // putsv("proc ", i);
+            //     // putsv("energy ", energy_i[i]);
+            //     // putsv("control_signal ", control_signal[i]);
+            // }
+            // generateTempMatrix(control_signal);
 
-            if ((measuredWindows)%20 == 0){
-                prints("Starting thermal actuation analysis\n");
-                temperature_migration(Temperature, tasks_to_map, task_addr);
-                // for(i = 0; i < tasks_to_map; i++)
-                //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
+            // if ((measuredWindows)%20 == 0){
+            //     prints("Starting thermal actuation analysis\n");
+            //     temperature_migration(Temperature, tasks_to_map, task_addr);
+            //     // for(i = 0; i < tasks_to_map; i++)
+            //     //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
 
-                // for(i = 0; i < tasks_to_map; i++){
-                //     task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
-                //     LOG("Task %d migrate to processor %x\n", i, task_addr[i]);
-                // }
-                // for(i=0;i<tasks_to_map;i++)
-                //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
-            }
-            else{
-                prints("Skiping thermal actuation analysis\n");
-            }
+            //     // for(i = 0; i < tasks_to_map; i++){
+            //     //     task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
+            //     //     LOG("Task %d migrate to processor %x\n", i, task_addr[i]);
+            //     // }
+            //     // for(i=0;i<tasks_to_map;i++)
+            //     //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
+            // }
+            // else{
+            //     prints("Skiping thermal actuation analysis\n");
+            // }
 
             // Verify if every task is finished
             disable_interruption(0);
