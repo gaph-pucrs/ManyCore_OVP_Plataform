@@ -63,6 +63,7 @@ echo "make -C peripheral/tea NOVLNV=1" >> ovp_compiler.sh
 echo "make -C harness" >> ovp_compiler.sh
 # --------- Sem HARNESS modificado
 echo "harness/harness.\${IMPERAS_ARCH}.exe \\" >> ovp_compiler.sh 
+echo "--override dictsize=512\\" >> ovp_compiler.sh 
 #echo "harness.exe \\" >> ovp_compiler.sh
 #echo "    --modulefile module/model.${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
 # --------------------------------
