@@ -13,7 +13,7 @@
 
 message theMessage;
 
-#define NUM_TASK	N_PES-1
+#define NUM_TASK N_PES - 1
 int my_task_addr[NUM_TASK];
 int new_task_addr[NUM_TASK];
 
@@ -28,9 +28,9 @@ int mpeg_ivlc(int state);
 int mpeg_print_mpeg(int state);
 int mpeg_start(int state);
 // MPEG - auxiliar functions
-void idct_func(type_DATA *block,int lx);
+void idct_func(type_DATA *block, int lx);
 static void idctcol(type_DATA *block, int offs, int lx);
-static void idctrow (type_DATA *block, int offs);
+static void idctrow(type_DATA *block, int offs);
 void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant);
 void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer);
 short int getDC(short int type, type_DATA *buffer);
@@ -62,14 +62,18 @@ int main(int argc, char **argv)
 	int i;
 	int aux[1];
 
-	while(1){
+	while (1)
+	{
 
 		// waits for mapping or migrating tasks and receives mapping table
-		*clockGating_flag = TRUE;
-		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ }
+		// waits for mapping or migrating tasks and receives mapping table
+		while (!get_mapping() && !get_migration_dst() && !finishSimulation_flag)
+		{
+			*clockGating_flag = TRUE;
+		}
 
 		// Detects the end of simulation
-		if(finishSimulation_flag)
+		if (finishSimulation_flag)
 			break;
 
 		set_taskMigrated(-1); // resets this, because it's running a new task
@@ -77,120 +81,129 @@ int main(int argc, char **argv)
 		get_mapping_table(my_task_addr);
 
 		// Get its task to run
-		for (i = 0; i < NUM_TASK; i++){
+		/*for (i = 0; i < NUM_TASK; i++)
+		{
 			if (my_task_addr[i] == *myAddress)
 				running_task = i;
-		}
+		}*/
 
 		// Informs the master that the task has occupied the defined address
 		sendAllocationConfirmation();
 
 		// Send the updt addr msg to every PE
-		for(i=1; i<N_PES; i++){
-			aux[0] =  ((*myAddress << 16) | running_task);
-			if(getAddress(i) != *myAddress)
+		for (i = 1; i < N_PES; i++)
+		{
+			aux[0] = ((*myAddress << 16) | running_task);
+			if (getAddress(i) != *myAddress)
 				sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
 		}
-		
-		if(get_mapping()){
-			prints("Task "); printi(running_task); prints("mapped\n");
+
+		if (get_mapping())
+		{
+			prints("Task ");
+			printi(running_task);
+			prints("mapped\n");
 			state = 0;
 			clear_mapping();
 		}
-		else if(get_migration_dst()){
+		else if (get_migration_dst())
+		{
 			state = get_new_state();
-			prints("Task "); printi(running_task); prints("migrated\n");
+			prints("Task ");
+			printi(running_task);
+			prints("migrated\n");
 			putsv("State: ", state);
 			clear_migration_dst();
 		}
 
-		switch(running_task){
-			// DIJKSTRA
-			case divider:
-				state = dijkstra_divider(state);
-				break;
-			case dijkstra_0:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_1:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_2:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_3:
-				state = dijkstra_slave();
-				break;
-			case print:
-				state = dijkstra_print();
-				break;
-			// MPEG
-			case idct:
-				state = mpeg_idct(state);
-				break;
-			case iquant:
-				state = mpeg_iquant(state);
-				break;
-			case ivlc:
-				state = mpeg_ivlc(state);
-				break;
-			case print_mpeg:
-				state = mpeg_print_mpeg(state);
-				break;
-			case start:
-				state = mpeg_start(state);
-				break;
-			// DTW
-			case bank:
-				state = dtw_bank(state);
-				break;
-			case p1:
-				state = dtw_p1(state);
-				break;
-			case p2:
-				state = dtw_p2(state);
-				break;
-			case p3:
-				state = dtw_p3(state);
-				break;
-			case p4:
-				state = dtw_p4(state);
-				break;
-			case recognizer:
-				state = dtw_recognizer(state);
-				break;
+		switch (running_task)
+		{
+		// DIJKSTRA
+		case divider:
+			state = dijkstra_divider(state);
+			break;
+		case dijkstra_0:
+			state = dijkstra_slave();
+			break;
+		case dijkstra_1:
+			state = dijkstra_slave();
+			break;
+		case dijkstra_2:
+			state = dijkstra_slave();
+			break;
+		case dijkstra_3:
+			state = dijkstra_slave();
+			break;
+		case print:
+			state = dijkstra_print();
+			break;
+		// MPEG
+		case idct:
+			state = mpeg_idct(state);
+			break;
+		case iquant:
+			state = mpeg_iquant(state);
+			break;
+		case ivlc:
+			state = mpeg_ivlc(state);
+			break;
+		case print_mpeg:
+			state = mpeg_print_mpeg(state);
+			break;
+		case start:
+			state = mpeg_start(state);
+			break;
+		// DTW
+		case bank:
+			state = dtw_bank(state);
+			break;
+		case p1:
+			state = dtw_p1(state);
+			break;
+		case p2:
+			state = dtw_p2(state);
+			break;
+		case p3:
+			state = dtw_p3(state);
+			break;
+		case p4:
+			state = dtw_p4(state);
+			break;
+		case recognizer:
+			state = dtw_recognizer(state);
+			break;
 		}
-		if(state == 0){
+		if (state == 0)
+		{
 			printFinish();
-			mapping_table[running_task] = 0;   // clear this address value
+			mapping_table[running_task] = 0; // clear this address value
 			sendFinishTask(running_task);
 			migratedTask = -1;
 			running_task = -1;
 		}
-		else{	
+		else
+		{
 			migratedTask = running_task;
 			get_migration_mapping_table(new_task_addr);
 			destination = new_task_addr[migratedTask];
 			putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
-			
-			
+
 			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
-			
-			sendPipe(destination);
-			
-			disable_interruption(2);
-			set_taskMigrated(destination); // save the new destination of this 
+
+			disable_interruptions();
+			set_taskMigrated(destination); // save the new destination of this
 			running_task = -1;
-			mapping_table[migratedTask] = 0;   // clear this address value
+			mapping_table[migratedTask] = 0; // clear this address value
+			enable_interruptions();
+
+			sendPipe(destination);
 			sendPendingReq(destination);
-			enable_interruption(2);
-			
+
 			new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000; // flag this as the migrating task
 			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
 			new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
 		}
 	}
-
 
 	//////////////////////////////////////////////////////
 	//////////////// YOUR CODE ENDS HERE /////////////////
