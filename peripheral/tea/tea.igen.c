@@ -293,6 +293,8 @@ PPM_PACKETNET_CB(dataUpdate) {
             for(xi = 0; xi < DIM_Y; xi++)
                 power_trace[index++] = (double)(power[yi][xi]*SCALING_FACTOR)/(1280000*WINDOW_TIME);
 
+        power_trace[0] = power_trace[0]*0.1;
+
         computeSteadyStateTemp(t_steady, power_trace);
 
         ////////////////////////////////////////////////////////////////////////
