@@ -16,7 +16,7 @@ unsigned int randwi(){
 }
 
 void swap(int *array, int a, int b){
-	int aux;
+	int aux; 
 
 	aux = array[a];
 	array[a] = array[b];
