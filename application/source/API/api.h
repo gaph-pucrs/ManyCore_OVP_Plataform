@@ -499,7 +499,7 @@ void interruptHandler_NI_RX(void) {
                 if ((incomingPacket[PI_PAYLOAD + i] & 0x80000000) != 0) {
                     running_task = i;
                 }
-                appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFFFFFF) >> 16;
+                appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
                 mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
             }
         }
