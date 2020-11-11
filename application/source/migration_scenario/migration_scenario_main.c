@@ -3,15 +3,15 @@
 #include <string.h>
 
 #include "../peripheral/whnoc_dma/noc.h"
-#include "audio_video_long_config.h"
-#include "dijkstra_long_config.h"
-#include "dtw_long_config.h"
+#include "audio_video_config.h"
+#include "dijkstra_config.h"
+#include "dtw_config.h"
 #include "interrupt.h"
-#include "mpeg_long_config.h"
-#include "sort_long_config.h"
+#include "mpeg_config.h"
+#include "sort_config.h"
 #include "source/API/api.h"
 #include "spr_defs.h"
-#include "synthetic_long_config.h"
+#include "synthetic_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
