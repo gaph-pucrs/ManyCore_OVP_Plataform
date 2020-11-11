@@ -501,7 +501,7 @@ void interruptHandler_NI_RX(void) {
                 }
                 appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
                 mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
-                LOG("%d APP: %d task: %d address: %d", getID(*myAddress), appID[i], i, mapping_table[i]);
+                LOG("%d APP: %d task: %d address: %d\n", getID(*myAddress), appID[i], i, mapping_table[i]);
             }
         }
         mapping_en = 1;
