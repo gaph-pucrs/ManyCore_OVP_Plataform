@@ -313,7 +313,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_start_time[DIM
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_start_time[i] == -2) {
             task_addr[i] = task_addr[i] | 0x80000000;
-            task_addr[i] = task_addr[i] | (task_applicationID << 16);
+            task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
             sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
             task_addr[i] = task_addr[i] & 0x0000FFFF;
             task_start_time[i] = -1;  //RELEASED
