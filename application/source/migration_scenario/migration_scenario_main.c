@@ -275,13 +275,13 @@ int main(int argc, char **argv) {
             sendPipe(destination);
             sendPendingReq(destination);
 
-            new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000;  // flag this as the migrating task
+            mapping_table[migratedTask] = mapping_table[migratedTask] | 0x80000000;  // flag this as the migrating task
             for (i = 0; i < NUM_TASK; i++) {
-                new_task_addr[i] = new_task_addr[i] | (appID[i] << 16);
+                mapping_table[i] = mapping_table[i] | (appID[i] << 16);
             }
             sendTaskService(TASK_MIGRATION_DEST, destination, mapping_table, NUM_TASK);
             for (i = 0; i < NUM_TASK; i++) {
-                new_task_addr[i] = new_task_addr[i] & 0x0000FFFF;
+                //new_task_addr[i] = new_task_addr[i] & 0x0000FFFF;
                 mapping_table[i] = 0;
             }
         }
