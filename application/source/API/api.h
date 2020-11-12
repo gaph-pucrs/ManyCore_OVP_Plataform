@@ -1369,10 +1369,14 @@ int getServiceIndex() {
     int index = -1;
     while (index < 0) {
         //prints("PRESO4\n");
+        disable_interruptions();
         for (i = 0; i < PIPE_SIZE; i++) {
-            if (myServicePacket[i][0] == 0xFFFFFFFF)
+            if (myServicePacket[i][0] == 0xFFFFFFFF){
                 index = i;
+                myServicePacket[i][0] == 0;
+            }       
         }
+        enable_interruptions();
     }
     return index;
 }
