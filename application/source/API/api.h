@@ -1366,19 +1366,15 @@ void sendFinishTask(unsigned int running_task) {
 
 int getServiceIndex() {
     int i;
-    int index = -1;
-    while (index < 0) {
+    while (1) {
         //prints("PRESO4\n");
-        disable_interruptions();
         for (i = 0; i < PIPE_SIZE; i++) {
             if (myServicePacket[i][0] == 0xFFFFFFFF){
-                index = i;
                 myServicePacket[i][0] = 0;
+                return i;
             }       
         }
-        enable_interruptions();
     }
-    return index;
 }
 
 void printFinish() {
