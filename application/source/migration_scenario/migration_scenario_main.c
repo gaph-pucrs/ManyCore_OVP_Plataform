@@ -101,11 +101,11 @@ int main(int argc, char **argv) {
         sendAllocationConfirmation();
 
         // Send the updt addr msg to every PE
-        for (i = 1; i < N_PES; i++) {
+        /*for (i = 1; i < N_PES; i++) {
             aux[0] = ((*myAddress << 16) | running_task);
             if (getAddress(i) != *myAddress)
                 sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
-        }
+        }*/
 
         if (get_mapping()) {
             prints("Task ");
@@ -253,6 +253,19 @@ int main(int argc, char **argv) {
             running_task = -1;
             mapping_table[migratedTask] = 0;  // clear this address value
             enable_interruptions();
+
+            // Send the updt addr msg to every PE
+            aux[0] = ((destination << 16) | running_task);  // mounts the update addr flit
+            for (i = 1; i < DIM_X * DIM_Y; i++) {
+                if (appID[i] == appID[migratedTask]) {  // sends the update for every task in the same application
+                    sendTaskService(TASK_ADDR_UPDT, getAddress(mapping_table[i]), aux, 1);
+                    if (mapping_table[i] != migration_mapping_table[i]) {
+                        sendTaskService(TASK_ADDR_UPDT, getAddress(migration_mapping_table[i]), aux, 1);
+                    }
+                }
+            }
+
+            update_mapping_table();
 
             sendPipe(destination);
             sendPendingReq(destination);

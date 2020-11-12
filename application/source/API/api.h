@@ -306,9 +306,17 @@ void get_migration_mapping_table(unsigned int taskAddr[DIM_X * DIM_Y]) {
     int i;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         taskAddr[i] = migration_mapping_table[i];
-        mapping_table[i] = migration_mapping_table[i];
         putsvsv("task_addr[", i, "] = ", taskAddr[i]);
     }
+    return;
+}
+
+void update_mapping_table() {
+    int i;
+    for (i = 0; i < DIM_X * DIM_Y; i++) {
+        mapping_table[i] = migration_mapping_table[i];
+    }
+    return;
 }
 
 void set_taskMigrated(int destination) {
@@ -501,7 +509,7 @@ void interruptHandler_NI_RX(void) {
                 }
                 appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
                 mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
-                LOG("%d APP: %d task: %d address: %d\n", getID(*myAddress), appID[i], i, mapping_table[i]);
+                //LOG("%d APP: %d task: %d address: %d\n", getID(*myAddress), appID[i], i, mapping_table[i]);
             }
         }
         mapping_en = 1;
