@@ -362,7 +362,7 @@ int main(int argc, char **argv) {
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
-    int nextMigration = 20;
+    unsigned int nextMigration = 20;
     //int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/

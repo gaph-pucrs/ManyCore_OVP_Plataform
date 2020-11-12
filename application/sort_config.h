@@ -49,7 +49,7 @@ void quicksort(int *array, int lo, int hi) {
         quicksort(array, p + 1, hi);
     }
 }
-#define sort_slave3 33
-#define sort_slave2 32
-#define sort_slave1 31
-#define sort_master 30
+#define sort_slave3 38
+#define sort_slave2 37
+#define sort_slave1 36
+#define sort_master 35
