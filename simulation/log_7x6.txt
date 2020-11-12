@@ -322,10 +322,10 @@ TX interruption!
 Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  51  81  249919 
+Counters: 157  42  14  20  116  54  4  45  20  0  3  28  43  249957 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  3  27  42  249958 
+Counters: 157  42  14  20  116  54  4  45  20  0  3  127  142  249858 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -406,22 +406,22 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 98 
 Task destination received
-task_addr[0 ] = 1793 
-task_addr[1 ] = 7 
-task_addr[2 ] = 2 
-task_addr[3 ] = 1792 
-task_addr[4 ] = 1287 
-task_addr[5 ] = 1797 
-task_addr[6 ] = 1543 
-task_addr[7 ] = 263 
+task_addr[0 ] = 6 
+task_addr[1 ] = 256 
+task_addr[2 ] = 1 
+task_addr[3 ] = 1536 
+task_addr[4 ] = 1799 
+task_addr[5 ] = 1031 
+task_addr[6 ] = 1797 
+task_addr[7 ] = 2 
 task_addr[8 ] = 1284 
 task_addr[9 ] = 1285 
 task_addr[10 ] = 1029 
 task_addr[11 ] = 773 
 task_addr[12 ] = 517 
-task_addr[13 ] = 6 
-task_addr[14 ] = 1 
-task_addr[15 ] = 257 
+task_addr[13 ] = 257 
+task_addr[14 ] = 1793 
+task_addr[15 ] = 1543 
 task_addr[16 ] = 513 
 task_addr[17 ] = 769 
 task_addr[18 ] = 1025 
@@ -437,9 +437,9 @@ task_addr[27 ] = 1030
 task_addr[28 ] = 774 
 task_addr[29 ] = 518 
 task_addr[30 ] = 262 
-task_addr[31 ] = 261 
-task_addr[32 ] = 1031 
-task_addr[33 ] = 1799 
+task_addr[31 ] = 7 
+task_addr[32 ] = 1287 
+task_addr[33 ] = 1792 
 task_addr[34 ] = 0 
 task_addr[35 ] = 0 
 task_addr[36 ] = 0 
@@ -500,11 +500,8 @@ TX interruption!
 > ivlc 459 
 Pedindo mesnagem de: 1540 
 TX interruption!
-Counters: 43383  12965  3116  2935  18157  9714  31389  7760  9988  122  22  1553  1663  248337 
->> Energy packet sent to thermalMaster
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 25 
@@ -514,9 +511,12 @@ buffer_map=-1    task_dest=0
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
+Counters: 45817  13655  3250  3037  19683  10874  31430  8190  10176  122  19  992  1087  248913 
+>> Energy packet sent to thermalMaster
 TX interruption!
-> ivlc 460 
+Encontrei um pending da tarefa 25  para o endereço 1542 
+> TX interruption!
+ivlc 460 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -578,7 +578,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69329  21365  3433  3649  22367  11519  66155  10162  15996  246  21  1041  1146  248854 
+Counters: 70419  21829  3599  3848  23096  11809  69419  10470  16927  271  20  1032  1132  248868 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -645,7 +645,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70366  21812  3621  3875  23133  11817  69342  10466  16984  277  22  1146  1256  248744 
+Counters: 70125  21694  3555  3861  22203  11082  69338  10272  16931  278  21  1139  1244  248756 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -686,8 +686,6 @@ TX interruption!
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 25 
 S1 - caso normal
@@ -696,6 +694,8 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Encontrei um pending da tarefa 25  para o endereço 1542 
 TX interruption!
 > ivlc 471 
@@ -717,9 +717,6 @@ TX interruption!
 > ivlc 472 
 Pedindo mesnagem de: 1540 
 TX interruption!
-Counters: 70171  21689  3671  3881  23797  12365  67646  10494  16773  272  22  1112  1222  250010 
->> Energy packet sent to thermalMaster
-TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Clk gate off - interruptHandler_NI_RX
@@ -731,9 +728,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
+Counters: 69564  21390  3621  3824  23793  12515  64648  10397  16209  260  24  1354  1474  250880 
+>> Energy packet sent to thermalMaster
 TX interruption!
-> ivlc 473 
+Encontrei um pending da tarefa 25  para o endereço 1542 
+>TX interruption!
+ ivlc 473 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -795,12 +795,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 68960  21244  3414  3627  22285  11493  65704  10112  15889  244  22  1274  1384  247384 
+Counters: 69616  21520  3486  3774  22004  11113  68226  10147  16596  267  20  1032  1132  246514 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 477 
+>TX interruption!
+ ivlc 477 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -820,8 +820,6 @@ TX interruption!
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 25 
 S1 - caso normal
@@ -830,6 +828,8 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Encontrei um pending da tarefa 25  para o endereço 1542 
 TX interruption!
 > ivlc 479 
@@ -862,12 +862,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70299  21794  3615  3868  23113  11806  69255  10457  16958  276  20  1032  1132  248868 
+Counters: 69915  21644  3575  3855  22598  11432  68909  10321  16873  276  20  1130  1230  248770 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 481 
+>TX interruption!
+ ivlc 481 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -931,14 +931,14 @@ buffer_map=-1    task_dest=25
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
 TX interruption!
-Counters: 70412  21784  3668  3898  23821  12397  68182  10517  16871  274  22  1210  1320  249169 
->> Energy packet sent to thermalMaster
-TX interruption!
 > ivlc 485 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
+Counters: 69619  21457  3591  3813  23325  12105  66231  10298  16430  266  23  1247  1362  250357 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 25 
@@ -949,8 +949,8 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 486 
+> TX interruption!
+ivlc 486 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -981,9 +981,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
 > ivlc 488 
 Pedindo mesnagem de: 1540 
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1012,12 +1012,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69394  21392  3605  3776  23929  12756  64860  10435  16168  255  22  1176  1286  248225 
+Counters: 68189  21000  3340  3602  21108  10561  65987  9870  15865  246  21  1139  1244  247037 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 490 
+>TX interruption!
+ ivlc 490 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1037,8 +1037,6 @@ TX interruption!
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 25 
 S1 - caso normal
@@ -1047,10 +1045,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
 > ivlc 492 
 Pedindo mesnagem de: 1540 
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1079,12 +1079,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70394  21822  3611  3864  23119  11798  69386  10468  16964  276  20  1130  1230  248770 
+Counters: 69332  21451  3512  3806  21994  11005  68431  10149  16701  273  20  1032  1132  248868 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 494 
+>TX interruption!
+ ivlc 494 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1146,12 +1146,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70348  21801  3632  3891  23164  11844  69258  10458  17011  278  19  1023  1118  248882 
+Counters: 68870  21293  3496  3792  21929  10999  67762  10096  16586  272  20  1130  1230  248770 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 498 
+> TX interruption!
+ivlc 498 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1229,12 +1229,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69033  21240  3629  3770  24509  13286  63227  10433  15937  251  24  1256  1376  249228 
+Counters: 69295  21287  3585  3778  23692  12589  63816  10305  16008  254  24  1256  1376  248624 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 503 
+> TX interruption!
+ivlc 503 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1296,12 +1296,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70309  21796  3596  3843  23077  11785  69301  10461  16901  273  20  1130  1230  248166 
+Counters: 69589  21551  3534  3801  22479  11374  68557  10283  16701  270  20  1130  1230  248770 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 507 
+> TX interruption!
+ivlc 507 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1321,8 +1321,6 @@ TX interruption!
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 25 
 S1 - caso normal
@@ -1331,6 +1329,8 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Encontrei um pending da tarefa 25  para o endereço 1542 
 TX interruption!
 > ivlc 509 
@@ -1363,12 +1363,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70359  21799  3625  3886  23146  11826  69315  10462  17003  277  19  1023  1118  248882 
+Counters: 69980  21667  3576  3855  22612  11432  69024  10332  16888  276  20  1032  1132  248868 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 511 
+> TX interruption!
+ivlc 511 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1446,7 +1446,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70514  21708  3704  3859  24851  13402  65033  10631  16359  259  24  1256  1376  251728 
+Counters: 70154  21577  3649  3858  23925  12554  65382  10479  16375  263  24  1354  1474  251880 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -1481,9 +1481,28 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[27 ] = 1541 
 Encontrei um pending da tarefa 25  para o endereço 1542 
+> TX interruption!
+ivlc 518 
+Pedindo mesnagem de: 1540 
 TX interruption!
-> ivlc 518 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 25 
+S1 - caso normal
+buffer_map=-1    task_dest=25 
+buffer_map=-1    task_dest=25 
+buffer_map=-1    task_dest=25 
+buffer_map=-1    task_dest=25 
+Adicionando ao pendingReq
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Encontrei um pending da tarefa 25  para o endereço 1542 
+> ivlc TX interruption!
+519 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1497,23 +1516,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 519 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69500  21535  3558  3800  22900  11730  68279  10350  16673  269  20  1130  1230  245666 
+Counters: 67149  20747  3422  3661  22097  11427  64503  9956  15888  255  21  1040  1145  245501 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -1549,9 +1552,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
+TX interruption!
 > ivlc 522 
 Pedindo mesnagem de: 1540 
-TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1580,7 +1583,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69831  21622  3568  3845  22561  11414  68919  10297  16866  276  20  1032  1132  248868 
+Counters: 69867  21623  3527  3823  22112  11037  69036  10238  16806  274  20  1130  1230  248770 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -1616,9 +1619,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
+TX interruption!
 > ivlc 526 
 Pedindo mesnagem de: 1540 
-TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1647,13 +1650,13 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 528 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Counters: 68400  21108  3556  3774  22941  11871  65661  10157  16284  264  23  1354  1469  248531 
+Counters: 70116  21690  3557  3868  22209  11086  69323  10269  16944  278  20  1032  1132  248868 
 >> Energy packet sent to thermalMaster
+TX interruption!
+Encontrei um pending da tarefa 25  para o endereço 1542 
+>TX interruption!
+ ivlc 528 
+Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1730,12 +1733,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69329  21364  3433  3649  22367  11519  66157  10162  15996  246  21  1139  1244  248756 
+Counters: 69383  21314  3586  3777  23702  12592  63925  10317  16018  254  24  1354  1474  248526 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 533 
+>TX interruption!
+ ivlc 533 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1797,12 +1800,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70366  21813  3621  3875  23133  11817  69340  10466  16984  277  19  1023  1118  248882 
+Counters: 70482  21854  3607  3859  23120  11797  69512  10485  16957  274  20  1032  1132  248868 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 537 
+>TX interruption!
+ ivlc 537 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -1864,13 +1867,13 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
+Counters: 70274  21760  3593  3877  22685  11458  69370  10370  16984  278  21  1139  1244  248756 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
 TX interruption!
 > ivlc 541 
 Pedindo mesnagem de: 1540 
-TX interruption!
-Counters: 70171  21688  3671  3881  23797  12365  67646  10494  16773  272  22  1112  1222  250010 
->> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -1947,12 +1950,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 68960  21245  3414  3627  22285  11493  65702  10112  15889  244  22  1274  1384  247384 
+Counters: 69384  21311  3591  3786  23709  12600  63892  10312  16038  256  24  1354  1474  248526 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 546 
+> TX interruption!
+ivlc 546 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2014,7 +2017,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70447  21839  3622  3875  23145  11817  69444  10477  16999  277  20  1032  1132  248868 
+Counters: 70475  21853  3605  3853  23120  11796  69528  10488  16947  272  20  1032  1132  248868 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -2081,12 +2084,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereCounters: 69822  21575  3561  3837  22752  11591  67915  10258  16711  273  20  1130  1230  248770 
+Counters: 70127  21691  3555  3864  22206  11082  69336  10269  16938  278  20  1130  1230  248770 
 >> Energy packet sent to thermalMaster
 TX interruption!
-ço 1542 
-> TX interruption!
-ivlc 554 
+Encontrei um pending da tarefa 25  para o endereço 1542 
+>TX interruption!
+ ivlc 554 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2164,7 +2167,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69466  21418  3658  3806  24441  13162  64623  10540  16188  255  24  1256  1376  248624 
+Counters: 69348  21321  3608  3807  23739  12495  64387  10369  16137  259  24  1256  1376  249228 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -2231,12 +2234,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70391  21827  3613  3861  23117  11799  69384  10472  16954  275  20  1130  1230  248770 
+Counters: 70202  21710  3513  3807  22133  11152  68965  10228  16762  270  20  1130  1230  248166 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 563 
+>TX interruption!
+ ivlc 563 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2298,7 +2301,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70343  21799  3629  3890  23149  11832  69296  10460  17013  278  19  1023  1118  248882 
+Counters: 70279  21763  3590  3873  22679  11452  69388  10373  16972  277  20  1032  1132  248868 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -2381,12 +2384,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69532  21396  3650  3795  24625  13328  63822  10498  16066  253  24  1256  1376  248624 
+Counters: 70013  21547  3672  3853  24336  12908  65054  10539  16335  262  25  1363  1488  250866 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 572 
+> TX interruption!
+ivlc 572 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2417,9 +2420,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
 > ivlc 574 
 Pedindo mesnagem de: 1540 
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2448,12 +2451,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70406  21827  3605  3855  23107  11795  69411  10473  16941  274  20  1130  1230  248770 
+Counters: 69681  21542  3491  3781  22022  11120  68307  10157  16621  267  21  1139  1244  246402 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> iTX interruption!
-vlc 576 
+TX interruption!
+> ivlc 576 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2484,9 +2487,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
 > ivlc 578 
 Pedindo mesnagem de: 1540 
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2515,7 +2518,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70336  21799  3629  3890  23147  11832  69300  10461  17009  278  20  1032  1132  248868 
+Counters: 69340  21440  3510  3807  21996  11009  68441  10147  16708  274  21  1139  1244  248756 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -2551,9 +2554,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
 > ivlc 582 
 Pedindo mesnagem de: 1540 
+TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2587,6 +2590,9 @@ TX interruption!
 > ivlc 584 
 Pedindo mesnagem de: 1540 
 TX interruption!
+Counters: 68989  21276  3556  3805  22627  11549  66542  10156  16452  268  23  1219  1334  249148 
+>> Energy packet sent to thermalMaster
+TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Clk gate off - interruptHandler_NI_RX
@@ -2598,12 +2604,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70149  21593  3682  3833  24768  13370  64588  10582  16247  256  24  1354  1474  250380 
->> Energy packet sent to thermalMaster
-TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 585 
+TX interruption!
+> ivlc 585 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2665,12 +2668,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69863  21654  3575  3818  22981  11754  68747  10402  16775  271  20  1032  1132  247014 
+Counters: 69472  21392  3412  3654  21955  11169  66480  10100  16039  248  23  1283  1398  248120 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 589 
+TX interruption!
+> ivlc 589 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2701,9 +2704,9 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
+TX interruption!
 > ivlc 591 
 Pedindo mesnagem de: 1540 
-TX interruption!
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
@@ -2732,12 +2735,12 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 69403  21481  3544  3820  22461  11379  68373  10237  16736  273  21  1139  1244  248756 
+Counters: 70303  21773  3587  3865  22669  11445  69404  10377  16957  277  21  1139  1244  248756 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 593 
+>TX interruption!
+ ivlc 593 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2804,11 +2807,11 @@ TX interruption!
 > ivlc 597 
 Pedindo mesnagem de: 1540 
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 69168  21315  3575  3792  23211  12074  65739  10221  16330  265  23  1345  1460  251009 
+Counters: 69435  21418  3574  3828  22724  11575  67113  10217  16575  270  23  1219  1334  249398 
 >> Energy packet sent to thermalMaster
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
 Clk gate off - interruptHandler_NI_RX
 Servico: 32 
 Message request received from 25 
@@ -2819,8 +2822,8 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
 Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 598 
+TX interruption!
+> ivlc 598 
 Pedindo mesnagem de: 1540 
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -2882,7 +2885,7 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 68265  21061  3403  3616  22034  11301  65704  10056  15871  244  21  1041  1146  246385 
+Counters: 69401  21369  3405  3647  21936  11158  66408  10092  16011  247  22  1274  1384  247884 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
@@ -2949,1611 +2952,25 @@ buffer_map=-1    task_dest=25
 buffer_map=-1    task_dest=25 
 buffer_map=-1    task_dest=25 
 Adicionando ao pendingReq
-Counters: 70447  21840  3622  3875  23145  11817  69442  10477  16999  277  20  1130  1230  248770 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 606 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 607 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 608 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 609 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereCounters: 69822  21575  3561  3837  22752  11591  67915  10258  16711  273  19  1023  1118  248882 
->> Energy packet sent to thermalMaster
-TX interruption!
-ço 1542 
-> TX interruption!
-ivlc 610 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 611 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 612 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 613 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 614 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69387  21393  3658  3806  24429  13162  64511  10529  16176  255  24  1256  1376  248624 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 615 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 616 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 617 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 618 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70464  21851  3612  3861  23129  11799  69496  10483  16966  275  20  1130  1230  248770 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 619 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 620 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 621 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 622 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70409  21820  3636  3900  23170  11844  69366  10467  17047  279  20  1032  1132  248868 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 623 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 624 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 625 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 626 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 627 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69691  21447  3654  3799  24650  13334  64024  10522  16093  253  24  1354  1474  248526 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 628 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 629 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 630 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 631 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70473  21850  3605  3856  23124  11792  69522  10484  16958  274  21  1139  1244  248756 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 632 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 633 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 634 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 635 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70418  21822  3636  3897  23168  11843  69373  10469  17040  279  19  1023  1118  248882 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 636 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 637 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 638 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 639 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 640 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69785  21475  3664  3811  24684  13344  64134  10532  16138  254  25  1363  1488  248866 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 641 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 642 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 643 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 644 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70379  21819  3602  3851  23097  11793  69373  10470  16930  274  19  1023  1118  248528 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 645 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 646 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 647 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 648 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70351  21800  3622  3883  23141  11821  69335  10464  16996  277  20  1032  1132  248868 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 649 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 650 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 651 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 652 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 653 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70367  21660  3698  3851  24821  13394  64843  10610  16319  258  25  1363  1488  251116 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 654 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 655 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 656 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 657 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69643  21584  3566  3807  22933  11741  68460  10370  16716  270  19  1023  1118  246278 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 658 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 659 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> ivlc 660 
-Pedindo mesnagem de: 1540 
-TX interruption!
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 661 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69692  21574  3561  3838  22528  11403  68736  10277  16823  275  20  1130  1230  248770 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 662 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 663 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 664 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 665 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 666 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 69361  21385  3620  3830  23779  12551  65703  10346  16374  264  23  1247  1362  248638 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 667 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 668 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 669 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 670 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70636  21852  3646  3836  23982  12588  67586  10632  16673  264  21  1139  1244  248756 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 671 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 672 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 673 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 674 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70437  21835  3625  3879  23152  11822  69432  10477  17005  277  19  1023  1118  248882 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 675 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 676 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> ivlc 677 
-Pedindo mesnagem de: 1540 
-TX interruption!
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 678 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 679 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Counters: 69760  21501  3600  3825  23338  12110  66491  10302  16495  268  23  1247  1362  250857 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 680 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 681 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 682 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 683 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69006  21316  3468  3662  22641  11714  66478  10238  16081  247  21  1139  1244  246537 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
-> TX interruption!
-ivlc 684 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 685 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 686 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 687 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 70365  21812  3621  3875  23133  11817  69339  10465  16986  277  20  1032  1132  248868 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 688 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 689 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 690 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 691 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-Counters: 69609  21508  3597  3845  23194  11973  67324  10327  16633  270  21  1201  1306  249683 
->> Energy packet sent to thermalMaster
-TX interruption!
-> ivlc 692 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 693 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 694 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 695 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 696 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Counters: 69323  21367  3603  3775  23916  12753  64759  10423  16155  255  23  1185  1300  247711 
->> Energy packet sent to thermalMaster
-TX interruption!
-Encontrei um pending da tarefa 25  para o endereço 1542 
->TX interruption!
- ivlc 697 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 698 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 699 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
-Encontrei um pending da tarefa 25  para o endereço 1542 
-TX interruption!
-> ivlc 700 
-Pedindo mesnagem de: 1540 
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 48 
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 25 
-S1 - caso normal
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-buffer_map=-1    task_dest=25 
-Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 97 
 Task migration received
-migration_mapping_table[0 ] = 1793 
-current   mapping_table[0 ] = 1793 
-migration_mapping_table[1 ] = 7 
-current   mapping_table[1 ] = 7 
-migration_mapping_table[2 ] = 2 
-current   mapping_table[2 ] = 2 
-migration_mapping_table[3 ] = 1792 
-current   mapping_table[3 ] = 1792 
-migration_mapping_table[4 ] = 768 
-current   mapping_table[4 ] = 1287 
-migration_mapping_table[5 ] = 1797 
-current   mapping_table[5 ] = 1797 
-migration_mapping_table[6 ] = 1283 
-current   mapping_table[6 ] = 1543 
-migration_mapping_table[7 ] = 263 
-current   mapping_table[7 ] = 263 
+migration_mapping_table[0 ] = 6 
+current   mapping_table[0 ] = 6 
+migration_mapping_table[1 ] = 256 
+current   mapping_table[1 ] = 256 
+migration_mapping_table[2 ] = 1 
+current   mapping_table[2 ] = 1 
+migration_mapping_table[3 ] = 1536 
+current   mapping_table[3 ] = 1536 
+migration_mapping_table[4 ] = 1799 
+current   mapping_table[4 ] = 1799 
+migration_mapping_table[5 ] = 1031 
+current   mapping_table[5 ] = 1031 
+migration_mapping_table[6 ] = 4 
+current   mapping_table[6 ] = 1797 
+migration_mapping_table[7 ] = 2 
+current   mapping_table[7 ] = 2 
 migration_mapping_table[8 ] = 1284 
 current   mapping_table[8 ] = 1284 
 migration_mapping_table[9 ] = 1285 
@@ -4564,12 +2981,12 @@ migration_mapping_table[11 ] = 773
 current   mapping_table[11 ] = 773 
 migration_mapping_table[12 ] = 517 
 current   mapping_table[12 ] = 517 
-migration_mapping_table[13 ] = 6 
-current   mapping_table[13 ] = 6 
-migration_mapping_table[14 ] = 1 
-current   mapping_table[14 ] = 1 
-migration_mapping_table[15 ] = 257 
-current   mapping_table[15 ] = 257 
+migration_mapping_table[13 ] = 257 
+current   mapping_table[13 ] = 257 
+migration_mapping_table[14 ] = 1793 
+current   mapping_table[14 ] = 1793 
+migration_mapping_table[15 ] = 1543 
+current   mapping_table[15 ] = 1543 
 migration_mapping_table[16 ] = 513 
 current   mapping_table[16 ] = 513 
 migration_mapping_table[17 ] = 769 
@@ -4582,70 +2999,70 @@ migration_mapping_table[20 ] = 1537
 current   mapping_table[20 ] = 1537 
 migration_mapping_table[21 ] = 1538 
 current   mapping_table[21 ] = 1538 
-migration_mapping_table[22 ] = 1539 
+migration_mapping_table[22 ] = 258 
 current   mapping_table[22 ] = 1539 
 migration_mapping_table[23 ] = 1540 
 current   mapping_table[23 ] = 1540 
-migration_mapping_table[24 ] = 1541 
+migration_mapping_table[24 ] = 1797 
 current   mapping_table[24 ] = 1798 
-migration_mapping_table[25 ] = 258 
+migration_mapping_table[25 ] = 512 
 current   mapping_table[25 ] = 1542 
-migration_mapping_table[26 ] = 1536 
+migration_mapping_table[26 ] = 1286 
 current   mapping_table[26 ] = 1286 
-migration_mapping_table[27 ] = 3 
-current   mapping_table[27 ] = 1030 
-migration_mapping_table[28 ] = 259 
+migration_mapping_table[27 ] = 768 
+current   mapping_table[27 ] = 1541 
+migration_mapping_table[28 ] = 774 
 current   mapping_table[28 ] = 774 
 migration_mapping_table[29 ] = 518 
 current   mapping_table[29 ] = 518 
 migration_mapping_table[30 ] = 262 
 current   mapping_table[30 ] = 262 
-migration_mapping_table[31 ] = 261 
-current   mapping_table[31 ] = 261 
-migration_mapping_table[32 ] = 4 
-current   mapping_table[32 ] = 1031 
-migration_mapping_table[33 ] = 512 
-current   mapping_table[33 ] = 1799 
-Counters: 72623  22171  4202  4166  27933  14891  61499  12064  16595  247  22  1212  1322  253374 
+migration_mapping_table[31 ] = 7 
+current   mapping_table[31 ] = 7 
+migration_mapping_table[32 ] = 1287 
+current   mapping_table[32 ] = 1287 
+migration_mapping_table[33 ] = 1792 
+current   mapping_table[33 ] = 1792 
+Counters: 75290  23007  4288  4301  28056  14695  65021  12354  17315  259  21  1073  1178  262768 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 25  para o endereço 1542 
 av_ivlc miTX interruption!
 grating.
-task_addr[0 ] = 1793 
-task_addr[1 ] = 7 
-task_addr[2 ] = 2 
-task_addr[3 ] = 1792 
-task_addr[4 ] = 768 
-task_addr[5 ] = 1797 
-task_addr[6 ] = 1283 
-task_addr[7 ] = 263 
+task_addr[0 ] = 6 
+task_addr[1 ] = 256 
+task_addr[2 ] = 1 
+task_addr[3 ] = 1536 
+task_addr[4 ] = 1799 
+task_addr[5 ] = 1031 
+task_addr[6 ] = 4 
+task_addr[7 ] = 2 
 task_addr[8 ] = 1284 
 task_addr[9 ] = 1285 
 task_addr[10 ] = 1029 
 task_addr[11 ] = 773 
 task_addr[12 ] = 517 
-task_addr[13 ] = 6 
-task_addr[14 ] = 1 
-task_addr[15 ] = 257 
+task_addr[13 ] = 257 
+task_addr[14 ] = 1793 
+task_addr[15 ] = 1543 
 task_addr[16 ] = 513 
 task_addr[17 ] = 769 
 task_addr[18 ] = 1025 
 task_addr[19 ] = 1281 
 task_addr[20 ] = 1537 
 task_addr[21 ] = 1538 
-task_addr[22 ] = 1539 
+task_addr[22 ] = 258 
 task_addr[23 ] = 1540 
-task_addr[24 ] = 1541 
-task_addr[25 ] = 258 
-task_addr[26 ] = 1536 
-task_addr[27 ] = 3 
-task_addr[28 ] = 259 
+task_addr[24 ] = 1797 
+task_addr[25 ] = 512 
+task_addr[26 ] = 1286 
+task_addr[27 ] = 768 
+task_addr[28 ] = 774 
 task_addr[29 ] = 518 
 task_addr[30 ] = 262 
-task_addr[31 ] = 261 
-task_addr[32 ] = 4 
-task_addr[33 ] = 512 
+task_addr[31 ] = 7 
+task_addr[32 ] = 1287 
+task_addr[33 ] = 1792 
 task_addr[34 ] = 0 
 task_addr[35 ] = 0 
 task_addr[36 ] = 0 
@@ -4676,90 +3093,213 @@ task_addr[60 ] = 0
 task_addr[61 ] = 0 
 task_addr[62 ] = 0 
 task_addr[63 ] = 0 
-Tarefa: 24  migrando para: 1541 
+Tarefa: 24  migrando para: 1797 
+AtuTX interruption!
+alizando a tabela das tasks da mesma app
+enviando update para tarefa 23 
 TX interruption!
+enviando update para tarefa 25 
 TX interruption!
+enviando updateTX interruption!
+ para tarefa 26 
+enviando TX interruption!
+update para tarefa 27 
 TX interruption!
+enviando update para tarefa 28 
 TX interruption!
+enviando update para tarefa 29 
 TX interruption!
+sendPipe()1797 
+sendPendingReq()1797 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
 TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-TX interruption!
-sendPipe()1541 
-sendPendingReq()1541 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
 > pendReq enviado
 TX interruption!
 TX interruption!
-Counters: 28341  8239  2752  2602  16876  10300  15879  5941  7069  110  17  327  412  244892 
+Counters: 23602  6729  2386  2270  14758  8989  10075  5175  5632  80  17  526  611  235443 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  136  156  249844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  234  254  249746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  136  156  249844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  234  254  249746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  136  156  249844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  234  254  249746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  136  156  249844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  234  254  249746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  136  156  249844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  234  254  249746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  136  156  249844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  234  254  249746 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  136  156  249844 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  4  135  155  249845 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 157  42  14  20  116  54  4  45  20  0  1  11  16  249984 
