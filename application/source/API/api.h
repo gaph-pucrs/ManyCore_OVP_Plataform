@@ -607,7 +607,7 @@ void interruptHandler_NI_RX(void) {
     } else if (incomingPacket[PI_SERVICE] == TASK_ADDR_UPDT) {
         //printi(incomingPacket[PI_PAYLOAD]);
         taskID = incomingPacket[PI_PAYLOAD] & 0x0000FFFF;
-        newAddr = (incomingPacket[PI_PAYLOAD] & 0xFFFF0000) >> 16;
+        newAddr = (incomingPacket[PI_PAYLOAD] & 0x7FFF0000) >> 16;
         if (newAddr == 0 && taskID == migratedTask) {
             migratedTask = -1;
             taskMigrated = -1;
