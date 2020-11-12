@@ -6851,7 +6851,7 @@ buffer_map=-1    task_dest=12
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
-Counters: 65446  8362  1032  719  28051  25154  1511  2338  1935  851  23  777  892  249108 
+Counters: 65447  8362  1032  719  28052  25154  1511  2338  1935  851  23  777  892  249108 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Encontrei um pending da tarefa 12  para o endereço 517 
@@ -6932,7 +6932,7 @@ buffer_map=-1    task_dest=12
 buffer_map=-1    task_dest=12 
 buffer_map=-1    task_dest=12 
 Adicionando ao pendingReq
-Counters: 63473  8687  1325  964  28959  25144  1785  3077  2495  756  25  795  920  249080 
+Counters: 63472  8686  1325  964  28958  25144  1785  3077  2495  756  25  795  920  249080 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -7569,6 +7569,22 @@ buffer_map=-1    task_dest=12
 Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
+Encontrei um pending da tarefa 12  para o endereço 517 
+TX interruption!
+IDCT: 448 
+Pedindo mesnagem de: 513 
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 12 
+S1 - caso normal
+buffer_map=-1    task_dest=12 
+buffer_map=-1    task_dest=12 
+buffer_map=-1    task_dest=12 
+buffer_map=-1    task_dest=12 
+Adicionando ao pendingReq
+Counters: 65048  8842  1329  965  29572  25748  1806  3078  2508  767  26  836  966  250370 
+>> Energy packet sent to thermalMaster
 Clk gate off - interruptHandler_NI_RX
 Servico: 97 
 Task migration received
@@ -7576,17 +7592,17 @@ migration_mapping_table[0 ] = 2
 current   mapping_table[0 ] = 1027 
 migration_mapping_table[1 ] = 1 
 current   mapping_table[1 ] = 1028 
-migration_mapping_table[2 ] = 1797 
+migration_mapping_table[2 ] = 257 
 current   mapping_table[2 ] = 772 
-migration_mapping_table[3 ] = 1793 
+migration_mapping_table[3 ] = 1536 
 current   mapping_table[3 ] = 771 
 migration_mapping_table[4 ] = 1799 
 current   mapping_table[4 ] = 770 
-migration_mapping_table[5 ] = 257 
+migration_mapping_table[5 ] = 1031 
 current   mapping_table[5 ] = 1026 
-migration_mapping_table[6 ] = 1543 
+migration_mapping_table[6 ] = 1287 
 current   mapping_table[6 ] = 1282 
-migration_mapping_table[7 ] = 263 
+migration_mapping_table[7 ] = 1798 
 current   mapping_table[7 ] = 1283 
 migration_mapping_table[8 ] = 1284 
 current   mapping_table[8 ] = 1284 
@@ -7598,11 +7614,11 @@ migration_mapping_table[11 ] = 773
 current   mapping_table[11 ] = 773 
 migration_mapping_table[12 ] = 517 
 current   mapping_table[12 ] = 517 
-migration_mapping_table[13 ] = 1287 
+migration_mapping_table[13 ] = 1797 
 current   mapping_table[13 ] = 516 
 migration_mapping_table[14 ] = 6 
 current   mapping_table[14 ] = 515 
-migration_mapping_table[15 ] = 1031 
+migration_mapping_table[15 ] = 1543 
 current   mapping_table[15 ] = 514 
 migration_mapping_table[16 ] = 513 
 current   mapping_table[16 ] = 513 
@@ -7620,13 +7636,13 @@ migration_mapping_table[22 ] = 1539
 current   mapping_table[22 ] = 1539 
 migration_mapping_table[23 ] = 1540 
 current   mapping_table[23 ] = 1540 
-migration_mapping_table[24 ] = 1798 
+migration_mapping_table[24 ] = 263 
 current   mapping_table[24 ] = 1541 
 migration_mapping_table[25 ] = 1542 
 current   mapping_table[25 ] = 1542 
 migration_mapping_table[26 ] = 1286 
 current   mapping_table[26 ] = 1286 
-migration_mapping_table[27 ] = 1030 
+migration_mapping_table[27 ] = 1793 
 current   mapping_table[27 ] = 1030 
 migration_mapping_table[28 ] = 774 
 current   mapping_table[28 ] = 774 
@@ -7636,32 +7652,45 @@ migration_mapping_table[30 ] = 262
 current   mapping_table[30 ] = 262 
 migration_mapping_table[31 ] = 261 
 current   mapping_table[31 ] = 261 
-migration_mapping_table[32 ] = 7 
+migration_mapping_table[32 ] = 1792 
 current   mapping_table[32 ] = 260 
-migration_mapping_table[33 ] = 1792 
+migration_mapping_table[33 ] = 7 
 current   mapping_table[33 ] = 259 
-Counters: 68423  10331  2009  1480  32998  27130  1763  5056  3586  733  23  747  862  261084 
->> Energy packet sent to thermalMaster
 TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 48 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[15 ] = 1543 
 Encontrei um pending da tarefa 12  para o endereço 517 
-IDCT: 448 
+IDCT: TX interruption!
+449 
 MPEG idct migrating.
 task_addr[0 ] = 2 
 task_addr[1 ] = 1 
-task_addr[2 ] = 1797 
-task_addr[3 ] = 1793 
+task_addr[2 ] = 257 
+task_addr[3 ] = 1536 
 task_addr[4 ] = 1799 
-task_addr[5 ] = 257 
-task_addr[6 ] = 1543 
-task_addr[7 ] = 263 
+Clk gate off - interruptHandler_NI_RX
+Servico: 32 
+Message request received from 12 
+S1 - caso normal
+buffer_map=-1    task_dest=12 
+buffer_map=-1    task_dest=12 
+buffer_map=-1    task_dest=12 
+buffer_map=-1    task_dest=12 
+Adicionando ao pendingReq
+task_addr[5 ] = 1031 
+task_addr[6 ] = 1287 
+task_addr[7 ] = 1798 
 task_addr[8 ] = 1284 
 task_addr[9 ] = 1285 
 task_addr[10 ] = 1029 
 task_addr[11 ] = 773 
 task_addr[12 ] = 517 
-task_addr[13 ] = 1287 
+task_addr[13 ] = 1797 
 task_addr[14 ] = 6 
-task_addr[15 ] = 1031 
+task_addr[15 ] = 1543 
 task_addr[16 ] = 513 
 task_addr[17 ] = 769 
 task_addr[18 ] = 1025 
@@ -7670,16 +7699,16 @@ task_addr[20 ] = 1537
 task_addr[21 ] = 1538 
 task_addr[22 ] = 1539 
 task_addr[23 ] = 1540 
-task_addr[24 ] = 1798 
+task_addr[24 ] = 263 
 task_addr[25 ] = 1542 
 task_addr[26 ] = 1286 
-task_addr[27 ] = 1030 
+task_addr[27 ] = 1793 
 task_addr[28 ] = 774 
 task_addr[29 ] = 518 
 task_addr[30 ] = 262 
 task_addr[31 ] = 261 
-task_addr[32 ] = 7 
-task_addr[33 ] = 1792 
+task_addr[32 ] = 1792 
+task_addr[33 ] = 7 
 task_addr[34 ] = 0 
 task_addr[35 ] = 0 
 task_addr[36 ] = 0 
@@ -7710,31 +7739,20 @@ task_addr[60 ] = 0
 task_addr[61 ] = 0 
 task_addr[62 ] = 0 
 task_addr[63 ] = 0 
-Tarefa: 13  migrando para: 1287 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[15 ] = 1031 
+Tarefa: 13  migrando para: 1797 
 TX interruption!
-Atualizando aTX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 32 
-Message request received from 12 
-S3 - depois da tarefa começar a migrar
-Forwarding msg request from task 12  para o endereco: 1287 
-Slot sent
-TX interruption!
- tabela das tasks da mesma app
+Atualizando a tabela das tasks da mesma app
 enviando update para tarefa 12 
-enviando upTX interruption!
-date para tarefa 14 
+enviando TX interruption!
+update para tarefa 14 
 TX interruption!
-enviando update para tarefa 15 
+envianTX interruption!
+do update para tarefa 15 
 TX interruption!
-enviando updaTX interruption!
-te para tarefa 16 
+enviando update para tarefa 16 
 TX interruption!
-sendPipe()1287 
-sendPendingReq()1287 
+sendPipe()1797 
+sendPendingReq()1797 
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
@@ -7747,6 +7765,7 @@ sendPendingReq()1287
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
+ > > pendReq: 517 
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
@@ -7798,76 +7817,663 @@ sendPendingReq()1287
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
- > > pendReq: 0 
-> pendReq eTX interruption!
-nviado
 TX interruption!
-Counters: 20135  4965  2100  1917  15231  10235  1161  4474  3787  71  27  2524  2659  235395 
+> pendReq enviado
+TX interruption!
+Counters: 37143  8172  2964  2348  24637  16937  1079  6990  4915  200  26  609  739  247925 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
-Counters: 761  232  62  54  530  264  8  241  90  0  7  127  162  249838 
+Counters: 157  42  14  20  116  54  4  45  20  0  27  2790  2925  247075 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
-Counters: 459  137  38  37  323  159  6  143  55  0  7  76  111  249889 
+Counters: 157  42  14  20  116  54  4  45  20  0  12  496  556  249444 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  74  109  249891 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  2  22  32  249968 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  13  143  208  249792 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  10  111  161  249839 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
-Counters: 459  137  38  37  323  159  6  143  55  0  10  98  148  249852 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
-Counters: 459  137  38  37  323  159  6  143  55  0  9  90  135  249865 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  74  109  249891 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  66  96  249904 
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  631  696  249304 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  18  356  446  249554 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  128  193  249807 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  129  194  249806 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  129  194  249806 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  129  194  249806 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  129  194  249806 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  129  194  249806 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  13  129  194  249806 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  12  120  180  249820 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  18  545  635  249365 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  26  820  950  249050 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  22  714  824  249176 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  23  751  866  249134 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  20  668  768  249232 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  22  742  852  249148 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  20  668  768  249232 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  22  742  852  249148 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  20  668  768  249232 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  22  742  852  249148 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  675  780  249220 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  22  742  852  249148 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  21  705  810  249190 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  22  712  822  249178 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  17  599  684  249316 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  357  432  249568 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  17  277  362  249638 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  14  194  264  249736 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  16  268  348  249652 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  14  194  264  249736 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  16  268  348  249652 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  14  194  264  249736 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  16  268  348  249652 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  14  194  264  249736 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  16  268  348  249652 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  14  194  264  249736 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  16  268  348  249652 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  15  231  306  249694 
 >> Energy packet sent to thermalMaster
 TX interruption!
