@@ -334,26 +334,36 @@ int getCoolestQuad() {
 }
 
 int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y], int appID) {
-    int i, j, empty, pe;
+    int i, j, k, empty, pe;
 
-    if (appQuadrant[appID] == -1)
-        appQuadrant[appID] = getCoolestQuad();
+    for (k = 0; k < DIM_Y * DIM_Y; k += (QUAD_DIM_X * QUAD_DIM_Y)) {
+        if (appQuadrant[appID] == -1 && k == 0) {
+            appQuadrant[appID] = getCoolestQuad();
+        }
 
-    for (j = QUAD_DIM_X * QUAD_DIM_Y - 1; j > 0; j--) {
-        pe = tempMatrix[appQuadrant[appID]][j];  // gets the peAddr from tempMatrix
-        empty = 1;                               // presumes that it is empty
-        for (i = 0; i < DIM_X * DIM_Y; i++) {
-            if (task_addr[i] == pe) {  // if you find some task runnin inside that processor
-                empty = 0;
-                break;  // breaks
+        for (j = QUAD_DIM_X * QUAD_DIM_Y - 1; j > 0; j--) {
+            pe = tempMatrix[appQuadrant[appID]][j];  // gets the peAddr from tempMatrix
+            empty = 1;                               // presumes that it is empty
+            for (i = 0; i < DIM_X * DIM_Y; i++) {
+                if (task_addr[i] == pe) {  // if you find some task runnin inside that processor
+                    empty = 0;
+                    break;  // breaks
+                }
+                if (task_confirmed_addr[i] == pe) {  // if you find some task runnin inside that processor
+                    empty = 0;
+                    break;  // breaks
+                }
             }
-            if (task_confirmed_addr[i] == pe) {  // if you find some task runnin inside that processor
-                empty = 0;
-                break;  // breaks
+            if (empty) {
+                return pe;
             }
         }
-        if (empty) {
-            return pe;
+
+        // if you can not fit the task inside a given quadrant, then get the next one (this is not based on temperature! it can be improved)
+        if (appQuadrant[appID] == QUAD_NUM - 1) {
+            appQuadrant[appID] = 0;
+        } else {
+            appQuadrant[appID]++;
         }
     }
     return 0;
