@@ -204,4 +204,4 @@ DCTtab DCTtab6[16] =
 #define ivlc 15
 #define start 14
 #define idct 13
-#define print_mpeg 12
+#define print 12
