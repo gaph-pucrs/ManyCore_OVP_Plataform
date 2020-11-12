@@ -424,7 +424,7 @@ void interruptHandler_NI_RX(void) {
         incomingPacket[PI_SERVICE] = 0;  // Reset the incomingPacket service
         *NIcmdRX = DONE;                 // releases the NI RX to return to the IDLE state
     } else if (incomingPacket[PI_SERVICE] == MESSAGE_REQ) {
-        putsv("Message request received from ", incomingPacket[PI_TASK_ID]);
+        putsvsv("Message request received from ", incomingPacket[PI_TASK_ID], "asking from task ", incomingPacket[PI_PRODUCER]);
         requester = incomingPacket[PI_TASK_ID];
         newAddr = incomingPacket[PI_REQUESTER];
         taskID = incomingPacket[PI_PRODUCER];  // & 0x7FFFFFFF;
