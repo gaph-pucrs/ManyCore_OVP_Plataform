@@ -519,7 +519,7 @@ void interruptHandler_NI_RX(void) {
         *NIcmdRX = DONE;  // releases the NI RX to return to the IDLE state
     } else if (incomingPacket[PI_SERVICE] == TASK_ALLOCATED) {
         if (*myAddress == 0 && (task_addr[incomingPacket[PI_TASK_ID]] & 0x0000FFFF) == (incomingPacket[PI_PAYLOAD] & 0x0000FFFF)) {
-            task_confirmed_addr[incomingPacket[PI_TASK_ID]] = task_addr[incomingPacket[PI_TASK_ID]];
+            task_confirmed_addr[incomingPacket[PI_TASK_ID]] = task_addr[incomingPacket[PI_TASK_ID]] & 0x0000FFFF;
         } else {
             putsvsv("ERROR - TASK_ALLOCATED: Task ", incomingPacket[PI_TASK_ID], " allocated at ", incomingPacket[PI_PAYLOAD]);
         }
