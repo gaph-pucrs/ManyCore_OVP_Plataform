@@ -311,7 +311,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_start_time[DIM
     }
 
     // adds the appID to the flit
-    for (i = 0; i < DIM_X * DIM_Y; i++) {
+    for (i = 0; i < tasks_to_map; i++) {
         task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
     }
 
@@ -327,7 +327,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_start_time[DIM
     }
 
     // removes it
-    for (i = 0; i < DIM_X * DIM_Y; i++) {
+    for (i = 0; i < tasks_to_map; i++) {
         task_addr[i] = task_addr[i] & 0x0000FFFF;
     }
 
