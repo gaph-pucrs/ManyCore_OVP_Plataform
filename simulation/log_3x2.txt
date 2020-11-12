@@ -11265,13 +11265,13 @@ Adicionando ao pendingReq
 Clk gate off - interruptHandler_NI_RX
 Servico: 97 
 Task migration received
-migration_mapping_table[0 ] = 6 
+migration_mapping_table[0 ] = 2 
 current   mapping_table[0 ] = 1027 
 migration_mapping_table[1 ] = 1 
 current   mapping_table[1 ] = 1028 
 migration_mapping_table[2 ] = 1797 
 current   mapping_table[2 ] = 772 
-migration_mapping_table[3 ] = 1798 
+migration_mapping_table[3 ] = 1793 
 current   mapping_table[3 ] = 771 
 migration_mapping_table[4 ] = 1799 
 current   mapping_table[4 ] = 770 
@@ -11279,7 +11279,7 @@ migration_mapping_table[5 ] = 257
 current   mapping_table[5 ] = 1026 
 migration_mapping_table[6 ] = 1543 
 current   mapping_table[6 ] = 1282 
-migration_mapping_table[7 ] = 2 
+migration_mapping_table[7 ] = 263 
 current   mapping_table[7 ] = 1283 
 migration_mapping_table[8 ] = 1284 
 current   mapping_table[8 ] = 1284 
@@ -11293,7 +11293,7 @@ migration_mapping_table[12 ] = 517
 current   mapping_table[12 ] = 517 
 migration_mapping_table[13 ] = 1287 
 current   mapping_table[13 ] = 516 
-migration_mapping_table[14 ] = 1793 
+migration_mapping_table[14 ] = 6 
 current   mapping_table[14 ] = 515 
 migration_mapping_table[15 ] = 1031 
 current   mapping_table[15 ] = 514 
@@ -11313,7 +11313,7 @@ migration_mapping_table[22 ] = 1539
 current   mapping_table[22 ] = 1539 
 migration_mapping_table[23 ] = 1540 
 current   mapping_table[23 ] = 1540 
-migration_mapping_table[24 ] = 263 
+migration_mapping_table[24 ] = 1798 
 current   mapping_table[24 ] = 1541 
 migration_mapping_table[25 ] = 1542 
 current   mapping_table[25 ] = 1542 
@@ -11333,30 +11333,30 @@ migration_mapping_table[32 ] = 7
 current   mapping_table[32 ] = 260 
 migration_mapping_table[33 ] = 1792 
 current   mapping_table[33 ] = 259 
-Counters: 34558  12434  2346  1711  18719  11935  584  12447  3351  12  43  805  1020  268926 
+Counters: 34558  12434  2346  1711  18719  11935  584  12447  3351  12  43  805  1020  268676 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 48 
 Encontrei um pending da tarefa 5  para o endereço 1026 
-27112653 taskE
-27112771 639 
+27112654 taskE
+27112772 639 
 synthetic task E migrating.
-task_addr[0 ] = 6 
+task_addr[0 ] = 2 
 task_addr[1 ] = 1 
 task_addr[2 ] = 1797 
-task_addr[3 ] = 1798 
+task_addr[3 ] = 1793 
 task_addr[4 ] = 1799 
 task_addr[5 ] = 257 
 task_addr[6 ] = 1543 
-task_addr[7 ] = 2 
+task_addr[7 ] = 263 
 task_addr[8 ] = 1284 
 task_addr[9 ] = 1285 
 task_addr[10 ] = 1029 
 task_addr[11 ] = 773 
 task_addr[12 ] = 517 
 task_addr[13 ] = 1287 
-task_addr[14 ] = 1793 
+task_addr[14 ] = 6 
 task_addr[15 ] = 1031 
 task_addr[16 ] = 513 
 task_addr[17 ] = 769 
@@ -11366,7 +11366,7 @@ task_addr[20 ] = 1537
 task_addr[21 ] = 1538 
 task_addr[22 ] = 1539 
 task_addr[23 ] = 1540 
-task_addr[24 ] = 263 
+task_addr[24 ] = 1798 
 task_addr[25 ] = 1542 
 task_addr[26 ] = 1286 
 task_addr[27 ] = 1030 
@@ -11418,8 +11418,8 @@ TX interruption!
 enviando TX interruption!
 update para tarefa 3 
 TX interruption!
-enviTX interruption!
-ando update para tarefa 5 
+envTX interruption!
+iando update para tarefa 5 
 TX interruption!
 TX interruption!
 sendPipe()1799 
@@ -11488,8 +11488,8 @@ sendPendingReq()1799
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
-TX interruption!
-> pendReq enviado
+> pendReq enTX interruption!
+viado
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
@@ -11497,7 +11497,7 @@ Updating mapping_table[2 ] = 1797
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 Updating mapping_table[65535 ] = 32767 
-Counters: 18707  5616  2144  1839  14788  9751  891  5639  3541  33  30  678  828  229226 
+Counters: 18705  5616  2144  1901  14787  9750  890  5639  3603  33  29  670  815  229489 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -11506,22 +11506,46 @@ Updating mapping_table[65535 ] = 32767
 Counters: 459  137  38  37  323  159  6  143  55  0  14  128  198  249802 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  8  80  120  249880 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  8  80  120  249880 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
+Counters: 157  42  14  20  116  54  4  45  20  0  9  88  133  249867 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 157  42  14  20  116  54  4  45  20  0  7  72  107  249893 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  5  55  80  249920 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  7  73  108  249892 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  7  72  107  249893 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[65535 ] = 32767 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[65535 ] = 32767 
+Counters: 761  232  62  54  530  264  8  241  90  0  8  80  120  249880 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  7  73  108  249892 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  7  72  107  249893 
+>> Energy packet sent to thermalMaster
+TX interruption!
+Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Clk gate off - interruptHandler_NI_RX
@@ -11534,39 +11558,6 @@ Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 157  42  14  20  116  54  4  45  20  0  7  73  108  249892 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  72  107  249893 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  73  108  249892 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
->> Energy packet sent to thermalMaster
-TX interruption!
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
-Counters: 459  137  38  37  323  159  6  143  55  0  7  72  107  249893 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  73  108  249892 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  72  107  249893 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 157  42  14  20  116  54  4  45  20  0  6  64  94  249906 

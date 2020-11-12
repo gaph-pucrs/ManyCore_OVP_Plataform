@@ -396,17 +396,17 @@ Task pendingReq received 640
  > > pendReq: 0 
  > > pendReq: 0 
 Clk gate off - interruptHandler_NI_RX
-Servico: 98 
-Task destination received
-Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 Updating mapping_table[2 ] = 1797 
+Clk gate off - interruptHandler_NI_RX
+Servico: 98 
+Task destination received
 task_addr[0 ] = 1027 
 task_addr[1 ] = 1 
 task_addr[2 ] = 1797 
 task_addr[3 ] = 771 
 task_addr[4 ] = 1799 
-task_addr[5 ] = 0 
+task_addr[5 ] = 1026 
 task_addr[6 ] = 1282 
 task_addr[7 ] = 1283 
 task_addr[8 ] = 1284 
@@ -465,8 +465,8 @@ task_addr[60 ] = 0
 task_addr[61 ] = 0 
 task_addr[62 ] = 0 
 task_addr[63 ] = 0 
-Task TX interruption!
--1 migrated
+Task -1 TX interruption!
+migrated
 State: 640 
 task_addr[0 ] = 0 
 task_addr[1 ] = 0 
@@ -521,7 +521,10 @@ task_addr[49 ] = 0
 task_addr[50 ] = 0 
 task_addr[51 ] = 0 
 task_addr[52 ] = 0 
-task_addr[53 ] = 0 
+task_addr[53 ] =Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[65535 ] = 32767 
+ 0 
 task_addr[54 ] = 0 
 task_addr[55 ] = 0 
 task_addr[56 ] = 0 
@@ -532,27 +535,25 @@ task_addr[60 ] = 0
 task_addr[61 ] = 0 
 task_addr[62 ] = 0 
 task_addr[63 ] = 0 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
 Tarefa: -1  migrando para: 0 
 TX interruption!
 Atualizando a tabela das tasks da mesma app
 enviando update para tarefa 1 
 TX interruption!
+enviaTX interruption!
+ndo update para tarefa 2 
+TX interruption!
 enTX interruption!
-viando update para tarefa 2 
-TX interruption!
-TX interruption!
-enviando update para tarefa 3 
+viando update para tarefa 3 
 TX interruption!
 TX interruption!
 enviando update para tarefa 4 
 TX interruption!
-TX interruption!
 enviando update para tarefa 5 
 TX interruption!
+TX interruption!
 enviando update para tarefa 6 
+TX interruption!
 TX interruption!
 enviando update para tarefa 7 
 TX interruption!
@@ -561,18 +562,18 @@ enviando update para tarefa 8
 TX interruption!
 TX interruption!
 enviando update para tarefa 9 
-Counters: 22471  6241  3056  2458  18893  11930  802  6330  5039  46  28  362  502  249498 
+Counters: 22116  6074  2996  2448  17894  11181  731  6085  4972  46  29  370  515  249485 
 >> Energy packet sent to thermalMaster
 TX interruption!
 TX interruption!
 TX interruption!
 enviando update para tarefa 10 
 TX interruption!
-TX interruption!
-enviando update para tarefa 11 
 Clk gate off - interruptHandler_NI_RX
 Servico: 103 
 Updating mapping_table[65535 ] = 32767 
+TX interruption!
+enviando update para tarefa 11 
 TX interruption!
 TX interruption!
 enviando update para tarefa 12 
@@ -621,27 +622,27 @@ enviando update para tarefa 26
 TX interruption!
 TX interruption!
 enviando update para tarefa 27 
-Counters: 17002  6970  828  912  9314  2518  254  1056  1459  72  47  402  637  249363 
->> Energy packet sent to thermalMaster
-TX interruption!
 TX interruption!
 TX interruption!
 enviando update para tarefa 28 
 TX interruption!
 TX interruption!
+Counters: 15153  5921  895  1025  8427  2740  273  1110  1603  78  51  429  684  249316 
+>> Energy packet sent to thermalMaster
 enviando update para tarefa 29 
+TX interruption!
 TX interruption!
 TX interruption!
 enviando update para tarefa 30 
 TX interruption!
 TX interruption!
 enviando update para tarefa 31 
-Clk gate off - interruptHandler_NI_RX
-Servico: 103 
-Updating mapping_table[65535 ] = 32767 
 TX interruption!
 TX interruption!
 enviando update para tarefa 32 
+Clk gate off - interruptHandler_NI_RX
+Servico: 103 
+Updating mapping_table[65535 ] = 32767 
 TX interruption!
 TX interruption!
 enviando update para tarefa 33 
@@ -656,7 +657,7 @@ TX interruption!
 enviando update para tarefa 37 
 TX interruption!
 enviando update para tarefa 38 
-Counters: 13483  5884  484  496  7592  1730  168  757  821  36  34  288  458  249542 
+Counters: 12306  5230  541  568  7348  2092  480  941  1106  44  36  309  489  249511 
 >> Energy packet sent to thermalMaster
 TX interruption!
 TX interruption!
@@ -697,6 +698,9 @@ TX interruption!
 enviando update para tarefa 56 
 TX interruption!
 enviando update para tarefa 57 
+Counters: 25157  11546  579  601  13921  2346  223  1066  998  39  44  373  593  249407 
+>> Energy packet sent to thermalMaster
+TX interruption!
 TX interruption!
 enviando update para tarefa 58 
 TX interruption!
@@ -708,10 +712,7 @@ enviando update para tarefa 61
 TX interruption!
 enviando update para tarefa 62 
 TX interruption!
-enviando updatCounters: 27513  12447  684  744  14803  2416  226  1159  1187  48  55  461  736  249264 
->> Energy packet sent to thermalMaster
-e para tarefa 63 
-TX interruption!
+enviando update para tarefa 63 
 TX interruption!
 sendPipe()0 
 sendPendingReq()0 
@@ -752,53 +753,41 @@ sendPendingReq()0
  > > pendReq: 0 
  > > pendReq: 0 
  > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
- > > pendReq: 0 
 TX interruption!
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
+ > > pendReq: 0 
 > pendReq enviado
 TX interruption!
-TX interruption!
-Counters: 28343  12509  791  817  15759  3273  602  1701  1491  20  12  250  310  249690 
+Counters: 64170  30340  855  822  33904  3560  319  1806  1358  17  18  244  334  249666 
 >> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  77  112  249888 
->> Energy packet sent to thermalMaster
 TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  77  112  249888 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  77  112  249888 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  77  112  249888 
->> Energy packet sent to thermalMaster
-TX interruption!
-Counters: 157  42  14  20  116  54  4  45  20  0  7  77  112  249888 
+Counters: 1506  488  208  234  1792  1246  436  462  547  14  7  131  166  249834 
 >> Energy packet sent to thermalMaster
 TX interruption!
 Counters: 157  42  14  20  116  54  4  45  20  0  7  77  112  249888 
