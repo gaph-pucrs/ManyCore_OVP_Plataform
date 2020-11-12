@@ -23,12 +23,14 @@ unsigned int integral_prev[INT_WINDOW][DIM_Y*DIM_X];
 unsigned int Temperature_prev[DIM_Y*DIM_X];
 unsigned int control_signal[DIM_Y*DIM_X];
 
-unsigned int spiralMatrix[DIM_X*DIM_Y];
-unsigned int tempSort[DIM_X*DIM_Y];
+unsigned int spiralMatrix[QUAD_DIM_X*QUAD_DIM_Y];
+unsigned int tempMatrix[QUAD_NUM][QUAD_DIM_X*QUAD_DIM_Y];
+unsigned int tempSort[QUAD_NUM][QUAD_DIM_X*QUAD_DIM_Y];
+int appQuadrant[QUAD_NUM];
 
 void generateSpiralMatrix()
 {
-    int i, cont=0, k = 0, l = 0, m=DIM_X, n=DIM_Y;
+    int i, cont=0, k = 0, l = 0, m=QUAD_DIM_X, n=QUAD_DIM_Y;
 
     while (k < m && l < n)
     {
@@ -82,10 +84,12 @@ void generatePatternMatrix(int n){
     }
 }
 
-void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
+void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y], int quad, int xi, int yi){
     unsigned int proc_address[DIM_X*DIM_Y];
     unsigned int ordered_temp[DIM_X*DIM_Y];
-    int i, j;
+    int i;
+    int x, y;
+    int index;
 
     memcpy(ordered_temp, temp, DIM_X*DIM_Y*4);
     /*for(i=0;i<DIM_X*DIM_Y; i++){
@@ -94,16 +98,21 @@ void generateTempMatrix(unsigned int temp[DIM_X*DIM_Y]){
 
     proc_address[0] = 0;
 
-    for (i = DIM_X*DIM_Y-1; i > 0; i--){
-        int coolest = 1;
-        for(j = 1; j < DIM_X*DIM_Y; j++)
-            if(ordered_temp[j] < ordered_temp[coolest])
-                coolest = j;
+    for (i = QUAD_DIM_X*QUAD_DIM_Y-1; i >= 0; i--){
+        int coolest = xi + yi*DIM_X;
+        for(y=yi; y<yi+QUAD_DIM_Y; y++){
+            for(x=xi; x<xi+QUAD_DIM_X; x++){
+                index = x + y*DIM_X;
+
+                if(ordered_temp[index] < ordered_temp[coolest])
+                    coolest = index;
+            }
+        }
 
         proc_address[i] = (coolest%DIM_X << 8) | coolest/DIM_X;
 
-        spiralMatrix[i] = proc_address[i];
-        tempSort[i] = coolest;
+        tempMatrix[quad][i] = proc_address[i];
+        tempSort[quad][i] = coolest;
 
         ordered_temp[coolest] = -1;
     }
@@ -168,9 +177,9 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X*DI
 int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_map, unsigned int task_addr[DIM_X*DIM_Y]){
     int task_ID;
     unsigned int tgtProc, srcProc, srcID;
-    int k=DIM_X*DIM_Y-1;
+    int k=QUAD_DIM_X*QUAD_DIM_Y-1;
     unsigned int contNumberOfMigrations=0;
-    int i, j;
+    int i, j, q;
     int src_vec[DIM_X*DIM_Y];// = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     int srcProcs[DIM_X*DIM_Y];
@@ -184,42 +193,46 @@ int temperature_migration(unsigned int temp[DIM_X*DIM_Y], unsigned int tasks_to_
         }*/
     }
 
-    for (i = 1; i < DIM_X*DIM_Y; i++){
-        srcID = tempSort[i];
-        int x = srcID % DIM_X;
-        int y = srcID / DIM_Y;
-        srcProc = x << 8 | y;
-        if (temp[srcID] > 33300){
-            putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
-            if(migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: detecta PEs que nao podem migrar 
-                if(how_many_tasks_PE_is_running(srcProc, task_addr)>0 && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE){
-                    while (k>0){
-                        tgtProc = spiralMatrix[k];
-                        task_ID = getSomeTaskID(srcProc, task_addr);
-                        putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);                       
-                        //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);                     
-                        if(migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: mesma coisa de antes 
-                            if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
-                                //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
-                                prints("send_task_migration\n");
+    for(q=0; q<QUAD_NUM; q++){
+        for (i = 1; i < QUAD_DIM_X*QUAD_DIM_Y; i++){
+            srcID = tempSort[q][i];
+            int x = srcID % DIM_X;
+            int y = srcID / DIM_Y;
+            srcProc = x << 8 | y;
+            if (temp[srcID] > 33300 && srcID!=0){
+                putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
+                if(migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: detecta PEs que nao podem migrar 
+                    if(how_many_tasks_PE_is_running(srcProc, task_addr)>0 && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE){
+                        while (k>0){
+                            tgtProc = tempMatrix[q][k];
+                            task_ID = getSomeTaskID(srcProc, task_addr);
+                            putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);                       
+                            //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);                     
+                            if(migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE){ // iaçanã: mesma coisa de antes 
+                                if ((how_many_tasks_PE_is_running(tgtProc, task_addr)==0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec)==0)){
+                                    //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
+                                    prints("send_task_migration\n");
 
-                                task_addr[task_ID] = tgtProc;
-                                src_vec[task_ID] = srcProc;
+                                    task_addr[task_ID] = tgtProc;
+                                    src_vec[task_ID] = srcProc;
 
-                                //Save to send later
-                                srcProcs[contNumberOfMigrations] = srcProc;
-                                //sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
-                                
-                                contNumberOfMigrations++;
-                                //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
-                                break;
+                                    //Save to send later
+                                    srcProcs[contNumberOfMigrations] = srcProc;
+                                    //sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
+                                    
+                                    contNumberOfMigrations++;
+                                    //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
+                                    break;
+                                }
                             }
+                            k--;
                         }
-                        k--;
                     }
                 }
             }
+            k=QUAD_DIM_X*QUAD_DIM_Y-1;
         }
+
         if(temp[i] > 35515 && Frequency[i] == 1000){
             //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
             Frequency[i] = 677;
@@ -279,10 +292,65 @@ int getRandomEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     return 0;
 }
 
-int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
+void spiralMatrixOffset(unsigned int matrix[QUAD_DIM_X*QUAD_DIM_Y], int xi, int yi){
+    int i, x, y;
+
+    for(i=0; i<QUAD_DIM_X*QUAD_DIM_Y; i++){
+        x = spiralMatrix[i] >> 8;
+        y = spiralMatrix[i] & 0xFF;
+        x = x + xi;
+        y = y + yi;
+
+        matrix[i] = x << 8 | y;
+    }
+}
+
+int getQuadTemp(int xi, int yi){
+    int x, y;
+    int sum = 0;
+    int index;
+
+    for(y=yi; y<yi+QUAD_DIM_Y; y++){
+        for(x=xi; x<xi+QUAD_DIM_X; x++){
+            index = x + y*DIM_X;
+            sum = sum + Temperature[index];
+        }
+    }
+
+    return sum/16;
+}
+
+int getCoolestQuad(){
+    int quadTemp[QUAD_NUM];
+    int i;
+    int coolestTemp, coolest;
+
+    quadTemp[0] = getQuadTemp(0, 0);
+    quadTemp[1] = getQuadTemp(4, 0);
+    quadTemp[2] = getQuadTemp(0, 4);
+    quadTemp[3] = getQuadTemp(4, 4);
+
+    coolestTemp = 0xFFFF;
+    coolest = 0;
+    for(i=QUAD_NUM-1; i>=0; i--){
+        if(quadTemp[i] < coolestTemp){
+            coolestTemp = quadTemp[i];
+            coolest = i;
+        }
+    }
+
+    return coolest;
+
+}
+
+int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y], int appID){
     int i, j, empty, pe;
-    for(j = 1; j < DIM_X*DIM_Y; j++){ 
-        pe = spiralMatrix[DIM_X*DIM_Y-j];      // gets the peAddr from spiralMatrix
+    
+    if (appQuadrant[appID] == -1)
+        appQuadrant[appID] = getCoolestQuad();
+
+    for(j = QUAD_DIM_X*QUAD_DIM_Y-1; j > 0; j--){ 
+        pe = tempMatrix[appQuadrant[appID]][j];        // gets the peAddr from tempMatrix
         empty = 1;                   // presumes that it is empty
         for(i = 0; i < DIM_X*DIM_Y; i++){
             if(task_addr[i] == pe){ // if you find some task runnin inside that processor
@@ -301,12 +369,15 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X*DIM_Y]){
     return 0;
 }
 
-void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y], int task_remaining_executions[DIM_X*DIM_Y]){
+void releaseTasks(unsigned int task_addr[DIM_X*DIM_Y], int task_applicationID[DIM_X*DIM_Y], int task_start_time[DIM_X*DIM_Y], int task_remaining_executions[DIM_X*DIM_Y]){
     int i;
     int tasks_to_map = 0;
+    int appID;
+
     for(i = 0; i < DIM_X*DIM_Y; i++){
         if(task_start_time[i] <= measuredWindows && task_start_time[i] != -1){
-            task_addr[i] = getSpiralMatixEmptyPE(task_addr);//getRandomEmptyPE(task_addr);
+            appID = task_applicationID[i];
+            task_addr[i] = getSpiralMatixEmptyPE(task_addr, appID);//getRandomEmptyPE(task_addr);
             if(task_addr[i]){ // if the task got some valid address
                 task_start_time[i] = -2; // PRE-RELEASE
                 finishedTask[i] = FALSE;
@@ -357,15 +428,30 @@ int main(int argc, char **argv)
     int task_remaining_executions[DIM_X*DIM_Y];
     int task_repeat_after[DIM_X*DIM_Y];
     int task_applicationID[DIM_X*DIM_Y];
-    int task_id = 10;
+    int appID = -1;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
     //int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/
-    //generateSpiralMatrix();
-    generatePatternMatrix(DIM_X*DIM_Y);
+    generateSpiralMatrix();
+
+    spiralMatrixOffset(tempMatrix[0], 0, 0);
+    spiralMatrixOffset(tempMatrix[1], 4, 0);
+    spiralMatrixOffset(tempMatrix[2], 0, 4);
+    spiralMatrixOffset(tempMatrix[3], 4, 4);
+
+    for(i=0; i<QUAD_NUM; i++){
+        for(y=0; y<QUAD_DIM_Y; y++){
+            for(x=0; x<QUAD_DIM_X; x++){
+                putsvsv("spiralMatrix ", i, "- ",  tempMatrix[i][p_idx]);
+                p_idx++;
+            }
+        }
+        p_idx=0;
+    }
+
     for(y=0;y<DIM_Y;y++){
         for(x=0;x<DIM_X;x++){
             Power[p_idx] = 0;
@@ -373,8 +459,7 @@ int main(int argc, char **argv)
             Temperature[p_idx] = TAMB;
             integral[p_idx] = 0;
             Temperature_prev[p_idx] = 0;
-            //LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
-            putsvsv("spiralMatrix ", p_idx, "- ",  spiralMatrix[p_idx]);
+            appQuadrant[p_idx] = -1;
             p_idx++;
         }
     }
@@ -390,7 +475,7 @@ int main(int argc, char **argv)
             starting_time = 0; // defines the starting time to zero
             repeat_after = 0;
             executions = 1;
-            task_id = task_id + 10;
+            appID = appID + 1;
         }
 
         if (yaml_tasks){
@@ -402,7 +487,7 @@ int main(int argc, char **argv)
             task_start_time[tasks_to_map] = starting_time;
             task_remaining_executions[tasks_to_map] = executions;
             task_repeat_after[tasks_to_map] = repeat_after;
-            task_applicationID[tasks_to_map] = task_id;
+            task_applicationID[tasks_to_map] = appID;
             tasks_to_map++;
         }
 
@@ -474,7 +559,7 @@ int main(int argc, char **argv)
             //LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
 
 
-            releaseTasks(task_addr, task_start_time, task_remaining_executions);
+            releaseTasks(task_addr, task_applicationID, task_start_time, task_remaining_executions);
 
             
             //////////////////////////////////////////////////////
@@ -499,42 +584,55 @@ int main(int argc, char **argv)
             //////////////////////////
             // Migration procedures //
             //////////////////////////
-            // prints("\nGenerating TempMatrix\n");
-            // for(i = 0; i < DIM_X*DIM_Y; i++){
+            prints("\nGenerating TempMatrix\n");
+            for(i = 0; i < DIM_X*DIM_Y; i++){
 
-            //     if (measuredWindows >= INT_WINDOW)
-            //         integral[i] = integral[i] - integral_prev[measuredWindows%INT_WINDOW][i];
+                if (measuredWindows >= INT_WINDOW)
+                    integral[i] = integral[i] - integral_prev[measuredWindows%INT_WINDOW][i];
 
-            //     integral_prev[measuredWindows%INT_WINDOW][i] = Temperature[i];
+                integral_prev[measuredWindows%INT_WINDOW][i] = Temperature[i];
 
-            //     //if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
-            //     derivative[i] = Temperature[i] - Temperature_prev[i];
-            //     integral[i] = integral[i] + Temperature[i];
-            //     control_signal[i] = KP*Temperature[i] + KI*integral[i]/INT_WINDOW + KD*derivative[i];
-            //     Temperature_prev[i] = Temperature[i];
+                //if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
+                derivative[i] = Temperature[i] - Temperature_prev[i];
+                integral[i] = integral[i] + Temperature[i];
+                control_signal[i] = KP*Temperature[i] + KI*integral[i]/INT_WINDOW + KD*derivative[i];
+                Temperature_prev[i] = Temperature[i];
 
-            //     // putsv("proc ", i);
-            //     // putsv("energy ", energy_i[i]);
-            //     // putsv("control_signal ", control_signal[i]);
-            // }
-            // generateTempMatrix(control_signal);
+                // putsv("proc ", i);
+                // putsv("energy ", energy_i[i]);
+                // putsv("control_signal ", control_signal[i]);
+            }
+            generateTempMatrix(control_signal, 0, 0, 0);
+            generateTempMatrix(control_signal, 1, 4, 0);
+            generateTempMatrix(control_signal, 2, 0, 4);
+            generateTempMatrix(control_signal, 3, 4, 4);
 
-            // if ((measuredWindows)%20 == 0){
-            //     prints("Starting thermal actuation analysis\n");
-            //     temperature_migration(Temperature, tasks_to_map, task_addr);
-            //     // for(i = 0; i < tasks_to_map; i++)
-            //     //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
+            for(i=0; i<QUAD_NUM; i++){
+                for(y=0; y<QUAD_DIM_Y; y++){
+                    for(x=0; x<QUAD_DIM_X; x++){
+                        putsvsv("tempSort ", i, "- ",  tempSort[i][p_idx]);
+                        p_idx++;
+                    }
+                }
+                p_idx=0;
+            }
 
-            //     // for(i = 0; i < tasks_to_map; i++){
-            //     //     task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
-            //     //     LOG("Task %d migrate to processor %x\n", i, task_addr[i]);
-            //     // }
-            //     // for(i=0;i<tasks_to_map;i++)
-            //     //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
-            // }
-            // else{
-            //     prints("Skiping thermal actuation analysis\n");
-            // }
+            if ((measuredWindows)%20 == 0){
+                prints("Starting thermal actuation analysis\n");
+                temperature_migration(Temperature, tasks_to_map, task_addr);
+                // for(i = 0; i < tasks_to_map; i++)
+                //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
+
+                // for(i = 0; i < tasks_to_map; i++){
+                //     task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
+                //     LOG("Task %d migrate to processor %x\n", i, task_addr[i]);
+                // }
+                // for(i=0;i<tasks_to_map;i++)
+                //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
+            }
+            else{
+                prints("Skiping thermal actuation analysis\n");
+            }
 
             // Verify if every task is finished
             disable_interruption(0);

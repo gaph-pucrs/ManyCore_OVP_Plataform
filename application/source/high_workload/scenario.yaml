@@ -12,6 +12,7 @@ apps:
  - name: dijkstra_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 7
    dynamic_mapping:
     divider: 0
     dijkstra_0: 1
@@ -22,6 +23,7 @@ apps:
  - name: mpeg_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 11
    dynamic_mapping:
     print_mpeg: 0
     idct: 1
@@ -31,6 +33,7 @@ apps:
  - name: dtw_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 17
    dynamic_mapping:
     bank: 0
     p1: 1
@@ -41,6 +44,7 @@ apps:
  - name: audio_video_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 21
    dynamic_mapping:
     split_av: 0
     ivlc_av: 1
@@ -52,6 +56,7 @@ apps:
  - name: sort_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 27
    dynamic_mapping:
     sort_master: 0
     sort_slave1: 1
