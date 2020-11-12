@@ -362,6 +362,7 @@ int main(int argc, char **argv) {
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
+    int nextMigration = 20;
     //int totalTasks, finishedTasks, progresso;
 
     /*Initialization*/
@@ -461,7 +462,7 @@ int main(int argc, char **argv) {
         while (*SyncToPE != 1) {  // Repete este processo enquanto houverem outras tarefas executando!
 
             putsv("Timer (ms) ", measuredWindows);
-
+            
             releaseTasks(task_addr, task_start_time, task_remaining_executions, task_applicationID);
 
             //////////////////////////////////////////////////////
@@ -505,7 +506,8 @@ int main(int argc, char **argv) {
             }
             generateTempMatrix(control_signal);
 
-            if ((measuredWindows) % 20 == 0) {
+            if (measuredWindows >= nextMigration) {
+                nextMigration += 20;
                 prints("Starting thermal actuation analysis\n");
                 temperature_migration(Temperature, tasks_to_map, task_addr);
                 // for(i = 0; i < tasks_to_map; i++)
