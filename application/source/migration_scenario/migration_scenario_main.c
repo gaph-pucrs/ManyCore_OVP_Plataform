@@ -254,7 +254,7 @@ int main(int argc, char **argv) {
             disable_interruptions();
             set_taskMigrated(destination);  // save the new destination of this
             running_task = -1;
-            mapping_table[migratedTask] = 0;  // clear this address value
+            //mapping_table[migratedTask] = 0;  // clear this address value
             enable_interruptions();
 
             prints("Atualizando a tabela das tasks da mesma app\n");
