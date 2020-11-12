@@ -3,15 +3,16 @@
 #include <string.h>
 
 #include "../peripheral/whnoc_dma/noc.h"
-#include "audio_video_config.h"
-#include "dijkstra_config.h"
-#include "dtw_config.h"
+#include "audio_video_long_config.h"
+#include "dijkstra_long_config.h"
+#include "dtw_long_config.h"
 #include "interrupt.h"
-#include "mpeg_config.h"
-#include "sort_config.h"
+#include "mpeg_long_config.h"
+#include "sort_long_config.h"
 #include "source/API/api.h"
 #include "spr_defs.h"
-#include "synthetic_config.h"
+#include "synthetic_long_config.h"
+#include "aes_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
@@ -99,13 +100,6 @@ int main(int argc, char **argv) {
 
         // Informs the master that the task has occupied the defined address
         sendAllocationConfirmation();
-
-        // Send the updt addr msg to every PE
-        /*for (i = 1; i < N_PES; i++) {
-            aux[0] = ((*myAddress << 16) | running_task);
-            if (getAddress(i) != *myAddress)
-                sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
-        }*/
 
         if (get_mapping()) {
             prints("Task ");
@@ -232,6 +226,22 @@ int main(int argc, char **argv) {
                 break;
             case recognizer:
                 state = dtw_recognizer(state);
+                break;
+			// AES
+            case aes_master:
+                state = aesMaster(state);
+                break;
+            case aes_slave1:
+                state = aes_slave();
+                break;
+            case aes_slave2:
+                state = aes_slave();
+                break;
+            case aes_slave3:
+                state = aes_slave();
+                break;
+            case aes_slave4:
+                state = aes_slave();
                 break;
         }
         if (state == 0) {

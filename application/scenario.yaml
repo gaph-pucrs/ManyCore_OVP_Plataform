@@ -49,6 +49,15 @@ apps:
     adpcm_dec_av: 4
     FIR_av: 5
     join_av: 6
+ - name: aes
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    aes_master: 0
+    aes_slave1: 1
+    aes_slave2: 2
+    aes_slave3: 3
+    aes_slave4: 4
  - name: sort
    cluster: 0
    mapping: dynamic
