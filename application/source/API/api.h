@@ -541,9 +541,12 @@ void interruptHandler_NI_RX(void) {
         // as outras atualizações vão vir conforme as tasks forem migrando
         for (i = 0; i < num_tasks; i++) {
             if ((incomingPacket[PI_PAYLOAD + i] & 0x80000000) != 0) {
-                mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x7FFFFFFF;
+                mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
                 running_task = i;
+            } else {
+                mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
             }
+            appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
         }
         /*for(i=0; i<num_tasks; i++){
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];

@@ -271,8 +271,13 @@ int main(int argc, char **argv) {
             sendPendingReq(destination);
 
             new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000;  // flag this as the migrating task
+            for (i = 0; i < NUM_TASK; i++) {
+                new_task_addr[i] = new_task_addr[i] | (appID[i] << 16);
+            }
             sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-            new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
+            for (i = 0; i < NUM_TASK; i++) {
+                new_task_addr[i] = new_task_addr[i] & 0x0000FFFF;
+            }
         }
     }
 
