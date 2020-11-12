@@ -255,7 +255,7 @@ int main(int argc, char **argv) {
             enable_interruptions();
 
             // Send the updt addr msg to every PE
-            aux[0] = ((destination << 16) | running_task);  // mounts the update addr flit
+            aux[0] = ((destination << 16) | migratedTask);  // mounts the update addr flit
             for (i = 1; i < DIM_X * DIM_Y; i++) {
                 if (appID[i] == appID[migratedTask]) {  // sends the update for every task in the same application
                     sendTaskService(TASK_ADDR_UPDT, getAddress(mapping_table[i]), aux, 1);

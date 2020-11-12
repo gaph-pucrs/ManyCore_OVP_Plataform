@@ -503,14 +503,14 @@ void interruptHandler_NI_RX(void) {
         }
         num_tasks = incomingPacket[PI_SIZE] - 3 - 2;
         for (i = 0; i < num_tasks; i++) {
-            if (mapping_table[i] == 0) {
-                if ((incomingPacket[PI_PAYLOAD + i] & 0x80000000) != 0) {
-                    running_task = i;
-                }
-                appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
-                mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
-                //LOG("%d APP: %d task: %d address: %d\n", getID(*myAddress), appID[i], i, mapping_table[i]);
+            //if (mapping_table[i] == 0) {
+            if ((incomingPacket[PI_PAYLOAD + i] & 0x80000000) != 0) {
+                running_task = i;
             }
+            appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
+            mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
+            //LOG("%d APP: %d task: %d address: %d\n", getID(*myAddress), appID[i], i, mapping_table[i]);
+            //}
         }
         mapping_en = 1;
         migration_dst = 0;
