@@ -1,23 +1,23 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include "interrupt.h"
-#include "spr_defs.h"
-#include "source/API/api.h"
-#include "../peripheral/whnoc_dma/noc.h"
+#include <string.h>
 
-#include "synthetic_config.h"
-#include "dijkstra_config.h"
-#include "sort_config.h"
-#include "aes_config.h"
-#include "mpeg_config.h"
-#include "dtw_config.h"
+#include "../peripheral/whnoc_dma/noc.h"
 #include "audio_video_config.h"
+#include "dijkstra_config.h"
+#include "dtw_config.h"
+#include "interrupt.h"
+#include "mpeg_config.h"
+#include "sort_config.h"
+#include "source/API/api.h"
+#include "spr_defs.h"
+#include "synthetic_config.h"
+#include "aes_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
 
-#define NUM_TASK	N_PES-1
+#define NUM_TASK N_PES - 1
 int my_task_addr[NUM_TASK];
 int new_task_addr[NUM_TASK];
 
@@ -35,9 +35,6 @@ int dijkstra_print();
 int sortMaster(int state);
 int sort_slave(int task, int state);
 
-int aesMaster(int state);
-int aes_slave();
-
 // AV threads
 int av_split(int state);
 int av_ivlc(int state);
@@ -47,16 +44,16 @@ int av_adpcm_dec(int state);
 int av_FIR(int state);
 int av_join(int state);
 
-// // MPEG - threads
+// MPEG - threads
 int mpeg_idct(int state);
 int mpeg_iquant(int state);
 int mpeg_ivlc(int state);
 int mpeg_print_mpeg(int state);
 int mpeg_start(int state);
 // MPEG - auxiliar functions
-void idct_func(type_DATA *block,int lx);
+void idct_func(type_DATA *block, int lx);
 static void idctcol(type_DATA *block, int offs, int lx);
-static void idctrow (type_DATA *block, int offs);
+static void idctrow(type_DATA *block, int offs);
 void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant);
 void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer);
 short int getDC(short int type, type_DATA *buffer);
@@ -77,222 +74,231 @@ int dtw_euclideanDistance(int *x, int *y);
 int dtw_min(int x, int y);
 int dtw_randNum(int seed, int min, int max);
 
-int main(int argc, char **argv)
-{
-	OVP_init();
-	//////////////////////////////////////////////////////
-	/////////////// YOUR CODE START HERE /////////////////
-	//////////////////////////////////////////////////////
-	int state = 0;
-	int destination;
-	int i;
-	int aux[1];
+int main(int argc, char **argv) {
+    OVP_init();
+    //////////////////////////////////////////////////////
+    /////////////// YOUR CODE START HERE /////////////////
+    //////////////////////////////////////////////////////
+    int state = 0;
+    int destination;
+    int i;
+    int aux[1];
 
-	while(1){
+    while (1) {
+        // waits for mapping or migrating tasks and receives mapping table
+        while (!get_mapping() && !get_migration_dst() && !finishSimulation_flag) {
+            *clockGating_flag = TRUE;
+        }
 
-		// waits for mapping or migrating tasks and receives mapping table
-		*clockGating_flag = TRUE;
-		while(!get_mapping() && !get_migration_dst() && !finishSimulation_flag){ }
+        // Detects the end of simulation
+        if (finishSimulation_flag)
+            break;
 
-		// Detects the end of simulation
-		if(finishSimulation_flag)
-			break;
+        set_taskMigrated(-1);  // resets this, because it's running a new task
+        *clockGating_flag = FALSE;
+        get_mapping_table(my_task_addr);
 
-		set_taskMigrated(-1); // resets this, because it's running a new task
-		*clockGating_flag = FALSE;
-		get_mapping_table(my_task_addr);
+        // Informs the master that the task has occupied the defined address
+        sendAllocationConfirmation();
 
-		// Get its task to run
-		for (i = 0; i < NUM_TASK; i++){
-			if (my_task_addr[i] == *myAddress)
-				running_task = i;
-		}
+        if (get_mapping()) {
+            prints("Task ");
+            printi(running_task);
+            prints(" app ");
+            printi(appID[running_task]);
+            prints("mapped\n");
+            state = 0;
+            clear_mapping();
+        } else if (get_migration_dst()) {
+            state = get_new_state();
+            prints("Task ");
+            printi(running_task);
+            prints("migrated\n");
+            putsv("State: ", state);
+            clear_migration_dst();
+        }
 
-		// Informs the master that the task has occupied the defined address
-		sendAllocationConfirmation();
+        switch (running_task) {
+            // SYNTHETIC
+            case taskA:
+                state = synthetic_taskA(state);
+                break;
+            case taskB:
+                state = synthetic_taskB(state);
+                break;
+            case taskC:
+                state = synthetic_taskC(state);
+                break;
+            case taskD:
+                state = synthetic_taskD(state);
+                break;
+            case taskE:
+                state = synthetic_taskE(state);
+                break;
+            case taskF:
+                state = synthetic_taskF(state);
+                break;
+            // DIJKSTRA
+            case divider:
+                state = dijkstra_divider(state);
+                break;
+            case dijkstra_0:
+                state = dijkstra_slave();
+                break;
+            case dijkstra_1:
+                state = dijkstra_slave();
+                break;
+            case dijkstra_2:
+                state = dijkstra_slave();
+                break;
+            case dijkstra_3:
+                state = dijkstra_slave();
+                break;
+            case print:
+                state = dijkstra_print();
+                break;
+            // MPEG
+            case idct:
+                state = mpeg_idct(state);
+                break;
+            case iquant:
+                state = mpeg_iquant(state);
+                break;
+            case ivlc:
+                state = mpeg_ivlc(state);
+                break;
+            case print_mpeg:
+                state = mpeg_print_mpeg(state);
+                break;
+            case start:
+                state = mpeg_start(state);
+                break;
+            //Sort
+            case sort_master:
+                state = sortMaster(state);
+                break;
+            case sort_slave1:
+                state = sort_slave(0, state);
+                break;
+            case sort_slave2:
+                state = sort_slave(1, state);
+                break;
+            case sort_slave3:
+                state = sort_slave(2, state);
+                break;
+            // Audio Video
+            case split_av:
+                state = av_split(state);
+                break;
+            case ivlc_av:
+                state = av_ivlc(state);
+                break;
+            case iquant_av:
+                state = av_iquant(state);
+                break;
+            case idct_av:
+                state = av_idct(state);
+                break;
+            case adpcm_dec_av:
+                state = av_adpcm_dec(state);
+                break;
+            case FIR_av:
+                state = av_FIR(state);
+                break;
+            case join_av:
+                state = av_join(state);
+                break;
+            // DTW
+            case bank:
+                state = dtw_bank(state);
+                break;
+            case p1:
+                state = dtw_p1(state);
+                break;
+            case p2:
+                state = dtw_p2(state);
+                break;
+            case p3:
+                state = dtw_p3(state);
+                break;
+            case p4:
+                state = dtw_p4(state);
+                break;
+            case recognizer:
+                state = dtw_recognizer(state);
+                break;
+			// AES
+            case aes_master:
+                state = aesMaster(state);
+                break;
+            case aes_slave1:
+                state = aes_slave();
+                break;
+            case aes_slave2:
+                state = aes_slave();
+                break;
+            case aes_slave3:
+                state = aes_slave();
+                break;
+            case aes_slave4:
+                state = aes_slave();
+                break;
+        }
+        if (state == 0) {
+            printFinish();
+            mapping_table[running_task] = 0;  // clear this address value
+            sendFinishTask(running_task);
+            migratedTask = -1;
+            running_task = -1;
+            for (i = 0; i < NUM_TASK; i++) {
+                mapping_table[i] = 0;
+            }
+        } else {  // migration
+            migratedTask = running_task;
+            get_migration_mapping_table(new_task_addr);
+            destination = new_task_addr[migratedTask];
+            putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 
-		// Send the updt addr msg to every PE
-		for(i=1; i<N_PES; i++){
-			aux[0] =  ((*myAddress << 16) | running_task);
-			if(getAddress(i) != *myAddress)
-				sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
-		}
-		
-		if(get_mapping()){
-			prints("Task "); printi(running_task); prints("mapped\n");
-			state = 0;
-			clear_mapping();
-		}
-		else if(get_migration_dst()){
-			state = get_new_state();
-			prints("Task "); printi(running_task); prints("migrated\n");
-			putsv("State: ", state);
-			clear_migration_dst();
-		}
+            sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
 
-		switch(running_task){
-			// SYNTHETIC
-			case taskA:
-				state = synthetic_taskA(state);
-				break;
-			case taskB:
-				state = synthetic_taskB(state);
-				break;
-			case taskC:
-				state = synthetic_taskC(state);
-				break;
-			case taskD:
-				state = synthetic_taskD(state);
-				break;
-			case taskE:
-				state = synthetic_taskE(state);
-				break;
-			case taskF:
-				state = synthetic_taskF(state);
-				break;
-			// DIJKSTRA
-			case divider:
-				state = dijkstra_divider(state);
-				break;
-			case dijkstra_0:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_1:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_2:
-				state = dijkstra_slave();
-				break;
-			case dijkstra_3:
-				state = dijkstra_slave();
-				break;
-			case print:
-				state = dijkstra_print();
-				break;
-			// MPEG
-			case idct:
-				state = mpeg_idct(state);
-				break;
-			case iquant:
-				state = mpeg_iquant(state);
-				break;
-			case ivlc:
-				state = mpeg_ivlc(state);
-				break;
-			case print_mpeg:
-				state = mpeg_print_mpeg(state);
-				break;
-			case start:
-				state = mpeg_start(state);
-				break;
-			//Sort
-			case sort_master:
-				state = sortMaster(state);
-				break;
-			case sort_slave1:
-				state = sort_slave(0, state);
-				break;
-			case sort_slave2:
-				state = sort_slave(1, state);
-				break;
-			case sort_slave3:
-				state = sort_slave(2, state);
-				break;
-			//AES
-			case aes_master:
-				state = aesMaster(state);
-				break;
-			case aes_slave1:
-				state = aes_slave();
-				break;
-			case aes_slave2:
-				state = aes_slave();
-				break;
-			case aes_slave3:
-				state = aes_slave();
-				break;
-			case aes_slave4:
-				state = aes_slave();
-				break;
-			// Audio Video
-			case split_av:
-				state = av_split(state);
-				break;
-			case ivlc_av:
-				state = av_ivlc(state);
-				break;
-			case iquant_av:
-				state = av_iquant(state);
-				break;
-			case idct_av:
-				state = av_idct(state);
-				break;
-			case adpcm_dec_av:
-				state = av_adpcm_dec(state);
-				break;
-			case FIR_av:
-				state = av_FIR(state);
-				break;
-			case join_av:
-				state = av_join(state);
-				break;
-			// DTW
-			case bank:
-				state = dtw_bank(state);
-				break;
-			case p1:
-				state = dtw_p1(state);
-				break;
-			case p2:
-				state = dtw_p2(state);
-				break;
-			case p3:
-				state = dtw_p3(state);
-				break;
-			case p4:
-				state = dtw_p4(state);
-				break;
-			case recognizer:
-				state = dtw_recognizer(state);
-				break;
-		}
-		if(state == 0){
-			printFinish();
-			mapping_table[running_task] = 0;   // clear this address value
-			sendFinishTask(running_task);
-			migratedTask = -1;
-			running_task = -1;
-		}
-		else{	
-			migratedTask = running_task;
-			get_migration_mapping_table(new_task_addr);
-			destination = new_task_addr[migratedTask];
-			putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
-			
-			
-			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
-			
-			sendPipe(destination);
-			
-			disable_interruption(2);
-			set_taskMigrated(destination); // save the new destination of this 
-			running_task = -1;
-			mapping_table[migratedTask] = 0;   // clear this address value
-			sendPendingReq(destination);
-			enable_interruption(2);
-			
-			new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000; // flag this as the migrating task
-			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-			new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
-		}
-	}
+            disable_interruptions();
+            set_taskMigrated(destination);  // save the new destination of this
+            running_task = -1;
+            //mapping_table[migratedTask] = 0;  // clear this address value
+            enable_interruptions();
 
+            // Send the updt addr msg to every PE
+            aux[0] = ((destination << 16) | migratedTask);  // mounts the update addr flit
+            for (i = 1; i < DIM_X * DIM_Y; i++) {
+                if (appID[i] == appID[migratedTask] && i != migratedTask) {  // sends the update for every task in the same application
+                    putsv("enviando update para tarefa ", i);
+                    sendTaskService(TASK_ADDR_UPDT, mapping_table[i], aux, 1);
+                    if (mapping_table[i] != migration_mapping_table[i]) {
+                        sendTaskService(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1);
+                    }
+                }
+            }
 
-	//////////////////////////////////////////////////////
-	//////////////// YOUR CODE ENDS HERE /////////////////
-	//////////////////////////////////////////////////////
-	FinishApplication();
-	return 1;
+            sendPipe(destination);
+            sendPendingReq(destination);
+
+            mapping_table[migratedTask] = mapping_table[migratedTask] | 0x80000000;  // flag this as the migrating task
+            for (i = 0; i < NUM_TASK; i++) {
+                mapping_table[i] = mapping_table[i] | (appID[i] << 16);
+            }
+            sendTaskService(TASK_MIGRATION_DEST, destination, mapping_table, NUM_TASK);
+            
+			for (i = 0; i < NUM_TASK; i++) {
+                mapping_table[i] = 0;
+            }
+        }
+    }
+
+    //////////////////////////////////////////////////////
+    //////////////// YOUR CODE ENDS HERE /////////////////
+    //////////////////////////////////////////////////////
+    FinishApplication();
+    return 1;
 }
 
 int synthetic_taskA(int state){
@@ -510,7 +516,8 @@ int dijkstra_divider(int state)
     int AdjMatrix[NUM_NODES][NUM_NODES];
 	int i, j, k, iter;
 	char buffer[70];
-
+	k = 0;
+	
 	prints("STARTING DIVIDER\n"); 
 
 	for (i=0;i<NUM_NODES;i++) {
@@ -602,8 +609,15 @@ int dijkstra_slave()
 			ReceiveMessage(&theMessage, divider);
 			for (j=0; j<NUM_NODES; j++){
 				AdjMatrix[i][j] = theMessage.msg[j];
-				if(theMessage.msg[j] == KILL)
-					prints("adjMatrix["); printi(i); prints("]["); printi(j); prints("] = "); printi(theMessage.msg[j]); prints("\n");
+				if(theMessage.msg[j] == KILL){
+					prints("adjMatrix["); 
+					printi(i); 
+					prints("]["); 
+					printi(j); 
+					prints("] = "); 
+					printi(theMessage.msg[j]); 
+					prints("\n");
+				}
 			}
 		}
 		calc = AdjMatrix[0][0];
@@ -3088,7 +3102,302 @@ int av_split(int state) { // r
 
     return 0;
 }
+/*********************************************************************
+* Filename:   aes_sl(n).c
+* Author:     Leonardo Rezende Juracy and Luciano L. Caimi
+* Copyleft:    
+* Disclaimer: This code is presented "as is" without any guarantees.
+* Details:   
+*********************************************************************/
 
+/*************************** HEADER FILES ***************************/
+#include "source/aes/aes.h"
+/**************************** VARIABLES *****************************/
+
+
+/*************************** MAIN PROGRAM ***************************/
+int aes_slave()
+{
+	unsigned int key_schedule[60];
+	int qtd_messages, op_mode, x, flag=1, id = -1, i;
+	unsigned int enc_buf[128];
+	unsigned int input_text[16]; 
+	unsigned int key[1][32] = {
+		{0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,0x2b,0x73,0xae,0xf0,0x85,0x7d,0x77,0x81,0x1f,0x35,0x2c,0x07,0x3b,0x61,0x08,0xd7,0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4}
+	};
+
+	printi(clock());
+    prints("task AES SLAVE started - ID:"); 
+	aes_key_setup(&key[0][0], key_schedule, 256);    
+    
+    while(flag){
+		ReceiveMessage(&theMessage, aes_master);
+		memcpy(input_text, theMessage.msg, 12);
+			
+#ifdef debug_comunication_on
+	prints(" ");  
+	prints("Slave configuration");
+	for(i=0; i<3;i++){
+		printi(input_text[i]);	
+	}
+	prints(" "); 
+#endif 
+				
+		op_mode = input_text[0];
+		qtd_messages = input_text[1];
+		x = input_text[2];	
+		
+		if(id == -1){
+				id = x;
+				printi(id);
+		}	
+		prints("Operation:"); 
+		printi(op_mode);
+		prints("Blocks:"); 		
+		printi(qtd_messages);
+
+		if (op_mode == END_TASK){
+			flag = 0;
+			qtd_messages = 0;
+		}
+		for(x = 0; x < qtd_messages; x++){
+			ReceiveMessage(&theMessage, aes_master);		
+			memcpy(input_text, theMessage.msg, 4*AES_BLOCK_SIZE);
+			
+#ifdef debug_comunication_on
+	prints(" ");  
+	prints("received msg");
+	for(i=0; i<16;i++){
+		printi(input_text[i]);	
+	}
+	prints(" "); 
+#endif 
+			
+			if(op_mode == CIPHER_MODE){
+				prints("encript");				
+				aes_encrypt(input_text, enc_buf, key_schedule, KEY_SIZE);	
+			}
+			else{
+				prints("decript");					
+				aes_decrypt(input_text, enc_buf, key_schedule, KEY_SIZE);
+			}			
+			theMessage.size = 4*AES_BLOCK_SIZE;
+			memcpy( theMessage.msg, enc_buf,4*AES_BLOCK_SIZE);
+			SendMessage(&theMessage, aes_master);	
+		}
+		//Migration breakpoint
+		if(get_migration_src()){
+			prints("aes_slave migrating.\n");
+			clear_migration_src();
+			return 1;
+		}
+	}
+    prints("task AES SLAVE finished  - ID: ");
+    printi(id);
+    printi(clock());
+   
+	return 0;	
+}
+
+/*************************** HEADER FILES ***************************/
+#include "source/aes/aes_master.h"
+/***************************** DEFINES ******************************/
+// total message length
+#define MSG_LENGHT 2048			
+// number of efectived used slaves
+#define NUMBER_OF_SLAVES 4	
+// number of total slaves allocated
+#define MAX_SLAVES 4		 	
+
+/**************************** VARIABLES *****************************/
+
+//index of slaves (slave names)
+int Slave[MAX_SLAVES] = {aes_slave1,aes_slave2,aes_slave3,aes_slave4};
+
+/*************************** MAIN PROGRAM ***************************/
+
+int aesMaster(int state)
+{
+	volatile int x, y, i,j;
+	int plain_msg[MSG_LENGHT];
+	int cipher_msg[MSG_LENGHT], decipher_msg[MSG_LENGHT];
+	int msg_length, blocks, qtd_messages[MAX_SLAVES];
+	int pad_value, aux_msg[3];
+	int aux1_blocks_PE;
+	int aux2_blocks_PE;	
+
+	// fill each block with values 'A', 'B', ...
+	for(x = 0; x < MSG_LENGHT; x++){
+		plain_msg[x] = ((x/16)%26)+0x41;
+	}
+	
+    prints("task AES started.");
+    printi(clock());
+
+	// calculate number of block and pad value (PCKS5) of last block
+	msg_length = MSG_LENGHT;	
+	blocks = (MSG_LENGHT%AES_BLOCK_SIZE)==0 ? (MSG_LENGHT/AES_BLOCK_SIZE) : (MSG_LENGHT/AES_BLOCK_SIZE)+1;
+	pad_value = (AES_BLOCK_SIZE - (msg_length%AES_BLOCK_SIZE))%AES_BLOCK_SIZE;	
+	
+	prints(" ");
+	prints("Blocks:");	
+	printi(blocks);
+
+#ifdef debug_comunication_on	
+    prints(" ");
+    prints("plain msg");
+    for(x=0; x<MSG_LENGHT-1;x++){
+		printi(plain_msg[x]);		
+	}
+#endif
+
+	//	Calculate number of blocks/messages to sent
+	//   to each Slave_PE
+	aux1_blocks_PE = blocks / NUMBER_OF_SLAVES;
+	aux2_blocks_PE = blocks % NUMBER_OF_SLAVES;
+	
+	////////////////////////////////////////////////
+	//				Start Encrypt				  //
+	////////////////////////////////////////////////	
+	for(x = 0; x < MAX_SLAVES; x++){
+		qtd_messages[x] = aux1_blocks_PE;
+		if(x < aux2_blocks_PE)
+			qtd_messages[x] += 1;
+	}
+	
+	// Send number of block and operation mode and ID
+	// to each Slave_PE
+	for(x=0; x < MAX_SLAVES; x++){
+		theMessage.size = sizeof(aux_msg);
+		aux_msg[0] = CIPHER_MODE;
+		aux_msg[1] = qtd_messages[x];
+		aux_msg[2] = x+1;
+		if(x >= NUMBER_OF_SLAVES) // zero messages to Slave not used
+			aux_msg[0] = END_TASK;
+		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
+		SendMessage(&theMessage, Slave[x]);  
+	}
+
+	// Send blocks to Cipher and 
+	// Receive the correspondent block Encrypted
+	for(x = 0; x < blocks+1; x += NUMBER_OF_SLAVES){
+		// send a block to Slave_PE encrypt
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				theMessage.size = 4*AES_BLOCK_SIZE;
+				memcpy(theMessage.msg, &plain_msg[(x+y)*AES_BLOCK_SIZE], 4*AES_BLOCK_SIZE);
+				SendMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
+			}
+		}
+	
+		// Receive Encrypted block from Slave_PE
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				ReceiveMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
+				j = 0;
+				for (i=(x+y)*AES_BLOCK_SIZE;i < ((x+y)*AES_BLOCK_SIZE) + AES_BLOCK_SIZE; i++)
+				{
+					cipher_msg[i] = theMessage.msg[j];
+					j++;
+				}
+				j = 0;
+				qtd_messages[(x+y) % NUMBER_OF_SLAVES]--;
+			}
+		}
+	}
+#ifdef debug_comunication_on
+	prints(" ");  
+	prints("cipher msg");
+	for(i=0; i<MSG_LENGHT;i++){
+		printi(cipher_msg[i]);		
+	}
+	prints(" "); 
+#endif 
+	
+	////////////////////////////////////////////////
+	//				Start Decrypt				  //
+	////////////////////////////////////////////////
+	for(x = 0; x < NUMBER_OF_SLAVES; x++){
+		qtd_messages[x] = aux1_blocks_PE;
+		if(x <= aux2_blocks_PE)
+			qtd_messages[x] += 1;
+	}
+	
+	// Send number of block and operation mode
+	// to each Slave_PE
+	for(x=0; x < NUMBER_OF_SLAVES; x++){
+		theMessage.size = sizeof(aux_msg);
+		aux_msg[0] = DECIPHER_MODE;
+		aux_msg[1] = qtd_messages[x];
+		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
+		SendMessage(&theMessage, Slave[x]);  
+	}
+
+	// Send blocks to Cipher and 
+	// Receive the correspondent block Encrypted
+	for(x = 0; x < blocks+1; x += NUMBER_OF_SLAVES){
+		// send each block to a Slave_PE
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				theMessage.size = 4*AES_BLOCK_SIZE;
+				memcpy(theMessage.msg, &cipher_msg[(x+y)*AES_BLOCK_SIZE], 4*AES_BLOCK_SIZE);
+				SendMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);   
+			} 
+		}
+		// Receive Encrypted block from Slave_PE
+		for(y = 0; y < NUMBER_OF_SLAVES; y++){
+			if(qtd_messages[(x+y) % NUMBER_OF_SLAVES] != 0){
+				ReceiveMessage(&theMessage, Slave[(x+y) % NUMBER_OF_SLAVES]);
+				j = 0;
+				for (i=(x+y)*AES_BLOCK_SIZE;i < ((x+y)*AES_BLOCK_SIZE) + AES_BLOCK_SIZE; i++)
+				{
+					decipher_msg[i] = theMessage.msg[j];
+					j++;
+				}
+				j = 0;
+				qtd_messages[(x+y) % NUMBER_OF_SLAVES]--;
+			}
+		}
+	}
+#ifdef debug_comunication_on	
+	prints("decipher msg");
+    for(x=0; x<MSG_LENGHT-1;x++){
+		printi(decipher_msg[x]);		
+	}
+#endif
+	//  End tasks still running
+	//  End Applicattion
+	for(x=0; x < NUMBER_OF_SLAVES; x++){
+		theMessage.size = sizeof(aux_msg);
+		aux_msg[0] = END_TASK;
+		aux_msg[1] = 0;
+		memcpy(&theMessage.msg, &aux_msg, 4*theMessage.size);
+		SendMessage(&theMessage, Slave[x]);  
+	}	
+    prints("task AES finished.");
+    printi(clock());
+
+//#ifdef debug_comunication_on	
+	prints(" ");
+	prints("Final Result");
+	unsigned int int_aux2 = 0;
+    for(x=0; x<MSG_LENGHT;x+=4){
+		int_aux2 = decipher_msg[0+x] << 24;
+		int_aux2 = int_aux2 | decipher_msg[1+x] << 16;
+		int_aux2 = int_aux2 | decipher_msg[2+x] << 8;
+		int_aux2 = int_aux2 | decipher_msg[3+x];
+		prints( &int_aux2 );
+		int_aux2 = 0;
+	}
+//#endif 
+
+	return 0;		
+}
+
+
+
+#define TASKS 300
+#define SORT_SLAVES 3
 
 
 void init_array(int *array, int size){

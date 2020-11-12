@@ -20,6 +20,7 @@ make -C peripheral/printer NOVLNV=1
 make -C peripheral/tea NOVLNV=1
 make -C harness
 harness/harness.${IMPERAS_ARCH}.exe \
+--override dictsize=512\
      --program cpu0=application/application0.${CROSS}.elf $* \
      --program cpu1=application/application1.${CROSS}.elf $* \
      --program cpu2=application/application2.${CROSS}.elf $* \
