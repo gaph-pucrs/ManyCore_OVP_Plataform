@@ -1,9 +1,28 @@
+/*
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
 //
-//                             Version 20170201.0
+//                             Version 20191106.0
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,28 +65,34 @@ static void installSlavePorts(void) {
 
 static void installRegisters(void) {
 
-    ppmCreateRegister("ab8_status",
-        0,
-        handles.DMAC,
-        0,
-        4,
-        statusRead,
-        statusWrite,
-        view32,
-        &(DMAC_ab8_data.status.value),
-        True
-    );
-    ppmCreateRegister("ab8_address",
-        0,
-        handles.DMAC,
-        4,
-        4,
-        addressRead,
-        addressWrite,
-        view32,
-        &(DMAC_ab8_data.address.value),
-        True
-    );
+    {
+        ppmCreateRegister(
+            "ab8_status",
+            0,
+            handles.DMAC,
+            0,
+            4,
+            statusRead,
+            statusWrite,
+            view32,
+            &(DMAC_ab8_data.status.value),
+            True
+        );
+    }
+    {
+        ppmCreateRegister(
+            "ab8_address",
+            0,
+            handles.DMAC,
+            4,
+            4,
+            addressRead,
+            addressWrite,
+            view32,
+            &(DMAC_ab8_data.address.value),
+            True
+        );
+    }
 
 }
 
@@ -78,33 +103,25 @@ static void installMasterPorts(void) {
     handles.MWRITE = ppmOpenAddressSpace("MWRITE");
 }
 
-/////////////////////////////////// Net Ports //////////////////////////////////
-
-static void installNetPorts(void) {
-// To write to this net, use ppmWriteNet(handles.INT_NI, value);
-
-    handles.INT_NI = ppmOpenNetPort("INT_NI");
-
-}
-
-////////////////////////////////// Constructor /////////////////////////////////
-
-PPM_CONSTRUCTOR_CB(periphConstructor) {
-    installSlavePorts();
-    installRegisters();
-    installMasterPorts();
-    installNetPorts();
-}
-
-///////////////////////////////////// Main /////////////////////////////////////
-
-int main(int argc, char *argv[]) {
+PPM_DOC_FN(installDocs){
 
     ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
     {
         ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
         ppmDocAddText(doc2_node, "A OVP DMA for a router");
     }
+}
+////////////////////////////////// Constructor /////////////////////////////////
+
+PPM_CONSTRUCTOR_CB(periphConstructor) {
+    installSlavePorts();
+    installRegisters();
+    installMasterPorts();
+}
+
+///////////////////////////////////// Main /////////////////////////////////////
+
+int main(int argc, char *argv[]) {
 
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);

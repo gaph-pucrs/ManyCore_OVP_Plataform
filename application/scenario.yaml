@@ -1,6 +1,11 @@
 apps:
- - name: pingpong
+ - name: prodcons
    cluster: 0
    static_mapping:
-    ping: [0,0]
-    pong: [2,2]
+    prod: [1,0]
+    cons: [1,1]
+ - name: secApp
+   cluster: 0
+   static_mapping:
+    sec: [0,0]
+

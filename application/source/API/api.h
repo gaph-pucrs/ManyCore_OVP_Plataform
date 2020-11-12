@@ -13,6 +13,7 @@ typedef unsigned char Uns8;
 #define TIMER_BASE     ((unsigned int *) 0x8000001C)
 #define CLK_GATING     ((unsigned int *) 0x0FFFFFFC)
 #define EXECUTED_INST  ((unsigned int *) 0x0FFFFFF8)
+
 /* -------------------------------------------------
 // Instruction Type Counter ----------------------*/
 #define BRANCH_INST    ((unsigned int *) 0x0FFFFFF4)
@@ -51,6 +52,8 @@ volatile unsigned int *SyncToPE = SYNC_BASE + 0x0;
 // Network Interface - mapped registers
 volatile unsigned int *NIaddr = NI_BASE + 0x1;
 volatile unsigned int *NIcmd = NI_BASE + 0x0;
+
+
 // Executed Instructions 
 volatile unsigned int *instructionCounter = EXECUTED_INST;
 volatile unsigned int *branchCounter =      BRANCH_INST;

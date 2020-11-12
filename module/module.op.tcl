@@ -254,8 +254,7 @@ ihwconnect -instancename ni0 -busslaveport DMAC -bus cpu0Bus -loaddress 0x800000
 ihwconnect -instancename ni0 -busmasterport MREAD  -bus cpu0Bus
 ihwconnect -instancename ni0 -busmasterport MWRITE -bus cpu0Bus
 ihwconnect -instancename timer0 -busslaveport TIMEREG -bus cpu0Bus -loaddress 0x8000001C -hiaddress 0x8000001F
-ihwconnect -instancename router0 -busmasterport SEC_APP -bus cpu0Bus  -loaddress 0x8000002F -hiaddress 0xFFFFFFFF
-
+ihwconnect -instancename router0 -busmasterport SEC_APP -bus cpu0Bus
 
 ihwconnect -instancename router1 -busslaveport localPort -bus cpu1Bus -loaddress 0x80000000 -hiaddress 0x80000003
 ihwconnect -instancename ni1 -busslaveport DMAC -bus cpu1Bus -loaddress 0x80000004 -hiaddress 0x8000000B

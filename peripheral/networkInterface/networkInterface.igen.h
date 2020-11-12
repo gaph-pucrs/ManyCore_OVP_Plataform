@@ -1,9 +1,28 @@
+/*
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
 //
-//                             Version 20170201.0
+//                             Version 20191106.0
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -19,6 +38,7 @@
 #    include "hostapi/impTypes.h"
 #endif
 
+#ifdef _PSE_
 //////////////////////////////////// Externs ///////////////////////////////////
 
 extern Uns32 diagnosticLevel;
@@ -33,6 +53,7 @@ extern Uns32 diagnosticLevel;
 // Next two bits of word used for PSE semihost/intercept library diagnostics
 #define PSE_DIAG_SEMIHOST (BHM_DIAG_MASK_SEMIHOST(diagnosticLevel))
 
+#endif
 /////////////////////////// Register data declaration //////////////////////////
 
 typedef struct DMAC_ab8_dataS { 
@@ -44,11 +65,11 @@ typedef struct DMAC_ab8_dataS {
     } address;
 } DMAC_ab8_dataT, *DMAC_ab8_dataTP;
 
+#ifdef _PSE_
 /////////////////////////////// Port Declarations //////////////////////////////
 
 extern DMAC_ab8_dataT DMAC_ab8_data;
 
-#ifdef _PSE_
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
@@ -72,10 +93,12 @@ PPM_REG_READ_CB(statusRead);
 PPM_REG_WRITE_CB(statusWrite);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
+PPM_DOC_FN(installDocs);
 PPM_CONSTRUCTOR_CB(constructor);
 PPM_DESTRUCTOR_CB(destructor);
 PPM_SAVE_STATE_FN(peripheralSaveState);
 PPM_RESTORE_STATE_FN(peripheralRestoreState);
+
 
 #endif
 

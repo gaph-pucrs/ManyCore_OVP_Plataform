@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
 //
-//                             Version 20170201.0
+//                             Version 20191106.0
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -33,7 +33,7 @@
 #include "op/op.h"
 
 
-#define MODULE_NAME "simpleCpuRouter"
+#define MODULE_NAME "ManyCores_WormHoleNoC"
 
 
 typedef struct optModuleObjectS {
@@ -42,20 +42,31 @@ typedef struct optModuleObjectS {
 
 
 
+// forward declaration of component constructor
+static OP_CONSTRUCT_FN(instantiateComponents);
+
+static OP_CONSTRUCT_FN(moduleConstructor) {
+
+    // instantiate module components
+    instantiateComponents(mi, object);
+
+    // insert constructor code here
+}
+
 static OP_PRE_SIMULATE_FN(modulePreSimulate) {
-// insert pre simulation code here
+    // insert pre simulation code here
 }
 
 static OP_SIMULATE_STARTING_FN(moduleSimulateStart) {
-// insert simulation starting code here
+    // insert simulation starting code here
 }
 
 static OP_POST_SIMULATE_FN(modulePostSimulate) {
-// insert post simulation  code here
+    // insert post simulation code here
 }
 
 static OP_DESTRUCT_FN(moduleDestruct) {
-// insert destructor code here
+    // insert destructor code here
 }
 
 #include "module.igen.h"

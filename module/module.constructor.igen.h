@@ -571,7 +571,7 @@ void platformConstructor(void) {
         0        // unused
     );
 
-    icmConnectPSEBus( handles.router0_p, handles.cpu0Bus_b, "SEC_APP", 1, 0x8000002f, 0xffffffff);
+    icmConnectPSEBus( handles.router0_p, handles.cpu0Bus_b, "SEC_APP", 1, 0x0, 0x0);
 
     icmConnectPSEBus( handles.router0_p, handles.cpu0Bus_b, "localPort", 0, 0x80000000, 0x80000003);
 
@@ -595,6 +595,7 @@ void platformConstructor(void) {
     icmConnectPSEBus( handles.ni0_p, handles.cpu0Bus_b, "MREAD", 1, 0x0, 0x0);
 
     icmConnectPSEBus( handles.ni0_p, handles.cpu0Bus_b, "MWRITE", 1, 0x0, 0x0);
+
 
     icmConnectPSEBus( handles.ni0_p, handles.cpu0Bus_b, "DMAC", 0, 0x80000004, 0x8000000b);
 

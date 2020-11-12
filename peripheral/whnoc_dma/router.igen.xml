@@ -2,10 +2,12 @@
 
  <peripheral constructor="constructor"
     destructor="destructor"
+    formalValues="F"
     httpvis="F"
     imagefile="pse.pse"
     library="peripheral"
     name="router"
+    nbyte="F"
     releasestatus="0"
     saveRestore="F"
     vendor="gaph"
@@ -26,6 +28,7 @@
             <memorymappedregister access="rw"
                 isvolatile="T"
                 name="myAddress"
+                nbyte="F"
                 offset="0x0"
                 readfunction="addressRead"
                 width="32"
@@ -59,6 +62,11 @@
         updatefunctionargument="0"/>
     <packetnetport maxbytes="8"
         mustbeconnected="F"
+        name="portSecNoC"
+        updatefunction="secNoC"
+        updatefunctionargument="0"/>
+    <packetnetport maxbytes="8"
+        mustbeconnected="F"
         name="iterationsPort"
         updatefunction="iterationPort"
         updatefunctionargument="0"/>
@@ -86,13 +94,24 @@
         mustbeconnected="F"
         name="portControlLocal"
         updatefunction="controlLocal"
-        updatefunctionargument="0">
+        updatefunctionargument="0"/>
+    <packetnetport maxbytes="8"
+        mustbeconnected="F"
+        name="portControlSecNoc"
+        updatefunction="controlSecNoc"
+        updatefunctionargument="0"/>
+    <netport name="INT_ROUTER"
+        type="output"/>
+    <busmasterport addresswidth="32"
+        addresswidthmax="0"
+        addresswidthmin="32"
+        name="SEC_APP">
         <docsection name="doc"
             text="Description">
             <doctext name="txt"
                 text="Interrupt Request"/>
         </docsection>
-    </packetnetport>
+    </busmasterport>
     <fileversion major="1"
         minor="0"
         name="_version_0"/>

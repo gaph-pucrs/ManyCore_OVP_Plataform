@@ -122,6 +122,10 @@ imodeladdpacketnetport \
 #########################################
 imodeladdnetport -name INT_ROUTER -type output
 
-imodeladdbusmasterport -name "SEC_APP"   -addresswidth 64
+imodeladdbusmasterport -name "SEC_APP"   -addresswidth 32
+
+
+
+#timeCfg = secApp
 
 iadddocumentation -name Description -text "Interrupt Request"

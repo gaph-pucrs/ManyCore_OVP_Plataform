@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
 //
-//                             Version 20170201.0
+//                             Version 20191106.0
 //
 ////////////////////////////////////////////////////////////////////////////////
 
 #define UNUSED   __attribute__((unused))
 
-static OP_CONSTRUCT_FN(moduleConstructor) {
+// instantiate module components
+static OP_CONSTRUCT_FN(instantiateComponents) {
 
 
 
@@ -393,7 +394,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
             )
         ),
         OP_PARAMS(
-             OP_PARAM_STRING_SET("variant", "generic")
+             OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -410,7 +411,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu0_c,
         or1kNewlib_0_expath,
-        "or1kNewlib_0",
+        "or1kNewlib_0_ex",
         0
     );
 
@@ -442,7 +443,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 1)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -459,7 +460,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu1_c,
         or1kNewlib_1_expath,
-        "or1kNewlib_1",
+        "or1kNewlib_1_ex",
         0
     );
 
@@ -491,7 +492,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 2)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -508,7 +509,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu2_c,
         or1kNewlib_2_expath,
-        "or1kNewlib_2",
+        "or1kNewlib_2_ex",
         0
     );
 
@@ -540,7 +541,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 3)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -557,7 +558,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu3_c,
         or1kNewlib_3_expath,
-        "or1kNewlib_3",
+        "or1kNewlib_3_ex",
         0
     );
 
@@ -589,7 +590,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 4)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -606,7 +607,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu4_c,
         or1kNewlib_4_expath,
-        "or1kNewlib_4",
+        "or1kNewlib_4_ex",
         0
     );
 
@@ -638,7 +639,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 5)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -655,7 +656,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu5_c,
         or1kNewlib_5_expath,
-        "or1kNewlib_5",
+        "or1kNewlib_5_ex",
         0
     );
 
@@ -687,7 +688,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 6)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -704,7 +705,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu6_c,
         or1kNewlib_6_expath,
-        "or1kNewlib_6",
+        "or1kNewlib_6_ex",
         0
     );
 
@@ -736,7 +737,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 7)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -753,7 +754,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu7_c,
         or1kNewlib_7_expath,
-        "or1kNewlib_7",
+        "or1kNewlib_7_ex",
         0
     );
 
@@ -785,7 +786,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 8)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -802,7 +803,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpu8_c,
         or1kNewlib_8_expath,
-        "or1kNewlib_8",
+        "or1kNewlib_8_ex",
         0
     );
 
@@ -830,7 +831,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         ),
         OP_PARAMS(
              OP_PARAM_UNS32_SET("cpuid", 9)
-            ,OP_PARAM_STRING_SET("variant", "generic")
+            ,OP_PARAM_ENUM_SET("variant", "generic")
         )
     );
 
@@ -847,7 +848,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
     opProcessorExtensionNew(
         cpuIterator_c,
         or1kNewlib_9_expath,
-        "or1kNewlib_9",
+        "or1kNewlib_9_ex",
         0
     );
 
@@ -1302,7 +1303,7 @@ static OP_CONSTRUCT_FN(moduleConstructor) {
         "router0",
         OP_CONNECTIONS(
             OP_BUS_CONNECTIONS(
-                OP_BUS_CONNECT(cpu0Bus_b, "SEC_APP", .addrLo=0x8000002fULL, .addrHi=0xffffffffULL),
+                OP_BUS_CONNECT(cpu0Bus_b, "SEC_APP"),
                 OP_BUS_CONNECT(cpu0Bus_b, "localPort", .slave=1, .addrLo=0x80000000ULL, .addrHi=0x80000003ULL)
             ),
             OP_NET_CONNECTIONS(

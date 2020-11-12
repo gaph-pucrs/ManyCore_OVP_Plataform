@@ -82,6 +82,9 @@ unsigned int actualPort = LOCAL;
 unsigned int contPriority[N_PORTS] = {0,0,0,0,1};
 #endif
 
+
+
+
 // Stores the atual router tick status
 unsigned short int myIterationStatus = ITERATION_OFF;
 
@@ -110,9 +113,30 @@ typedef struct{
 }secNoCData;
 
 secNoCData flitSec;
+//unsigned int addressSecApp = 0x0FFFFFA0;
+unsigned int addressSecApp = 0x0FF00000;
+unsigned int usFlit;
+char chFlit[4];
+void usi2vec(){
+    chFlit[3] = (usFlit >> 24) & 0x000000FF;
+    chFlit[2] = (usFlit >> 16) & 0x000000FF;
+    chFlit[1] = (usFlit >> 8) & 0x000000FF;
+    chFlit[0] = usFlit & 0x000000FF;
+}
 
-
-
+void writeMem(unsigned int secFlit){
+    usFlit = secFlit;
+    usi2vec();
+    ppmAddressSpaceHandle h = ppmOpenAddressSpace("SEC_APP");
+    if(!h) {
+        bhmMessage("I", "secApp", "ERROR_WRITE secApp!");
+        while(1){} // error handling
+    }
+    //addressSecApp = 
+    bhmMessage("I","ADDRESSSEC", "=============================================address sec = %d", addressSecApp);
+    ppmWriteAddressSpace(h, addressSecApp+(4*flitSec.source) , sizeof(chFlit), chFlit);
+    ppmCloseAddressSpace(h);
+}
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
@@ -813,30 +837,33 @@ PPM_PACKETNET_CB(iterationPort) {
 
 ppmAddressSpaceHandle h;
 int testando = 0;
-unsigned int SecAddr = 0x8000002F;
+
                        
 
 PPM_PACKETNET_CB(secNoC) {
     if(bytes == 8){
        flitSec.data = *(Uns8*)data;
        bhmMessage("I", "ROUTER secNoC","*****************************************************data = %d",flitSec.data);
+	//writeMem(flitSec.data);
     } else{
        flitSec.source = *(Uns8*)data;
        bhmMessage("I", "ROUTER secNoC","*****************************************************source = %d",flitSec.source);
+      writeMem(htonl(flitSec.data));
         //hasDataToSend = 1;
     }
+
  
 
-     h = ppmOpenAddressSpace("SEC_APP");
+   /*  h = ppmOpenAddressSpace("SEC_APP");
     if(!h) {
         bhmMessage("I", "ROUTER secNoC", "ERROR_WRITE h handling!");
         while(1){} // error handling
-    }
+    }*/
 
    //ppmWriteAddressSpace (handles.MPORT, (Uns64)(Uns32)&, 4, &reset);
 
-    ppmWriteAddressSpace(h, SecAddr, sizeof(*(Uns8*)data), &*(Uns8*)data);
-    ppmCloseAddressSpace(h);
+  //  ppmWriteAddressSpace(h, SecAddr, sizeof(*(Uns8*)data), &*(Uns8*)data);
+   // ppmCloseAddressSpace(h);
 
     //uint32_t u = *(uint32_t*)&x;
    // ppmWriteNet(handles.INT_ROUTER, 1); */

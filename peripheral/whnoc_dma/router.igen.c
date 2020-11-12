@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2017 Imperas Software Ltd., www.imperas.com
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
 //
-//                             Version 20170201.0
+//                             Version 20191106.0
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -68,24 +68,37 @@ static void installSlavePorts(void) {
 
 static void installRegisters(void) {
 
-    ppmCreateRegister("regs_myAddress",
-        0,
-        handles.localPort,
-        0,
-        4,
-        addressRead,
-        addressWrite,
-        view32,
-        &(localPort_regs_data.myAddress.value),
-        True
-    );
+    {
+        ppmCreateRegister(
+            "regs_myAddress",
+            0,
+            handles.localPort,
+            0,
+            4,
+            addressRead,
+            addressWrite,
+            view32,
+            &(localPort_regs_data.myAddress.value),
+            True
+        );
+    }
 
 }
+
+/////////////////////////////// Bus Master Ports ///////////////////////////////
+
 static void installMasterPorts(void) {
     handles.SEC_APP = ppmOpenAddressSpace("SEC_APP");
 }
 
+PPM_DOC_FN(installDocs){
 
+    ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
+    {
+        ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
+        ppmDocAddText(doc2_node, "A OVP Wormhole Router");
+    }
+}
 ////////////////////////////////// Constructor /////////////////////////////////
 
 PPM_CONSTRUCTOR_CB(periphConstructor) {
@@ -96,28 +109,7 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
 
 ///////////////////////////////////// Main /////////////////////////////////////
 
-
-/////////////////////////////////// Net Ports //////////////////////////////////
-
-/*static void installNetPorts(void) {
-// To write to this net, use ppmWriteNet(handles.INT_ROUTER, value);
-
-    handles.INT_ROUTER = ppmOpenNetPort("INT_ROUTER");
-
-}*/
-
-
-//Uns32 u = 8(*Uns32) testando;//*(Uns32*) testando;
-
-
-
 int main(int argc, char *argv[]) {
-
-    ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
-    {
-        ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
-        ppmDocAddText(doc2_node, "A OVP Wormhole Router");
-    }
 
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
@@ -163,3 +155,4 @@ int main(int argc, char *argv[]) {
     destructor();
     return 0;
 }
+
