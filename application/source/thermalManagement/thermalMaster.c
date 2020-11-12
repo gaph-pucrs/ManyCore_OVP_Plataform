@@ -635,6 +635,7 @@ int main(int argc, char **argv) {
                     //finishedTasks++;
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i] = 2;
+                    appQuadrant[task_applicationID[i]] = -1;  // reset the app quadrant to get a new one if the app restarts
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
                 } else if (finishedTask[i] == FALSE) {
                     finishSimulation = 0;

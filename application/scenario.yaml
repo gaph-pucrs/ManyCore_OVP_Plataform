@@ -51,6 +51,9 @@ apps:
     join_av: 6
  - name: aes
    cluster: 0
+   start_time_ms: 12
+   repeat_after_ms: 18
+   repeat_times: 5
    mapping: dynamic
    dynamic_mapping:
     aes_master: 0
