@@ -555,6 +555,10 @@ void interruptHandler_NI_RX(void) {
     } else if (incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE) {
         new_state = incomingPacket[PI_PAYLOAD];
         putsv("Task state received ", new_state);
+        for (i = 0; i < DIM_X * DIM_Y; i++) {
+            mapping_table[i] = 0;
+        }
+
         for (i = 0; i < PIPE_SIZE; i++) {
             bufferPop(i);
         }
@@ -611,16 +615,15 @@ void interruptHandler_NI_RX(void) {
             migratedTask = -1;
             taskMigrated = -1;
         }
-        
-        
-        if(running_task != -1 || migration_dst == 1){
-            mapping_table[taskID] = newAddr;
-            putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
-        }
+
+        //if(running_task != -1 || migration_dst == 1){
+        mapping_table[taskID] = newAddr;
+        putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
+        //}
         /*if(mapping_table[taskID] == *myAddress){
             taskMigrated = -1; // reseting this makes this PE ready to receive a new app!
         }*/
-        
+
         *NIcmdRX = DONE;
     } else if (incomingPacket[PI_SERVICE] == TASK_FINISHED) {
         prints("Tarefa finalizada - ");
@@ -1374,10 +1377,10 @@ int getServiceIndex() {
     while (1) {
         //prints("PRESO4\n");
         for (i = 0; i < PIPE_SIZE; i++) {
-            if (myServicePacket[i][0] == 0xFFFFFFFF){
+            if (myServicePacket[i][0] == 0xFFFFFFFF) {
                 myServicePacket[i][0] = 0;
                 return i;
-            }       
+            }
         }
     }
 }
