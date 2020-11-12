@@ -1373,7 +1373,7 @@ int getServiceIndex() {
         for (i = 0; i < PIPE_SIZE; i++) {
             if (myServicePacket[i][0] == 0xFFFFFFFF){
                 index = i;
-                myServicePacket[i][0] == 0;
+                myServicePacket[i][0] = 0;
             }       
         }
         enable_interruptions();
