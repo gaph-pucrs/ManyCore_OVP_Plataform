@@ -611,11 +611,16 @@ void interruptHandler_NI_RX(void) {
             migratedTask = -1;
             taskMigrated = -1;
         }
+        
+        
+        if(running_task != -1 || migration_dst == 1){
+            mapping_table[taskID] = newAddr;
+            putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
+        }
         /*if(mapping_table[taskID] == *myAddress){
             taskMigrated = -1; // reseting this makes this PE ready to receive a new app!
         }*/
-        mapping_table[taskID] = newAddr;
-        putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
+        
         *NIcmdRX = DONE;
     } else if (incomingPacket[PI_SERVICE] == TASK_FINISHED) {
         prints("Tarefa finalizada - ");

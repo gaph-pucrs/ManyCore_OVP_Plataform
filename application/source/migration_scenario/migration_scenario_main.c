@@ -267,7 +267,6 @@ int main(int argc, char **argv) {
             //mapping_table[migratedTask] = 0;  // clear this address value
             enable_interruptions();
 
-            prints("Atualizando a tabela das tasks da mesma app\n");
             // Send the updt addr msg to every PE
             aux[0] = ((destination << 16) | migratedTask);  // mounts the update addr flit
             for (i = 1; i < DIM_X * DIM_Y; i++) {
@@ -280,8 +279,6 @@ int main(int argc, char **argv) {
                 }
             }
 
-            //update_mapping_table();
-
             sendPipe(destination);
             sendPendingReq(destination);
 
@@ -290,8 +287,8 @@ int main(int argc, char **argv) {
                 mapping_table[i] = mapping_table[i] | (appID[i] << 16);
             }
             sendTaskService(TASK_MIGRATION_DEST, destination, mapping_table, NUM_TASK);
-            for (i = 0; i < NUM_TASK; i++) {
-                //new_task_addr[i] = new_task_addr[i] & 0x0000FFFF;
+            
+			for (i = 0; i < NUM_TASK; i++) {
                 mapping_table[i] = 0;
             }
         }
