@@ -240,6 +240,9 @@ int main(int argc, char **argv) {
             sendFinishTask(running_task);
             migratedTask = -1;
             running_task = -1;
+            for (i = 0; i < NUM_TASK; i++) {
+                mapping_table[i] = 0;
+            }
         } else {  // migration
             migratedTask = running_task;
             get_migration_mapping_table(new_task_addr);
@@ -254,18 +257,20 @@ int main(int argc, char **argv) {
             mapping_table[migratedTask] = 0;  // clear this address value
             enable_interruptions();
 
+            prints("Atualizando a tabela das tasks da mesma app\n");
             // Send the updt addr msg to every PE
             aux[0] = ((destination << 16) | migratedTask);  // mounts the update addr flit
             for (i = 1; i < DIM_X * DIM_Y; i++) {
-                if (appID[i] == appID[migratedTask]) {  // sends the update for every task in the same application
-                    sendTaskService(TASK_ADDR_UPDT, getAddress(mapping_table[i]), aux, 1);
+                if (appID[i] == appID[migratedTask] && i != migratedTask) {  // sends the update for every task in the same application
+                    putsv("enviando update para tarefa ", i);
+                    sendTaskService(TASK_ADDR_UPDT, mapping_table[i], aux, 1);
                     if (mapping_table[i] != migration_mapping_table[i]) {
-                        sendTaskService(TASK_ADDR_UPDT, getAddress(migration_mapping_table[i]), aux, 1);
+                        sendTaskService(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1);
                     }
                 }
             }
 
-            update_mapping_table();
+            //update_mapping_table();
 
             sendPipe(destination);
             sendPendingReq(destination);
@@ -274,9 +279,10 @@ int main(int argc, char **argv) {
             for (i = 0; i < NUM_TASK; i++) {
                 new_task_addr[i] = new_task_addr[i] | (appID[i] << 16);
             }
-            sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
+            sendTaskService(TASK_MIGRATION_DEST, destination, mapping_table, NUM_TASK);
             for (i = 0; i < NUM_TASK; i++) {
                 new_task_addr[i] = new_task_addr[i] & 0x0000FFFF;
+                mapping_table[i] = 0;
             }
         }
     }

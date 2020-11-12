@@ -2,11 +2,11 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define NUM_NODES 					16		//16 for small input;
-#define NPROC 						5
-#define CALCULATIONS				500
-#define INFINITY					9999
-#define KILL						99999
+#define NUM_NODES 16  //16 for small input;
+#define NPROC 5
+#define CALCULATIONS 127
+#define INFINITY 9999
+#define KILL 99999
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
