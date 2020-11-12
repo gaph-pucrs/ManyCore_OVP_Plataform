@@ -320,7 +320,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_start_time[DIM
             task_addr[i] = task_addr[i] | 0x80000000;
             //task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
             sendTaskService(TASK_MAPPING, (task_addr[i] & 0x0000FFFF), task_addr, tasks_to_map);
-            //task_addr[i] = task_addr[i] & 0x0000FFFF;
+            task_addr[i] = task_addr[i] & 0x0000FFFF;
             task_start_time[i] = -1;  //RELEASED
             task_remaining_executions[i]--;
         }
@@ -462,7 +462,7 @@ int main(int argc, char **argv) {
         while (*SyncToPE != 1) {  // Repete este processo enquanto houverem outras tarefas executando!
 
             putsv("Timer (ms) ", measuredWindows);
-            
+
             releaseTasks(task_addr, task_start_time, task_remaining_executions, task_applicationID);
 
             //////////////////////////////////////////////////////

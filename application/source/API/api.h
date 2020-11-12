@@ -1375,13 +1375,13 @@ void sendFinishTask(unsigned int running_task) {
 int getServiceIndex() {
     int i;
     while (1) {
-        //prints("PRESO4\n");
         for (i = 0; i < PIPE_SIZE; i++) {
             if (myServicePacket[i][0] == 0xFFFFFFFF) {
                 myServicePacket[i][0] = 0;
                 return i;
             }
         }
+        prints("PRESO4\n");
     }
 }
 

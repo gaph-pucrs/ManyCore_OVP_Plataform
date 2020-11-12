@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "../peripheral/whnoc_dma/noc.h"
+#include "aes_config.h"
 #include "audio_video_config.h"
 #include "dijkstra_config.h"
 #include "dtw_config.h"
@@ -12,7 +13,6 @@
 #include "source/API/api.h"
 #include "spr_defs.h"
 #include "synthetic_config.h"
-#include "aes_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
@@ -227,7 +227,7 @@ int main(int argc, char **argv) {
             case recognizer:
                 state = dtw_recognizer(state);
                 break;
-			// AES
+                // AES
             case aes_master:
                 state = aesMaster(state);
                 break;
@@ -246,8 +246,8 @@ int main(int argc, char **argv) {
         }
         if (state == 0) {
             printFinish();
-            mapping_table[running_task] = 0;  // clear this address value
             sendFinishTask(running_task);
+            mapping_table[running_task] = 0;  // clear this address value
             migratedTask = -1;
             running_task = -1;
             for (i = 0; i < NUM_TASK; i++) {
@@ -287,8 +287,8 @@ int main(int argc, char **argv) {
                 mapping_table[i] = mapping_table[i] | (appID[i] << 16);
             }
             sendTaskService(TASK_MIGRATION_DEST, destination, mapping_table, NUM_TASK);
-            
-			for (i = 0; i < NUM_TASK; i++) {
+
+            for (i = 0; i < NUM_TASK; i++) {
                 mapping_table[i] = 0;
             }
         }
