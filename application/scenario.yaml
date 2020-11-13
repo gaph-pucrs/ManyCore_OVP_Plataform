@@ -1,7 +1,45 @@
 apps:
+ - name: mpeg
+   cluster: 0
+   mapping: dynamic
+   repeat_after_ms: 100
+   repeat_times: 5
+   dynamic_mapping:
+    print_mpeg: 0
+    idct: 1
+    start: 2
+    ivlc: 3
+    iquant: 4
+ - name: dtw
+   cluster: 0
+   mapping: dynamic
+   repeat_after_ms: 100
+   repeat_times: 2   
+   dynamic_mapping:
+    bank: 0
+    p1: 1
+    p2: 2
+    p3: 3
+    p4: 4
+    recognizer: 5
+ - name: aes
+   cluster: 0
+   mapping: dynamic
+   start_time_ms: 50
+   repeat_after_ms: 500
+   repeat_times: 10
+   dynamic_mapping:
+    aes_master: 0
+    aes_slave1: 1
+    aes_slave2: 2
+    aes_slave3: 3
+    aes_slave4: 4
  - name: synthetic
    cluster: 0
    mapping: dynamic
+   start_time_ms: 100
+   repeat_after_ms: 200
+   repeat_times: 8
    dynamic_mapping:
     taskA: 0
     taskB: 1
@@ -12,6 +50,9 @@ apps:
  - name: dijkstra
    cluster: 0
    mapping: dynamic
+   start_time_ms: 150
+   repeat_after_ms: 200
+   repeat_times: 4
    dynamic_mapping:
     divider: 0
     dijkstra_0: 1
@@ -19,28 +60,12 @@ apps:
     dijkstra_2: 3
     dijkstra_3: 4
     print: 5
- - name: mpeg
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    print_mpeg: 0
-    idct: 1
-    start: 2
-    ivlc: 3
-    iquant: 4
- - name: dtw
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    bank: 0
-    p1: 1
-    p2: 2
-    p3: 3
-    p4: 4
-    recognizer: 5
  - name: audio_video
    cluster: 0
    mapping: dynamic
+   start_time_ms: 500
+   repeat_after_ms: 2000
+   repeat_times: 3
    dynamic_mapping:
     split_av: 0
     ivlc_av: 1
@@ -49,21 +74,12 @@ apps:
     adpcm_dec_av: 4
     FIR_av: 5
     join_av: 6
- - name: aes
-   cluster: 0
-   start_time_ms: 12
-   repeat_after_ms: 18
-   repeat_times: 5
-   mapping: dynamic
-   dynamic_mapping:
-    aes_master: 0
-    aes_slave1: 1
-    aes_slave2: 2
-    aes_slave3: 3
-    aes_slave4: 4
  - name: sort
    cluster: 0
    mapping: dynamic
+   start_time_ms: 1000
+   repeat_after_ms: 2200
+   repeat_times: 3
    dynamic_mapping:
     sort_master: 0
     sort_slave1: 1
