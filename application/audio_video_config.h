@@ -33,10 +33,10 @@
 
 #define AUDIO_VIDEO_PERIOD	40000*/
 
-#define join_av 29
-#define FIR_av 28
-#define adpcm_dec_av 27
-#define idct_av 26
-#define iquant_av 25
-#define ivlc_av 24
-#define split_av 23
+#define join_av 34
+#define FIR_av 33
+#define adpcm_dec_av 32
+#define idct_av 31
+#define iquant_av 30
+#define ivlc_av 29
+#define split_av 28

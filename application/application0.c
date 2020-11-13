@@ -637,7 +637,8 @@ int main(int argc, char **argv) {
                     finishedTask[i] = 2;
                     appQuadrant[task_applicationID[i]] = -1;  // reset the app quadrant to get a new one if the app restarts
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
-                } else if (finishedTask[i] == FALSE) {
+                } else if (finishedTask[i] == FALSE && finishSimulation == 1) {
+                    putsv("not finishing by task ", i);
                     finishSimulation = 0;
                 }
             }

@@ -6,9 +6,9 @@
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define taskF 5
-#define taskE 4
-#define taskD 3
-#define taskC 2
-#define taskB 1
-#define taskA 0
+#define taskF 21
+#define taskE 20
+#define taskD 19
+#define taskC 18
+#define taskB 17
+#define taskA 16
