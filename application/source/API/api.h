@@ -488,8 +488,10 @@ void interruptHandler_NI_RX(void) {
             if ((incomingPacket[PI_PAYLOAD + i] & 0x80000000) != 0) {
                 running_task = i;
             }
+
             appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
             mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
+            putsvsv("Task ", i, " belongs to app ", appID[i]);
             // LOG("%d APP: %d task: %d address: %d\n", getID(*myAddress), appID[i], i, mapping_table[i]);
             //}
         }
