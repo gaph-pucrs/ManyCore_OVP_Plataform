@@ -526,8 +526,11 @@ void interruptHandler_NI_RX(void) {
             if ((incomingPacket[PI_PAYLOAD + i] & 0x80000000) != 0) {
                 running_task = i;
             }
-            if (mapping_table[i] == 0)
+            if (mapping_table[i] == 0) {
                 mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
+            } else {
+                putsv("not changing mapping_table entry ", i);
+            }
             appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
         }
         /*for(i=0; i<num_tasks; i++){
