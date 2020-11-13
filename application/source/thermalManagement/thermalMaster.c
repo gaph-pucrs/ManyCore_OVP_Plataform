@@ -143,13 +143,13 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X * 
     int foundJ = -1;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_addr[i] == pe && foundI == -1) {
-            foundI = i;  // found inside the future address
+            foundI = i; // found inside the future address
         }
         if (task_confirmed_addr[i] == pe && foundJ == -1) {
-            foundJ = i;  // found inside the confirmed address
+            foundJ = i; // found inside the confirmed address
         }
-        if (foundI != -1 && foundJ != -1) {  // if u found in both address list
-            if (foundI == foundJ) {          // and they are in the same ID (task)
+        if (foundI != -1 && foundJ != -1) { // if u found in both address list
+            if (foundI == foundJ) {         // and they are in the same ID (task)
                 return FALSE;
             } else {
                 return TRUE;
@@ -175,7 +175,7 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
     int k = QUAD_DIM_X * QUAD_DIM_Y - 1;
     unsigned int contNumberOfMigrations = 0;
     int i, j, q;
-    int src_vec[DIM_X * DIM_Y];  // = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int src_vec[DIM_X * DIM_Y]; // = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     int srcProcs[DIM_X * DIM_Y];
 
@@ -195,14 +195,14 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
             srcProc = x << 8 | y;
             if (temp[srcID] > 33300 && srcID != 0) {
                 putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
-                if (migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE) {  // iaçanã: detecta PEs que nao podem migrar
+                if (migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE) { // iaçanã: detecta PEs que nao podem migrar
                     if (how_many_tasks_PE_is_running(srcProc, task_addr) > 0 && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE) {
                         while (k > 0) {
                             tgtProc = tempMatrix[q][k];
                             task_ID = getSomeTaskID(srcProc, task_addr);
                             putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
                             //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
-                            if (migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE) {  // iaçanã: mesma coisa de antes
+                            if (migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE) { // iaçanã: mesma coisa de antes
                                 if ((how_many_tasks_PE_is_running(tgtProc, task_addr) == 0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec) == 0)) {
                                     //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                                     prints("send_task_migration\n");
@@ -256,19 +256,19 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
 
 int getRandomEmptyPE(unsigned int task_addr[DIM_X * DIM_Y]) {
     int i, j, empty, pe;
-    pe = random() % (DIM_X * DIM_Y);  // assumes a random address
-    if (pe == 0)                      // zero is reserved to the master
+    pe = random() % (DIM_X * DIM_Y); // assumes a random address
+    if (pe == 0)                     // zero is reserved to the master
         pe++;
     for (j = 1; j < DIM_X * DIM_Y; j++) {
-        empty = 1;  // presumes that it is empty
+        empty = 1; // presumes that it is empty
         for (i = 0; i < DIM_X * DIM_Y; i++) {
-            if (task_addr[i] == getAddress(pe)) {  // if you find some task runnin inside that processor
+            if (task_addr[i] == getAddress(pe)) { // if you find some task runnin inside that processor
                 empty = 0;
-                break;  // breaks
+                break; // breaks
             }
-            if (task_confirmed_addr[i] == getAddress(pe)) {  // if you find some task runnin inside that processor
+            if (task_confirmed_addr[i] == getAddress(pe)) { // if you find some task runnin inside that processor
                 empty = 0;
-                break;  // breaks
+                break; // breaks
             }
         }
         if (empty) {
@@ -308,7 +308,7 @@ int getQuadTemp(int xi, int yi) {
         }
     }
 
-    return sum / 16;  // porque 16? é o tamanho do quadrante?
+    return sum / 16; // porque 16? é o tamanho do quadrante?
 }
 
 int getCoolestQuad() {
@@ -342,16 +342,16 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y], int appID) {
         }
 
         for (j = QUAD_DIM_X * QUAD_DIM_Y - 1; j > 0; j--) {
-            pe = tempMatrix[appQuadrant[appID]][j];  // gets the peAddr from tempMatrix
-            empty = 1;                               // presumes that it is empty
+            pe = tempMatrix[appQuadrant[appID]][j]; // gets the peAddr from tempMatrix
+            empty = 1;                              // presumes that it is empty
             for (i = 0; i < DIM_X * DIM_Y; i++) {
-                if (task_addr[i] == pe) {  // if you find some task runnin inside that processor
+                if (task_addr[i] == pe) { // if you find some task runnin inside that processor
                     empty = 0;
-                    break;  // breaks
+                    break; // breaks
                 }
-                if (task_confirmed_addr[i] == pe) {  // if you find some task runnin inside that processor
+                if (task_confirmed_addr[i] == pe) { // if you find some task runnin inside that processor
                     empty = 0;
-                    break;  // breaks
+                    break; // breaks
                 }
             }
             if (empty) {
@@ -377,9 +377,9 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1) {
             appID = task_applicationID[i];
-            task_addr[i] = getSpiralMatixEmptyPE(task_addr, appID);  //getRandomEmptyPE(task_addr);
-            if (task_addr[i]) {                                      // if the task got some valid address
-                task_start_time[i] = -2;                             // PRE-RELEASE
+            task_addr[i] = getSpiralMatixEmptyPE(task_addr, appID); //getRandomEmptyPE(task_addr);
+            if (task_addr[i]) {                                     // if the task got some valid address
+                task_start_time[i] = -2;                            // PRE-RELEASE
                 finishedTask[i] = FALSE;
                 putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
             }
@@ -400,7 +400,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
             //task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
             sendTaskService(TASK_MAPPING, (task_addr[i] & 0x0000FFFF), task_addr, tasks_to_map);
             task_addr[i] = task_addr[i] & 0x0000FFFF;
-            task_start_time[i] = -1;  //RELEASED
+            task_start_time[i] = -1; //RELEASED
             task_remaining_executions[i]--;
         }
     }
@@ -481,7 +481,7 @@ int main(int argc, char **argv) {
             app_name = strtok(NULL, " ");
             app_name[strlen(app_name) - 1] = '\0';
             yaml_tasks = 0;
-            starting_time = 0;  // defines the starting time to zero
+            starting_time = 0; // defines the starting time to zero
             repeat_after = 0;
             executions = 1;
             appID = appID + 1;
@@ -552,7 +552,7 @@ int main(int argc, char **argv) {
 
     /* Wait for every PE to send each power estimation */
     if (*timerConfig != 0) {
-        while (*SyncToPE != 1) {  // Repete este processo enquanto houverem outras tarefas executando!
+        while (*SyncToPE != 1) { // Repete este processo enquanto houverem outras tarefas executando!
 
             putsv("Timer (ms) ", measuredWindows);
 
@@ -574,7 +574,7 @@ int main(int argc, char **argv) {
             for (i = 0; i < DIM_X * DIM_Y; i++) {
                 //printi(deliveredMessage->msg[i]);
                 printi(executedInstPacket[i]);
-                Temperature[i] = executedInstPacket[i];  //deliveredMessage->msg[i];
+                Temperature[i] = executedInstPacket[i]; //deliveredMessage->msg[i];
             }
 
             //////////////////////////
@@ -635,7 +635,7 @@ int main(int argc, char **argv) {
                     //finishedTasks++;
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i] = 2;
-                    appQuadrant[task_applicationID[i]] = -1;  // reset the app quadrant to get a new one if the app restarts
+                    appQuadrant[task_applicationID[i]] = -1; // reset the app quadrant to get a new one if the app restarts
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
                 } else if (finishedTask[i] == FALSE && finishSimulation == 1) {
                     putsv("not finishing by task ", i);
