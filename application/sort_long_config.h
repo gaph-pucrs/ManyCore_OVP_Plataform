@@ -3,8 +3,10 @@
 #define LFSR_POL 0xA3000000
 
 #define TASK_REQUEST    0x1000
-#define KILL_PROC		    0x2000
-#define MSG_ACK			    0x3000
+#define KILL_PROC		0x2000
+#define MSG_ACK			0x3000
+#define TASKS 			15000
+#define SORT_SLAVES 3
 
 unsigned int rand_val = LFSR_POL;
 
@@ -49,7 +51,7 @@ void quicksort(int *array, int lo, int hi) {
         quicksort(array, p + 1, hi);
     }
 }
-#define sort_slave3 38
-#define sort_slave2 37
-#define sort_slave1 36
-#define sort_master 35
+#define sort_slave3 33
+#define sort_slave2 32
+#define sort_slave1 31
+#define sort_master 30

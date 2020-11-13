@@ -2,7 +2,7 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define MPEG_FRAMES				1000//160
+#define MPEG_FRAMES				24000//160
 // Cosine Transform Coefficients
 #define W1 2841                 /* 2048*sqrt(2)*cos(1*pi/16) */
 #define W2 2676                 /* 2048*sqrt(2)*cos(2*pi/16) */
@@ -200,8 +200,9 @@ DCTtab DCTtab6[16] =
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define iquant 4
-#define ivlc 3
-#define start 2
-#define idct 1
-#define print_mpeg 0
+
+#define iquant 16
+#define ivlc 15
+#define start 14
+#define idct 13
+#define print_mpeg 12
