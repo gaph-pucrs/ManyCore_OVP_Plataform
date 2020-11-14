@@ -246,8 +246,8 @@ int main(int argc, char **argv) {
         }
         if (state == 0) {
             printFinish();
-            sendFinishTask(running_task);
             mapping_table[running_task] = 0; // clear this address value
+            sendFinishTask(running_task);
             migratedTask = -1;
             running_task = -1;
             for (i = 0; i < NUM_TASK; i++) {
