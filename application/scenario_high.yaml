@@ -1,5 +1,5 @@
 apps:
- - name: synthetic
+ - name: synthetic_long
    cluster: 0
    mapping: dynamic
    dynamic_mapping:
@@ -9,9 +9,10 @@ apps:
     taskD: 3
     taskE: 4
     taskF: 5
- - name: dijkstra
+ - name: dijkstra_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 7
    dynamic_mapping:
     divider: 0
     dijkstra_0: 1
@@ -19,18 +20,20 @@ apps:
     dijkstra_2: 3
     dijkstra_3: 4
     print: 5
- - name: mpeg
+ - name: mpeg_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 11
    dynamic_mapping:
-    print: 0
+    print_mpeg: 0
     idct: 1
     start: 2
     ivlc: 3
     iquant: 4
- - name: dtw
+ - name: dtw_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 17
    dynamic_mapping:
     bank: 0
     p1: 1
@@ -38,9 +41,10 @@ apps:
     p3: 3
     p4: 4
     recognizer: 5
- - name: audio_video
+ - name: audio_video_long
    cluster: 0
    mapping: dynamic
+   start_time_ms: 21
    dynamic_mapping:
     split_av: 0
     ivlc_av: 1
@@ -49,18 +53,10 @@ apps:
     adpcm_dec_av: 4
     FIR_av: 5
     join_av: 6
- - name: aes
+ - name: sort_long
    cluster: 0
    mapping: dynamic
-   dynamic_mapping:
-    aes_master: 0
-    aes_slave1: 1
-    aes_slave2: 2
-    aes_slave3: 3
-    aes_slave4: 4
- - name: sort
-   cluster: 0
-   mapping: dynamic
+   start_time_ms: 27
    dynamic_mapping:
     sort_master: 0
     sort_slave1: 1
