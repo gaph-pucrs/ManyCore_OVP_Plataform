@@ -2,13 +2,17 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define SYNTHETIC_ITERATIONS	40000
+#define NUM_NODES 16  //16 for small input;
+#define NPROC 5
+#define CALCULATIONS 127
+#define INFINITY 9999
+#define KILL 99999
 //////////////////////////////////////
 // Tasks addresses ///////////////////
 //////////////////////////////////////
-#define taskF 5
-#define taskE 4
-#define taskD 3
-#define taskC 2
-#define taskB 1
-#define taskA 0
+#define print 11
+#define dijkstra_3 10
+#define dijkstra_2 9
+#define dijkstra_1 8
+#define dijkstra_0 7
+#define divider 6

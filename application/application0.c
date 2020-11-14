@@ -227,11 +227,11 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
             k = QUAD_DIM_X * QUAD_DIM_Y - 1;
         }
         if (temp[i] > 35515 && Frequency[i] == 1000) {
-            // LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            putsv("BAIXANDO A FREQUENCIA DE ", srcProc);
             Frequency[i] = 677;
             setDVFS(srcProc, Frequency[i]);
         } else if (temp[i] < 35515 && Frequency[i] == 677) {
-            // LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            putsv("SUBINDO A FREQUENCIA DE ", srcProc);
             Frequency[i] = 1000;
             setDVFS(srcProc, Frequency[i]);
         }
@@ -400,7 +400,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
             task_addr[i] = task_addr[i] | 0x80000000;
             // task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
             sendTaskService(TASK_MAPPING, (task_addr[i] & 0x0000FFFF), task_addr, tasks_to_map);
-            task_addr[i] = task_addr[i] & 0x0000FFFF;
+            task_addr[i] = task_addr[i] & 0x7FFFFFFF;
             task_start_time[i] = -1; // RELEASED
             task_remaining_executions[i]--;
         }
@@ -574,8 +574,8 @@ int main(int argc, char **argv) {
             prints("TEA Packet Received: ");
             for (i = 0; i < DIM_X * DIM_Y; i++) {
                 // printi(deliveredMessage->msg[i]);
-                printi(executedInstPacket[i]);
-                Temperature[i] = executedInstPacket[i]; // deliveredMessage->msg[i];
+                printi(executedInstPacket2[i]);
+                Temperature[i] = executedInstPacket2[i]; // deliveredMessage->msg[i];
             }
 
             //////////////////////////
@@ -645,10 +645,14 @@ int main(int argc, char **argv) {
             }
             for (i = 0; i < tasks_to_map; i++) {
                 if (finishedTask[i] == 2) {
-                    finishedTask[i] = 3;
                     // updates every PE mapping table to clear the past address
+                    while (task_applicationID[i + 1] == task_applicationID[i]) {
+                        finishedTask[i] = 3;
+                        i++;
+                    }
+                    finishedTask[i] = 3;
                     for (j = 1; j < N_PES; j++) {
-                        aux[0] = ((0 << 16) | i);
+                        aux[0] = ((0 << 16) | task_applicationID[i]);
                         sendTaskService(TASK_ADDR_UPDT, getAddress(j), aux, 1);
                     }
                 }
