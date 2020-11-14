@@ -355,10 +355,9 @@ void interruptHandler_NI_RX(void) {
     if (incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET) {
         tempPacket = TRUE;
         // deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
-        // IF YOU WANT TO ACCESS THE (SENDTIME - SERVICE - HOPS - INITERATION - OUTITERATION) FLITS - HERE IS THE LOCAL TO DO IT!!!
         for (i = 0; i < (incomingPacket[PI_SIZE] - 3 - 2); i++) {
             // deliveredMessage->msg[i] = incomingPacket[i+4];
-            executedInstPacket[i] = incomingPacket[i + 4];
+            executedInstPacket2[i] = incomingPacket[i + 4];
         }
         *NIcmdRX = DONE; // releases the NI RX to return to the IDLE state
     } else if (incomingPacket[PI_SERVICE] == MESSAGE_DELIVERY /*|| incomingPacket[PI_SERVICE] == INSTR_COUNT_PACKET || incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET*/) {
@@ -597,19 +596,21 @@ void interruptHandler_NI_RX(void) {
         // printi(incomingPacket[PI_PAYLOAD]);
         taskID = incomingPacket[PI_PAYLOAD] & 0x0000FFFF;
         newAddr = (incomingPacket[PI_PAYLOAD] & 0x7FFF0000) >> 16;
-        if (newAddr == 0 && taskID == migratedTask) {
-            migratedTask = -1;
-            taskMigrated = -1;
+        if (newAddr == 0) { // in case of master cleaning possible old content
+            for (i = 0; i < DIM_Y * DIM_X; i++) {
+                if (taskID == appID[i]) {    // if the task belongs to this app then
+                    mapping_table[i] = 0;    // clear the mapping table
+                    if (i == migratedTask) { // and also, if the task has migrated from this PE, clear it
+                        migratedTask = -1;
+                        taskMigrated = -1;
+                    }
+                }
+            }
+        } else { // in case of PEs informing new addresses
+            mapping_table[taskID] = newAddr;
         }
 
-        // if(running_task != -1 || migration_dst == 1){
-        mapping_table[taskID] = newAddr;
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
-        //}
-        /*if(mapping_table[taskID] == *myAddress){
-            taskMigrated = -1; // reseting this makes this PE ready to receive a new app!
-        }*/
-
         *NIcmdRX = DONE;
     } else if (incomingPacket[PI_SERVICE] == TASK_FINISHED) {
         prints("Tarefa finalizada - ");

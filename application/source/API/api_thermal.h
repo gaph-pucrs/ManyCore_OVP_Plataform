@@ -2,16 +2,16 @@
 #define __THERMAL_H__
 
 /*--------------------------------------------------------------------------------
- * OVERHEAD FINE-GRAIN VOLTAGE SCALING - *DC_DC_CONVERTER_ENERGY_OVERHEAD/10 
+ * OVERHEAD FINE-GRAIN VOLTAGE SCALING - *DC_DC_CONVERTER_ENERGY_OVERHEAD/10
  * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
  * Class[0.9 V][1.0 V][1.1 V] - Power Leakage and Dynamic
  * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
  * Total leakage power of a bank without power gating, including its network outside (uW)
  * -------------------------------------------------------------------------------*/
 
-//the period is actually 2.5 ns
-#define PERIOD_NS 1  // for 1 GHz
-//the period is actually 10%. Look the using of this constant
+// the period is actually 2.5 ns
+#define PERIOD_NS 1 // for 1 GHz
+// the period is actually 10%. Look the using of this constant
 #define DC_DC_CONVERTER_ENERGY_OVERHEAD 11
 
 /*--------------------------------------------------------------------------------
@@ -86,7 +86,7 @@
  * ROUTER - Multipling power and period results in energy (pJ)
  * the energy is in pJ MULTIPLIED BY 100 (xxxx => xx.xx)
  * -------------------------------------------------------------------------------*/
-//mW*100 or uW/10
+// mW*100 or uW/10
 #define DYN_BUFFER_ACTIVE_0 118
 #define DYN_BUFFER_ACTIVE_1 151
 #define DYN_BUFFER_ACTIVE_2 188
@@ -103,7 +103,7 @@
 #define DYN_CTRL_IDLE_1 18
 #define DYN_CTRL_IDLE_2 22
 /*--------------------------------------------------------------------------------
- * OVERHEAD FINE-GRAIN VOLTAGE SCALING - *DC_DC_CONVERTER_ENERGY_OVERHEAD/10 
+ * OVERHEAD FINE-GRAIN VOLTAGE SCALING - *DC_DC_CONVERTER_ENERGY_OVERHEAD/10
  * THE INTEGER IS A FLOAT CONSTANT MULTIPLIED BY 100 (xxxx => xx.xx)
  * Class[0.9 V][1.0 V][1.1 V] - Power Leakage and Dynamic
  * Total leakage power of a bank without power gating, including its network outside (uW)
@@ -143,7 +143,7 @@ const int writeEnergyMemory[3] = {DYN_WRITE_MEM_0, DYN_WRITE_MEM_1, DYN_WRITE_ME
  * Multipling power and period results in energy (pJ)
  * the energy is in pJ MULTIPLIED BY 100 (xxxx => xx.xx)
  * -------------------------------------------------------------------------------*/
-//mW*100 or uW/10
+// mW*100 or uW/10
 const int powerAvgBufferActive[3] = {DYN_BUFFER_ACTIVE_0, DYN_BUFFER_ACTIVE_1, DYN_BUFFER_ACTIVE_2};
 const int powerSwitchControlActive[3] = {DYN_CTRL_ACTIVE_0, DYN_CTRL_ACTIVE_1, DYN_CTRL_ACTIVE_2};
 
@@ -262,14 +262,14 @@ typedef struct {
 } Instrucions_class;
 
 typedef struct {
-    //total energy
+    // total energy
     unsigned int processor;
     unsigned int router;
     unsigned int memory;
-    //leakage energy
+    // leakage energy
     unsigned int leakage;
     unsigned int n_inst;
-    //real sampling window
+    // real sampling window
     unsigned int real_window;
 } Estimation_of_energy;
 
@@ -298,9 +298,10 @@ unsigned int latency_DVS = 0;
 
 // Activate this flag to deactivate the instruction count - "clock gating the processor"
 volatile unsigned int *clockGating_flag = CLK_GATING;
-volatile unsigned int *operationFrequency = FREQUENCY_SCALE;  // Used by the HARNESS to control the processor frequency
-volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];    // Used by the API_thermal to create the energy packet
-volatile unsigned int sendExecutedInstPacket = FALSE;         // Used by the API_thermal to inform if the energy packet must be sent after the TX interruption
+volatile unsigned int *operationFrequency = FREQUENCY_SCALE; // Used by the HARNESS to control the processor frequency
+volatile unsigned int executedInstPacket[PACKET_MAX_SIZE];   // Used by the API_thermal to create the energy packet
+volatile unsigned int executedInstPacket2[PACKET_MAX_SIZE];  // Used by the API_thermal to create the energy packet
+volatile unsigned int sendExecutedInstPacket = FALSE;        // Used by the API_thermal to inform if the energy packet must be sent after the TX interruption
 
 //////////////////////////////
 // Thermal Stuff
@@ -407,7 +408,7 @@ void energyEstimation() {
     unsigned int avoidOverflow, energyProcDif_leak, energyLocalDif_dyn, energyLocalDif_leak;
 
     // This is required by the thermalMaster to synchronize the power analysis.
-    //waitingEnergyReport = 0;
+    // waitingEnergyReport = 0;
 
     actualTime = (unsigned int)clock();
     difTime = actualTime - (unsigned int)lastTimeInstructions;
@@ -415,7 +416,7 @@ void energyEstimation() {
 
     /*Read executed instructions*/
     read_class_inst();
-    Instrucions_class inst_class;  //*inst_class_ptr,
+    Instrucions_class inst_class; //*inst_class_ptr,
 
     inst_class.arith = arith_inst >> 6;
     inst_class.logical = logical_inst >> 6;
@@ -429,8 +430,9 @@ void energyEstimation() {
     inst_class.mult_div = mult_div_inst >> 6;
     inst_class.total = arith_inst + logical_inst + branch_inst + jump_inst + move_inst + load_inst + store_inst + shift_inst + nop_inst + mult_div_inst;
 
-    //Print router info
-    //LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
+    // Print router info
+    // LOG("%x, EAST:%d,%d WEST:%d,%d NORTH:%d,%d SOUTH:%d,%d LOCAL:%d,%d
+    // \n",*myAddress,*eastFlits,*eastPackets,*westFlits,*westPackets,*northFlits,*northPackets,*southFlits,*southPackets,*localFlits,*localPackets);
     ////////////////////////////////
     /* NOC ENERGY */
     timeActiveNoC = estimateNoCActivity();
@@ -481,40 +483,33 @@ void energyEstimation() {
     ////////////////////////////////
     /* PE ENERGY */
 
-    energyProcDif_dyn = arithDyn[Voltage] * inst_class.arith +
-                        branchDyn[Voltage] * inst_class.branch +
-                        jumpDyn[Voltage] * inst_class.jump +
-                        moveDyn[Voltage] * inst_class.move +
-                        loadStoreDyn[Voltage] * (inst_class.load + inst_class.store) +
-                        shiftDyn[Voltage] * inst_class.shift +
-                        nopDyn[Voltage] * inst_class.nop +
-                        logicalDyn[Voltage] * inst_class.logical +
-                        multDivDyn[Voltage] * inst_class.mult_div;
+    energyProcDif_dyn = arithDyn[Voltage] * inst_class.arith + branchDyn[Voltage] * inst_class.branch + jumpDyn[Voltage] * inst_class.jump + moveDyn[Voltage] * inst_class.move +
+                        loadStoreDyn[Voltage] * (inst_class.load + inst_class.store) + shiftDyn[Voltage] * inst_class.shift + nopDyn[Voltage] * inst_class.nop +
+                        logicalDyn[Voltage] * inst_class.logical + multDivDyn[Voltage] * inst_class.mult_div;
 
     energyProcDif_dyn = energyProcDif_dyn * DC_DC_CONVERTER_ENERGY_OVERHEAD / 10;
 
-    //prints("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
+    // prints("DEBUG-%x: energyProcDif_dyn: %d\n",*myAddress, energyProcDif_dyn);
 
     /* MEMORY ENERGY */
-    energyMemoryDif_dyn = readEnergyMemory[Voltage] * inst_class.load +
-                          writeEnergyMemory[Voltage] * inst_class.store;
+    energyMemoryDif_dyn = readEnergyMemory[Voltage] * inst_class.load + writeEnergyMemory[Voltage] * inst_class.store;
 
     avoidOverflow = difTime >> 6;
     energyMemoryDif_leak = PERIOD_NS / 10 * energyLeakMemory[Voltage] * avoidOverflow;
 
-    if (flag_DVS) {  //voltage_scaling (flag_DVS==1 || flag_DVS==-1)
+    if (flag_DVS) { // voltage_scaling (flag_DVS==1 || flag_DVS==-1)
         avoidOverflow = latency_DVS >> 6;
         energyProcDif_leak = energyLeakProc[Voltage + flag_DVS] * avoidOverflow * DC_DC_CONVERTER_ENERGY_OVERHEAD / 10;
 
         avoidOverflow = (difTime - latency_DVS) >> 6;
         energyProcDif_leak += energyLeakProc[Voltage] * avoidOverflow * DC_DC_CONVERTER_ENERGY_OVERHEAD / 10;
-    } else {  //no_voltage_scaling
+    } else { // no_voltage_scaling
         avoidOverflow = difTime >> 6;
         energyProcDif_leak = energyLeakProc[Voltage] * avoidOverflow * DC_DC_CONVERTER_ENERGY_OVERHEAD / 10;
     }
 
     energyLocalDif_dyn = energyProcDif_dyn + energyMemoryDif_dyn + activeNoC + idleNoC;
-    energyLocalDif_leak = energyProcDif_leak + energyMemoryDif_leak;  // + energyLeakNoC;
+    energyLocalDif_leak = energyProcDif_leak + energyMemoryDif_leak; // + energyLeakNoC;
 
     // Resultado
     sampling.router = EnergyNoC;
@@ -525,7 +520,7 @@ void energyEstimation() {
     sampling.n_inst = inst_class.total;
 
     executedInstPacket[PI_DESTINATION] = makeAddress(0, 0);
-    executedInstPacket[PI_SIZE] = 4 + 2 + 3;  // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    executedInstPacket[PI_SIZE] = 4 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
     tsend = tsend - tinicio;
     executedInstPacket[PI_SEND_TIME] = tsend;
@@ -543,19 +538,19 @@ void energyEstimation() {
         char logFileName[26];
         err0 = sprintf(logFileName, "simulation/log%dx%d.txt",getXpos(*myAddress),getYpos(*myAddress));
         filepointer = fopen (logFileName,"a");
-        fprintf(filepointer,"Counters: %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",arith_inst, branch_inst, jump_inst, move_inst, load_inst, store_inst, shift_inst, nop_inst, logical_inst, mult_div_inst, t0talpackets, t0talflits, timeActiveNoC<<6, timeIdleNoC<<6);
-        fclose(filepointer);*/
+        fprintf(filepointer,"Counters: %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",arith_inst, branch_inst, jump_inst, move_inst, load_inst, store_inst, shift_inst, nop_inst, logical_inst,
+       mult_div_inst, t0talpackets, t0talflits, timeActiveNoC<<6, timeIdleNoC<<6); fclose(filepointer);*/
     //*clockGating_flag = FALSE;
-    //executedInstPacket[7] = router_congestion;
-    //executedInstPacket[8] = router_injection;
-    //executedInstPacket[9] = 0; // ((total_slack_time*100) / sampling->real_window);
+    // executedInstPacket[7] = router_congestion;
+    // executedInstPacket[8] = router_injection;
+    // executedInstPacket[9] = 0; // ((total_slack_time*100) / sampling->real_window);
 
-    //LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, difTime);
+    // LOG("%x - actualTime:%d - difTime:%d\n",*myAddress, actualTime, difTime);
 
     /*executedInstPacket[PI_DESTINATION] = makeAddress(0,0); //| PERIPH_WEST; // Send the packet to the router 0,0 in the port west
     executedInstPacket[PI_SIZE] = 12 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     tsend = clock();
-	tsend = tsend - tinicio;
+        tsend = tsend - tinicio;
     executedInstPacket[PI_SEND_TIME] = tsend;
     executedInstPacket[PI_SERVICE] = INSTR_COUNT_PACKET;
     executedInstPacket[PI_I_MYADDR] = *myAddress;
@@ -570,9 +565,9 @@ void energyEstimation() {
     executedInstPacket[PI_I_LOGICAL] = *logicalCounter;
     executedInstPacket[PI_I_MULTDIV] = *multDivCounter;
     executedInstPacket[PI_I_WEIRD] = *weirdCounter;*/
-    if (*NIcmdTX == NI_STATUS_OFF && insideSendSlot == 0)  // If the NI is OFF then send the executed instruction packet
+    if (*NIcmdTX == NI_STATUS_OFF && insideSendSlot == 0) // If the NI is OFF then send the executed instruction packet
         SendSlot((unsigned int)&executedInstPacket, 0xFFFFFFFE);
-    else  // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet
+    else // If it is working, then turn this flag TRUE and when the NI turns OFF it will interrupt the processor and the interruptHandler_NI will send the packet
         sendExecutedInstPacket = TRUE;
     prints(">> Energy packet sent to thermalMaster\n");
     return;
@@ -581,11 +576,11 @@ void energyEstimation() {
 void setDVFS(unsigned int pe_addr, unsigned int frequency) {
     int index = getServiceIndex();
     myServicePacket[index][PI_DESTINATION] = pe_addr;
-    myServicePacket[index][PI_SIZE] = 1 + 2 + 3;  // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_SIZE] = 1 + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
     myServicePacket[index][PI_TASK_ID] = running_task;
     myServicePacket[index][PI_SERVICE] = PE_SET_FREQUENCY;
     myServicePacket[index][PI_PAYLOAD] = frequency;
-    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index));  // WARNING: This may cause a problem!!!!
+    SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
 ///////////////////////////////////////////////////////////////////
