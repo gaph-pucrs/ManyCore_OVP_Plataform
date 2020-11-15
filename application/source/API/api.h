@@ -217,6 +217,7 @@ void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
 void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int taskAddr[DIM_X * DIM_Y], unsigned int size);
 void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
+void trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
 unsigned int getAddress(unsigned int id);
 unsigned int getID(unsigned int addr);
 unsigned int getXpos(unsigned int addr);
@@ -245,6 +246,7 @@ void disable_interruptions();
 void disable_interruption(unsigned int n);
 void enable_interruption(unsigned int n);
 int getServiceIndex();
+int tryServiceIndex();
 void requestToForward();
 void printFinish();
 
@@ -428,7 +430,7 @@ void interruptHandler_NI_RX(void) {
             prints("S3 - depois da tarefa começar a migrar\n");
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
             aux[0] = ((taskMigrated << 16) | migratedTask);
-            sendTaskService(TASK_ADDR_UPDT, newAddr, aux, 1);
+            trySendTaskService(TASK_ADDR_UPDT, newAddr, aux, 1);
         } else if (migration_dst == 1 || taskMigrated == -2) {
             prints("S4 - chegou durante a migração\n");
             if (!sendFromMsgBuffer(requester, newAddr)) { // if the package is not ready yet add a request to the pending request queue
@@ -996,6 +998,30 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
     // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
+void trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size) {
+    int i;
+    int index = tryServiceIndex();
+    if (index != -1) {
+        myServicePacket[index][PI_DESTINATION] = dest;
+        myServicePacket[index][PI_SIZE] = size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+        myServicePacket[index][PI_TASK_ID] = running_task;
+        myServicePacket[index][PI_SERVICE] = service;
+        for (i = 0; i < size; i++) {
+            myServicePacket[index][PI_PAYLOAD + i] = payload[i];
+            // putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
+        }
+        if (*NIcmdTX == NI_STATUS_OFF) {
+            SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+        } else {
+            addServiceAfterTX(index);
+        }
+        prints("trySendTaskService - Slot sent\n");
+    } else {
+        prints("trySendTaskService - no slot available, will send next time!\n");
+    }
+    // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
 void sendPipe(unsigned int dest) {
     int i, j, index, older, empty;
     putsv("sendPipe()", dest);
@@ -1384,6 +1410,17 @@ int getServiceIndex() {
         }
         prints("PRESO4\n");
     }
+}
+
+int tryServiceIndex() {
+    int i;
+    for (i = 0; i < PIPE_SIZE; i++) {
+        if (myServicePacket[i][0] == 0xFFFFFFFF) {
+            myServicePacket[i][0] = 0;
+            return i;
+        }
+    }
+    return -1;
 }
 
 void printFinish() {
