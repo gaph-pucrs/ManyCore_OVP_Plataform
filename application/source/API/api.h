@@ -217,7 +217,7 @@ void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
 void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int taskAddr[DIM_X * DIM_Y], unsigned int size);
 void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
-void trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
+int trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
 unsigned int getAddress(unsigned int id);
 unsigned int getID(unsigned int addr);
 unsigned int getXpos(unsigned int addr);
@@ -321,6 +321,8 @@ void interruptHandler_timer(void) {
 
 #if USE_THERMAL
     energyEstimation();
+
+    measuredWindows++;
 
     *operationFrequency = newFrequency;
     Voltage = newVoltage;
@@ -464,7 +466,7 @@ void interruptHandler_NI_RX(void) {
 
         if (waitingEnergyReport >= N_PES) {
             waitingEnergyReport = 0;
-            measuredWindows++;
+            // measuredWindows++;
             executedInstPacket[PI_DESTINATION] = makeAddress(0, 0) | PERIPH_WEST;
             executedInstPacket[PI_SIZE] = DIM_Y * DIM_X + 2 + 3;
             tsend = clock();
@@ -998,7 +1000,7 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
     // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
-void trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size) {
+int trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size) {
     int i;
     int index = tryServiceIndex();
     if (index != -1) {
@@ -1016,8 +1018,10 @@ void trySendTaskService(unsigned int service, unsigned int dest, unsigned int *p
             addServiceAfterTX(index);
         }
         prints("trySendTaskService - Slot sent\n");
+        return 1;
     } else {
         prints("trySendTaskService - no slot available, will send next time!\n");
+        return 0;
     }
     // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
