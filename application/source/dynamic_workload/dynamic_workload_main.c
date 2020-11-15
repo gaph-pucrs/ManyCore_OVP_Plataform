@@ -288,7 +288,7 @@ int main(int argc, char **argv) {
                     *clockGating_flag = FALSE;
                 }
             }
-            myServicePacket[j][0] == 0xFFFFFFFF;
+            myServicePacket[j][0] = 0xFFFFFFFF;
 
             sendPipe(destination);
             sendPendingReq(destination);
