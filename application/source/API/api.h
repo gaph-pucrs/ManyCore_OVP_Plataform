@@ -67,6 +67,7 @@ volatile unsigned int *NIcmdRX = ((unsigned int *)0x8000000C); // NI_BASE + 0x2;
 #define TASK_MIGRATION_UPDT 0x63
 #define TASK_MIGRATION_PIPE 0x64
 #define TASK_MIGRATION_STATE 0x65
+#define TASK_MIGRATION_ACK 0x68
 #define TASK_MIGRATION_PEND 0x66 // 102
 #define TASK_ADDR_UPDT 0x67      // 103
 #define TASK_FINISHED 0x70       // 112
@@ -168,6 +169,7 @@ time_t tinicio, tsend; //, tfim, tignore;                    // TODO: GEANINNE -
 volatile int taskMigrated = -1;
 volatile int migratedTask = -1;
 volatile int running_task = -1;
+volatile int migrationAck = 0;
 volatile unsigned int migration_src = 0;
 volatile unsigned int migration_dst = 0;
 volatile unsigned int mapping_en = 0;
@@ -568,6 +570,9 @@ void interruptHandler_NI_RX(void) {
         migration_src = 0;
         taskMigrated = -2;
         migratedTask = -1;
+
+        sendTaskService(TASK_MIGRATION_ACK, incomingPacket[PI_PAYLOAD + 1], 0, 0);
+
         *NIcmdRX = DONE;
     } else if (incomingPacket[PI_SERVICE] == TASK_MIGRATION_PIPE) {
         putsv("Task pipe received para tarefa ", incomingPacket[PI_TASK_ID]);
@@ -629,6 +634,10 @@ void interruptHandler_NI_RX(void) {
         }
 
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
+        *NIcmdRX = DONE;
+    } else if (incomingPacket[PI_SERVICE] == TASK_MIGRATION_ACK) {
+        prints("Migration ACK received - performing the migration!\n");]
+        migrationAck = 1;
         *NIcmdRX = DONE;
     } else if (incomingPacket[PI_SERVICE] == TASK_FINISHED) {
         prints("Tarefa finalizada - ");

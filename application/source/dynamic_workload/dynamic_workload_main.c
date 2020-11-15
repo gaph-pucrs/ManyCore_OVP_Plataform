@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
     int state = 0;
     int destination;
     int i, j;
-    int aux[1];
+    int aux[2];
 
     while (1) {
         while (!get_mapping() && !get_migration_dst() && !finishSimulation_flag) {
@@ -260,12 +260,15 @@ int main(int argc, char **argv) {
             destination = new_task_addr[migratedTask];
             putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 
-            j = getServiceIndex();
-            sendTaskService_index(TASK_MIGRATION_STATE, destination, &state, 1, j);
-            while (isServiceIndexReady(j) == 0) {
+            aux[0] = state;
+            aux[1] = *myAddress;
+            sendTaskService(TASK_MIGRATION_STATE, destination, aux, 2);
+            while (migrationAck == 0) {
                 *clockGating_flag = TRUE;
             }
-            myServicePacket[j][0] = 0xFFFFFFFF;
+            *clockGating_flag = FALSE;
+            migrationAck = 0;
+
             disable_interruptions();
             set_taskMigrated(destination); // save the new destination of this
             running_task = -1;
