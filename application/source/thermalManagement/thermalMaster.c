@@ -373,6 +373,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
     int i;
     int tasks_to_map = 0;
     int appID;
+    int delivery_something = 0;
 
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1) {
@@ -381,6 +382,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
             if (task_addr[i]) {                                     // if the task got some valid address
                 task_start_time[i] = -2;                            // PRE-RELEASE
                 finishedTask[i] = FALSE;
+                delivery_something = 1;
                 putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
             }
         }
@@ -389,26 +391,28 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
         }
     }
 
-    // adds the appID to the flit
-    for (i = 0; i < tasks_to_map; i++) {
-        task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
-        putsvsv("i ", i, "flit: ", task_addr[i]);
-    }
-
-    for (i = 0; i < DIM_X * DIM_Y; i++) {
-        if (task_start_time[i] == -2) {
-            task_addr[i] = task_addr[i] | 0x80000000;
-            // task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
-            sendTaskService(TASK_MAPPING, (task_addr[i] & 0x0000FFFF), task_addr, tasks_to_map);
-            task_addr[i] = task_addr[i] & 0x7FFFFFFF;
-            task_start_time[i] = -1; // RELEASED
-            task_remaining_executions[i]--;
+    if (delivery_something) {
+        // adds the appID to the flit
+        for (i = 0; i < tasks_to_map; i++) {
+            task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
+            putsvsv("i ", i, "flit: ", task_addr[i]);
         }
-    }
 
-    // removes it
-    for (i = 0; i < tasks_to_map; i++) {
-        task_addr[i] = task_addr[i] & 0x0000FFFF;
+        for (i = 0; i < DIM_X * DIM_Y; i++) {
+            if (task_start_time[i] == -2) {
+                task_addr[i] = task_addr[i] | 0x80000000;
+                // task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
+                sendTaskService(TASK_MAPPING, (task_addr[i] & 0x0000FFFF), task_addr, tasks_to_map);
+                task_addr[i] = task_addr[i] & 0x7FFFFFFF;
+                task_start_time[i] = -1; // RELEASED
+                task_remaining_executions[i]--;
+            }
+        }
+
+        // removes it
+        for (i = 0; i < tasks_to_map; i++) {
+            task_addr[i] = task_addr[i] & 0x0000FFFF;
+        }
     }
 
     return;

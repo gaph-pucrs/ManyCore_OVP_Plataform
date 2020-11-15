@@ -281,7 +281,7 @@ void get_mapping_table(unsigned int taskAddr[DIM_X * DIM_Y]) {
     int i;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         taskAddr[i] = mapping_table[i];
-        putsvsv("task_addr[", i, "] = ", taskAddr[i]);
+        // putsvsv("task_addr[", i, "] = ", taskAddr[i]);
     }
 }
 
@@ -289,7 +289,7 @@ void get_migration_mapping_table(unsigned int taskAddr[DIM_X * DIM_Y]) {
     int i;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         taskAddr[i] = migration_mapping_table[i];
-        putsvsv("task_addr[", i, "] = ", taskAddr[i]);
+        // putsvsv("task_addr[", i, "] = ", taskAddr[i]);
     }
     return;
 }
@@ -351,7 +351,7 @@ void interruptHandler_NI_RX(void) {
     putsv("Servico: ", incomingPacket[PI_SERVICE]);
 #endif
     //////////////////////////////////////////////////////////////
-    int requester, i, j, index, taskID, newAddr, newFreq;
+    int requester, i, j, index, taskID, newAddr, newFreq, aux[1];
     if (incomingPacket[PI_SERVICE] == TEMPERATURE_PACKET) {
         tempPacket = TRUE;
         // deliveredMessage->size = incomingPacket[PI_SIZE]-3 -2; // -2 (sendTime,service) -3 (hops,inIteration,outIteration)
@@ -425,6 +425,8 @@ void interruptHandler_NI_RX(void) {
         } else if (taskMigrated != -1 && migratedTask == taskID) {
             prints("S3 - depois da tarefa começar a migrar\n");
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
+            aux[0] = ((taskMigrated << 16) | migratedTask);
+            sendTaskService(TASK_ADDR_UPDT, newAddr, aux, 1);
         } else if (migration_dst == 1 || taskMigrated == -2) {
             prints("S4 - chegou durante a migração\n");
             if (!sendFromMsgBuffer(requester, newAddr)) { // if the package is not ready yet add a request to the pending request queue
@@ -527,6 +529,7 @@ void interruptHandler_NI_RX(void) {
             }
             if (mapping_table[i] == 0) {
                 mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
+                putsvsv("task_addr[", i, "] = ", mapping_table[i]);
             } else {
                 putsv("not changing mapping_table entry ", i);
             }
@@ -540,6 +543,8 @@ void interruptHandler_NI_RX(void) {
     } else if (incomingPacket[PI_SERVICE] == TASK_MIGRATION_STATE) {
         new_state = incomingPacket[PI_PAYLOAD];
         putsv("Task state received ", new_state);
+
+        // talvez isso seja um problema. vai apagar endereços que foram atualizados
         for (i = 0; i < DIM_X * DIM_Y; i++) {
             mapping_table[i] = 0;
         }
