@@ -410,7 +410,7 @@ void interruptHandler_NI_RX(void) {
         incomingPacket[PI_SERVICE] = 0; // Reset the incomingPacket service
         *NIcmdRX = DONE;                // releases the NI RX to return to the IDLE state
     } else if (incomingPacket[PI_SERVICE] == MESSAGE_REQ) {
-        putsvsv("Message request received from ", incomingPacket[PI_TASK_ID], "asking from task ", incomingPacket[PI_PRODUCER]);
+        putsvsv("Message request received from ", incomingPacket[PI_TASK_ID], "asking for task ", incomingPacket[PI_PRODUCER]);
         requester = incomingPacket[PI_TASK_ID];
         newAddr = incomingPacket[PI_REQUESTER];
         taskID = incomingPacket[PI_PRODUCER]; // & 0x7FFFFFFF;
@@ -428,7 +428,7 @@ void interruptHandler_NI_RX(void) {
                 prints("Adicionando ao pendingReq\n");
                 pendingReq[requester] = incomingPacket[PI_REQUESTER]; // actual requester address
             }
-        } else if (taskMigrated != -1 && migratedTask == taskID) {
+        } else if (taskMigrated != -1) { // && migratedTask == taskID) {
             prints("S3 - depois da tarefa começar a migrar\n");
             forwardMsgRequest(requester, taskMigrated, newAddr, taskID);
             aux[0] = ((taskMigrated << 16) | migratedTask);
@@ -676,7 +676,7 @@ void interruptHandler_NI_RX(void) {
             LOG("%x - ERROR! Unexpected interruption! NI_RX - can not handle it! Call the SAC!\n", *myAddress);
         }
     }
-    //////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 #if USE_THERMAL
     *clockGating_flag = savedClkGating;
 #endif
