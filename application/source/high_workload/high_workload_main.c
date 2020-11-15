@@ -240,8 +240,12 @@ int main(int argc, char **argv) {
             destination = new_task_addr[migratedTask];
             putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 
-            sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
-
+            j = getServiceIndex();
+            sendTaskService_index(TASK_MIGRATION_STATE, destination, &state, 1, j);
+            while (isServiceIndexReady(j) == 0) {
+                *clockGating_flag = TRUE;
+            }
+            myServicePacket[j][0] = 0xFFFFFFFF;
             disable_interruptions();
             set_taskMigrated(destination); // save the new destination of this
             running_task = -1;
