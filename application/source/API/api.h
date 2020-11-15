@@ -142,6 +142,7 @@ volatile int insideSendSlot = 0;
 // API Master - thermal stuff
 volatile unsigned int waitingEnergyReport = 0;
 volatile unsigned int measuredWindows = 0;
+volatile unsigned int energyReceived[DIM_X][DIM_Y];
 volatile unsigned int energyLocalsDif_total[DIM_X][DIM_Y];
 //////////////////////////////
 //////////////////////////////
@@ -457,6 +458,7 @@ void interruptHandler_NI_RX(void) {
         waitingEnergyReport++;
         putsvsv("Energy packet received from PE ", getID(incomingPacket[PI_PAYLOAD + 3]), " total energy packet received until now: ", waitingEnergyReport);
         energyLocalsDif_total[getXpos(incomingPacket[PI_PAYLOAD + 3])][getYpos(incomingPacket[PI_PAYLOAD + 3])] = incomingPacket[PI_PAYLOAD + 1]; // total energy
+        energyReceived[getXpos(incomingPacket[PI_PAYLOAD + 3])][getYpos(incomingPacket[PI_PAYLOAD + 3])] = 1;
 
         if (waitingEnergyReport >= N_PES) {
             waitingEnergyReport = 0;
@@ -472,6 +474,10 @@ void interruptHandler_NI_RX(void) {
                 for (j = 0; j < DIM_X; j++) {
                     executedInstPacket[index + 4] = (unsigned int)((energyLocalsDif_total[j][i]) * 64 / 1000 / 100) * 128 / 100; // return energyLocalsDif_total[x][y]*64/1000/100;
                     index++;
+                    if (energyReceived[j][i] == 0) {
+                        LOG("FALTOU PACOTE %d, %d", j, i);
+                    }
+                    energyReceived[j][i] = 0;
                 }
             }
             if (*NIcmdTX == NI_STATUS_OFF) // If the NI is OFF then send the executed instruction packet
