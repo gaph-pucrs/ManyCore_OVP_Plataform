@@ -475,7 +475,7 @@ void interruptHandler_NI_RX(void) {
                     executedInstPacket[index + 4] = (unsigned int)((energyLocalsDif_total[j][i]) * 64 / 1000 / 100) * 128 / 100; // return energyLocalsDif_total[x][y]*64/1000/100;
                     index++;
                     if (energyReceived[j][i] == 0) {
-                        LOG("FALTOU PACOTE %d, %d", j, i);
+                        LOG("FALTOU PACOTE %d, %d\n", j, i);
                     }
                     energyReceived[j][i] = 0;
                 }
