@@ -215,6 +215,7 @@ void sendFinishTask(unsigned int running_task);
 void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
 void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int taskAddr[DIM_X * DIM_Y], unsigned int size);
+void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
 unsigned int getAddress(unsigned int id);
 unsigned int getID(unsigned int addr);
 unsigned int getXpos(unsigned int addr);
