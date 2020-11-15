@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
     //////////////////////////////////////////////////////
     int state = 0;
     int destination;
-    int i;
+    int i, j;
     int aux[1];
 
     while (1) {
@@ -267,21 +267,22 @@ int main(int argc, char **argv) {
             // mapping_table[migratedTask] = 0;  // clear this address value
             enable_interruptions();
 
-            // Send the updt addr msg to every PE
-            // disable_interruption(2);
+            // Send the updt addr msg to same app PEs
             aux[0] = ((destination << 16) | migratedTask); // mounts the update addr flit
+            j = getServiceIndex();
             for (i = 1; i < DIM_X * DIM_Y; i++) {
                 if (appID[i] == appID[migratedTask] && i != migratedTask) { // sends the update for every task in the same application
                     putsv("enviando update para tarefa ", i);
-                    sendTaskService(TASK_ADDR_UPDT, mapping_table[i], aux, 1);
+                    sendTaskService_index(TASK_ADDR_UPDT, mapping_table[i], aux, 1, index);
+                    while (!isServiceIndexReady(index)) {
+                    }
                     if (mapping_table[i] != migration_mapping_table[i]) {
-                        sendTaskService(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1);
+                        sendTaskService_index(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1, index);
+                    }
+                    while (!isServiceIndexReady(index)) {
                     }
                 }
             }
-            while (tryServiceIndex() == -1) {
-            }
-            // enable_interruption(2);
 
             sendPipe(destination);
             sendPendingReq(destination);

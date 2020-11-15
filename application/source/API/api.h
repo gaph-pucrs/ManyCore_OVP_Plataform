@@ -217,6 +217,7 @@ void SendRaw(unsigned int addr);
 void requestMsg(unsigned int from);
 void sendTaskMigration(unsigned int service, unsigned int dest, unsigned int taskAddr[DIM_X * DIM_Y], unsigned int size);
 void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
+void sendTaskService_index(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size, int index);
 int trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size);
 unsigned int getAddress(unsigned int id);
 unsigned int getID(unsigned int addr);
@@ -247,6 +248,7 @@ void disable_interruption(unsigned int n);
 void enable_interruption(unsigned int n);
 int getServiceIndex();
 int tryServiceIndex();
+int isServiceIndexReady(int indx);
 void requestToForward();
 void printFinish();
 
@@ -1001,6 +1003,25 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
     // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
+void sendTaskService_index(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size, int index) {
+    int i;
+    myServicePacket[index][PI_DESTINATION] = dest;
+    myServicePacket[index][PI_SIZE] = size + 2 + 3; // +2 (sendTime,service) +3 (hops,inIteration,outIteration)
+    myServicePacket[index][PI_TASK_ID] = running_task;
+    myServicePacket[index][PI_SERVICE] = service;
+    for (i = 0; i < size; i++) {
+        myServicePacket[index][PI_PAYLOAD + i] = payload[i];
+        // putsvsv("Payload+", i, " valor: ", myServicePacket[index][PI_PAYLOAD+i]);
+    }
+    if (*NIcmdTX == NI_STATUS_OFF) {
+        SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+    } else {
+        addServiceAfterTX(index);
+    }
+    prints("sendTaskService - Slot sent\n");
+    // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
+}
+
 int trySendTaskService(unsigned int service, unsigned int dest, unsigned int *payload, unsigned int size) {
     int i;
     int index = tryServiceIndex();
@@ -1414,6 +1435,15 @@ int getServiceIndex() {
             }
         }
         prints("PRESO4\n");
+    }
+}
+
+int isServiceIndexReady(int indx) {
+    if (myServicePacket[indx][0] == 0xFFFFFFFF) {
+        myServicePacket[indx][0] = 0;
+        return 1;
+    } else {
+        return 0;
     }
 }
 
