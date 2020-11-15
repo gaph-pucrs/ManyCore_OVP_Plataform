@@ -466,7 +466,7 @@ void interruptHandler_NI_RX(void) {
 
         if (waitingEnergyReport >= N_PES) {
             waitingEnergyReport = 0;
-            // measuredWindows++;
+            // feasuredWindows++;
             executedInstPacket[PI_DESTINATION] = makeAddress(0, 0) | PERIPH_WEST;
             executedInstPacket[PI_SIZE] = DIM_Y * DIM_X + 2 + 3;
             tsend = clock();
@@ -876,6 +876,7 @@ void OVP_init() {
     for (i = 0; i < N_PES; i++) {
         pendingReq[i] = 0;
         mapping_table[i] = 0;
+        appID[i] = 0xFFFFFFFF;
         finishedTask[i] = FALSE;
     }
 
