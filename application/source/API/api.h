@@ -636,7 +636,7 @@ void interruptHandler_NI_RX(void) {
         putsvsv("Updating mapping_table[", taskID, "] = ", newAddr);
         *NIcmdRX = DONE;
     } else if (incomingPacket[PI_SERVICE] == TASK_MIGRATION_ACK) {
-        prints("Migration ACK received - performing the migration!\n");]
+        prints("Migration ACK received - performing the migration!\n");
         migrationAck = 1;
         *NIcmdRX = DONE;
     } else if (incomingPacket[PI_SERVICE] == TASK_FINISHED) {
