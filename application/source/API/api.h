@@ -535,6 +535,7 @@ void interruptHandler_NI_RX(void) {
         // Acha a tarefa que migrou e atualiza só o endereço dela
         // as outras atualizações vão vir conforme as tasks forem migrando
         for (i = 0; i < num_tasks; i++) {
+            appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
             if ((incomingPacket[PI_PAYLOAD + i] & 0x80000000) != 0) {
                 running_task = i;
             }
@@ -542,9 +543,8 @@ void interruptHandler_NI_RX(void) {
                 mapping_table[i] = incomingPacket[PI_PAYLOAD + i] & 0x0000FFFF;
                 putsvsv("task_addr[", i, "] = ", mapping_table[i]);
             } else {
-                putsv("not changing mapping_table entry ", i);
+                putsvsv("not changing mapping_table entry ", i, "addr: ", mapping_table[i]);
             }
-            appID[i] = (incomingPacket[PI_PAYLOAD + i] & 0x7FFF0000) >> 16;
         }
         /*for(i=0; i<num_tasks; i++){
             mapping_table[i] = incomingPacket[PI_PAYLOAD+i];
@@ -876,7 +876,7 @@ void OVP_init() {
     for (i = 0; i < N_PES; i++) {
         pendingReq[i] = 0;
         mapping_table[i] = 0;
-        appID[i] = 0xFFFFFFFF;
+        appID[i] = 0x00007FFF;
         finishedTask[i] = FALSE;
     }
 
