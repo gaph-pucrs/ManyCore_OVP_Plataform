@@ -274,14 +274,18 @@ int main(int argc, char **argv) {
             for (i = 1; i < DIM_X * DIM_Y; i++) {
                 if (appID[i] == appID[migratedTask] && i != migratedTask) { // sends the update for every task in the same application
                     putsv("enviando update para tarefa ", i);
-                    sendTaskService_index(TASK_ADDR_UPDT, mapping_table[i], aux, 1, index);
-                    while (!isServiceIndexReady(index)) {
+                    sendTaskService_index(TASK_ADDR_UPDT, mapping_table[i], aux, 1, j);
+                    while (!isServiceIndexReady(j)) {
+                        *clockGating_flag = TRUE;
                     }
+                    *clockGating_flag = FALSE;
                     if (mapping_table[i] != migration_mapping_table[i]) {
-                        sendTaskService_index(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1, index);
+                        sendTaskService_index(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1, j);
                     }
-                    while (!isServiceIndexReady(index)) {
+                    while (!isServiceIndexReady(j)) {
+                        *clockGating_flag = TRUE;
                     }
+                    *clockGating_flag = FALSE;
                 }
             }
 
