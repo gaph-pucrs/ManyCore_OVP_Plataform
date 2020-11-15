@@ -249,7 +249,6 @@ int main(int argc, char **argv) {
             enable_interruptions();
 
             // Send the updt addr msg to every PE
-            disable_interruption(2);
             aux[0] = ((destination << 16) | migratedTask); // mounts the update addr flit
             for (i = 1; i < DIM_X * DIM_Y; i++) {
                 if (appID[i] == appID[migratedTask] && i != migratedTask) { // sends the update for every task in the same application
@@ -262,7 +261,6 @@ int main(int argc, char **argv) {
             }
             while (tryServiceIndex() == -1) {
             }
-            enable_interruption(2);
 
             sendPipe(destination);
             sendPendingReq(destination);
