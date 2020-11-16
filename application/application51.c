@@ -80,8 +80,8 @@ int main(int argc, char **argv) {
     //////////////////////////////////////////////////////
     int state = 0;
     int destination;
-    int i;
-    int aux[1];
+    int i, j;
+    int aux[2];
 
     while (1) {
         while (!get_mapping() && !get_migration_dst() && !finishSimulation_flag) {
@@ -240,7 +240,14 @@ int main(int argc, char **argv) {
             destination = new_task_addr[migratedTask];
             putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 
-            sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
+            aux[0] = state;
+            aux[1] = *myAddress;
+            sendTaskService(TASK_MIGRATION_STATE, destination, aux, 2);
+            while (migrationAck == 0) {
+                *clockGating_flag = TRUE;
+            }
+            *clockGating_flag = FALSE;
+            migrationAck = 0;
 
             disable_interruptions();
             set_taskMigrated(destination); // save the new destination of this
@@ -248,17 +255,27 @@ int main(int argc, char **argv) {
             // mapping_table[migratedTask] = 0;  // clear this address value
             enable_interruptions();
 
-            // Send the updt addr msg to every PE
+            // Send the updt addr msg to same app PEs
             aux[0] = ((destination << 16) | migratedTask); // mounts the update addr flit
+            j = getServiceIndex();
             for (i = 1; i < DIM_X * DIM_Y; i++) {
                 if (appID[i] == appID[migratedTask] && i != migratedTask) { // sends the update for every task in the same application
                     putsv("enviando update para tarefa ", i);
-                    sendTaskService(TASK_ADDR_UPDT, mapping_table[i], aux, 1);
-                    if (mapping_table[i] != migration_mapping_table[i]) {
-                        sendTaskService(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1);
+                    sendTaskService_index(TASK_ADDR_UPDT, mapping_table[i], aux, 1, j);
+                    while (isServiceIndexReady(j) == 0) {
+                        *clockGating_flag = TRUE;
                     }
+                    *clockGating_flag = FALSE;
+                    if (mapping_table[i] != migration_mapping_table[i]) {
+                        sendTaskService_index(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1, j);
+                        while (isServiceIndexReady(j) == 0) {
+                            *clockGating_flag = TRUE;
+                        }
+                    }
+                    *clockGating_flag = FALSE;
                 }
             }
+            myServicePacket[j][0] = 0xFFFFFFFF;
 
             sendPipe(destination);
             sendPendingReq(destination);
