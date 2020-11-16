@@ -31,7 +31,7 @@ def loadQuantum(input_file):
     for row in input_file:
         if "Quantum" in row[0] :
             j = 0
-            #  print("Entrou no if")
+            #  prints("Entrou no if")
         elif "LOCAL" in row[1]:
             pass
         else:
@@ -46,7 +46,7 @@ def loadQuantum(input_file):
             j = j+1
         if (j == N_PES):
                 
-            #print("aquuiii")
+            #prints("aquuiii")
 
             return quantumFlits(pLocal,pEast,pWest,pNorth,pSouth)
 
@@ -192,7 +192,7 @@ if __name__ == '__main__':
                     pWestImg[z] += qFlit.pWest[z]
                     pNorthImg[z] += qFlit.pNorth[z]
                     pSouthImg[z] += qFlit.pSouth[z]
-            # print(cont)
+            # prints(cont)
             #cont = 0
             drawNoC(pLocalImg, pEastImg, pWestImg, pNorthImg, pSouthImg, i)
             pLocalImg = [0 for i in range (N_PES)]

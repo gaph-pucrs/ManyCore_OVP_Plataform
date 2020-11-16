@@ -1,0 +1,14 @@
+apps:
+ - name: synthetic
+   cluster: 0
+   static_mapping:
+    taskA: [2,1]
+    taskB: [2,2]
+    taskC: [1,2]
+    taskD: [1,1]
+    taskE: [1,0]
+    taskF: [2,0]
+ - name: thermalManagement
+   cluster: 0
+   static_mapping:
+    thermalMaster: [0,0]

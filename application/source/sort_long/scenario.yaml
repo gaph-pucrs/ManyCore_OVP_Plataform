@@ -1,0 +1,14 @@
+apps:
+ - name: sort_long
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    sort_master: 0
+    sort_slave1: 1
+    sort_slave2: 2
+    sort_slave3: 3
+ - name: thermalManagement
+   mapping: static
+   cluster: 0
+   static_mapping:
+    thermalMaster: [0,0]

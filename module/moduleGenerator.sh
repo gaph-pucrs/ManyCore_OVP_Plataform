@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Parameters
-Y=$1
-X=$2
+X=$1
+Y=$2
 
 # Removes the old .tcl
 rm -rf module.op.tcl
@@ -24,7 +24,8 @@ echo "" >> module.op.tcl
 # Creates the interruption signals
 for i in $(seq 0 $N);
 do
-	echo "ihwaddnet -instancename intNI"$i >> module.op.tcl
+	echo "ihwaddnet -instancename intNI_TX"$i >> module.op.tcl
+	echo "ihwaddnet -instancename intNI_RX"$i >> module.op.tcl
 	echo "ihwaddnet -instancename intTIMER"$i >> module.op.tcl
 done
 echo "" >> module.op.tcl
@@ -49,8 +50,9 @@ for i in $(seq 0 $N);
 do
 	echo "ihwconnect -bus cpu"$i"Bus -instancename cpu"$i" -busmasterport INSTRUCTION" >> module.op.tcl
 	echo "ihwconnect -bus cpu"$i"Bus -instancename cpu"$i" -busmasterport DATA" >> module.op.tcl
-	echo "ihwconnect -instancename cpu"$i" -netport       intr0       -net intNI"$i >> module.op.tcl
-	echo "ihwconnect -instancename cpu"$i" -netport       intr1       -net intTIMER"$i >> module.op.tcl
+	echo "ihwconnect -instancename cpu"$i" -netport       intr0       -net intTIMER"$i >> module.op.tcl
+	echo "ihwconnect -instancename cpu"$i" -netport       intr1       -net intNI_TX"$i >> module.op.tcl
+	echo "ihwconnect -instancename cpu"$i" -netport       intr2       -net intNI_RX"$i >> module.op.tcl
 	echo "" >> module.op.tcl
 done
 echo "ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport INSTRUCTION" >> module.op.tcl # Iterator
@@ -90,6 +92,7 @@ do
 	echo "ihwaddperipheral -instancename router"$i" -modelfile peripheral/whnoc_dma/pse.pse" >> module.op.tcl
 	echo "ihwaddperipheral -instancename ni"$i" -modelfile peripheral/networkInterface/pse.pse" >> module.op.tcl
 	echo "ihwaddperipheral -instancename timer"$i" -modelfile peripheral/timer/pse.pse" >> module.op.tcl
+	echo "ihwaddperipheral -instancename printer"$i" -modelfile peripheral/printer/pse.pse" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
@@ -97,9 +100,12 @@ echo "" >> module.op.tcl
 for i in $(seq 0 $N);
 do
 	echo "ihwconnect -instancename router"$i" -busslaveport localPort -bus cpu"$i"Bus -loaddress 0x80000000 -hiaddress 0x80000003" >> module.op.tcl
-	echo "ihwconnect -instancename ni"$i" -busslaveport DMAC -bus cpu"$i"Bus -loaddress 0x80000004 -hiaddress 0x8000000B" >> module.op.tcl
+	echo "ihwconnect -instancename router"$i" -busmasterport RREAD  -bus cpu"$i"Bus" >> module.op.tcl
+	echo "ihwconnect -instancename router"$i" -busmasterport RWRITE -bus cpu"$i"Bus" >> module.op.tcl
+	echo "ihwconnect -instancename ni"$i" -busslaveport DMAC -bus cpu"$i"Bus -loaddress 0x80000004 -hiaddress 0x8000000F" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MREAD  -bus cpu"$i"Bus" >> module.op.tcl
 	echo "ihwconnect -instancename ni"$i" -busmasterport MWRITE -bus cpu"$i"Bus" >> module.op.tcl
+	echo "ihwconnect -instancename printer"$i" -busslaveport PRINTREGS -bus cpu"$i"Bus -loaddress 0x80000020 -hiaddress 0x80000027" >> module.op.tcl
 	echo "ihwconnect -instancename timer"$i" -busslaveport TIMEREG -bus cpu"$i"Bus -loaddress 0x8000001C -hiaddress 0x8000001F" >> module.op.tcl
 done
 echo "" >> module.op.tcl
@@ -266,7 +272,8 @@ echo "" >> module.op.tcl
 # Connects every interruption signal from each router to the associated processor
 for i in $(seq 0 $N);
 do
-	echo "ihwconnect -instancename ni"$i" -netport       INT_NI  -net intNI"$i >> module.op.tcl
+	echo "ihwconnect -instancename ni"$i" -netport       INT_NI_TX  -net intNI_TX"$i >> module.op.tcl
+	echo "ihwconnect -instancename ni"$i" -netport       INT_NI_RX  -net intNI_RX"$i >> module.op.tcl
 	echo "ihwconnect -instancename timer"$i" -netport       INT_TIMER  -net intTIMER"$i >> module.op.tcl
 done
 

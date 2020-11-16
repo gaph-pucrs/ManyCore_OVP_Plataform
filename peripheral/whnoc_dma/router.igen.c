@@ -89,6 +89,8 @@ static void installRegisters(void) {
 
 static void installMasterPorts(void) {
     handles.SEC_APP = ppmOpenAddressSpace("SEC_APP");
+    handles.RREAD = ppmOpenAddressSpace("RREAD");
+    handles.RWRITE = ppmOpenAddressSpace("RWRITE");
 }
 
 PPM_DOC_FN(installDocs){

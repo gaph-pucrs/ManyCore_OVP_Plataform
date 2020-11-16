@@ -34,9 +34,11 @@
 #ifndef DMAC
     #error DMAC is undefined.It needs to be set to the port base address
 #endif
-#define DMAC_AB8_STATUS    (DMAC + 0x0)
+#define DMAC_AB8_ADDRESS    (DMAC + 0x0)
 
-#define DMAC_AB8_ADDRESS    (DMAC + 0x4)
+#define DMAC_AB8_STATUSTX    (DMAC + 0x4)
+
+#define DMAC_AB8_STATUSRX    (DMAC + 0x8)
 
 
 

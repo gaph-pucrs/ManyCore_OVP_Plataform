@@ -1,0 +1,26 @@
+apps:
+ - name: synthetic
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    taskA: 0
+    taskB: 1
+    taskC: 2
+    taskD: 3
+    taskE: 4
+    taskF: 5
+ - name: dijkstra
+   cluster: 0
+   mapping: dynamic
+   dynamic_mapping:
+    divider: 0
+    dijkstra_0: 1
+    dijkstra_1: 2
+    dijkstra_2: 3
+    dijkstra_3: 4
+    print: 5
+ - name: thermalManagement
+   cluster: 0
+   mapping: static
+   static_mapping:
+    thermalMaster: [0,0]

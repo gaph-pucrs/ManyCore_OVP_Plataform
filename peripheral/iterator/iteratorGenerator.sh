@@ -46,7 +46,7 @@ echo "//////////////////////////////////////////////////////////////////////////
 echo "//"                                                                                   >> iterator.igen.c
 echo "//                W R I T T E N   B Y   I M P E R A S   I G E N"                      >> iterator.igen.c
 echo "//"                                                                                   >> iterator.igen.c
-echo "//                             Version 20170201.0"                                    >> iterator.igen.c
+echo "//                             Version 20191106.0"                                    >> iterator.igen.c
 echo "//"                                                                                   >> iterator.igen.c
 echo "////////////////////////////////////////////////////////////////////////////////"     >> iterator.igen.c
 echo "" >> iterator.igen.c

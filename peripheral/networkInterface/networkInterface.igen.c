@@ -54,7 +54,7 @@ static PPM_VIEW_CB(view32) {  *(Uns32*)data = *(Uns32*)user; }
 //////////////////////////////// Bus Slave Ports ///////////////////////////////
 
 static void installSlavePorts(void) {
-    handles.DMAC = ppmCreateSlaveBusPort("DMAC", 8);
+    handles.DMAC = ppmCreateSlaveBusPort("DMAC", 12);
     if (!handles.DMAC) {
         bhmMessage("E", "PPM_SPNC", "Could not connect port 'DMAC'");
     }
@@ -65,34 +65,39 @@ static void installSlavePorts(void) {
 
 static void installRegisters(void) {
 
-    {
-        ppmCreateRegister(
-            "ab8_status",
-            0,
-            handles.DMAC,
-            0,
-            4,
-            statusRead,
-            statusWrite,
-            view32,
-            &(DMAC_ab8_data.status.value),
-            True
-        );
-    }
-    {
-        ppmCreateRegister(
-            "ab8_address",
-            0,
-            handles.DMAC,
-            4,
-            4,
-            addressRead,
-            addressWrite,
-            view32,
-            &(DMAC_ab8_data.address.value),
-            True
-        );
-    }
+    ppmCreateRegister("ab8_address",
+        0,
+        handles.DMAC,
+        0,
+        4,
+        addressRead,
+        addressWrite,
+        view32,
+        &(DMAC_ab8_data.address.value),
+        True
+    );
+    ppmCreateRegister("ab8_statusTX",
+        0,
+        handles.DMAC,
+        4,
+        4,
+        statusTXRead,
+        statusTXWrite,
+        view32,
+        &(DMAC_ab8_data.statusTX.value),
+        True
+    );
+    ppmCreateRegister("ab8_statusRX",
+        0,
+        handles.DMAC,
+        8,
+        4,
+        statusRXRead,
+        statusRXWrite,
+        view32,
+        &(DMAC_ab8_data.statusRX.value),
+        True
+    );
 
 }
 
@@ -103,7 +108,16 @@ static void installMasterPorts(void) {
     handles.MWRITE = ppmOpenAddressSpace("MWRITE");
 }
 
-PPM_DOC_FN(installDocs){
+/////////////////////////////////// Net Ports //////////////////////////////////
+
+static void installNetPorts(void) {
+// To write to this net, use ppmWriteNet(handles.INT_NI_TX, value);
+
+    handles.INT_NI_TX = ppmOpenNetPort("INT_NI_TX");
+
+// To write to this net, use ppmWriteNet(handles.INT_NI_RX, value);
+
+    handles.INT_NI_RX = ppmOpenNetPort("INT_NI_RX");
 
     ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
     {

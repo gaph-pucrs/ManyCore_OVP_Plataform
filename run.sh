@@ -1,14 +1,14 @@
 #!/bin/sh
-
+#NOVO: 20191106 --- VELHO: 20170201
 X=$1
 Y=$2
 APP_NAME=$3
 N=$(($X*$Y))
 
 #source /soft64/source_gaph
-# module load ovp/20170201
-# source /soft64/imperas/ferramentas/64bits/Imperas.20170201/bin/setup.sh
-# setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20170201
+# module load ovp/20191106
+# source /soft64/imperas/ferramentas/64bits/Imperas.20191106/bin/setup.sh
+# setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20191106
 cd simulation
     rm -f flitFlow.csv
 cd ..
@@ -29,7 +29,7 @@ cd peripheral
     cd ..
 
     cd iteratorMonoTrigger
-    #    ./iteratorGenerator.sh $X $Y
+        ./iteratorGenerator.sh $X $Y
 cd ../..
 
 cd harness
@@ -38,10 +38,14 @@ cd ..
 
 N=$(($N-1))
 
+rm -rf *.csv
 rm -rf ovp_compiler.sh
 echo "#!/bin/sh" >> ovp_compiler.sh
 echo "cd peripheral" >> ovp_compiler.sh
 echo "rm -rf pse.pse" >> ovp_compiler.sh
+echo "cd .." >> ovp_compiler.sh
+echo "cd simulation" >> ovp_compiler.sh
+echo "rm -f *.txt" >> ovp_compiler.sh
 echo "cd .." >> ovp_compiler.sh
 echo "# Check Installation supports this example" >> ovp_compiler.sh
 echo "checkinstall.exe -p install.pkg --nobanner || exit" >> ovp_compiler.sh
@@ -54,12 +58,14 @@ echo "make -C peripheral/synchronizer NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/iteratorMonoTrigger NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/networkInterface NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/timer NOVLNV=1" >> ovp_compiler.sh
+echo "make -C peripheral/printer NOVLNV=1" >> ovp_compiler.sh
 echo "make -C peripheral/tea NOVLNV=1" >> ovp_compiler.sh
 
 echo "make -C peripheral/secNoC NOVLNV=1" >> ovp_compiler.sh
 echo "make -C harness" >> ovp_compiler.sh
 # --------- Sem HARNESS modificado
 echo "harness/harness.\${IMPERAS_ARCH}.exe \\" >> ovp_compiler.sh 
+echo "--override dictsize=512\\" >> ovp_compiler.sh 
 #echo "harness.exe \\" >> ovp_compiler.sh
 #echo "    --modulefile module/model.${IMPERAS_SHRSUF} \\" >> ovp_compiler.sh
 # --------------------------------
@@ -81,7 +87,7 @@ do
     #    echo "     --program cpu"$i"=application/application"$i".\${CROSS}.elf --imperasintercepts \$* \\" >> ovp_compiler.sh
     #fi
 done
-    echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts \$* \\" >> ovp_compiler.sh
+    echo "     --program cpuIterator=application/source/applicationIterator/applicationIterator.\${CROSS}.elf --imperasintercepts  \$* \\" >> ovp_compiler.sh
 	echo "\$*" >> ovp_compiler.sh
         #echo "     --verbose " >> ovp_compiler.sh
 
@@ -89,9 +95,9 @@ chmod +x ovp_compiler.sh
 ./ovp_compiler.sh
 
 cd application
-# for i in $(seq 0 $N);
-# do
-#     ./assemblyExtractor.sh application"$i".OR1K.elf
-# done
+#for i in $(seq 0 $N);
+#do
+#    ./assemblyExtractor.sh application"$i".OR1K.elf
+#done
 rm -rf *.S # If you want to see the assembly file, uncomment the upper "for" and comment this line
 rm -rf *.elf

@@ -1,0 +1,49 @@
+
+set terminal pdf #size 640px, 400px
+set output "temp.pdf"
+
+set multiplot layout 2,2
+
+#set yrange [ 44 : 75 ]
+
+#set view 75, 40, 1, 0.5
+set tics font "Helvetica,8"
+
+set ylabel "temperature" offset 2.5, 0, 0 font "Helvetica,8"
+set xlabel "time (ms)" offset 0, 0.5, 0 font "Helvetica,8"
+
+
+#####################################################################
+
+set key samplen 2 spacing .8 font ",8" right bottom
+
+#set label 1 at graph 0.35, -0.35 font "Helvetica,12"
+#set label 1 "(b) HotSpot"
+
+#set label 1 at graph 0.27, -0.35 font "Helvetica,12"
+#set label 1 "(a) Castilhos et al."
+
+plot "Temperatures" using 2 title "0x0" with lines, \
+     "Temperatures" using 3 title "1x0" with lines, \
+     "Temperatures" using 4 title "2x0" with lines, \
+     "Temperatures" using 5 title "3x0" with lines, \
+     "Temperatures" using 10 title "0x2" with lines, \
+     "Temperatures" using 11 title "1x2" with lines, \
+     "Temperatures" using 12 title "2x2" with lines, \
+     "Temperatures" using 13 title "3x2" with lines
+
+
+###########################################################################
+
+
+
+plot "Temperatures" using 6 title "0x1" with lines, \
+     "Temperatures" using 7 title "1x1" with lines, \
+     "Temperatures" using 8 title "2x1" with lines, \
+     "Temperatures" using 9 title "3x1" with lines, \
+     "Temperatures" using 14 title "0x3" with lines, \
+     "Temperatures" using 15 title "1x3" with lines, \
+     "Temperatures" using 16 title "2x3" with lines, \
+     "Temperatures" using 17 title "3x3" with lines
+
+set key off

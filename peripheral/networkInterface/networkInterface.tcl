@@ -17,14 +17,15 @@ imodeladdbusmasterport -name "MWRITE"  -addresswidth 32
 #########################################
 ## A slave port on the processor bus
 #########################################
-imodeladdbusslaveport -name DMAC -size 8 -mustbeconnected
+imodeladdbusslaveport -name DMAC -size 12 -mustbeconnected
 
 # Address block for 8 bit control registers
-imodeladdaddressblock -name ab8 -port DMAC -offset 0x0 -width 32 -size 8
+imodeladdaddressblock -name ab8 -port DMAC -offset 0x0 -width 32 -size 12
 
 # 8 bit control registers
-imodeladdmmregister -addressblock DMAC/ab8 -name status -readfunction statusRead -writefunction statusWrite -offset 0
-imodeladdmmregister -addressblock DMAC/ab8 -name address -readfunction addressRead -writefunction addressWrite -offset 4
+imodeladdmmregister -addressblock DMAC/ab8 -name address -readfunction addressRead -writefunction addressWrite -offset 0
+imodeladdmmregister -addressblock DMAC/ab8 -name statusTX -readfunction statusTXRead -writefunction statusTXWrite -offset 4
+imodeladdmmregister -addressblock DMAC/ab8 -name statusRX -readfunction statusRXRead -writefunction statusRXWrite -offset 8
 
 #########################################
 ## Data ports between routers
@@ -44,5 +45,7 @@ imodeladdpacketnetport \
 #########################################
 ## Processor interrupt line
 #########################################
-imodeladdnetport -name INT_NI -type output
-iadddocumentation -name Description -text "NI Interrupt Request"
+imodeladdnetport -name INT_NI_TX -type output
+iadddocumentation -name Description -text "NI TX Interrupt Request"
+imodeladdnetport -name INT_NI_RX -type output
+iadddocumentation -name Description -text "NI RX Interrupt Request"

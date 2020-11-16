@@ -48,13 +48,22 @@ static ppmBusPort busPorts[] = {
         .description     = 0,
     },
     {
-        .name            = "SEC_APP",
+        .name            = "RREAD",
         .type            = PPM_MASTER_PORT,
         .addrBits        = 32,
         .addrBitsMin     = 32,
         .addrBitsMax     = 0,
         .mustBeConnected = 0,
-        .description     = "Interrupt Request",
+        .description     = 0,
+    },
+    {
+        .name            = "RWRITE",
+        .type            = PPM_MASTER_PORT,
+        .addrBits        = 32,
+        .addrBitsMin     = 32,
+        .addrBitsMax     = 0,
+        .mustBeConnected = 0,
+        .description     = 0,
     },
     { 0 }
 };

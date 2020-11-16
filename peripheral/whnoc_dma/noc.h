@@ -38,9 +38,9 @@
 #define OUT_TIME    0x00000000
 
 // NoC Dimensions
-#define DIM_X 3
-#define DIM_Y 3
-#define N_PES 9
+#define DIM_X 8
+#define DIM_Y 8
+#define N_PES 64
 
 //Ticks
 #define ITERATION                0x5555
@@ -60,11 +60,14 @@
 #define WAIT_PE             0x4444
 
 #define DONE                0x5555
-#define READING             0x6666
+#define BLOCKED             0xF2F2
+#define UNBLOCKED           0xF3F3
+#define READY               0x6666
 
 #define NI_STATUS_ON        0x0011
 #define NI_STATUS_OFF       0x00FF
 #define NI_STATUS_INTER     0x0F0F
+#define NI_STATUS_HANDLING  0x0EEE
 #define NI_INT_TYPE_CLEAR   0x0000
 #define NI_INT_TYPE_TX      0xF222
 #define NI_INT_TYPE_RX      0xF333
@@ -73,6 +76,17 @@
 #define FROM_IDLE           0x2525
 #define FROM_RX             0x3535
 
+// Memory information localization
+#define EAST_FLITS_ADDR    0x0FFFFFC8
+#define EAST_PACKETS_ADDR  0x0FFFFFC4
+#define WEST_FLITS_ADDR    0x0FFFFFC0
+#define WEST_PACKETS_ADDR  0x0FFFFFBC
+#define NORTH_FLITS_ADDR   0x0FFFFFB8
+#define NORTH_PACKETS_ADDR 0x0FFFFFB4
+#define SOUTH_FLITS_ADDR   0x0FFFFFB0
+#define SOUTH_PACKETS_ADDR 0x0FFFFFAC
+#define LOCAL_FLITS_ADDR   0x0FFFFFA8
+#define LOCAL_PACKETS_ADDR 0x0FFFFFA4
 
 ///// CODE DEFINES
 // Arbitration
@@ -81,6 +95,8 @@
 #define ARBITER_TTL     0
 // Debug logs
 #define LOG_OUTPUTFLITS 1
+// Thermal stuff
+#define USE_THERMAL     1
 
 #if LOG_OUTPUTFLITS
 extern int contFlits[N_PORTS];

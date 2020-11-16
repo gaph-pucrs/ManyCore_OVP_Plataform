@@ -3,7 +3,7 @@
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
 //
-//                             Version 20170201.0
+//                             Version 20191106.0
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -26,7 +26,7 @@ handlesT handles;
 
 /////////////////////////////// Global Variable ////////////////////////////////
 
-double timer_us = 1000; // interruption timer in us ~~ default is 1 ms!
+double timer_us = 0; // interruption timer in us ~~ default is off (zero)!
 
 /////////////////////////////// Diagnostic level ///////////////////////////////
 
