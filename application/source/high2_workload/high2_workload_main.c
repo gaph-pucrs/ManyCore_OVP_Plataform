@@ -234,7 +234,7 @@ int main(int argc, char **argv) {
             for (i = 0; i < NUM_TASK; i++) {
                 mapping_table[i] = 0;
             }
-        } else { // migration
+        } /*else { // migration
             migratedTask = running_task;
             get_migration_mapping_table(new_task_addr);
             destination = new_task_addr[migratedTask];
@@ -289,7 +289,7 @@ int main(int argc, char **argv) {
             for (i = 0; i < NUM_TASK; i++) {
                 mapping_table[i] = 0;
             }
-        }
+        }*/
     }
 
     //////////////////////////////////////////////////////
