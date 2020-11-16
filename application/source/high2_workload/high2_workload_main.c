@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
             prints("Task ");
             printi(running_task);
             prints(" app ");
-            printi(appID[running_task]);
+            //printi(appID[running_task]);
             prints("mapped\n");
             state = 0;
             clear_mapping();
