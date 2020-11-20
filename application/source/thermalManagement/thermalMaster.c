@@ -256,6 +256,7 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
         disable_interruptions();
         FILE *log;
         char log_name[50];
+        app_startTime[task_applicationID[id]]--; // removes the +1 added in case of releasing in the window 0
         sprintf(log_name, "simulation/applicationRegister.csv");
         log = fopen(log_name, "a+");
         if (log != NULL) {
@@ -421,7 +422,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
         for (i = 0; i < DIM_X * DIM_Y; i++) {
             if (task_start_time[i] == -2) {
                 if (app_startTime[task_applicationID[i]] == 0)
-                    app_startTime[task_applicationID[i]] = measuredWindows;
+                    app_startTime[task_applicationID[i]] = measuredWindows + 1;
                 task_addr[i] = task_addr[i] | 0x80000000;
                 // task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
                 sendTaskService(TASK_MAPPING, (task_addr[i] & 0x0000FFFF), task_addr, tasks_to_map);
