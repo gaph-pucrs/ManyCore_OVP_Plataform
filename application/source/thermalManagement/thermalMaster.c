@@ -252,7 +252,7 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
                 return FALSE;
         }
     }
-    if (app_startTime[task_applicationID[id] != 0]) {
+    if (app_startTime[task_applicationID[id]] != 0) {
         disable_interruptions();
         FILE *log;
         char log_name[50];
