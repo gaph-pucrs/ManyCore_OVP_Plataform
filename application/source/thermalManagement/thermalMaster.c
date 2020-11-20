@@ -308,7 +308,7 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y]) {
     return 0;
 }
 
-void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_start_time[DIM_X * DIM_Y], int task_remaining_executions[DIM_X * DIM_Y]) {
+void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[DIM_X * DIM_Y], int task_start_time[DIM_X * DIM_Y], int task_remaining_executions[DIM_X * DIM_Y]) {
     int i;
     int tasks_to_map = 0;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
@@ -489,7 +489,7 @@ int main(int argc, char **argv) {
             // putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
             // LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
 
-            releaseTasks(task_addr, task_start_time, task_remaining_executions);
+            releaseTasks(task_addr, task_applicationID, task_start_time, task_remaining_executions);
 
             //////////////////////////////////////////////////////
             // RECEIVE THE PACKET FROM TEA WITH PE TEMPERATURES //
