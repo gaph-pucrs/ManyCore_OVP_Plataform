@@ -193,7 +193,7 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
             int x = srcID % DIM_X;
             int y = srcID / DIM_Y;
             srcProc = x << 8 | y;
-            if (temp[srcID] > 33300 && srcID != 0) {
+            if (temp[srcID] > 34000 && srcID != 0) {
                 putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
                 if (migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE) { // iaçanã: detecta PEs que nao podem migrar
                     if (how_many_tasks_PE_is_running(srcProc, task_addr) > 0 && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE) {
@@ -329,6 +329,12 @@ int getCoolestQuad() {
             coolest = i;
         }
     }
+
+    putsv("quadTemp[0] = ", quadTemp[0]);
+    putsv("quadTemp[1] = ", quadTemp[1]);
+    putsv("quadTemp[2] = ", quadTemp[2]);
+    putsv("quadTemp[3] = ", quadTemp[3]);
+    putsv("Coolest quad = ", coolest);
 
     return coolest;
 }
