@@ -1,26 +1,7 @@
 
-
-
-void init_array(int *array, int size){
-	int i;
-
-	for (i = 0; i < size; i++)
-		array[i] = size - i;
-}
-
-
-void print_array(int *array, int size){
-	int i;
-	for (i = 0; i < size; i++) {
-		printi(array[i]);
-	}
-	prints("\n");
-
-}
-
-int sortMaster(int state){
+int sortMaster2(int state){
 	int i, j, k;
-	int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
+	int slave_addr[SORT_SLAVES] = {sort_slave1_2, sort_slave2_2, sort_slave3_2};
 
 	int array[SORT_SLAVES][ARRAY_SIZE];
 	//int slave_task[SORT_SLAVES];
@@ -120,7 +101,7 @@ int sortMaster(int state){
 }*/
 
 
-int sort_slave(int task, int state){
+int sort_slave_2(int task, int state){
 	//int task_request[2];
 	int array[ARRAY_SIZE];
 	//int i;
@@ -138,16 +119,16 @@ int sort_slave(int task, int state){
     	theMessage.msg[i] = task_request[i];
 
 	if(state == 0){
-		SendMessage(&theMessage, sort_master);
+		SendMessage(&theMessage, sort_master_2);
 	}*/
     
     /* Wait for a task, execute and return result to master*/
     for (;;) {
-    	ReceiveMessage(&theMessage, sort_master);
+    	ReceiveMessage(&theMessage, sort_master_2);
     	prints("Packet received\n");
     	if (theMessage.msg[0] == KILL_PROC) break;
 		quicksort(theMessage.msg, 0, ARRAY_SIZE-1);
-		SendMessage(&theMessage, sort_master);
+		SendMessage(&theMessage, sort_master_2);
 
 		//Migration breakpoint
 		if(get_migration_src()){
