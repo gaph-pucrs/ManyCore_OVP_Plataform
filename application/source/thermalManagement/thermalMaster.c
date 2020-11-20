@@ -259,10 +259,10 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
         sprintf(log_name, "simulation/applicationRegister.csv");
         log = fopen(log_name, "a+");
         if (log != NULL) {
-            fprintf(log, "%d; %d; %d; %d\n", task_applicationID[id], app_startTime[task_applicationID[id], measuredWindows, (measuredWindows-app_startTime[task_applicationID[id]]));
+            fprintf(log, "%d; %d; %d; %d\n", task_applicationID[id], app_startTime[task_applicationID[id]], measuredWindows, (measuredWindows - app_startTime[task_applicationID[id]]));
             fclose(log);
         }
-        app_startTime[task_applicationID[id] = 0;
+        app_startTime[task_applicationID[id]] = 0;
         enable_interruptions();
     }
     return TRUE;
