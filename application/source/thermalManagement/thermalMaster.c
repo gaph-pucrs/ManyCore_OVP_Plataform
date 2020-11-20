@@ -27,6 +27,7 @@ unsigned int spiralMatrix[QUAD_DIM_X * QUAD_DIM_Y];
 unsigned int tempMatrix[QUAD_NUM][QUAD_DIM_X * QUAD_DIM_Y];
 unsigned int tempSort[QUAD_NUM][QUAD_DIM_X * QUAD_DIM_Y];
 int appQuadrant[QUAD_NUM];
+int app_startTime[DIM_X * DIM_Y];
 
 void generateSpiralMatrix() {
     int i, cont = 0, k = 0, l = 0, m = QUAD_DIM_X, n = QUAD_DIM_Y;
@@ -251,6 +252,19 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
                 return FALSE;
         }
     }
+    if (app_startTime[task_applicationID[id] != 0]) {
+        disable_interruptions();
+        FILE *log;
+        char log_name[50];
+        sprintf(log_name, "simulation/applicationRegister.csv");
+        log = fopen(log_name, "a+");
+        if (log != NULL) {
+            fprintf(log, "%d; %d; %d; %d\n",task_applicationID[id], app_startTime[task_applicationID[id], measuredWindows, (measuredWindows-app_startTime[task_applicationID[id]));
+            fclose(log);
+        }
+        app_startTime[task_applicationID[id] = 0;
+        enable_interruptions();
+    }
     return TRUE;
 }
 
@@ -406,6 +420,8 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
 
         for (i = 0; i < DIM_X * DIM_Y; i++) {
             if (task_start_time[i] == -2) {
+                if (app_startTime[task_applicationID[i]] == 0)
+                    app_startTime[task_applicationID[i]] = measuredWindows;
                 task_addr[i] = task_addr[i] | 0x80000000;
                 // task_addr[i] = task_addr[i] | (task_applicationID[i] << 16);
                 sendTaskService(TASK_MAPPING, (task_addr[i] & 0x0000FFFF), task_addr, tasks_to_map);
@@ -448,12 +464,23 @@ int main(int argc, char **argv) {
     int task_remaining_executions[DIM_X * DIM_Y];
     int task_repeat_after[DIM_X * DIM_Y];
     int task_applicationID[DIM_X * DIM_Y];
+
     int appID = -1;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
     unsigned int nextMigration = 20;
     // int totalTasks, finishedTasks, progresso;
+
+    // Initialization of application register file
+    FILE *log;
+    char log_name[50];
+    sprintf(log_name, "simulation/applicationRegister.csv");
+    log = fopen(log_name, "w+");
+    if (log != NULL) {
+        fprintf(log, "appId; startTime; finishTime; elapsedTime\n");
+        fclose(log);
+    }
 
     /*Initialization*/
     generateSpiralMatrix();
