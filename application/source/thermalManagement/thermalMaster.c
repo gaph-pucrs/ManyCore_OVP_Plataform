@@ -13,7 +13,7 @@ unsigned int Power[DIM_X * DIM_Y];
 unsigned int Temperature[DIM_X * DIM_Y];
 unsigned int Frequency[DIM_X * DIM_Y];
 
-//PID control variables
+// PID control variables
 unsigned int derivative[DIM_Y * DIM_X];
 unsigned int integral[DIM_Y * DIM_X];
 unsigned int integral_prev[INT_WINDOW][DIM_Y * DIM_X];
@@ -22,6 +22,7 @@ unsigned int control_signal[DIM_Y * DIM_X];
 
 unsigned int spiralMatrix[DIM_X * DIM_Y];
 unsigned int tempSort[DIM_X * DIM_Y];
+int app_startTime[DIM_X * DIM_Y];
 
 void generateSpiralMatrix() {
     int i, cont = 0, k = 0, l = 0, m = DIM_X, n = DIM_Y;
@@ -70,8 +71,8 @@ void generatePatternMatrix(int n) {
             spiralMatrix[i] = (matrix[i] / DIM_X << 8) | matrix[i] % DIM_X;
     }
     if (n == 64) {
-        int matrix[64] = {0, 2, 18, 16, 34, 32, 48, 50, 52, 54, 36, 38, 20, 22, 4, 6, 15, 13, 31, 29, 47, 45, 63, 61, 59, 57, 43, 41, 27, 25, 11, 9,
-                          1, 3, 5, 7, 14, 12, 10, 8, 17, 19, 21, 23, 30, 28, 26, 24, 33, 35, 37, 39, 46, 44, 42, 40, 49, 51, 53, 55, 62, 60, 58, 56};
+        int matrix[64] = {0, 2, 18, 16, 34, 32, 48, 50, 52, 54, 36, 38, 20, 22, 4,  6,  15, 13, 31, 29, 47, 45, 63, 61, 59, 57, 43, 41, 27, 25, 11, 9,
+                          1, 3, 5,  7,  14, 12, 10, 8,  17, 19, 21, 23, 30, 28, 26, 24, 33, 35, 37, 39, 46, 44, 42, 40, 49, 51, 53, 55, 62, 60, 58, 56};
         for (i = 0; i < 64; i++)
             spiralMatrix[i] = (matrix[i] / DIM_X << 8) | matrix[i] % DIM_X;
     }
@@ -131,13 +132,13 @@ int migrationEnvolved(unsigned int pe, unsigned int task_confirmed_addr[DIM_X * 
     int foundJ = -1;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_addr[i] == pe && foundI == -1) {
-            foundI = i;  // found inside the future address
+            foundI = i; // found inside the future address
         }
         if (task_confirmed_addr[i] == pe && foundJ == -1) {
-            foundJ = i;  // found inside the confirmed address
+            foundJ = i; // found inside the confirmed address
         }
-        if (foundI != -1 && foundJ != -1) {  // if u found in both address list
-            if (foundI == foundJ) {          // and they are in the same ID (task)
+        if (foundI != -1 && foundJ != -1) { // if u found in both address list
+            if (foundI == foundJ) {         // and they are in the same ID (task)
                 return FALSE;
             } else {
                 return TRUE;
@@ -163,7 +164,7 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
     int k = DIM_X * DIM_Y - 1;
     unsigned int contNumberOfMigrations = 0;
     int i, j;
-    int src_vec[DIM_X * DIM_Y];  // = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int src_vec[DIM_X * DIM_Y]; // = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     int srcProcs[DIM_X * DIM_Y];
 
@@ -185,27 +186,27 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
         srcProc = x << 8 | y;
         if (temp[srcID] > 33300) {
             putsvsv("Temperature migration: srcProc=", srcProc, "how_many_tasks_PE_is_running=", how_many_tasks_PE_is_running(srcProc, task_addr));
-            if (migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE) {  // iaçanã: detecta PEs que nao podem migrar
+            if (migrationEnvolved(srcProc, task_confirmed_addr, task_addr) == FALSE) { // iaçanã: detecta PEs que nao podem migrar
                 if (how_many_tasks_PE_is_running(srcProc, task_addr) > 0 && finishedTask[getSomeTaskID(srcProc, task_addr)] != TRUE) {
                     while (k > 0) {
                         tgtProc = spiralMatrix[k];
                         task_ID = getSomeTaskID(srcProc, task_addr);
                         putsvsv("Temperature migration: tgtProc=", tgtProc, " task_ID=", task_ID);
-                        //LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
-                        if (migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE) {  // iaçanã: mesma coisa de antes
+                        // LOG("Temperature migration: tgtProc= %x task_ID= %d\n", tgtProc, task_ID);
+                        if (migrationEnvolved(tgtProc, task_confirmed_addr, task_addr) == FALSE) { // iaçanã: mesma coisa de antes
                             if ((how_many_tasks_PE_is_running(tgtProc, task_addr) == 0) && (tgtProc != srcProc) && (how_many_tasks_PE_is_running(tgtProc, src_vec) == 0)) {
-                                //LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
+                                // LOG("send_task_migration %x -> %x\n", srcProc, tgtProc);
                                 prints("send_task_migration\n");
 
                                 task_addr[task_ID] = tgtProc;
                                 src_vec[task_ID] = srcProc;
 
-                                //Save to send later
+                                // Save to send later
                                 srcProcs[contNumberOfMigrations] = srcProc;
-                                //sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
+                                // sendTaskService(TASK_MIGRATION_SRC, srcProc, task_addr, tasks_to_map);
 
                                 contNumberOfMigrations++;
-                                //setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
+                                // setEnergySlaveAcc_total(tgtProc); //zera energia acumulada do PE destino
                                 break;
                             }
                         }
@@ -215,11 +216,11 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
             }
         }
         if (temp[i] > 35515 && Frequency[i] == 1000) {
-            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            // LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
             Frequency[i] = 677;
             setDVFS(srcProc, Frequency[i]);
         } else if (temp[i] < 35515 && Frequency[i] == 677) {
-            //LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
+            // LOG("AJUSTANDO A FREQUENCIA DE %x", srcProc);
             Frequency[i] = 1000;
             setDVFS(srcProc, Frequency[i]);
         }
@@ -239,24 +240,38 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
                 return FALSE;
         }
     }
+    if (app_startTime[task_applicationID[id]] != 0) {
+        disable_interruptions();
+        FILE *log;
+        char log_name[50];
+        app_startTime[task_applicationID[id]]--; // removes the +1 added in case of releasing in the window 0
+        sprintf(log_name, "simulation/applicationRegister.csv");
+        log = fopen(log_name, "a+");
+        if (log != NULL) {
+            fprintf(log, "%d; %d; %d; %d\n", task_applicationID[id], app_startTime[task_applicationID[id]], measuredWindows, (measuredWindows - app_startTime[task_applicationID[id]]));
+            fclose(log);
+        }
+        app_startTime[task_applicationID[id]] = 0;
+        enable_interruptions();
+    }
     return TRUE;
 }
 
 int getRandomEmptyPE(unsigned int task_addr[DIM_X * DIM_Y]) {
     int i, j, empty, pe;
-    pe = random() % (DIM_X * DIM_Y);  // assumes a random address
-    if (pe == 0)                      // zero is reserved to the master
+    pe = random() % (DIM_X * DIM_Y); // assumes a random address
+    if (pe == 0)                     // zero is reserved to the master
         pe++;
     for (j = 1; j < DIM_X * DIM_Y; j++) {
-        empty = 1;  // presumes that it is empty
+        empty = 1; // presumes that it is empty
         for (i = 0; i < DIM_X * DIM_Y; i++) {
-            if (task_addr[i] == getAddress(pe)) {  // if you find some task runnin inside that processor
+            if (task_addr[i] == getAddress(pe)) { // if you find some task runnin inside that processor
                 empty = 0;
-                break;  // breaks
+                break; // breaks
             }
-            if (task_confirmed_addr[i] == getAddress(pe)) {  // if you find some task runnin inside that processor
+            if (task_confirmed_addr[i] == getAddress(pe)) { // if you find some task runnin inside that processor
                 empty = 0;
-                break;  // breaks
+                break; // breaks
             }
         }
         if (empty) {
@@ -274,16 +289,16 @@ int getRandomEmptyPE(unsigned int task_addr[DIM_X * DIM_Y]) {
 int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y]) {
     int i, j, empty, pe;
     for (j = 1; j < DIM_X * DIM_Y; j++) {
-        pe = spiralMatrix[DIM_X * DIM_Y - j];  // gets the peAddr from spiralMatrix
-        empty = 1;                             // presumes that it is empty
+        pe = spiralMatrix[DIM_X * DIM_Y - j]; // gets the peAddr from spiralMatrix
+        empty = 1;                            // presumes that it is empty
         for (i = 0; i < DIM_X * DIM_Y; i++) {
-            if (task_addr[i] == pe) {  // if you find some task runnin inside that processor
+            if (task_addr[i] == pe) { // if you find some task runnin inside that processor
                 empty = 0;
-                break;  // breaks
+                break; // breaks
             }
-            if (task_confirmed_addr[i] == pe) {  // if you find some task runnin inside that processor
+            if (task_confirmed_addr[i] == pe) { // if you find some task runnin inside that processor
                 empty = 0;
-                break;  // breaks
+                break; // breaks
             }
         }
         if (empty) {
@@ -298,9 +313,9 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_start_time[DIM
     int tasks_to_map = 0;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1) {
-            task_addr[i] = getSpiralMatixEmptyPE(task_addr);  //getRandomEmptyPE(task_addr);
-            if (task_addr[i]) {                               // if the task got some valid address
-                task_start_time[i] = -2;                      // PRE-RELEASE
+            task_addr[i] = getSpiralMatixEmptyPE(task_addr); // getRandomEmptyPE(task_addr);
+            if (task_addr[i]) {                              // if the task got some valid address
+                task_start_time[i] = -2;                     // PRE-RELEASE
                 finishedTask[i] = FALSE;
                 putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
             }
@@ -312,10 +327,12 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_start_time[DIM
 
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_start_time[i] == -2) {
+            if (app_startTime[task_applicationID[i]] == 0)
+                app_startTime[task_applicationID[i]] = measuredWindows + 1;
             task_addr[i] = task_addr[i] | 0x80000000;
             sendTaskService(TASK_MAPPING, task_addr[i], task_addr, tasks_to_map);
             task_addr[i] = task_addr[i] & 0x7FFFFFFF;
-            task_start_time[i] = -1;  //RELEASED
+            task_start_time[i] = -1; // RELEASED
             task_remaining_executions[i]--;
         }
     }
@@ -329,7 +346,7 @@ int main(int argc, char **argv) {
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int y, x, p_idx = 0;
-    //int ordem[DIM_X*DIM_Y];
+    // int ordem[DIM_X*DIM_Y];
 
     FILE *testcase;
     testcase = fopen("application/scenario.yaml", "r");
@@ -351,10 +368,20 @@ int main(int argc, char **argv) {
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
-    //int totalTasks, finishedTasks, progresso;
+    // int totalTasks, finishedTasks, progresso;
+
+    // Initialization of application register file
+    FILE *log;
+    char log_name[50];
+    sprintf(log_name, "simulation/applicationRegister.csv");
+    log = fopen(log_name, "w+");
+    if (log != NULL) {
+        fprintf(log, "appId; startTime; finishTime; elapsedTime\n");
+        fclose(log);
+    }
 
     /*Initialization*/
-    //generateSpiralMatrix();
+    // generateSpiralMatrix();
     generatePatternMatrix(DIM_X * DIM_Y);
     for (y = 0; y < DIM_Y; y++) {
         for (x = 0; x < DIM_X; x++) {
@@ -363,7 +390,7 @@ int main(int argc, char **argv) {
             Temperature[p_idx] = TAMB;
             integral[p_idx] = 0;
             Temperature_prev[p_idx] = 0;
-            //LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
+            // LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
             putsvsv("spiralMatrix ", p_idx, "- ", spiralMatrix[p_idx]);
             p_idx++;
         }
@@ -376,7 +403,7 @@ int main(int argc, char **argv) {
             app_name = strtok(NULL, " ");
             app_name[strlen(app_name) - 1] = '\0';
             yaml_tasks = 0;
-            starting_time = 0;  // defines the starting time to zero
+            starting_time = 0; // defines the starting time to zero
             repeat_after = 0;
             executions = 1;
             task_id = task_id + 10;
@@ -421,8 +448,8 @@ int main(int argc, char **argv) {
         }
     }
 
-    //totalTasks = 0;
-    //finishedTasks = 0;
+    // totalTasks = 0;
+    // finishedTasks = 0;
     for (i = 0; i < tasks_to_map; i++) {
         prints("==================\n");
         prints("Tarefa (");
@@ -433,7 +460,7 @@ int main(int argc, char **argv) {
         printi(task_applicationID[i]);
         prints(". Ela vai executar ");
         printi(task_remaining_executions[i]);
-        //totalTasks += task_remaining_executions[i];
+        // totalTasks += task_remaining_executions[i];
         prints(" vezes, começando ");
         printi(task_repeat_after[i]);
         prints("ms depois de terminar a execução anterior.\n\n");
@@ -447,7 +474,7 @@ int main(int argc, char **argv) {
 
     /* Wait for every PE to send each power estimation */
     if (*timerConfig != 0) {
-        while (*SyncToPE != 1) {  // Repete este processo enquanto houverem outras tarefas executando!
+        while (*SyncToPE != 1) { // Repete este processo enquanto houverem outras tarefas executando!
             putsv("Timer (ms) ", measuredWindows);
 
             /*prints("================================\n== Fila de tasks:\n");
@@ -458,9 +485,9 @@ int main(int argc, char **argv) {
             }
             prints("================================\n");*/
 
-            //progresso = (finishedTasks*100)/totalTasks;
-            //putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
-            //LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
+            // progresso = (finishedTasks*100)/totalTasks;
+            // putsvsv("Ainda faltam executar ", (totalTasks-finishedTasks),"tarefas. Percent: ", progresso);
+            // LOG("Ainda faltam executar %d tarefas. %d percent\n", (totalTasks-finishedTasks), progresso);
 
             releaseTasks(task_addr, task_start_time, task_remaining_executions);
 
@@ -478,9 +505,9 @@ int main(int argc, char **argv) {
             tempPacket = FALSE;
             prints("TEA Packet Received: ");
             for (i = 0; i < DIM_X * DIM_Y; i++) {
-                //printi(deliveredMessage->msg[i]);
+                // printi(deliveredMessage->msg[i]);
                 printi(executedInstPacket[i]);
-                Temperature[i] = executedInstPacket[i];  //deliveredMessage->msg[i];
+                Temperature[i] = executedInstPacket[i]; // deliveredMessage->msg[i];
             }
 
             //////////////////////////
@@ -535,7 +562,7 @@ int main(int argc, char **argv) {
                 }
                 if (finishedTask[i] == TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)) {
                     // calculates the next start time
-                    //finishedTasks++;
+                    // finishedTasks++;
                     task_start_time[i] = measuredWindows + task_repeat_after[i];
                     finishedTask[i] = 2;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
