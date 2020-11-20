@@ -364,7 +364,7 @@ int main(int argc, char **argv) {
     int task_remaining_executions[DIM_X * DIM_Y];
     int task_repeat_after[DIM_X * DIM_Y];
     int task_applicationID[DIM_X * DIM_Y];
-    int task_id = 10;
+    int task_id = -1;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
@@ -406,7 +406,7 @@ int main(int argc, char **argv) {
             starting_time = 0; // defines the starting time to zero
             repeat_after = 0;
             executions = 1;
-            task_id = task_id + 10;
+            task_id = task_id + 1;
         }
 
         if (yaml_tasks) {
