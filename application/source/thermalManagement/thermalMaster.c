@@ -27,7 +27,7 @@ unsigned int spiralMatrix[QUAD_DIM_X * QUAD_DIM_Y];
 unsigned int tempMatrix[QUAD_NUM][QUAD_DIM_X * QUAD_DIM_Y];
 unsigned int tempSort[QUAD_NUM][QUAD_DIM_X * QUAD_DIM_Y];
 int appQuadrant[QUAD_NUM];
-int app_startTime[DIM_X * DIM_Y];
+volatile int app_startTime[DIM_X * DIM_Y];
 
 void generateSpiralMatrix() {
     int i, cont = 0, k = 0, l = 0, m = QUAD_DIM_X, n = QUAD_DIM_Y;
@@ -509,6 +509,7 @@ int main(int argc, char **argv) {
             integral[p_idx] = 0;
             Temperature_prev[p_idx] = 0;
             appQuadrant[p_idx] = -1;
+            app_startTime[p_idx] = 0;
             p_idx++;
         }
     }
