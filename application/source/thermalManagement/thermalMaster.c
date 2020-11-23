@@ -22,7 +22,7 @@ unsigned int control_signal[DIM_Y * DIM_X];
 
 unsigned int spiralMatrix[DIM_X * DIM_Y];
 unsigned int tempSort[DIM_X * DIM_Y];
-int app_startTime[DIM_X * DIM_Y];
+volatile int app_startTime[DIM_X * DIM_Y];
 
 void generateSpiralMatrix() {
     int i, cont = 0, k = 0, l = 0, m = DIM_X, n = DIM_Y;
@@ -390,6 +390,7 @@ int main(int argc, char **argv) {
             Temperature[p_idx] = TAMB;
             integral[p_idx] = 0;
             Temperature_prev[p_idx] = 0;
+            app_startTime[p_idx] = 0;
             // LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
             putsvsv("spiralMatrix ", p_idx, "- ", spiralMatrix[p_idx]);
             p_idx++;

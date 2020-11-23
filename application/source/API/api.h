@@ -687,7 +687,9 @@ void interruptHandler_NI_RX(void) {
     else if(incomingPacket[PI_SERVICE] == TASK_FINISHED){
         prints("Tarefa finalizada - ");
         printi(incomingPacket[PI_TASK_ID]);
-        prints("-\n");
+        prints("- MW: ");
+        printi(measuredWindows);
+        prints("\n");
         finishedTask[incomingPacket[PI_TASK_ID]] = TRUE;
         *NIcmdRX = DONE;
     }
