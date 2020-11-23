@@ -3,17 +3,18 @@
 #include <string.h>
 
 #include "../peripheral/whnoc_dma/noc.h"
-#include "audio_video_long_config.h"
-#include "dijkstra_long_config.h"
-#include "dtw_long_config.h"
-#include "dtw_long2_config.h"
+#include "aes_config.h"
+#include "audio_video_config.h"
+#include "dijkstra_config.h"
+#include "dtw_config.h"
+#include "dtw2_config.h"
 #include "interrupt.h"
-#include "mpeg_long_config.h"
-#include "sort_long2_config.h"
-#include "sort_long_config.h"
+#include "mpeg_config.h"
+#include "sort_config.h"
+#include "sort2_config.h"
 #include "source/API/api.h"
 #include "spr_defs.h"
-#include "synthetic_long_config.h"
+#include "synthetic_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
@@ -35,8 +36,9 @@ int dijkstra_print();
 
 int sortMaster(int state);
 int sort_slave(int task, int state);
-int sortMaster2(int state);
-int sort_slave_2(int task, int state);
+
+int aesMaster(int state);
+int aes_slave();
 
 // AV threads
 int av_split(int state);
@@ -47,7 +49,7 @@ int av_adpcm_dec(int state);
 int av_FIR(int state);
 int av_join(int state);
 
-// MPEG - threads
+// // MPEG - threads
 int mpeg_idct(int state);
 int mpeg_iquant(int state);
 int mpeg_ivlc(int state);
@@ -205,6 +207,22 @@ int main(int argc, char **argv) {
             break;
         case sort_slave3_2:
             state = sort_slave_2(2, state);
+            break;
+        // AES
+        case aes_master:
+            state = aesMaster(state);
+            break;
+        case aes_slave1:
+            state = aes_slave();
+            break;
+        case aes_slave2:
+            state = aes_slave();
+            break;
+        case aes_slave3:
+            state = aes_slave();
+            break;
+        case aes_slave4:
+            state = aes_slave();
             break;
         // Audio Video
         case split_av:
