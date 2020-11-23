@@ -71,6 +71,17 @@ apps:
     sort_slave1_2: 1
     sort_slave2_2: 2
     sort_slave3_2: 3
+ - name: dtw_long2
+   cluster: 0
+   mapping: dynamic
+   start_time_ms: 17
+   dynamic_mapping:
+    bank_2: 0
+    p1_2: 1
+    p2_2: 2
+    p3_2: 3
+    p4_2: 4
+    recognizer_2: 5
  - name: thermalManagement
    cluster: 0
    mapping: static

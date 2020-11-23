@@ -6,6 +6,7 @@
 #include "audio_video_long_config.h"
 #include "dijkstra_long_config.h"
 #include "dtw_long_config.h"
+#include "dtw_long2_config.h"
 #include "interrupt.h"
 #include "mpeg_long_config.h"
 #include "sort_long2_config.h"
@@ -13,7 +14,6 @@
 #include "source/API/api.h"
 #include "spr_defs.h"
 #include "synthetic_long_config.h"
-//#include "synthetic_long2_config.h"
 #include "thermalManagement_config.h"
 
 message theMessage;
@@ -69,6 +69,12 @@ int dtw_p2(int state);
 int dtw_p3(int state);
 int dtw_p4(int state);
 int dtw_recognizer(int state);
+int dtw_bank_2(int state);
+int dtw_p1_2(int state);
+int dtw_p2_2(int state);
+int dtw_p3_2(int state);
+int dtw_p4_2(int state);
+int dtw_recognizer_2(int state);
 // DTW - auxiliar functins
 void randPattern(int in[MATX_SIZE][MATX_SIZE]);
 int dtw_abs(int num);
@@ -240,6 +246,25 @@ int main(int argc, char **argv) {
             break;
         case recognizer:
             state = dtw_recognizer(state);
+            break;
+        // DTW2
+        case bank_2:
+            state = dtw_bank_2(state);
+            break;
+        case p1_2:
+            state = dtw_p1_2(state);
+            break;
+        case p2_2:
+            state = dtw_p2_2(state);
+            break;
+        case p3_2:
+            state = dtw_p3_2(state);
+            break;
+        case p4_2:
+            state = dtw_p4_2(state);
+            break;
+        case recognizer_2:
+            state = dtw_recognizer_2(state);
             break;
         }
         if (state == 0) {
