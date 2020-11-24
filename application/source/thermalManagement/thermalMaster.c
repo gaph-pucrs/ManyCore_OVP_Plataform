@@ -508,6 +508,7 @@ int main(int argc, char **argv) {
             Temperature_prev[p_idx] = 0;
             appQuadrant[p_idx] = -1;
             app_startTime[p_idx] = 0;
+            task_applicationID[p_idx] = 0xFFFFFFFF;
             p_idx++;
         }
     }
