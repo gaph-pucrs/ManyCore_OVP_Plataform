@@ -326,7 +326,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
                         finishedTask[j] = finishedTask[i];
                     }
                 }
-                mapp = 0;
+                map = 0;
             }
         }
         if (tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF) {
