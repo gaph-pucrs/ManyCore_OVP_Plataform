@@ -389,6 +389,7 @@ int main(int argc, char **argv) {
             integral[p_idx] = 0;
             Temperature_prev[p_idx] = 0;
             app_startTime[p_idx] = 0;
+            task_applicationID[p_idx] = 0xFFFFFFFF;
             // LOG("spiralMatrix %d - %x\n", p_idx, spiralMatrix[p_idx]);
             putsvsv("spiralMatrix ", p_idx, "- ", spiralMatrix[p_idx]);
             p_idx++;
