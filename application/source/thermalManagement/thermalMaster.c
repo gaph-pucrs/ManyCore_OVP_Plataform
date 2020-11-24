@@ -393,9 +393,9 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
     int tasks_to_map = 0;
     int appID;
     int delivery_something = 0;
-
+    int map = 1;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
-        if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1) {
+        if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1 && map == 1) {
             appID = task_applicationID[i];
             task_addr[i] = getSpiralMatixEmptyPE(task_addr, appID); // getRandomEmptyPE(task_addr);
             if (task_addr[i]) {                                     // if the task got some valid address
@@ -412,7 +412,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
                         finishedTask[j] = finishedTask[i];
                     }
                 }
-                break;
+                map = 0;
             }
         }
         if (tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF) {
@@ -590,7 +590,7 @@ int main(int argc, char **argv) {
         // totalTasks += task_remaining_executions[i];
         prints(" vezes, começando ");
         printi(task_repeat_after[i]);
-        prints("ms depois de terminar a execução anterior.\n\n");
+        prints("ms depois de terminar a execução anterior.\n");
     }
 
     for (i = tasks_to_map; i < DIM_Y * DIM_X; i++) {
@@ -625,6 +625,7 @@ int main(int argc, char **argv) {
                 printi(executedInstPacket2[i]);
                 Temperature[i] = executedInstPacket2[i]; // deliveredMessage->msg[i];
             }
+            prints("\n");
 
             //////////////////////////
             // Migration procedures //
