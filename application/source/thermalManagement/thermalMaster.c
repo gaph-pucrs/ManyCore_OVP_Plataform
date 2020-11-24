@@ -253,7 +253,6 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
         }
     }
     if (app_startTime[task_applicationID[id]] != 0) {
-        disable_interruptions();
         FILE *log;
         char log_name[50];
         app_startTime[task_applicationID[id]]--; // removes the +1 added in case of releasing in the window 0
@@ -264,7 +263,6 @@ int appFinished(int id, int task_applicationID[DIM_X * DIM_Y]) {
             fclose(log);
         }
         app_startTime[task_applicationID[id]] = 0;
-        enable_interruptions();
     }
     return TRUE;
 }
