@@ -389,7 +389,7 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y], int appID) {
 }
 
 void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[DIM_X * DIM_Y], int task_start_time[DIM_X * DIM_Y], int task_remaining_executions[DIM_X * DIM_Y]) {
-    int i;
+    int i, j;
     int tasks_to_map = 0;
     int appID;
     int delivery_something = 0;
@@ -403,6 +403,16 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
                 finishedTask[i] = FALSE;
                 delivery_something = 1;
                 putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
+            }
+            else{
+                putsvsv("Task ", i, " mapped to ZERO - reseting app mapping!", 0);
+                for(j=0;j<DIM_X*DIM_Y;j++){
+                    if(task_applicationID[i] == task_applicationID[j]){
+                        task_start_time[j] = task_start_time[i];
+                        finishedTask[j] = finishedTask[i];
+                    }
+                }
+                break;
             }
         }
         if (tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF) {
