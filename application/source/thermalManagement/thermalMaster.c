@@ -309,8 +309,9 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y]) {
 void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[DIM_X * DIM_Y], int task_start_time[DIM_X * DIM_Y], int task_remaining_executions[DIM_X * DIM_Y]) {
     int i, j;
     int tasks_to_map = 0;
+    int map = 1;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
-        if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1) {
+        if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1 && map==1) {
             task_addr[i] = getSpiralMatixEmptyPE(task_addr); // getRandomEmptyPE(task_addr);
             if (task_addr[i]) {                              // if the task got some valid address
                 task_start_time[i] = -2;                     // PRE-RELEASE
@@ -325,6 +326,7 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
                         finishedTask[j] = finishedTask[i];
                     }
                 }
+                mapp = 0;
             }
         }
         if (tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF) {
@@ -472,7 +474,7 @@ int main(int argc, char **argv) {
         // totalTasks += task_remaining_executions[i];
         prints(" vezes, começando ");
         printi(task_repeat_after[i]);
-        prints("ms depois de terminar a execução anterior.\n\n");
+        prints("ms depois de terminar a execução anterior.\n");
     }
 
     for (i = tasks_to_map; i < DIM_Y * DIM_X; i++) {
@@ -518,6 +520,7 @@ int main(int argc, char **argv) {
                 printi(executedInstPacket[i]);
                 Temperature[i] = executedInstPacket[i]; // deliveredMessage->msg[i];
             }
+            prints("\n");
 
             //////////////////////////
             // Migration procedures //
