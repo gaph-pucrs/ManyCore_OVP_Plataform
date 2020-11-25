@@ -377,6 +377,7 @@ int main(int argc, char **argv) {
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
+    unsigned int now;
     // int totalTasks, finishedTasks, progresso;
 
     // Initialization of application register file
@@ -564,6 +565,7 @@ int main(int argc, char **argv) {
 
             // Verify if every task is finished
             disable_interruption(0);
+            measuredWindows_now = measuredWindows;
             finishSimulation = 1;
             for (i = 0; i < tasks_to_map; i++) {
                 if (finishedTask[i] == TRUE) {
@@ -575,7 +577,7 @@ int main(int argc, char **argv) {
                 if (finishedTask[i] == TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)) {
                     // calculates the next start time
                     // finishedTasks++;
-                    task_start_time[i] = measuredWindows + task_repeat_after[i];
+                    task_start_time[i] = measuredWindows_now + task_repeat_after[i];
                     finishedTask[i] = 2;
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
                 }
