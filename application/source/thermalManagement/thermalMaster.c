@@ -517,7 +517,7 @@ int main(int argc, char **argv) {
     int task_remaining_executions[DIM_X * DIM_Y];
     int task_repeat_after[DIM_X * DIM_Y];
     int task_applicationID[DIM_X * DIM_Y];
-
+    unsigned int measuredWindows_now;
     int appID = -1;
     unsigned int tasks_to_map = 0;
     int finishSimulation;
@@ -717,6 +717,7 @@ int main(int argc, char **argv) {
             // Verify if every task is finished
             disable_interruption(0);
             finishSimulation = 1;
+            measuredWindows_now = measuredWindows;
             for (i = 0; i < tasks_to_map; i++) {
                 if (finishedTask[i] == TRUE) {
                     if (appFinished(i, task_applicationID)) {
@@ -727,7 +728,7 @@ int main(int argc, char **argv) {
                 if (finishedTask[i] == TRUE && task_remaining_executions[i] > 0 && appFinished(i, task_applicationID)) {
                     // calculates the next start time
                     // finishedTasks++;
-                    task_start_time[i] = measuredWindows + task_repeat_after[i];
+                    task_start_time[i] = measuredWindows_now + task_repeat_after[i];
                     finishedTask[i] = 2;
                     appQuadrant[task_applicationID[i]] = -1; // reset the app quadrant to get a new one if the app restarts
                     putsvsv("Task ", i, " restarting at (ms) ", task_start_time[i]);
