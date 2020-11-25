@@ -674,45 +674,45 @@ int main(int argc, char **argv) {
             //////////////////////////
             // Migration procedures //
             //////////////////////////
-            prints("\nGenerating TempMatrix\n");
-            for (i = 0; i < DIM_X * DIM_Y; i++) {
-                if (measuredWindows >= INT_WINDOW)
-                    integral[i] = integral[i] - integral_prev[measuredWindows % INT_WINDOW][i];
+            // prints("\nGenerating TempMatrix\n");
+            // for (i = 0; i < DIM_X * DIM_Y; i++) {
+            //     if (measuredWindows >= INT_WINDOW)
+            //         integral[i] = integral[i] - integral_prev[measuredWindows % INT_WINDOW][i];
 
-                integral_prev[measuredWindows % INT_WINDOW][i] = Temperature[i];
+            //     integral_prev[measuredWindows % INT_WINDOW][i] = Temperature[i];
 
-                // if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
-                derivative[i] = Temperature[i] - Temperature_prev[i];
-                integral[i] = integral[i] + Temperature[i];
-                control_signal[i] = KP * Temperature[i] + KI * integral[i] / INT_WINDOW + KD * derivative[i];
-                Temperature_prev[i] = Temperature[i];
+            //     // if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
+            //     derivative[i] = Temperature[i] - Temperature_prev[i];
+            //     integral[i] = integral[i] + Temperature[i];
+            //     control_signal[i] = KP * Temperature[i] + KI * integral[i] / INT_WINDOW + KD * derivative[i];
+            //     Temperature_prev[i] = Temperature[i];
 
-                // putsv("proc ", i);
-                // putsv("energy ", energy_i[i]);
-                // putsv("control_signal ", control_signal[i]);
-            }
+            //     // putsv("proc ", i);
+            //     // putsv("energy ", energy_i[i]);
+            //     // putsv("control_signal ", control_signal[i]);
+            // }
 
-            generateTempMatrix(control_signal, 0, 0, 0);
-            generateTempMatrix(control_signal, 1, 4, 0);
-            generateTempMatrix(control_signal, 2, 0, 4);
-            generateTempMatrix(control_signal, 3, 4, 4);
+            // generateTempMatrix(control_signal, 0, 0, 0);
+            // generateTempMatrix(control_signal, 1, 4, 0);
+            // generateTempMatrix(control_signal, 2, 0, 4);
+            // generateTempMatrix(control_signal, 3, 4, 4);
 
-            if (measuredWindows >= nextMigration) {
-                nextMigration += 20;
-                prints("Starting thermal actuation analysis\n");
-                temperature_migration(Temperature, tasks_to_map, task_addr);
-                // for(i = 0; i < tasks_to_map; i++)
-                //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
+            // if (measuredWindows >= nextMigration) {
+            //     nextMigration += 20;
+            //     prints("Starting thermal actuation analysis\n");
+            //     temperature_migration(Temperature, tasks_to_map, task_addr);
+            //     // for(i = 0; i < tasks_to_map; i++)
+            //     //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
 
-                // for(i = 0; i < tasks_to_map; i++){
-                //     task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
-                //     LOG("Task %d migrate to processor %x\n", i, task_addr[i]);
-                // }
-                // for(i=0;i<tasks_to_map;i++)
-                //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
-            } else {
-                prints("Skiping thermal actuation analysis\n");
-            }
+            //     // for(i = 0; i < tasks_to_map; i++){
+            //     //     task_addr[i] = spiralMatrix[DIM_X*DIM_Y-1-i];
+            //     //     LOG("Task %d migrate to processor %x\n", i, task_addr[i]);
+            //     // }
+            //     // for(i=0;i<tasks_to_map;i++)
+            //     //     sendTaskService(TASK_MIGRATION_DEST, task_addr[i], task_addr, tasks_to_map);
+            // } else {
+            //     prints("Skiping thermal actuation analysis\n");
+            // }
 
             // Verify if every task is finished
             disable_interruption(0);
