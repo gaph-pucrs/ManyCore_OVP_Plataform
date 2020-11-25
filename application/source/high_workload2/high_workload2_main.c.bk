@@ -84,71 +84,49 @@ int dtw_min(int x, int y);
 int dtw_randNum(int seed, int min, int max);
 
 int main(int argc, char **argv) {
-    	OVP_init();
-	//////////////////////////////////////////////////////
-	/////////////// YOUR CODE START HERE /////////////////
-	//////////////////////////////////////////////////////
-	int state = 0;
-	int destination;
-	int i;
-	int aux[1];
+    OVP_init();
+    //////////////////////////////////////////////////////
+    /////////////// YOUR CODE START HERE /////////////////
+    //////////////////////////////////////////////////////
+    int state = 0;
+    int destination;
+    int i, j;
+    int aux[2];
 
-	while (1)
-	{
+    while (1) {
+        while (!get_mapping() && !get_migration_dst() && !finishSimulation_flag) {
+            *clockGating_flag = TRUE;
+        }
 
-		// waits for mapping or migrating tasks and receives mapping table
-		// waits for mapping or migrating tasks and receives mapping table
-		while (!get_mapping() && !get_migration_dst() && !finishSimulation_flag)
-		{
-			*clockGating_flag = TRUE;
-		}
+        // Detects the end of simulation
+        if (finishSimulation_flag)
+            break;
 
-		// Detects the end of simulation
-		if (finishSimulation_flag)
-			break;
+        set_taskMigrated(-1); // resets this, because it's running a new task
+        *clockGating_flag = FALSE;
+        get_mapping_table(my_task_addr);
 
-		set_taskMigrated(-1); // resets this, because it's running a new task
-		*clockGating_flag = FALSE;
-		get_mapping_table(my_task_addr);
+        // Informs the master that the task has occupied the defined address
+        sendAllocationConfirmation();
 
-		// Get its task to run
-		/*for (i = 0; i < NUM_TASK; i++)
-		{
-			if (my_task_addr[i] == *myAddress)
-				running_task = i;
-		}*/
-
-		// Informs the master that the task has occupied the defined address
-		sendAllocationConfirmation();
-
-		// Send the updt addr msg to every PE
-		for (i = 1; i < N_PES; i++)
-		{
-			aux[0] = ((*myAddress << 16) | running_task);
-			if (getAddress(i) != *myAddress)
-				sendTaskService(TASK_ADDR_UPDT, getAddress(i), aux, 1);
-		}
-
-		if (get_mapping())
-		{
-			prints("Task ");
-			printi(running_task);
-			prints("mapped\n");
-			state = 0;
-			clear_mapping();
-		}
-		else if (get_migration_dst())
-		{
-			state = get_new_state();
-			prints("Task ");
-			printi(running_task);
-			prints("migrated\n");
-			putsv("State: ", state);
-			clear_migration_dst();
-		}
-
-		switch (running_task)
-		{
+        if (get_mapping()) {
+            prints("Task ");
+            printi(running_task);
+            prints(" app ");
+            printi(appID[running_task]);
+            prints("mapped\n");
+            state = 0;
+            clear_mapping();
+        } else if (get_migration_dst()) {
+            state = get_new_state();
+            prints("Task ");
+            printi(running_task);
+            prints("migrated\n");
+            putsv("State: ", state);
+            clear_migration_dst();
+        }
+        switch (running_task) {
+        // SYNTHETIC
         case taskA:
             state = synthetic_taskA(state);
             break;
@@ -289,36 +267,71 @@ int main(int argc, char **argv) {
             state = dtw_recognizer_2(state);
             break;
         }
-        if (state == 0)
-		{
-			printFinish();
-			mapping_table[running_task] = 0; // clear this address value
-			sendFinishTask(running_task);
-			migratedTask = -1;
-			running_task = -1;
-		}
-		else
-		{
-			migratedTask = running_task;
-			get_migration_mapping_table(new_task_addr);
-			destination = new_task_addr[migratedTask];
-			putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
+        if (state == 0) {
+            printFinish();
+            mapping_table[running_task] = 0; // clear this address value
+            sendFinishTask(running_task);
+            migratedTask = -1;
+            running_task = -1;
+            for (i = 0; i < NUM_TASK; i++) {
+                mapping_table[i] = 0;
+            }
+        } else { // migration
+            migratedTask = running_task;
+            get_migration_mapping_table(new_task_addr);
+            destination = new_task_addr[migratedTask];
+            putsvsv("Tarefa: ", migratedTask, " migrando para: ", destination);
 
-			sendTaskService(TASK_MIGRATION_STATE, destination, &state, 1);
+            aux[0] = state;
+            aux[1] = *myAddress;
+            sendTaskService(TASK_MIGRATION_STATE, destination, aux, 2);
+            while (migrationAck == 0) {
+                *clockGating_flag = TRUE;
+            }
+            *clockGating_flag = FALSE;
+            migrationAck = 0;
 
-			disable_interruptions();
-			set_taskMigrated(destination); // save the new destination of this
-			running_task = -1;
-			mapping_table[migratedTask] = 0; // clear this address value
-			enable_interruptions();
+            disable_interruptions();
+            set_taskMigrated(destination); // save the new destination of this
+            running_task = -1;
+            // mapping_table[migratedTask] = 0;  // clear this address value
+            enable_interruptions();
 
-			sendPipe(destination);
-			sendPendingReq(destination);
+            // Send the updt addr msg to same app PEs
+            aux[0] = ((destination << 16) | migratedTask); // mounts the update addr flit
+            j = getServiceIndex();
+            for (i = 1; i < DIM_X * DIM_Y; i++) {
+                if (appID[i] == appID[migratedTask] && i != migratedTask) { // sends the update for every task in the same application
+                    putsv("enviando update para tarefa ", i);
+                    sendTaskService_index(TASK_ADDR_UPDT, mapping_table[i], aux, 1, j);
+                    while (isServiceIndexReady(j) == 0) {
+                        *clockGating_flag = TRUE;
+                    }
+                    *clockGating_flag = FALSE;
+                    if (mapping_table[i] != migration_mapping_table[i]) {
+                        sendTaskService_index(TASK_ADDR_UPDT, migration_mapping_table[i], aux, 1, j);
+                        while (isServiceIndexReady(j) == 0) {
+                            *clockGating_flag = TRUE;
+                        }
+                    }
+                    *clockGating_flag = FALSE;
+                }
+            }
+            myServicePacket[j][0] = 0xFFFFFFFF;
 
-			new_task_addr[migratedTask] = new_task_addr[migratedTask] | 0x80000000; // flag this as the migrating task
-			sendTaskService(TASK_MIGRATION_DEST, destination, new_task_addr, NUM_TASK);
-			new_task_addr[migratedTask] = new_task_addr[migratedTask] & 0x7FFFFFFF;
-		}
+            sendPipe(destination);
+            sendPendingReq(destination);
+
+            mapping_table[migratedTask] = mapping_table[migratedTask] | 0x80000000; // flag this as the migrating task
+            for (i = 0; i < NUM_TASK; i++) {
+                mapping_table[i] = mapping_table[i] | (appID[i] << 16);
+            }
+            sendTaskService(TASK_MIGRATION_DEST, destination, mapping_table, NUM_TASK);
+
+            for (i = 0; i < NUM_TASK; i++) {
+                mapping_table[i] = 0;
+            }
+        }
     }
 
     //////////////////////////////////////////////////////
