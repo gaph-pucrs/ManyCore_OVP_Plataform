@@ -324,6 +324,22 @@ int getQuadTemp(int xi, int yi) {
     return sum / 16; // porque 16? é o tamanho do quadrante?
 }
 
+int getQuadTasks(int xi, int yi, unsigned int task_addr[DIM_X * DIM_Y]) {
+    int x, y;
+    int sum = 0;
+    int index;
+
+    for (y = yi; y < yi + QUAD_DIM_Y; y++) {
+        for (x = xi; x < xi + QUAD_DIM_X; x++) {
+            index = (x << 8) + y;
+            if (how_many_tasks_PE_is_running(index, task_addr))
+                sum++;
+        }
+    }
+
+    return sum;
+}
+
 int getCoolestQuad() {
     int quadTemp[QUAD_NUM];
     int i;
@@ -352,12 +368,40 @@ int getCoolestQuad() {
     return coolest;
 }
 
+int getFreestQuad(unsigned int task_addr[DIM_X * DIM_Y]) {
+    int quadTasks[QUAD_NUM];
+    int i;
+    int freestTasks, freest;
+
+    quadTasks[0] = getQuadTasks(0, 0, task_addr);
+    quadTasks[1] = getQuadTasks(4, 0, task_addr);
+    quadTasks[2] = getQuadTasks(0, 4, task_addr);
+    quadTasks[3] = getQuadTasks(4, 4, task_addr);
+
+    freestTasks = 0xFFFF;
+    freest = 0;
+    for (i = QUAD_NUM - 1; i >= 0; i--) {
+        if (quadTasks[i] < freestTasks) {
+            freestTasks = quadTasks[i];
+            freest = i;
+        }
+    }
+
+    putsv("quadTasks[0] = ", quadTasks[0]);
+    putsv("quadTasks[1] = ", quadTasks[1]);
+    putsv("quadTasks[2] = ", quadTasks[2]);
+    putsv("quadTasks[3] = ", quadTasks[3]);
+    putsv("Freest quad = ", freest);
+
+    return freest;
+}
+
 int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y], int appID) {
     int i, j, k, empty, pe;
 
     for (k = 0; k < DIM_Y * DIM_Y; k += (QUAD_DIM_X * QUAD_DIM_Y)) {
         if (appQuadrant[appID] == -1) {
-            appQuadrant[appID] = getCoolestQuad();
+            appQuadrant[appID] = getFreestQuad(task_addr);
         }
 
         for (j = QUAD_DIM_X * QUAD_DIM_Y - 1; j > 0; j--) {

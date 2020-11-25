@@ -1,13 +1,14 @@
 apps:
- - name: sort_long
+ - name: synthetic_long
    cluster: 0
    mapping: dynamic
-   start_time_ms: 0
    dynamic_mapping:
-    sort_master: 0
-    sort_slave1: 1
-    sort_slave2: 2
-    sort_slave3: 3
+    taskA: 0
+    taskB: 1
+    taskC: 2
+    taskD: 3
+    taskE: 4
+    taskF: 5
  - name: dijkstra_long
    cluster: 0
    mapping: dynamic
@@ -52,10 +53,19 @@ apps:
     adpcm_dec_av: 4
     FIR_av: 5
     join_av: 6
- - name: sort_long2
+ - name: sort_long
    cluster: 0
    mapping: dynamic
    start_time_ms: 27
+   dynamic_mapping:
+    sort_master: 0
+    sort_slave1: 1
+    sort_slave2: 2
+    sort_slave3: 3
+ - name: sort_long2
+   cluster: 0
+   mapping: dynamic
+   start_time_ms: 37
    dynamic_mapping:
     sort_master_2: 0
     sort_slave1_2: 1
@@ -64,7 +74,7 @@ apps:
  - name: dtw_long2
    cluster: 0
    mapping: dynamic
-   start_time_ms: 37
+   start_time_ms: 47
    dynamic_mapping:
     bank_2: 0
     p1_2: 1
@@ -72,17 +82,6 @@ apps:
     p3_2: 3
     p4_2: 4
     recognizer_2: 5
- - name: synthetic_long
-   cluster: 0
-   mapping: dynamic
-   start_time_ms: 47
-   dynamic_mapping:
-    taskA: 0
-    taskB: 1
-    taskC: 2
-    taskD: 3
-    taskE: 4
-    taskF: 5
  - name: thermalManagement
    cluster: 0
    mapping: static
