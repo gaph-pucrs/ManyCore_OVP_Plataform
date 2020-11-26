@@ -377,7 +377,7 @@ int main(int argc, char **argv) {
     unsigned int tasks_to_map = 0;
     int finishSimulation;
     int i, j;
-    unsigned int now;
+    unsigned int measuredWindows_now;
     // int totalTasks, finishedTasks, progresso;
 
     // Initialization of application register file
