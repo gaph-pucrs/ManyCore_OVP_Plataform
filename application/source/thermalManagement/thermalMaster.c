@@ -401,7 +401,7 @@ int getSpiralMatixEmptyPE(unsigned int task_addr[DIM_X * DIM_Y], int appID) {
 
     for (k = 0; k < DIM_Y * DIM_Y; k += (QUAD_DIM_X * QUAD_DIM_Y)) {
         if (appQuadrant[appID] == -1) {
-            appQuadrant[appID] = getFreestQuad(task_addr);
+            appQuadrant[appID] = getCoolestQuad(task_addr);
         }
 
         for (j = QUAD_DIM_X * QUAD_DIM_Y - 1; j > 0; j--) {
