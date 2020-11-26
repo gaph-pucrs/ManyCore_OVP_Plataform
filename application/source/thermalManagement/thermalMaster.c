@@ -310,23 +310,33 @@ void releaseTasks(unsigned int task_addr[DIM_X * DIM_Y], int task_applicationID[
     int i, j;
     int tasks_to_map = 0;
     int map = 1;
+    int dontMap = 0;
     for (i = 0; i < DIM_X * DIM_Y; i++) {
         if (task_start_time[i] <= measuredWindows && task_start_time[i] != -1 && map==1) {
-            task_addr[i] = getSpiralMatixEmptyPE(task_addr); // getRandomEmptyPE(task_addr);
-            if (task_addr[i]) {                              // if the task got some valid address
-                task_start_time[i] = -2;                     // PRE-RELEASE
-                finishedTask[i] = FALSE;
-                putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
-            }
-            else{
-                putsvsv("Task ", i, " mapped to ZERO - reseting app mapping!", 0);
-                for(j=0;j<DIM_X*DIM_Y;j++){
-                    if(task_applicationID[i] == task_applicationID[j]){
-                        task_start_time[j] = task_start_time[i];
-                        finishedTask[j] = finishedTask[i];
-                    }
+            dontMap = 0;
+            for(j=0;j<DIM_X * DIM_Y;j++){ // checks if every task is ready to restart!!!
+                if(task_applicationID[i] == task_applicationID[j] && task_start_time[i] != task_start_time[j] && task_start_time[j] != -2){
+                    dontMap = 1;
+                    break;
                 }
-                map = 0;
+            }
+            if(dontMap == 0){
+                task_addr[i] = getSpiralMatixEmptyPE(task_addr); // getRandomEmptyPE(task_addr);
+                if (task_addr[i]) {                              // if the task got some valid address
+                    task_start_time[i] = -2;                     // PRE-RELEASE
+                    finishedTask[i] = FALSE;
+                    putsvsv("Task ", i, " mapped in processor ", task_addr[i]);
+                }
+                else{
+                    putsvsv("Task ", i, " mapped to ZERO - reseting app mapping!", 0);
+                    for(j=0;j<DIM_X*DIM_Y;j++){
+                        if(task_applicationID[i] == task_applicationID[j]){
+                            task_start_time[j] = task_start_time[i];
+                            finishedTask[j] = finishedTask[i];
+                        }
+                    }
+                    map = 0;
+                }
             }
         }
         if (tasks_to_map == 0 && task_addr[i] == 0xFFFFFFFF) {
