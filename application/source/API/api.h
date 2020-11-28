@@ -855,7 +855,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X][DIM_Y]) {
     FILE *testcase;
     testcase = fopen("application/scenario.yaml", "r");
     char line[64];
-    +char *app_name;
+    char *app_name;
     int taskNumber = 0;
     int i, j;
     int firstDigit = 0;
