@@ -1,54 +1,52 @@
-#include "source/dtw/dtw_stdlib.h"
 #include "dtw_config.h"
 #include "source/API/api.h"
+#include "source/dtw/dtw_stdlib.h"
 
 message msg;
 
-int main(int argc, char **argv)
-{
-	OVP_init();
-	//////////////////////////////////////////////////////
-	/////////////// YOUR CODE START HERE /////////////////
-	/////////////////////////////////////////////////////
+int main(int argc, char **argv) {
+    OVP_init();
+    //////////////////////////////////////////////////////
+    /////////////// YOUR CODE START HERE /////////////////
+    /////////////////////////////////////////////////////
 
-	int test[MATX_SIZE][MATX_SIZE];
-	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j;
+    int test[MATX_SIZE][MATX_SIZE];
+    int pattern[MATX_SIZE][MATX_SIZE];
+    int result, j;
 
-	ReceiveMessage(&msg, recognizer_addr);
+    ReceiveMessage(&msg, recognizer);
 
-	LOG("Task P1 INIT\n");
+    LOG("Task P1 INIT\n");
 
-	memcpy(test, msg.msg, sizeof(test));
+    memcpy(test, msg.msg, sizeof(test));
 
-	for (j = 0; j < PATTERN_PER_TASK; j++)
-	{
+    for (j = 0; j < PATTERN_PER_TASK; j++) {
 
-		LOG("Task P1 FOR\n");
+        LOG("Task P1 FOR\n");
 
-		dtw_memset(msg.msg, 0, sizeof(int) * MESSAGE_MAX_SIZE);
+        dtw_memset(msg.msg, 0, sizeof(int) * MESSAGE_MAX_SIZE);
 
-		ReceiveMessage(&msg, bank_addr);
+        ReceiveMessage(&msg, bank);
 
-		//LOG("Task P1 ReceiveMessaged pattern from bank\n");
+        // LOG("Task P1 ReceiveMessaged pattern from bank\n");
 
-		memcpy(pattern, msg.msg, sizeof(pattern));
+        memcpy(pattern, msg.msg, sizeof(pattern));
 
-		result = dtw_dynamicTimeWarping(test, pattern);
+        result = dtw_dynamicTimeWarping(test, pattern);
 
-		msg.size = 1;
+        msg.size = 1;
 
-		msg.msg[0] = result;
+        msg.msg[0] = result;
 
-		SendMessage(&msg, recognizer_addr);
-	}
+        SendMessage(&msg, recognizer);
+    }
 
-	LOG("Task P1 FINISHEDD IN\n");
-	LOG("%d\n", clock());
+    LOG("Task P1 FINISHEDD IN\n");
+    LOG("%d\n", clock());
 
-	//////////////////////////////////////////////////////
-	//////////////// YOUR CODE ENDS HERE /////////////////
-	//////////////////////////////////////////////////////
-	FinishApplication();
-	return 1;
+    //////////////////////////////////////////////////////
+    //////////////// YOUR CODE ENDS HERE /////////////////
+    //////////////////////////////////////////////////////
+    FinishApplication();
+    return 1;
 }
