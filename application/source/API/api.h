@@ -935,6 +935,9 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X * DIM_Y]) {
             yaml_static_tasks = 1;
         }
     }
+    for (i = taskNumber; i < DIM_X * DIM_Y; i++) {
+        mapping_table[i] = 0xFFFFFFFF;
+    }
 
     return;
 }
@@ -956,9 +959,12 @@ void OVP_init() {
 
     // Read .yaml to get static tasks addresses
     getAdresses_fromYAML(mapping_table);
-    /*for (i = 0; i < DIM_Y * DIM_X; i++) {
-        LOG("Task %d mapeada em %x\n", i, mapping_table[i]);
-    }*/
+
+    for (i = 0; i < DIM_Y * DIM_X; i++) {
+        if (*myAddress == mapping_table[i])
+            running_task = i;
+        // LOG("Task %d mapeada em %x\n", i, mapping_table[i]);
+    }
 
     // Operating Frequency
     *operationFrequency = 1000;
@@ -970,6 +976,15 @@ void OVP_init() {
     // Inform the processor ID to the router
     *myAddress = impProcessorId();
     LOG("Starting ROUTER %x application! \n", *myAddress);
+
+    // Defines the running task
+    for (i = 0; i < DIM_Y * DIM_X; i++) {
+        if (*myAddress == mapping_table[i]) {
+            running_task = i;
+            break;
+        }
+        // LOG("Task %d mapeada em %x\n", i, mapping_table[i]);
+    }
 
     // Inform the NI addresses to store the incomming packets and then the interruptionType address
     *NIaddr = (unsigned int)&incomingPacket;
@@ -1012,9 +1027,9 @@ void OVP_init() {
 #if USE_THERMAL
     lastTimeInstructions = tinicio;
 #endif
-    // tinicio = tignore - (tignore - tinicio);   // TODO: GEANINNE - Ver isso!
+// tinicio = tignore - (tignore - tinicio);   // TODO: GEANINNE - Ver isso!
 
-    // Reset the amount of executed instructions
+// Reset the amount of executed instructions
 #if USE_THERMAL
     ResetExecutedInstructions();
 #endif
