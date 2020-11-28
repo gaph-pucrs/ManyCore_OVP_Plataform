@@ -863,7 +863,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X * DIM_Y]) {
     char value[10];
     int coordX;
     int coordY;
-    int appID = -1;
+    int thisApp = -1;
     int yaml_dynamic_tasks;
     int yaml_static_tasks;
     while (fgets(line, sizeof(line), testcase)) {
@@ -873,7 +873,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X * DIM_Y]) {
             app_name[strlen(app_name) - 1] = '\0';
             yaml_static_tasks = 0;
             yaml_dynamic_tasks = 0;
-            appID = appID + 1;
+            thisApp = thisApp + 1;
         }
 
         // Dynamic tasks are treated only by the master
@@ -925,6 +925,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X * DIM_Y]) {
             coordY = atoi(value);
             // LOG("Task %d mapeada em %d %d - %x\n", taskNumber, coordX, coordY, makeAddress(coordX, coordY));
             mapping_table[taskNumber] = makeAddress(coordX, coordY);
+            appID[taskNumber] = thisApp;
             taskNumber++;
         }
 
