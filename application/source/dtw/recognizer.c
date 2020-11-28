@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 
     int i, j;
     // int distances[NUM_PATTERNS];
-
+    int P[4] = {p1, p2, p3, p4};
     msg.size = MATX_SIZE * MATX_SIZE; // MATX_SIZE*MATX_SIZE nao pode ser maior que 128, senao usar o SendMessageData
 
     LOG("Rec ola\n");
