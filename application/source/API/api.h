@@ -851,6 +851,92 @@ void interruptHandler_NI_TX(void) {
 #endif
 }
 
+getAdresses_fromYAML(unsigned int mapping_table[DIM_X][DIM_Y]) {
+    FILE *testcase;
+    testcase = fopen("application/scenario.yaml", "r");
+    char line[64];
+    +char *app_name;
+    int taskNumber = 0;
+    int i, j;
+    int firstDigit = 0;
+    int lastDigit = 0;
+    char value[10];
+    int coordX;
+    int coordY;
+    int appID = -1;
+    int yaml_dynamic_tasks;
+    int yaml_static_tasks;
+    while (fgets(line, sizeof(line), testcase)) {
+        if (strstr(line, "name") != NULL) {
+            app_name = strtok(line, ":");
+            app_name = strtok(NULL, " ");
+            app_name[strlen(app_name) - 1] = '\0';
+            yaml_static_tasks = 0;
+            yaml_dynamic_tasks = 0;
+            appID = appID + 1;
+        }
+
+        // Dynamic tasks are treated only by the master
+        if (yaml_dynamic_tasks) {
+            /*    task_name = strtok(line, " ");
+                task_name[strlen(task_name) - 1] = '\0';
+                task_number = strtok(NULL, " ");
+                task_number[strlen(task_number) - 1] = '\0';
+                task_addr[tasks_to_map] = 0;
+                task_start_time[tasks_to_map] = starting_time;
+                task_remaining_executions[tasks_to_map] = executions;
+                task_repeat_after[tasks_to_map] = repeat_after;
+                task_applicationID[tasks_to_map] = appID;
+                tasks_to_map++;*/
+            taskNumber++;
+        }
+
+        // Treats a static task entry
+        if (yaml_static_tasks) {
+            i = 0;
+            while (line[i] != '[') {
+                i++;
+            }
+            firstDigit = i + 1;
+            while (line[i] != ',') {
+                i++
+            }
+            lastDigit = i - 1;
+            j = 0;
+            for (i = firstDigit; i <= lastDigit; i++) {
+                value[j] = line[i];
+                j++;
+            }
+            value[i] = '\0';
+            coordX = atoi(value);
+            i = lastDigit;
+            firstDigit = lastDigit + 1;
+            while (line[i] != ']') {
+                i++;
+            }
+            lastDigit = i - 1;
+            for (i = firstDigit; i <= lastDigit; i++) {
+                value[j] = line[i];
+                j++;
+            }
+            value[i] = '\0';
+            coordY = atoi(value);
+            LOG("Task %d mapeada em %d %d - %x", taskNumber, coordX, coordY, getID(coordX, coordY));
+
+            taskNumber++;
+        }
+
+        // Identify the start of a given application set of tasks
+        if (strstr(line, "dynamic_mapping") != NULL) {
+            yaml_dynamic_tasks = 1;
+        } else if (strstr(line, "static_mapping") != NULL) {
+            yaml_static_tasks = 1;
+        }
+    }
+
+    return;
+}
+
 ///////////////////////////////////////////////////////////////////
 /* Initiation function */
 void OVP_init() {
@@ -864,6 +950,9 @@ void OVP_init() {
     int_enable(2);
     // Enable external interrupts
     enable_interruptions();
+
+    // Read .yaml to get static tasks addresses
+    getAdresses_fromYAML(mapping_table);
 
     // Operating Frequency
     *operationFrequency = 1000;
