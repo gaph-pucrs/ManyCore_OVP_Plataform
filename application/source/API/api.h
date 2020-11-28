@@ -899,7 +899,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X][DIM_Y]) {
             }
             firstDigit = i + 1;
             while (line[i] != ',') {
-                i++
+                i++;
             }
             lastDigit = i - 1;
             j = 0;
