@@ -956,9 +956,9 @@ void OVP_init() {
 
     // Read .yaml to get static tasks addresses
     getAdresses_fromYAML(mapping_table);
-    for (i = 0; i < DIM_Y * DIM_X; i++) {
+    /*for (i = 0; i < DIM_Y * DIM_X; i++) {
         LOG("Task %d mapeada em %x\n", i, mapping_table[i]);
-    }
+    }*/
 
     // Operating Frequency
     *operationFrequency = 1000;
