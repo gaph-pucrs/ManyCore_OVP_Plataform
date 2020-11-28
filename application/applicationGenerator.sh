@@ -21,9 +21,9 @@ do
 			cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 		fi
 	else
-		file="source/migration_scenario/migration_scenario_main.c"
+		file="source/applicationGeneric/applicationGeneric.c"
 		if [ -f "$file" ]; then
-			cp -u -v source/migration_scenario/migration_scenario_main.c application$i.c
+			cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 		else 
 			cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 		fi
