@@ -894,35 +894,37 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X][DIM_Y]) {
         // Treats a static task entry
         if (yaml_static_tasks) {
             i = 0;
-            while (line[i] != '[') {
+
+            while (line[i] != '[') { // Finds the "["
                 i++;
             }
-            firstDigit = i + 1;
-            while (line[i] != ',') {
+            firstDigit = i + 1;      // anotate the position of the first digit that compose the coord X
+            while (line[i] != ',') { // Finds the ","
                 i++;
             }
-            lastDigit = i - 1;
+            lastDigit = i - 1; // anotate the position of the last digit that compose the coord X
             j = 0;
-            for (i = firstDigit; i <= lastDigit; i++) {
+            for (i = firstDigit; i <= lastDigit; i++) { // copy the string of coordX to a separated string
                 value[j] = line[i];
                 j++;
             }
             value[i] = '\0';
-            coordX = atoi(value);
+            coordX = atoi(value); // converts it to integer
             i = lastDigit;
-            firstDigit = lastDigit + 1;
-            while (line[i] != ']') {
+            firstDigit = lastDigit + 2; // the first digit of the coordY will be the lastDigit from coordX +1 to jump over the ','
+            while (line[i] != ']') {    // finds the ']'
                 i++;
             }
-            lastDigit = i - 1;
-            for (i = firstDigit; i <= lastDigit; i++) {
+            lastDigit = i - 1; // defines the last digit of coordY
+            j = 0;
+            for (i = firstDigit; i <= lastDigit; i++) { // copy the string of coordY to a separated string
                 value[j] = line[i];
                 j++;
             }
             value[i] = '\0';
             coordY = atoi(value);
-            LOG("Task %d mapeada em %d %d - %x\n", taskNumber, coordX, coordY, makeAddress(coordX, coordY));
-
+            // LOG("Task %d mapeada em %d %d - %x\n", taskNumber, coordX, coordY, makeAddress(coordX, coordY));
+            mapping_table[taskNumber] = makeAddress(coordX, coordY);
             taskNumber++;
         }
 
