@@ -965,24 +965,9 @@ void OVP_init() {
     // Operating Frequency
     *operationFrequency = 1000;
 
-    // Read .yaml to get static tasks addresses
-    getAdresses_fromYAML(mapping_table);
-    /*for (i = 0; i < DIM_Y * DIM_X; i++) {
-        putsvsv("Task ", i, "mapeada em ", mapping_table[i]);
-    }*/
-
     //
     finishSimulation_flag = 0;
     measuredWindows = 0;
-
-    // Defines the running task
-    for (i = 0; i < DIM_Y * DIM_X; i++) {
-        if (*myAddress == mapping_table[i]) {
-            running_task = i;
-            break;
-        }
-        // LOG("Task %d mapeada em %x\n", i, mapping_table[i]);
-    }
 
     // Inform the NI addresses to store the incomming packets and then the interruptionType address
     *NIaddr = (unsigned int)&incomingPacket;
@@ -1014,6 +999,18 @@ void OVP_init() {
 
     // Configure the timer to interrupt once every 1 ms (1000 us)
     *timerConfig = 0; // 1000; // 0-> disabled ---- 1000-> 1ms;
+
+    // Read .yaml to get static tasks addresses
+    getAdresses_fromYAML(mapping_table);
+    // Defines the running task
+    for (i = 0; i < DIM_Y * DIM_X; i++) {
+        if (*myAddress == mapping_table[i]) {
+            running_task = i;
+            break;
+        }
+        // LOG("Task %d mapeada em %x\n", i, mapping_table[i]);
+        putsvsv("Task ", i, "mapeada em ", mapping_table[i]);
+    }
 
     // Comunicate to the sync that this PE is ready to start the code execution
     *PEToSync = 0x00;
