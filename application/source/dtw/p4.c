@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
 
     LOG("Task P4 INIT\n");
 
-    memcpy(test, msg.msg, sizeof(test));
+    dtw_memcpy(test, msg.msg, sizeof(test));
 
     for (j = 0; j < PATTERN_PER_TASK; j++) {
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 
         // LOG("Task P4 ReceiveMessaged pattern from bank\n");
 
-        memcpy(pattern, msg.msg, sizeof(pattern));
+        dtw_memcpy(pattern, msg.msg, sizeof(pattern));
 
         result = dtw_dynamicTimeWarping(test, pattern);
 

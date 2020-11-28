@@ -19,28 +19,30 @@
 //#define FALSE		0
 //#define TRUE		1
 
-int dtw_abs(int num){
-	if(num<0) return (-1)*num;
-	else return num;
+int dtw_abs(int num) {
+    if (num < 0)
+        return (-1) * num;
+    else
+        return num;
 }
 
-int dtw_randNum(int seed, int min, int max){ 
-	int lfsr = seed;
-	lfsr = (lfsr >> 1) ^ (-(lfsr & 1u) & 0xB400u);
-	return ((lfsr % max) + min);
-} 
+int dtw_randNum(int seed, int min, int max) {
+    int lfsr = seed;
+    lfsr = (lfsr >> 1) ^ (-(lfsr & 1u) & 0xB400u);
+    return ((lfsr % max) + min);
+}
 
 void *dtw_memset(void *dst, int c, unsigned long bytes) {
-   unsigned char *Dst = (unsigned char*)dst;
-   while((int)bytes-- > 0)
-      *Dst++ = (unsigned char)c;
-   return dst;
+    unsigned char *Dst = (unsigned char *)dst;
+    while ((int)bytes-- > 0)
+        *Dst++ = (unsigned char)c;
+    return dst;
 }
 
-void memcpy(unsigned int *dest, const unsigned int *src, size_t n) {
-	unsigned int i = n/4;
-	while(i--)
-		dest[i] = src[i];
+void dtw_memcpy(unsigned int *dest, const unsigned int *src, size_t n) {
+    unsigned int i = n / 4;
+    while (i--)
+        dest[i] = src[i];
 }
 
 //#endif
