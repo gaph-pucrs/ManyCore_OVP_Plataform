@@ -921,7 +921,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X][DIM_Y]) {
             }
             value[i] = '\0';
             coordY = atoi(value);
-            LOG("Task %d mapeada em %d %d - %x", taskNumber, coordX, coordY, makeAddress(coordX, coordY));
+            LOG("Task %d mapeada em %d %d - %x\n", taskNumber, coordX, coordY, makeAddress(coordX, coordY));
 
             taskNumber++;
         }
