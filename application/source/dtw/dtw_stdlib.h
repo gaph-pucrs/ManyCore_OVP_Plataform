@@ -45,15 +45,6 @@ void dtw_memcpy(unsigned int *dest, const unsigned int *src, size_t n) {
         dest[i] = src[i];
 }
 
-void randPattern(int in[MATX_SIZE][MATX_SIZE]) {
-    int i, j;
-    for (i = 0; i < MATX_SIZE; i++) {
-        for (j = 0; j < MATX_SIZE; j++) {
-            in[i][j] = dtw_abs(dtw_randNum(23, 2, 100) % 5000);
-        }
-    }
-}
-
 int dtw_euclideanDistance(int *x, int *y) {
     int ed = 0.0f;
     int aux = 0.0f;
