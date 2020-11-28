@@ -958,6 +958,10 @@ void OVP_init() {
     // Enable external interrupts
     enable_interruptions();
 
+    // Inform the processor ID to the router
+    *myAddress = impProcessorId();
+    LOG("Starting ROUTER %x application! \n", *myAddress);
+
     // Read .yaml to get static tasks addresses
     getAdresses_fromYAML(mapping_table);
     /*for (i = 0; i < DIM_Y * DIM_X; i++) {
@@ -971,10 +975,7 @@ void OVP_init() {
     finishSimulation_flag = 0;
     measuredWindows = 0;
 
-    // Inform the processor ID to the router
-    *myAddress = impProcessorId();
-    LOG("Starting ROUTER %x application! \n", *myAddress);
-
+    
     // Defines the running task
     for (i = 0; i < DIM_Y * DIM_X; i++) {
         if (*myAddress == mapping_table[i]) {
