@@ -962,20 +962,19 @@ void OVP_init() {
     *myAddress = impProcessorId();
     LOG("Starting ROUTER %x application! \n", *myAddress);
 
+    // Operating Frequency
+    *operationFrequency = 1000;
+
     // Read .yaml to get static tasks addresses
     getAdresses_fromYAML(mapping_table);
     /*for (i = 0; i < DIM_Y * DIM_X; i++) {
         putsvsv("Task ", i, "mapeada em ", mapping_table[i]);
     }*/
 
-    // Operating Frequency
-    *operationFrequency = 1000;
-
     //
     finishSimulation_flag = 0;
     measuredWindows = 0;
 
-    
     // Defines the running task
     for (i = 0; i < DIM_Y * DIM_X; i++) {
         if (*myAddress == mapping_table[i]) {
