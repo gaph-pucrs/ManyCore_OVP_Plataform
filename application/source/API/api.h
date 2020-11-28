@@ -923,7 +923,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X * DIM_Y]) {
             }
             value[i] = '\0';
             coordY = atoi(value);
-            LOG("Task %d mapeada em %d %d - %x\n", taskNumber, coordX, coordY, makeAddress(coordX, coordY));
+            // LOG("Task %d mapeada em %d %d - %x\n", taskNumber, coordX, coordY, makeAddress(coordX, coordY));
             mapping_table[taskNumber] = makeAddress(coordX, coordY);
             taskNumber++;
         }
@@ -942,6 +942,7 @@ void getAdresses_fromYAML(unsigned int mapping_table[DIM_X * DIM_Y]) {
 ///////////////////////////////////////////////////////////////////
 /* Initiation function */
 void OVP_init() {
+    int i;
     // Attach the external interrupt handler for 'intr0'
     int_init();
     int_add(0, (void *)interruptHandler_timer, NULL);
@@ -955,6 +956,9 @@ void OVP_init() {
 
     // Read .yaml to get static tasks addresses
     getAdresses_fromYAML(mapping_table);
+    for (i = 0; i < DIM_Y * DIM_X; i++) {
+        LOG("Task %d mapeada em %x\n", i, mapping_table[coordX, coordY]);
+    }
 
     // Operating Frequency
     *operationFrequency = 1000;
@@ -972,7 +976,7 @@ void OVP_init() {
     *NIaddr = (unsigned int)&interruptionType;
 
     // Initiate the packets buffer map to free
-    int i;
+
     for (i = 0; i < PIPE_SIZE; i++) {
         buffer_map[i] = PIPE_FREE;
         sendAfterTX[i] = PIPE_WAIT;
