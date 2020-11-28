@@ -851,7 +851,7 @@ void interruptHandler_NI_TX(void) {
 #endif
 }
 
-getAdresses_fromYAML(unsigned int mapping_table[DIM_X][DIM_Y]) {
+void getAdresses_fromYAML(unsigned int mapping_table[DIM_X][DIM_Y]) {
     FILE *testcase;
     testcase = fopen("application/scenario.yaml", "r");
     char line[64];
