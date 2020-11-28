@@ -115,7 +115,9 @@ with open('scenario.yaml') as file:
 						numberOfLines = len(configLines)
 					#Wrie the programs adressess in the '.h' file
 					with open(updatedConfigPath, 'w') as configFile:
-						newLine = "#define " + p + "_addr " + "0x" + "0" + str(progX) + "0" + str(progY) + "\n" #alexandre - tem que arrumar pra valores maiores que o range 1-9 por exemplo em uma 10x10 o maior endereço é 0x909 porém em uma noc 11x11 o maior endereço será 0xA0A (tem que ser em hexa!!)
+						#newLine = "#define " + p + "_addr " + "0x" + "0" + str(progX) + "0" + str(progY) + "\n" #alexandre - tem que arrumar pra valores maiores que o range 1-9 por exemplo em uma 10x10 o maior endereço é 0x909 porém em uma noc 11x11 o maior endereço será 0xA0A (tem que ser em hexa!!)
+						newLine = "#define " + p + " " + str(dynamic_task_id) + "\n"
+						dynamic_task_id = dynamic_task_id + 1
 						if(configLines[numberOfLines-1].find("/")!=-1):
 							configLines.insert(numberOfLines, '\n')
 							numberOfLines = numberOfLines + 1

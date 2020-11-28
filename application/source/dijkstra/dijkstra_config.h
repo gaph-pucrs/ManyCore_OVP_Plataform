@@ -2,7 +2,7 @@
 //////////////////////////////////////
 //////////////////////////////////////
 // Task defines //////////////////////
-#define NUM_NODES 16  //16 for small input;
+#define NUM_NODES 16 // 16 for small input;
 #define NPROC 5
 #define CALCULATIONS 500
 #define INFINITY 9999
