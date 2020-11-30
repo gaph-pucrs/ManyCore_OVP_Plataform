@@ -119,11 +119,7 @@ static void installNetPorts(void) {
 
     handles.INT_NI_RX = ppmOpenNetPort("INT_NI_RX");
 
-    ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
-    {
-        ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
-        ppmDocAddText(doc2_node, "A OVP DMA for a router");
-    }
+    
 }
 ////////////////////////////////// Constructor /////////////////////////////////
 
@@ -131,6 +127,7 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
     installSlavePorts();
     installRegisters();
     installMasterPorts();
+    installNetPorts();
 }
 
 ///////////////////////////////////// Main /////////////////////////////////////

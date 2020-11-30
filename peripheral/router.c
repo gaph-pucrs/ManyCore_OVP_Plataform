@@ -3,7 +3,7 @@
 //
 //                W R I T T E N   B Y   I M P E R A S   I G E N
 //
-//                             Version 20170201.0
+//                             Version 20191106.0
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,6 +39,9 @@ int myID = 0xFFFFFFFF;
 // Number of packets delivered to the Local port
 unsigned int localDeliveredPckts = 0;
 
+// Activity
+unsigned int activity;
+
 // Countdown value per Packet, informing how many flits are left to be transmitted 
 unsigned int flitCountOut[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
 unsigned int flitCountIn = HEADER;
@@ -60,7 +63,7 @@ unsigned int localStatus = GO;
 unsigned int localBufferAmount = 0;
 
 // Stores the control status of each port
-unsigned int control[N_PORTS+1] = {GO,GO,GO,GO,GO,GO};
+unsigned int control[N_PORTS] = {GO,GO,GO,GO,GO};
 unsigned int txCtrl;
 
 // Routing Table
@@ -82,6 +85,9 @@ unsigned int actualPort = LOCAL;
 unsigned int contPriority[N_PORTS] = {0,0,0,0,1};
 #endif
 
+
+
+
 // Stores the atual router tick status
 unsigned short int myIterationStatus = ITERATION_OFF;
 
@@ -99,7 +105,9 @@ unsigned int localBuffer_packetDest;
 
 #if LOG_OUTPUTFLITS
 // flit counter of each port, is reseted in each quantum in router.igen.c
-int contFlits[N_PORTS];
+
+unsigned int countTotalPackets[N_PORTS] = {0,0,0,0,0};
+unsigned int countTotalFlits[N_PORTS] = {0,0,0,0,0};
 #endif
 
 //secNoC Variables
@@ -109,10 +117,34 @@ typedef struct{
     unsigned int source;
 }secNoCData;
 
-secNoCData flitSec;
+secNoCData flitSec[16];
+//unsigned int addressSecApp = 0x0FFFFFA0;
+unsigned int addressSecApp = 0x0FF00000;
+unsigned int usFlit;
+char chFlit[4];
+void usi2vec(){
+    chFlit[3] = (usFlit >> 24) & 0x000000FF;
+    chFlit[2] = (usFlit >> 16) & 0x000000FF;
+    chFlit[1] = (usFlit >> 8) & 0x000000FF;
+    chFlit[0] = usFlit & 0x000000FF;
+}
 
-
-
+void writeMemSecApp(secNoCDatta flitSec[]){
+	ppmAddressSpaceHandle h = ppmOpenAddressSpace("SEC_APP");
+    	if(!h) {
+        	bhmMessage("I", "secApp", "ERROR_WRITE secApp!");
+        	while(1){} // error handling
+    	}
+        
+	int i = 0;
+	for(i=0;i<16;i++){
+		usFlit = htonl(flitSec[i].data);
+		usi2vec();
+		//ppmWriteAddressSpace(h, addressSecApp+(4*flitSec.source) , sizeof(chFlit), chFlit);
+		ppmWriteAddressSpace(h, addressSecApp+(4*i) , sizeof(chFlit), chFlit);
+	}
+    	ppmCloseAddressSpace(h);
+}
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
@@ -147,6 +179,13 @@ void iterateNI(){
     ppmPacketnetWrite(handles.portControlLocal, &iterate, sizeof(iterate));
 }
 
+void iteratePeriph(){
+    unsigned long long int iterate = 0xFFFFFFFFFFFFFFFFULL;
+    // TODO: Descobrir quais são as portas periféricas
+    ppmPacketnetWrite(handles.portControlWest, &iterate, sizeof(iterate));
+    ppmPacketnetWrite(handles.portControlSouth, &iterate, sizeof(iterate));
+}
+
 // Extract the Y position for a given address
 unsigned int positionY(unsigned int address){
     unsigned int mask =  0xFF;
@@ -166,6 +205,43 @@ unsigned int peripheralPort(unsigned int address){
     unsigned int mask = 0x000F0000;
     unsigned int masked_n = address & mask;
     return masked_n;
+}
+
+// Variables to handle memory write and read
+char chValue[4];
+unsigned int usValue;
+
+void vec2usi(){
+    unsigned int auxFlit = 0x00000000;
+    unsigned int aux;
+    aux = 0x000000FF & chValue[3];
+    auxFlit = ((aux << 24) & 0xFF000000);
+
+    aux = 0x000000FF & chValue[2];
+    auxFlit = auxFlit | ((aux << 16) & 0x00FF0000);
+
+    aux = 0x000000FF & chValue[1];
+    auxFlit = auxFlit | ((aux << 8) & 0x0000FF00);
+
+    aux = 0x000000FF & chValue[0];
+    auxFlit = auxFlit | ((aux) & 0x000000FF);
+
+    usValue = auxFlit;
+    return;
+}
+
+
+// Function to write something in the memory
+void writeMem(unsigned int value, unsigned int addr){
+    usValue = value;
+    usi2vec();
+    ppmAddressSpaceHandle h = ppmOpenAddressSpace("RWRITE");
+    if(!h) {
+        bhmMessage("I", "ROUTER_MEM_WRITE", "ERROR_WRITE h handling!");
+        while(1){} // error handling
+    }
+    ppmWriteAddressSpace(h, addr, sizeof(chValue), chValue);
+    ppmCloseAddressSpace(h);
 }
 
 // Calculates the output port for a given local address and a destination address
@@ -209,6 +285,7 @@ unsigned int XYrouting(unsigned int current, unsigned int dest){
 // Updates the buffer status
 void bufferStatusUpdate(unsigned int port){
     unsigned int status = 0;
+    //bhmMessage("INFO", "STATUSUPDT", "Enviando para packetnet port %d\n", port);
     // -- No available space in this buffer!
     if ((first[port] == 0 && last[port] == (BUFFER_SIZE-1)) || (first[port] == (last[port]+1))){
         status = STALL;
@@ -253,6 +330,7 @@ void bufferPush(unsigned int port){
     //if(myIterationStatus == ITERATION_OFF) turn_TickOn(); 
 
     // Update the buffer status
+    //bhmMessage("INFO", "PUSH", "Foi push! flit:%x\n", htonl(incomingFlit.data));
     bufferStatusUpdate(port);
 }
 
@@ -291,10 +369,11 @@ unsigned int bufferPop(unsigned int port){
         if (routingTable[port] == LOCAL){
             value = ntohl(currentTime); // Register the out-iteration in the last flit
             localDeliveredPckts++;
-            bhmMessage("I", "Router", "Packet delivered at %d-(%d,%d) - total delivered: %d\n",myID, positionX(myAddress), positionY(myAddress), localDeliveredPckts);
+            // bhmMessage("I", "Router", "Packet delivered at %d-(%d,%d) - total delivered: %d\n",myID, positionX(myAddress), positionY(myAddress), localDeliveredPckts);
         }
 
         // Updates the routing table, releasing the output port
+        // bhmMessage("INFO", "ROUTER", ">>>>> %x - Porta de saída %d ficou livre\n", myAddress, port);
         routingTable[port] = ND;
 
         // Inform that the next flit will be a header
@@ -339,6 +418,7 @@ unsigned int bufferPop(unsigned int port){
     }
 
     // Update the buffer status
+    //bhmMessage("INFO", "POP", "Foi pop!\n");
     bufferStatusUpdate(port);
     
     return value;
@@ -389,7 +469,7 @@ unsigned int selectPort(){
     return selected;
 }
 
-// Allocates the output port to the givel selPort if it is available
+// Allocates the output port to the given selPort if it is available
 void allocate(unsigned int port){
     unsigned int header, to, checkport, allowed;
     // In the first place, verify if the port is not connected to any thing and has something to transmitt 
@@ -407,8 +487,18 @@ void allocate(unsigned int port){
                 if(priority[port]>5) priority[port] = priority[port] - 5;
             }
         }
+        //If the requested output port is free
         if(allowed == 1){
+            // Connect the buffer to the output
+            // bhmMessage("INFO", "ROUTER", ">>>>> %x - Porta %d saindo pela porta %d\n", myAddress, port, to);
             routingTable[port] = to;
+            // and compute a packet transmittion
+            countTotalPackets[to] = countTotalPackets[to]+1;
+            if(to==LOCAL)       writeMem(htonl(countTotalPackets[to]), LOCAL_PACKETS_ADDR);
+            else if(to==EAST)   writeMem(htonl(countTotalPackets[to]), EAST_PACKETS_ADDR);
+            else if(to==WEST)   writeMem(htonl(countTotalPackets[to]), WEST_PACKETS_ADDR);
+            else if(to==NORTH)  writeMem(htonl(countTotalPackets[to]), NORTH_PACKETS_ADDR);
+            else if(to==SOUTH)  writeMem(htonl(countTotalPackets[to]), SOUTH_PACKETS_ADDR);
             // Once one port is attended, then reset it's priority.
             priority[port] = 1;
         }
@@ -559,10 +649,13 @@ void transmitt(){
                             flit = bufferPop(port);
                             //bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[LOCAL]= contFlits[LOCAL]++;
+                            contFlits[LOCAL] = contFlits[LOCAL]+1;
                             #endif
+                            countTotalFlits[LOCAL] = countTotalFlits[LOCAL]+1;
+                            writeMem(htonl(countTotalFlits[LOCAL]), LOCAL_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portDataLocal, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -573,11 +666,14 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[EAST]= contFlits[EAST]++;
+                            contFlits[EAST] = contFlits[EAST]+1;
                             #endif
+                            countTotalFlits[EAST] = countTotalFlits[EAST]+1;
+                            writeMem(htonl(countTotalFlits[EAST]), EAST_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlEast, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataEast, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -588,11 +684,14 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[WEST]= contFlits[WEST]++;
+                            contFlits[WEST] = contFlits[WEST]+1;
                             #endif
+                            countTotalFlits[WEST] = countTotalFlits[WEST]+1;
+                            writeMem(htonl(countTotalFlits[WEST]), WEST_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlWest, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataWest, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -603,11 +702,14 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[NORTH]= contFlits[NORTH]++;
+                            contFlits[NORTH] = contFlits[NORTH]+1;
                             #endif
+                            countTotalFlits[NORTH] = countTotalFlits[NORTH]+1;
+                            writeMem(htonl(countTotalFlits[NORTH]), NORTH_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlNorth, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataNorth, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
 
@@ -618,11 +720,14 @@ void transmitt(){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
                             #if LOG_OUTPUTFLITS
-                            contFlits[SOUTH]= contFlits[SOUTH]++;
+                            contFlits[SOUTH] = contFlits[SOUTH]+1;
                             #endif
+                            countTotalFlits[SOUTH] = countTotalFlits[SOUTH]+1;
+                            writeMem(htonl(countTotalFlits[SOUTH]), SOUTH_FLITS_ADDR);
                             // Send the flit transmission time followed by the data
                             ppmPacketnetWrite(handles.portControlSouth, &currentTime, sizeof(currentTime));
                             ppmPacketnetWrite(handles.portDataSouth, &flit, sizeof(flit));
+                            activity++;
                         }
                     }
                 }
@@ -642,9 +747,10 @@ void controlUpdate(unsigned int port, unsigned int ctrlData){
 ////////////////////////////////////////////////////////////////////////////////
 
 void iterate(){
+    activity = 0;
     // Sends the iteration signal to the NI module
     iterateNI();
-    //iteratePeriph();
+    if(myAddress == 0x00) iteratePeriph();
     // Verify if the LOCAL buffer has something to send
     //verifyLocalBuffer();
     ////////////////////////////////////////////
@@ -671,7 +777,9 @@ void iterate(){
     ////////////////////////////////////////////
     ////////////////////////////////////////////
     // Runs the transmittion of one flit to each direction (if there is a connection stablished)
-    transmitt(); 
+    transmitt();
+    //
+    ppmPacketnetWrite(handles.iterationsPort, &activity, sizeof(activity));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -813,28 +921,41 @@ PPM_PACKETNET_CB(iterationPort) {
 
 ppmAddressSpaceHandle h;
 int testando = 0;
-unsigned int SecAddr = 0xFFFFFFFF;
 
+                       
+int auxData;
+int contRouters = 0;
 PPM_PACKETNET_CB(secNoC) {
     if(bytes == 8){
-       flitSec.data = *(unsigned int *)data;
-       bhmMessage("I", "ROUTER secNoC","*****************************************************data = %d",flitSec.data);
+	auxData =  *(Uns8*)data;     
+	//flitSec.data = *(Uns8*)data;
+       bhmMessage("I", "ROUTER secNoC","*****************************************************data = %d",auxData);
+	//writeMem(flitSec.data);
     } else{
-       flitSec.source = *(unsigned int *)data;
-       bhmMessage("I", "ROUTER secNoC","*****************************************************source = %d",flitSec.source);
+       flitSec[*(Uns8*)data].source = *(Uns8*)data;
+ 	flitSec[*(Uns8*)data].data = auxData;
+       bhmMessage("I", "ROUTER secNoC","*****************************************************source = %d",flitSec[*(Uns8*)data].source);
+	contRouters++;
+	if(contRouters==16){
+      		//writeMemSecApp(htonl(flitSec.data));
+		writeMemSecApp(flitSec);
+		contRouters=0;
+	}
         //hasDataToSend = 1;
     }
+
  
 
-     h = ppmOpenAddressSpace("SEC_APP");
+   /*  h = ppmOpenAddressSpace("SEC_APP");
     if(!h) {
         bhmMessage("I", "ROUTER secNoC", "ERROR_WRITE h handling!");
         while(1){} // error handling
-    }
-	
+    }*/
 
-    ppmWriteAddressSpace(h, SecAddr, sizeof(*(Uns32*)data), &*(Uns32*)data);
-    ppmCloseAddressSpace(h);
+   //ppmWriteAddressSpace (handles.MPORT, (Uns64)(Uns32)&, 4, &reset);
+
+  //  ppmWriteAddressSpace(h, SecAddr, sizeof(*(Uns8*)data), &*(Uns8*)data);
+   // ppmCloseAddressSpace(h);
 
     //uint32_t u = *(uint32_t*)&x;
    // ppmWriteNet(handles.INT_ROUTER, 1); */
@@ -843,8 +964,7 @@ PPM_PACKETNET_CB(secNoC) {
   
 }
 
-
-PPM_PACKETNET_CB(controlSecNoc) {
+PPM_PACKETNET_CB(controlSecNoC) {
 
 }
 

@@ -178,18 +178,18 @@ PPM_PACKETNET_CB(unsafeNoC) {
     if(myAddress == 0xFFFFFFFF){
         
 	myID = *(unsigned int *) data;
-	bhmMessage("I","secNoC", "myID3 = %d", myID); 
+	//bhmMessage("I","secNoC", "myID3 = %d", myID); 
         int y = myID/DIM_X;
         int x = myID-(DIM_X*y);
         myAddress = xy2addr(x, y);
-        bhmMessage("INFO", "MY_ADRESS SECURE NOC", "My Address: %d %d", x, y);
-        bhmMessage("INFO","MYADRESS SECURE NOC","MY ID = %d", myID);
+      //  bhmMessage("INFO", "MY_ADRESS SECURE NOC", "My Address: %d %d", x, y);
+       // bhmMessage("INFO","MYADRESS SECURE NOC","MY ID = %d", myID);
     }else{
 
         incomingFlit.source = myID;
         incomingFlit.data = *(unsigned int *) data;
         //incomingFlit.data = htonl1(incomingFlit.data);
-        bhmMessage("INFO", "SECROUTER", "-------------------------------------------------------------> flitTotal = %d received", incomingFlit.data);
+       // bhmMessage("INFO", "SECROUTER", "-------------------------------------------------------------> flitTotal = %d received", incomingFlit.data);
         bufferPush(LOCAL);
         hasDataToSend = 1;
     }

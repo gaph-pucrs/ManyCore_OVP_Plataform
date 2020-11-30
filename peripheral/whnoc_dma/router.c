@@ -46,6 +46,10 @@ unsigned int activity;
 unsigned int flitCountOut[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
 unsigned int flitCountIn = HEADER;
 
+#if LOG_OUTPUTFLITS
+// flit counter of each port, is reseted in each quantum in router.igen.c
+int contFlits[N_PORTS];
+#endif
 // Define a struct that stores each flit and the time that it arrive in the router
 typedef struct{
     unsigned int data;
@@ -105,7 +109,7 @@ unsigned int localBuffer_packetDest;
 
 #if LOG_OUTPUTFLITS
 // flit counter of each port, is reseted in each quantum in router.igen.c
-int contFlits[N_PORTS];
+
 unsigned int countTotalPackets[N_PORTS] = {0,0,0,0,0};
 unsigned int countTotalFlits[N_PORTS] = {0,0,0,0,0};
 #endif
@@ -120,6 +124,7 @@ typedef struct{
 secNoCData flitSec;
 //unsigned int addressSecApp = 0x0FFFFFA0;
 unsigned int addressSecApp = 0x0FF00000;
+unsigned int secNocCFG = 0x0FFF0124;
 unsigned int usFlit;
 char chFlit[4];
 void usi2vec(){
@@ -129,18 +134,30 @@ void usi2vec(){
     chFlit[0] = usFlit & 0x000000FF;
 }
 
-void writeMem(unsigned int secFlit){
-    usFlit = secFlit;
-    usi2vec();
-    ppmAddressSpaceHandle h = ppmOpenAddressSpace("SEC_APP");
-    if(!h) {
-        bhmMessage("I", "secApp", "ERROR_WRITE secApp!");
-        while(1){} // error handling
-    }
-    //addressSecApp = 
-    bhmMessage("I","ADDRESSSEC", "=============================================address sec = %d", addressSecApp);
-    ppmWriteAddressSpace(h, addressSecApp+(4*flitSec.source) , sizeof(chFlit), chFlit);
-    ppmCloseAddressSpace(h);
+void writeMemSecApp(secNoCData flitSec){
+
+	unsigned int cfg = 1;
+	ppmAddressSpaceHandle h = ppmOpenAddressSpace("SEC_APP");
+    	if(!h) {
+        	bhmMessage("I", "secApp", "ERROR_WRITE secApp!");
+        	while(1){} // error handling
+    	}
+        
+	//int i = 0;
+	//for(i=0;i<16;i++){
+		usFlit = htonl(cfg);
+//bhmMessage("I", "secApp", "Escrevendo flit de configuracao %d\n", cfg);
+		usi2vec(); 
+                	
+		ppmWriteAddressSpace(h, secNocCFG +(4*flitSec.source) , sizeof(chFlit), chFlit);
+		usFlit = htonl(flitSec.data);
+		usi2vec();
+
+		ppmWriteAddressSpace(h, addressSecApp+(4*flitSec.source) , sizeof(chFlit), chFlit);
+    		ppmCloseAddressSpace(h);
+		
+	
+    	ppmCloseAddressSpace(h);
 }
 
 ////////////////////////////////////////////////////////////
@@ -227,12 +244,6 @@ void vec2usi(){
     return;
 }
 
-void usi2vec(){
-    chValue[3] = (usValue >> 24) & 0x000000FF;
-    chValue[2] = (usValue >> 16) & 0x000000FF;
-    chValue[1] = (usValue >> 8) & 0x000000FF;
-    chValue[0] = usValue & 0x000000FF;
-}
 
 // Function to write something in the memory
 void writeMem(unsigned int value, unsigned int addr){
@@ -650,7 +661,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
-                            //bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
+                            bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
                             #if LOG_OUTPUTFLITS
                             contFlits[LOCAL] = contFlits[LOCAL]+1;
                             #endif
@@ -926,16 +937,20 @@ ppmAddressSpaceHandle h;
 int testando = 0;
 
                        
+int auxData;
 
 PPM_PACKETNET_CB(secNoC) {
     if(bytes == 8){
-       flitSec.data = *(Uns8*)data;
-       bhmMessage("I", "ROUTER secNoC","*****************************************************data = %d",flitSec.data);
+	auxData =  *(Uns8*)data;     
+	flitSec.data = *(Uns8*)data;
+       //bhmMessage("I", "ROUTER secNoC","*****************************************************data = %d",flitSec.data);
 	//writeMem(flitSec.data);
     } else{
        flitSec.source = *(Uns8*)data;
-       bhmMessage("I", "ROUTER secNoC","*****************************************************source = %d",flitSec.source);
-      writeMem(htonl(flitSec.data));
+       //bhmMessage("I", "ROUTER secNoC","*****************************************************source = %d",flitSec.source);
+ 	//writeMemSecApp(flitSec);
+	//	contRouters=0;
+	//}
         //hasDataToSend = 1;
     }
 
@@ -959,7 +974,7 @@ PPM_PACKETNET_CB(secNoC) {
   
 }
 
-PPM_PACKETNET_CB(controlSecNoc) {
+PPM_PACKETNET_CB(controlSecNoC) {
 
 }
 

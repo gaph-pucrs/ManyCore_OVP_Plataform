@@ -29,6 +29,7 @@ do
 	echo "ihwaddnet -instancename intTIMER"$i >> module.op.tcl
 done
 echo "" >> module.op.tcl
+echo "ihwaddnet -instancename intSecNoC" >> module.op.tcl
 
 # Defines the processor type
 for i in $(seq 0 $N);
@@ -53,8 +54,12 @@ do
 	echo "ihwconnect -instancename cpu"$i" -netport       intr0       -net intTIMER"$i >> module.op.tcl
 	echo "ihwconnect -instancename cpu"$i" -netport       intr1       -net intNI_TX"$i >> module.op.tcl
 	echo "ihwconnect -instancename cpu"$i" -netport       intr2       -net intNI_RX"$i >> module.op.tcl
+
 	echo "" >> module.op.tcl
 done
+	echo "ihwconnect -instancename cpu0 -netport intr3    -net intSecNoC" >> module.op.tcl
+	echo "" >> module.op.tcl
+
 echo "ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport INSTRUCTION" >> module.op.tcl # Iterator
 echo "ihwconnect -bus cpuIteratorBus -instancename cpuIterator -busmasterport DATA" >> module.op.tcl # Iterator
 echo "" >> module.op.tcl # Iterator
@@ -93,10 +98,12 @@ do
 	echo "ihwaddperipheral -instancename ni"$i" -modelfile peripheral/networkInterface/pse.pse" >> module.op.tcl
 	echo "ihwaddperipheral -instancename timer"$i" -modelfile peripheral/timer/pse.pse" >> module.op.tcl
 	echo "ihwaddperipheral -instancename printer"$i" -modelfile peripheral/printer/pse.pse" >> module.op.tcl
+	echo "ihwaddperipheral -instancename secRouter"$i" -modelfile peripheral/secNoC/pse.pse" >> module.op.tcl
 done
 echo "" >> module.op.tcl
 
 # Defines the connection between each router and the processor bus
+
 for i in $(seq 0 $N);
 do
 	echo "ihwconnect -instancename router"$i" -busslaveport localPort -bus cpu"$i"Bus -loaddress 0x80000000 -hiaddress 0x80000003" >> module.op.tcl
@@ -109,6 +116,7 @@ do
 	echo "ihwconnect -instancename timer"$i" -busslaveport TIMEREG -bus cpu"$i"Bus -loaddress 0x8000001C -hiaddress 0x8000001F" >> module.op.tcl
 done
 echo "" >> module.op.tcl
+echo "ihwconnect -instancename router0 -busmasterport SEC_APP -bus cpu0Bus" >> module.op.tcl
 
 # Creates the wire to connect the TEA with one router
 echo "ihwaddpacketnet -instancename data_0_0_TEA" >> module.op.tcl
@@ -155,6 +163,71 @@ for i in $(seq 0 $(($Y-1)));
 done 
 echo "" >> module.op.tcl
 
+for i in $(seq 0 $(($Y-1)));
+	do
+	for j in $(seq 0 $(($X-1)));
+	do	
+		echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_safeNoC" >> module.op.tcl
+		echo "ihwaddpacketnet -instancename data_"$i"_"$j"_safeNoC" >> module.op.tcl
+	done
+done
+echo "" >> module.op.tcl
+
+id=0
+for i in $(seq 0 $(($Y-1)));
+	do
+	for j in $(seq 0 $(($X-1)));
+	do	
+		echo "ihwconnect -instancename router"$id" -packetnetport portSecNoC -packetnet data_"$i"_"$j"_safeNoC" >> module.op.tcl
+		echo "ihwconnect -instancename router"$id" -packetnetport portControlSecNoC -packetnet ctrl_"$i"_"$j"_safeNoC" >> module.op.tcl
+		echo "ihwconnect -instancename secRouter"$id" -packetnetport portUnsafeNoC -packetnet data_"$i"_"$j"_safeNoC" >> module.op.tcl
+		echo "ihwconnect -instancename secRouter"$id" -packetnetport portControlUnsafeNoC -packetnet ctrl_"$i"_"$j"_safeNoC" >> module.op.tcl
+		id=$(($id+1))
+	done	
+	
+done
+
+for i in $(seq 0 $(($Y-1)));
+	do
+	for j in $(seq 0 $(($X-1)));
+	do	
+		if [ $(($j%2)) = 0 ];
+		then 
+			if [ $(($i%2)) = 0 ];
+			then
+				#echo $i$j
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_E_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_W_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_N_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_S_secNoC" >> module.op.tcl
+				
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_E_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_W_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_N_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_S_secNoC" >> module.op.tcl
+			fi
+		else
+			if [ $(($i%2)) != 0 ];
+			then
+				#echo $i$j
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_E_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_W_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_N_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename data_"$i"_"$j"_S_secNoC" >> module.op.tcl
+
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_E_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_W_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_N_secNoC" >> module.op.tcl
+				echo "ihwaddpacketnet -instancename ctrl_"$i"_"$j"_S_secNoC" >> module.op.tcl 
+			fi
+		fi
+	done
+done 
+echo "" >> module.op.tcl
+
+
+
+
 # Connects the TEA peripheral to one given PE
 echo "ihwconnect -instancename router0 -packetnetport portDataWest -packetnet data_0_0_TEA" >> module.op.tcl
 echo "ihwconnect -instancename router0 -packetnetport portControlWest -packetnet ctrl_0_0_TEA" >> module.op.tcl
@@ -171,6 +244,7 @@ for i in $(seq 0 $bordaY);
 	do
 		echo "ihwconnect -instancename router"$cont" -packetnetport portDataLocal -packetnet data_"$i"_"$j"_L" >> module.op.tcl
 		echo "ihwconnect -instancename ni"$cont" -packetnetport dataPort -packetnet data_"$i"_"$j"_L" >> module.op.tcl
+
 		
 		echo "ihwconnect -instancename router"$cont" -packetnetport portControlLocal -packetnet ctrl_"$i"_"$j"_L" >> module.op.tcl
 		echo "ihwconnect -instancename ni"$cont" -packetnetport controlPort -packetnet ctrl_"$i"_"$j"_L" >> module.op.tcl
@@ -269,6 +343,110 @@ for i in $(seq 0 $bordaY);
 done 
 echo "" >> module.op.tcl
 
+
+cont=0;
+bordaX=$(($X-1))
+bordaY=$(($Y-1))
+for i in $(seq 0 $bordaY);
+	do
+	for j in $(seq 0 $bordaX);
+	do
+		if [ $(($j%2)) = 0 ];
+		then
+			if [ $(($i%2)) = 0 ];
+			then 
+
+				if [ $j -lt $bordaX ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataEast -packetnet data_"$i"_"$j"_E_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+1))" -packetnetport portDataWest -packetnet data_"$i"_"$j"_E_secNoC" >> module.op.tcl
+
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlEast -packetnet ctrl_"$i"_"$j"_E_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+1))" -packetnetport portControlWest -packetnet ctrl_"$i"_"$j"_E_secNoC" >> module.op.tcl
+				fi
+
+
+				if [ $j -gt 0 ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataWest -packetnet data_"$i"_"$j"_W_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-1))" -packetnetport portDataEast -packetnet data_"$i"_"$j"_W_secNoC" >> module.op.tcl
+
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlWest -packetnet ctrl_"$i"_"$j"_W_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-1))" -packetnetport portControlEast -packetnet ctrl_"$i"_"$j"_W_secNoC" >> module.op.tcl
+				fi
+
+
+				if [ $i -lt $bordaY ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_N_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+$X))" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_N_secNoC" >> module.op.tcl
+
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlNorth -packetnet ctrl_"$i"_"$j"_N_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+$X))" -packetnetport portControlSouth -packetnet ctrl_"$i"_"$j"_N_secNoC" >> module.op.tcl
+				fi
+
+
+				if [ $i -gt 0 ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_S_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-$X))" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_S_secNoC" >> module.op.tcl
+
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlSouth -packetnet ctrl_"$i"_"$j"_S_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-$X))" -packetnetport portControlNorth -packetnet ctrl_"$i"_"$j"_S_secNoC" >> module.op.tcl
+				fi
+
+			fi
+	
+		else
+			if [ $(($i%2)) != 0 ];
+			then
+
+				if [ $j -lt $bordaX ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataEast -packetnet data_"$i"_"$j"_E_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+1))" -packetnetport portDataWest -packetnet data_"$i"_"$j"_E_secNoC" >> module.op.tcl
+
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlEast -packetnet ctrl_"$i"_"$j"_E_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+1))" -packetnetport portControlWest -packetnet ctrl_"$i"_"$j"_E_secNoC" >> module.op.tcl
+				fi
+
+
+				if [ $j -gt 0 ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataWest -packetnet data_"$i"_"$j"_W_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-1))" -packetnetport portDataEast -packetnet data_"$i"_"$j"_W_secNoC" >> module.op.tcl
+
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlWest -packetnet ctrl_"$i"_"$j"_W_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-1))" -packetnetport portControlEast -packetnet ctrl_"$i"_"$j"_W_secNoC" >> module.op.tcl
+				fi
+
+
+				if [ $i -lt $bordaY ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_N_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+$X))" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_N_secNoC" >> module.op.tcl
+					
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlNorth -packetnet ctrl_"$i"_"$j"_N_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont+$X))" -packetnetport portControlSouth -packetnet ctrl_"$i"_"$j"_N_secNoC" >> module.op.tcl
+				fi
+
+
+				if [ $i -gt 0 ];
+				then
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portDataSouth -packetnet data_"$i"_"$j"_S_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-$X))" -packetnetport portDataNorth -packetnet data_"$i"_"$j"_S_secNoC" >> module.op.tcl
+
+					echo "ihwconnect -instancename secRouter"$cont" -packetnetport portControlSouth -packetnet ctrl_"$i"_"$j"_S_secNoC" >> module.op.tcl
+					echo "ihwconnect -instancename secRouter"$(($cont-$X))" -packetnetport portControlNorth -packetnet ctrl_"$i"_"$j"_S_secNoC" >> module.op.tcl
+				fi
+			fi
+		fi		
+	cont=$(($cont+1))
+	done
+done 
+echo "" >> module.op.tcl
+
+
 # Connects every interruption signal from each router to the associated processor
 for i in $(seq 0 $N);
 do
@@ -276,6 +454,7 @@ do
 	echo "ihwconnect -instancename ni"$i" -netport       INT_NI_RX  -net intNI_RX"$i >> module.op.tcl
 	echo "ihwconnect -instancename timer"$i" -netport       INT_TIMER  -net intTIMER"$i >> module.op.tcl
 done
+echo "ihwconnect -instancename router0 -netport INT_ROUTER -net intSecNoC" >> module.op.tcl
 
 echo "ihwaddperipheral -instancename sync -modelfile peripheral/synchronizer/pse.pse" >> module.op.tcl
 

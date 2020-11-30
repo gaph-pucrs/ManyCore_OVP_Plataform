@@ -18,7 +18,7 @@ cd application
 cd ..
 
 cd module
-  #  ./moduleGenerator.sh $X $Y
+    ./moduleGenerator.sh $X $Y
 cd ..
 
 cd peripheral

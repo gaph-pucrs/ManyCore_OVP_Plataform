@@ -7,26 +7,21 @@ APP_NAME=$3
 N=$(($X*$Y))
 N=$(($N-1))
 
-rm -f *.c
-rm -f *.h
+rm *.c
+rm *.h
 
 for i in $(seq 0 $N);
 do
 	if [ ! -z "$APP_NAME" ] 
 	then
-		file="source/"$APP_NAME"/"$APP_NAME"_main.c"
+		file="source/"$APP_NAME"/application"$i".c"
 		if [ -f "$file" ]; then
-			cp -u -v source/"$APP_NAME"/"$APP_NAME"_main.c application$i.c
+			cp -u -v source/"$APP_NAME"/application$i.c application$i.c
 		else 
 			cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 		fi
 	else
-		file="source/migration_scenario/migration_scenario_main.c"
-		if [ -f "$file" ]; then
-			cp -u -v source/migration_scenario/migration_scenario_main.c application$i.c
-		else 
-			cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
-		fi
+		cp -u -v source/applicationGeneric/applicationGeneric.c application$i.c
 	fi
 	
 done

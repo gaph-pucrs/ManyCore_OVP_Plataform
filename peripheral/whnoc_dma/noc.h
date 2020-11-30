@@ -38,9 +38,9 @@
 #define OUT_TIME    0x00000000
 
 // NoC Dimensions
-#define DIM_X 8
-#define DIM_Y 8
-#define N_PES 64
+#define DIM_X 4
+#define DIM_Y 4
+#define N_PES 16
 
 //Ticks
 #define ITERATION                0x5555
@@ -90,16 +90,19 @@
 
 ///// CODE DEFINES
 // Arbitration
-#define ARBITER_RR      1
+#define ARBITER_RR      0
 #define ARBITER_HERMES  0
-#define ARBITER_TTL     0
+#define ARBITER_TTL     1
 // Debug logs
 #define LOG_OUTPUTFLITS 1
 // Thermal stuff
 #define USE_THERMAL     1
 
+
+
 #if LOG_OUTPUTFLITS
 extern int contFlits[N_PORTS];
 #endif
+
 
 extern int myID;

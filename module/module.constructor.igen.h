@@ -2076,7 +2076,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_0_0_safeNoC_pktn = icmNewPacketnet("ctrl_0_0_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router0_p, handles.ctrl_0_0_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router0_p, handles.ctrl_0_0_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter0_p, handles.ctrl_0_0_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2090,7 +2090,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_0_1_safeNoC_pktn = icmNewPacketnet("ctrl_0_1_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router1_p, handles.ctrl_0_1_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router1_p, handles.ctrl_0_1_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter1_p, handles.ctrl_0_1_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2104,7 +2104,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_0_2_safeNoC_pktn = icmNewPacketnet("ctrl_0_2_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router2_p, handles.ctrl_0_2_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router2_p, handles.ctrl_0_2_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter2_p, handles.ctrl_0_2_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2118,7 +2118,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_1_0_safeNoC_pktn = icmNewPacketnet("ctrl_1_0_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router3_p, handles.ctrl_1_0_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router3_p, handles.ctrl_1_0_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter3_p, handles.ctrl_1_0_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2132,7 +2132,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_1_1_safeNoC_pktn = icmNewPacketnet("ctrl_1_1_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router4_p, handles.ctrl_1_1_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router4_p, handles.ctrl_1_1_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter4_p, handles.ctrl_1_1_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2146,7 +2146,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_1_2_safeNoC_pktn = icmNewPacketnet("ctrl_1_2_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router5_p, handles.ctrl_1_2_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router5_p, handles.ctrl_1_2_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter5_p, handles.ctrl_1_2_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2160,7 +2160,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_2_0_safeNoC_pktn = icmNewPacketnet("ctrl_2_0_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router6_p, handles.ctrl_2_0_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router6_p, handles.ctrl_2_0_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter6_p, handles.ctrl_2_0_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2174,7 +2174,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_2_1_safeNoC_pktn = icmNewPacketnet("ctrl_2_1_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router7_p, handles.ctrl_2_1_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router7_p, handles.ctrl_2_1_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter7_p, handles.ctrl_2_1_safeNoC_pktn, "portControlUnsafeNoC");
 
@@ -2188,7 +2188,7 @@ void platformConstructor(void) {
 ////////////////////////////////////////////////////////////////////////////////
     handles.ctrl_2_2_safeNoC_pktn = icmNewPacketnet("ctrl_2_2_safeNoC");
 
-    icmConnectPSEPacketnet( handles.router8_p, handles.ctrl_2_2_safeNoC_pktn, "portControlSecNoc");
+    icmConnectPSEPacketnet( handles.router8_p, handles.ctrl_2_2_safeNoC_pktn, "portControlSecNoC");
 
     icmConnectPSEPacketnet( handles.secRouter8_p, handles.ctrl_2_2_safeNoC_pktn, "portControlUnsafeNoC");
 

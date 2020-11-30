@@ -1,8 +1,8 @@
-#include <api.h>
+
 #include <stdlib.h>
 #include <stdio.h>
-
-#include "sort.h"
+#include "source/API/api.h"
+#include "sort_config.h"
 
 #define TASKS 1000
 #define SLAVES 3

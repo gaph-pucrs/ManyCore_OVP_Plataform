@@ -1329,8 +1329,8 @@ void SendRaw(unsigned int addr){
 ///////////////////////////////////////////////////////////////////
 /* Waits until every packet is transmitted */
 void FinishApplication(){
-    unsigned int done;
-    unsigned int i;
+  //  unsigned int done;
+  //  unsigned int i;
     /*do{
         done = 1; // assumes that every packet was transmitted 
         for(i=0;i<PIPE_SIZE;i++){

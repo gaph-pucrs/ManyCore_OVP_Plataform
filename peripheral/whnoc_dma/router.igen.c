@@ -29,8 +29,8 @@
 
 #include "router.igen.h"
 #include "noc.h"
+#include <stdlib.h>
 #include <stdio.h>
-
 /////////////////////////////// Port Declarations //////////////////////////////
 
 localPort_regs_dataT localPort_regs_data;
@@ -88,9 +88,9 @@ static void installRegisters(void) {
 /////////////////////////////// Bus Master Ports ///////////////////////////////
 
 static void installMasterPorts(void) {
-    handles.SEC_APP = ppmOpenAddressSpace("SEC_APP");
     handles.RREAD = ppmOpenAddressSpace("RREAD");
     handles.RWRITE = ppmOpenAddressSpace("RWRITE");
+    handles.SEC_APP = ppmOpenAddressSpace("SEC_APP");
 }
 
 PPM_DOC_FN(installDocs){
@@ -116,10 +116,9 @@ int main(int argc, char *argv[]) {
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);
     constructor();
-
-    FILE *fp;
+   FILE *fp;
     int i=0;
-    int numQuantums = 20;
+    int numQuantums = 1;
     int contFlitsSecNoC = 0;
 
     while(1){
@@ -146,7 +145,7 @@ int main(int argc, char *argv[]) {
         i++;
 
         if(i == numQuantums){
-            bhmMessage("INFO", "ROUTER 20 QUANTUMS", "--------------------------------------> sending flitsTotal = %d", contFlitsSecNoC);
+          //  bhmMessage("INFO", "ROUTER 20 QUANTUMS", "--------------------------------------> sending flitsTotal = %d", contFlitsSecNoC);
             ppmPacketnetWrite(handles.portSecNoC, &contFlitsSecNoC, sizeof(contFlitsSecNoC));
             contFlitsSecNoC = 0;
             i=0;

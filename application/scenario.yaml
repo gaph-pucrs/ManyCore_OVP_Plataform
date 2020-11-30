@@ -1,64 +1,6 @@
 apps:
- - name: synthetic_long
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    taskA: 0
-    taskB: 1
-    taskC: 2
-    taskD: 3
-    taskE: 4
-    taskF: 5
- - name: dijkstra_long
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    divider: 0
-    dijkstra_0: 1
-    dijkstra_1: 2
-    dijkstra_2: 3
-    dijkstra_3: 4
-    print: 5
- - name: mpeg_long
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    print_mpeg: 0
-    idct: 1
-    start: 2
-    ivlc: 3
-    iquant: 4
- - name: dtw_long
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    bank: 0
-    p1: 1
-    p2: 2
-    p3: 3
-    p4: 4
-    recognizer: 5
- - name: audio_video_long
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    split_av: 0
-    ivlc_av: 1
-    iquant_av: 2
-    idct_av: 3
-    adpcm_dec_av: 4
-    FIR_av: 5
-    join_av: 6
- - name: sort_long
-   cluster: 0
-   mapping: dynamic
-   dynamic_mapping:
-    sort_master: 0
-    sort_slave1: 1
-    sort_slave2: 2
-    sort_slave3: 3
- - name: thermalManagement
-   cluster: 0
-   mapping: static
-   static_mapping:
-    thermalMaster: [0,0]
+  - name: prod_cons
+    cluster: 0
+    static_mapping:
+      prod: [0,0]
+      cons: [1,1]
