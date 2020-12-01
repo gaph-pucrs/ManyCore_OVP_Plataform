@@ -1,4 +1,3 @@
-<<<<<<< HEAD:application/source/audio_video_long2/audio_video_long2_all.c
 /* common sampling rate for sound cards on IBM/PC */
 #define SAMPLE_RATE 11025
 
@@ -1502,29 +1501,4 @@ int av_split(int state) { // r
     prints("AV - End Task SPLIT\n");
 
     return 0;
-=======
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "interrupt.h"
-#include "spr_defs.h"
-#include "source/API/api.h"
-
-int main(int argc, char **argv)
-{
-    OVP_init();
-    //////////////////////////////////////////////////////
-    /////////////// YOUR CODE START HERE /////////////////
-    //////////////////////////////////////////////////////
-    
-
-    //LOG("Hello World!");
-
-
-    //////////////////////////////////////////////////////
-    //////////////// YOUR CODE ENDS HERE /////////////////
-    //////////////////////////////////////////////////////
-    FinishApplication();
-    return 1;
->>>>>>> secNoC:application/application12.c
 }
