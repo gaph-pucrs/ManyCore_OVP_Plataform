@@ -2,10 +2,12 @@
 
  <peripheral constructor="constructor"
     destructor="destructor"
+    formalValues="F"
     httpvis="F"
     imagefile="pse.pse"
     library="peripheral"
     name="networkInterface"
+    nbyte="F"
     releasestatus="0"
     saveRestore="F"
     vendor="gaph"
@@ -16,6 +18,14 @@
         <doctext name="txt"
             text="A OVP DMA for a router"/>
     </docsection>
+    <busmasterport addresswidth="32"
+        addresswidthmax="0"
+        addresswidthmin="32"
+        name="MREAD"/>
+    <busmasterport addresswidth="32"
+        addresswidthmax="0"
+        addresswidthmin="32"
+        name="MWRITE"/>
     <busslaveport addresswidth="32"
         mustbeconnected="T"
         name="DMAC"
@@ -26,12 +36,14 @@
             <memorymappedregister access="rw"
                 isvolatile="T"
                 name="status"
+                nbyte="F"
                 readfunction="statusRead"
                 width="32"
                 writefunction="statusWrite"/>
             <memorymappedregister access="rw"
                 isvolatile="T"
                 name="address"
+                nbyte="F"
                 offset="0x4"
                 readfunction="addressRead"
                 width="32"
@@ -43,18 +55,17 @@
         name="dataPort"
         updatefunction="dataPortUpd"
         updatefunctionargument="0"/>
-    <packetnetport maxbytes="4"
+    <packetnetport maxbytes="8"
         mustbeconnected="F"
         name="controlPort"
         updatefunction="controlPortUpd"
         updatefunctionargument="0"/>
-    <netport name="INTTC"
-        type="output"
-        updatefunctionargument="0">
+    <netport name="INT_NI"
+        type="output">
         <docsection name="doc"
             text="Description">
             <doctext name="txt"
-                text="Interrupt Request"/>
+                text="NI Interrupt Request"/>
         </docsection>
     </netport>
     <fileversion major="1"

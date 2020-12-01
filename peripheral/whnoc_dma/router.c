@@ -13,6 +13,7 @@
 #include<stdio.h>
 
 
+
 #define __bswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
@@ -45,6 +46,10 @@ unsigned int activity;
 unsigned int flitCountOut[N_PORTS] = {HEADER,HEADER,HEADER,HEADER,HEADER};
 unsigned int flitCountIn = HEADER;
 
+#if LOG_OUTPUTFLITS
+// flit counter of each port, is reseted in each quantum in router.igen.c
+int contFlits[N_PORTS];
+#endif
 // Define a struct that stores each flit and the time that it arrive in the router
 typedef struct{
     unsigned int data;
@@ -84,6 +89,9 @@ unsigned int actualPort = LOCAL;
 unsigned int contPriority[N_PORTS] = {0,0,0,0,1};
 #endif
 
+
+
+
 // Stores the atual router tick status
 unsigned short int myIterationStatus = ITERATION_OFF;
 
@@ -101,10 +109,56 @@ unsigned int localBuffer_packetDest;
 
 #if LOG_OUTPUTFLITS
 // flit counter of each port, is reseted in each quantum in router.igen.c
-int contFlits[N_PORTS];
+
 unsigned int countTotalPackets[N_PORTS] = {0,0,0,0,0};
 unsigned int countTotalFlits[N_PORTS] = {0,0,0,0,0};
 #endif
+
+//secNoC Variables
+
+typedef struct{
+    unsigned int data;
+    unsigned int source;
+}secNoCData;
+
+secNoCData flitSec;
+//unsigned int addressSecApp = 0x0FFFFFA0;
+unsigned int addressSecApp = 0x0FF00000;
+unsigned int secNocCFG = 0x0FFF0124;
+unsigned int usFlit;
+char chFlit[4];
+void usi2vec(){
+    chFlit[3] = (usFlit >> 24) & 0x000000FF;
+    chFlit[2] = (usFlit >> 16) & 0x000000FF;
+    chFlit[1] = (usFlit >> 8) & 0x000000FF;
+    chFlit[0] = usFlit & 0x000000FF;
+}
+
+void writeMemSecApp(secNoCData flitSec){
+
+	unsigned int cfg = 1;
+	ppmAddressSpaceHandle h = ppmOpenAddressSpace("SEC_APP");
+    	if(!h) {
+        	bhmMessage("I", "secApp", "ERROR_WRITE secApp!");
+        	while(1){} // error handling
+    	}
+        
+	//int i = 0;
+	//for(i=0;i<16;i++){
+		usFlit = htonl(cfg);
+//bhmMessage("I", "secApp", "Escrevendo flit de configuracao %d\n", cfg);
+		usi2vec(); 
+                	
+		ppmWriteAddressSpace(h, secNocCFG +(4*flitSec.source) , sizeof(chFlit), chFlit);
+		usFlit = htonl(flitSec.data);
+		usi2vec();
+
+		ppmWriteAddressSpace(h, addressSecApp+(4*flitSec.source) , sizeof(chFlit), chFlit);
+    		ppmCloseAddressSpace(h);
+		
+	
+    	ppmCloseAddressSpace(h);
+}
 
 ////////////////////////////////////////////////////////////
 /////////////////////// FUNCTIONS //////////////////////////
@@ -190,12 +244,6 @@ void vec2usi(){
     return;
 }
 
-void usi2vec(){
-    chValue[3] = (usValue >> 24) & 0x000000FF;
-    chValue[2] = (usValue >> 16) & 0x000000FF;
-    chValue[1] = (usValue >> 8) & 0x000000FF;
-    chValue[0] = usValue & 0x000000FF;
-}
 
 // Function to write something in the memory
 void writeMem(unsigned int value, unsigned int addr){
@@ -613,7 +661,7 @@ void transmitt(){
                         if(control[routingTable[port]] == GO && !isEmpty(port) && routingTable[port] == LOCAL){
                             // Gets a flit from the buffer 
                             flit = bufferPop(port);
-                            //bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
+                            bhmMessage("I", "LOCALOUT", "Enviando flit: %x do buffer %d",htonl(flit), port);
                             #if LOG_OUTPUTFLITS
                             contFlits[LOCAL] = contFlits[LOCAL]+1;
                             #endif
@@ -765,6 +813,7 @@ PPM_REG_WRITE_CB(addressWrite) {
         myAddress = xy2addr(x, y);
         bhmMessage("INFO", "MY_ADRESS", "My Address: %d %d", x, y);
         bhmMessage("INFO","MYADRESS","MY ID = %d", myID);
+        ppmPacketnetWrite(handles.portSecNoC, &myID, sizeof(myID));
     }
     else{ // Display an error message when another write operation is made in this register!!
         bhmMessage("INFO", "MY_ADRESS", "ERROR: The address can not be changed!");
@@ -834,8 +883,10 @@ PPM_PACKETNET_CB(controlWest) {
 }
 
 PPM_PACKETNET_CB(dataEast) {
-    unsigned int newFlit = *(unsigned int *)data;
+
+     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
     bufferPush(EAST);
 }
 
@@ -847,20 +898,24 @@ PPM_PACKETNET_CB(dataLocal) {
 }
 
 PPM_PACKETNET_CB(dataNorth) {
-    unsigned int newFlit = *(unsigned int *)data;
+     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
     bufferPush(NORTH);
+    
 }
 
 PPM_PACKETNET_CB(dataSouth) {
-    unsigned int newFlit = *(unsigned int *)data;
+     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
     bufferPush(SOUTH);
 }
 
 PPM_PACKETNET_CB(dataWest) {
-    unsigned int newFlit = *(unsigned int *)data;
+     unsigned int newFlit = *(unsigned int *)data;
     incomingFlit.data = newFlit;
+    incomingFlit.inTime = currentTime;
     bufferPush(WEST);
 }
 
@@ -876,6 +931,54 @@ PPM_PACKETNET_CB(iterationPort) {
     //Runs iterate
     iterate();
 }
+
+
+ppmAddressSpaceHandle h;
+int testando = 0;
+
+                       
+int auxData;
+
+PPM_PACKETNET_CB(secNoC) {
+    if(bytes == 8){
+	auxData =  *(Uns8*)data;     
+	flitSec.data = *(Uns8*)data;
+       //bhmMessage("I", "ROUTER secNoC","*****************************************************data = %d",flitSec.data);
+	//writeMem(flitSec.data);
+    } else{
+       flitSec.source = *(Uns8*)data;
+       //bhmMessage("I", "ROUTER secNoC","*****************************************************source = %d",flitSec.source);
+ 	//writeMemSecApp(flitSec);
+	//	contRouters=0;
+	//}
+        //hasDataToSend = 1;
+    }
+
+ 
+
+   /*  h = ppmOpenAddressSpace("SEC_APP");
+    if(!h) {
+        bhmMessage("I", "ROUTER secNoC", "ERROR_WRITE h handling!");
+        while(1){} // error handling
+    }*/
+
+   //ppmWriteAddressSpace (handles.MPORT, (Uns64)(Uns32)&, 4, &reset);
+
+  //  ppmWriteAddressSpace(h, SecAddr, sizeof(*(Uns8*)data), &*(Uns8*)data);
+   // ppmCloseAddressSpace(h);
+
+    //uint32_t u = *(uint32_t*)&x;
+   // ppmWriteNet(handles.INT_ROUTER, 1); */
+
+    //*myAddress = secNoCData; 
+  
+}
+
+PPM_PACKETNET_CB(controlSecNoC) {
+
+}
+
+
 
 PPM_CONSTRUCTOR_CB(constructor) {
     // YOUR CODE HERE (pre constructor)

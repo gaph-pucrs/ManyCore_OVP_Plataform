@@ -99,5 +99,3 @@ python3 applicationMapping.py $X $Y
 #         cont=$((cont+1))
 #     done
 # done
-
-

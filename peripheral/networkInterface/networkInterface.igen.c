@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -100,8 +119,8 @@ static void installNetPorts(void) {
 
     handles.INT_NI_RX = ppmOpenNetPort("INT_NI_RX");
 
+    
 }
-
 ////////////////////////////////// Constructor /////////////////////////////////
 
 PPM_CONSTRUCTOR_CB(periphConstructor) {
@@ -114,12 +133,6 @@ PPM_CONSTRUCTOR_CB(periphConstructor) {
 ///////////////////////////////////// Main /////////////////////////////////////
 
 int main(int argc, char *argv[]) {
-
-    ppmDocNodeP Root1_node = ppmDocAddSection(0, "Root");
-    {
-        ppmDocNodeP doc2_node = ppmDocAddSection(Root1_node, "Description");
-        ppmDocAddText(doc2_node, "A OVP DMA for a router");
-    }
 
     diagnosticLevel = 0;
     bhmInstallDiagCB(setDiagLevel);

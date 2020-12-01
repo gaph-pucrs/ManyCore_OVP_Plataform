@@ -1,4 +1,5 @@
 apps:
+<<<<<<< HEAD
  - name: dijkstra
    cluster: 0
    mapping: static
@@ -20,3 +21,10 @@ apps:
     p3: [3,2]
     p4: [4,2]
     recognizer: [2,6]
+=======
+  - name: prod_cons
+    cluster: 0
+    static_mapping:
+      prod: [0,0]
+      cons: [1,1]
+>>>>>>> secNoC

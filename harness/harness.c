@@ -13,13 +13,13 @@
 #define MODULE_NAME     "top"
 #define MODULE_DIR      "module"
 #define MODULE_INSTANCE "u2"
-#define N_PES 64
+#define N_PES 16
 #define __bswap_constant_32(x) \
      ((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |		      \
       (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
 /* Quantum defines */
 #define INSTRUCTIONS_PER_SECOND       250000000.0 // 1GHz (assuming 1 instruction per cycle)
-#define INSTRUCTIONS_PER_TIME_SLICE   250.0 //(INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
+#define INSTRUCTIONS_PER_TIME_SLICE   1000 //(INSTRUCTIONS_PER_SECOND*QUANTUM_TIME_SLICE)
 #define QUANTUM_TIME_SLICE            (INSTRUCTIONS_PER_TIME_SLICE/INSTRUCTIONS_PER_SECOND)// 0.0000010 // 
 
 #define BRANCH  1
@@ -262,6 +262,7 @@ int main(int argc, const char *argv[]) {
     optTime       myTime     = QUANTUM_TIME_SLICE;
     optStopReason stopReason = OP_SR_SCHED;   
     optProcessorP proc;
+    //optProcessorP proc0;
 
     // must advance to next phase for the API calls that follow
     opRootModulePreSimulate(mi);
@@ -274,7 +275,7 @@ int main(int argc, const char *argv[]) {
 
     // flag to add the callbacks during the first quantum
     int firstRun = N_PES;
-
+    //int cont = 0;
     do {
         // move time forward by time slice on root module
         // NOTE: This matches the standard scheduler which moves time forward in
@@ -291,6 +292,7 @@ int main(int argc, const char *argv[]) {
         while ((proc = opProcessorNext(modNew, proc))) {
             if(firstRun){
                 // Add a fetch callback to each processor
+		//proc0 = proc;
                 opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
                 firstRun--;
             } 
@@ -309,7 +311,7 @@ int main(int argc, const char *argv[]) {
             }
 
             // simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions 
-            stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
+	      stopReason = opProcessorSimulate(proc, INSTRUCTIONS_PER_TIME_SLICE);
             if(stopReason == OP_SR_EXIT){
                 finishedProcessors++;
             }
