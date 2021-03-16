@@ -1,7 +1,7 @@
 apps:
  - name: dijkstra
    cluster: 0
-   mapping: dynamic
+   mapping: dynamic_mapping
    static_mapping:
     divider: 0
     dijkstra_0: 1
@@ -12,7 +12,7 @@ apps:
     print_dij: 6
  - name: dtw
    cluster: 0
-   mapping: dynamic
+   mapping: dynamic_mapping
    static_mapping:
     bank: 0
     p1: 1
