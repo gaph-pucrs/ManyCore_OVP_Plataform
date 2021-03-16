@@ -1,4 +1,9 @@
 apps:
+ - name: thermalManagement
+   cluster: 0
+   mapping: static_mapping
+   static_mapping:
+    thermalManagement: [0,0]
  - name: dijkstra
    cluster: 0
    mapping: dynamic_mapping
