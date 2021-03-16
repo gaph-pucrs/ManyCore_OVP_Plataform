@@ -1,22 +1,22 @@
 apps:
  - name: dijkstra
    cluster: 0
-   mapping: static
+   mapping: dynamic
    static_mapping:
-    divider: [0,0]
-    dijkstra_0: [1,1]
-    dijkstra_1: [2,2]
-    dijkstra_2: [3,3]
-    dijkstra_3: [4,4]
-    dijkstra_4: [1,6]
-    print_dij: [5,5]
+    divider: 0
+    dijkstra_0: 1
+    dijkstra_1: 2
+    dijkstra_2: 3
+    dijkstra_3: 4
+    dijkstra_4: 5
+    print_dij: 6
  - name: dtw
    cluster: 0
-   mapping: static
+   mapping: dynamic
    static_mapping:
-    bank: [0,2]
-    p1: [1,2]
-    p2: [2,3]
-    p3: [3,2]
-    p4: [4,2]
-    recognizer: [2,6]
+    bank: 0
+    p1: 1
+    p2: 2
+    p3: 3
+    p4: 4
+    recognizer: 5
