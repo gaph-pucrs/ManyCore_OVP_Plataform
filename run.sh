@@ -1,20 +1,63 @@
 #!/bin/sh
 #NOVO: 20191106 --- VELHO: 20170201
-X=$1
-Y=$2
-APP_NAME=$3
+testcase=$1
+scenario=$2
+
+#if  "$testcase" =~ "*.yaml"; then
+#    echo "tem .yaml" || exit
+#fi
+
+testcase="${testcase}.yaml"
+scenario="${scenario}.yaml"
+echo $testcase
+echo $scenario
+
+##################################################################
+#   reads testcase + scenario and get dimensions & buffer size   #
+##################################################################
+cd application
+
+    if [ ! -f $testcase ];
+    then
+         echo "$testcase file not found" && exit
+    fi
+    if [ ! -f $scenario ];
+    then
+         echo "$scenario file not found" && exit
+    fi
+    
+    noc_buffer_size=$(grep -oP 'noc_buffer_size:\s*\K\d' $testcase)
+    X=$(grep -oP 'mpsoc_dimension:\s*\[\K\d' $testcase)
+    Y=$(grep -oP 'mpsoc_dimension:\s*\[\d,\K\d' $testcase)
+
+    [ -z "$size" ] && :echo 'ERROR: noc_buffer_size info not found' && exit
+    [ -z "$X" ] && echo 'ERROR: X dimension info not found' && exit
+    [ -z "$Y" ] && echo 'ERROR: Y dimension info not found' && exit
+
+#   this line changes the scenario file name on Python, using the line number (15)!!
+    sed -i "15s/.*/with open('$scenario') as file:/" applicationMapping.py
+    cd source 
+        cd thermalManagement
+           sed -i "s/testcase = fopen.*/testcase = fopen(\"application\/$scenario\", \"r\"); /" thermalMaster.c
+        cd ..
+    cd ..
+cd ..
+
+##################################################################
+
 N=$(($X*$Y))
 
 #source /soft64/source_gaph
 # module load ovp/20191106
 # source /soft64/imperas/ferramentas/64bits/Imperas.20191106/bin/setup.sh
 # setupImperas /soft64/imperas/ferramentas/64bits/Imperas.20191106
+
 cd simulation
     rm -f flitFlow.csv
 cd ..
 
 cd application
-    ./applicationGenerator.sh $X $Y $APP_NAME
+    ./applicationGenerator.sh $X $Y
 cd ..
 
 cd module
@@ -26,6 +69,7 @@ cd peripheral
         sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
         sed -i 's/#define DIM_Y.*/#define DIM_Y '$Y'/' noc.h
         sed -i 's/#define N_PE.*/#define N_PES '$N'/' noc.h
+        sed -i 's/#define BUFFER_SIZE.*/#define BUFFER_SIZE '$noc_buffer_size'/' noc.h
     cd ..
 
     cd iteratorMonoTrigger
