@@ -32,14 +32,13 @@
 #define MULTDIV 10
 #define WEIRD 11
 
-/*unsigned int activeFetch[N_PES];
+unsigned int activeFetch[N_PES];
 unsigned int fetch[N_PES];
 unsigned int PE_freq[N_PES];
 
 // Instructions
 // char instructions [][12] =
-//
-{"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
+// {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
 char branchInstructions[][12] = {"l.bf", "l.bnf", "EndList@"};
 char arithInstructions[][12] = {"l.add",   "l.addc",   "l.addi",  "l.addic",  "l.sub",   "l.adrp",   "l.sfeq",  "l.sfeqi",  "l.sfges", "l.sfgesi", "l.sfgeu", "l.sfgeui", "l.sfgts", "l.sfgtsi",
                                 "l.sfgtu", "l.sfgtui", "l.sfles", "l.sflesi", "l.sfleu", "l.sfleui", "l.sflts", "l.sfltsi", "l.sfltu", "l.sfltui", "l.sfne",  "l.sfnei",  "EndList@"};
@@ -134,12 +133,12 @@ unsigned int getInstructionType(char *instruction) {
     while (1) {
         opMessage("I", "FETCH", "Instrucao nao encontrada! %s", instruction);
     }
-}*/
+}
 
-/*unsigned int htonl(unsigned int x) {
+unsigned int htonl(unsigned int x) {
     // endian adjustment
     return bswap_constant_32(x);
-}*/
+}
 
 struct optionsS {
     Bool configurecpuinstance;
@@ -168,7 +167,7 @@ optModuleAttr modelAttrs = {
     .destructCB = moduleDestruct,
 };
 
-/*unsigned int vec2usi(char *vec) {
+unsigned int vec2usi(char *vec) {
     unsigned int auxValue = 0x00000000;
     unsigned int aux;
     aux = 0x000000FF & vec[3];
@@ -180,9 +179,9 @@ optModuleAttr modelAttrs = {
     aux = 0x000000FF & vec[0];
     auxValue = auxValue | ((aux)&0x000000FF);
     return auxValue;
-}*/
+}
 
-/*int getProcessorID(optProcessorP processor) {
+int getProcessorID(optProcessorP processor) {
     int processorID;
     char processorName[7] = "@@@@@@@";
     strcpy(processorName, opObjectName(processor));
@@ -192,55 +191,54 @@ optModuleAttr modelAttrs = {
         processorID = ((int)processorName[3] - 48) * 10 + ((int)processorName[4] - 48);
     } else
         processorID = ((int)processorName[3] - 48);
-    //ERROR CATCHER!
-if (processorID < 0 || processorID > N_PES) {
-    opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d", processorID);
-    while (1) {
+    /*ERROR CATCHER!*/
+    if (processorID < 0 || processorID > N_PES) {
+        opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d", processorID);
+        while (1) {
+        }
+    }
+    return processorID;
+}
+
+// Fetch Callback
+static OP_MONITOR_FN(fetchCallBack) {
+    // get the processor id
+    int processorID = getProcessorID(processor);
+    fetch[processorID]++;
+
+    char value[4]; // aux var
+    // reads the clock gating flag in the processor memory
+    opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+    unsigned int clkGating_flag = htonl(vec2usi(value));
+
+    // clkgating = 0 == CONTAR
+    // clkgating = 1 == NAO CONTAR
+    // if the processor is not in clkgating then run the disassemble
+    if (!clkGating_flag) {
+        activeFetch[processorID]++;
+        char instruction[60];
+        strcpy(instruction, opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
+        sscanf(instruction, "%s %*s\n", instruction);
+        // opMessage("I", "FETCH", "pos-Instrucao: %s",instruction);
+
+        //                         BASE ADDRESS -  (INSTRUCTION TYPE OFFSET)
+        unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction) * 4); // *4 porque é endereçado por palavra
+
+        // Load the atual value and add one
+        char read_EI[4];
+        opProcessorRead(processor, countAddress, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
+        unsigned int read_executedInstructions = vec2usi(read_EI);
+        read_executedInstructions = htonl(read_executedInstructions) + 1;
+
+        // Store the atual value
+        char EI[4];
+        EI[3] = (htonl(read_executedInstructions) >> 24) & 0x000000FF;
+        EI[2] = (htonl(read_executedInstructions) >> 16) & 0x000000FF;
+        EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
+        EI[0] = htonl(read_executedInstructions) & 0x000000FF;
+        opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
     }
 }
-return processorID;
-}
-
-
-    // Fetch Callback
-    static OP_MONITOR_FN(fetchCallBack) {
-        // get the processor id
-        int processorID = getProcessorID(processor);
-        fetch[processorID]++;
-
-        char value[4]; // aux var
-        // reads the clock gating flag in the processor memory
-        opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
-        unsigned int clkGating_flag = htonl(vec2usi(value));
-
-        // clkgating = 0 == CONTAR
-        // clkgating = 1 == NAO CONTAR
-        // if the processor is not in clkgating then run the disassemble
-        if (!clkGating_flag) {
-            activeFetch[processorID]++;
-            char instruction[60];
-            strcpy(instruction, opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
-            sscanf(instruction, "%s %*s\n", instruction);
-            // opMessage("I", "FETCH", "pos-Instrucao: %s",instruction);
-
-            //                         BASE ADDRESS -  (INSTRUCTION TYPE OFFSET)
-            unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction) * 4); // *4 porque é endereçado por palavra
-
-            // Load the atual value and add one
-            char read_EI[4];
-            opProcessorRead(processor, countAddress, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
-            unsigned int read_executedInstructions = vec2usi(read_EI);
-            read_executedInstructions = htonl(read_executedInstructions) + 1;
-
-            // Store the atual value
-            char EI[4];
-            EI[3] = (htonl(read_executedInstructions) >> 24) & 0x000000FF;
-            EI[2] = (htonl(read_executedInstructions) >> 16) & 0x000000FF;
-            EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
-            EI[0] = htonl(read_executedInstructions) & 0x000000FF;
-            opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
-        }
-    }*/
 
 int main(int argc, const char *argv[]) {
     /*Required to init the simulation */
@@ -256,94 +254,92 @@ int main(int argc, const char *argv[]) {
         opMessage("E", MODULE_NAME, "Command line parse incomplete");
     }
     optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);
-    // optModuleP modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
+    optModuleP modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 
     // counts the numbers of quantums
-    /*int countQuantum = 0;
+    int countQuantum = 0;
 
     optTime myTime = QUANTUM_TIME_SLICE;
     optStopReason stopReason = OP_SR_SCHED;
     optProcessorP proc;
-*/
+
     // must advance to next phase for the API calls that follow
     opRootModulePreSimulate(mi);
-    /*
-        int actual_PE = 0;
 
-        for (actual_PE = 0; actual_PE < N_PES; actual_PE++) {
-            PE_freq[actual_PE] = 1000;
+    int actual_PE = 0;
+
+    for (actual_PE = 0; actual_PE < N_PES; actual_PE++) {
+        PE_freq[actual_PE] = 1000;
+    }
+
+    // flag to add the callbacks during the first quantum
+    int firstRun = N_PES;
+
+    do {
+        // move time forward by time slice on root module
+        // NOTE: This matches the standard scheduler which moves time forward in
+        //       the system and then executes instructions on all processors
+        opRootModuleTimeAdvance(mi, myTime);
+
+        /*cont the number of processors that has exited */
+        int finishedProcessors = 0;
+
+        // Reset the processor count
+        actual_PE = 0;
+
+        /* loop for all processors */
+        while ((proc = opProcessorNext(modNew, proc))) {
+            if (firstRun) {
+                // Add a fetch callback to each processor
+                opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
+                firstRun--;
+            } else if (countQuantum % 100 == 0) {
+                char value[4]; // aux var
+                // reads the clock gating flag in the processor memory
+                opProcessorRead(proc, 0x0FFFFFA0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+                unsigned int operationFreq = htonl(vec2usi(value));
+
+                // INSTRUCTIONS_PER_TIME_SLICE <-> 1000
+                //              x              <-> operationFreq
+                PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE) / 1000);
+                // PE_freq[actual_PE] = operationFreq;
+
+                // opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, operationFreq);
+            }
+
+            // simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions
+            stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
+            if (stopReason == OP_SR_EXIT) {
+                finishedProcessors++;
+            }
+
+            // Go to the next processor
+            actual_PE++;
         }
 
-        // flag to add the callbacks during the first quantum
-        int firstRun = N_PES;
+        countQuantum++;
+        if (countQuantum % 100 == 0) {
+            opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum * QUANTUM_TIME_SLICE),
+                      (countQuantum * QUANTUM_TIME_SLICE * 1000)); // alzemiro modification
+            // int i;
+            // for(i=0;i<N_PES;i++){
+            //     opMessage("I", "HARNESS INFO", "PE %d - percent: %f\n",i,((float)activeFetch[i]/(float)fetch[i])*100);
+            //     activeFetch[i] = 0;
+            //     fetch[i] = 0;
+            // }
+        }
 
-        do {
-            // move time forward by time slice on root module
-            // NOTE: This matches the standard scheduler which moves time forward in
-            //       the system and then executes instructions on all processors
-            opRootModuleTimeAdvance(mi, myTime);
+        /* checks if all processors has exited */
+        if (finishedProcessors == N_PES) {
 
-            //cont the number of processors that has exited
-            int finishedProcessors = 0;
+            opMessage("I", "HARNESS", "Simulation Complete (%s) e %d quantums", opStopReasonString(stopReason), countQuantum);
 
-            // Reset the processor count
-            actual_PE = 0;
+            break; // finish simulation loop
+        }
 
-            // loop for all processors
-            while ((proc = opProcessorNext(modNew, proc))) {
-                if (firstRun) {
-                    // Add a fetch callback to each processor
-                    opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
-                    firstRun--;
-                } else if (countQuantum % 100 == 0) {
-                    char value[4]; // aux var
-                    // reads the clock gating flag in the processor memory
-                    opProcessorRead(proc, 0x0FFFFFA0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
-                    unsigned int operationFreq = htonl(vec2usi(value));
+        myTime += QUANTUM_TIME_SLICE;
 
-                    // INSTRUCTIONS_PER_TIME_SLICE <-> 1000
-                    //              x              <-> operationFreq
-                    PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE) / 1000);
-                    // PE_freq[actual_PE] = operationFreq;
-
-                    // opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, operationFreq);
-                }
-
-                // simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions
-                stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
-                if (stopReason == OP_SR_EXIT) {
-                    finishedProcessors++;
-                }
-
-                // Go to the next processor
-                actual_PE++;
-            }
-
-            countQuantum++;
-            if (countQuantum % 100 == 0) {
-                opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum * QUANTUM_TIME_SLICE),
-                          (countQuantum * QUANTUM_TIME_SLICE * 1000)); // alzemiro modification
-                // int i;
-                // for(i=0;i<N_PES;i++){
-                //     opMessage("I", "HARNESS INFO", "PE %d - percent: %f\n",i,((float)activeFetch[i]/(float)fetch[i])*100);
-                //     activeFetch[i] = 0;
-                //     fetch[i] = 0;
-                // }
-            }
-
-            // checks if all processors has exited
-            if (finishedProcessors == N_PES) {
-
-                opMessage("I", "HARNESS", "Simulation Complete (%s) e %d quantums", opStopReasonString(stopReason), countQuantum);
-
-                break; // finish simulation loop
-            }
-
-            myTime += QUANTUM_TIME_SLICE;
-
-        } while (1);*/
-
-    opRootModuleSimulate(mi);
+    } while (1);
 
     /*Required for the end of simulation*/
     opSessionTerminate();
