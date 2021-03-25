@@ -32,13 +32,14 @@
 #define MULTDIV 10
 #define WEIRD 11
 
-unsigned int activeFetch[N_PES];
+/*unsigned int activeFetch[N_PES];
 unsigned int fetch[N_PES];
 unsigned int PE_freq[N_PES];
 
 // Instructions
 // char instructions [][12] =
-// {"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
+//
+{"l.add","l.addc","l.addi","l.addic","l.adrp","l.and","l.andi","l.bf","l.bnf","l.cmov","l.csync","l.cust1","l.cust2","l.cust3","l.cust4","l.cust5","l.cust6","l.cust7","l.cust8","l.div","l.divu","l.extbs","l.extbz","l.exths","l.exthz","l.extws","l.extwz","l.ff1","l.fl1","l.j","l.jal","l.jalr","l.jr","l.lbs","l.lbz","l.ld","l.lf","l.lhs","l.lhz","l.lwa","l.lws","l.lwz","l.mac","l.maci","l.macrc","l.macu","l.mfspr","l.movhi","l.msb","l.msbu","l.msync","l.mtspr","l.mul","l.muld","l.muldu","l.muli","l.mulu","l.nop","l.or","l.ori","l.psync","l.rfe","l.ror","l.rori","l.sb","l.sd","l.sfeq","l.sfeqi","l.sfges","l.sfgesi","l.sfgeu","l.sfgeui","l.sfgts","l.sfgtsi","l.sfgtu","l.sfgtui","l.sfles","l.sflesi","l.sfleu","l.sfleui","l.sflts","l.sfltsi","l.sfltu","l.sfltui","l.sfne","l.sfnei","l.sh","l.sll","l.slli","l.sra","l.srai","l.srl","l.srli","l.sub","l.sw","l.swa","l.sys","l.trap","l.xor","l.xori","EndList@"};
 char branchInstructions[][12] = {"l.bf", "l.bnf", "EndList@"};
 char arithInstructions[][12] = {"l.add",   "l.addc",   "l.addi",  "l.addic",  "l.sub",   "l.adrp",   "l.sfeq",  "l.sfeqi",  "l.sfges", "l.sfgesi", "l.sfgeu", "l.sfgeui", "l.sfgts", "l.sfgtsi",
                                 "l.sfgtu", "l.sfgtui", "l.sfles", "l.sflesi", "l.sfleu", "l.sfleui", "l.sflts", "l.sfltsi", "l.sfltu", "l.sfltui", "l.sfne",  "l.sfnei",  "EndList@"};
@@ -133,12 +134,12 @@ unsigned int getInstructionType(char *instruction) {
     while (1) {
         opMessage("I", "FETCH", "Instrucao nao encontrada! %s", instruction);
     }
-}
+}*/
 
-unsigned int htonl(unsigned int x) {
+/*unsigned int htonl(unsigned int x) {
     // endian adjustment
     return bswap_constant_32(x);
-}
+}*/
 
 struct optionsS {
     Bool configurecpuinstance;
@@ -167,7 +168,7 @@ optModuleAttr modelAttrs = {
     .destructCB = moduleDestruct,
 };
 
-unsigned int vec2usi(char *vec) {
+/*unsigned int vec2usi(char *vec) {
     unsigned int auxValue = 0x00000000;
     unsigned int aux;
     aux = 0x000000FF & vec[3];
@@ -179,9 +180,9 @@ unsigned int vec2usi(char *vec) {
     aux = 0x000000FF & vec[0];
     auxValue = auxValue | ((aux)&0x000000FF);
     return auxValue;
-}
+}*/
 
-int getProcessorID(optProcessorP processor) {
+/*int getProcessorID(optProcessorP processor) {
     int processorID;
     char processorName[7] = "@@@@@@@";
     strcpy(processorName, opObjectName(processor));
@@ -192,55 +193,56 @@ int getProcessorID(optProcessorP processor) {
     } else
         processorID = ((int)processorName[3] - 48);
     /*ERROR CATCHER!*/
-    if (processorID < 0 || processorID > N_PES) {
-        opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d", processorID);
-        while (1) {
+if (processorID < 0 || processorID > N_PES) {
+    opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d", processorID);
+    while (1) {
+    }
+}
+return processorID;
+}
+* /
+
+    // Fetch Callback
+    /*static OP_MONITOR_FN(fetchCallBack) {
+        // get the processor id
+        int processorID = getProcessorID(processor);
+        fetch[processorID]++;
+
+        char value[4]; // aux var
+        // reads the clock gating flag in the processor memory
+        opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+        unsigned int clkGating_flag = htonl(vec2usi(value));
+
+        // clkgating = 0 == CONTAR
+        // clkgating = 1 == NAO CONTAR
+        // if the processor is not in clkgating then run the disassemble
+        if (!clkGating_flag) {
+            activeFetch[processorID]++;
+            char instruction[60];
+            strcpy(instruction, opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
+            sscanf(instruction, "%s %*s\n", instruction);
+            // opMessage("I", "FETCH", "pos-Instrucao: %s",instruction);
+
+            //                         BASE ADDRESS -  (INSTRUCTION TYPE OFFSET)
+            unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction) * 4); // *4 porque é endereçado por palavra
+
+            // Load the atual value and add one
+            char read_EI[4];
+            opProcessorRead(processor, countAddress, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
+            unsigned int read_executedInstructions = vec2usi(read_EI);
+            read_executedInstructions = htonl(read_executedInstructions) + 1;
+
+            // Store the atual value
+            char EI[4];
+            EI[3] = (htonl(read_executedInstructions) >> 24) & 0x000000FF;
+            EI[2] = (htonl(read_executedInstructions) >> 16) & 0x000000FF;
+            EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
+            EI[0] = htonl(read_executedInstructions) & 0x000000FF;
+            opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
         }
-    }
-    return processorID;
-}
+    }*/
 
-// Fetch Callback
-static OP_MONITOR_FN(fetchCallBack) {
-    // get the processor id
-    int processorID = getProcessorID(processor);
-    fetch[processorID]++;
-
-    char value[4]; // aux var
-    // reads the clock gating flag in the processor memory
-    opProcessorRead(processor, 0x0FFFFFFC, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
-    unsigned int clkGating_flag = htonl(vec2usi(value));
-
-    // clkgating = 0 == CONTAR
-    // clkgating = 1 == NAO CONTAR
-    // if the processor is not in clkgating then run the disassemble
-    if (!clkGating_flag) {
-        activeFetch[processorID]++;
-        char instruction[60];
-        strcpy(instruction, opProcessorDisassemble(processor, addr, OP_DSA_UNCOOKED));
-        sscanf(instruction, "%s %*s\n", instruction);
-        // opMessage("I", "FETCH", "pos-Instrucao: %s",instruction);
-
-        //                         BASE ADDRESS -  (INSTRUCTION TYPE OFFSET)
-        unsigned int countAddress = 0x0FFFFFF8 - (getInstructionType(instruction) * 4); // *4 porque é endereçado por palavra
-
-        // Load the atual value and add one
-        char read_EI[4];
-        opProcessorRead(processor, countAddress, &read_EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
-        unsigned int read_executedInstructions = vec2usi(read_EI);
-        read_executedInstructions = htonl(read_executedInstructions) + 1;
-
-        // Store the atual value
-        char EI[4];
-        EI[3] = (htonl(read_executedInstructions) >> 24) & 0x000000FF;
-        EI[2] = (htonl(read_executedInstructions) >> 16) & 0x000000FF;
-        EI[1] = (htonl(read_executedInstructions) >> 8) & 0x000000FF;
-        EI[0] = htonl(read_executedInstructions) & 0x000000FF;
-        opProcessorWrite(processor, countAddress, EI, 4, 1, True, OP_HOSTENDIAN_TARGET);
-    }
-}
-
-int main(int argc, const char *argv[]) {
+    int main(int argc, const char *argv[]) {
     /*Required to init the simulation */
     opSessionInit(OP_VERSION);
 
@@ -254,7 +256,7 @@ int main(int argc, const char *argv[]) {
         opMessage("E", MODULE_NAME, "Command line parse incomplete");
     }
     optModuleP mi = opRootModuleNew(&modelAttrs, MODULE_NAME, params);
-    optModuleP modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
+    // optModuleP modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 
     // counts the numbers of quantums
     /*int countQuantum = 0;
