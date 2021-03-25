@@ -264,84 +264,84 @@ int main(int argc, const char *argv[]) {
     optTime myTime = QUANTUM_TIME_SLICE;
     optStopReason stopReason = OP_SR_SCHED;
     optProcessorP proc;
-
+*/
     // must advance to next phase for the API calls that follow
     opRootModulePreSimulate(mi);
+    /*
+        int actual_PE = 0;
 
-    int actual_PE = 0;
+        for (actual_PE = 0; actual_PE < N_PES; actual_PE++) {
+            PE_freq[actual_PE] = 1000;
+        }
 
-    for (actual_PE = 0; actual_PE < N_PES; actual_PE++) {
-        PE_freq[actual_PE] = 1000;
-    }
+        // flag to add the callbacks during the first quantum
+        int firstRun = N_PES;
 
-    // flag to add the callbacks during the first quantum
-    int firstRun = N_PES;
+        do {
+            // move time forward by time slice on root module
+            // NOTE: This matches the standard scheduler which moves time forward in
+            //       the system and then executes instructions on all processors
+            opRootModuleTimeAdvance(mi, myTime);
 
-    do {
-        // move time forward by time slice on root module
-        // NOTE: This matches the standard scheduler which moves time forward in
-        //       the system and then executes instructions on all processors
-        opRootModuleTimeAdvance(mi, myTime);
+            //cont the number of processors that has exited
+            int finishedProcessors = 0;
 
-        //cont the number of processors that has exited
-        int finishedProcessors = 0;
+            // Reset the processor count
+            actual_PE = 0;
 
-        // Reset the processor count
-        actual_PE = 0;
+            // loop for all processors
+            while ((proc = opProcessorNext(modNew, proc))) {
+                if (firstRun) {
+                    // Add a fetch callback to each processor
+                    opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
+                    firstRun--;
+                } else if (countQuantum % 100 == 0) {
+                    char value[4]; // aux var
+                    // reads the clock gating flag in the processor memory
+                    opProcessorRead(proc, 0x0FFFFFA0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
+                    unsigned int operationFreq = htonl(vec2usi(value));
 
-        // loop for all processors
-        while ((proc = opProcessorNext(modNew, proc))) {
-            if (firstRun) {
-                // Add a fetch callback to each processor
-                opProcessorFetchMonitorAdd(proc, 0x00000000, 0x0fffffff, fetchCallBack, "fetch");
-                firstRun--;
-            } else if (countQuantum % 100 == 0) {
-                char value[4]; // aux var
-                // reads the clock gating flag in the processor memory
-                opProcessorRead(proc, 0x0FFFFFA0, &value, 4, 1, True, OP_HOSTENDIAN_TARGET);
-                unsigned int operationFreq = htonl(vec2usi(value));
+                    // INSTRUCTIONS_PER_TIME_SLICE <-> 1000
+                    //              x              <-> operationFreq
+                    PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE) / 1000);
+                    // PE_freq[actual_PE] = operationFreq;
 
-                // INSTRUCTIONS_PER_TIME_SLICE <-> 1000
-                //              x              <-> operationFreq
-                PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE) / 1000);
-                // PE_freq[actual_PE] = operationFreq;
+                    // opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, operationFreq);
+                }
 
-                // opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, operationFreq);
+                // simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions
+                stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
+                if (stopReason == OP_SR_EXIT) {
+                    finishedProcessors++;
+                }
+
+                // Go to the next processor
+                actual_PE++;
             }
 
-            // simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions
-            stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
-            if (stopReason == OP_SR_EXIT) {
-                finishedProcessors++;
+            countQuantum++;
+            if (countQuantum % 100 == 0) {
+                opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum * QUANTUM_TIME_SLICE),
+                          (countQuantum * QUANTUM_TIME_SLICE * 1000)); // alzemiro modification
+                // int i;
+                // for(i=0;i<N_PES;i++){
+                //     opMessage("I", "HARNESS INFO", "PE %d - percent: %f\n",i,((float)activeFetch[i]/(float)fetch[i])*100);
+                //     activeFetch[i] = 0;
+                //     fetch[i] = 0;
+                // }
             }
 
-            // Go to the next processor
-            actual_PE++;
-        }
+            // checks if all processors has exited
+            if (finishedProcessors == N_PES) {
 
-        countQuantum++;
-        if (countQuantum % 100 == 0) {
-            opMessage("I", "HARNESS INFO", "Iniciando Quantum %d - elapsed time: %lfs / %.2lfms", countQuantum, (countQuantum * QUANTUM_TIME_SLICE),
-                      (countQuantum * QUANTUM_TIME_SLICE * 1000)); // alzemiro modification
-            // int i;
-            // for(i=0;i<N_PES;i++){
-            //     opMessage("I", "HARNESS INFO", "PE %d - percent: %f\n",i,((float)activeFetch[i]/(float)fetch[i])*100);
-            //     activeFetch[i] = 0;
-            //     fetch[i] = 0;
-            // }
-        }
+                opMessage("I", "HARNESS", "Simulation Complete (%s) e %d quantums", opStopReasonString(stopReason), countQuantum);
 
-        // checks if all processors has exited
-        if (finishedProcessors == N_PES) {
+                break; // finish simulation loop
+            }
 
-            opMessage("I", "HARNESS", "Simulation Complete (%s) e %d quantums", opStopReasonString(stopReason), countQuantum);
+            myTime += QUANTUM_TIME_SLICE;
 
-            break; // finish simulation loop
-        }
-
-        myTime += QUANTUM_TIME_SLICE;
-
-    } while (1);*/
+        } while (1);*/
 
     opRootModuleSimulate(mi);
 
