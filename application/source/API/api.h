@@ -1064,7 +1064,7 @@ int trySendTaskService(unsigned int service, unsigned int dest, unsigned int *pa
 }
 
 void sendPipe(unsigned int dest) {
-    int i, j, index, older, empty;
+    int i, j, index, older, empty = 0;
     putsv("sendPipe()", dest);
     while (empty != PIPE_SIZE) {
         older = -1;
@@ -1328,8 +1328,6 @@ void SendRaw(unsigned int addr) {
 ///////////////////////////////////////////////////////////////////
 /* Waits until every packet is transmitted */
 void FinishApplication() {
-    unsigned int done;
-    unsigned int i;
     /*do{
         done = 1; // assumes that every packet was transmitted
         for(i=0;i<PIPE_SIZE;i++){
