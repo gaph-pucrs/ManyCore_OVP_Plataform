@@ -203,7 +203,7 @@ return processorID;
 
 
     // Fetch Callback
-    /*static OP_MONITOR_FN(fetchCallBack) {
+    static OP_MONITOR_FN(fetchCallBack) {
         // get the processor id
         int processorID = getProcessorID(processor);
         fetch[processorID]++;
