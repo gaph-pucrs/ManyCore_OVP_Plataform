@@ -192,7 +192,7 @@ optModuleAttr modelAttrs = {
         processorID = ((int)processorName[3] - 48) * 10 + ((int)processorName[4] - 48);
     } else
         processorID = ((int)processorName[3] - 48);
-    /*ERROR CATCHER!*/
+    //ERROR CATCHER!
 if (processorID < 0 || processorID > N_PES) {
     opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d", processorID);
     while (1) {
@@ -200,7 +200,7 @@ if (processorID < 0 || processorID > N_PES) {
 }
 return processorID;
 }
-* /
+
 
     // Fetch Callback
     /*static OP_MONITOR_FN(fetchCallBack) {
@@ -242,7 +242,7 @@ return processorID;
         }
     }*/
 
-    int main(int argc, const char *argv[]) {
+int main(int argc, const char *argv[]) {
     /*Required to init the simulation */
     opSessionInit(OP_VERSION);
 
