@@ -1014,7 +1014,7 @@ void sendTaskService(unsigned int service, unsigned int dest, unsigned int *payl
     } else {
         addServiceAfterTX(index);
     }
-    prints("sendTaskService - Slot sent\n");
+    prints("sendTaskService1 - Slot sent\n");
     // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
@@ -1033,7 +1033,7 @@ void sendTaskService_index(unsigned int service, unsigned int dest, unsigned int
     } else {
         addServiceAfterTX(index);
     }
-    prints("sendTaskService - Slot sent\n");
+    prints("sendTaskService2 - Slot sent\n");
     // SendSlot((unsigned int)&myServicePacket[index], (0xFFFF0000 | index)); // WARNING: This may cause a problem!!!!
 }
 
@@ -1054,7 +1054,7 @@ int trySendTaskService(unsigned int service, unsigned int dest, unsigned int *pa
         } else {
             addServiceAfterTX(index);
         }
-        prints("trySendTaskService - Slot sent\n");
+        prints("trySendTaskService3 - Slot sent\n");
         return 1;
     } else {
         prints("trySendTaskService - no slot available, will send next time!\n");

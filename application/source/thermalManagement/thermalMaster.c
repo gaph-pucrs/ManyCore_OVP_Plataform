@@ -511,7 +511,7 @@ int main(int argc, char **argv) {
     // int ordem[DIM_X*DIM_Y];
 
     FILE *testcase;
-    testcase = fopen("application/scenario.yaml", "r"); 
+    testcase = fopen("application/scenario.yaml", "r");
     char line[64];
     int aux[1];
     char *app_name;
