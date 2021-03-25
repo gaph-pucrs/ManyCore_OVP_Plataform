@@ -257,7 +257,7 @@ int main(int argc, const char *argv[]) {
     optModuleP modNew = opModuleNew(mi, MODULE_DIR, MODULE_INSTANCE, 0, 0);
 
     // counts the numbers of quantums
-    int countQuantum = 0;
+    /*int countQuantum = 0;
 
     optTime myTime = QUANTUM_TIME_SLICE;
     optStopReason stopReason = OP_SR_SCHED;
@@ -281,13 +281,13 @@ int main(int argc, const char *argv[]) {
         //       the system and then executes instructions on all processors
         opRootModuleTimeAdvance(mi, myTime);
 
-        /*cont the number of processors that has exited */
+        //cont the number of processors that has exited
         int finishedProcessors = 0;
 
         // Reset the processor count
         actual_PE = 0;
 
-        /* loop for all processors */
+        // loop for all processors
         while ((proc = opProcessorNext(modNew, proc))) {
             if (firstRun) {
                 // Add a fetch callback to each processor
@@ -329,7 +329,7 @@ int main(int argc, const char *argv[]) {
             // }
         }
 
-        /* checks if all processors has exited */
+        // checks if all processors has exited
         if (finishedProcessors == N_PES) {
 
             opMessage("I", "HARNESS", "Simulation Complete (%s) e %d quantums", opStopReasonString(stopReason), countQuantum);
@@ -339,7 +339,9 @@ int main(int argc, const char *argv[]) {
 
         myTime += QUANTUM_TIME_SLICE;
 
-    } while (1);
+    } while (1);*/
+
+    opRootModuleSimulate(mi);
 
     /*Required for the end of simulation*/
     opSessionTerminate();
