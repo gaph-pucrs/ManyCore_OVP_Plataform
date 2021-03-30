@@ -125,7 +125,7 @@ int sortMaster(int state){
 
 int sort_slave(int task, int state){
 	//int task_request[2];
-	int array[ARRAY_SIZE];
+	//int array[ARRAY_SIZE];			// <---- variavel inutilizada
 	//int i;
 
 	/*task_request[0] = task;

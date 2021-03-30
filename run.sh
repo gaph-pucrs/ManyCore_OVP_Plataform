@@ -30,7 +30,7 @@ cd application
     X=$(grep -oP 'mpsoc_dimension:\s*\[\K\d' $testcase)
     Y=$(grep -oP 'mpsoc_dimension:\s*\[\d,\K\d' $testcase)
 
-    [ -z "$size" ] && :echo 'ERROR: noc_buffer_size info not found' && exit
+    [ -z "$noc_buffer_size" ] && echo 'ERROR: noc_buffer_size info not found' && exit
     [ -z "$X" ] && echo 'ERROR: X dimension info not found' && exit
     [ -z "$Y" ] && echo 'ERROR: Y dimension info not found' && exit
 

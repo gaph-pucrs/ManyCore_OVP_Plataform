@@ -1,4 +1,4 @@
-/*********************************************************************
+/********************************************************************
 * Filename:   aes_sl(n).c
 * Author:     Leonardo Rezende Juracy and Luciano L. Caimi
 * Copyleft:    
@@ -282,7 +282,7 @@ int aesMaster(int state)
 		int_aux2 = int_aux2 | decipher_msg[1+x] << 16;
 		int_aux2 = int_aux2 | decipher_msg[2+x] << 8;
 		int_aux2 = int_aux2 | decipher_msg[3+x];
-		prints( &int_aux2 );
+		printf("%d", int_aux2 );//						<---- tirei um & do int
 		int_aux2 = 0;
 	}
 //#endif 

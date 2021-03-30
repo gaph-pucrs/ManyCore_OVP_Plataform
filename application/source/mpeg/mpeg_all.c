@@ -159,7 +159,7 @@ void idct_func(type_DATA *block,int lx)
 }
 
 int mpeg_idct(int state){
-    unsigned int time_a, time_b;
+//    unsigned int time_a, time_b;             <-------------------------------- um
     int i,j;
     type_DATA block[64];
 
@@ -235,10 +235,10 @@ void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant){
 }
 
 int mpeg_iquant(int state){
-    unsigned int time_a, time_b;
+//    unsigned int time_a, time_b; <------------
   	int i,j;
 
-    type_DATA clk_count;
+//    type_DATA clk_count; <---------
     type_DATA block[64];
 
 
@@ -278,7 +278,7 @@ int mpeg_iquant(int state){
 
 
 int mpeg_ivlc(int state){
-  unsigned int time_a, time_b;
+//  unsigned int time_a, time_b; <------------
 	int i,j;
 
 	type_DATA vlc_array[128];
@@ -379,7 +379,7 @@ void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer
       val = getbits(12, 1, buffer,0);
       if ((val&2047)==0)
         return;
-      if (sign = val>=(2048))
+      if ((sign = val)>=(2048))
         val = 4096 - val;
     }
     else
@@ -488,7 +488,7 @@ unsigned int getbits (short int n, short int flush, type_DATA *buffer, short int
 
 int mpeg_print_mpeg(int state)
 {
-    unsigned int time_a, time_b;
+//    unsigned int time_a, time_b; <--------------------
     int i;
 
     prints("MPEG Task PRINT start:\n");

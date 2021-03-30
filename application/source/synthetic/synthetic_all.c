@@ -163,7 +163,7 @@ int synthetic_taskE(int state){
 }
 
 int synthetic_taskF(int state){
-	int i, j, t;
+	int i, t; 	// Tirei J daqui
 
 	prints("synthetic task F started.\n");
 

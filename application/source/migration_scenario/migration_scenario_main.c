@@ -35,6 +35,10 @@ int dijkstra_print();
 int sortMaster(int state);
 int sort_slave(int task, int state);
 
+// Aes
+int aesMaster(int state);
+int aes_slave();
+
 // AV threads
 int av_split(int state);
 int av_ivlc(int state);

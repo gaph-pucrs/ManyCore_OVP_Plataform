@@ -175,7 +175,7 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
     unsigned int tgtProc, srcProc, srcID;
     int k = QUAD_DIM_X * QUAD_DIM_Y - 1;
     unsigned int contNumberOfMigrations = 0;
-    int i, j, q;
+    int i, q;
     int src_vec[DIM_X * DIM_Y]; // = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     int srcProcs[DIM_X * DIM_Y];
@@ -511,14 +511,14 @@ int main(int argc, char **argv) {
     // int ordem[DIM_X*DIM_Y];
 
     FILE *testcase;
-    testcase = fopen("application/scenario.yaml", "r");
+    testcase = fopen("application/scenario.yaml", "r"); 
     char line[64];
     int aux[1];
-    char *app_name;
+    char *app_name = '\0';          //    <----
     char *aux_str;
-    int starting_time;
-    int executions;
-    int repeat_after;
+    int starting_time = 0;
+    int executions = 0;
+    int repeat_after = 0;
     char *task_name;
     char *task_number;
     unsigned int yaml_tasks = 0;

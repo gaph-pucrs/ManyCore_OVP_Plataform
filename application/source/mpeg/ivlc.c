@@ -405,7 +405,7 @@ void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer
       val = getbits(12, 1, buffer,0);
       if ((val&2047)==0)
         return;
-      if (sign = val>=(2048))
+      if ((sign = val)>=(2048))
         val = 4096 - val;
     }
     else

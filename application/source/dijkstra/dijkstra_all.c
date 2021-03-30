@@ -20,7 +20,7 @@ int dijkstra_divider(int state)
 
     int AdjMatrix[NUM_NODES][NUM_NODES];
 	int i, j, k, iter;
-	char buffer[70];
+//	char buffer[70];                       <----
 	k = 0;
 	
 	prints("STARTING DIVIDER\n"); 

@@ -531,7 +531,7 @@ void decode(int input)
 int av_adpcm_dec(int state) { //r 
 	int i, k;
 	int * compressed_adpcm;
-	int result[COMPRESSED_SAMPLES*2];	/* Compression factor: 2 */
+	//int result[COMPRESSED_SAMPLES*2];	/* Compression factor: 2 */ <--- uused variable
 
 	prints("ADPCM Decoder - start\n");
 
@@ -1359,7 +1359,7 @@ void ivlc_(type_DATA_av *block, short int comp, short int lx, type_DATA_av *buff
       val = getbits_av(12, 1, buffer,0);
       if ((val&2047)==0)
         return;
-      if (sign = val>=(2048))
+      if ((sign = val)>=(2048)) 		/// <---- botei parenteses 
         val = 4096 - val;
     }
     else

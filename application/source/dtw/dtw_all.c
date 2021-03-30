@@ -112,7 +112,7 @@ int dtw_bank(int state){
 int dtw_p1(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i, iter;
+	int result, i, j = 0, iter;			 // iniciei elas com 0, antes nao eram inicializadas
 
 	prints("DTW P1 Resuming!\n");
 
@@ -156,7 +156,7 @@ int dtw_p1(int state){
 int dtw_p2(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i, iter;
+	int result, i, j = 0, iter;
 
 	prints("DTW P2 Resuming!\n");
 
@@ -200,7 +200,7 @@ int dtw_p2(int state){
 int dtw_p3(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i, iter;
+	int result, i, j = 0, iter;
 
 	prints("DTW P3 Resuming!\n");
 
@@ -244,7 +244,7 @@ int dtw_p3(int state){
 int dtw_p4(int state){
 	int test[MATX_SIZE][MATX_SIZE];
 	int pattern[MATX_SIZE][MATX_SIZE];
-	int result, j, i, iter;
+	int result, j = 0, i, iter;
 
 	prints("DTW P4 Resuming!\n");
 

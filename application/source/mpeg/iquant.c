@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
-    unsigned int time_a, time_b;
+//    unsigned int time_a, time_b;       <---
 	int i,j;
 
     type_DATA clk_count;
