@@ -5,10 +5,9 @@
  *      Author: mruaro
  */
 
-#define COMPRESSED_SAMPLES	(8*2)
+#define COMPRESSED_SAMPLES (8 * 2)
 
-#define FRAMES				1000 //HeMPS 4X4 sc demora 7s para cada frame 20
-
+#define FRAMES 1000 // HeMPS 4X4 sc demora 7s para cada frame 20
 
 /*#define IVLC_exe_time		35000
 #define IVLC_deadline		40000
@@ -32,4 +31,3 @@
 #define ADPCM_DEC_deadline	40000
 
 #define AUDIO_VIDEO_PERIOD	40000*/
-

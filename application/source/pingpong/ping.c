@@ -1,16 +1,15 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "interrupt.h"
-#include "spr_defs.h"
 #include "source/API/api.h"
+#include "spr_defs.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "pingpong_config.h"
 
 message pingpong;
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     OVP_init();
     //////////////////////////////////////////////////////
     /////////////// YOUR CODE START HERE /////////////////
