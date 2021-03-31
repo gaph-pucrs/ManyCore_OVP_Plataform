@@ -6,6 +6,9 @@
 #define KILL_PROC 0x2000
 #define MSG_ACK 0x3000
 
+#define TASKS 300
+#define SORT_SLAVES 3
+
 unsigned int rand_val = LFSR_POL;
 
 unsigned int randwi() {
@@ -48,4 +51,19 @@ void quicksort(int *array, int lo, int hi) {
         quicksort(array, lo, p - 1);
         quicksort(array, p + 1, hi);
     }
+}
+
+void init_array(int *array, int size) {
+    int i;
+
+    for (i = 0; i < size; i++)
+        array[i] = size - i;
+}
+
+void print_array(int *array, int size) {
+    int i;
+    for (i = 0; i < size; i++) {
+        printi(array[i]);
+    }
+    prints("\n");
 }

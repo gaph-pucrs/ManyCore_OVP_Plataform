@@ -1,23 +1,4 @@
 
-
-#define TASKS 300
-#define SORT_SLAVES 3
-
-void init_array(int *array, int size) {
-    int i;
-
-    for (i = 0; i < size; i++)
-        array[i] = size - i;
-}
-
-void print_array(int *array, int size) {
-    int i;
-    for (i = 0; i < size; i++) {
-        printi(array[i]);
-    }
-    prints("\n");
-}
-
 int sortMaster(int state) {
     int i, j, k;
     int slave_addr[SORT_SLAVES] = {sort_slave1, sort_slave2, sort_slave3};
@@ -78,65 +59,10 @@ int sortMaster(int state) {
     return 0;
 }
 
-/*	for (i = 0; i < SORT_SLAVES; i++){
-                ReceiveMessage(&theMessage, slave_addr[i]);
-                prints("Received ");
-                printi(theMessage.size);
-                prints(" bytes\n");
-                theMessage.size = ARRAY_SIZE;
-                for (j = 0; j < ARRAY_SIZE; j++)
-                        theMessage.msg[j] = array[i][j];
-                SendMessage(&theMessage, slave_addr[i]);
-                prints("Packet sent\n");
-                task++;
-        }
-
-        for (i = 0; i < TASKS; i++){
-                ReceiveMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
-                printi(i);
-                prints(" - Received array from slave: ");
-                printi(i%SORT_SLAVES);
-                prints("\n");
-                slave_task[i%SORT_SLAVES] = task;
-                if (task == TASKS){
-                        theMessage.size = 1;
-                        theMessage.msg[0] = msg_kill;
-                        SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
-                        prints("Master Sening kill to ");
-                        printi(i%SORT_SLAVES);
-                        prints("\n");
-                }
-                else {
-                        theMessage.size = ARRAY_SIZE;
-                        for (j = 0; j < ARRAY_SIZE; j++)
-                                theMessage.msg[j] = array[i%SORT_SLAVES][j];
-                        SendMessage(&theMessage, slave_addr[i%SORT_SLAVES]);
-                        task++;
-                }
-        }
-        return 0;
-}*/
-
 int sort_slave(int task, int state) {
-    // int task_request[2];
-    // int array[ARRAY_SIZE];			// <---- variavel inutilizada
-    // int i;
-
-    /*task_request[0] = task;
-    task_request[1] = TASK_REQUEST;*/
-
     prints("sort_slave started state = ");
     printi(state);
     prints("\n");
-
-    /*Requests initial task*/
-    /*theMessage.size = 2;
-    for (i = 0; i < 2; i++)
-        theMessage.msg[i] = task_request[i];
-
-        if(state == 0){
-                SendMessage(&theMessage, sort_master);
-        }*/
 
     /* Wait for a task, execute and return result to master*/
     for (;;) {

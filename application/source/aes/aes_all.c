@@ -1,16 +1,3 @@
-/********************************************************************
- * Filename:   aes_sl(n).c
- * Author:     Leonardo Rezende Juracy and Luciano L. Caimi
- * Copyleft:
- * Disclaimer: This code is presented "as is" without any guarantees.
- * Details:
- *********************************************************************/
-
-/*************************** HEADER FILES ***************************/
-//#include "source/aes/aes.h"
-/**************************** VARIABLES *****************************/
-
-/*************************** MAIN PROGRAM ***************************/
 int aes_slave() {
     unsigned int key_schedule[60];
     int qtd_messages, op_mode, x, flag = 1, id = -1, i;
@@ -90,17 +77,6 @@ int aes_slave() {
 
     return 0;
 }
-
-/*************************** HEADER FILES ***************************/
-//#include "source/aes/aes_master.h"
-/***************************** DEFINES ******************************/
-
-/**************************** VARIABLES *****************************/
-
-// index of slaves (slave names)
-int Slave[MAX_SLAVES] = {aes_slave1, aes_slave2, aes_slave3, aes_slave4};
-
-/*************************** MAIN PROGRAM ***************************/
 
 int aesMaster(int state) {
     volatile int x, y, i, j;

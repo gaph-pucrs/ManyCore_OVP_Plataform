@@ -11,3 +11,6 @@
 #define NUMBER_OF_SLAVES 4
 // number of total slaves allocated
 #define MAX_SLAVES 4
+
+// index of slaves (slave names)
+int Slave[MAX_SLAVES] = {aes_slave1, aes_slave2, aes_slave3, aes_slave4};
