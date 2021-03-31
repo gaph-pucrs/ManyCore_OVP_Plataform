@@ -32,44 +32,13 @@ int new_task_addr[NUM_TASK];
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // dynamically added -> our "protothreads"
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// synthetic
-int synthetic_taskA(int state);
-int synthetic_taskB(int state);
-int synthetic_taskC(int state);
-int synthetic_taskD(int state);
-int synthetic_taskE(int state);
-int synthetic_taskF(int state);
-// dijkstra
-int dijkstra_divider(int state);
-int dijkstra_slave();
-int dijkstra_print();
-// sort
-int sortMaster(int state);
-int sort_slave(int task, int state);
-// aes
-int aesMaster(int state);
-int aes_slave();
-// av
-int av_split(int state);
-int av_ivlc(int state);
-int av_iquant(int state);
-int av_idct(int state);
-int av_adpcm_dec(int state);
-int av_FIR(int state);
-int av_join(int state);
-// mpeg
-int mpeg_idct(int state);
-int mpeg_iquant(int state);
-int mpeg_ivlc(int state);
-int mpeg_print_mpeg(int state);
-int mpeg_start(int state);
-// dtw
-int dtw_bank(int state);
-int dtw_p1(int state);
-int dtw_p2(int state);
-int dtw_p3(int state);
-int dtw_p4(int state);
-int dtw_recognizer(int state);
+#include "aes_all.c"
+#include "audio_video_all.c"
+#include "dijkstra_all.c"
+#include "dtw_all.c"
+#include "mpeg_all.c"
+#include "sort_all.c"
+#include "synthetic_all.c"
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // main code
