@@ -44,15 +44,15 @@ with open('scenario.yaml') as file:
 			#Check if program exists
 			if(path.exists(progPath)):
 				#Clean app file
-				for app in appPath:
+#				for app in appPath:                                                  
 					# with open(app, 'r+') as file:
 					# 	appLines = file.readlines()
 					# 	file.truncate(0) 
 
-					with open(app, 'a') as appw:
-						with open(progPath, 'r') as prog:
-							for line in prog.readlines():
-								appw.write(line)
+#					with open(app, 'a') as appw:                                  # appends all_c on applications
+#						with open(progPath, 'r') as prog:
+#							for line in prog.readlines():
+#								appw.write(line)
 
 				#Set the index to the EOF
 				with open(updatedConfigPath, 'r') as configFile:
