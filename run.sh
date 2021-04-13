@@ -5,7 +5,7 @@ scenario=$2
 
 #if  "$testcase" =~ "*.yaml"; then
 #    echo "tem .yaml" || exit
-#fi
+#fi 
 
 testcase="${testcase}.yaml"
 scenario="${scenario}.yaml"
