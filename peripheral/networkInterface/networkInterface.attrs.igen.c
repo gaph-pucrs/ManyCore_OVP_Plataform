@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2005-2019 Imperas Software Ltd., www.imperas.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -32,6 +51,8 @@ static ppmBusPort busPorts[] = {
         .name            = "MREAD",
         .type            = PPM_MASTER_PORT,
         .addrBits        = 32,
+        .addrBitsMin     = 32,
+        .addrBitsMax     = 0,
         .mustBeConnected = 0,
         .description     = 0,
     },
@@ -39,6 +60,8 @@ static ppmBusPort busPorts[] = {
         .name            = "MWRITE",
         .type            = PPM_MASTER_PORT,
         .addrBits        = 32,
+        .addrBitsMin     = 32,
+        .addrBitsMax     = 0,
         .mustBeConnected = 0,
         .description     = 0,
     },
@@ -59,13 +82,15 @@ static ppmNetPort netPorts[] = {
         .name            = "INT_NI_TX",
         .type            = PPM_OUTPUT_PORT,
         .mustBeConnected = 0,
-        .description     = "NI TX Interrupt Request"
+        .description     = "NI TX Interrupt Request",
+        .handlePtr       = &handles.INT_NI_TX,
     },
     {
         .name            = "INT_NI_RX",
         .type            = PPM_OUTPUT_PORT,
         .mustBeConnected = 0,
-        .description     = "NI RX Interrupt Request"
+        .description     = "NI RX Interrupt Request",
+        .handlePtr       = &handles.INT_NI_RX,
     },
     { 0 }
 };
@@ -76,7 +101,7 @@ static PPM_NET_PORT_FN(nextNetPort) {
     } else {
         netPort++;
     }
-    return netPort->name ? netPort : 0;
+    return (netPort && netPort->name) ? netPort : 0;
 }
 
 
@@ -129,6 +154,8 @@ ppmModelAttr modelAttrs = {
 
     .saveCB        = peripheralSaveState,
     .restoreCB     = peripheralRestoreState,
+
+    .docCB         = installDocs,
 
     .vlnv          = {
         .vendor  = "gaph",
