@@ -4,8 +4,9 @@ testcase=$1 # gets the
 scenario=$2
 testcase="${testcase}.yaml"
 scenario="${scenario}.yaml"
-
-echo "Starting..."
+echo "> Starting..."
+echo "=========================================================="
+echo "=========================================================="
 echo " ▄████▄  ██░ ██ ██▀███  ▒█████  ███▄    █ ▒█████   ██████ "
 echo "▒██▀ ▀█ ▓██░ ██▓██ ▒ ██▒██▒  ██▒██ ▀█   █▒██▒  ██▒██    ▒ "
 echo "▒▓█    ▄▒██▀▀██▓██ ░▄█ ▒██░  ██▓██  ▀█ ██▒██░  ██░ ▓██▄   "
@@ -15,6 +16,10 @@ echo "░ ░▒ ▒  ░▒ ░░▒░░ ▒▓ ░▒▓░ ▒░▒░▒
 echo "░  ▒   ▒ ░▒░ ░ ░▒ ░ ▒░ ░ ▒ ▒░░ ░░   ░ ▒░ ░ ▒ ▒░░ ░▒  ░ ░  "
 echo "░        ░  ░░ ░ ░░   ░░ ░ ░ ▒    ░   ░ ░░ ░ ░ ▒ ░  ░  ░  "
 echo "░ ░      ░  ░  ░  ░        ░ ░          ░    ░ ░       ░  "
+echo "                                            PUCRS - Brazil"
+echo "Contact: fernando.moraes@pucrs.br                         "
+echo "=========================================================="
+echo "=========================================================="
 
 ##################################################################
 #   reads testcase + scenario and get dimensions & buffer size   #
@@ -41,7 +46,7 @@ cd application
     [ -z "$X" ] && echo 'ERROR: X dimension info not found' && exit
     [ -z "$Y" ] && echo 'ERROR: Y dimension info not found' && exit
     echo "The simulated system will have ${X}x${Y} processors"
-
+    
 #   this line changes the scenario file name on Python, using the line number (15)!!
     sed -i "15s/.*/with open('$scenario') as file:/" applicationMapping.py
     cd source 
@@ -62,10 +67,10 @@ cd ..
 
 echo "> Running the applicationGenerator script..."
 cd application
-    ./applicationGenerator.sh $X $Y
+    ./applicationGenerator.sh $X $Y $scenario
 cd ..
 
-echo "> Creating the peripherals..."
+echo "> Creating peripherals..."
 cd peripheral
     cd whnoc_dma
         sed -i 's/#define DIM_X.*/#define DIM_X '$X'/' noc.h
@@ -141,7 +146,7 @@ done
 	echo "\$*" >> ovp_compiler.sh
         #echo "     --verbose " >> ovp_compiler.sh
 
-echo "Starting the OVP Compiler..."
+echo "> Starting the OVP Compiler..."
 chmod +x ovp_compiler.sh
 ./ovp_compiler.sh
 

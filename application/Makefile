@@ -11,8 +11,8 @@ ifeq ($($(CROSS)_CC),)
     IMPERAS_ERROR := $(error "Please install the toolchain to support $(CROSS) ")
 endif
 
-#OPTIMISATION=-O0
-OPTIMISATION?=-O2
+#OPTIMIZATION=-O0
+OPTIMIZATION?=-O2
 
 SRC = $(sort $(wildcard *.c))
 EXE = $(patsubst %.c,%.$(CROSS).elf,$(SRC))
@@ -25,7 +25,7 @@ all: $(EXE)
 
 %.o: %.c
 	$(V)  echo "# Compiling $<"
-	$(V)  $(IMPERAS_CC) -g  -c -Wall -o $@ $< $(OPTIMISATION)
+	$(V)  $(IMPERAS_CC) -g  -c -Wall -o $@ $< $(OPTIMIZATION)
 
 clean:
 	-rm -f *.elf *.o 
