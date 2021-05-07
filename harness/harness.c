@@ -14,7 +14,7 @@
 #define MODULE_NAME "top"
 #define MODULE_DIR "module"
 #define MODULE_INSTANCE "u2"
-#define N_PES 9
+#define N_PES 16
 #define bswap_constant_32(x) ((((x)&0xff000000) >> 24) | (((x)&0x00ff0000) >> 8) | (((x)&0x0000ff00) << 8) | (((x)&0x000000ff) << 24))
 /* Quantum defines */
 #define INSTRUCTIONS_PER_SECOND 250000000.0                                         // 1GHz (assuming 1 instruction per cycle)
@@ -53,85 +53,53 @@ char multDivInstructions[][12] = {"l.div", "l.divu", "l.mac", "l.maci", "l.macrc
 char weirdInstructions[][12] = {"l.csync", "l.cust1", "l.cust2", "l.cust3", "l.cust4", "l.cust5", "l.cust6", "l.cust7", "l.cust8", "l.msync", "l.psync", "l.rfe", "l.sys", "l.trap", "EndList@"};
 
 unsigned int getInstructionType(char *instruction) {
-	int i = 0;
-	while (strcmp(branchInstructions[i], "EndList@") != 0) {  // Branch type
-		if (strcmp(branchInstructions[i], instruction) == 0) {
+	// WARNING: IF THE PE ISA CHANGE THEN YOU NEED TO REBUILT THIS SWITCH TO CLASSIFY EVERY NEW INSTRUCTION!!!
+	switch(instruction[2]){
+		case 'b':
 			return BRANCH;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(arithInstructions[i], "EndList@") != 0) {  // Arith type
-		if (strcmp(arithInstructions[i], instruction) == 0) {
-			return ARITH;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(jumpInstructions[i], "EndList@") != 0) {  // Jump type
-		if (strcmp(jumpInstructions[i], instruction) == 0) {
+		case 'j':
 			return JUMP;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(moveInstructions[i], "EndList@") != 0) {  // Move type
-		if (strcmp(moveInstructions[i], instruction) == 0) {
-			return MOVE;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(loadInstructions[i], "EndList@") != 0) {  // Load type
-		if (strcmp(loadInstructions[i], instruction) == 0) {
+		case 'l':
 			return LOAD;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(storeInstructions[i], "EndList@") != 0) {  // Store type
-		if (strcmp(storeInstructions[i], instruction) == 0) {
-			return STORE;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(shiftInstructions[i], "EndList@") != 0) {  // Shift type
-		if (strcmp(shiftInstructions[i], instruction) == 0) {
-			return SHIFT;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(nopInstructions[i], "EndList@") != 0) {  // NOP type
-		if (strcmp(nopInstructions[i], instruction) == 0) {
+		case 'n':
 			return NOP;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(logicalInstructions[i], "EndList@") != 0) {  // Logical type
-		if (strcmp(logicalInstructions[i], instruction) == 0) {
+		case 'e':
+			return MOVE;
+		case 'f':
 			return LOGICAL;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(multDivInstructions[i], "EndList@") != 0) {  // Multiplication and Division type
-		if (strcmp(multDivInstructions[i], instruction) == 0) {
-			return MULTDIV;
-		}
-		i++;
-	}
-	i = 0;
-	while (strcmp(weirdInstructions[i], "EndList@") != 0) {  // Weird stuff type
-		if (strcmp(weirdInstructions[i], instruction) == 0) {
+		case 'o':
+			return LOGICAL;
+		case 'x':
+			return LOGICAL;
+		case 'd':
+			return MULTDIV;      
+		case 'p':
 			return WEIRD;
-		}
-		i++;
-	}
-	while (1) {
-		opMessage("I", "FETCH", "Instrucao nao encontrada! %s", instruction);
+		case 't':
+			return WEIRD;
+		case 'c':
+			if( instruction[3] == 'm' ) return MOVE;
+			return WEIRD;
+		case 'r':
+			if( instruction[3] == 'o' ) return SHIFT;
+			return WEIRD;
+		case 'a':
+			if( instruction[3] == 'n' ) return LOGICAL;
+			return ARITH;
+		case 'm':
+			if( instruction[3] == 's' && instruction[4] == 'y' ) return WEIRD;
+			if( instruction[3] == 'f' || instruction[3] == 'o' || instruction[3] == 't' ) return MOVE;
+			return MULTDIV;
+		case 's':
+			if( instruction[3] == 'l' || instruction[3] == 'r' ) return SHIFT;
+			if( instruction[3] == 'u' || instruction[3] == 'f' ) return ARITH;
+			if( instruction[3] == 'y' ) return WEIRD;
+			return STORE;
+		default:
+			opMessage("I", "FETCH", "Instrucao nao encontrada! %s", instruction);
+			while(1){
+				//opMessage("I", "FETCH", "Instrucao nao encontrada! %s", instruction);
+			}
 	}
 }
 
@@ -193,7 +161,7 @@ int getProcessorID(optProcessorP processor) {
 		processorID = ((int)processorName[3] - 48);
 	/*ERROR CATCHER!*/
 	if (processorID < 0 || processorID > N_PES) {
-		opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro! %d", processorID);
+		opMessage("I", "FETCH CALLBACK", "~~~~> Ocorreu um erro em: getProcessorID() %d", processorID);
 		while (1) {
 		}
 	}
@@ -266,10 +234,11 @@ int main(int argc, const char *argv[]) {
 	// must advance to next phase for the API calls that follow
 	opRootModulePreSimulate(mi);
 
-	int actual_PE = 0;
+	int runningPE = 0;
 
-	for (actual_PE = 0; actual_PE < N_PES; actual_PE++) {
-		PE_freq[actual_PE] = 1000;
+	// Defines the frequency of each processor to 1GHz
+	for (runningPE = 0; runningPE < N_PES; runningPE++) {
+		PE_freq[runningPE] = 1000;
 	}
 
 	// flag to add the callbacks during the first quantum
@@ -281,11 +250,11 @@ int main(int argc, const char *argv[]) {
 		//       the system and then executes instructions on all processors
 		opRootModuleTimeAdvance(mi, myTime);
 
-		/*cont the number of processors that has exited */
+		// cont the number of processors that has exited
 		int finishedProcessors = 0;
 
 		// Reset the processor count
-		actual_PE = 0;
+		runningPE = 0;
 
 		/* loop for all processors */
 		while ((proc = opProcessorNext(modNew, proc))) {
@@ -301,20 +270,20 @@ int main(int argc, const char *argv[]) {
 
 				// INSTRUCTIONS_PER_TIME_SLICE <-> 1000
 				//              x              <-> operationFreq
-				PE_freq[actual_PE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE) / 1000);
-				// PE_freq[actual_PE] = operationFreq;
+				PE_freq[runningPE] = (int)((operationFreq * INSTRUCTIONS_PER_TIME_SLICE) / 1000);
+				// PE_freq[runningPE] = operationFreq;
 
-				// opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", actual_PE, operationFreq);
+				// opMessage("I", "HARNESS INFO", "PE %d running at %d MHz", runningPE, operationFreq);
 			}
 
 			// simulate  processor for INSTRUCTIONS PER_TIME_SLICE instructions
-			stopReason = opProcessorSimulate(proc, PE_freq[actual_PE]);
+			stopReason = opProcessorSimulate(proc, PE_freq[runningPE]);
 			if (stopReason == OP_SR_EXIT) {
 				finishedProcessors++;
 			}
 
 			// Go to the next processor
-			actual_PE++;
+			runningPE++;
 		}
 
 		countQuantum++;

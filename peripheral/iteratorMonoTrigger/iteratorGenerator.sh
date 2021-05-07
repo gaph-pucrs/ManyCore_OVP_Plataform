@@ -9,7 +9,6 @@ N=$(($N-1))
 
 # Removes the old .tcl
 rm -rf iteratorMonoTrigger.tcl
-#rm -rf iteratorMonoTrigger.c
 
 # Creating the new iterator.tcl
 echo "imodelnewperipheral -name iteratorMonoTrigger \\" >> iteratorMonoTrigger.tcl
@@ -25,13 +24,7 @@ echo "" >> iteratorMonoTrigger.tcl
 echo "#########################################" >> iteratorMonoTrigger.tcl
 echo "## A slave port on the processor bus" >> iteratorMonoTrigger.tcl
 echo "#########################################" >> iteratorMonoTrigger.tcl
-echo "imodeladdbusslaveport -name iteratorReg -size 4 -mustbeconnected" >> iteratorMonoTrigger.tcl
-echo "" >> iteratorMonoTrigger.tcl
-echo "# Address block for 8 bit control registers" >> iteratorMonoTrigger.tcl
-echo "imodeladdaddressblock -name ab8 -port iteratorReg -offset 0x0 -width 32 -size 4" >> iteratorMonoTrigger.tcl
-echo "" >> iteratorMonoTrigger.tcl
-echo "# 8 bit control registers" >> iteratorMonoTrigger.tcl
-echo "imodeladdmmregister -addressblock iteratorReg/ab8 -name iterationPort -readfunction iterateRead -writefunction iterateWrite -offset 0" >> iteratorMonoTrigger.tcl
+
 echo "" >> iteratorMonoTrigger.tcl
 echo "" >> iteratorMonoTrigger.tcl
 echo "#############################################" >> iteratorMonoTrigger.tcl
@@ -64,8 +57,6 @@ echo "" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "#include \"iteratorMonoTrigger.igen.h\"" >> iteratorMonoTrigger.igen.c
 echo "/////////////////////////////// Port Declarations //////////////////////////////" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "iteratorReg_ab8_dataT iteratorReg_ab8_data;" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "handlesT handles;" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
@@ -110,44 +101,9 @@ echo "" >> iteratorMonoTrigger.igen.c
 echo "static void setDiagLevel(Uns32 new) {" >> iteratorMonoTrigger.igen.c
 echo "    diagnosticLevel = new;" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "///////////////////////////// MMR Generic callbacks ////////////////////////////" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "static PPM_VIEW_CB(view32) {  *(Uns32*)data = *(Uns32*)user; }" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "//////////////////////////////// Bus Slave Ports ///////////////////////////////" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "static void installSlavePorts(void) {" >> iteratorMonoTrigger.igen.c
-echo "    handles.iteratorReg = ppmCreateSlaveBusPort(\"iteratorReg\", 4);" >> iteratorMonoTrigger.igen.c
-echo "    if (!handles.iteratorReg) {" >> iteratorMonoTrigger.igen.c
-echo "        bhmMessage(\"E\", \"PPM_SPNC\", \"Could not connect port 'iteratorReg'\");" >> iteratorMonoTrigger.igen.c
-echo "    }" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "//////////////////////////// Memory mapped registers ///////////////////////////" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "static void installRegisters(void) {" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "    ppmCreateRegister(\"ab8_iterationPort\"," >> iteratorMonoTrigger.igen.c
-echo "        0," >> iteratorMonoTrigger.igen.c
-echo "        handles.iteratorReg," >> iteratorMonoTrigger.igen.c
-echo "        0," >> iteratorMonoTrigger.igen.c
-echo "        4," >> iteratorMonoTrigger.igen.c
-echo "        iterateRead," >> iteratorMonoTrigger.igen.c
-echo "        iterateWrite," >> iteratorMonoTrigger.igen.c
-echo "        view32," >> iteratorMonoTrigger.igen.c
-echo "        &(iteratorReg_ab8_data.iterationPort.value)," >> iteratorMonoTrigger.igen.c
-echo "        True" >> iteratorMonoTrigger.igen.c
-echo "    );" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
-echo "}" >> iteratorMonoTrigger.igen.c
-echo "" >> iteratorMonoTrigger.igen.c
 echo "////////////////////////////////// Constructor /////////////////////////////////" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "PPM_CONSTRUCTOR_CB(periphConstructor) {" >> iteratorMonoTrigger.igen.c
-echo "    installSlavePorts();" >> iteratorMonoTrigger.igen.c
-echo "    installRegisters();" >> iteratorMonoTrigger.igen.c
 echo "}" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c
 echo "" >> iteratorMonoTrigger.igen.c

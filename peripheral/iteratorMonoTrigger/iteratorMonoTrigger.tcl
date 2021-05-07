@@ -11,13 +11,6 @@ iadddocumentation -name Description \
 #########################################
 ## A slave port on the processor bus
 #########################################
-imodeladdbusslaveport -name iteratorReg -size 4 -mustbeconnected
-
-# Address block for 8 bit control registers
-imodeladdaddressblock -name ab8 -port iteratorReg -offset 0x0 -width 32 -size 4
-
-# 8 bit control registers
-imodeladdmmregister -addressblock iteratorReg/ab8 -name iterationPort -readfunction iterateRead -writefunction iterateWrite -offset 0
 
 
 #############################################
@@ -75,5 +68,47 @@ imodeladdpacketnetport  \
       -name iterationPort8 \
       -maxbytes 8 \
       -updatefunction iteration8 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort9 \
+      -maxbytes 8 \
+      -updatefunction iteration9 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort10 \
+      -maxbytes 8 \
+      -updatefunction iteration10 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort11 \
+      -maxbytes 8 \
+      -updatefunction iteration11 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort12 \
+      -maxbytes 8 \
+      -updatefunction iteration12 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort13 \
+      -maxbytes 8 \
+      -updatefunction iteration13 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort14 \
+      -maxbytes 8 \
+      -updatefunction iteration14 \
+      -updatefunctionargument 0x00
+
+imodeladdpacketnetport  \
+      -name iterationPort15 \
+      -maxbytes 8 \
+      -updatefunction iteration15 \
       -updatefunctionargument 0x00
 

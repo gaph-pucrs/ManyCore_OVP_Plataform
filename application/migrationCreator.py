@@ -21,7 +21,11 @@ def insertApps(string, fileTipe):
             break
     j = 0
     for i in range(starts, starts+len(dynamic_app_names)):  # insert the new include  files
-        str = '#include "' + dynamic_app_names[j] + fileTipe
+        if fileTipe == '_all.c"\n':
+            str = '#include "source/' + dynamic_app_names[j] + '/' + dynamic_app_names[j] + fileTipe    
+        else:
+            str = '#include "' + dynamic_app_names[j] + fileTipe
+        
         if i < ends:
             lines[i] = str
         else:

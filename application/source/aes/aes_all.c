@@ -1,3 +1,6 @@
+// index of slaves (slave names)
+int Slave[MAX_SLAVES] = {aes_slave1, aes_slave2, aes_slave3, aes_slave4};
+
 int aes_slave() {
     unsigned int key_schedule[60];
     int qtd_messages, op_mode, x, flag = 1, id = -1, i;

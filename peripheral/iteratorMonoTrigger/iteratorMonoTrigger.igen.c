@@ -10,8 +10,6 @@
 #include "iteratorMonoTrigger.igen.h"
 /////////////////////////////// Port Declarations //////////////////////////////
 
-iteratorReg_ab8_dataT iteratorReg_ab8_data;
-
 handlesT handles;
 
 // Iteration counter
@@ -45,6 +43,20 @@ void runIterations(){
         ppmPacketnetWrite(handles.iterationPort7, &iteration, sizeof(iteration));
         iteration = iterationN;
         ppmPacketnetWrite(handles.iterationPort8, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort9, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort10, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort11, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort12, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort13, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort14, &iteration, sizeof(iteration));
+        iteration = iterationN;
+        ppmPacketnetWrite(handles.iterationPort15, &iteration, sizeof(iteration));
         i++;
         if(tryAgain == 0 && activity == 0){
             activity++; 
@@ -68,44 +80,9 @@ Uns32 diagnosticLevel;
 static void setDiagLevel(Uns32 new) {
     diagnosticLevel = new;
 }
-
-///////////////////////////// MMR Generic callbacks ////////////////////////////
-
-static PPM_VIEW_CB(view32) {  *(Uns32*)data = *(Uns32*)user; }
-
-//////////////////////////////// Bus Slave Ports ///////////////////////////////
-
-static void installSlavePorts(void) {
-    handles.iteratorReg = ppmCreateSlaveBusPort("iteratorReg", 4);
-    if (!handles.iteratorReg) {
-        bhmMessage("E", "PPM_SPNC", "Could not connect port 'iteratorReg'");
-    }
-
-}
-
-//////////////////////////// Memory mapped registers ///////////////////////////
-
-static void installRegisters(void) {
-
-    ppmCreateRegister("ab8_iterationPort",
-        0,
-        handles.iteratorReg,
-        0,
-        4,
-        iterateRead,
-        iterateWrite,
-        view32,
-        &(iteratorReg_ab8_data.iterationPort.value),
-        True
-    );
-
-}
-
 ////////////////////////////////// Constructor /////////////////////////////////
 
 PPM_CONSTRUCTOR_CB(periphConstructor) {
-    installSlavePorts();
-    installRegisters();
 }
 
 
@@ -180,6 +157,55 @@ PPM_PACKETNET_CB(iteration7) {
  }
 
 PPM_PACKETNET_CB(iteration8) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration9) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration10) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration11) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration12) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration13) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration14) {
+    unsigned int act = *(unsigned int *)data;
+    if(act > 0){
+        activity++;
+    }
+ }
+
+PPM_PACKETNET_CB(iteration15) {
     unsigned int act = *(unsigned int *)data;
     if(act > 0){
         activity++;

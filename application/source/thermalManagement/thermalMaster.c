@@ -7,21 +7,27 @@
 #include "spr_defs.h"
 #include "thermalManagement_config.h"
 
+typedef struct {
+    unsigned int Power[DIM_X * DIM_Y];
+    unsigned int Temperature[DIM_X * DIM_Y];
+    unsigned int Frequency[DIM_X * DIM_Y];
+} systemInfo;
+
+systemInfo systemStatus;
+
+typedef struct{
+    // PID control variables
+    unsigned int derivative[DIM_Y * DIM_X];
+    unsigned int integral[DIM_Y * DIM_X];
+    unsigned int integral_prev[INT_WINDOW][DIM_Y * DIM_X];
+    unsigned int Temperature_prev[DIM_Y * DIM_X];
+    unsigned int control_signal[DIM_Y * DIM_X];
+} PIDinfo;
+
+PIDinfo pidStatus;
+
 message theMsg;
 message theMsg2;
-
-unsigned int toPeriph[(DIM_X * DIM_Y) + 2 + 3 + 1];
-
-unsigned int Power[DIM_X * DIM_Y];
-unsigned int Temperature[DIM_X * DIM_Y];
-unsigned int Frequency[DIM_X * DIM_Y];
-
-// PID control variables
-unsigned int derivative[DIM_Y * DIM_X];
-unsigned int integral[DIM_Y * DIM_X];
-unsigned int integral_prev[INT_WINDOW][DIM_Y * DIM_X];
-unsigned int Temperature_prev[DIM_Y * DIM_X];
-unsigned int control_signal[DIM_Y * DIM_X];
 
 unsigned int spiralMatrix[QUAD_DIM_X * QUAD_DIM_Y];
 unsigned int tempMatrix[QUAD_NUM][QUAD_DIM_X * QUAD_DIM_Y];
@@ -33,21 +39,21 @@ void generateSpiralMatrix() {
     int i, cont = 0, k = 0, l = 0, m = QUAD_DIM_X, n = QUAD_DIM_Y;
 
     while (k < m && l < n) {
-        /* Print the first row from the remaining rows */
+        // Print the first row from the remaining rows
         for (i = l; i < n; ++i) {
             spiralMatrix[cont] = (k << 8) | i;
             cont++;
         }
         k++;
 
-        /* Print the last column from the remaining columns */
+        // Print the last column from the remaining columns 
         for (i = k; i < m; ++i) {
             spiralMatrix[cont] = (i << 8) | (n - 1);
             cont++;
         }
         n--;
 
-        /* Print the last row from the remaining rows */
+        // Print the last row from the remaining rows 
         if (k < m) {
             for (i = n - 1; i >= l; --i) {
                 spiralMatrix[cont] = ((m - 1) << 8) | i;
@@ -56,7 +62,7 @@ void generateSpiralMatrix() {
             m--;
         }
 
-        /* Print the first column from the remaining columns */
+        // Print the first column from the remaining columns 
         if (l < n) {
             for (i = m - 1; i >= k; --i) {
                 spiralMatrix[cont] = (i << 8) | l;
@@ -69,7 +75,6 @@ void generateSpiralMatrix() {
 
 void generatePatternMatrix(int n) {
     int i;
-    putsv("entrou aqui ", n);
     if (n == 16) {
         int matrix[16] = {0, 11, 9, 1, 3, 6, 4, 12, 14, 7, 2, 5, 8, 13, 10, 15};
         for (i = 0; i < 16; i++)
@@ -91,9 +96,6 @@ void generateTempMatrix(unsigned int temp[DIM_X * DIM_Y], int quad, int xi, int 
     int index;
 
     memcpy(ordered_temp, temp, DIM_X * DIM_Y * 4);
-    /*for(i=0;i<DIM_X*DIM_Y; i++){
-        ordered_temp[i] = temp[i];
-    }*/
 
     proc_address[0] = 0;
 
@@ -227,14 +229,14 @@ int temperature_migration(unsigned int temp[DIM_X * DIM_Y], unsigned int tasks_t
             }
             k = QUAD_DIM_X * QUAD_DIM_Y - 1;
         }
-        if (temp[i] > 35515 && Frequency[i] == 1000) {
+        if (temp[i] > 35515 && systemStatus.Frequency[i] == 1000) {
             putsv("BAIXANDO A FREQUENCIA DE ", srcProc);
-            Frequency[i] = 677;
-            setDVFS(srcProc, Frequency[i]);
-        } else if (temp[i] < 35515 && Frequency[i] == 677) {
+            systemStatus.Frequency[i] = 677;
+            setDVFS(srcProc, systemStatus.Frequency[i]);
+        } else if (temp[i] < 35515 && systemStatus.Frequency[i] == 677) {
             putsv("SUBINDO A FREQUENCIA DE ", srcProc);
-            Frequency[i] = 1000;
-            setDVFS(srcProc, Frequency[i]);
+            systemStatus.Frequency[i] = 1000;
+            setDVFS(srcProc, systemStatus.Frequency[i]);
         }
     }
     if (contNumberOfMigrations > 0) {
@@ -317,7 +319,7 @@ int getQuadTemp(int xi, int yi) {
     for (y = yi; y < yi + QUAD_DIM_Y; y++) {
         for (x = xi; x < xi + QUAD_DIM_X; x++) {
             index = x + y * DIM_X;
-            sum = sum + Temperature[index];
+            sum = sum + systemStatus.Temperature[index];
         }
     }
 
@@ -508,13 +510,12 @@ int main(int argc, char **argv) {
     /////////////// YOUR CODE START HERE /////////////////
     //////////////////////////////////////////////////////
     int y, x, p_idx = 0;
-    // int ordem[DIM_X*DIM_Y];
 
     FILE *testcase;
     testcase = fopen("application/scenario.yaml", "r"); 
     char line[64];
     int aux[1];
-    char *app_name = '\0';          //    <----
+    char *app_name = '\0';
     char *aux_str;
     int starting_time = 0;
     int executions = 0;
@@ -532,7 +533,6 @@ int main(int argc, char **argv) {
     int finishSimulation;
     int i, j;
     unsigned int nextMigration = 20;
-    // int totalTasks, finishedTasks, progresso;
 
     // Initialization of application register file
     FILE *log;
@@ -548,9 +548,9 @@ int main(int argc, char **argv) {
     generateSpiralMatrix();
 
     spiralMatrixOffset(tempMatrix[0], 0, 0);
-    spiralMatrixOffset(tempMatrix[1], 4, 0);
-    spiralMatrixOffset(tempMatrix[2], 0, 4);
-    spiralMatrixOffset(tempMatrix[3], 4, 4);
+    spiralMatrixOffset(tempMatrix[1], QUAD_DIM_X, 0);
+    spiralMatrixOffset(tempMatrix[2], 0, QUAD_DIM_Y);
+    spiralMatrixOffset(tempMatrix[3], QUAD_DIM_X, QUAD_DIM_Y);
 
     for (i = 0; i < QUAD_NUM; i++) {
         for (y = 0; y < QUAD_DIM_Y; y++) {
@@ -564,11 +564,11 @@ int main(int argc, char **argv) {
 
     for (y = 0; y < DIM_Y; y++) {
         for (x = 0; x < DIM_X; x++) {
-            Power[p_idx] = 0;
-            Frequency[p_idx] = 1000;
-            Temperature[p_idx] = TAMB;
-            integral[p_idx] = 0;
-            Temperature_prev[p_idx] = 0;
+            systemStatus.Power[p_idx] = 0;
+            systemStatus.Frequency[p_idx] = 1000;
+            systemStatus.Temperature[p_idx] = TAMB;
+            pidStatus.integral[p_idx] = 0;
+            pidStatus.Temperature_prev[p_idx] = 0;
             appQuadrant[p_idx] = -1;
             app_startTime[p_idx] = 0;
             task_applicationID[p_idx] = 0xFFFFFFFF;
@@ -676,7 +676,7 @@ int main(int argc, char **argv) {
             for (i = 0; i < DIM_X * DIM_Y; i++) {
                 // printi(deliveredMessage->msg[i]);
                 printi(executedInstPacket2[i]);
-                Temperature[i] = executedInstPacket2[i]; // deliveredMessage->msg[i];
+                systemStatus.Temperature[i] = executedInstPacket2[i]; // deliveredMessage->msg[i];
             }
             prints("\n");
 
@@ -686,30 +686,30 @@ int main(int argc, char **argv) {
             prints("\nGenerating TempMatrix\n");
             for (i = 0; i < DIM_X * DIM_Y; i++) {
                 if (measuredWindows >= INT_WINDOW)
-                    integral[i] = integral[i] - integral_prev[measuredWindows % INT_WINDOW][i];
+                    pidStatus.integral[i] = pidStatus.integral[i] - pidStatus.integral_prev[measuredWindows % INT_WINDOW][i];
 
-                integral_prev[measuredWindows % INT_WINDOW][i] = Temperature[i];
+                pidStatus.integral_prev[measuredWindows % INT_WINDOW][i] = systemStatus.Temperature[i];
 
                 // if (measuredWindows != 0) energy_i[i] = getEnergySlaveAcc_total(i)/measuredWindows;
-                derivative[i] = Temperature[i] - Temperature_prev[i];
-                integral[i] = integral[i] + Temperature[i];
-                control_signal[i] = KP * Temperature[i] + KI * integral[i] / INT_WINDOW + KD * derivative[i];
-                Temperature_prev[i] = Temperature[i];
+                pidStatus.derivative[i] = systemStatus.Temperature[i] - pidStatus.Temperature_prev[i];
+                pidStatus.integral[i] = pidStatus.integral[i] + systemStatus.Temperature[i];
+                pidStatus.control_signal[i] = KP * systemStatus.Temperature[i] + KI * pidStatus.integral[i] / INT_WINDOW + KD * pidStatus.derivative[i];
+                pidStatus.Temperature_prev[i] = systemStatus.Temperature[i];
 
                 // putsv("proc ", i);
                 // putsv("energy ", energy_i[i]);
                 // putsv("control_signal ", control_signal[i]);
             }
 
-            generateTempMatrix(control_signal, 0, 0, 0);
-            generateTempMatrix(control_signal, 1, 4, 0);
-            generateTempMatrix(control_signal, 2, 0, 4);
-            generateTempMatrix(control_signal, 3, 4, 4);
+            generateTempMatrix(pidStatus.control_signal, 0, 0, 0);
+            generateTempMatrix(pidStatus.control_signal, 1, 4, 0);
+            generateTempMatrix(pidStatus.control_signal, 2, 0, 4);
+            generateTempMatrix(pidStatus.control_signal, 3, 4, 4);
 
             if (measuredWindows >= nextMigration) {
                 nextMigration += 20;
                 prints("Starting thermal actuation analysis\n");
-                temperature_migration(Temperature, tasks_to_map, task_addr);
+                temperature_migration(systemStatus.Temperature, tasks_to_map, task_addr);
                 // for(i = 0; i < tasks_to_map; i++)
                 //     sendTaskService(TASK_MIGRATION_SRC, task_addr[i], task_addr, tasks_to_map);
 

@@ -10,8 +10,8 @@
 #define KD 10
 #define INT_WINDOW 10
 #define TAMB 31815
-#define QUAD_DIM_X 4
-#define QUAD_DIM_Y 4
+#define QUAD_DIM_X DIM_X/2
+#define QUAD_DIM_Y DIM_Y/2
 #define QUAD_NUM 4
 //////////////////////////////////////
 // Tasks addresses ///////////////////

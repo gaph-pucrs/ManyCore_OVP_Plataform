@@ -135,3 +135,11 @@ case aes_slave4:
 state = aes_slave();
 break;
 //=================
+//PRODCONS
+case producer:
+state = prodcons_producer(state);
+break;
+case consumer:
+state = prodcons_consumer(state);
+break;
+//=================

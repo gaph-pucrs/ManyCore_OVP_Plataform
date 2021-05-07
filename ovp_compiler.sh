@@ -9,8 +9,6 @@ cd ..
 checkinstall.exe -p install.pkg --nobanner || exit
 CROSS=OR1K
 make -C application CROSS=${CROSS}
-make -C application/source/applicationIterator CROSS=${CROSS}
-make -C module
 make -C peripheral/whnoc_dma NOVLNV=1
 make -C peripheral/synchronizer NOVLNV=1
 make -C peripheral/iteratorMonoTrigger NOVLNV=1
@@ -18,6 +16,7 @@ make -C peripheral/networkInterface NOVLNV=1
 make -C peripheral/timer NOVLNV=1
 make -C peripheral/printer NOVLNV=1
 make -C peripheral/tea NOVLNV=1
+make -C module
 make -C harness
 harness/harness.${IMPERAS_ARCH}.exe \
 --override dictsize=512\
@@ -30,5 +29,11 @@ harness/harness.${IMPERAS_ARCH}.exe \
      --program cpu6=application/application6.${CROSS}.elf $* \
      --program cpu7=application/application7.${CROSS}.elf $* \
      --program cpu8=application/application8.${CROSS}.elf $* \
-     --program cpuIterator=application/source/applicationIterator/applicationIterator.${CROSS}.elf $* --imperasintercepts --parallel --parallelmax \
+     --program cpu9=application/application9.${CROSS}.elf $* \
+     --program cpu10=application/application10.${CROSS}.elf $* \
+     --program cpu11=application/application11.${CROSS}.elf $* \
+     --program cpu12=application/application12.${CROSS}.elf $* \
+     --program cpu13=application/application13.${CROSS}.elf $* \
+     --program cpu14=application/application14.${CROSS}.elf $* \
+     --program cpu15=application/application15.${CROSS}.elf $* --imperasintercepts --parallel --parallelmax  \
 $*

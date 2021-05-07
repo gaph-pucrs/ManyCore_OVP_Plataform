@@ -280,6 +280,81 @@ void iquant_func(type_DATA *src, int lx, int dc_prec, int mquant) {
 // ************************************************************************************
 // * IVLC Function
 // ************************************************************************************
+unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init) {
+    short int i = 0;
+    short int temp = 0;
+    int temp2 = 0;
+    short int tmp_bytecnt = bytecount;
+    short int tmp_bitpstn = bitposition;
+    unsigned char tmp_mask = mask;
+
+    if (init == 0) {
+        for (i = 0; i < n; i++) {
+            temp = (buffer[tmp_bytecnt] & tmp_mask) >> tmp_bitpstn;
+            temp2 <<= 1;
+            temp2 += temp;
+            tmp_mask >>= 1;
+            tmp_bitpstn -= 1;
+            if (tmp_bitpstn == -1) {
+                tmp_bitpstn = 7;
+                tmp_bytecnt += 1;
+                tmp_mask = 0x80;
+            }
+        }
+
+        if (flush) {
+            bytecount = tmp_bytecnt;
+            bitposition = tmp_bitpstn;
+            mask = tmp_mask;
+        }
+    } else {
+        tmp_bytecnt = 0;
+        bytecount = 0;
+        tmp_bitpstn = 7;
+        bitposition = 7;
+        tmp_mask = 0x80;
+        mask = 0x80;
+    }
+    return temp2;
+}
+
+short int getDC(short int type, type_DATA *buffer) {
+    short int code, size, val;
+
+    code = getbits(5, 0, buffer, 0);
+    // printfuart("codeDC:"); printfuart(itoa(code));
+
+    if (code < 31) {
+        if (type) {
+            size = DCchromtab0[code].val;
+            getbits(DCchromtab0[code].len, 1, buffer, 0);
+        } else {
+            size = DClumtab0[code].val;
+            getbits(DClumtab0[code].len, 1, buffer, 0);
+        }
+    } else {
+        if (type) {
+            code = getbits(10, 0, buffer, 0) - 0x3E0;
+            size = DCchromtab1[code].val;
+            getbits(DCchromtab1[code].len, 1, buffer, 0);
+        } else {
+            code = getbits(9, 0, buffer, 0) - 0x1F0;
+            size = DClumtab1[code].val;
+            getbits(DClumtab1[code].len, 1, buffer, 0);
+        }
+    }
+
+    if (size == 0) {
+        val = 0;
+    } else {
+        val = getbits(size, 1, buffer, 0);
+        if ((val & (1 << (size - 1))) == 0)
+            val -= (1 << size) - 1;
+    }
+    return val;
+}
+
+
 void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer) {
     int val, i, sign, run;
     short int temp, temp2;
@@ -348,80 +423,6 @@ void ivlc_func(type_DATA *block, short int comp, short int lx, type_DATA *buffer
         block[(temp * lx + temp2)] = sign ? -val : val;
     }
     return;
-}
-
-short int getDC(short int type, type_DATA *buffer) {
-    short int code, size, val;
-
-    code = getbits(5, 0, buffer, 0);
-    // printfuart("codeDC:"); printfuart(itoa(code));
-
-    if (code < 31) {
-        if (type) {
-            size = DCchromtab0[code].val;
-            getbits(DCchromtab0[code].len, 1, buffer, 0);
-        } else {
-            size = DClumtab0[code].val;
-            getbits(DClumtab0[code].len, 1, buffer, 0);
-        }
-    } else {
-        if (type) {
-            code = getbits(10, 0, buffer, 0) - 0x3E0;
-            size = DCchromtab1[code].val;
-            getbits(DCchromtab1[code].len, 1, buffer, 0);
-        } else {
-            code = getbits(9, 0, buffer, 0) - 0x1F0;
-            size = DClumtab1[code].val;
-            getbits(DClumtab1[code].len, 1, buffer, 0);
-        }
-    }
-
-    if (size == 0) {
-        val = 0;
-    } else {
-        val = getbits(size, 1, buffer, 0);
-        if ((val & (1 << (size - 1))) == 0)
-            val -= (1 << size) - 1;
-    }
-    return val;
-}
-
-unsigned int getbits(short int n, short int flush, type_DATA *buffer, short int init) {
-    short int i = 0;
-    short int temp = 0;
-    int temp2 = 0;
-    short int tmp_bytecnt = bytecount;
-    short int tmp_bitpstn = bitposition;
-    unsigned char tmp_mask = mask;
-
-    if (init == 0) {
-        for (i = 0; i < n; i++) {
-            temp = (buffer[tmp_bytecnt] & tmp_mask) >> tmp_bitpstn;
-            temp2 <<= 1;
-            temp2 += temp;
-            tmp_mask >>= 1;
-            tmp_bitpstn -= 1;
-            if (tmp_bitpstn == -1) {
-                tmp_bitpstn = 7;
-                tmp_bytecnt += 1;
-                tmp_mask = 0x80;
-            }
-        }
-
-        if (flush) {
-            bytecount = tmp_bytecnt;
-            bitposition = tmp_bitpstn;
-            mask = tmp_mask;
-        }
-    } else {
-        tmp_bytecnt = 0;
-        bytecount = 0;
-        tmp_bitpstn = 7;
-        bitposition = 7;
-        tmp_mask = 0x80;
-        mask = 0x80;
-    }
-    return temp2;
 }
 
 //////////////////////////////////////

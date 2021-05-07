@@ -37,21 +37,12 @@ extern Uns32 diagnosticLevel;
 #endif
 /////////////////////////// Register data declaration //////////////////////////
 
-typedef struct iteratorReg_ab8_dataS { 
-    union { 
-        Uns32 value;
-    } iterationPort;
-} iteratorReg_ab8_dataT, *iteratorReg_ab8_dataTP;
-
 #ifdef _PSE_
 /////////////////////////////// Port Declarations //////////////////////////////
-
-extern iteratorReg_ab8_dataT iteratorReg_ab8_data;
 
 ///////////////////////////////// Port handles /////////////////////////////////
 
 typedef struct handlesS {
-    void                 *iteratorReg;
     ppmPacketnetHandle    iterationPort0;
     ppmPacketnetHandle    iterationPort1;
     ppmPacketnetHandle    iterationPort2;
@@ -61,16 +52,27 @@ typedef struct handlesS {
     ppmPacketnetHandle    iterationPort6;
     ppmPacketnetHandle    iterationPort7;
     ppmPacketnetHandle    iterationPort8;
+    ppmPacketnetHandle    iterationPort9;
+    ppmPacketnetHandle    iterationPort10;
+    ppmPacketnetHandle    iterationPort11;
+    ppmPacketnetHandle    iterationPort12;
+    ppmPacketnetHandle    iterationPort13;
+    ppmPacketnetHandle    iterationPort14;
+    ppmPacketnetHandle    iterationPort15;
 } handlesT, *handlesTP;
 
 extern handlesT handles;
 
 ////////////////////////////// Callback prototypes /////////////////////////////
 
-PPM_REG_READ_CB(iterateRead);
-PPM_REG_WRITE_CB(iterateWrite);
 PPM_PACKETNET_CB(iteration0);
 PPM_PACKETNET_CB(iteration1);
+PPM_PACKETNET_CB(iteration10);
+PPM_PACKETNET_CB(iteration11);
+PPM_PACKETNET_CB(iteration12);
+PPM_PACKETNET_CB(iteration13);
+PPM_PACKETNET_CB(iteration14);
+PPM_PACKETNET_CB(iteration15);
 PPM_PACKETNET_CB(iteration2);
 PPM_PACKETNET_CB(iteration3);
 PPM_PACKETNET_CB(iteration4);
@@ -78,6 +80,7 @@ PPM_PACKETNET_CB(iteration5);
 PPM_PACKETNET_CB(iteration6);
 PPM_PACKETNET_CB(iteration7);
 PPM_PACKETNET_CB(iteration8);
+PPM_PACKETNET_CB(iteration9);
 PPM_CONSTRUCTOR_CB(periphConstructor);
 PPM_DESTRUCTOR_CB(periphDestructor);
 PPM_DOC_FN(installDocs);
